@@ -89,13 +89,18 @@ const Programs = () => {
     },
   ]
 
-  // Get current program details based on the first visible card in carousel
+  // Calculate previous card index (with circular wrapping)
+  const previousCardIndex = currentCardIndex === 0 
+    ? programCards.length - 1 
+    : currentCardIndex - 1
+
+  // Get current program details based on the previous card (before the first visible card in carousel)
   const getCurrentProgramDetails = () => {
-    const currentCard = programCards[currentCardIndex]
-    if (!currentCard) return null
+    const previousCard = programCards[previousCardIndex]
+    if (!previousCard) return null
 
     // Check if it's an AURUM Bankers card
-    if (currentCard.logo === auCardLogo) {
+    if (previousCard.logo === auCardLogo) {
       // Map AURUM Bankers titles to details
       const detailsMap = {
         'AURUM Bankers Relationship Manager': {
@@ -141,9 +146,9 @@ const Programs = () => {
       }
       return {
         logo: auCardLogo,
-        title: currentCard.title,
-        details: detailsMap[currentCard.title]?.details || 'Join our program',
-        duration: detailsMap[currentCard.title]?.duration || '3-month program',
+        title: previousCard.title,
+        details: detailsMap[previousCard.title]?.details || 'Join our program',
+        duration: detailsMap[previousCard.title]?.duration || '3-month program',
         image: auBankImage,
       }
     } else {
@@ -160,9 +165,9 @@ const Programs = () => {
       }
       return {
         logo: lenskartLogo,
-        title: currentCard.title,
-        details: detailsMap[currentCard.title]?.details || 'Join our program',
-        duration: detailsMap[currentCard.title]?.duration || '2-month program',
+        title: previousCard.title,
+        details: detailsMap[previousCard.title]?.details || 'Join our program',
+        duration: detailsMap[previousCard.title]?.duration || '2-month program',
         image: lenskartStoreImage,
       }
     }
@@ -354,7 +359,7 @@ const Programs = () => {
                         <li>{currentProgramDetails.details}</li>
                         <li>{currentProgramDetails.duration}</li>
                       </ul>
-                      <a href={programCards[currentCardIndex]?.url || '#'} target="_blank" rel="noopener noreferrer">
+                      <a href={programCards[previousCardIndex]?.url || '#'} target="_blank" rel="noopener noreferrer">
                         <button className="learn-more-button">Learn More</button>
                       </a>
                     </div>
