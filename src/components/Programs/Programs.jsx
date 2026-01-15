@@ -99,44 +99,44 @@ const Programs = () => {
       // Map AURUM Bankers titles to details
       const detailsMap = {
         'AURUM Bankers Relationship Manager': {
-          details: 'Join as a Relationship Manager',
-          duration: '3-month program',
+          details: 'Join as a Relationship Manager with a CTC of Rs 5.5 LPA + PLP',
+          duration: '6-months program',
         },
         'AURUM Bankers Relationship Officer': {
-          details: 'Join as a Relationship Officer',
-          duration: '3-month program',
+          details: 'Join as a Relationship Officer with a CTC of Rs 2.7 LPA + PLP',
+          duration: '2-months program',
         },
         'AURUM Bankers Bank Officer': {
-          details: 'Join as a Bank Officer',
-          duration: '3-month program',
+          details: 'Join as a Bank Officer with a CTC of Rs 3.5 LPA + PLP',
+          duration: '4-months program',
         },
         'AURUM Bankers Sales Officer': {
-          details: 'Join as a Sales Officer',
-          duration: '3-month program',
+          details: 'Join as a Sales Officer with a CTC of Rs 2.7 LPA + PLP',
+          duration: '2-months program',
         },
         'AURUM Bankers Transaction Officer': {
-          details: 'Join as a Transaction Officer',
-          duration: '3-month program',
+          details: 'Join as a Transaction Officer with a CTC of upto Rs 2.7 LPA + PLP',
+          duration: '2-months program',
         },
         'AURUM Bankers Deputy Center Manager': {
-          details: 'Join as a Deputy Center Manager',
-          duration: '3-month program',
+          details: 'Join as a Deputy Center Manager with a CTC of upto Rs 2.05 LPA + PLP',
+          duration: '2-months program',
         },
         'AURUM Bankers Customer Service Officer': {
-          details: 'Join as a Customer Service Officer',
-          duration: '3-month program',
+          details: 'Join as a Customer Service Officer with a CTC of Rs 2.75 LPA + PLP',
+          duration: '2-months program',
         },
         'AURUM Bankers Late Recovery Officer': {
-          details: 'Join as a Late Recovery Officer',
-          duration: '3-month program',
+          details: 'Join as a Deputy Late Recovery Officer with a CTC of upto Rs 2.05 LPA + PLP',
+          duration: '2-months program',
         },
         'AURUM Bankers Money Officer': {
-          details: 'Join as a Money Officer',
-          duration: '3-month program',
+          details: 'Join as a Money Officer with a CTC of Rs 2.75 LPA + PLP',
+          duration: '2-months program',
         },
         'AURUM Bankers Customer Service Officer Valuation': {
-          details: 'Join as a Customer Service Officer',
-          duration: '3-month program',
+          details: 'Join as a Customer Service Officer Valuation with a CTC of Rs 2.7 LPA + PLP',
+          duration: '2.5-months program',
         },
       }
       return {
@@ -150,12 +150,12 @@ const Programs = () => {
       // Lenskart cards
       const detailsMap = {
         'Lenskart Dispensing Optician Program': {
-          details: 'Join as a Dispensing Optician with a CTC of Rs 2.7 LPA + PLP',
-          duration: '2-month program',
+          details: 'Join as a Dispensing Optician with a CTC of Rs 2.64 LPA',
+          duration: '6-months program',
         },
         'Lenskart Retail Sales Officer Program': {
-          details: 'Join as a Retail Sales Officer',
-          duration: '2-month program',
+          details: 'Join as a Sales Associate with a CTC of Rs 3 LPA + incentives',
+          duration: '9-weeks program',
         },
       }
       return {
