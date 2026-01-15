@@ -1,0 +1,67 @@
+.logo-carousel-container {
+  width: 100%;
+  overflow: hidden;
+  padding: 2rem 0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+}
+
+.logo-carousel-track {
+  display: flex;
+  align-items: center;
+  gap: 10rem;
+  animation: scroll 30s linear infinite;
+  width: fit-content;
+}
+
+.logo-carousel-item {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+}
+
+.logo-image {
+  max-height: 60px;
+  max-width: 150px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.logo-image:hover {
+  opacity: 1;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-50% - 5rem));
+  }
+}
+
+@media (max-width: 768px) {
+  .logo-carousel-container {
+    padding: 1.5rem 0;
+  }
+
+  .logo-carousel-track {
+    gap: 2rem;
+  }
+
+  .logo-image {
+    max-height: 40px;
+    max-width: 100px;
+  }
+}
