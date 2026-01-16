@@ -1,13 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import heroImage from '../../assets/hero_section_image.png'
 import LogoCarousel from '../LogoCarousel/LogoCarousel'
+import EnquireModal from '../EnquireModal/EnquireModal'
 import './Hero.css'
 
 const Hero = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
   const handleEnquireClick = () => {
-    // Handle enquiry button click
-    console.log('Enquire Now clicked')
-    // You can add navigation or modal opening logic here
+    setIsModalOpen(true)
+  }
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false)
   }
 
   return (
@@ -42,6 +47,7 @@ const Hero = () => {
         </div>
         <LogoCarousel />
       </div>
+      <EnquireModal isOpen={isModalOpen} onClose={handleCloseModal} />
     </section>
   )
 }

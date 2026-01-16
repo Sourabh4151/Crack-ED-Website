@@ -136,8 +136,9 @@
 }
 
 .program-mini-card-logo {
-  width: 100%;
-  height: 100%;
+  width: 41px;
+  height: 42px;
+  border-radius: 100px;
   object-fit: contain;
   flex-shrink: 0;
 }
@@ -608,8 +609,9 @@
   }
 
   .program-mini-card-logo {
-    width: 56px;
-    height: 56px;
+    width: 41px;
+    height: 42px;
+    border-radius: 100px;
   }
 
   .program-mini-card-title {
