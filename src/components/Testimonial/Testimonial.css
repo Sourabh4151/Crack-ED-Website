@@ -1,7 +1,7 @@
 .testimonial-section {
   width: 100%;
   background: #000000;
-  padding: 120px 0;
+  padding: 40px 0 120px 0;
   position: relative;
 }
 
@@ -224,7 +224,7 @@
 
 @media (max-width: 768px) {
   .testimonial-section {
-    padding: 60px 0;
+    padding: 30px 0 60px 0;
   }
 
   .testimonial-container {
@@ -267,6 +267,7 @@
     max-width: 280px;
     width: 280px;
     scroll-snap-align: start;
+    cursor: pointer;
   }
 
   .testimonial-image-container {
@@ -294,7 +295,7 @@
 
 @media (max-width: 480px) {
   .testimonial-section {
-    padding: 50px 0;
+    padding: 25px 0 50px 0;
   }
 
   .testimonial-container {
@@ -324,6 +325,7 @@
     flex: 0 0 260px;
     max-width: 260px;
     width: 260px;
+    cursor: pointer;
   }
 
   .testimonial-image-container {

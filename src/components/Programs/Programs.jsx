@@ -327,7 +327,7 @@ const Programs = () => {
           </div>
           <button className="view-all-button">
             View All
-            <svg className="view-all-arrow" width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg className="view-all-arrow" width="11.69" height="11.42" viewBox="0 0 11.69 11.42" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M5.5 1L10 5.5L5.5 10M1 5.5H10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </button>

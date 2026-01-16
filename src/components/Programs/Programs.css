@@ -26,7 +26,7 @@
   overflow: hidden;
   background-size: cover;
   background-repeat: no-repeat;
-  min-height: 455px;
+  min-height: 500px;
 }
 
 .progress-bar-container-top {
@@ -67,6 +67,7 @@
   position: relative;
   flex: 1;
   min-width: 0;
+  overflow: hidden;
 }
 
 .program-cards-carousel {
@@ -200,11 +201,12 @@
   cursor: pointer;
   transition: all 0.3s ease;
   padding: 0;
-  font-size: 11px;
-  font-weight: 400;
+  font-size: 18px;
+  font-weight: 900;
   line-height: 1;
   min-width: 43px;
   min-height: 43px;
+  font-family: 'Arial', sans-serif;
 }
 
 .card-nav-arrow:hover {
@@ -285,9 +287,9 @@
 }
 
 .view-all-arrow {
-  width: 10.71px;
-  height: 10.69px;
-  transform: rotate(-45deg);
+  width: 11.69px;
+  height: 11.42px;
+  transform: rotate(180deg);
   color: #FAFAFA;
   flex-shrink: 0;
 }
@@ -300,11 +302,12 @@
 .program-card {
   width: 100%;
   max-width: 1200px;
-  min-height: 455px;
+  min-height: 470px;
   position: relative;
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
+  overflow: visible;
 }
 
 .program-card-content {
@@ -312,8 +315,13 @@
   top: 190px;
   left: 34px;
   width: 666px;
+  max-width: calc(100% - 34px);
   height: auto;
   z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-sizing: border-box;
 }
 
 .program-logo-container {
@@ -332,18 +340,25 @@
   flex-direction: column;
   gap: 32px;
   border-radius: 24px;
+  padding: 0;
+  margin: 0;
 }
 
 .program-card-title {
   font-family: 'Poppins', sans-serif;
   font-size: 32px;
   font-weight: 500;
-  line-height: 100%;
+  line-height: 120%;
   letter-spacing: 0%;
   color: #FAFAFA;
-  width: 666px;
-  height: 48px;
+  width: 100%;
+  max-width: 666px;
+  height: auto;
   margin: 0;
+  margin-top: 30px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  box-sizing: border-box;
 }
 
 .program-info-list {
@@ -352,7 +367,7 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 16px;
 }
 
 .program-info-list li {
@@ -365,13 +380,15 @@
   position: relative;
   padding-left: 2rem;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  min-height: 20px;
 }
 
 .program-info-list li::before {
   content: '';
   position: absolute;
   left: 0;
+  top: 0;
   width: 20px;
   height: 20px;
   border-radius: 100px;
@@ -379,6 +396,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .program-info-list li::after {
@@ -715,7 +733,8 @@
     height: 38px;
     min-width: 38px;
     min-height: 38px;
-    font-size: 10px;
+    font-size: 16px;
+    font-weight: 900;
   }
 
   .card-nav-indicator {
@@ -815,6 +834,8 @@
     height: 34px;
     min-width: 34px;
     min-height: 34px;
+    font-size: 14px;
+    font-weight: 900;
   }
 
   .card-nav-indicator {

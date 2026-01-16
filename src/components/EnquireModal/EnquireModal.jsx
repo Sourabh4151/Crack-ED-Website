@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './EnquireModal.css'
-import { submitLeadToCRMDirect } from '../../services/crmService'
+import { submitLeadToCRM, submitLeadToCRMDirect } from '../../services/crmService'
 
 const EnquireModal = ({ isOpen, onClose }) => {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -34,6 +34,14 @@ const EnquireModal = ({ isOpen, onClose }) => {
     }
   }, [isOpen, onClose])
   const [formData, setFormData] = useState({
+    fullName: '',
+    mobileNumber: '',
+    emailId: '',
+    state: '',
+    program: ''
+  })
+
+  const [errors, setErrors] = useState({
     fullName: '',
     mobileNumber: '',
     emailId: '',
@@ -87,16 +95,134 @@ const EnquireModal = ({ isOpen, onClose }) => {
     'Lenskart Retail Sales Officer Program'
   ]
 
+  const validateFullName = (name) => {
+    if (!name.trim()) {
+      return 'Full name is required'
+    }
+    if (name.trim().length < 2) {
+      return 'Full name must be at least 2 characters'
+    }
+    if (!/^[a-zA-Z\s]+$/.test(name.trim())) {
+      return 'Full name should only contain letters and spaces'
+    }
+    return ''
+  }
+
+  const validateMobileNumber = (mobile) => {
+    if (!mobile) {
+      return 'Mobile number is required'
+    }
+    if (!/^\d+$/.test(mobile)) {
+      return 'Mobile number should only contain digits'
+    }
+    if (mobile.length !== 10) {
+      return 'Mobile number must be exactly 10 digits'
+    }
+    return ''
+  }
+
+  const validateEmail = (email) => {
+    if (!email) {
+      return 'Email is required'
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(email)) {
+      return 'Please enter a valid email address'
+    }
+    return ''
+  }
+
+  const validateState = (state) => {
+    if (!state) {
+      return 'State is required'
+    }
+    return ''
+  }
+
+  const validateProgram = (program) => {
+    if (!program) {
+      return 'Program selection is required'
+    }
+    return ''
+  }
+
   const handleInputChange = (e) => {
     const { name, value } = e.target
+    let processedValue = value
+
+    // Special handling for mobile number - only allow digits and limit to 10
+    if (name === 'mobileNumber') {
+      // Remove any non-digit characters
+      processedValue = value.replace(/\D/g, '')
+      // Limit to 10 digits
+      if (processedValue.length > 10) {
+        processedValue = processedValue.slice(0, 10)
+      }
+    }
+
     setFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: processedValue
     }))
+
+    // Clear error for this field when user starts typing
+    setErrors(prev => ({
+      ...prev,
+      [name]: ''
+    }))
+  }
+
+  const handleBlur = (e) => {
+    const { name, value } = e.target
+    let error = ''
+
+    switch (name) {
+      case 'fullName':
+        error = validateFullName(value)
+        break
+      case 'mobileNumber':
+        error = validateMobileNumber(value)
+        break
+      case 'emailId':
+        error = validateEmail(value)
+        break
+      case 'state':
+        error = validateState(value)
+        break
+      case 'program':
+        error = validateProgram(value)
+        break
+      default:
+        break
+    }
+
+    setErrors(prev => ({
+      ...prev,
+      [name]: error
+    }))
+  }
+
+  const validateForm = () => {
+    const newErrors = {
+      fullName: validateFullName(formData.fullName),
+      mobileNumber: validateMobileNumber(formData.mobileNumber),
+      emailId: validateEmail(formData.emailId),
+      state: validateState(formData.state),
+      program: validateProgram(formData.program)
+    }
+
+    setErrors(newErrors)
+    return !Object.values(newErrors).some(error => error !== '')
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    
+    // Validate form before submission
+    if (!validateForm()) {
+      return
+    }
+
     setIsSubmitting(true)
     setSubmitError(null)
     setSubmitSuccess(false)
@@ -107,8 +233,15 @@ const EnquireModal = ({ isOpen, onClose }) => {
       
       setSubmitSuccess(true)
       
-      // Reset form
+      // Reset form and errors
       setFormData({
+        fullName: '',
+        mobileNumber: '',
+        emailId: '',
+        state: '',
+        program: ''
+      })
+      setErrors({
         fullName: '',
         mobileNumber: '',
         emailId: '',
@@ -138,6 +271,13 @@ const EnquireModal = ({ isOpen, onClose }) => {
   const handleClose = () => {
     if (!isSubmitting) {
       setFormData({
+        fullName: '',
+        mobileNumber: '',
+        emailId: '',
+        state: '',
+        program: ''
+      })
+      setErrors({
         fullName: '',
         mobileNumber: '',
         emailId: '',
@@ -176,9 +316,13 @@ const EnquireModal = ({ isOpen, onClose }) => {
                 placeholder="Full name"
                 value={formData.fullName}
                 onChange={handleInputChange}
-                className="enquire-modal-input"
+                onBlur={handleBlur}
+                className={`enquire-modal-input ${errors.fullName ? 'enquire-modal-input-error' : ''}`}
                 required
               />
+              {errors.fullName && (
+                <span className="enquire-modal-field-error">{errors.fullName}</span>
+              )}
             </div>
             <div className="enquire-modal-form-field">
               <input
@@ -187,9 +331,14 @@ const EnquireModal = ({ isOpen, onClose }) => {
                 placeholder="Mobile number"
                 value={formData.mobileNumber}
                 onChange={handleInputChange}
-                className="enquire-modal-input"
+                onBlur={handleBlur}
+                maxLength="10"
+                className={`enquire-modal-input ${errors.mobileNumber ? 'enquire-modal-input-error' : ''}`}
                 required
               />
+              {errors.mobileNumber && (
+                <span className="enquire-modal-field-error">{errors.mobileNumber}</span>
+              )}
             </div>
           </div>
           
@@ -201,16 +350,21 @@ const EnquireModal = ({ isOpen, onClose }) => {
                 placeholder="Email ID"
                 value={formData.emailId}
                 onChange={handleInputChange}
-                className="enquire-modal-input"
+                onBlur={handleBlur}
+                className={`enquire-modal-input ${errors.emailId ? 'enquire-modal-input-error' : ''}`}
                 required
               />
+              {errors.emailId && (
+                <span className="enquire-modal-field-error">{errors.emailId}</span>
+              )}
             </div>
             <div className="enquire-modal-form-field enquire-modal-select-wrapper">
               <select
                 name="state"
                 value={formData.state}
                 onChange={handleInputChange}
-                className="enquire-modal-select"
+                onBlur={handleBlur}
+                className={`enquire-modal-select ${errors.state ? 'enquire-modal-input-error' : ''}`}
                 required
               >
                 <option value="">State</option>
@@ -221,6 +375,9 @@ const EnquireModal = ({ isOpen, onClose }) => {
               <svg className="enquire-modal-select-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M5 7.5L10 12.5L15 7.5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
+              {errors.state && (
+                <span className="enquire-modal-field-error">{errors.state}</span>
+              )}
             </div>
           </div>
           
@@ -230,7 +387,8 @@ const EnquireModal = ({ isOpen, onClose }) => {
                 name="program"
                 value={formData.program}
                 onChange={handleInputChange}
-                className="enquire-modal-select"
+                onBlur={handleBlur}
+                className={`enquire-modal-select ${errors.program ? 'enquire-modal-input-error' : ''}`}
                 required
               >
                 <option value="">Select program</option>
@@ -241,6 +399,9 @@ const EnquireModal = ({ isOpen, onClose }) => {
               <svg className="enquire-modal-select-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M5 7.5L10 12.5L15 7.5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
+              {errors.program && (
+                <span className="enquire-modal-field-error">{errors.program}</span>
+              )}
             </div>
           </div>
           

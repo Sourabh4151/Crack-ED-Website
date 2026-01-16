@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import ShubhamMBL from '../../assets/Shubham_MBL.jpeg'
 import RohitKhatanaCASA from '../../assets/RohitKhatana_CASA.jpeg'
 import RohitashMBL from '../../assets/Rohitash_MBL.jpeg'
@@ -10,6 +10,19 @@ import AbhijeetCASA from '../../assets/Abhijeet_CASA.jpeg'
 import './Testimonial.css'
 
 const Testimonial = () => {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768)
+    }
+    
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
   const testimonials = [
     {
       id: 1,
@@ -69,8 +82,9 @@ const Testimonial = () => {
     }
   ]
 
-  // Duplicate testimonials for seamless loop
-  const duplicatedTestimonials = [...testimonials, ...testimonials]
+  // Only duplicate testimonials for desktop (where animation is used)
+  // On mobile, show only original testimonials to avoid duplicates
+  const testimonialsToShow = isMobile ? testimonials : [...testimonials, ...testimonials]
 
   return (
     <section className="testimonial-section">
@@ -81,7 +95,7 @@ const Testimonial = () => {
         </div>
         <div className="testimonial-cards-wrapper">
           <div className="testimonial-cards">
-            {duplicatedTestimonials.map((testimonial, index) => (
+            {testimonialsToShow.map((testimonial, index) => (
               <div key={`${testimonial.id}-${index}`} className="testimonial-card">
                 <div className="testimonial-image-container">
                   <img src={testimonial.image} alt={testimonial.name} className="testimonial-image" />
