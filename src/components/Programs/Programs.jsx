@@ -336,7 +336,8 @@ const Programs = () => {
         <div 
           className="programs-background-container"
           style={{ 
-            backgroundImage: `url(${currentProgramDetails?.image || (currentCardIndex < 10 ? auBankImage : lenskartStoreImage)})` 
+            backgroundImage: `url(${currentProgramDetails?.image || (currentCardIndex < 10 ? auBankImage : lenskartStoreImage)})`,
+            backgroundPosition: (currentProgramDetails?.image === auBankImage || (!currentProgramDetails?.image && currentCardIndex < 10)) ? 'center 10%' : 'center top'
           }}
         >
           <div className="progress-bar-container-top">
