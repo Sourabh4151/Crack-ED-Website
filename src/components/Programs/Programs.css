@@ -576,6 +576,10 @@
 }
 
 @media (max-width: 768px) {
+  .programs-section {
+    padding: 1.5rem 0;
+  }
+
   .programs-container {
     padding: 0 24px;
   }
@@ -584,6 +588,7 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
+    margin-bottom: 1.5rem;
   }
 
   .programs-badge {
@@ -594,33 +599,25 @@
 
   .programs-subtitle {
     width: 100%;
-    font-size: 20px;
+    font-size: 18px;
     height: auto;
+    line-height: 24px;
   }
 
-  .program-cards-carousel {
-    margin-bottom: 2rem;
+  .view-all-button {
+    font-size: 13px;
+    padding: 10px 20px;
+    min-height: 40px;
   }
 
-  .program-mini-card {
-    min-width: 160px;
-    width: 160px;
-    padding: 20px 16px;
-  }
-
-  .program-mini-card-logo {
-    width: 41px;
-    height: 42px;
-    border-radius: 100px;
-  }
-
-  .program-mini-card-title {
-    font-size: 12px;
+  .programs-background-container {
+    min-height: auto;
+    border-radius: 12px;
   }
 
   .programs-content-wrapper {
     flex-direction: column;
-    padding: 1.5rem 24px;
+    padding: 1.5rem 20px;
     gap: 1.5rem;
   }
 
@@ -629,34 +626,198 @@
     top: auto;
     left: auto;
     width: 100%;
-    padding: 1.5rem;
+    padding: 0;
   }
 
   .program-card {
     min-height: auto;
   }
 
+  .program-card-title {
+    font-size: 24px;
+    width: 100%;
+    height: auto;
+    line-height: 120%;
+    margin-bottom: 16px;
+  }
+
+  .program-details {
+    gap: 20px;
+  }
+
+  .program-info-list {
+    gap: 0.75rem;
+  }
+
+  .program-info-list li {
+    font-size: 14px;
+    line-height: 140%;
+    padding-left: 1.75rem;
+  }
+
+  .learn-more-button {
+    width: 100%;
+    max-width: 200px;
+    font-size: 13px;
+    padding: 12px 32px;
+    height: auto;
+  }
+
   .program-cards-carousel {
     width: 100%;
     margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .program-cards-wrapper {
+    width: 100%;
   }
 
   .program-cards-container {
     max-width: 100%;
+    gap: 12px;
   }
 
-  .program-carousel-sidebar {
-    width: 100%;
-    flex-direction: row;
-    overflow-x: auto;
+  .program-mini-card-link {
+    width: 150px;
+    min-width: 150px;
   }
 
-  .program-carousel-navigation {
-    top: 40px;
+  .program-mini-card {
+    min-width: 150px;
+    width: 150px;
+    padding: 18px 14px;
+    height: 180px;
+  }
+
+  .program-mini-card-logo-wrap {
+    width: 56px;
+    height: 56px;
+    padding: 20px 6px;
+  }
+
+  .program-mini-card-logo {
+    width: 36px;
+    height: 36px;
+  }
+
+  .program-mini-card-title {
+    font-size: 12px;
+    max-width: 120px;
+  }
+
+  .program-cards-navigation {
+    margin-top: 1rem;
+  }
+
+  .card-nav-arrow {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    min-height: 38px;
+    font-size: 10px;
+  }
+
+  .card-nav-indicator {
+    font-size: 12px;
+    min-width: 50px;
   }
 
   .progress-bar-container-top {
     width: 100%;
-    max-width: 700px;
+  }
+}
+
+@media (max-width: 480px) {
+  .programs-section {
+    padding: 1rem 0;
+  }
+
+  .programs-container {
+    padding: 0 20px;
+  }
+
+  .programs-header {
+    margin-bottom: 1rem;
+  }
+
+  .programs-badge {
+    font-size: 11px;
+    padding: 3px 16px;
+  }
+
+  .programs-subtitle {
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  .view-all-button {
+    font-size: 12px;
+    padding: 8px 16px;
+    min-height: 36px;
+  }
+
+  .programs-content-wrapper {
+    padding: 1.25rem 16px;
+    gap: 1.25rem;
+  }
+
+  .program-card-title {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+
+  .program-details {
+    gap: 16px;
+  }
+
+  .program-info-list li {
+    font-size: 13px;
+    padding-left: 1.5rem;
+  }
+
+  .learn-more-button {
+    max-width: 100%;
+    font-size: 12px;
+    padding: 10px 28px;
+  }
+
+  .program-mini-card-link {
+    width: 140px;
+    min-width: 140px;
+  }
+
+  .program-mini-card {
+    min-width: 140px;
+    width: 140px;
+    padding: 16px 12px;
+    height: 170px;
+  }
+
+  .program-mini-card-logo-wrap {
+    width: 50px;
+    height: 50px;
+    padding: 18px 5px;
+  }
+
+  .program-mini-card-logo {
+    width: 32px;
+    height: 32px;
+  }
+
+  .program-mini-card-title {
+    font-size: 11px;
+    max-width: 110px;
+  }
+
+  .card-nav-arrow {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    min-height: 34px;
+  }
+
+  .card-nav-indicator {
+    font-size: 11px;
   }
 }

@@ -7,6 +7,7 @@ const Header = () => {
   const [isAurumSubmenuOpen, setIsAurumSubmenuOpen] = useState(false)
   const [isLenskartSubmenuOpen, setIsLenskartSubmenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const closeTimeoutRef = useRef(null)
   const aurumTimeoutRef = useRef(null)
   const lenskartTimeoutRef = useRef(null)
@@ -39,33 +40,137 @@ const Header = () => {
     }
   }, [])
 
+  // Close mobile menu on window resize to desktop
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 768 && isMobileMenuOpen) {
+        setIsMobileMenuOpen(false)
+        setIsProgramsOpen(false)
+        setIsAurumSubmenuOpen(false)
+        setIsLenskartSubmenuOpen(false)
+      }
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [isMobileMenuOpen])
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [isMobileMenuOpen])
+
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isMobileMenuOpen && window.innerWidth <= 768) {
+        const nav = document.querySelector('.nav')
+        const hamburger = document.querySelector('.hamburger-menu')
+        if (nav && hamburger && !nav.contains(event.target) && !hamburger.contains(event.target)) {
+          closeMobileMenu()
+        }
+      }
+    }
+
+    if (isMobileMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [isMobileMenuOpen])
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen)
+    // Close all dropdowns when toggling mobile menu
+    if (!isMobileMenuOpen) {
+      setIsProgramsOpen(false)
+      setIsAurumSubmenuOpen(false)
+      setIsLenskartSubmenuOpen(false)
+    }
+  }
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false)
+    setIsProgramsOpen(false)
+    setIsAurumSubmenuOpen(false)
+    setIsLenskartSubmenuOpen(false)
+  }
+
+  const toggleProgramsMobile = () => {
+    setIsProgramsOpen(!isProgramsOpen)
+    setIsAurumSubmenuOpen(false)
+    setIsLenskartSubmenuOpen(false)
+  }
+
+  const toggleAurumSubmenuMobile = () => {
+    setIsAurumSubmenuOpen(!isAurumSubmenuOpen)
+  }
+
+  const toggleLenskartSubmenuMobile = () => {
+    setIsLenskartSubmenuOpen(!isLenskartSubmenuOpen)
+  }
+
   return (
-    <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
+    <header className={`header ${isScrolled ? 'scrolled' : ''} ${isMobileMenuOpen ? 'mobile-menu-open' : ''}`}>
       <div className="header-container">
         <div className="logo">
           <img src={logoImage} alt="CRACK-ED Logo" className="logo-icon" />
         </div>
         
-        <nav className="nav">
+        <button 
+          className="hamburger-menu"
+          onClick={toggleMobileMenu}
+          aria-label="Toggle menu"
+        >
+          <span className={`hamburger-line ${isMobileMenuOpen ? 'open' : ''}`}></span>
+          <span className={`hamburger-line ${isMobileMenuOpen ? 'open' : ''}`}></span>
+          <span className={`hamburger-line ${isMobileMenuOpen ? 'open' : ''}`}></span>
+        </button>
+        
+        <nav className={`nav ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
           <ul className="nav-list">
             <li className="nav-item">
               <a href="https://crack-ed.com/about-us/" className="nav-link">About Us</a>
             </li>
             <li 
-              className="nav-item nav-item-dropdown"
+              className={`nav-item nav-item-dropdown ${isProgramsOpen ? 'active' : ''}`}
               onMouseEnter={() => {
-                clearAllTimeouts()
-                setIsProgramsOpen(true)
+                if (window.innerWidth > 768) {
+                  clearAllTimeouts()
+                  setIsProgramsOpen(true)
+                }
               }}
               onMouseLeave={() => {
-                closeTimeoutRef.current = setTimeout(() => {
-                  setIsProgramsOpen(false)
-                  setIsAurumSubmenuOpen(false)
-                  setIsLenskartSubmenuOpen(false)
-                }, 150)
+                if (window.innerWidth > 768) {
+                  closeTimeoutRef.current = setTimeout(() => {
+                    setIsProgramsOpen(false)
+                    setIsAurumSubmenuOpen(false)
+                    setIsLenskartSubmenuOpen(false)
+                  }, 150)
+                }
               }}
             >
-              <a href="#programs" className="nav-link">
+              <a 
+                href="#programs" 
+                className="nav-link"
+                onClick={(e) => {
+                  if (window.innerWidth <= 768) {
+                    e.preventDefault()
+                    toggleProgramsMobile()
+                  }
+                }}
+              >
                 Programs
                 <svg className="dropdown-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M4 6L8 10L12 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -75,31 +180,48 @@ const Header = () => {
                 <ul 
                   className="dropdown-menu"
                   onMouseEnter={() => {
-                    clearAllTimeouts()
-                    setIsProgramsOpen(true)
+                    if (window.innerWidth > 768) {
+                      clearAllTimeouts()
+                      setIsProgramsOpen(true)
+                    }
                   }}
                   onMouseLeave={() => {
-                    closeTimeoutRef.current = setTimeout(() => {
-                      setIsProgramsOpen(false)
-                      setIsAurumSubmenuOpen(false)
-                      setIsLenskartSubmenuOpen(false)
-                    }, 150)
+                    if (window.innerWidth > 768) {
+                      closeTimeoutRef.current = setTimeout(() => {
+                        setIsProgramsOpen(false)
+                        setIsAurumSubmenuOpen(false)
+                        setIsLenskartSubmenuOpen(false)
+                      }, 150)
+                    }
                   }}
                 >
                   <li 
-                    className="dropdown-item-with-submenu"
+                    className={`dropdown-item-with-submenu ${isAurumSubmenuOpen ? 'active' : ''}`}
                     onMouseEnter={() => {
-                      clearAllTimeouts()
-                      setIsAurumSubmenuOpen(true)
-                      setIsProgramsOpen(true)
+                      if (window.innerWidth > 768) {
+                        clearAllTimeouts()
+                        setIsAurumSubmenuOpen(true)
+                        setIsProgramsOpen(true)
+                      }
                     }}
                     onMouseLeave={() => {
-                      aurumTimeoutRef.current = setTimeout(() => {
-                        setIsAurumSubmenuOpen(false)
-                      }, 150)
+                      if (window.innerWidth > 768) {
+                        aurumTimeoutRef.current = setTimeout(() => {
+                          setIsAurumSubmenuOpen(false)
+                        }, 150)
+                      }
                     }}
                   >
-                    <a href="#programs/aurum-bankers" className="dropdown-link-with-arrow">
+                    <a 
+                      href="#programs/aurum-bankers" 
+                      className="dropdown-link-with-arrow"
+                      onClick={(e) => {
+                        if (window.innerWidth <= 768) {
+                          e.preventDefault()
+                          toggleAurumSubmenuMobile()
+                        }
+                      }}
+                    >
                       Aurum Bankers Program
                       <svg 
                         className="submenu-arrow" 
@@ -110,7 +232,11 @@ const Header = () => {
                         xmlns="http://www.w3.org/2000/svg"
                         onClick={(e) => {
                           e.preventDefault()
-                          setIsAurumSubmenuOpen(!isAurumSubmenuOpen)
+                          if (window.innerWidth <= 768) {
+                            toggleAurumSubmenuMobile()
+                          } else {
+                            setIsAurumSubmenuOpen(!isAurumSubmenuOpen)
+                          }
                         }}
                       >
                         <path d="M6 4L10 8L6 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -120,44 +246,61 @@ const Header = () => {
                       <ul 
                         className="nested-dropdown-menu"
                         onMouseEnter={() => {
-                          clearAllTimeouts()
-                          setIsAurumSubmenuOpen(true)
-                          setIsProgramsOpen(true)
+                          if (window.innerWidth > 768) {
+                            clearAllTimeouts()
+                            setIsAurumSubmenuOpen(true)
+                            setIsProgramsOpen(true)
+                          }
                         }}
                         onMouseLeave={() => {
-                          aurumTimeoutRef.current = setTimeout(() => {
-                            setIsAurumSubmenuOpen(false)
-                          }, 150)
+                          if (window.innerWidth > 768) {
+                            aurumTimeoutRef.current = setTimeout(() => {
+                              setIsAurumSubmenuOpen(false)
+                            }, 150)
+                          }
                         }}
                       >
-                        <li><a href="https://crack-ed.com/pgprm/">Relationship Manager</a></li>
-                        <li><a href="https://aubank.ro.crack-ed.com/portal">Relationship Officer</a></li>
-                        <li><a href="https://aubankbo.crack-ed.com/portal">Bank Officer</a></li>
-                        <li><a href="https://aubankso.crack-ed.com/portal">Sales Officer</a></li>
-                        <li><a href="https://aubankto.crack-ed.com/portal">Transaction Officer</a></li>
-                        <li><a href="https://aubankcm.crack-ed.com/portal">Deputy Center Manager</a></li>
-                        <li><a href="https://aubankcso.crack-ed.com/portal">Customer Service Officer</a></li>
-                        <li><a href="https://aubanklro.crack-ed.com/portal">Late Recovery Officer</a></li>
-                        <li><a href="https://aubankmo.crack-ed.com/portal">Money Officer</a></li>
-                        <li><a href="https://aubankbcso.crack-ed.com/portal">Customer Service Officer Valuation</a></li>
+                        <li><a href="https://crack-ed.com/pgprm/" onClick={closeMobileMenu}>Relationship Manager</a></li>
+                        <li><a href="https://aubank.ro.crack-ed.com/portal" onClick={closeMobileMenu}>Relationship Officer</a></li>
+                        <li><a href="https://aubankbo.crack-ed.com/portal" onClick={closeMobileMenu}>Bank Officer</a></li>
+                        <li><a href="https://aubankso.crack-ed.com/portal" onClick={closeMobileMenu}>Sales Officer</a></li>
+                        <li><a href="https://aubankto.crack-ed.com/portal" onClick={closeMobileMenu}>Transaction Officer</a></li>
+                        <li><a href="https://aubankcm.crack-ed.com/portal" onClick={closeMobileMenu}>Deputy Center Manager</a></li>
+                        <li><a href="https://aubankcso.crack-ed.com/portal" onClick={closeMobileMenu}>Customer Service Officer</a></li>
+                        <li><a href="https://aubanklro.crack-ed.com/portal" onClick={closeMobileMenu}>Late Recovery Officer</a></li>
+                        <li><a href="https://aubankmo.crack-ed.com/portal" onClick={closeMobileMenu}>Money Officer</a></li>
+                        <li><a href="https://aubankbcso.crack-ed.com/portal" onClick={closeMobileMenu}>Customer Service Officer Valuation</a></li>
                       </ul>
                     )}
                   </li>
-                  <li><a href="https://piramal.crack-ed.com/portal">Piramal ProEdge Program</a></li>
+                  <li><a href="https://piramal.crack-ed.com/portal" onClick={closeMobileMenu}>Piramal ProEdge Program</a></li>
                   <li 
-                    className="dropdown-item-with-submenu"
+                    className={`dropdown-item-with-submenu ${isLenskartSubmenuOpen ? 'active' : ''}`}
                     onMouseEnter={() => {
-                      clearAllTimeouts()
-                      setIsLenskartSubmenuOpen(true)
-                      setIsProgramsOpen(true)
+                      if (window.innerWidth > 768) {
+                        clearAllTimeouts()
+                        setIsLenskartSubmenuOpen(true)
+                        setIsProgramsOpen(true)
+                      }
                     }}
                     onMouseLeave={() => {
-                      lenskartTimeoutRef.current = setTimeout(() => {
-                        setIsLenskartSubmenuOpen(false)
-                      }, 150)
+                      if (window.innerWidth > 768) {
+                        lenskartTimeoutRef.current = setTimeout(() => {
+                          setIsLenskartSubmenuOpen(false)
+                        }, 150)
+                      }
                     }}
                   >
-                    <a href="#programs/lenskart-eyetech" className="dropdown-link-with-arrow">
+                    <a 
+                      href="#programs/lenskart-eyetech" 
+                      className="dropdown-link-with-arrow"
+                      onClick={(e) => {
+                        if (window.innerWidth <= 768) {
+                          e.preventDefault()
+                          toggleLenskartSubmenuMobile()
+                        }
+                      }}
+                    >
                       Lenskart Eyetech Program
                       <svg 
                         className="submenu-arrow" 
@@ -168,7 +311,11 @@ const Header = () => {
                         xmlns="http://www.w3.org/2000/svg"
                         onClick={(e) => {
                           e.preventDefault()
-                          setIsLenskartSubmenuOpen(!isLenskartSubmenuOpen)
+                          if (window.innerWidth <= 768) {
+                            toggleLenskartSubmenuMobile()
+                          } else {
+                            setIsLenskartSubmenuOpen(!isLenskartSubmenuOpen)
+                          }
                         }}
                       >
                         <path d="M6 4L10 8L6 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -178,18 +325,22 @@ const Header = () => {
                       <ul 
                         className="nested-dropdown-menu"
                         onMouseEnter={() => {
-                          clearAllTimeouts()
-                          setIsLenskartSubmenuOpen(true)
-                          setIsProgramsOpen(true)
+                          if (window.innerWidth > 768) {
+                            clearAllTimeouts()
+                            setIsLenskartSubmenuOpen(true)
+                            setIsProgramsOpen(true)
+                          }
                         }}
                         onMouseLeave={() => {
-                          lenskartTimeoutRef.current = setTimeout(() => {
-                            setIsLenskartSubmenuOpen(false)
-                          }, 150)
+                          if (window.innerWidth > 768) {
+                            lenskartTimeoutRef.current = setTimeout(() => {
+                              setIsLenskartSubmenuOpen(false)
+                            }, 150)
+                          }
                         }}
                       >
-                        <li><a href="https://lenskart.crack-ed.com/portal">Dispensing Optician</a></li>
-                        <li><a href="https://lenskartrsa.crack-ed.com/portal">Retail Sales Officer</a></li>
+                        <li><a href="https://lenskart.crack-ed.com/portal" onClick={closeMobileMenu}>Dispensing Optician</a></li>
+                        <li><a href="https://lenskartrsa.crack-ed.com/portal" onClick={closeMobileMenu}>Retail Sales Officer</a></li>
                       </ul>
                     )}
                   </li>
@@ -197,13 +348,13 @@ const Header = () => {
               )}
             </li>
             <li className="nav-item">
-              <a href="#resources" className="nav-link">Resources</a>
+              <a href="#resources" className="nav-link" onClick={closeMobileMenu}>Resources</a>
             </li>
             <li className="nav-item">
-              <a href="https://crack-ed.com/badhta-india-dekho-podcast/" className="nav-link">Badhta India Dekho</a>
+              <a href="https://crack-ed.com/badhta-india-dekho-podcast/" className="nav-link" onClick={closeMobileMenu}>Badhta India Dekho</a>
             </li>
             <li className="nav-item">
-              <a href="https://crack-ed.com/careers/" className="nav-link">Careers</a>
+              <a href="https://crack-ed.com/careers/" className="nav-link" onClick={closeMobileMenu}>Careers</a>
             </li>
           </ul>
         </nav>

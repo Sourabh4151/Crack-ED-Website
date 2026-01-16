@@ -221,7 +221,8 @@
   }
 
   .stats-subtitle {
-    font-size: 24px;
+    font-size: 22px;
+    line-height: 130%;
   }
 
   .stats-grid {
@@ -232,9 +233,21 @@
 
   .stat-card {
     flex: 0 0 100%;
-    max-width: 285px;
+    max-width: 100%;
     height: auto;
-    min-height: 396px;
+    min-height: 350px;
+    padding: 18px;
+  }
+
+  .stat-icon {
+    width: 70px;
+    height: 70px;
+    padding: 15px;
+  }
+
+  .stat-icon img {
+    width: 40px;
+    height: 40px;
   }
 
   .stat-value {
@@ -243,5 +256,65 @@
 
   .stat-description {
     font-size: 13px;
+    line-height: 150%;
+  }
+
+  .stat-hover-text {
+    font-size: 24px;
+    line-height: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-section {
+    padding: 50px 0;
+  }
+
+  .stats-container {
+    padding: 0 20px;
+    gap: 32px;
+  }
+
+  .stats-header {
+    gap: 16px;
+  }
+
+  .stats-badge {
+    font-size: 11px;
+    padding: 3px 16px;
+  }
+
+  .stats-subtitle {
+    font-size: 20px;
+    line-height: 125%;
+  }
+
+  .stat-card {
+    min-height: 320px;
+    padding: 16px;
+  }
+
+  .stat-icon {
+    width: 64px;
+    height: 64px;
+    padding: 14px;
+  }
+
+  .stat-icon img {
+    width: 36px;
+    height: 36px;
+  }
+
+  .stat-value {
+    font-size: 18px;
+  }
+
+  .stat-description {
+    font-size: 12px;
+  }
+
+  .stat-hover-text {
+    font-size: 20px;
+    line-height: 24px;
   }
 }

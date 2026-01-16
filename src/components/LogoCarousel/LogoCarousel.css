@@ -54,14 +54,42 @@
 @media (max-width: 768px) {
   .logo-carousel-container {
     padding: 1.5rem 0;
+    position: relative;
+    margin-top: 2rem;
   }
 
   .logo-carousel-track {
-    gap: 2rem;
+    gap: 3rem;
+    animation-duration: 25s;
+  }
+
+  .logo-carousel-item {
+    height: 50px;
   }
 
   .logo-image {
     max-height: 40px;
     max-width: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-carousel-container {
+    padding: 1rem 0;
+    margin-top: 1.5rem;
+  }
+
+  .logo-carousel-track {
+    gap: 2rem;
+    animation-duration: 20s;
+  }
+
+  .logo-carousel-item {
+    height: 45px;
+  }
+
+  .logo-image {
+    max-height: 35px;
+    max-width: 80px;
   }
 }
