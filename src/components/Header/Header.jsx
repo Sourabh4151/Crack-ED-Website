@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import logoImage from '../../assets/crack-ed_logo.png'
 import './Header.css'
 
@@ -161,8 +162,8 @@ const Header = () => {
                 }
               }}
             >
-              <a 
-                href="#programs" 
+              <Link 
+                to="/programs" 
                 className="nav-link"
                 onClick={(e) => {
                   if (window.innerWidth <= 768) {
@@ -175,7 +176,7 @@ const Header = () => {
                 <svg className="dropdown-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M4 6L8 10L12 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
-              </a>
+              </Link>
               {isProgramsOpen && (
                 <ul 
                   className="dropdown-menu"
@@ -339,8 +340,8 @@ const Header = () => {
                           }
                         }}
                       >
-                        <li><a href="https://lenskart.crack-ed.com/portal" onClick={closeMobileMenu}>Dispensing Optician</a></li>
-                        <li><a href="https://lenskartrsa.crack-ed.com/portal" onClick={closeMobileMenu}>Retail Sales Officer</a></li>
+                        <li><a href="https://lenskart.crack-ed.com/portal" onClick={closeMobileMenu}>Clinical Technician</a></li>
+                        <li><a href="https://lenskartrsa.crack-ed.com/portal" onClick={closeMobileMenu}>Retail Sales Associate</a></li>
                       </ul>
                     )}
                   </li>

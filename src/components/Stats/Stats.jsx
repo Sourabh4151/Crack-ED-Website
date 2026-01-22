@@ -17,7 +17,7 @@ const Stats = () => {
     {
       id: 2,
       icon: icon2,
-      value: "Avg CTC of Rs 3.2LPA",
+      value: "Avg CTC of Rs 3.2 LPA",
       description: "Our learners don't just get trained, they get paid what they deserve.",
       hoverText: "CAREERS THAT PAY"
     },
@@ -41,8 +41,8 @@ const Stats = () => {
     <section className="stats-section">
       <div className="stats-container">
         <div className="stats-header">
-          <div className="stats-badge">The Numbers Speak For Themselves</div>
-          <h2 className="stats-subtitle">Lorem elementum leo. at ullamcorper Sed orci convallis. venenatis</h2>
+          <div className="stats-badge">Numbers at a glance</div>
+          <h2 className="stats-subtitle">Where programs convert into careers, at real scale.</h2>
         </div>
         <div className="stats-grid">
           {stats.map((stat) => (

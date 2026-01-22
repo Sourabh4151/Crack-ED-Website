@@ -1,200 +1,124 @@
 .career-forward-section {
+  position: relative;
   width: 100%;
-  min-height: 656px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #000000;
-  padding: 0;
-  margin: 0;
-  margin-top: -2rem; /* Remove Programs bottom padding gap */
+  min-height: 100vh;
+  background-color: #000;
 }
 
-/* Reduce height for Variant 5 */
-.career-forward-section.variant5-active {
-  min-height: auto;
-  align-items: flex-start;
-}
+.sticky-wrapper {
 
-.career-forward-container {
-  width: 1440px;
-  min-height: 656px;
-  height: 656px;
+  height: 100vh;
+  width: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
-  background-color: #000000;
-  padding: 0 20px;
-  margin: 0;
+  overflow: hidden;
 }
 
 .career-forward-text {
+  position: absolute;
+  width: 100%;
   font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
-  font-style: normal;
-  font-size: 150px;
-  line-height: 135px;
-  letter-spacing: 0%;
+  font-weight: 700;
   text-align: center;
   text-transform: capitalize;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.8) 0%,
-    rgba(255, 255, 255, 0.6) 50%,
-    rgba(255, 255, 255, 0.8) 100%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin: 0;
-  padding: 0;
-  transition: font-size 300ms linear, line-height 300ms linear;
-  will-change: font-size, line-height;
-}
-
-
-
-/* Responsive adjustments */
-@media (max-width: 1440px) {
-  .career-forward-container {
-    width: 100%;
-    max-width: 1440px;
-  }
-  
-  .career-forward-text {
-    padding: 0 20px;
-  }
-}
-
-@media (max-width: 768px) {
-  .career-forward-section {
-    min-height: 500px;
-  }
-  
-  .career-forward-container {
-    height: auto;
-    min-height: 500px;
-    padding: 40px 20px;
-  }
-}
-
-/* Variant 5 Styles */
-.career-forward-variant5 {
-  width: 100%;
-  min-height: auto;
-  height: auto;
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  background: radial-gradient(ellipse at bottom left, rgba(0, 200, 200, 0.1) 0%, transparent 50%);
-  background-color: #000000;
-  padding: 100px 0 80px 0;
-  margin: 0;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.08) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  z-index: 5;
+}
+
+.text-line { display: block; width: 100%; white-space: nowrap; }
+
+.variant5-container {
   position: relative;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  align-items: center;
+  padding: 0 120px;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 10;
 }
 
 .variant5-content {
-  width: 480px;
-  display: flex;
-  flex-direction: column;
-  gap: 34px;
-  position: relative;
-  top: 0;
-  left: 145px;
-  padding: 0;
+  grid-column: span 7; 
+  text-align: left;
 }
 
 .variant5-heading {
-  font-family: 'Montserrat', sans-serif;
+  font-size: 60px; 
   font-weight: 600;
-  font-style: normal;
-  font-size: 60px;
-  line-height: 100%;
-  letter-spacing: 0%;
-  text-align: left;
-  text-transform: capitalize;
   color: #FAFAFA;
-  margin: 0;
-  padding: 0;
-  width: 100%;
+  line-height: 1.1;
+  margin-bottom: 34px;
 }
 
 .variant5-paragraph {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 18px;
-  line-height: 100%;
-  letter-spacing: 0%;
-  text-align: left;
-  color: #FAFAFA;
-  opacity: 0.5;
-  margin: 0;
-  padding: 0;
-  width: 100%;
+  color: #FAFAFA80; 
+  font-size: 20px;
+  line-height: 1.5;
+  max-width: 500px;
+  margin-bottom: 34px;
 }
-
 .variant5-button {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
-  font-style: normal;
-  font-size: 14px;
-  line-height: 100%;
-  letter-spacing: 0%;
-  text-align: center;
-  color: #FAFAFA;
-  background-color: #000000;
-  border: 1px solid rgba(0, 200, 200, 0.3);
-  border-radius: 4px;
-  padding: 12px 24px;
+  position: relative;
+  padding: 14px 45px;
+  color: #ffffff;
+  font-family: sans-serif;
+  font-weight: 500;
+  font-size: 14px; 
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 10px rgba(0, 200, 200, 0.2);
-  margin: 0;
-  width: fit-content;
+  border-radius: 10px;
+
+  background: #000;
+  border: 1.5px solid transparent;
+  background-image: linear-gradient(#000, #000), 
+                    linear-gradient(180deg, #1A9EB7 0%, rgba(26, 158, 183, 0.2) 100%);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  box-shadow: 0px 20px 40px -15px rgba(26, 158, 183, 0.7);
+  
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-block;
+  outline: none;
 }
 
 .variant5-button:hover {
-  border-color: rgba(0, 200, 200, 0.6);
-  box-shadow: 0 0 20px rgba(0, 200, 200, 0.4);
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  box-shadow: 0px 10px 25px 0px #1A9EB74D;
+  filter: brightness(1.2);
 }
 
 .variant5-button:active {
-  transform: translateY(0);
+  transform: translateY(0px);
 }
-
-/* Responsive adjustments for Variant 5 */
-@media (max-width: 1440px) {
-  .variant5-content {
-    left: 40px;
-    width: calc(100% - 80px);
-    max-width: 480px;
-  }
+.variant5-glow {
+  position: absolute;
+  right: -10%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  /* YOUR SPECIFIC GRADIENT */
+  background: linear-gradient(43.87deg, 
+    rgba(26, 158, 183, 0.3) 14.65%, 
+    rgba(26, 158, 183, 0.6) 32.66%, 
+    #1A9EB7 49.99%, 
+    rgba(26, 158, 183, 0.6) 67.66%, 
+    rgba(26, 158, 183, 0.3) 85.33%
+  );
+  filter: blur(150px); /* Heavy blur for the soft glow look */
+  opacity: 0.6;
+  z-index: 1;
 }
-
 @media (max-width: 768px) {
-  .career-forward-variant5 {
-    padding: 60px 0 60px 0;
-  }
-  
-  .variant5-content {
-    top: 0;
-    left: 20px;
-    width: calc(100% - 40px);
-    gap: 24px;
-  }
-  
-  .variant5-heading {
-    font-size: 40px;
-  }
-  
-  .variant5-paragraph {
-    font-size: 16px;
-  }
-  
-  .variant5-button {
-    font-size: 12px;
-    padding: 10px 20px;
-  }
+    .variant5-container { padding: 0 30px; display: block; padding-top: 100px; }
+    .variant5-heading { font-size: 40px; }
 }

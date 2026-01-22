@@ -91,8 +91,8 @@ const EnquireModal = ({ isOpen, onClose }) => {
     'AURUM Bankers Late Recovery Officer',
     'AURUM Bankers Money Officer',
     'AURUM Bankers Customer Service Officer Valuation',
-    'Lenskart Dispensing Optician Program',
-    'Lenskart Retail Sales Officer Program'
+    'Lenskart Clinical Technician Program',
+    'Lenskart Retail Sales Associate Program'
   ]
 
   const validateFullName = (name) => {

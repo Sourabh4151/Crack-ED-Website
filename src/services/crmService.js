@@ -26,8 +26,8 @@ const PROGRAM_TO_CENTER_MAP = {
   'AURUM Bankers Late Recovery Officer': '63',
   'AURUM Bankers Money Officer': '65',
   'AURUM Bankers Customer Service Officer Valuation': '66',
-  'Lenskart Dispensing Optician Program': '38',
-  'Lenskart Retail Sales Officer Program': '61',
+  'Lenskart Clinical Technician Program': '38',
+  'Lenskart Retail Sales Associate Program': '61',
 }
 
 /**

@@ -4,6 +4,18 @@ import auBankImage from '../../assets/au_bank.png'
 import lenskartLogo from '../../assets/lenskart.png'
 import lenskartCardLogo from '../../assets/lenskart_card_logo.png'
 import auCardLogo from '../../assets/au_card_logo.png'
+import relationshipManagerImage from '../../assets/relationship manager - updated.jpg'
+import goldLoanImage from '../../assets/gold loan.jpg'
+import casaImage from '../../assets/casa bank officer - updated.jpg'
+import mblImage from '../../assets/sales officer - updated.jpg'
+import transactionOfficerImage from '../../assets/transaction officer.jpg'
+import deputyCentreManagerImage from '../../assets/deputy centre manager.jpg'
+import csoImage from '../../assets/cso.jpg'
+import lateRecoveryOfficerImage from '../../assets/late recovery officer.jpg'
+import moneyOfficerImage from '../../assets/money officer.jpg'
+import csovImage from '../../assets/csov.jpg'
+import lenskartRetailSalesImage from '../../assets/lenskart - retail sales associate.jpg'
+import clinicalTechnicianImage from '../../assets/clinical technician.jpg'
 import './Programs.css'
 
 const Programs = () => {
@@ -78,26 +90,42 @@ const Programs = () => {
     {
       id: 11,
       logo: lenskartCardLogo,
-      title: 'Lenskart Dispensing Optician Program',
+      title: 'Lenskart Clinical Technician',
       url: 'https://lenskart.crack-ed.com/portal',
     },
     {
       id: 12,
       logo: lenskartCardLogo,
-      title: 'Lenskart Retail Sales Officer Program',
+      title: 'Lenskart Retail Sales Associate',
       url: 'https://lenskartrsa.crack-ed.com/portal',
     },
   ]
 
   // Calculate previous card index (with circular wrapping)
-  const previousCardIndex = currentCardIndex === 0 
-    ? programCards.length - 1 
+  const previousCardIndex = currentCardIndex === 0
+    ? programCards.length - 1
     : currentCardIndex - 1
 
   // Get current program details based on the previous card (before the first visible card in carousel)
   const getCurrentProgramDetails = () => {
     const previousCard = programCards[previousCardIndex]
     if (!previousCard) return null
+
+    // Map program titles to background images
+    const imageMap = {
+      'AURUM Bankers Relationship Manager': relationshipManagerImage,
+      'AURUM Bankers Relationship Officer': goldLoanImage,
+      'AURUM Bankers Bank Officer': casaImage,
+      'AURUM Bankers Sales Officer': mblImage,
+      'AURUM Bankers Transaction Officer': transactionOfficerImage,
+      'AURUM Bankers Deputy Center Manager': deputyCentreManagerImage,
+      'AURUM Bankers Customer Service Officer': csoImage,
+      'AURUM Bankers Late Recovery Officer': lateRecoveryOfficerImage,
+      'AURUM Bankers Money Officer': moneyOfficerImage,
+      'AURUM Bankers Customer Service Officer Valuation': csovImage,
+      'Lenskart Clinical Technician': clinicalTechnicianImage,
+      'Lenskart Retail Sales Associate': lenskartRetailSalesImage,
+    }
 
     // Check if it's an AURUM Bankers card
     if (previousCard.logo === auCardLogo) {
@@ -149,16 +177,16 @@ const Programs = () => {
         title: previousCard.title,
         details: detailsMap[previousCard.title]?.details || 'Join our program',
         duration: detailsMap[previousCard.title]?.duration || '3-month program',
-        image: auBankImage,
+        image: imageMap[previousCard.title] || auBankImage,
       }
     } else {
       // Lenskart cards
       const detailsMap = {
-        'Lenskart Dispensing Optician Program': {
+        'Lenskart Clinical Technician': {
           details: 'Join as a Dispensing Optician with a CTC of Rs 2.64 LPA',
           duration: '6-months program',
         },
-        'Lenskart Retail Sales Officer Program': {
+        'Lenskart Retail Sales Associate': {
           details: 'Join as a Sales Associate with a CTC of Rs 3 LPA + incentives',
           duration: '9-weeks program',
         },
@@ -168,7 +196,7 @@ const Programs = () => {
         title: previousCard.title,
         details: detailsMap[previousCard.title]?.details || 'Join our program',
         duration: detailsMap[previousCard.title]?.duration || '2-month program',
-        image: lenskartStoreImage,
+        image: imageMap[previousCard.title] || lenskartStoreImage,
       }
     }
   }
@@ -180,10 +208,10 @@ const Programs = () => {
       const cardWidth = 180 // card width
       const gap = 14 // gap between cards
       const cardSpacing = cardWidth + gap
-      
+
       // Calculate translateX based on current index
       let translateX = -(currentCardIndex * cardSpacing)
-      
+
       // When at last index, we need to show last card + first card (circular wrap)
       // The duplicate card at the end handles this visually
       if (currentCardIndex === programCards.length) {
@@ -201,7 +229,7 @@ const Programs = () => {
           }
         }, 300)
       }
-      
+
       carouselRef.current.style.transform = `translateX(${translateX}px)`
       carouselRef.current.style.transition = 'transform 0.3s ease'
     }
@@ -217,16 +245,16 @@ const Programs = () => {
       clearTimeout(autoAdvanceTimeoutRef.current)
       autoAdvanceTimeoutRef.current = null
     }
-    
+
     // Reset progress
     setProgress(0)
-    
+
     // Start new auto-advance cycle (8 seconds)
     const duration = 8000 // 8 seconds
     const interval = 50 // Update every 50ms for smooth animation
     const steps = duration / interval
     const increment = 100 / steps
-    
+
     progressIntervalRef.current = setInterval(() => {
       setProgress((prev) => {
         const next = prev + increment
@@ -238,7 +266,7 @@ const Programs = () => {
         return next
       })
     }, interval)
-    
+
     // Auto-advance after duration
     autoAdvanceTimeoutRef.current = setTimeout(() => {
       // Move to next card without resetting auto-advance (it will reset via useEffect)
@@ -266,7 +294,7 @@ const Programs = () => {
       autoAdvanceTimeoutRef.current = null
     }
     setProgress(0)
-    
+
     setCurrentCardIndex((prev) => {
       // When at last card (index 11), show duplicate then reset to 0
       if (prev === programCards.length - 1) {
@@ -290,7 +318,7 @@ const Programs = () => {
       autoAdvanceTimeoutRef.current = null
     }
     setProgress(0)
-    
+
     setCurrentCardIndex((prev) => {
       const next = prev - 1
       const maxIndex = programCards.length - 1
@@ -305,7 +333,7 @@ const Programs = () => {
     if (currentCardIndex !== programCards.length) {
       resetAutoAdvance()
     }
-    
+
     return () => {
       if (progressIntervalRef.current) {
         clearInterval(progressIntervalRef.current)
@@ -327,22 +355,25 @@ const Programs = () => {
           </div>
           <button className="view-all-button">
             View All
-            <svg className="view-all-arrow" width="11.69" height="11.42" viewBox="0 0 11.69 11.42" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <span class="material-symbols-outlined">
+              north_east
+            </span>
+            {/* <svg className="view-all-arrow" width="11.69" height="11.42" viewBox="0 0 11.69 11.42" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M5.5 1L10 5.5L5.5 10M1 5.5H10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
+            </svg> */}
           </button>
         </div>
 
-        <div 
+        <div
           className="programs-background-container"
-          style={{ 
+          style={{
             backgroundImage: `url(${currentProgramDetails?.image || (currentCardIndex < 10 ? auBankImage : lenskartStoreImage)})`,
             backgroundPosition: (currentProgramDetails?.image === auBankImage || (!currentProgramDetails?.image && currentCardIndex < 10)) ? 'center 10%' : 'center top'
           }}
         >
           <div className="progress-bar-container-top">
-            <div 
-              className="progress-bar" 
+            <div
+              className="progress-bar"
               style={{ width: `${progress}%` }}
             ></div>
           </div>
@@ -351,21 +382,29 @@ const Programs = () => {
               {currentProgramDetails && (
                 <div className="program-card">
                   <div className="program-card-content">
-                    <div className="program-logo-container">
-                      <img src={currentProgramDetails.logo} alt="Program Logo" className="program-logo" />
-                    </div>
-                    <div className="program-details">
-                      <h3 className="program-card-title">{currentProgramDetails.title}</h3>
-                      <ul className="program-info-list">
-                        <li>{currentProgramDetails.details}</li>
-                        <li>{currentProgramDetails.duration}</li>
-                      </ul>
-                      <a href={programCards[previousCardIndex]?.url || '#'} target="_blank" rel="noopener noreferrer">
-                        <button className="learn-more-button">Learn More</button>
-                      </a>
+                    <div className="program-card-panel">
+                      <div className="program-card-label">
+                        {currentProgramDetails.logo === auCardLogo
+                          ? 'AURUM Bankers Program'
+                          : 'Lenskart Program'}
+                      </div>
+                      <div className="program-details">
+                        <h3 className="program-card-title">
+                          {currentProgramDetails.title
+                            .replace('AURUM Bankers ', '')
+                            .replace('Lenskart ', '')}
+                        </h3>
+                        <ul className="program-info-list">
+                          <li>{currentProgramDetails.details}</li>
+                          <li>{currentProgramDetails.duration}</li>
+                        </ul>
+                        <a href={programCards[previousCardIndex]?.url || '#'} target="_blank" rel="noopener noreferrer">
+                          <button className="learn-more-button">Learn More</button>
+                        </a>
+                      </div>
                     </div>
                   </div>
-                  
+
                   <div className="program-card-image">
                     <img src={currentProgramDetails.image} alt="Program Store" className="program-store-image" />
                   </div>

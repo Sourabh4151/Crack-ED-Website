@@ -1,0 +1,285 @@
+.premium-program {
+  width: 100%;
+  background: #000000;
+  padding: 72px 120px;
+}
+
+.premium-program-container {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.premium-program-tag {
+  display: inline-block;
+  padding: 4px 30px;
+  border: 1px solid rgba(250, 250, 250, 0.3);
+  border-radius: 100px;
+  background: rgba(0, 0, 0, 1);
+  color: rgba(250, 250, 250, 0.7);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 27px;
+  text-align: center;
+  text-transform: capitalize;
+  letter-spacing: 0%;
+  width: fit-content;
+}
+
+.premium-program-heading {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: rgba(250, 250, 250, 1);
+  margin: 0 0 24px 0;
+  line-height: 27px;
+  letter-spacing: 0%;
+}
+
+.premium-program-card {
+  position: relative;
+  width: 1200px;
+  height: 455px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.premium-program-card-background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.premium-program-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 15%;
+}
+
+.premium-program-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+}
+
+.premium-program-card-content {
+  position: absolute;
+  top: 176px;
+  left: 60px;
+  z-index: 2;
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.premium-program-card-tag {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 4px 30px;
+  border: 1px solid rgba(250, 250, 250, 0.3);
+  border-radius: 100px;
+  background: transparent;
+  color: rgba(250, 250, 250, 0.7);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 27px;
+  text-align: center;
+  text-transform: capitalize;
+  letter-spacing: 0%;
+  width: fit-content;
+  height: fit-content;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.premium-program-card-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  color: rgba(250, 250, 250, 1);
+  margin: 0 0 16px 0;
+  line-height: 100%;
+  letter-spacing: 0%;
+}
+
+.premium-program-sponsors {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  width: fit-content;
+  height: fit-content;
+  margin-bottom: 16px;
+}
+
+.sponsor-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  height: fit-content;
+}
+
+.sponsor-logo img {
+  width: auto;
+  height: 49px;
+  object-fit: contain;
+}
+
+.premium-program-learn-more {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: rgba(30, 30, 30, 1);
+  background: rgba(250, 250, 250, 1);
+  border: none;
+  padding: 12px 40px;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 175px;
+  height: 41px;
+  gap: 10px;
+  transition: background 0.3s ease;
+  text-decoration: none;
+}
+
+.premium-program-learn-more:hover {
+  background: rgba(214, 214, 214, 1);
+}
+
+.premium-program-learn-more:active {
+  background: rgba(214, 214, 214, 1);
+}
+
+@media (max-width: 1440px) {
+  .premium-program {
+    padding: 72px 60px;
+  }
+
+  .premium-program-card {
+    width: 100%;
+    max-width: 1200px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .premium-program {
+    padding: 60px 40px;
+  }
+
+  .premium-program-heading {
+    font-size: 36px;
+  }
+
+  .premium-program-card-title {
+    font-size: 28px;
+  }
+
+  .premium-program-card-content {
+    top: 120px;
+    left: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .premium-program {
+    padding: 48px 24px;
+    gap: 32px;
+  }
+
+  .premium-program-container {
+    gap: 32px;
+  }
+
+  .premium-program-heading {
+    font-size: 28px;
+  }
+
+  .premium-program-card {
+    width: 100%;
+    height: auto;
+    min-height: 400px;
+  }
+
+  .premium-program-card-content {
+    position: relative;
+    top: auto;
+    left: auto;
+    padding: 32px 24px;
+    gap: 8px;
+  }
+
+  .premium-program-card-title {
+    font-size: 24px;
+  }
+
+  .premium-program-learn-more {
+    width: fit-content;
+    padding: 12px 32px;
+  }
+
+  .premium-program-sponsors {
+    gap: 16px;
+  }
+
+  .sponsor-logo img {
+    height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .premium-program {
+    padding: 40px 20px;
+    gap: 24px;
+  }
+
+  .premium-program-container {
+    gap: 24px;
+  }
+
+  .premium-program-heading {
+    font-size: 24px;
+  }
+
+  .premium-program-card {
+    min-height: 350px;
+  }
+
+  .premium-program-card-content {
+    position: relative;
+    top: auto;
+    left: auto;
+    padding: 24px 20px;
+    gap: 8px;
+  }
+
+  .premium-program-card-title {
+    font-size: 20px;
+  }
+
+  .premium-program-learn-more {
+    width: fit-content;
+    padding: 10px 28px;
+    font-size: 13px;
+  }
+
+  .sponsor-logo img {
+    height: 35px;
+  }
+}

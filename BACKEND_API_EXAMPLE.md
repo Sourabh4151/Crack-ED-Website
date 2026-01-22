@@ -35,8 +35,8 @@ PROGRAM_TO_CENTER_MAP = {
     'AURUM Bankers Late Recovery Officer': '8',
     'AURUM Bankers Money Officer': '9',
     'AURUM Bankers Customer Service Officer Valuation': '10',
-    'Lenskart Dispensing Optician Program': '11',
-    'Lenskart Retail Sales Officer Program': '12',
+    'Lenskart Clinical Technician Program': '11',
+    'Lenskart Retail Sales Associate Program': '12',
 }
 
 def get_center_by_program(program):
