@@ -89,10 +89,11 @@
   width: 100%;
 }
 
-.program-card {
+.programs-list .program-card {
   position: relative;
   width: 384px;
   min-height: 318px;
+  height: auto;
   background: rgba(17, 17, 17, 1);
   border-radius: 24px;
   padding: 24px;
@@ -100,17 +101,22 @@
   flex-direction: column;
   gap: 16px;
   box-sizing: border-box;
+  overflow: visible;
 }
 
-.program-card-top {
+.programs-list .program-card-top {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   gap: 16px;
-  margin-bottom: 0;
+  margin-bottom: 8px;
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
-.program-card-icon {
+.programs-list .program-card-icon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -128,7 +134,7 @@
   object-fit: contain;
 }
 
-.program-card-icon img[alt="AU Bank"] {
+.programs-list .program-card-icon img[alt="AU Bank"] {
   width: 41px;
   height: 42px;
   border-radius: 100px;
@@ -136,24 +142,31 @@
 }
 
 
-.program-card-content {
+.programs-list .program-card-content {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
   flex: 1;
   margin-top: 0;
   margin-left: 0;
   padding-left: 0;
+  min-height: 0;
+  overflow: visible;
 }
 
-.program-card-header {
+.programs-list .program-card-header {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  flex: 1;
+  gap: 12px;
+  flex: 1 1 0%;
+  min-height: 0;
+  min-width: 0;
+  max-width: calc(100% - 81px);
+  overflow: visible;
+  box-sizing: border-box;
 }
 
-.program-card-name {
+.programs-list .program-card-name {
   font-family: 'Montserrat', sans-serif;
   font-size: 12px;
   font-weight: 600;
@@ -162,18 +175,35 @@
   color: rgba(250, 250, 250, 0.7);
   text-transform: uppercase;
   margin-top: 8px;
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+  box-sizing: border-box;
 }
 
-.program-card-role {
+.programs-list .program-card-role {
   font-family: 'Montserrat', sans-serif;
   font-size: 18px;
   font-weight: 500;
-  line-height: 100%;
+  line-height: 120%;
   letter-spacing: 0%;
   color: rgba(250, 250, 250, 1);
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
+  overflow: visible;
+  white-space: normal;
+  display: block;
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
-.program-card-details {
+.programs-list .program-card-details {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -181,10 +211,14 @@
   border-radius: 12px;
   padding: 20px 24px 20px 24px;
   width: calc(100% + 24px);
+  max-width: calc(384px + 24px);
   margin: 0;
-  margin-top: -80px;
+  margin-top: -75px;
   margin-left: -24px;
   position: relative;
+  overflow: visible;
+  min-height: 0;
+  box-sizing: border-box;
 }
 
 .program-detail-item {
@@ -231,9 +265,13 @@
   letter-spacing: 0%;
   color: rgba(250, 250, 250, 0.7);
   flex: 1;
+  min-width: 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
-.program-card-footer {
+.programs-list .program-card-footer {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -289,7 +327,7 @@
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   }
 
-  .program-card {
+  .programs-list .program-card {
     width: 100%;
   }
 }
@@ -323,7 +361,7 @@
     gap: 16px;
   }
 
-  .program-card {
+  .programs-list .program-card {
     width: 100%;
     min-height: auto;
   }
@@ -339,11 +377,11 @@
     flex-wrap: wrap;
   }
 
-  .program-card {
+  .programs-list .program-card {
     padding: 20px;
   }
 
-  .program-card-icon {
+  .programs-list .program-card-icon {
     font-size: 40px;
   }
 }
