@@ -7,7 +7,7 @@ import './PremiumProgram.css'
 
 const PremiumProgram = () => {
   return (
-    <section className="premium-program">
+    <section id="premium-program" className="premium-program">
       <div className="premium-program-container">
         <div className="premium-program-tag">Premium Program</div>
         <h2 className="premium-program-heading">

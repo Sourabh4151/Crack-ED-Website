@@ -8,7 +8,10 @@ const ProgramsHero = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const handleExploreClick = () => {
-    setIsModalOpen(true)
+    const premiumProgramSection = document.getElementById('premium-program')
+    if (premiumProgramSection) {
+      premiumProgramSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
   }
 
   const handleCloseModal = () => {

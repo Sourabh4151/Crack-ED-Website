@@ -355,7 +355,7 @@ const Header = () => {
               <a href="https://crack-ed.com/badhta-india-dekho-podcast/" className="nav-link" onClick={closeMobileMenu}>Badhta India Dekho</a>
             </li>
             <li className="nav-item">
-              <a href="https://crack-ed.com/careers/" className="nav-link" onClick={closeMobileMenu}>Careers</a>
+              <Link to="/careers" className="nav-link" onClick={closeMobileMenu}>Careers</Link>
             </li>
           </ul>
         </nav>
