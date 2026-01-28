@@ -128,6 +128,57 @@ const ProgramsList = () => {
     ]
   }
 
+  const getProgramLink = (category, role) => {
+    if (category === 'Banking') {
+      switch (role) {
+        case 'Relationship Manager':
+          return 'https://crack-ed.com/pgprm/'
+        case 'Relationship Officer':
+          return 'https://aubank.ro.crack-ed.com/portal'
+        case 'Bank Officer':
+          return 'https://aubankbo.crack-ed.com/portal'
+        case 'Sales Officer':
+          return 'https://aubankso.crack-ed.com/portal'
+        case 'Transaction Officer':
+          return 'https://aubankto.crack-ed.com/portal'
+        case 'Deputy Center Manager':
+          return 'https://aubankcm.crack-ed.com/portal'
+        case 'Customer Service Officer':
+          return 'https://aubankcso.crack-ed.com/portal'
+        case 'Deputy Late Recovery Officer':
+          return 'https://aubanklro.crack-ed.com/portal'
+        case 'Money Officer':
+          return 'https://aubankmo.crack-ed.com/portal'
+        case 'Customer Service Officer Valuation':
+          return 'https://aubankbcso.crack-ed.com/portal'
+        default:
+          return null
+      }
+    }
+
+    if (category === 'Retail') {
+      switch (role) {
+        case 'Clinical Technician':
+          return 'https://lenskart.crack-ed.com/portal'
+        case 'Retail Sales Associate':
+          return 'https://lenskartrsa.crack-ed.com/portal'
+        default:
+          return null
+      }
+    }
+
+    if (category === 'NBFC') {
+      switch (role) {
+        case 'Relationship Manager':
+          return 'https://piramal.crack-ed.com/portal'
+        default:
+          return null
+      }
+    }
+
+    return null
+  }
+
   const getIcon = (category) => {
     if (category === 'Banking') return <img src={auCardLogo} alt="AU Bank" className="program-logo-img" />
     if (category === 'Retail') return <img src={lenskartCardLogo} alt="Lenskart" className="program-logo-img" />
@@ -181,7 +232,12 @@ const ProgramsList = () => {
                   ))}
                 </div>
                 <div className="program-card-footer">
-                  <a href="#" className="view-details-link">
+                  <a
+                    href={getProgramLink(activeTab, item.role) || '#'}
+                    className="view-details-link"
+                    target={getProgramLink(activeTab, item.role) ? '_blank' : undefined}
+                    rel={getProgramLink(activeTab, item.role) ? 'noopener noreferrer' : undefined}
+                  >
                     View Details
                     <span className="view-details-arrow">
                       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
