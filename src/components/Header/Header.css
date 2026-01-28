@@ -304,6 +304,11 @@
     display: flex;
   }
 
+  /* Hide main Programs chevron on mobile (we navigate instead of dropdown) */
+  .nav-item-dropdown .dropdown-arrow {
+    display: none;
+  }
+
   .nav {
     position: fixed;
     top: 0;

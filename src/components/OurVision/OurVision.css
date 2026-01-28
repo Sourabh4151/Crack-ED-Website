@@ -1,0 +1,113 @@
+.our-vision-section {
+  min-height: 100vh;
+  background: #000;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.our-vision-sticky-wrapper {
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 120px;
+}
+
+.our-vision-heading {
+  position: absolute;
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(40px, 10vw, 180px);
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.12);
+  text-align: center;
+  width: 100%;
+  z-index: 1;
+  top: 10%;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  white-space: nowrap;
+}
+
+.our-vision-typing-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 40px;
+  /* Constrain width so justify doesn't create huge word gaps */
+  width: 100%;
+  max-width: 700px;
+  line-height: 1.3;
+  z-index: 2;
+  color: #ffffff;
+  margin: 0;
+  text-align: justify;
+  text-justify: inter-word;
+  /* Keep justify, but avoid mid-word breaks (prefer hyphenation) */
+  hyphens: auto;
+  overflow-wrap: normal;
+  word-break: normal;
+  white-space: normal;
+}
+
+.our-vision-typing-text .char {
+  opacity: 0.15;
+  display: inline;
+  transition: opacity 0.1s linear;
+  white-space: normal;
+}
+
+@media (max-width: 768px) {
+  .our-vision-section {
+    min-height: auto;
+  }
+
+  .our-vision-sticky-wrapper {
+    height: auto;
+    min-height: auto;
+    padding: 48px 24px 56px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    gap: 0px;
+  }
+
+  .our-vision-heading {
+    position: relative;
+    font-size: clamp(32px, 8vw, 60px);
+    top: auto;
+    left: auto;
+    right: auto;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    text-align: center;
+    box-sizing: border-box;
+    letter-spacing: 0.12em;
+    white-space: nowrap;
+  }
+
+  .our-vision-typing-text {
+    position: relative;
+    font-size: 24px;
+    left: auto;
+    right: auto;
+    width: 100%;
+    max-width: 100%;
+    line-height: 1.4;
+    z-index: 2;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+    overflow-wrap: normal;
+    word-break: normal;
+    white-space: normal;
+  }
+}

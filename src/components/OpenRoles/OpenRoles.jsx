@@ -91,7 +91,7 @@ const OpenRoles = () => {
   const activeFiltersCount = Object.values(filters).filter(v => v !== '').length
 
   return (
-    <section className="open-roles-section">
+    <section id="open-roles" className="open-roles-section">
       <div className="open-roles-container">
         <div className="open-roles-header">
           <div className="open-roles-badge">Open Roles</div>
@@ -118,11 +118,12 @@ const OpenRoles = () => {
             <button 
               className="open-roles-filters-button"
               onClick={() => setIsFiltersOpen(!isFiltersOpen)}
+              aria-label="Filters"
             >
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M3 5H17M5 10H15M7 15H13" stroke="rgba(250, 250, 250, 0.7)" strokeWidth="2" strokeLinecap="round"/>
               </svg>
-              Filters
+              <span className="open-roles-filters-button-text">Filters</span>
               {activeFiltersCount > 0 && (
                 <span className="open-roles-filter-badge">{activeFiltersCount}</span>
               )}
@@ -130,6 +131,14 @@ const OpenRoles = () => {
             
             {isFiltersOpen && (
               <div className="open-roles-filters-dropdown">
+                <button
+                  type="button"
+                  className="open-roles-filters-close"
+                  onClick={() => setIsFiltersOpen(false)}
+                  aria-label="Close filters"
+                >
+                  Close
+                </button>
                 <div className="open-roles-filter-group">
                   <label className="open-roles-filter-label">Job Type</label>
                   <div className="open-roles-filter-options">
@@ -196,7 +205,21 @@ const OpenRoles = () => {
             >
               <div className="open-roles-card-content">
                 <div className="open-roles-card-main">
-                  <h3 className="open-roles-job-title">{job.title}</h3>
+                  <div className="open-roles-card-title-row">
+                    <h3 className="open-roles-job-title">{job.title}</h3>
+                    <button 
+                      className="open-roles-card-arrow"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        navigate(`/careers/job/${job.id}`)
+                        setTimeout(() => window.scrollTo(0, 0), 0)
+                      }}
+                    >
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 17L17 7M17 7H7M17 7V17" stroke="rgba(250, 250, 250, 0.7)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </button>
+                  </div>
                   <div className="open-roles-job-details">
                     <span className="open-roles-job-detail">{job.type}</span>
                     <span className="open-roles-job-detail">{job.workMode}</span>
@@ -210,21 +233,6 @@ const OpenRoles = () => {
                     </span>
                   </div>
                 </div>
-                <button 
-                  className="open-roles-card-arrow"
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    navigate(`/careers/job/${job.id}`)
-                    // Scroll to top after navigation
-                    setTimeout(() => {
-                      window.scrollTo(0, 0)
-                    }, 0)
-                  }}
-                >
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M7 17L17 7M17 7H7M17 7V17" stroke="rgba(250, 250, 250, 0.7)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </button>
               </div>
             </div>
           ))}

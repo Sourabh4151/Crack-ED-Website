@@ -1,0 +1,174 @@
+.bid-host {
+  background-color: #000;
+  color: #fafafa;
+  padding: 80px 120px;
+  display: flex;
+  justify-content: center;
+}
+
+.bid-host-inner {
+  width: 100%;
+  max-width: 1440px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.bid-host-pill {
+  align-self: flex-start;
+  padding: 4px 30px;
+  min-height: 35px;
+  border-radius: 100px;
+  border: 1px solid rgba(250, 250, 250, 1);
+  background: transparent;
+  color: rgba(250, 250, 250, 1);
+  font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 27px;
+  cursor: default;
+}
+
+.bid-host-heading {
+  margin: 0;
+  font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 1;
+  color: rgba(250, 250, 250, 1);
+}
+
+.bid-host-card {
+  width: 100%;
+  max-width: 1200px;
+  background-color: rgba(13, 13, 13, 1);
+  border-radius: 16px 0 0 16px;
+  display: flex;
+  gap: 36px;
+  padding: 0px 32px 0px 0px;
+}
+
+.bid-host-image-wrapper {
+  width: 470px;
+  height: 440px;
+  border-radius: 12px 0 0 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.bid-host-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.bid-host-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 180px 0px 24px 0px;
+}
+
+.bid-host-name {
+  margin: 0;
+  font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 27px;
+  color: rgba(250, 250, 250, 1);
+}
+
+.bid-host-role {
+  margin: 4px 0 0;
+  font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 27px;
+  color: rgba(250, 250, 250, 0.9);
+}
+
+.bid-host-accent {
+  margin-top: 12px;
+  width: 48px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(12, 70, 81, 1), rgba(26, 158, 183, 1));
+}
+
+.bid-host.in-view .bid-host-accent {
+  animation: bid-host-accent-grow 600ms linear 1000ms forwards;
+}
+
+@keyframes bid-host-accent-grow {
+  from {
+    width: 48px;
+  }
+  to {
+    width: 200px;
+  }
+}
+
+.bid-host-body {
+  margin: 0;
+  font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 27px;
+  color: rgba(250, 250, 250, 0.8);
+  text-align: justify;
+}
+
+@media (max-width: 1200px) {
+  .bid-host {
+    padding: 64px 48px;
+  }
+
+  .bid-host-card {
+    flex-direction: column;
+    max-width: 100%;
+  }
+
+  .bid-host-image-wrapper {
+    width: 100%;
+    max-width: 470px;
+    height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .bid-host {
+    padding: 48px 24px;
+  }
+
+  .bid-host-inner {
+    gap: 32px;
+  }
+
+  .bid-host-card {
+    padding: 24px;
+  }
+
+  .bid-host-content {
+    padding: 16px 0 0;
+  }
+
+  .bid-host-name {
+    font-size: 20px;
+  }
+
+  .bid-host-pill {
+    font-size: 14px;
+    line-height: 27px;
+    color: rgba(250, 250, 250, 0.7);
+    text-align: center;
+  }
+
+  .bid-host-heading {
+    font-size: 18px;
+    line-height: 27px;
+    color: rgba(250, 250, 250, 1);
+  }
+}
+

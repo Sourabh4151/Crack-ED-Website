@@ -125,9 +125,9 @@ const Header = () => {
   return (
     <header className={`header ${isScrolled ? 'scrolled' : ''} ${isMobileMenuOpen ? 'mobile-menu-open' : ''}`}>
       <div className="header-container">
-        <div className="logo">
+        <Link to="/" className="logo" onClick={closeMobileMenu} aria-label="Go to home">
           <img src={logoImage} alt="CRACK-ED Logo" className="logo-icon" />
-        </div>
+        </Link>
         
         <button 
           className="hamburger-menu"
@@ -142,7 +142,9 @@ const Header = () => {
         <nav className={`nav ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
           <ul className="nav-list">
             <li className="nav-item">
-              <a href="https://crack-ed.com/about-us/" className="nav-link">About Us</a>
+              <Link to="/about" className="nav-link" onClick={closeMobileMenu}>
+                About Us
+              </Link>
             </li>
             <li 
               className={`nav-item nav-item-dropdown ${isProgramsOpen ? 'active' : ''}`}
@@ -165,12 +167,7 @@ const Header = () => {
               <Link 
                 to="/programs" 
                 className="nav-link"
-                onClick={(e) => {
-                  if (window.innerWidth <= 768) {
-                    e.preventDefault()
-                    toggleProgramsMobile()
-                  }
-                }}
+                onClick={closeMobileMenu}
               >
                 Programs
                 <svg className="dropdown-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -352,7 +349,9 @@ const Header = () => {
               <a href="#resources" className="nav-link" onClick={closeMobileMenu}>Resources</a>
             </li>
             <li className="nav-item">
-              <a href="https://crack-ed.com/badhta-india-dekho-podcast/" className="nav-link" onClick={closeMobileMenu}>Badhta India Dekho</a>
+              <Link to="/badhta-india-dekho" className="nav-link" onClick={closeMobileMenu}>
+                Badhta India Dekho
+              </Link>
             </li>
             <li className="nav-item">
               <Link to="/careers" className="nav-link" onClick={closeMobileMenu}>Careers</Link>

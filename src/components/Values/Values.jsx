@@ -55,8 +55,10 @@ const Values = () => {
               <div className="value-icon">
                 <img src={value.icon} alt={value.title} />
               </div>
-              <h3 className="value-title">{value.title}</h3>
-              <p className="value-description">{value.description}</p>
+              <div className="value-content">
+                <h3 className="value-title">{value.title}</h3>
+                <p className="value-description">{value.description}</p>
+              </div>
             </div>
           ))}
           <div className="values-bottom-row">
@@ -65,8 +67,10 @@ const Values = () => {
                 <div className="value-icon">
                   <img src={value.icon} alt={value.title} />
                 </div>
-                <h3 className="value-title">{value.title}</h3>
-                <p className="value-description">{value.description}</p>
+                <div className="value-content">
+                  <h3 className="value-title">{value.title}</h3>
+                  <p className="value-description">{value.description}</p>
+                </div>
               </div>
             ))}
           </div>

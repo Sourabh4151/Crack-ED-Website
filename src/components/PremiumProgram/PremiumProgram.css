@@ -215,14 +215,18 @@
     width: 100%;
     height: auto;
     min-height: 400px;
+    display: flex;
+    align-items: flex-end; /* push content block towards bottom so more image is visible */
   }
 
   .premium-program-card-content {
     position: relative;
     top: auto;
     left: auto;
-    padding: 32px 24px;
+    padding: 32px 24px 24px 24px;
     gap: 8px;
+    margin-top: auto; /* let image show above, content sits lower */
+    width: 100%;
   }
 
   .premium-program-card-title {

@@ -4,17 +4,23 @@ import Home from './pages/Home'
 import Programs from './pages/Programs'
 import Careers from './pages/Careers'
 import JobDetail from './pages/JobDetail'
+import About from './pages/About'
+import BID from './pages/BID'
+import ScrollToTop from './components/ScrollToTop/ScrollToTop'
 import './App.css'
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <div className="App">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
           <Route path="/programs" element={<Programs />} />
           <Route path="/careers" element={<Careers />} />
           <Route path="/careers/job/:id" element={<JobDetail />} />
+          <Route path="/badhta-india-dekho" element={<BID />} />
         </Routes>
       </div>
     </Router>

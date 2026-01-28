@@ -343,6 +343,9 @@
   display: flex;
   justify-content: flex-end;
   margin-top: 0;
+  width: 698px;
+  max-width: 100%;
+  align-self: flex-start;
 }
 
 .job-detail-submit-button {
@@ -509,10 +512,21 @@
     flex-direction: column;
   }
 
+  .job-detail-apply-form-section {
+    width: 100% !important;
+    max-width: 100%;
+    min-width: 0;
+    align-self: stretch;
+  }
+
   .job-detail-apply-form {
     width: 100%;
+    max-width: 100%;
+    min-width: 0;
     position: relative;
     top: 0;
+    height: auto;
+    min-height: auto;
   }
 }
 
@@ -538,9 +552,53 @@
     gap: 24px;
   }
 
+  /* Apply For This Role form – tablet/mobile */
+  .job-detail-apply-form-section {
+    width: 100% !important;
+    max-width: 100%;
+    min-width: 0;
+    align-self: stretch;
+  }
+
   .job-detail-apply-form {
-    width: 100%;
+    width: 100% !important;
+    max-width: 100%;
+    min-width: 0;
+    height: auto;
+    min-height: auto;
     padding: 32px 24px;
+    gap: 14px;
+  }
+
+  .job-detail-apply-form-title {
+    font-size: 22px;
+  }
+
+  .job-detail-form-separator {
+    width: 100%;
+  }
+
+  .job-detail-form-input {
+    width: 100%;
+    min-height: 44px;
+    box-sizing: border-box;
+  }
+
+  .job-detail-upload-box {
+    width: 100%;
+    min-height: 64px;
+    padding: 20px 16px;
+    box-sizing: border-box;
+  }
+
+  .job-detail-form-actions {
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  .job-detail-submit-button {
+    width: 100%;
+    min-height: 44px;
   }
 }
 
@@ -560,8 +618,39 @@
     height: auto;
   }
 
+  /* Apply For This Role form – small mobile */
+  .job-detail-apply-form-section {
+    margin-top: 24px;
+  }
+
   .job-detail-apply-form {
     padding: 24px 20px;
+    gap: 12px;
     min-height: auto;
+  }
+
+  .job-detail-apply-form-title {
+    font-size: 20px;
+    line-height: 1.3;
+  }
+
+  .job-detail-form-input {
+    padding: 10px 14px;
+    font-size: 16px; /* reduces zoom on iOS */
+    min-height: 48px;
+  }
+
+  .job-detail-upload-box {
+    min-height: 72px;
+    padding: 16px 14px;
+  }
+
+  .job-detail-upload-box span {
+    font-size: 13px;
+  }
+
+  .job-detail-submit-button {
+    min-height: 48px;
+    padding: 14px 24px;
   }
 }

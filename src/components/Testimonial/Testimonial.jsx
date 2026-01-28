@@ -42,14 +42,14 @@ const Testimonial = () => {
       id: 3,
       image: RohitKhatanaCASA,
       name: "Rohit Khatana",
-      title: "Credits and Savings Account Program",
+      title: "Current and Savings Account Program",
       description: "This program helped me learn core banking, develop customer-handling skills, and prepared me with the right mindset for a banking career."
     },
     {
       id: 4,
       image: AbhijeetCASA,
       name: "Abhijeet",
-      title: "Credits and Savings Account Program",
+      title: "Current and Savings Account Program",
       description: "Crack-ED truly strengthened my banking preparation. The teachers share real experience, clear doubts patiently, and their guidance gave me confidence for my career."
     },
     {
@@ -77,7 +77,7 @@ const Testimonial = () => {
       id: 8,
       image: KrishnakantCASA,
       name: "Krishnakant",
-      title: "Credits and Savings Account Program",
+      title: "Current and Savings Account Program",
       description: "Through the AURUM Banker Program, I gained banking knowledge and confidence. The trainers' guidance has prepared me well for a bright career in banking."
     }
   ]

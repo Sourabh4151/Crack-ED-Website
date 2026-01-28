@@ -153,6 +153,10 @@
   margin-left: 4px;
 }
 
+.open-roles-filters-close {
+  display: none;
+}
+
 .open-roles-filters-dropdown {
   position: absolute;
   top: calc(100% + 8px);
@@ -299,6 +303,16 @@
   flex-direction: column;
   gap: 8px;
   flex: 1;
+  min-width: 0;
+}
+
+.open-roles-card-title-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
 }
 
 .open-roles-job-title {
@@ -310,6 +324,8 @@
   letter-spacing: 0%;
   color: rgba(250, 250, 250, 1);
   margin: 0;
+  flex: 1;
+  min-width: 0;
 }
 
 .open-roles-job-details {
@@ -400,22 +416,45 @@
   }
 
   .open-roles-search-container {
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
   }
 
   .open-roles-search-wrapper {
-    width: 100%;
+    flex: 1;
+    min-width: 0;
+    width: auto;
+    max-width: none;
   }
 
   .open-roles-filters-button {
+    flex-shrink: 0;
+    min-width: 51px;
+    height: 51px;
+    padding: 0 20px;
+  }
+
+  .open-roles-filters-dropdown {
     width: 100%;
-    justify-content: center;
+    max-width: 100%;
+    left: 0;
+    right: 0;
+    box-sizing: border-box;
+  }
+
+  .open-roles-card-content {
+    flex-wrap: wrap;
+  }
+
+  .open-roles-job-details {
+    gap: 24px;
   }
 }
 
 @media (max-width: 768px) {
   .open-roles-section {
-    padding: 60px 24px;
+    padding: 48px 24px 60px 24px;
   }
 
   .open-roles-container {
@@ -433,28 +472,152 @@
     line-height: 27px;
   }
 
+  .open-roles-search-container {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .open-roles-search-wrapper {
+    flex: 1;
+    min-width: 0;
+    height: 48px;
+    padding: 10px 20px;
+  }
+
+  .open-roles-filters-button {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    padding: 0;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .open-roles-filters-button-text {
+    display: none;
+  }
+
+  .open-roles-filter-badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    margin-left: 0;
+  }
+
+  .open-roles-filters-wrapper {
+    position: static;
+  }
+
+  .open-roles-filters-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% + 32px);
+    margin: -20px -16px 20px -16px;
+    padding: 14px 16px;
+    background: rgba(13, 13, 13, 1);
+    border: none;
+    border-bottom: 1px solid rgba(250, 250, 250, 0.1);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: rgba(250, 250, 250, 1);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .open-roles-filters-dropdown {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 20px 16px 32px;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    overflow-y: auto;
+    z-index: 100;
+    -webkit-overflow-scrolling: touch;
+    box-sizing: border-box;
+  }
+
+  .open-roles-list {
+    gap: 12px;
+  }
+
   .open-roles-card {
-    padding: 20px 20px 20px 24px;
+    padding: 20px 16px;
+    border-radius: 12px;
+    border-left-width: 4px;
+    min-height: auto;
   }
 
   .open-roles-card-content {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
+    align-items: stretch;
   }
 
-  .open-roles-card-arrow {
-    align-self: flex-end;
+  .open-roles-card-main {
+    gap: 8px;
+    width: 100%;
+  }
+
+  /* Title and arrow on same row on mobile */
+  .open-roles-card-title-row {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .open-roles-job-title {
+    font-size: 16px;
+    line-height: 24px;
+    flex: 1;
+    min-width: 0;
   }
 
   .open-roles-job-details {
     gap: 12px;
+    flex-wrap: wrap;
+    height: auto;
+  }
+
+  .open-roles-job-detail,
+  .open-roles-job-location {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .open-roles-card-arrow {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    min-height: 48px;
+    padding: 14px;
+    flex-shrink: 0;
+    border-radius: 8px;
+  }
+
+  .open-roles-card-arrow svg {
+    width: 20px;
+    height: 20px;
   }
 }
 
 @media (max-width: 480px) {
   .open-roles-section {
-    padding: 40px 20px;
+    padding: 32px 16px 48px 16px;
+  }
+
+  .open-roles-container {
+    gap: 16px;
   }
 
   .open-roles-badge {
@@ -468,14 +631,82 @@
     line-height: 24px;
   }
 
+  .open-roles-search-container {
+    gap: 8px;
+  }
+
+  .open-roles-search-wrapper {
+    height: 44px;
+    padding: 8px 16px;
+  }
+
+  .open-roles-search-input {
+    font-size: 14px;
+  }
+
+  .open-roles-filters-button {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    padding: 0;
+  }
+
+  .open-roles-filters-dropdown {
+    padding: 16px 12px 28px;
+  }
+
+  .open-roles-filters-close {
+    margin: -16px -12px 16px -12px;
+    width: calc(100% + 24px);
+    padding: 12px;
+  }
+
+  .open-roles-filter-option {
+    padding: 6px 12px;
+    font-size: 11px;
+  }
+
+  .open-roles-list {
+    gap: 10px;
+  }
+
+  .open-roles-card {
+    padding: 16px 14px;
+    border-radius: 10px;
+    border-left-width: 3px;
+  }
+
+  .open-roles-card-content {
+    gap: 14px;
+  }
+
   .open-roles-job-title {
-    font-size: 16px;
-    line-height: 24px;
+    font-size: 15px;
+    line-height: 22px;
   }
 
   .open-roles-job-details {
     flex-direction: column;
     align-items: flex-start;
-    gap: 8px;
+    gap: 6px;
+  }
+
+  .open-roles-job-detail,
+  .open-roles-job-location {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .open-roles-card-arrow {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 12px;
+  }
+
+  .open-roles-card-arrow svg {
+    width: 18px;
+    height: 18px;
   }
 }

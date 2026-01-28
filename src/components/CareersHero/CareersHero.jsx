@@ -4,10 +4,17 @@ import './CareersHero.css'
 
 const CareersHero = () => {
   const handleSeeOpeningsClick = () => {
-    // Scroll to job openings section when implemented
-    const openingsSection = document.getElementById('job-openings')
+    const openingsSection = document.getElementById('open-roles')
     if (openingsSection) {
-      openingsSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      // Account for fixed header height
+      const headerOffset = 100
+      const elementPosition = openingsSection.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      })
     }
   }
 

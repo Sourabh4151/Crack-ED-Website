@@ -16,6 +16,15 @@
 
 @media (max-width: 768px) {
   .careers-transition {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .careers-transition {
     height: 80px;
     margin-top: -40px;
     margin-bottom: -40px;

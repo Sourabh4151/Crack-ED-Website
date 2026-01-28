@@ -365,6 +365,15 @@
     width: 100%;
     min-height: auto;
   }
+
+  /* On mobile, let the header and details stack naturally without overlap */
+  .programs-list .program-card-details {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 0;
+    margin-left: 0;
+    padding: 20px 20px 20px 20px;
+  }
 }
 
 @media (max-width: 480px) {
