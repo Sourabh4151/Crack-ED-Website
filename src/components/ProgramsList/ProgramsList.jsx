@@ -231,22 +231,22 @@ const ProgramsList = () => {
                     </div>
                   ))}
                 </div>
-                <div className="program-card-footer">
-                  <a
-                    href={getProgramLink(activeTab, item.role) || '#'}
-                    className="view-details-link"
-                    target={getProgramLink(activeTab, item.role) ? '_blank' : undefined}
-                    rel={getProgramLink(activeTab, item.role) ? 'noopener noreferrer' : undefined}
-                  >
-                    View Details
-                    <span className="view-details-arrow">
-                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M7.5 4L12.5 10L7.5 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                        <line x1="7.5" y1="10" x2="0" y2="10" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                      </svg>
-                    </span>
-                  </a>
-                </div>
+              </div>
+              <div className="program-card-footer">
+                <a
+                  href={getProgramLink(activeTab, item.role) || '#'}
+                  className="view-details-link"
+                  target={getProgramLink(activeTab, item.role) ? '_blank' : undefined}
+                  rel={getProgramLink(activeTab, item.role) ? 'noopener noreferrer' : undefined}
+                >
+                  View Details
+                  <span className="view-details-arrow">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M7.5 4L12.5 10L7.5 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <line x1="7.5" y1="10" x2="0" y2="10" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                    </svg>
+                  </span>
+                </a>
               </div>
             </div>
           ))}

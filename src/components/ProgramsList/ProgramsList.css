@@ -94,14 +94,20 @@
   width: 384px;
   min-height: 318px;
   height: auto;
-  background: rgba(17, 17, 17, 1);
+  background: rgba(13, 13, 13, 1);
+  border: 0.5px solid transparent;
   border-radius: 24px;
-  padding: 24px;
+  padding: 24px 24px 0 24px;
   display: flex;
   flex-direction: column;
   gap: 16px;
   box-sizing: border-box;
-  overflow: visible;
+  overflow: hidden;
+  transition: border-color 0.3s ease;
+}
+
+.programs-list .program-card:hover {
+  border-color: rgba(26, 158, 183, 1);
 }
 
 .programs-list .program-card-top {
@@ -109,7 +115,7 @@
   flex-direction: row;
   align-items: flex-start;
   gap: 16px;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
   min-width: 0;
   width: 100%;
   max-width: 100%;
@@ -149,6 +155,7 @@
   flex: 1;
   margin-top: 0;
   margin-left: 0;
+  margin-right: 0;
   padding-left: 0;
   min-height: 0;
   overflow: visible;
@@ -210,10 +217,9 @@
   background: rgba(17, 17, 17, 1);
   border-radius: 12px;
   padding: 20px 24px 20px 24px;
-  width: calc(100% + 24px);
-  max-width: calc(384px + 24px);
+  width: calc(100% + 6px);
   margin: 0;
-  margin-top: -75px;
+  margin-top: -60px;
   margin-left: -24px;
   position: relative;
   overflow: visible;
@@ -275,9 +281,23 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 16px;
+  margin-top: auto;
+  margin-bottom: 0;
+  margin-left: -24px;
+  margin-right: -24px;
+  padding: 40px 24px 28px;
   position: relative;
-  background: transparent;
+  background: rgba(17, 17, 17, 1);
+  border-radius: 0 0 24px 24px;
+  width: calc(100% + 48px);
+  min-width: calc(100% + 48px);
+  box-sizing: border-box;
+  transition: background 0.3s ease;
+  cursor: pointer;
+}
+
+.programs-list .program-card:hover .program-card-footer {
+  background: rgba(26, 158, 183, 1);
 }
 
 .view-details-link {
@@ -292,10 +312,19 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
   gap: 5px;
-  width: fit-content;
-  height: fit-content;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  margin: 0;
+  padding: 0;
   transition: color 0.3s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .view-details-link:hover {
@@ -374,6 +403,14 @@
     margin-left: 0;
     padding: 20px 20px 20px 20px;
   }
+
+  .programs-list .program-card-footer {
+    width: calc(100% + 48px);
+    min-width: calc(100% + 48px);
+    max-width: calc(100% + 48px);
+    margin-left: -24px;
+    margin-right: -24px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -387,7 +424,15 @@
   }
 
   .programs-list .program-card {
-    padding: 20px;
+    padding: 20px 20px 0 20px;
+  }
+
+  .programs-list .program-card-footer {
+    width: calc(100% + 40px);
+    min-width: calc(100% + 40px);
+    max-width: calc(100% + 40px);
+    margin-left: -20px;
+    margin-right: -20px;
   }
 
   .programs-list .program-card-icon {
