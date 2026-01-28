@@ -393,6 +393,11 @@
   .programs-list .program-card {
     width: 100%;
     min-height: auto;
+    gap: 8px;
+  }
+
+  .programs-list .program-card-top {
+    margin-bottom: 8px;
   }
 
   /* On mobile, let the header and details stack naturally without overlap */
@@ -401,6 +406,7 @@
     max-width: 100%;
     margin-top: 0;
     margin-left: 0;
+    margin-bottom: 24px;
     padding: 20px 20px 20px 20px;
   }
 
@@ -425,6 +431,10 @@
 
   .programs-list .program-card {
     padding: 20px 20px 0 20px;
+  }
+
+  .programs-list .program-card-details {
+    margin-bottom: 24px;
   }
 
   .programs-list .program-card-footer {
