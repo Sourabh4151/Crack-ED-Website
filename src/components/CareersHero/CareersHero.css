@@ -2,9 +2,11 @@
   position: relative;
   width: 100%;
   height: 726px;
+  min-height: 726px;
   display: flex;
   align-items: center;
-  overflow: visible;
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
 .careers-hero-overlay {

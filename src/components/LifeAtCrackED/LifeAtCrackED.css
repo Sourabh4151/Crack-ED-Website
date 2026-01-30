@@ -3,7 +3,8 @@
   background: #000000;
   padding: 64px 0;
   position: relative;
-  overflow: hidden;
+  flex-shrink: 0;
+  overflow: visible;
 }
 
 .life-at-cracked-container {

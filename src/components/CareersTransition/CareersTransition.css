@@ -1,17 +1,19 @@
 .careers-transition {
   position: relative;
-  width: 1599px;
-  max-width: calc(100% + 200px);
+  width: 100%;
+  max-width: 100vw;
   height: 118px;
   background: rgba(0, 0, 0, 1);
   filter: blur(75px);
   -webkit-filter: blur(75px);
   margin-top: -60px;
-  margin-bottom: -60px;
-  margin-left: -100px;
-  z-index: 1;
-  overflow: visible;
+  margin-bottom: 0;
+  margin-left: 0;
+  margin-right: 0;
+  z-index: 0;
+  overflow: hidden;
   pointer-events: none;
+  flex-shrink: 0;
 }
 
 @media (max-width: 768px) {
@@ -27,7 +29,7 @@
   .careers-transition {
     height: 80px;
     margin-top: -40px;
-    margin-bottom: -40px;
+    margin-bottom: 0;
     filter: blur(50px);
     -webkit-filter: blur(50px);
   }
@@ -37,7 +39,7 @@
   .careers-transition {
     height: 60px;
     margin-top: -30px;
-    margin-bottom: -30px;
+    margin-bottom: 0;
     filter: blur(40px);
     -webkit-filter: blur(40px);
   }
