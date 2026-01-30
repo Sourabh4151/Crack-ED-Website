@@ -1,0 +1,163 @@
+.media-section {
+    background-color: #000;
+    padding: 100px 20px;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.media-container {
+    max-width: 1200px;
+    width: 100%;
+}
+
+.stats-header1 {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+}
+.casestudyheader{
+    color: #FAFAFA;
+    font-size: 32px;
+    line-height: 42px;
+
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
+.stats-badge1 {
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 4px 30px;
+    border-radius: 100px;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    line-height: 27px;
+    font-family: 'Poppins', sans-serif;
+    display: inline-block;
+}
+
+.slider-card {
+    background: #0D0D0D;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+
+}
+
+.mainsection {
+    display: flex;
+    min-height: 550px;
+    gap:14px;
+}
+
+.sec11 {
+    width: 45%;
+    
+}
+
+.slide-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+.sec22 {
+    width: 55%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+}
+
+.content-wrapper1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    text-align: left;
+    gap: 10px;
+}
+
+.publisher-logo {
+    height: auto;
+    filter: brightness(1.2);
+}
+
+.mediadesc1 {
+    color: #FAFAFAB2;
+    font-size: 16px;
+    line-height: 26px;
+ 
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
+
+.slider-controls {
+    position: absolute;
+    bottom: 40px;
+    right: 50px;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.control-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.control-btn:hover {
+    border-color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.counter {
+    color: rgba(255, 255, 255, 0.6);
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    letter-spacing: 4px;
+}
+.casestudybtn{
+    display: flex;
+    justify-content: start;
+    width: 100%;
+}
+@media (max-width: 768px) {
+    .media-container {
+    max-width: 100% !important;
+    }
+}
+@media (max-width: 1024px) {
+    .casestudyheader{
+        font-size: 28px;
+        line-height: 38px;
+    }
+    .mainsection {
+        flex-direction: column;
+    }
+.sec22{
+    padding: 20px;
+}
+.sec11{
+    padding: 20px;
+}
+    .sec11, .sec22 {
+        width: 100%;
+    }
+    .slider-controls {
+        position: relative;
+        bottom: 0;
+        right: 0;
+        justify-content: center;
+        padding-bottom: 40px;
+    }
+}

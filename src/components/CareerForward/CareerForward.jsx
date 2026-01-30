@@ -30,7 +30,7 @@ const CareerForward = () => {
         end: "+=800",        // controlled scroll
         scrub: 0.8,          // smooth
         pin: true,           // 🔥 REQUIRED
-        anticipatePin: 1
+        anticipatePin: 1,
       }
     })
     tl.to(text, {

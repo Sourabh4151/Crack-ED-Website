@@ -25,7 +25,7 @@ const Whychooseus = () => {
           start: "top top",
           end: "+=1000",
           scrub: true,
-          pin: true
+          pin: true,
         }
       })
       tl.to(textRef.current, {
