@@ -14,15 +14,16 @@
   gap: 60px;
 }
 
-.stats-header {
+.stats-section .stats-header {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 24px;
   text-align: center;
 }
 
-.stats-badge {
+.stats-section .stats-badge {
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   font-style: normal;
@@ -43,7 +44,7 @@
   background: rgba(0, 0, 0, 0.8);
 }
 
-.stats-subtitle {
+.stats-section .stats-subtitle {
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   font-style: normal;
@@ -196,14 +197,14 @@
     max-width: none;
   }
 
-  .stats-subtitle {
+  .stats-section .stats-subtitle {
     font-size: 28px;
   }
 }
 
 @media (max-width: 768px) {
   .stats-section {
-    padding: 60px 0 30px 0;
+    padding: 60px 0 10px 0;
   }
 
   .stats-container {
@@ -211,17 +212,17 @@
     gap: 40px;
   }
 
-  .stats-header {
+  .stats-section .stats-header {
     gap: 20px;
   }
 
-  .stats-badge {
+  .stats-section .stats-badge {
     font-size: 12px;
     padding: 4px 20px;
     height: auto;
   }
 
-  .stats-subtitle {
+  .stats-section .stats-subtitle {
     font-size: 22px;
     line-height: 130%;
   }
@@ -236,15 +237,28 @@
     flex: 0 0 100%;
     max-width: 100%;
     height: auto;
-    min-height: 350px;
-    padding: 18px;
-    cursor: pointer;
+    min-height: auto;
+    padding: 20px;
+    gap: 32px;
+    cursor: default;
+  }
+
+  /* Hide gradient overlay on mobile - all content always visible */
+  .stat-card::after {
+    display: none;
+  }
+
+  /* Keep value and description fully visible on mobile (no hover fade) */
+  .stat-card:hover .stat-value,
+  .stat-card:hover .stat-description {
+    opacity: 1;
   }
 
   .stat-icon {
-    width: 70px;
-    height: 70px;
-    padding: 15px;
+    width: 84px;
+    height: 84px;
+    padding: 18px;
+    border-radius: 8px;
   }
 
   .stat-icon img {
@@ -254,6 +268,7 @@
 
   .stat-value {
     font-size: 20px;
+    margin-top: 0;
   }
 
   .stat-description {
@@ -261,15 +276,23 @@
     line-height: 150%;
   }
 
+  /* Blue text "CAREERS THAT PAY" always visible on mobile - no click needed */
   .stat-hover-text {
-    font-size: 24px;
-    line-height: 28px;
+    position: static;
+    transform: none;
+    opacity: 1;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 100%;
+    color: rgba(26, 158, 183, 1);
+    margin-top: 0;
   }
 }
 
 @media (max-width: 480px) {
   .stats-section {
-    padding: 50px 0 25px 0;
+    padding: 50px 0 8px 0;
   }
 
   .stats-container {
@@ -277,30 +300,31 @@
     gap: 32px;
   }
 
-  .stats-header {
+  .stats-section .stats-header {
     gap: 16px;
   }
 
-  .stats-badge {
+  .stats-section .stats-badge {
     font-size: 11px;
     padding: 3px 16px;
   }
 
-  .stats-subtitle {
+  .stats-section .stats-subtitle {
     font-size: 20px;
     line-height: 125%;
   }
 
   .stat-card {
-    min-height: 320px;
-    padding: 16px;
-    cursor: pointer;
+    min-height: auto;
+    padding: 20px;
+    gap: 32px;
+    cursor: default;
   }
 
   .stat-icon {
-    width: 64px;
-    height: 64px;
-    padding: 14px;
+    width: 84px;
+    height: 84px;
+    padding: 18px;
   }
 
   .stat-icon img {
@@ -316,8 +340,8 @@
     font-size: 12px;
   }
 
+  /* Blue text always visible on mobile */
   .stat-hover-text {
-    font-size: 20px;
-    line-height: 24px;
+    font-size: 16px;
   }
 }

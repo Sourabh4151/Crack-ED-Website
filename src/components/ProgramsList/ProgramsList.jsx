@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import auCardLogo from '../../assets/au_card_logo.png'
 import lenskartCardLogo from '../../assets/lenskart_card_logo.png'
-import piramalLogo from '../../assets/piramal.png'
+// import piramalLogo from '../../assets/piramal.png'
+import piramalLogo from '../../assets/piramal_small.png'
+
+import udaanLogo from '../../assets/udaan_temporary_logo.png'
 import './ProgramsList.css'
 
 const ProgramsList = () => {
@@ -151,6 +154,8 @@ const ProgramsList = () => {
           return 'https://aubankmo.crack-ed.com/portal'
         case 'Customer Service Officer Valuation':
           return 'https://aubankbcso.crack-ed.com/portal'
+        case 'Cashier / Teller':
+          return 'https://udaan.crack-ed.com/portal'
         default:
           return null
       }
@@ -179,7 +184,10 @@ const ProgramsList = () => {
     return null
   }
 
-  const getIcon = (category) => {
+  const getIcon = (category, item) => {
+    if (category === 'Banking' && item?.program === 'Udaan Program') {
+      return <img src={udaanLogo} alt="Udaan" className="program-logo-img program-logo-udaan" />
+    }
     if (category === 'Banking') return <img src={auCardLogo} alt="AU Bank" className="program-logo-img" />
     if (category === 'Retail') return <img src={lenskartCardLogo} alt="Lenskart" className="program-logo-img" />
     if (category === 'NBFC') return <img src={piramalLogo} alt="Piramal" className="program-logo-img" />
@@ -216,7 +224,7 @@ const ProgramsList = () => {
           {programs[activeTab].map((item, index) => (
             <div key={index} className="program-card">
               <div className="program-card-top">
-                <div className="program-card-icon">{getIcon(activeTab)}</div>
+                <div className="program-card-icon">{getIcon(activeTab, item)}</div>
                 <div className="program-card-header">
                   <div className="program-card-name">{item.program}</div>
                   <div className="program-card-role">{item.role}</div>

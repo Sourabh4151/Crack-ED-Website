@@ -2,12 +2,18 @@ import React, { useState, useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import "./page.css";
 
-// Assets
+import img2 from "../../assets/hindustanbg.png";
 import img1 from "../../assets/Frame 365.png";
-import img2 from "../../assets/Frame 365 (1).png";
 import img3 from "../../assets/Frame 365 (2).png";
 import logoBW from "../../assets/idvrZDd6SZ_logos 1.png";
 import logoHT from "../../assets/hindustan times 1.png";
+import loggo3 from "../../assets/loggo3.png";
+import loggo1 from "../../assets/loggo1.png";
+import loggo4 from "../../assets/logo444.png";
+import loggo5 from "../../assets/logo555.png";
+import img4 from "../../assets/bgimg444.png";
+import img5 from "../../assets/bgimg555.jpg";
+
 import logoBWDisrupt from "../../assets/idaqkNYWaP_1768564795277 1.png";
 
 const Media = () => {
@@ -18,21 +24,38 @@ const Media = () => {
   const slides = [
     {
       image: img1,
-      logo: logoBW,
+      logo: loggo1,
       desc: "Crack-ED was honoured as the Skill Empowerment Institution of the Year at the BW Emerging Business Awards (7th Edition) by BW Businessworld, recognising our commitment to empowering young minds across India with confidence, clarity, and job-ready skills through accessible, outcome-driven learning.",
       logoWidth: "290px",
+      logoHeight: "37px",
     },
     {
       image: img2,
       logo: logoHT,
       desc: "Crack-ED was featured in the Hindustan Times (Gurgaon Edition) for its work in building employability among young learners across India, highlighting our mission to make high-quality skills training and career pathways accessible to youth from tier-2 and tier-3 cities.",
       logoWidth: "310px",
+      logoHeight: "40px",
     },
     {
       image: img3,
-      logo: logoBWDisrupt,
+      logo: loggo3,
       desc: "Debojit Sen, founder of Crack-ED, was recognised in the BW Disrupt 40 Under 40 for reimagining what success can look like for young India, building Crack-ED to create access, exposure, and real career pathways for those who often don’t get the chance to dream differently.",
-      logoWidth: "239px",
+      logoWidth: "139px",
+      logoHeight: "64px",
+    },
+    {
+      image: img4,
+      logo: loggo4,
+      desc: "Crack-ED has been featured as a teaching case published by Ivey Publishing and the Harvard Business Review, and is used by leading business schools globally as an academic reference for strategy and entrepreneurship.",
+      logoWidth: "139px",
+      logoHeight: "64px",
+    },
+    {
+      image: img5,
+      logo: loggo5,
+      desc: "Featured in The Times of India, Crack-ED is recognized as a credible leader in upskilling Indian youth and bridging employability gaps among graduates, highlighting our growing impact in India’s workforce readiness ecosystem.",
+      logoWidth: "139px",
+      logoHeight: "64px",
     },
   ];
 
@@ -65,41 +88,76 @@ const Media = () => {
   };
 
   return (
-    <section className="media-section">
+    <section className="media-section media-mentions-section">
       <div className="media-container">
         
-        <div className="stats-header">
-          <div className="stats-badge">Media Mentions & Recognition</div>
+        <div className="media-header">
+          <div className="stats-header">
+            <div className="stats-badge">Media Mentions & Recognition</div>
+          </div>
+          <h2 className="media-headline">Recognised by leading media for building job-ready talent</h2>
         </div>
 
-        <div className="slider-card">
-          <div className="mainsection">
-            
-            {/* Left Section: Image */}
-            <div className="sec1">
-              <img
-                ref={imageRef}
-                src={slides[currentIndex].image}
-                alt="Recognition"
-                className="slide-image"
-              />
-            </div>
+        <div className="slider-wrapper">
+          {/* Mobile: Horizontal scroll of all cards */}
+          <div className="mobile-cards-scroll">
+            {slides.map((slide, index) => (
+              <div key={index} className="slider-card mobile-card">
+                <div className="mainsection123">
+                  <div className="sec11111">
+                    <img
+                      src={slide.image}
+                      alt="Recognition"
+                      className="slide-image"
+                    />
+                  </div>
+                  <div className="sec2">
+                    <div className="content-wrapper">
+                      <img
+                        src={slide.logo}
+                        alt="Publisher Logo"
+                        style={{ width: slide.logoWidth, height: slide.logoHeight }}
+                        className="publisher-logo"
+                      />
+                      <p className="mediadesc">{slide.desc}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
 
-            {/* Right Section: Content */}
-            <div className="sec2">
-              <div ref={contentRef} className="content-wrapper">
+          {/* Desktop: Single card with arrows */}
+          <div className="desktop-slider">
+          <div className="slider-card">
+            <div className="mainsection123">
+              
+              {/* Left Section: Image */}
+              <div className="sec11111">
                 <img
-                  src={slides[currentIndex].logo}
-                  alt="Publisher Logo"
-                  style={{ width: slides[currentIndex].logoWidth }}
-                  className="publisher-logo"
+                  ref={imageRef}
+                  src={slides[currentIndex].image}
+                  alt="Recognition"
+                  className="slide-image"
                 />
-                <p className="mediadesc">{slides[currentIndex].desc}</p>
+              </div>
+
+              {/* Right Section: Content */}
+              <div className="sec2">
+                <div ref={contentRef} className="content-wrapper">
+                  <img
+                    src={slides[currentIndex].logo}
+                    alt="Publisher Logo"
+                    style={{ width: slides[currentIndex].logoWidth, height: slides[currentIndex].logoHeight }}
+                    className="publisher-logo"
+                  />
+                  <p className="mediadesc">{slides[currentIndex].desc}</p>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Navigation Controls */}
+          {/* Navigation Controls - below the container */}
           <div className="slider-controls">
             <button onClick={handlePrev} className="control-btn">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
@@ -110,6 +168,7 @@ const Media = () => {
             <button onClick={handleNext} className="control-btn">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
             </button>
+          </div>
           </div>
         </div>
       </div>

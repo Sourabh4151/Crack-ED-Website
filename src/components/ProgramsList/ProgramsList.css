@@ -147,6 +147,12 @@
   object-fit: contain;
 }
 
+.programs-list .program-card-icon .program-logo-udaan {
+  width: 41px;
+  height: 42px;
+  object-fit: contain;
+}
+
 
 .programs-list .program-card-content {
   display: flex;
@@ -217,10 +223,10 @@
   background: rgba(17, 17, 17, 1);
   border-radius: 12px;
   padding: 20px 24px 20px 24px;
-  width: calc(100% + 6px);
+  width: 100%;
   margin: 0;
-  margin-top: -60px;
-  margin-left: -24px;
+  margin-top: 3px;
+  margin-left: 0;
   position: relative;
   overflow: visible;
   min-height: 0;

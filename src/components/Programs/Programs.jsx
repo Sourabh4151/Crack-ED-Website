@@ -1,13 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import lenskartStoreImage from '../../assets/lenskart_store.png'
 import auBankImage from '../../assets/au_bank.png'
 import lenskartLogo from '../../assets/lenskart.png'
 import lenskartCardLogo from '../../assets/lenskart_card_logo.png'
 import auCardLogo from '../../assets/au_card_logo.png'
-import relationshipManagerImage from '../../assets/relationship manager - updated.jpg'
+import relationshipManagerImage from '../../assets/relationship manager_desktop.jpg'
+import relationshipManagerMobileImage from '../../assets/relationship manager_mobile.jpg'
 import goldLoanImage from '../../assets/gold loan.jpg'
-import casaImage from '../../assets/casa bank officer - updated.jpg'
-import mblImage from '../../assets/sales officer - updated.jpg'
+import casaImage from '../../assets/bank officer.jpg'
+import mblImage from '../../assets/sales officer_desktop.jpg'
 import transactionOfficerImage from '../../assets/transaction officer.jpg'
 import deputyCentreManagerImage from '../../assets/deputy centre manager.jpg'
 import csoImage from '../../assets/cso.jpg'
@@ -16,7 +18,46 @@ import moneyOfficerImage from '../../assets/money officer.jpg'
 import csovImage from '../../assets/csov.jpg'
 import lenskartRetailSalesImage from '../../assets/lenskart - retail sales associate.jpg'
 import clinicalTechnicianImage from '../../assets/clinical technician.jpg'
+import cashierTellerImage from '../../assets/cashier _ teller.jpg'
+import relationshipManagerPiramalImage from '../../assets/relationship manager.jpg'
+import fieldSalesExecutiveImage from '../../assets/field sales executive_desktop.jpg'
+import udaanCardLogo from '../../assets/udaan_temporary_logo.png'
+import piramalCardLogo from '../../assets/piramal_small.png'
+import paytmCardLogo from '../../assets/paytm_small_logo.png'
+import auHomeLogo from '../../assets/au_home_logo.png'
+import paytmHomeLogo from '../../assets/paytm_home_logo.png'
+import lenskartHomeLogo from '../../assets/lenskart_home_logo.png'
+import piramalHomeLogo from '../../assets/piramal_home_logo.png'
+import img1 from '../../assets/au_logo.png'
+import img2 from '../../assets/immmggg2.jpg'
+import checkinbg from '../../assets/checkinbg.png'
 import './Programs.css'
+
+// Keep "LPA + PLP" on one line to prevent awkward wrapping
+const DetailsText = ({ text }) => {
+  if (!text) return null
+  if (typeof text !== 'string') return text
+  const parts = text.split(/(LPA\s*\+\s*PLP)/)
+  return parts.map((part, i) =>
+    /LPA\s*\+\s*PLP/.test(part) ? (
+      <span key={i} style={{ whiteSpace: 'nowrap' }}>{part}</span>
+    ) : (
+      part
+    )
+  )
+}
+
+// Map program label to home logo (null = no logo)
+const getProgramHomeLogo = (programLabel) => {
+  switch (programLabel) {
+    case 'AURUM Bankers Program': return { src: auHomeLogo, alt: 'AU Small Finance Bank' }
+    case 'Paytm Disha Program': return { src: paytmHomeLogo, alt: 'Paytm' }
+    case 'Piramal ProEdge Program': return { src: piramalHomeLogo, alt: 'Piramal Finance' }
+    case 'Lenskart Program': return { src: lenskartHomeLogo, alt: 'Lenskart' }
+    case 'Udaan Program': return null
+    default: return null
+  }
+}
 
 const Programs = () => {
   const [currentCardIndex, setCurrentCardIndex] = useState(0)
@@ -36,14 +77,14 @@ const Programs = () => {
     {
       id: 2,
       logo: auCardLogo,
-      title: 'AURUM Bankers Relationship Officer',
-      url: 'https://aubank.ro.crack-ed.com/portal',
+      title: 'AURUM Bankers Bank Officer',
+      url: 'https://aubankbo.crack-ed.com/portal',
     },
     {
       id: 3,
       logo: auCardLogo,
-      title: 'AURUM Bankers Bank Officer',
-      url: 'https://aubankbo.crack-ed.com/portal',
+      title: 'AURUM Bankers Relationship Officer',
+      url: 'https://aubank.ro.crack-ed.com/portal',
     },
     {
       id: 4,
@@ -53,63 +94,78 @@ const Programs = () => {
     },
     {
       id: 5,
-      logo: auCardLogo,
-      title: 'AURUM Bankers Transaction Officer',
-      url: 'https://aubankto.crack-ed.com/portal',
-    },
-    {
-      id: 6,
-      logo: auCardLogo,
-      title: 'AURUM Bankers Deputy Center Manager',
-      url: 'https://aubankcm.crack-ed.com/portal',
-    },
-    {
-      id: 7,
-      logo: auCardLogo,
-      title: 'AURUM Bankers Customer Service Officer',
-      url: 'https://aubankcso.crack-ed.com/portal',
-    },
-    {
-      id: 8,
-      logo: auCardLogo,
-      title: 'AURUM Bankers Late Recovery Officer',
-      url: 'https://aubanklro.crack-ed.com/portal',
-    },
-    {
-      id: 9,
-      logo: auCardLogo,
-      title: 'AURUM Bankers Money Officer',
-      url: 'https://aubankmo.crack-ed.com/portal',
-    },
-    {
-      id: 10,
-      logo: auCardLogo,
-      title: 'AURUM Bankers Customer Service Officer Valuation',
-      url: 'https://aubankbcso.crack-ed.com/portal',
-    },
-    {
-      id: 11,
       logo: lenskartCardLogo,
       title: 'Lenskart Clinical Technician',
       url: 'https://lenskart.crack-ed.com/portal',
     },
     {
-      id: 12,
+      id: 6,
       logo: lenskartCardLogo,
       title: 'Lenskart Retail Sales Associate',
       url: 'https://lenskartrsa.crack-ed.com/portal',
     },
+    {
+      id: 7,
+      logo: auCardLogo,
+      title: 'AURUM Bankers Transaction Officer',
+      url: 'https://aubankto.crack-ed.com/portal',
+    },
+    {
+      id: 8,
+      logo: auCardLogo,
+      title: 'AURUM Bankers Deputy Center Manager',
+      url: 'https://aubankcm.crack-ed.com/portal',
+    },
+    {
+      id: 9,
+      logo: auCardLogo,
+      title: 'AURUM Bankers Customer Service Officer',
+      url: 'https://aubankcso.crack-ed.com/portal',
+    },
+    {
+      id: 10,
+      logo: auCardLogo,
+      title: 'AURUM Bankers Late Recovery Officer',
+      url: 'https://aubanklro.crack-ed.com/portal',
+    },
+    {
+      id: 11,
+      logo: auCardLogo,
+      title: 'AURUM Bankers Money Officer',
+      url: 'https://aubankmo.crack-ed.com/portal',
+    },
+    {
+      id: 12,
+      logo: auCardLogo,
+      title: 'AURUM Bankers Customer Service Officer Valuation',
+      url: 'https://aubankbcso.crack-ed.com/portal',
+    },
+    {
+      id: 13,
+      logo: udaanCardLogo,
+      title: 'Udaan Program - Cashier / Teller',
+      url: 'https://udaan.crack-ed.com/portal',
+    },
+    {
+      id: 14,
+      logo: piramalCardLogo,
+      title: 'Piramal ProEdge Program - Relationship Manager',
+      url: 'https://piramal.crack-ed.com/portal',
+    },
+    {
+      id: 15,
+      logo: paytmCardLogo,
+      title: 'Paytm Disha Program - Field Sales Executive',
+      url: 'https://paytm.crack-ed.com/portal',
+    },
   ]
 
-  // Calculate previous card index (with circular wrapping)
-  const previousCardIndex = currentCardIndex === 0
-    ? programCards.length - 1
-    : currentCardIndex - 1
+  // Featured card index: the first visible card in carousel (shown on main background)
+  const featuredCardIndex = currentCardIndex >= programCards.length ? 0 : currentCardIndex
 
-  // Get current program details based on the previous card (before the first visible card in carousel)
-  const getCurrentProgramDetails = () => {
-    const previousCard = programCards[previousCardIndex]
-    if (!previousCard) return null
+  // Get program details for any card (used for featured card and mobile scroll cards)
+  const getProgramDetailsForCard = (card) => {
+    if (!card) return null
 
     // Map program titles to background images
     const imageMap = {
@@ -125,59 +181,104 @@ const Programs = () => {
       'AURUM Bankers Customer Service Officer Valuation': csovImage,
       'Lenskart Clinical Technician': clinicalTechnicianImage,
       'Lenskart Retail Sales Associate': lenskartRetailSalesImage,
+      'Udaan Program - Cashier / Teller': cashierTellerImage,
+      'Piramal ProEdge Program - Relationship Manager': relationshipManagerPiramalImage,
+      'Paytm Disha Program - Field Sales Executive': fieldSalesExecutiveImage,
+    }
+
+    // Udaan, Piramal, Paytm programs
+    const newProgramsMap = {
+      'Udaan Program - Cashier / Teller': {
+        programLabel: 'Udaan Program',
+        logo: udaanCardLogo,
+        details: 'Join as a Cashier / Teller with a CTC of upto Rs 3.5 LPA',
+        duration: '2-month program',
+        image: cashierTellerImage,
+      },
+      'Piramal ProEdge Program - Relationship Manager': {
+        programLabel: 'Piramal ProEdge Program',
+        logo: piramalCardLogo,
+        details: 'Join as a Relationship Manager with a CTC of Rs 2.74 LPA + variable',
+        duration: '13-week program',
+        image: relationshipManagerPiramalImage,
+      },
+      'Paytm Disha Program - Field Sales Executive': {
+        programLabel: 'Paytm Disha Program',
+        logo: paytmCardLogo,
+        details: 'Join as a Field Sales Executive with a CTC of Rs 2.5 LPA + incentives',
+        duration: '2-week program (virtual)',
+        image: fieldSalesExecutiveImage,
+      },
+    }
+
+    if (newProgramsMap[card.title]) {
+      const prog = newProgramsMap[card.title]
+      return {
+        logo: prog.logo,
+        programLabel: prog.programLabel,
+        title: card.title,
+        details: prog.details,
+        duration: prog.duration,
+        image: prog.image,
+        mobileImage: prog.image,
+      }
     }
 
     // Check if it's an AURUM Bankers card
-    if (previousCard.logo === auCardLogo) {
+    if (card.logo === auCardLogo) {
       // Map AURUM Bankers titles to details
       const detailsMap = {
         'AURUM Bankers Relationship Manager': {
-          details: 'Join as a Relationship Manager with a CTC of Rs 5.5 LPA + PLP',
+          details: 'Join as a Relationship Manager with a CTC of Rs 5.5 LPA +\u00a0PLP',
           duration: '6-months program',
         },
         'AURUM Bankers Relationship Officer': {
-          details: 'Join as a Relationship Officer with a CTC of Rs 2.7 LPA + PLP',
+          details: 'Join as a Relationship Officer with a CTC of Rs 2.7 LPA +\u00a0PLP',
           duration: '2-months program',
         },
         'AURUM Bankers Bank Officer': {
-          details: 'Join as a Bank Officer with a CTC of Rs 3.5 LPA + PLP',
+          details: 'Join as a Bank Officer with a CTC of Rs 3.5 LPA +\u00a0PLP',
           duration: '4-months program',
         },
         'AURUM Bankers Sales Officer': {
-          details: 'Join as a Sales Officer with a CTC of Rs 2.7 LPA + PLP',
+          details: 'Join as a Sales Officer with a CTC of Rs 2.7 LPA +\u00a0PLP',
           duration: '2-months program',
         },
         'AURUM Bankers Transaction Officer': {
-          details: 'Join as a Transaction Officer with a CTC of upto Rs 2.7 LPA + PLP',
+          details: 'Join as a Transaction Officer with a CTC of upto Rs 2.7 LPA +\u00a0PLP',
           duration: '2-months program',
         },
         'AURUM Bankers Deputy Center Manager': {
-          details: 'Join as a Deputy Center Manager with a CTC of upto Rs 2.05 LPA + PLP',
+          details: 'Join as a Deputy Center Manager with a CTC of upto Rs 2.05 LPA +\u00a0PLP',
           duration: '2-months program',
         },
         'AURUM Bankers Customer Service Officer': {
-          details: 'Join as a Customer Service Officer with a CTC of Rs 2.75 LPA + PLP',
+          details: 'Join as a Customer Service Officer with a CTC of Rs 2.75 LPA +\u00a0PLP',
           duration: '2-months program',
         },
         'AURUM Bankers Late Recovery Officer': {
-          details: 'Join as a Deputy Late Recovery Officer with a CTC of upto Rs 2.05 LPA + PLP',
+          details: 'Join as a Deputy Late Recovery Officer with a CTC of upto Rs 2.05 LPA +\u00a0PLP',
           duration: '2-months program',
         },
         'AURUM Bankers Money Officer': {
-          details: 'Join as a Money Officer with a CTC of Rs 2.75 LPA + PLP',
+          details: 'Join as a Money Officer with a CTC of Rs 2.75 LPA +\u00a0PLP',
           duration: '2-months program',
         },
         'AURUM Bankers Customer Service Officer Valuation': {
-          details: 'Join as a Customer Service Officer Valuation with a CTC of Rs 2.7 LPA + PLP',
+          details: 'Join as a Customer Service Officer Valuation with a CTC of Rs 2.7 LPA +\u00a0PLP',
           duration: '2.5-months program',
         },
       }
+      const baseImage = imageMap[card.title] || auBankImage
+      const mobileImage = card.title === 'AURUM Bankers Relationship Manager' ? relationshipManagerMobileImage : baseImage
       return {
         logo: auCardLogo,
-        title: previousCard.title,
-        details: detailsMap[previousCard.title]?.details || 'Join our program',
-        duration: detailsMap[previousCard.title]?.duration || '3-month program',
-        image: imageMap[previousCard.title] || auBankImage,
+        programLabel: 'AURUM Bankers Program',
+        title: card.title,
+        details: detailsMap[card.title]?.details || 'Join our program',
+        duration: detailsMap[card.title]?.duration || '3-month program',
+        image: baseImage,
+        mobileImage,
       }
     } else {
       // Lenskart cards
@@ -193,15 +294,27 @@ const Programs = () => {
       }
       return {
         logo: lenskartLogo,
-        title: previousCard.title,
-        details: detailsMap[previousCard.title]?.details || 'Join our program',
-        duration: detailsMap[previousCard.title]?.duration || '2-month program',
-        image: imageMap[previousCard.title] || lenskartStoreImage,
+        programLabel: 'Lenskart Program',
+        title: card.title,
+        details: detailsMap[card.title]?.details || 'Join our program',
+        duration: detailsMap[card.title]?.duration || '2-month program',
+        image: imageMap[card.title] || lenskartStoreImage,
+        mobileImage: imageMap[card.title] || lenskartStoreImage,
       }
     }
   }
 
-  const currentProgramDetails = getCurrentProgramDetails()
+  const currentProgramDetails = getProgramDetailsForCard(programCards[featuredCardIndex])
+
+  // Get display title (strip program prefix)
+  const getDisplayTitle = (title) => {
+    return title
+      .replace('AURUM Bankers ', '')
+      .replace('Lenskart ', '')
+      .replace('Udaan Program - ', '')
+      .replace('Piramal ProEdge Program - ', '')
+      .replace('Paytm Disha Program - ', '')
+  }
 
   useEffect(() => {
     if (carouselRef.current) {
@@ -209,31 +322,15 @@ const Programs = () => {
       const gap = 14 // gap between cards
       const cardSpacing = cardWidth + gap
 
-      // Calculate translateX based on current index
-      let translateX = -(currentCardIndex * cardSpacing)
-
-      // When at last index, we need to show last card + first card (circular wrap)
-      // The duplicate card at the end handles this visually
-      if (currentCardIndex === programCards.length) {
-        // Reset to 0 after showing duplicate
-        setTimeout(() => {
-          if (carouselRef.current) {
-            carouselRef.current.style.transition = 'none'
-            carouselRef.current.style.transform = `translateX(0px)`
-            setCurrentCardIndex(0)
-            setTimeout(() => {
-              if (carouselRef.current) {
-                carouselRef.current.style.transition = 'transform 0.3s ease'
-              }
-            }, 50)
-          }
-        }, 300)
-      }
+      // Carousel shows the NEXT two cards after the featured one (main display)
+      // When main shows Relationship Manager (index 0), carousel shows Bank Officer & Relationship Officer (indices 1, 2)
+      const carouselStartIndex = (featuredCardIndex + 1) % programCards.length
+      const translateX = -(carouselStartIndex * cardSpacing)
 
       carouselRef.current.style.transform = `translateX(${translateX}px)`
       carouselRef.current.style.transition = 'transform 0.3s ease'
     }
-  }, [currentCardIndex])
+  }, [currentCardIndex, featuredCardIndex])
 
   const resetAutoAdvance = () => {
     // Clear existing timers
@@ -269,17 +366,7 @@ const Programs = () => {
 
     // Auto-advance after duration
     autoAdvanceTimeoutRef.current = setTimeout(() => {
-      // Move to next card without resetting auto-advance (it will reset via useEffect)
-      setCurrentCardIndex((prev) => {
-        // When at last card (index 11), show duplicate then reset to 0
-        if (prev === programCards.length - 1) {
-          return programCards.length // This will trigger the reset in useEffect
-        }
-        const next = prev + 1
-        const maxIndex = programCards.length - 1
-        // Circular: if at the end, loop to the beginning
-        return next > maxIndex ? 0 : next
-      })
+      setCurrentCardIndex((prev) => (prev + 1) % programCards.length)
     }, duration)
   }
 
@@ -295,16 +382,7 @@ const Programs = () => {
     }
     setProgress(0)
 
-    setCurrentCardIndex((prev) => {
-      // When at last card (index 11), show duplicate then reset to 0
-      if (prev === programCards.length - 1) {
-        return programCards.length // This will trigger the reset in useEffect
-      }
-      const next = prev + 1
-      const maxIndex = programCards.length - 1
-      // Circular: if at the end, loop to the beginning
-      return next > maxIndex ? 0 : next
-    })
+    setCurrentCardIndex((prev) => (prev + 1) % programCards.length)
   }
 
   const prevCard = () => {
@@ -319,20 +397,12 @@ const Programs = () => {
     }
     setProgress(0)
 
-    setCurrentCardIndex((prev) => {
-      const next = prev - 1
-      const maxIndex = programCards.length - 1
-      // Circular: if at the beginning, loop to the end
-      return next < 0 ? maxIndex : next
-    })
+    setCurrentCardIndex((prev) => (prev - 1 + programCards.length) % programCards.length)
   }
 
   // Initialize auto-advance on mount and when currentCardIndex changes
   useEffect(() => {
-    // Skip auto-advance if we're at the duplicate position (will reset to 0)
-    if (currentCardIndex !== programCards.length) {
-      resetAutoAdvance()
-    }
+    resetAutoAdvance()
 
     return () => {
       if (progressIntervalRef.current) {
@@ -353,22 +423,80 @@ const Programs = () => {
             <div className="programs-badge">100% Job-Ready Programs</div>
             <p className="programs-subtitle">Built for real roles. Backed by real employers.</p>
           </div>
-          <button className="view-all-button">
-            View All
-            <span class="material-symbols-outlined">
-              north_east
-            </span>
-            {/* <svg className="view-all-arrow" width="11.69" height="11.42" viewBox="0 0 11.69 11.42" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M5.5 1L10 5.5L5.5 10M1 5.5H10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg> */}
-          </button>
+          <div className="mobilesection">
+            <div className="mobile-program-cards-wrapper">
+              <div className="mobile-program-cards">
+                {programCards.map((card) => {
+                  const details = getProgramDetailsForCard(card)
+                  if (!details) return null
+                  return (
+                    <a
+                      key={card.id}
+                      href={card.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mobile-program-card-link"
+                    >
+                      <div className="mobile-program-card">
+                        <div
+                          className="mobile-program-card-image"
+                          style={{
+                            backgroundImage: `url(${details.mobileImage || details.image})`,
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                            backgroundRepeat: 'no-repeat'
+                          }}
+                        >
+                          <div className="mobile-program-card-content">
+                            {(() => {
+                              const logoInfo = getProgramHomeLogo(details.programLabel || (details.logo === auCardLogo ? 'AURUM Bankers Program' : 'Lenskart Program'))
+                              if (!logoInfo) return null
+                              return (
+                                <div className="mobile-program-card-logo">
+                                  <img src={logoInfo.src} alt={logoInfo.alt} />
+                                </div>
+                              )
+                            })()}
+                            <div className="mobile-program-card-label">{details.programLabel}</div>
+                            <h3 className="mobile-program-card-title">{getDisplayTitle(details.title)}</h3>
+                            <div className="mobile-program-card-details">
+                              <div className="mobile-program-card-detail">
+                                <img src={checkinbg} alt="check" className="mobile-program-check" />
+                                <span><DetailsText text={details.details} /></span>
+                              </div>
+                              <div className="mobile-program-card-detail">
+                                <img src={checkinbg} alt="check" className="mobile-program-check" />
+                                <span>{details.duration}</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <span className="mobile-program-learn-more">
+                          Learn More
+                          <span className="material-symbols-outlined">north_east</span>
+                        </span>
+                      </div>
+                    </a>
+                  )
+                })}
+              </div>
+            </div>
+          </div>
+          <div className="btnadjustment">
+            <Link to="/programs" className="view-all-button1">
+              View All
+              <span className="material-symbols-outlined">
+                north_east
+              </span>
+            </Link>
+          </div>
         </div>
 
         <div
           className="programs-background-container"
           style={{
             backgroundImage: `url(${currentProgramDetails?.image || (currentCardIndex < 10 ? auBankImage : lenskartStoreImage)})`,
-            backgroundPosition: (currentProgramDetails?.image === auBankImage || (!currentProgramDetails?.image && currentCardIndex < 10)) ? 'center 10%' : 'center top'
+            backgroundPosition: 'center 60%'
           }}
         >
           <div className="progress-bar-container-top">
@@ -383,22 +511,28 @@ const Programs = () => {
                 <div className="program-card">
                   <div className="program-card-content">
                     <div className="program-card-panel">
+                      {(() => {
+                        const programLabel = currentProgramDetails.programLabel || (currentProgramDetails.logo === auCardLogo ? 'AURUM Bankers Program' : 'Lenskart Program')
+                        const logoInfo = getProgramHomeLogo(programLabel)
+                        if (!logoInfo) return null
+                        return (
+                          <div className="program-logo-above">
+                            <img src={logoInfo.src} alt={logoInfo.alt} />
+                          </div>
+                        )
+                      })()}
                       <div className="program-card-label">
-                        {currentProgramDetails.logo === auCardLogo
-                          ? 'AURUM Bankers Program'
-                          : 'Lenskart Program'}
+                        {currentProgramDetails.programLabel || (currentProgramDetails.logo === auCardLogo ? 'AURUM Bankers Program' : 'Lenskart Program')}
                       </div>
                       <div className="program-details">
                         <h3 className="program-card-title">
-                          {currentProgramDetails.title
-                            .replace('AURUM Bankers ', '')
-                            .replace('Lenskart ', '')}
+                          {getDisplayTitle(currentProgramDetails.title)}
                         </h3>
                         <ul className="program-info-list">
-                          <li>{currentProgramDetails.details}</li>
+                          <li><DetailsText text={currentProgramDetails.details} /></li>
                           <li>{currentProgramDetails.duration}</li>
                         </ul>
-                        <a href={programCards[previousCardIndex]?.url || '#'} target="_blank" rel="noopener noreferrer">
+                        <a href={programCards[featuredCardIndex]?.url || '#'} target="_blank" rel="noopener noreferrer">
                           <button className="learn-more-button">Learn More</button>
                         </a>
                       </div>

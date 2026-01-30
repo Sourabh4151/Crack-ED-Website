@@ -28,70 +28,67 @@ const Testimonial = () => {
       id: 1,
       image: KuldeepMBL,
       name: "Kuldeep Agnihotri",
-      title: "Micro Business Loan Program",
+      title: "AURUM Bankers Program - Sales Officer",
       description: "Learning with Crack-ED's AU Bank Microbusiness Loan course gave me clarity on customer needs, boosted my confidence, and made me more professional in my work."
     },
     {
       id: 2,
       image: ShubhamMBL,
       name: "Shubham Kumar",
-      title: "Micro Business Loan Program",
+      title: "AURUM Bankers Program - Sales Officer",
       description: "I started at Crack-ED with little knowledge, but their support and training helped me learn banking and grow into a more confident person."
     },
     {
       id: 3,
       image: RohitKhatanaCASA,
       name: "Rohit Khatana",
-      title: "Current and Savings Account Program",
+      title: "AURUM Bankers Program - Bank Officer",
       description: "This program helped me learn core banking, develop customer-handling skills, and prepared me with the right mindset for a banking career."
     },
     {
       id: 4,
       image: AbhijeetCASA,
       name: "Abhijeet",
-      title: "Current and Savings Account Program",
+      title: "AURUM Bankers Program - Bank Officer",
       description: "Crack-ED truly strengthened my banking preparation. The teachers share real experience, clear doubts patiently, and their guidance gave me confidence for my career."
     },
     {
       id: 5,
       image: IlaKumariGL,
       name: "Ila Kumari",
-      title: "Gold Loan Program",
+      title: "AURUM Bankers Program - Relationship Officer",
       description: "I joined Crack-ED with low confidence, but within a month I improved my grooming, communication, and personality. I'm truly happy to be here."
     },
     {
       id: 6,
       image: BalaYadavGL,
       name: "Bala Yadav",
-      title: "Gold Loan Program",
+      title: "AURUM Bankers Program - Relationship Officer",
       description: "The support from my trainers at Crack-ED meant a lot. I learned banking, communication, and confidence, and I'll always remember this journey fondly."
     },
     {
       id: 7,
       image: RohitashMBL,
       name: "Rohitash",
-      title: "Micro Business Loan Program",
+      title: "AURUM Bankers Program - Sales Officer",
       description: "Crack-ED transformed me from someone with no banking knowledge or confidence into someone who can introduce myself and speak comfortably with anyone."
     },
     {
       id: 8,
       image: KrishnakantCASA,
       name: "Krishnakant",
-      title: "Current and Savings Account Program",
+      title: "AURUM Bankers Program - Bank Officer",
       description: "Through the AURUM Banker Program, I gained banking knowledge and confidence. The trainers' guidance has prepared me well for a bright career in banking."
     }
   ]
 
-  // Only duplicate testimonials for desktop (where animation is used)
-  // On mobile, show only original testimonials to avoid duplicates
   const testimonialsToShow = isMobile ? testimonials : [...testimonials, ...testimonials]
 
   return (
     <section className="testimonial-section">
       <div className="testimonial-container">
         <div className="testimonial-header">
-          <div className="testimonial-badge">Testimonials</div>
-          <h2 className="testimonial-heading">Hear From Our Learners</h2>
+   
         </div>
         <div className="testimonial-cards-wrapper">
           <div className="testimonial-cards">

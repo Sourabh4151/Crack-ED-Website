@@ -16,51 +16,40 @@ const Whychooseus = () => {
 
       gsap.set(chars, {
         opacity: 0.15,
-        color: "#ffffff"
+        color: "#fafafa"
       })
 
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top top", // 🎬 ANIMATION START MARKER: Animation begins when section top hits viewport top
-          end: "+=1000", // 🎬 ANIMATION END MARKER: Animation ends after scrolling 1000px
+          start: "top top",
+          end: "+=1000",
           scrub: true,
-          pin: true,
-          // markers: true // 🎯 VISUAL MARKERS: Shows green (start) and red (end) markers on page
+          pin: true
         }
       })
-      // 🎬 ANIMATION 1 START: Fades out the "Why Choose Us" heading (opacity to 0.15 = 15% visible, making it very faded/transparent)
-      // Note: scale: 1 means no size change, just opacity fade
       tl.to(textRef.current, {
-        opacity: 0.15, // Fades the heading to 15% opacity (makes it very transparent)
-        scale: 1,      // Keeps the heading at normal size (no scaling)
+        opacity: 0.15,
+        scale: 1,
         ease: "none",
         duration: 1
       })
-      // 🎬 ANIMATION 2 START: Character reveal animation (typewriter effect)
-      // This animates each individual character in the paragraph to become fully visible
-      // - Starts with opacity 0.15 (faded) → animates to opacity 1 (fully visible)
-      // - stagger: 0.035 = each character animates 0.035 seconds after the previous one
-      // - Creates a sequential "typing" effect where letters appear one by one
-      // - Timeline position -2 = starts 2 seconds BEFORE Animation 1 (starts earlier in scroll)
       tl.to(
-        chars, // Targets all individual character spans in the paragraph
+        chars,
         {
-          opacity: 1,        // Makes each character fully visible (from 0.15 to 1)
-          stagger: 0.035,    // 0.035 second delay between each character (creates sequential reveal)
+          opacity: 1,
+          stagger: 0.035,
           ease: "none",
-          duration: 4,
-          markers: true    // Total animation duration: 4 seconds
+          duration: 4
         },
-        -20 // 🎯 TIMELINE POSITION: -2 means this animation starts 2 seconds BEFORE Animation 1 (starts from above/earlier in scroll)
+        0
       )
     })
 
     return () => ctx.revert()
   }, [])
 
-  const paragraph =
-    "Because degrees don't get jobs. Skills Do.  And we have Crack-ED the formula of imbibing skills that make you job ready."
+  const paragraph = "Getting a job is tough.Keeping it is tougher.Our Job-Linked courses, powered by the ABC Framework of Job Readiness, prepare you for both."
 
 
   return (
@@ -68,16 +57,23 @@ const Whychooseus = () => {
       <div className="sticky-wrapper">
 
         <h2
-        //  ref={textRef} 
-         className="career-forward-text">
+
+          className="career-forward-text1">
           <span className="text-line">Why Choose Us</span>
         </h2>
         <p ref={revealRef} className="typing-text">
-          {paragraph.split("").map((char, i) => (
-            <span key={i} className="char">
-              {char === " " ? "\u00A0" : char}
+
+          {paragraph.split(" ").map((word, i) => (
+            <span key={i} className="word">
+              {word.split("").map((char, j) => (
+                <span key={j} className="char">
+                  {char}
+                </span>
+              ))}
+              <span className="space">&nbsp;</span>
             </span>
           ))}
+
         </p>
 
       </div>

@@ -1,8 +1,9 @@
 import React from 'react'
-import premiumProgramImage from '../../assets/premium_program.jpg'
+// import premiumProgramImage from '../../assets/premium_program.jpg'
 import auPremiumLogo from '../../assets/au_premium.png'
 import iimRohtakLogo from '../../assets/iim_rohtak.png'
 import crackEdPremiumLogo from '../../assets/crack-ed_premium.png'
+import premiumProgramImage from '../../assets/relationship manager_desktop.jpg'
 import './PremiumProgram.css'
 
 const PremiumProgram = () => {

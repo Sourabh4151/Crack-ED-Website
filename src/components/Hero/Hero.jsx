@@ -29,12 +29,14 @@ const Hero = () => {
               <h1 className="hero-headline">
                 UPSKILL TODAY,
                 <br />
-                <span className="crack-text">CRACK</span> THE WORLD
+                <span className="hero-headline-line">
+                  <span className="crack-text">CRACK</span> THE WORLD
+                </span>
                 <br />
                 TOMORROW
               </h1>
               <p className="hero-subheadline">
-                Learn by doing. Master skills, practice actively, and get career-ready from day one.
+                Apply. Learn with our ABC model. Get hired.
               </p>
             </div>
             <button 
@@ -45,7 +47,9 @@ const Hero = () => {
             </button>
           </div>
         </div>
-        <LogoCarousel />
+        <div className="hero-logo-wrap">
+          <LogoCarousel />
+        </div>
       </div>
       <EnquireModal isOpen={isModalOpen} onClose={handleCloseModal} />
     </section>

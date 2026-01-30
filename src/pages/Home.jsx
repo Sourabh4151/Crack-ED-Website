@@ -10,6 +10,9 @@ import './Home.css'
 import Whychooseus from '../components/whychoseus/page'
 import Analysis from '../components/analysis/page'
 import Media from '../components/mediasection/page'
+import Analyse from '../components/analyse/page'
+import EnquireSection from '../components/EnquireSection/EnquireSection'
+
 
 const Home = () => {
   return (
@@ -19,10 +22,11 @@ const Home = () => {
        {/* <CareerForward /> */}
       <Whychooseus />
       <Analysis />
-   
+      <Analyse />
       <Stats />
       <Media />
       <Testimonial />
+      <EnquireSection />
       <Footer />
       {/* <CareerForward /> */}
     </div>
