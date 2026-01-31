@@ -139,3 +139,76 @@ export const submitLeadToCRMDirect = async (formData) => {
     throw error
   }
 }
+
+/**
+ * Submit quiz lead to CRM via YOUR backend API (no center, no state)
+ * Use for CareerQuiz form submissions
+ */
+export const submitQuizLeadToCRM = async (formData) => {
+  const { firstName, lastName } = splitName(formData.name)
+
+  const payload = {
+    firstName,
+    lastName,
+    email: formData.email,
+    mobile: formData.mobile,
+    program: formData.program,
+  }
+
+  try {
+    const response = await fetch('/api/submit-lead', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    })
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+
+    const data = await response.json()
+    return { success: true, data }
+  } catch (error) {
+    console.error('Error submitting quiz lead:', error)
+    throw error
+  }
+}
+
+/**
+ * Submit quiz lead directly to CRM (no center, no state)
+ * NOT RECOMMENDED - Only for development. AuthToken exposed in frontend.
+ */
+export const submitQuizLeadToCRMDirect = async (formData) => {
+  const { firstName, lastName } = splitName(formData.name)
+
+  const payload = {
+    Source: 'crack-ed',
+    AuthToken: 'crack-ed_29-01-2025', // ⚠️ EXPOSED IN FRONTEND CODE
+    FirstName: firstName,
+    LastName: lastName,
+    Email: formData.email,
+    MobileNumber: parseInt(String(formData.mobile).replace(/\D/g, ''), 10),
+  }
+
+  try {
+    const response = await fetch('https://publisher.extraaedge.com/api/Webhook/addPublisherLead', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    })
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+
+    const data = await response.json()
+    return { success: true, data }
+  } catch (error) {
+    console.error('Error submitting quiz lead to CRM:', error)
+    throw error
+  }
+}

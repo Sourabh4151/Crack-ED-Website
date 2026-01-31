@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './EnquireModal.css'
-import { submitLeadToCRM, submitLeadToCRMDirect } from '../../services/crmService'
+import { submitLeadToCRMDirect } from '../../services/crmService'
 
 const EnquireModal = ({ isOpen, onClose }) => {
   const [isSubmitting, setIsSubmitting] = useState(false)

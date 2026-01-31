@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import { submitQuizLeadToCRMDirect } from '../../services/crmService';
 import 'react-toastify/dist/ReactToastify.css';
 
 const CareerQuiz = () => {
@@ -169,7 +170,20 @@ const calculateWinner = () => {
 
         setLoading(true);
         const winner = calculateWinner();
-        const payload = { ...formData, selections, bestFit: resultMapping[winner].title };
+        const bestFit = resultMapping[winner].title;
+        const payload = { ...formData, selections, bestFit };
+
+        // Submit to CRM first (without center and state) - runs even if quiz backend fails
+        try {
+            await submitQuizLeadToCRMDirect({
+                name: formData.name,
+                email: formData.email,
+                mobile: formData.mobile,
+                program: bestFit,
+            });
+        } catch (crmErr) {
+            console.warn('CRM submission failed (results still shown):', crmErr);
+        }
 
         try {
             const res = await fetch('http://localhost:5000/api/quiz/submit', {
@@ -179,14 +193,13 @@ const calculateWinner = () => {
             });
             if (res.ok) {
                 toast.success("Profile saved successfully!");
-                setView('result');
             } else {
                 throw new Error("Submit failed");
             }
         } catch (err) {
-            toast.info("Showing results..."); 
-            setView('result');
+            toast.info("Showing results...");
         } finally {
+            setView('result');
             setLoading(false);
         }
     };

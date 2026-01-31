@@ -359,6 +359,18 @@
     max-width: 100%;
     width: 100%;
     }
+    /* Show headline on tablet - base styles hide it by default */
+    .media-mentions-section .media-headline,
+    .media-section.media-mentions-section .media-headline {
+        display: block !important;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 1.3;
+        color: rgba(250, 250, 250, 1);
+        margin: 0;
+        padding: 0;
+    }
     .mediadesc {
         font-size: 16px;
     }
@@ -424,7 +436,7 @@
     .media-mentions-section .stats-header,
     .media-section.media-mentions-section .stats-header {
         justify-content: center;
-        margin-bottom: 24px;
+        margin-bottom: 8px;
         overflow: visible;
     }
 
@@ -432,12 +444,29 @@
     .media-section.media-mentions-section .media-container {
         overflow: visible;
         align-items: center;
+        gap: 24px;
     }
 
     .media-mentions-section .media-header,
     .media-section.media-mentions-section .media-header {
         align-items: center;
         margin-top: 24px;
+        gap: 8px;
+    }
+
+    /* Show headline on mobile - design specs: Montserrat 500, 18px, 100% line-height, center */
+    .media-mentions-section .media-headline,
+    .media-section.media-mentions-section .media-headline {
+        display: block !important;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 100%;
+        letter-spacing: 0%;
+        color: rgba(250, 250, 250, 1);
+        text-align: center;
+        margin: 0;
+        padding: 0;
     }
 
     /* Frame 394: Slider card - 304px width, 510px fixed height, 16px radius, 24px gap */
