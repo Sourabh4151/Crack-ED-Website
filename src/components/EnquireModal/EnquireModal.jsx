@@ -81,10 +81,21 @@ const EnquireModal = ({ isOpen, onClose }) => {
   ]
 
   const programs = [
-   'AURUM Bankers Program - Relationship Manager', 'AURUM Bankers Program - Relationship Officer', 'AURUM Bankers Program - Bank Officer',
-  'AURUM Bankers Program - Sales Officer', 'AURUM Bankers Program - Transaction Officer', 'AURUM Bankers Program - Deputy Center Manager',
-  'AURUM Bankers Program - Customer Service Officer', 'AURUM Bankers Program - Deputy Late Recovery Officer', 'AURUM Bankers Program - Money Officer',
-  'AURUM Bankers Program - Customer Service Officer Valuation', 'Lenskart EyeTech Program - Clinical Technician', 'Lenskart EyeTech Program - Retail Sales Associate'
+    'AURUM Bankers Program - Relationship Manager',
+    'AURUM Bankers Program - Relationship Officer',
+    'AURUM Bankers Program - Bank Officer',
+    'AURUM Bankers Program - Sales Officer',
+    'AURUM Bankers Program - Transaction Officer',
+    'AURUM Bankers Program - Deputy Center Manager',
+    'AURUM Bankers Program - Customer Service Officer',
+    'AURUM Bankers Program - Deputy Late Recovery Officer',
+    'AURUM Bankers Program - Money Officer',
+    'AURUM Bankers Program - Customer Service Officer Valuation',
+    'Udaan Program - Cashier / Teller',
+    'Lenskart EyeTech Program - Clinical Technician',
+    'Lenskart EyeTech Program - Retail Sales Associate',
+    'Piramal ProEdge Program - Relationship Manager',
+    'Paytm Disha Program - Field Sales Executive',
   ]
 
   const validateFullName = (name) => {

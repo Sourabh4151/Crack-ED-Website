@@ -16,18 +16,21 @@
 
 // Program to Center mapping
 const PROGRAM_TO_CENTER_MAP = {
-  'AURUM Bankers Relationship Manager': '67', // Update with correct center ID if needed
-  'AURUM Bankers Relationship Officer': '48',
-  'AURUM Bankers Bank Officer': '1',
-  'AURUM Bankers Sales Officer': '49',
-  'AURUM Bankers Transaction Officer': '59',
-  'AURUM Bankers Deputy Center Manager': '62',
-  'AURUM Bankers Customer Service Officer': '60',
-  'AURUM Bankers Late Recovery Officer': '63',
-  'AURUM Bankers Money Officer': '65',
-  'AURUM Bankers Customer Service Officer Valuation': '66',
-  'Lenskart Clinical Technician Program': '38',
-  'Lenskart Retail Sales Associate Program': '61',
+  'AURUM Bankers Program - Relationship Manager': '67',
+  'AURUM Bankers Program - Relationship Officer': '48',
+  'AURUM Bankers Program - Bank Officer': '1',
+  'AURUM Bankers Program - Sales Officer': '49',
+  'AURUM Bankers Program - Transaction Officer': '59',
+  'AURUM Bankers Program - Deputy Center Manager': '62',
+  'AURUM Bankers Program - Customer Service Officer': '60',
+  'AURUM Bankers Program - Deputy Late Recovery Officer': '63',
+  'AURUM Bankers Program - Money Officer': '65',
+  'AURUM Bankers Program - Customer Service Officer Valuation': '66',
+  'Lenskart EyeTech Program - Clinical Technician': '38',
+  'Lenskart EyeTech Program - Retail Sales Associate': '61',
+  'Udaan Program - Cashier / Teller': '33',
+  'Piramal ProEdge Program - Relationship Manager': '47',
+  'Paytm Disha Program - Field Sales Executive': '55',
 }
 
 /**

@@ -58,17 +58,7 @@ const Header = () => {
     }
   }, [isMobileMenuOpen])
 
-  // Prevent body scroll when mobile menu is open
-  useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
-    return () => {
-      document.body.style.overflow = ''
-    }
-  }, [isMobileMenuOpen])
+  // No body scroll lock - we use an overlay that unmounts when menu closes (avoids unlock bugs)
 
   // Close mobile menu when clicking outside
   useEffect(() => {
@@ -272,6 +262,8 @@ const Header = () => {
                     )}
                   </li>
                   <li><a href="https://piramal.crack-ed.com/portal" onClick={closeMobileMenu}>Piramal ProEdge Program</a></li>
+                  <li><a href="https://udaan.crack-ed.com/portal" onClick={closeMobileMenu}>Udaan Program</a></li>
+                  <li><a href="https://paytm.crack-ed.com/portal" onClick={closeMobileMenu}>Paytm Disha Program</a></li>
                   <li 
                     className={`dropdown-item-with-submenu ${isLenskartSubmenuOpen ? 'active' : ''}`}
                     onMouseEnter={() => {
@@ -346,7 +338,7 @@ const Header = () => {
               )}
             </li>
             <li className="nav-item">
-              <a href="#resources" className="nav-link" onClick={closeMobileMenu}>Resources</a>
+              <a href="http://blogs.crack-ed.com/" className="nav-link" onClick={closeMobileMenu}>Resources</a>
             </li>
             <li className="nav-item">
               <Link to="/badhta-india-dekho" className="nav-link" onClick={closeMobileMenu}>

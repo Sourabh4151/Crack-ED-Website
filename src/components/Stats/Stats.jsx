@@ -10,7 +10,7 @@ const Stats = () => {
     {
       id: 1,
       icon: icon1,
-      value: "12+ Programs",
+      value: "18 Programs",
       description: "A growing portfolio of job-linked programs across high-demand industries.",
       hoverText: "BUILT TO SCALE"
     },

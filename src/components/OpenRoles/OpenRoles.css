@@ -3,6 +3,8 @@
   background: rgba(0, 0, 0, 1);
   padding: 100px 120px;
   position: relative;
+  /* Offset for fixed header when scrolling into view (See Openings button) */
+  scroll-margin-top: 100px;
 }
 
 .open-roles-container {

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -23,46 +24,86 @@ const CareerQuiz = () => {
     //     D: { title: "Lenskart Dispensing Optician", details: "CTC of Rs 2.7LPA + PLP", duration: "2-month program", alternatives: [{ t: "AURUM Banker's - RM", d: "Relationship Manager" }, { t: "AURUM Bankers - DLRO", d: "Recovery Officer" }] }
     // };
 const resultMapping = {
-    A: { 
-        title: "AURUM Bankers Program - Relationship Manager", 
-        details: "CTC of Rs 5.5 LPA + PLP", 
-        duration: "6-month program", 
-        priority: 4, // Higher value
+    A: {
+        title: "AURUM Bankers Program - Relationship Manager",
+        details: "CTC of Rs 5.5 LPA + PLP",
+        duration: "6-month program",link: "https://crack-ed.com/pgprm/",
+        priority: 4, 
         alternatives: [
-            { t: "AURUM Banker - Bank Officer", d: "3.5 LPA" }, 
-            { t: "Paytm Sales Executive", d: "Sales Officer" }
-        ] 
+            { t: "AURUM Bankers Program - Bank Officer", d: "Rs. 3.5 LPA",link:"https://aubankbo.crack-ed.com/portal" },
+            { t: "Paytm Disha Program - Field Sales Executive", d: "Rs. 2.5 LPA", link:"http://paytm.crack-ed.com/portal" }
+        ]
     },
-    B: { 
-        title: "AURUM Bankers Program - RM Royale / Gold Loan", 
-        details: "CTC of Rs 2.7 LPA + PLP", 
-        duration: "2-month program", 
-        priority: 3, 
+    B: {
+        title: "AURUM Bankers Program - Relationship Officer",
+        details: "CTC of Rs 2.7 LPA + PLP",
+        duration: "2-month program",link: "https://aubank.ro.crack-ed.com/portal",
+        priority: 3,
         alternatives: [
-            { t: "Piramal Relationship Manager", d: "2.74 LPA" },
-            { t: "AU Deputy Center Manager", d: "2.05 LPA" }
-        ] 
+            { t: "Piramal ProEdge Program - Relationship Manager", d: "Rs. 2.74 LPA", link:"https://piramal.crack-ed.com/portal" },
+            { t: "AURUM Bankers Program - Deputy Center Manager", d: "Rs. 2.05 LPA", link:"https://aubankcm.crack-ed.com/portal" }
+        ]
     },
-    C: { 
-        title: "Udaan Program - Cashier / Teller", 
-        details: "CTC of upto Rs 3.5 LPA", 
-        duration: "2-month program", 
-        priority: 2, 
+    C: {
+        title: "Udaan Program - Cashier / Teller",
+        details: "CTC of upto Rs 3.5 LPA",
+        duration: "2-month program",link: "https://udaan.crack-ed.com/portal",
+        priority: 2,
         alternatives: [
-            { t: "AURUM Transaction Officer", d: "2.7 LPA" }, 
-            { t: "AU CSO Gold Valuation", d: "2.7 LPA" }
-        ] 
+            { t: "AURUM Bankers Program - Transaction Officer", d: "Rs. 2.7 LPA", link:"https://aubankto.crack-ed.com/portal" },
+            { t: "AURUM Bankers Program - CSOV", d: "Rs. 2.7 LPA", link:"https://aubankbcso.crack-ed.com/portal" }
+        ]
     },
-    D: { 
-        title: "Lenskart EyeTech - Clinical Technician", 
-        details: "CTC of Rs 2.64 LPA", 
-        duration: "6-month program", 
-        priority: 1, 
+    D: {
+        title: "Lenskart EyeTech Program - Clinical Technician",
+        details: "CTC of Rs 2.64 LPA",
+        duration: "6-month program",link: "https://lenskart.crack-ed.com/portal",
+        priority: 1,
         alternatives: [
-            { t: "Lenskart Retail Sales Associate", d: "3 LPA" }, 
-            { t: "AU Customer Service Officer", d: "2.75 LPA" }
-        ] 
+            { t: "Lenskart Eyetech Program - Retail Sales Associate", d: "Rs. 3 LPA", link:"https://lenskartrsa.crack-ed.com/portal" },
+            { t: "AURUM Bankers Program - CSO", d: "Rs. 2.75 LPA", link:"https://aubankcso.crack-ed.com/portal" }
+        ]
     }
+    // A: { 
+    //     title: "AURUM Bankers Program - Relationship Manager", 
+    //     details: "CTC of Rs 5.5 LPA + PLP", 
+    //     duration: "6-month program", 
+    //     priority: 4, // Higher value
+    //     alternatives: [
+    //         { t: "AURUM Banker - Bank Officer", d: "3.5 LPA" }, 
+    //         { t: "Paytm Sales Executive", d: "Sales Officer" }
+    //     ] 
+    // },
+    // B: { 
+    //     title: "AURUM Bankers Program - RM Royale / Gold Loan", 
+    //     details: "CTC of Rs 2.7 LPA + PLP", 
+    //     duration: "2-month program", 
+    //     priority: 3, 
+    //     alternatives: [
+    //         { t: "Piramal Relationship Manager", d: "2.74 LPA" },
+    //         { t: "AU Deputy Center Manager", d: "2.05 LPA" }
+    //     ] 
+    // },
+    // C: { 
+    //     title: "Udaan Program - Cashier / Teller", 
+    //     details: "CTC of upto Rs 3.5 LPA", 
+    //     duration: "2-month program", 
+    //     priority: 2, 
+    //     alternatives: [
+    //         { t: "AURUM Transaction Officer", d: "2.7 LPA" }, 
+    //         { t: "AU CSO Gold Valuation", d: "2.7 LPA" }
+    //     ] 
+    // },
+    // D: { 
+    //     title: "Lenskart EyeTech - Clinical Technician", 
+    //     details: "CTC of Rs 2.64 LPA", 
+    //     duration: "6-month program", 
+    //     priority: 1, 
+    //     alternatives: [
+    //         { t: "Lenskart Retail Sales Associate", d: "3 LPA" }, 
+    //         { t: "AU Customer Service Officer", d: "2.75 LPA" }
+    //     ] 
+    // }
 };
     const [view, setView] = useState('quiz');
     const [step, setStep] = useState(0);
@@ -158,13 +199,13 @@ const calculateWinner = () => {
                 <div className="badge-outline">Your Perfect Fit</div>
                 <div className="hero-card">
                     <div className="hero-content">
-                        <h2>{result.title}</h2>
+                         <h2>{result.title}</h2>
                         <ul className="hero-lists">
                             <li><span className="check">✔</span> {result.details}</li>
                             <li><span className="check">✔</span> {result.duration}</li>
                         </ul>
                               <div style={{display:"inline-block"}}>
-                            <button className="hero-cta-button">Explore Program</button>     
+                           <Link style={{textDecoration:"none"}} to={result.link} target="_blank"> <button className="hero-cta-button">Explore Program</button> </Link>  
                               </div>
                        
                     </div>
@@ -176,7 +217,7 @@ const calculateWinner = () => {
                             <h3>{alt.t} - {alt.d}</h3>
                             <div style={{display:"inline-block"}}>
 
-                            <button className="secondary-btn-outline">Explore Program</button>
+                            <Link to={alt.link} target="_blank"><button className="secondary-btn-outline">Explore Program</button></Link>
                             </div>
                         </div>
                     ))}
@@ -218,9 +259,9 @@ const calculateWinner = () => {
         <div className="quiz-container">
             <div className="progress-section">
                 <span className="step-count">QUESTION {step + 1} OF 10</span>
-                <span className="percent-text">{((step+1)*10)}%</span>
+                {/* <span className="percent-text">{((step+1)*10)}%</span> */}
             </div>
-            <div className="bar-bg"><div className="bar-fill" style={{ width: `${(step+1)*10}%` }}></div></div>
+            {/* <div className="bar-bg"><div className="bar-fill" style={{ width: `${(step+1)*10}%` }}></div></div> */}
             <h2 className="question-text">{questions[step].question}</h2>
             <div className="options-stack">
                 {questions[step].options.map((opt, index) => (

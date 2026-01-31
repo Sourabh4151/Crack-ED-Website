@@ -104,6 +104,9 @@
   box-sizing: border-box;
   overflow: hidden;
   transition: border-color 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
 }
 
 .programs-list .program-card:hover {
@@ -150,6 +153,18 @@
 .programs-list .program-card-icon .program-logo-udaan {
   width: 41px;
   height: 42px;
+  object-fit: contain;
+}
+
+.programs-list .program-card-icon .program-logo-paytm {
+  width: 41px;
+  height: 42px;
+  object-fit: contain;
+}
+
+.programs-list .program-card-icon .program-logo-piramal {
+  width: 40px;
+  height: 40px;
   object-fit: contain;
 }
 

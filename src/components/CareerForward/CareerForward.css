@@ -5,17 +5,23 @@
   background-color: #000;
 }
 
-.sticky-wrapper {
+.sticky-wrapperCareerForward {
 
-  height: 100vh;
+height: 150vh; 
   width: 100%;
+  max-width: 1300px;
+    margin: 0 auto;
   display: flex;
   align-items: center;
+  justify-content: center;
   overflow: hidden;
+  position: relative;
 }
 
 .career-forward-text {
   position: absolute;
+  width: 1300px !important;
+  margin: 0px auto;
   width: 100%;
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
@@ -24,7 +30,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.06) 50%, rgba(255, 255, 255, 0.08) 100%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.04) 100%);
+
+  /* background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.06) 50%, rgba(255, 255, 255, 0.08) 100%); */
   /* background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.08) 100%); */
   -webkit-background-clip: text;
   background-clip: text;
@@ -258,11 +266,22 @@
   font-weight: 500;
   font-family: "Montserrat", sans-serif;
 }
-
 .quiz-option-button.selected {
+  background: #181818;
+  border: 1px solid transparent;
+  border-radius: 16px;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(
+    90deg,
+    rgba(26, 158, 183, 0.4) 0%,
+    #1A9EB7 50%,
+    rgba(26, 158, 183, 0.4) 100%
+  );
+}
+/* .quiz-option-button.selected {
   border-color: #1A9EB7;
   background: #181818;
-}
+} */
 
 .form-main-heading {
   font-size: 24px;
@@ -427,8 +446,17 @@
   margin-top: 24px;
   cursor: pointer;
 }
-
+@media (min-width: 1600px) {
+  .sticky-wrapperCareerForward {
+    height: 100vh !important;
+    align-items: center; /* Center it perfectly on big screens */
+    padding-top: 0;
+  }
+}
 @media (max-width: 768px) {
+.career-forward-text {
+  width: 100% !important;
+}
    section.career-forward-section11 {
     height: auto !important;
     min-height: 100vh;

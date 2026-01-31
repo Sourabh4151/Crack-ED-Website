@@ -271,7 +271,7 @@
     /* move text block significantly lower on very small screens as well */
     margin: 6rem auto 2rem;
     gap: 20px;
-    padding: 0 16px;
+    padding: 43px 16px;
   }
 
   .programs-hero-text-content {

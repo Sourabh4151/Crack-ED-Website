@@ -1,11 +1,13 @@
 import React from 'react'
-import lenskartLogo from '../../assets/lenskart.png'
-import paytmLogoGreyscale from '../../assets/paytm_logo_greyscale.png'
-import piramalLogoGreyscale from '../../assets/piramal_greyscale.svg'
+import lenskartLogo from '../../assets/lenskart_greyscale_new.png'
+import paytmLogoGreyscale from '../../assets/paytm_greyscale_new.png'
+import piramalLogoGreyscale from '../../assets/piramal_greyscale_new.png'
 import testbookLogo from '../../assets/testbook.png'
-import LAPDP3Qlogos from '../../assets/idLAPDP3-Q_logos 2.png'
-import InsuranceDekho from '../../assets/InsuranceDekho_idjmo4nKwR_1 1.png'
+import LAPDP3Qlogos from '../../assets/finova_greyscale_new.png'
+import InsuranceDekho from '../../assets/InsuranceDekho_greyscale_new.png'
 import auLogoGreyscale from '../../assets/au_logo_greyscale.png'
+import greenfinchLogo from '../../assets/greenfinch_greyscale_new.png'
+import nivabupaLogo from '../../assets/nivabupa_greyscale_new.png'
 import bgimg from "../../assets/bgimage.png"
 import './LogoCarousel.css'
 
@@ -17,6 +19,8 @@ const LogoCarousel = () => {
     { name: 'Piramal Finance', image: piramalLogoGreyscale, noFilter: true },
     { name: 'Testbook', image: LAPDP3Qlogos },
     { name: 'InsuranceDekho', image: InsuranceDekho },
+    { name: 'Greenfinch Global Consulting', image: greenfinchLogo, noFilter: true },
+    { name: 'Niva Bupa Health Insurance', image: nivabupaLogo, noFilter: true },
   ]
 
   const duplicatedLogos = [...logos, ...logos]

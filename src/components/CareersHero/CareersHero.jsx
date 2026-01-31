@@ -5,19 +5,11 @@ import './CareersHero.css'
 const CareersHero = () => {
   const handleSeeOpeningsClick = () => {
     const openingsSection = document.getElementById('open-roles')
-    const careersPage = document.querySelector('.careers-page')
     if (openingsSection) {
-      const headerOffset = 100
-      // Careers page scrolls inside its container, not window
-      if (careersPage) {
-        const elementPosition = openingsSection.getBoundingClientRect().top
-        const scrollTop = careersPage.scrollTop + elementPosition - headerOffset
-        careersPage.scrollTo({ top: scrollTop, behavior: 'smooth' })
-      } else {
-        const elementPosition = openingsSection.getBoundingClientRect().top
-        const offsetPosition = elementPosition + window.pageYOffset - headerOffset
-        window.scrollTo({ top: offsetPosition, behavior: 'smooth' })
-      }
+      openingsSection.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      })
     }
   }
 

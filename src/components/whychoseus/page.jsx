@@ -49,7 +49,7 @@ const Whychooseus = () => {
     return () => ctx.revert()
   }, [])
 
-  const paragraph = "Getting a job is tough.Keeping it is tougher.Our Job-Linked courses, powered by the ABC Framework of Job Readiness, prepare you for both."
+  const paragraph = "Getting a job is tough. Keeping it is tougher. Our Job-Linked courses, powered by the ABC Framework of Job Readiness, prepare you for both."
 
 
   return (

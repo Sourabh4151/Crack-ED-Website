@@ -42,6 +42,7 @@
 .mainsection123 {
     display: flex;
     min-height: 550px;
+    margin-top: 20px;
 }
 
 .sec1 {
@@ -149,9 +150,9 @@ p.sec1234 {
     letter-spacing: 4px;
 }
 
-.mainsection123 {
+.mainsection123.pp{
     border-radius: 12px;
-    min-height: 400px;
+    min-height: 600px;
     padding: 32px;
     display: flex;
     align-items: center;
@@ -159,6 +160,9 @@ p.sec1234 {
 
 /* Controls Layout */
 .slider-wrapper {
+    max-width: 1160px;
+    width: 100;
+    margin: 0px auto;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -220,7 +224,7 @@ p.sec1234 {
 }
 
 @media (max-width: 768px) {
-    .mainsection123 {
+    .mainsection123.pp{
         padding: 0px !important;
         align-items: flex-start !important;
     }

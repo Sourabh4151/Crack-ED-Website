@@ -5,6 +5,7 @@ import lenskartCardLogo from '../../assets/lenskart_card_logo.png'
 import piramalLogo from '../../assets/piramal_small.png'
 
 import udaanLogo from '../../assets/udaan_temporary_logo.png'
+import paytmLogo from '../../assets/paytm_small_logo.png'
 import './ProgramsList.css'
 
 const ProgramsList = () => {
@@ -127,6 +128,14 @@ const ProgramsList = () => {
           'Join as a Relationship Manager with a CTC of Rs 2.74 LPA + variable',
           '13-week program'
         ]
+      },
+      {
+        program: 'Paytm Disha Program',
+        role: 'Field Sales Executive',
+        details: [
+          'Join as a Field Sales Executive with a CTC of Rs 2.5 LPA + incentives',
+          '2-week program (virtual)'
+        ]
       }
     ]
   }
@@ -176,6 +185,8 @@ const ProgramsList = () => {
       switch (role) {
         case 'Relationship Manager':
           return 'https://piramal.crack-ed.com/portal'
+        case 'Field Sales Executive':
+          return 'https://paytm.crack-ed.com/portal'
         default:
           return null
       }
@@ -190,7 +201,10 @@ const ProgramsList = () => {
     }
     if (category === 'Banking') return <img src={auCardLogo} alt="AU Bank" className="program-logo-img" />
     if (category === 'Retail') return <img src={lenskartCardLogo} alt="Lenskart" className="program-logo-img" />
-    if (category === 'NBFC') return <img src={piramalLogo} alt="Piramal" className="program-logo-img" />
+    if (category === 'NBFC' && item?.program === 'Paytm Disha Program') {
+      return <img src={paytmLogo} alt="Paytm" className="program-logo-img program-logo-paytm" />
+    }
+    if (category === 'NBFC') return <img src={piramalLogo} alt="Piramal" className="program-logo-img program-logo-piramal" />
     return null
   }
 
@@ -221,43 +235,48 @@ const ProgramsList = () => {
         </div>
 
         <div className="programs-grid">
-          {programs[activeTab].map((item, index) => (
-            <div key={index} className="program-card">
-              <div className="program-card-top">
-                <div className="program-card-icon">{getIcon(activeTab, item)}</div>
-                <div className="program-card-header">
-                  <div className="program-card-name">{item.program}</div>
-                  <div className="program-card-role">{item.role}</div>
+          {programs[activeTab].map((item, index) => {
+            const link = getProgramLink(activeTab, item.role)
+            return (
+              <a
+                key={index}
+                href={link || '#'}
+                className="program-card"
+                target={link ? '_blank' : undefined}
+                rel={link ? 'noopener noreferrer' : undefined}
+                onClick={!link ? (e) => e.preventDefault() : undefined}
+              >
+                <div className="program-card-top">
+                  <div className="program-card-icon">{getIcon(activeTab, item)}</div>
+                  <div className="program-card-header">
+                    <div className="program-card-name">{item.program}</div>
+                    <div className="program-card-role">{item.role}</div>
+                  </div>
                 </div>
-              </div>
-              <div className="program-card-content">
-                <div className="program-card-details">
-                  {item.details.map((detail, idx) => (
-                    <div key={idx} className="program-detail-item">
-                      <span className="checkmark"></span>
-                      <span className="detail-text">{detail}</span>
-                    </div>
-                  ))}
+                <div className="program-card-content">
+                  <div className="program-card-details">
+                    {item.details.map((detail, idx) => (
+                      <div key={idx} className="program-detail-item">
+                        <span className="checkmark"></span>
+                        <span className="detail-text">{detail}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-              <div className="program-card-footer">
-                <a
-                  href={getProgramLink(activeTab, item.role) || '#'}
-                  className="view-details-link"
-                  target={getProgramLink(activeTab, item.role) ? '_blank' : undefined}
-                  rel={getProgramLink(activeTab, item.role) ? 'noopener noreferrer' : undefined}
-                >
-                  View Details
-                  <span className="view-details-arrow">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M7.5 4L12.5 10L7.5 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      <line x1="7.5" y1="10" x2="0" y2="10" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                    </svg>
+                <div className="program-card-footer">
+                  <span className="view-details-link">
+                    View Details
+                    <span className="view-details-arrow">
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.5 4L12.5 10L7.5 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        <line x1="7.5" y1="10" x2="0" y2="10" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                      </svg>
+                    </span>
                   </span>
-                </a>
-              </div>
-            </div>
-          ))}
+                </div>
+              </a>
+            )
+          })}
         </div>
       </div>
     </section>

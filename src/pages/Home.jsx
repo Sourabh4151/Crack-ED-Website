@@ -12,6 +12,8 @@ import Analysis from '../components/analysis/page'
 import Media from '../components/mediasection/page'
 import Analyse from '../components/analyse/page'
 import EnquireSection from '../components/EnquireSection/EnquireSection'
+import Partners from '../components/partners/page'
+import FloatingSteps from '../components/FloatingSteps/page'
 
 
 const Home = () => {
@@ -19,12 +21,14 @@ const Home = () => {
     <div className="home-page">
       <Header />
       <Hero />   <Programs />
-       {/* <CareerForward /> */}
+      <CareerForward />
       <Whychooseus />
+      <FloatingSteps />
       <Analysis />
       <Analyse />
       <Stats />
       <Media />
+      <Partners />
       <Testimonial />
       <EnquireSection />
       <Footer />

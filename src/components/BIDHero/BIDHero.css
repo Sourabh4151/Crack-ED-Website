@@ -16,7 +16,7 @@
   pointer-events: none;
   background:
     linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url('../../assets/bid_heroflip.png');
+    url('../../assets/bid_new.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -41,7 +41,7 @@
 }
 
 .bid-hero-logo {
-  width: 220px;
+  width: 160px;
   height: auto;
 }
 
@@ -123,6 +123,15 @@
     align-items: center;
   }
 
+  .bid-hero-background {
+    background:
+      linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+      url('../../assets/bid_mobile.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
   .bid-hero-content {
     padding: 120px 24px 72px;
     display: flex;
@@ -137,7 +146,7 @@
   }
 
   .bid-hero-logo {
-    width: 180px;
+    width: 130px;
   }
 
   .bid-hero-title {

@@ -30,10 +30,10 @@ const Footer = () => {
               <h3 className="footer-heading">QUICK LINKS</h3>
               <ul className="footer-links">
                 <li><Link to="/">Home</Link></li>
-                <li><a href="https://crack-ed.com/about-us/" target="_blank" rel="noopener noreferrer">About Us</a></li>
+                <li><Link to="/about">About Us</Link></li>
                 <li><Link to="/programs">Programs</Link></li>
-                <li><a href="#resources" onClick={(e) => { e.preventDefault(); scrollToSection('resources'); }}>Resources</a></li>
-                <li><a href="https://crack-ed.com/badhta-india-dekho-podcast/" target="_blank" rel="noopener noreferrer">BID Podcast</a></li>
+                <li><a href="http://blogs.crack-ed.com/">Resources</a></li>
+                <li><Link to="/badhta-india-dekho">BID Podcast</Link></li>
               </ul>
             </div>
 
@@ -55,6 +55,12 @@ const Footer = () => {
                 <li><Link to="/programs" className="footer-program-heading">Lenskart Eyetech Program</Link></li>
                 <li><a href="https://lenskart.crack-ed.com/portal" target="_blank" rel="noopener noreferrer">Clinical Technician</a></li>
                 <li><a href="https://lenskartrsa.crack-ed.com/portal" target="_blank" rel="noopener noreferrer">Retail Sales Associate</a></li>
+                <li><Link to="/programs" className="footer-program-heading">Piramal ProEdge Program</Link></li>
+                <li><a href="https://piramal.crack-ed.com/portal" target="_blank" rel="noopener noreferrer">Relationship Manager</a></li>
+                <li><Link to="/programs" className="footer-program-heading">Udaan Program</Link></li>
+                <li><a href="https://udaan.crack-ed.com/portal" target="_blank" rel="noopener noreferrer">Cashier / Teller</a></li>
+                <li><Link to="/programs" className="footer-program-heading">Paytm Disha Program</Link></li>
+                <li><a href="https://paytm.crack-ed.com/portal" target="_blank" rel="noopener noreferrer">Field Sales Executive</a></li>
               </ul>
             </div>
 

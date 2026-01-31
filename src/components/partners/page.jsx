@@ -5,12 +5,15 @@ import "./page.css";
 import img1 from "../../assets/ef7bcc6e680026c28232839c9205a4830a2925b8 (1).jpg";
 import img2 from "../../assets/eb818bfd9c2640eb80e319dd1817733d995d655f.jpg";
 import img3 from "../../assets/b16c5ec29861e38c6feb16079aefef89d0657f23.jpg"
+import img4 from "../../assets/7cc44da2763eea8aaab3ae42eb7dffc24e2042b0.jpg"
 import img1Mobile from "../../assets/au small finance bank.png";
 import img2Mobile from "../../assets/lenskart_mobile.png";
 import img3Mobile from "../../assets/piramal_mobile.png";
+import img4Mobile from "../../assets/aumobileimg.png";
 import logoBW from "../../assets/0b17d9c50ed5f95358cc7c76ea958a46b64679e9.png";
 import logoHT from "../../assets/323ba31805264950f2a461aeef96f9fd0e551196.png";
 import logoBWDisrupt from "../../assets/2b13185556d7f4e88147ae6e85d255f3d49d3609.png";
+import piramal_logo1 from "../../assets/piramal_logo 1.png";
 
 const Partners = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -52,6 +55,16 @@ const Partners = () => {
       ownerName: "Keyur Shah",
       ownerDesiganation: "Senior Vice President - Head Talent Acquisition & Campus Relations",
       logoWidth: "134px",
+    },
+    {
+      image: img4,
+      imageMobile: img4Mobile,
+      
+      logo: piramal_logo1,
+      desc: "“Crack-ED is doing important work in preparing young talent for real business environments. Their approach builds confidence, clarity, and job-readiness where it truly matters.”",
+      ownerName: "Amit Jain",
+      ownerDesiganation: "CEO, GFTP",
+      logoWidth: "236px",
     },
   ];
 
@@ -106,10 +119,10 @@ const Partners = () => {
   return (
     <section className="media-section">
       <div className="media-container">
-        <div className="stats-header">
-          {/* <div className="stats-badge">Testimonials</div> */}
+        <div style={{display:"flex",justifyContent:"center",flexDirection:"column",alignItems:"center",width:"100%"}}>
+    
                  <div className="testimonial-badge">Testimonials</div>
-          <h2 className="testimonial-heading">Hear from our partners and learners.</h2>
+          <h2 className="testimonial-heading" style={{marginTop:"20px"}}>Hear from our partners and learners.</h2>
         </div>
 
         <div className="slider-wrapper">
@@ -117,7 +130,7 @@ const Partners = () => {
           <div
             key={currentIndex} 
             ref={mainSectionRef}
-            className="mainsection123"
+            className="mainsection123 pp"
             style={{
               backgroundImage: `
                 linear-gradient(90deg, rgba(0, 0, 0, 0.7) 10%, rgba(0, 0, 0, 0) 100%),
@@ -126,7 +139,7 @@ const Partners = () => {
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
-              height: "600px",
+              // height: "600px",
               width: "100%",
               display: "flex",
               alignItems: "center",
