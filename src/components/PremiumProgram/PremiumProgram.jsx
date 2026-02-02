@@ -38,7 +38,7 @@ const PremiumProgram = () => {
               </div>
             </div>
             <a 
-              href="https://crack-ed.com/pgprm/" 
+              href="https://aurmroyale.crack-ed.com/" 
               target="_blank" 
               rel="noopener noreferrer"
               className="premium-program-learn-more"

@@ -73,7 +73,7 @@ const Programs = () => {
       id: 1,
       logo: auCardLogo,
       title: 'AURUM Bankers Program - Relationship Manager',
-      url: 'https://crack-ed.com/pgprm/',
+      url: 'https://aurmroyale.crack-ed.com/',
     },
     {
       id: 2,

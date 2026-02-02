@@ -141,11 +141,12 @@ export const submitLeadToCRMDirect = async (formData) => {
 }
 
 /**
- * Submit quiz lead to CRM via YOUR backend API (no center, no state)
- * Use for CareerQuiz form submissions
+ * Submit quiz lead to CRM via YOUR backend API
+ * Uses program from "Your Perfect Fit" to pass Center value
  */
 export const submitQuizLeadToCRM = async (formData) => {
   const { firstName, lastName } = splitName(formData.name)
+  const center = getCenterByProgram(formData.program)
 
   const payload = {
     firstName,
@@ -153,6 +154,7 @@ export const submitQuizLeadToCRM = async (formData) => {
     email: formData.email,
     mobile: formData.mobile,
     program: formData.program,
+    center,
   }
 
   try {
@@ -177,11 +179,13 @@ export const submitQuizLeadToCRM = async (formData) => {
 }
 
 /**
- * Submit quiz lead directly to CRM (no center, no state)
+ * Submit quiz lead directly to CRM
+ * Uses program from "Your Perfect Fit" to pass Center value to Extraaedge
  * NOT RECOMMENDED - Only for development. AuthToken exposed in frontend.
  */
 export const submitQuizLeadToCRMDirect = async (formData) => {
   const { firstName, lastName } = splitName(formData.name)
+  const center = getCenterByProgram(formData.program)
 
   const payload = {
     Source: 'crack-ed',
@@ -190,6 +194,7 @@ export const submitQuizLeadToCRMDirect = async (formData) => {
     LastName: lastName,
     Email: formData.email,
     MobileNumber: parseInt(String(formData.mobile).replace(/\D/g, ''), 10),
+    Center: center,
   }
 
   try {

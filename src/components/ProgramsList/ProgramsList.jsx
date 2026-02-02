@@ -144,7 +144,7 @@ const ProgramsList = () => {
     if (category === 'Banking') {
       switch (role) {
         case 'Relationship Manager':
-          return 'https://crack-ed.com/pgprm/'
+          return 'https://aurmroyale.crack-ed.com/'
         case 'Relationship Officer':
           return 'https://aubank.ro.crack-ed.com/portal'
         case 'Bank Officer':
