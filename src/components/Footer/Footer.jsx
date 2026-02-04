@@ -88,7 +88,7 @@ const Footer = () => {
                 <li><Link to="/">Home</Link></li>
                 <li><Link to="/about">About Us</Link></li>
                 <li><Link to="/programs">Programs</Link></li>
-                <li><a href="http://blogs.crack-ed.com/">Resources</a></li>
+                <li><Link to="/resources">Resources</Link></li>
                 <li><Link to="/badhta-india-dekho">BID Podcast</Link></li>
               </ul>
             </div>
