@@ -1,5 +1,5 @@
 import React from 'react'
-import debojitSen from '../../assets/debojit_sen.jpg'
+import debojitSen from '../../assets/debojit_about_us2.jpeg'
 import vipinSingh from '../../assets/vipin_singh.jpeg'
 import ankitMittal from '../../assets/ankit_mittal.jpg'
 import bhavanaAnand from '../../assets/bhavana_anand.jpg'

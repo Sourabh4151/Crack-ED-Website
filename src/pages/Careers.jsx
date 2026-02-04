@@ -11,12 +11,13 @@ const Careers = () => {
   return (
     <div className="careers-page">
       <Header />
-      <CareersHero />
-      <CareersTransition />
-      <LifeAtCrackED />
-      <OpenRoles />
-      {/* Additional components will be added here */}
-      <Footer />
+      <div className="careers-scroll-wrapper">
+        <CareersHero />
+        <CareersTransition />
+        <LifeAtCrackED />
+        <OpenRoles />
+        <Footer />
+      </div>
     </div>
   )
 }

@@ -107,7 +107,7 @@ const ProgramsList = () => {
         program: 'Lenskart EyeTech Program',
         role: 'Clinical Technician',
         details: [
-          'Join as a Dispensing Optician with a CTC of Rs 2.64 LPA',
+          'Join as a Clinical Technician with a CTC of Rs 2.64 LPA',
           '6-month program'
         ]
       },

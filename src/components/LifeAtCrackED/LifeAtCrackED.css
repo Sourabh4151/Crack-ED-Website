@@ -65,15 +65,13 @@
   height: 267px;
   overflow: hidden;
   position: relative;
-  mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
 }
 
 .life-at-cracked-carousel-track {
   display: flex;
   align-items: center;
   gap: 16px;
-  animation: scrollImages 20s linear infinite;
+  animation: scrollImages 30s linear infinite;
   width: fit-content;
   height: 100%;
 }
@@ -176,7 +174,7 @@
 
   .life-at-cracked-carousel-track {
     gap: 12px;
-    animation-duration: 15s;
+    animation-duration: 25s;
   }
 }
 
@@ -211,6 +209,6 @@
 
   .life-at-cracked-carousel-track {
     gap: 10px;
-    animation-duration: 12s;
+    animation-duration: 20s;
   }
 }

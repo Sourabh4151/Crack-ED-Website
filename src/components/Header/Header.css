@@ -77,12 +77,13 @@
 .nav-item-dropdown::after {
   content: '';
   position: absolute;
-  bottom: -5px;
+  bottom: -15px;
   left: 0;
   right: 0;
-  height: 10px;
+  height: 20px;
   background: transparent;
   z-index: 1001;
+  pointer-events: auto;
 }
 
 .nav-link {
@@ -98,6 +99,7 @@
   display: flex;
   align-items: center;
   gap: 0.3rem;
+  cursor: pointer;
 }
 
 .nav-link:hover {
@@ -120,9 +122,9 @@
 
 .dropdown-menu {
   position: absolute;
-  top: calc(100% + 5px);
+  top: 100%;
   left: 0;
-  margin-top: 0;
+  margin-top: 8px;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
   border-radius: 8px;
@@ -137,11 +139,12 @@
 .dropdown-menu::before {
   content: '';
   position: absolute;
-  top: -5px;
+  top: -10px;
   left: 0;
   right: 0;
-  height: 5px;
+  height: 10px;
   background: transparent;
+  pointer-events: auto;
 }
 
 .dropdown-menu li {

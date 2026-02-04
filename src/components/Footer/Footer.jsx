@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import logo from '../../assets/crack-ed_logo.png'
 import instagramIcon from '../../assets/instagram_footer.png'
@@ -7,12 +7,64 @@ import facebookIcon from '../../assets/facebook_footer.png'
 import youtubeIcon from '../../assets/youtube_footer.png'
 import './Footer.css'
 
+const PROGRAMS = [
+  {
+    id: 'aurum',
+    name: 'AURUM Bankers Program',
+    link: '/programs',
+    links: [
+      { label: 'Relationship Manager', href: 'https://aurmroyale.crack-ed.com/' },
+      { label: 'Relationship Officer', href: 'https://aubank.ro.crack-ed.com/portal' },
+      { label: 'Bank Officer', href: 'https://aubankbo.crack-ed.com/portal' },
+      { label: 'Sales Officer', href: 'https://aubankso.crack-ed.com/portal' },
+      { label: 'Money Officer', href: 'https://aubankmo.crack-ed.com/portal' },
+      { label: 'Transaction Officer', href: 'https://aubankto.crack-ed.com/portal' },
+      { label: 'Customer Service Officer', href: 'https://aubankcso.crack-ed.com/portal' },
+      { label: 'Customer Service Officer Valuation', href: 'https://aubankbcso.crack-ed.com/portal' },
+      { label: 'Deputy Center Manager', href: 'https://aubankcm.crack-ed.com/portal' },
+      { label: 'Deputy Late Recovery Officer', href: 'https://aubanklro.crack-ed.com/portal' },
+    ],
+  },
+  {
+    id: 'lenskart',
+    name: 'Lenskart Eyetech Program',
+    link: '/programs',
+    links: [
+      { label: 'Clinical Technician', href: 'https://lenskart.crack-ed.com/portal' },
+      { label: 'Retail Sales Associate', href: 'https://lenskartrsa.crack-ed.com/portal' },
+    ],
+  },
+  {
+    id: 'piramal',
+    name: 'Piramal ProEdge Program',
+    link: '/programs',
+    links: [
+      { label: 'Relationship Manager', href: 'https://piramal.crack-ed.com/portal' },
+    ],
+  },
+  {
+    id: 'udaan',
+    name: 'Udaan Program',
+    link: '/programs',
+    links: [
+      { label: 'Cashier / Teller', href: 'https://udaan.crack-ed.com/portal' },
+    ],
+  },
+  {
+    id: 'paytm',
+    name: 'Paytm Disha Program',
+    link: '/programs',
+    links: [
+      { label: 'Field Sales Executive', href: 'https://paytm.crack-ed.com/portal' },
+    ],
+  },
+]
+
 const Footer = () => {
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }
+  const [openProgram, setOpenProgram] = useState('aurum')
+
+  const toggleProgram = (id) => {
+    setOpenProgram((prev) => (prev === id ? null : id))
   }
 
   return (
@@ -42,30 +94,57 @@ const Footer = () => {
             </div>
 
             {/* Job-Linked Programs Section */}
-            <div className="footer-column">
+            <div className="footer-column footer-programs-column">
               <h3 className="footer-heading">JOB-LINKED PROGRAMS</h3>
-              <ul className="footer-links footer-job-links">
-                <li><Link to="/programs" className="footer-program-heading">AURUM Bankers Program</Link></li>
-                <li><a href="https://aurmroyale.crack-ed.com/" target="_blank" rel="noopener noreferrer">Relationship Manager</a></li>
-                <li><a href="https://aubank.ro.crack-ed.com/portal" target="_blank" rel="noopener noreferrer">Relationship Officer</a></li>
-                <li><a href="https://aubankbo.crack-ed.com/portal" target="_blank" rel="noopener noreferrer">Bank Officer</a></li>
-                <li><a href="https://aubankso.crack-ed.com/portal" target="_blank" rel="noopener noreferrer">Sales Officer</a></li>
-                <li><a href="https://aubankmo.crack-ed.com/portal" target="_blank" rel="noopener noreferrer">Money Officer</a></li>
-                <li><a href="https://aubankto.crack-ed.com/portal" target="_blank" rel="noopener noreferrer">Transaction Officer</a></li>
-                <li><a href="https://aubankcso.crack-ed.com/portal" target="_blank" rel="noopener noreferrer">Customer Service Officer</a></li>
-                <li><a href="https://aubankbcso.crack-ed.com/portal" target="_blank" rel="noopener noreferrer">Customer Service Officer Valuation</a></li>
-                <li><a href="https://aubankcm.crack-ed.com/portal" target="_blank" rel="noopener noreferrer">Deputy Center Manager</a></li>
-                <li><a href="https://aubanklro.crack-ed.com/portal" target="_blank" rel="noopener noreferrer">Deputy Late Recovery Officer</a></li>
-                <li><Link to="/programs" className="footer-program-heading">Lenskart Eyetech Program</Link></li>
-                <li><a href="https://lenskart.crack-ed.com/portal" target="_blank" rel="noopener noreferrer">Clinical Technician</a></li>
-                <li><a href="https://lenskartrsa.crack-ed.com/portal" target="_blank" rel="noopener noreferrer">Retail Sales Associate</a></li>
-                <li><Link to="/programs" className="footer-program-heading">Piramal ProEdge Program</Link></li>
-                <li><a href="https://piramal.crack-ed.com/portal" target="_blank" rel="noopener noreferrer">Relationship Manager</a></li>
-                <li><Link to="/programs" className="footer-program-heading">Udaan Program</Link></li>
-                <li><a href="https://udaan.crack-ed.com/portal" target="_blank" rel="noopener noreferrer">Cashier / Teller</a></li>
-                <li><Link to="/programs" className="footer-program-heading">Paytm Disha Program</Link></li>
-                <li><a href="https://paytm.crack-ed.com/portal" target="_blank" rel="noopener noreferrer">Field Sales Executive</a></li>
-              </ul>
+              <div className="footer-program-dropdowns">
+                {PROGRAMS.map((program) => {
+                  const isOpen = openProgram === program.id
+                  return (
+                    <div
+                      key={program.id}
+                      className={`footer-program-dropdown ${isOpen ? 'open' : ''}`}
+                    >
+                      <button
+                        type="button"
+                        className="footer-program-toggle"
+                        onClick={() => toggleProgram(program.id)}
+                        aria-expanded={isOpen}
+                        aria-controls={`footer-program-${program.id}`}
+                        id={`footer-program-toggle-${program.id}`}
+                      >
+                        <span className="footer-program-heading">{program.name}</span>
+                        <svg
+                          className="footer-program-chevron"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 16 16"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                          aria-hidden
+                        >
+                          <path d="M4 6L8 10L12 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </button>
+                      <div
+                        id={`footer-program-${program.id}`}
+                        className="footer-program-links"
+                        role="region"
+                        aria-labelledby={`footer-program-toggle-${program.id}`}
+                      >
+                        <ul className="footer-links footer-job-links">
+                          {program.links.map((item) => (
+                            <li key={item.href}>
+                              <a href={item.href} target="_blank" rel="noopener noreferrer">
+                                {item.label}
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
             </div>
 
             {/* Contact Us and Follow Us Section */}

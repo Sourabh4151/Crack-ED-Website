@@ -541,7 +541,7 @@
         object-fit: contain;
     }
 
-    /* Paragraph - Poppins 400, 14px, line-height 1.6, center-aligned, rgba(250,250,250,0.6) */
+    /* Paragraph - Poppins 400, 14px, line-height 1.6, justified on mobile, rgba(250,250,250,0.6) */
     .media-mentions-section .mediadesc,
     .media-section.media-mentions-section .mediadesc {
         font-family: 'Poppins', sans-serif;
@@ -549,7 +549,7 @@
         font-size: 14px;
         line-height: 1.4;
         letter-spacing: 0%;
-        text-align: center;
+        text-align: justify;
         color: rgba(250, 250, 250, 0.6);
         font-style: normal;
     }
@@ -630,5 +630,6 @@
     .media-mentions-section .mediadesc,
     .media-section.media-mentions-section .mediadesc {
         font-size: 13px;
+        text-align: justify;
     }
 }

@@ -6,6 +6,8 @@ import Careers from './pages/Careers'
 import JobDetail from './pages/JobDetail'
 import About from './pages/About'
 import BID from './pages/BID'
+import Resources from './pages/Resources'
+import BlogPost from './pages/BlogPost'
 import ScrollToTop from './components/ScrollToTop/ScrollToTop'
 import './App.css'
 
@@ -21,6 +23,8 @@ function App() {
           <Route path="/careers" element={<Careers />} />
           <Route path="/careers/job/:id" element={<JobDetail />} />
           <Route path="/badhta-india-dekho" element={<BID />} />
+          <Route path="/resources" element={<Resources />} />
+          <Route path="/resources/blog/:id" element={<BlogPost />} />
         </Routes>
       </div>
     </Router>

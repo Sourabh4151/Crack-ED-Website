@@ -285,7 +285,7 @@ const Programs = () => {
       // Lenskart EyeTech cards
       const detailsMap = {
         'Lenskart EyeTech Program - Clinical Technician': {
-          details: 'Join as a Dispensing Optician with a CTC of Rs 2.64 LPA',
+          details: 'Join as a Clinical Technician with a CTC of Rs 2.64 LPA',
           duration: '6-months program',
         },
         'Lenskart EyeTech Program - Retail Sales Associate': {
@@ -452,8 +452,9 @@ const Programs = () => {
                             {(() => {
                               const logoInfo = getProgramHomeLogo(details.programLabel || (details.logo === auCardLogo ? 'AURUM Bankers Program' : 'Lenskart Program'))
                               if (!logoInfo) return null
+                              const isPaytm = logoInfo.alt === 'Paytm'
                               return (
-                                <div className="mobile-program-card-logo">
+                                <div className={`mobile-program-card-logo${isPaytm ? ' mobile-program-card-logo--paytm' : ''}`}>
                                   <img src={logoInfo.src} alt={logoInfo.alt} />
                                 </div>
                               )

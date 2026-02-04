@@ -120,22 +120,85 @@
 
 .footer-job-links a {
   font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 24px;
+  letter-spacing: 0%;
+  color: rgba(250, 250, 250, 0.8);
+}
+
+.footer-program-heading {
+  font-family: 'Montserrat', sans-serif;
   font-size: 16px;
   font-weight: 500;
   font-style: normal;
   line-height: 21px;
   letter-spacing: 0%;
-  color: rgba(250, 250, 245, 1);
+  color: rgba(250, 250, 250, 1);
 }
 
-.footer-program-heading {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  font-style: normal;
-  line-height: 21px;
-  letter-spacing: 0%;
-  color: rgba(180, 187, 186, 0.6) !important;
+/* Footer Program Dropdowns */
+.footer-programs-column {
+  max-width: 280px;
+}
+
+.footer-program-dropdowns {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.footer-program-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 12px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  gap: 8px;
+  transition: opacity 0.2s ease;
+}
+
+.footer-program-toggle:hover {
+  opacity: 0.85;
+}
+
+.footer-program-toggle .footer-program-heading {
+  flex: 1;
+}
+
+.footer-program-chevron {
+  flex-shrink: 0;
+  color: rgba(180, 187, 186, 0.8);
+  transition: transform 0.25s ease;
+}
+
+.footer-program-dropdown.open .footer-program-chevron {
+  transform: rotate(180deg);
+}
+
+.footer-program-links {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s ease;
+}
+
+.footer-program-dropdown.open .footer-program-links {
+  max-height: 800px;
+}
+
+.footer-program-dropdown .footer-job-links {
+  padding-left: 8px;
+  padding-bottom: 12px;
+  gap: 10px;
+}
+
+.footer-program-dropdown .footer-job-links li {
+  padding-left: 0;
 }
 
 .footer-links a:hover {
@@ -439,12 +502,12 @@
   
   .footer-job-links a {
     font-size: 14px;
-    line-height: 20px;
+    line-height: 24px;
   }
   
   .footer-program-heading {
-    font-size: 11px;
-    line-height: 18px;
+    font-size: 14px;
+    line-height: 21px;
   }
   
   .contact-item {

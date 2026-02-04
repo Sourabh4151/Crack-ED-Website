@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import logoImage from '../../assets/crack-ed_logo.png'
 import './Header.css'
 
 const Header = () => {
+  const location = useLocation()
   const [isProgramsOpen, setIsProgramsOpen] = useState(false)
   const [isAurumSubmenuOpen, setIsAurumSubmenuOpen] = useState(false)
   const [isLenskartSubmenuOpen, setIsLenskartSubmenuOpen] = useState(false)
@@ -12,6 +13,25 @@ const Header = () => {
   const closeTimeoutRef = useRef(null)
   const aurumTimeoutRef = useRef(null)
   const lenskartTimeoutRef = useRef(null)
+
+  // On BID, Resources, and Careers the page uses an inner scroll container, so window.scrollY stays 0.
+  // Listen to the actual scroll container so the header gets the black background when scrolled.
+  const scrollThreshold = 50
+
+  const getScrollTarget = () => {
+    const path = location.pathname
+    if (path === '/badhta-india-dekho') return document.querySelector('.bid-page')
+    if (path === '/resources') return document.querySelector('.resources-scroll-wrapper')
+    if (path.startsWith('/resources/blog/')) return document.querySelector('.blog-post-scroll')
+    if (path === '/careers') return document.querySelector('.careers-scroll-wrapper')
+    if (path.startsWith('/careers/job/')) return document.querySelector('.job-detail-page')
+    return null
+  }
+
+  const getScrollPosition = (target) => {
+    if (!target) return window.scrollY
+    return target.scrollTop
+  }
   
   const clearAllTimeouts = () => {
     if (closeTimeoutRef.current) {
@@ -29,17 +49,23 @@ const Header = () => {
   }
 
   useEffect(() => {
+    const scrollTarget = getScrollTarget()
+    const target = scrollTarget || window
+
     const handleScroll = () => {
-      const scrollPosition = window.scrollY
-      setIsScrolled(scrollPosition > 50)
+      const scrollPosition = getScrollPosition(scrollTarget)
+      setIsScrolled(scrollPosition > scrollThreshold)
     }
 
-    window.addEventListener('scroll', handleScroll)
+    // Set initial state in case the container is already scrolled (e.g. after navigation)
+    handleScroll()
+
+    target.addEventListener('scroll', handleScroll, { passive: true })
     return () => {
-      window.removeEventListener('scroll', handleScroll)
+      target.removeEventListener('scroll', handleScroll)
       clearAllTimeouts()
     }
-  }, [])
+  }, [location.pathname])
 
   // Close mobile menu on window resize to desktop
   useEffect(() => {
@@ -150,7 +176,7 @@ const Header = () => {
                     setIsProgramsOpen(false)
                     setIsAurumSubmenuOpen(false)
                     setIsLenskartSubmenuOpen(false)
-                  }, 150)
+                  }, 300)
                 }
               }}
             >
@@ -158,6 +184,7 @@ const Header = () => {
                 to="/programs" 
                 className="nav-link"
                 onClick={closeMobileMenu}
+                title="Click to view all programs"
               >
                 Programs
                 <svg className="dropdown-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -179,7 +206,7 @@ const Header = () => {
                         setIsProgramsOpen(false)
                         setIsAurumSubmenuOpen(false)
                         setIsLenskartSubmenuOpen(false)
-                      }, 150)
+                      }, 300)
                     }
                   }}
                 >
@@ -338,7 +365,7 @@ const Header = () => {
               )}
             </li>
             <li className="nav-item">
-              <a href="http://blogs.crack-ed.com/" className="nav-link" onClick={closeMobileMenu}>Resources</a>
+              <Link to="/resources" className="nav-link" onClick={closeMobileMenu}>Resources</Link>
             </li>
             <li className="nav-item">
               <Link to="/badhta-india-dekho" className="nav-link" onClick={closeMobileMenu}>
