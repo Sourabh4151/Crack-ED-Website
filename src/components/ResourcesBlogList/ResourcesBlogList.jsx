@@ -7,7 +7,7 @@ const defaultBlog = {
   date: 'April 7, 2025',
   description:
     "Discover how a practical banking course can help you launch a successful career in the BFSI sector. Learn skills in credit, legal, and tech underwriting, and find job-ready training with Crack-ED.",
-  link: 'https://blogs.crack-ed.com/',
+  link: '/resources/blog/1',
 }
 
 const ResourcesBlogList = ({ blogs = [defaultBlog] }) => {
