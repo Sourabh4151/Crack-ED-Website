@@ -1,23 +1,56 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import Header from '../components/Header/Header'
 import Footer from '../components/Footer/Footer'
+import { getApiBase } from '../services/crmService'
 import './JobDetail.css'
+import 'react-toastify/dist/ReactToastify.css'
 
 const JobDetail = () => {
   const { id } = useParams()
   const navigate = useNavigate()
+  const [job, setJob] = useState(null)
+  const [jobLoading, setJobLoading] = useState(true)
+  const [jobError, setJobError] = useState(null)
 
   useEffect(() => {
-    // Scroll to top when component mounts or route changes
     window.scrollTo(0, 0)
   }, [id])
+
+  useEffect(() => {
+    if (!id) {
+      setJobLoading(false)
+      return
+    }
+    let cancelled = false
+    setJobLoading(true)
+    setJobError(null)
+    const apiBase = getApiBase()
+    fetch(`${apiBase}/api/jobs/${id}/`)
+      .then((res) => {
+        if (!res.ok) throw new Error(res.status === 404 ? 'Job not found' : 'Failed to load')
+        return res.json()
+      })
+      .then((data) => {
+        if (!cancelled) setJob(data)
+      })
+      .catch((err) => {
+        if (!cancelled) setJobError(err.message)
+      })
+      .finally(() => {
+        if (!cancelled) setJobLoading(false)
+      })
+    return () => { cancelled = true }
+  }, [id])
+
   const [formData, setFormData] = useState({
     fullName: '',
     mobileNumber: '',
     email: '',
     resume: null
   })
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -34,51 +67,76 @@ const JobDetail = () => {
     }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // Handle form submission
-    console.log('Form submitted:', formData)
-  }
-
-  // Job data - in a real app, this would come from an API
-  const job = {
-    id: id || '1',
-    title: 'Operations Executive',
-    type: 'FULL TIME',
-    workMode: 'WORK FROM OFFICE',
-    positions: 2,
-    location: 'GURUGRAM, SECTOR 62',
-    description: {
-      aboutUs: "At Crack-ED, we are on a mission to empower young professionals through our industry-ready Post Graduate Programs (PGPs). We believe a smooth and supportive journey leads to long-term success and that journey starts with our Operations team.",
-      roleOverview: "We are looking for a detail-oriented and proactive Operations Executive to ensure a seamless experience for our PGP candidates from onboarding to batch completion. You will play a critical role in making sure processes run smoothly, loans are processed timely, and candidates feel supported throughout their learning journey.",
-      responsibilities: [
-        {
-          title: "Seamless Onboarding:",
-          description: "Facilitate a smooth onboarding experience for all selected candidates of our PGP programs. Coordinate documentation, orientation, and communication to ensure a positive first impression."
-        },
-        {
-          title: "Batch Management:",
-          description: "Oversee batch-wise scheduling, student lists, attendance tracking, and coordination with the academic team to ensure classes run efficiently. Manage communication related to schedule updates, session links, and program milestones."
-        },
-        {
-          title: "Operational Support:",
-          description: "Support end-to-end execution of operational tasks such as certificate generation, feedback collection, issue resolution, and escalation management."
-        },
-        {
-          title: "Process Improvement:",
-          description: "Identify gaps in operational workflows and suggest improvements to enhance efficiency and student experience."
-        },
-        {
-          title: "Data Management & Reporting:",
-          description: "Maintain accurate records of candidate status, loan processing, and batch data. Share timely reports with stakeholders for transparency and planning."
-        },
-        {
-          title: "Email Writing:",
-          description: "Be proficient in writing professional emails, ensuring timely and accurate updates about trainings are shared with our corporate partners and all other relevant stakeholders."
-        }
-      ]
+    if (!formData.resume) {
+      toast.error('Please upload your resume. Resume is required.')
+      return
+    }
+    setIsSubmitting(true)
+    try {
+      const apiBase = getApiBase()
+      const body = new FormData()
+      body.append('fullName', formData.fullName.trim())
+      body.append('mobileNumber', String(formData.mobileNumber).replace(/\D/g, '').slice(0, 15))
+      body.append('email', formData.email.trim())
+      body.append('jobId', id || '')
+      body.append('jobTitle', job?.title || '')
+      body.append('sourcePage', typeof window !== 'undefined' ? (window.location.pathname || '') : '')
+      body.append('resume', formData.resume)
+      const res = await fetch(`${apiBase}/api/job-apply/`, {
+        method: 'POST',
+        body,
+      })
+      const data = await res.json().catch(() => ({}))
+      if (!res.ok) {
+        toast.error(data?.error || 'Submission failed. Please try again.')
+        return
+      }
+      toast.success('Application submitted successfully!')
+      setFormData({ fullName: '', mobileNumber: '', email: '', resume: null })
+      const fileInput = document.getElementById('job-apply-resume')
+      if (fileInput) fileInput.value = ''
+    } catch (err) {
+      console.error('Job apply error:', err)
+      toast.error('Something went wrong. Please try again.')
+    } finally {
+      setIsSubmitting(false)
     }
   }
+
+  if (jobLoading) {
+    return (
+      <div className="job-detail-page">
+        <Header />
+        <section className="job-detail-section">
+          <div className="job-detail-container" style={{ padding: '2rem', textAlign: 'center' }}>
+            <p>Loading job...</p>
+          </div>
+        </section>
+        <Footer />
+      </div>
+    )
+  }
+  if (jobError || !job) {
+    return (
+      <div className="job-detail-page">
+        <Header />
+        <section className="job-detail-section">
+          <div className="job-detail-container" style={{ padding: '2rem', textAlign: 'center' }}>
+            <p>{jobError || 'Job not found.'}</p>
+            <button type="button" className="job-detail-back-link" onClick={() => navigate('/careers')} style={{ marginTop: '1rem' }}>
+              Back to listings
+            </button>
+          </div>
+        </section>
+        <Footer />
+      </div>
+    )
+  }
+
+  const description = job.description || {}
+  const responsibilities = Array.isArray(description.responsibilities) ? description.responsibilities : []
 
   return (
     <div className="job-detail-page">
@@ -98,7 +156,7 @@ const JobDetail = () => {
               <div className="job-detail-meta">
                 <span className="job-detail-meta-item">{job.type}</span>
                 <span className="job-detail-meta-item">{job.workMode}</span>
-                <span className="job-detail-meta-item">{job.positions} POSITIONS</span>
+                <span className="job-detail-meta-item">{job.positions || 1} POSITIONS</span>
                 <span className="job-detail-location">
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M8 8.5C9.10457 8.5 10 7.60457 10 6.5C10 5.39543 9.10457 4.5 8 4.5C6.89543 4.5 6 5.39543 6 6.5C6 7.60457 6.89543 8.5 8 8.5Z" stroke="rgba(180, 187, 186, 1)" strokeWidth="1.5"/>
@@ -127,17 +185,17 @@ const JobDetail = () => {
             <div className="job-detail-description">
               <div className="job-detail-section-block">
                 <h2 className="job-detail-section-heading">About Us:</h2>
-                <p className="job-detail-section-text">{job.description.aboutUs}</p>
+                <p className="job-detail-section-text">{description.aboutUs || ''}</p>
               </div>
 
               <div className="job-detail-section-block">
                 <h2 className="job-detail-section-heading">Role Overview:</h2>
-                <p className="job-detail-section-text">{job.description.roleOverview}</p>
+                <p className="job-detail-section-text">{description.roleOverview || ''}</p>
               </div>
 
               <div className="job-detail-section-block">
                 <h2 className="job-detail-section-heading">Key Responsibilities:</h2>
-                {job.description.responsibilities.map((responsibility, index) => (
+                {responsibilities.map((responsibility, index) => (
                   <div key={index} className="job-detail-responsibility">
                     <h3 className="job-detail-responsibility-title">{responsibility.title}</h3>
                     <p className="job-detail-responsibility-text">{responsibility.description}</p>
@@ -185,10 +243,12 @@ const JobDetail = () => {
                   <div className="job-detail-form-field">
                     <label className="job-detail-upload-label">
                       <input
+                        id="job-apply-resume"
                         type="file"
                         accept=".pdf,.doc,.docx"
                         onChange={handleFileChange}
                         className="job-detail-file-input"
+                        required
                       />
                       <div className="job-detail-upload-box">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -196,12 +256,20 @@ const JobDetail = () => {
                           <path d="M5.83331 8.33333L9.99998 12.5L14.1666 8.33333" stroke="rgba(250, 250, 250, 0.6)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                           <path d="M10 12.5V2.5" stroke="rgba(250, 250, 250, 0.6)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
-                        <span>Upload Resume</span>
+                        <span className="job-detail-upload-text">
+                          {formData.resume ? (
+                            <span className="job-detail-upload-filename" style={{ color: 'var(--color-accent, #00d4aa)' }}>✓ {formData.resume.name}</span>
+                          ) : (
+                            <>Upload Resume <span style={{ color: 'var(--color-accent, #00d4aa)' }}>*</span></>
+                          )}
+                        </span>
                       </div>
                     </label>
                   </div>
                   <div className="job-detail-form-actions">
-                    <button type="submit" className="job-detail-submit-button">Submit</button>
+                    <button type="submit" className="job-detail-submit-button" disabled={isSubmitting}>
+                      {isSubmitting ? 'Submitting...' : 'Submit'}
+                    </button>
                   </div>
                 </form>
               </div>

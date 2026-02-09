@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { getApiBase } from '../../services/crmService'
 import './OpenRoles.css'
 
 const OpenRoles = () => {
   const navigate = useNavigate()
+  const [jobs, setJobs] = useState([])
+  const [jobsLoading, setJobsLoading] = useState(true)
   const [searchQuery, setSearchQuery] = useState('')
   const [isFiltersOpen, setIsFiltersOpen] = useState(false)
   const [filters, setFilters] = useState({
@@ -12,6 +15,15 @@ const OpenRoles = () => {
     location: ''
   })
   const filtersRef = useRef(null)
+
+  useEffect(() => {
+    const apiBase = getApiBase()
+    fetch(`${apiBase}/api/jobs/`)
+      .then((res) => (res.ok ? res.json() : []))
+      .then((data) => setJobs(Array.isArray(data) ? data : []))
+      .catch(() => setJobs([]))
+      .finally(() => setJobsLoading(false))
+  }, [])
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -28,41 +40,6 @@ const OpenRoles = () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
   }, [isFiltersOpen])
-
-  const jobs = [
-    {
-      id: 1,
-      title: 'Sales Executive - B2B',
-      type: 'FULL TIME',
-      workMode: 'WORK FROM OFFICE',
-      positions: 3,
-      location: 'GURUGRAM, SECTOR 62'
-    },
-    {
-      id: 2,
-      title: 'Marketing Specialist',
-      type: 'PART TIME',
-      workMode: 'WORK FROM HOME',
-      positions: 2,
-      location: 'GURUGRAM, SECTOR 62'
-    },
-    {
-      id: 3,
-      title: 'Software Developer - Frontend',
-      type: 'FULL TIME',
-      workMode: 'WORK FROM OFFICE',
-      positions: 5,
-      location: 'GURUGRAM, SECTOR 62'
-    },
-    {
-      id: 4,
-      title: 'Technical Support Engineer',
-      type: 'FULL TIME',
-      workMode: 'WORK FROM OFFICE',
-      positions: 4,
-      location: 'GURUGRAM, SECTOR 62'
-    }
-  ]
 
   const handleFilterChange = (filterType, value) => {
     setFilters(prev => ({
@@ -191,7 +168,13 @@ const OpenRoles = () => {
         </div>
 
         <div className="open-roles-list">
-          {filteredJobs.map((job) => (
+          {jobsLoading && (
+            <p style={{ textAlign: 'center', padding: '2rem', color: 'rgba(250,250,250,0.7)' }}>Loading roles...</p>
+          )}
+          {!jobsLoading && filteredJobs.length === 0 && (
+            <p style={{ textAlign: 'center', padding: '2rem', color: 'rgba(250,250,250,0.7)' }}>No open roles at the moment.</p>
+          )}
+          {!jobsLoading && filteredJobs.map((job) => (
             <div 
               key={job.id} 
               className="open-roles-card"

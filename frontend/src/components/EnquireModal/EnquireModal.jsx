@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './EnquireModal.css'
-import { submitLeadToCRMDirect } from '../../services/crmService'
+import { submitLeadToCRMDirect, submitLeadToCRM } from '../../services/crmService'
 
 const EnquireModal = ({ isOpen, onClose }) => {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -231,6 +231,12 @@ const EnquireModal = ({ isOpen, onClose }) => {
     setSubmitSuccess(false)
 
     try {
+      // Save to our Django backend first (so it appears in Django admin)
+      try {
+        await submitLeadToCRM(formData)
+      } catch (backendErr) {
+        console.warn('Could not save lead to backend:', backendErr)
+      }
       // Call CRM API directly
       await submitLeadToCRMDirect(formData)
       

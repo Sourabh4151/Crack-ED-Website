@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
-import { submitQuizLeadToCRMDirect } from '../../services/crmService';
+import { submitQuizLeadToCRMDirect, getApiBase } from '../../services/crmService';
 import 'react-toastify/dist/ReactToastify.css';
 
 // Program fees (₹) - used for tie-breaking when counts are equal
@@ -266,7 +266,8 @@ const CareerQuiz = () => {
     }
 
     try {
-      const res = await fetch('http://localhost:5000/api/quiz/submit', {
+      const apiBase = getApiBase();
+      const res = await fetch(`${apiBase}/api/quiz/submit/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -274,9 +275,12 @@ const CareerQuiz = () => {
       if (res.ok) {
         toast.success("Profile saved successfully!");
       } else {
-        throw new Error("Submit failed");
+        const errData = await res.json().catch(() => ({}));
+        console.error('Quiz submit failed:', res.status, errData);
+        throw new Error(errData?.error || "Submit failed");
       }
     } catch (err) {
+      console.error('Quiz submit error:', err);
       toast.info("Showing results...");
     } finally {
       setView('result');

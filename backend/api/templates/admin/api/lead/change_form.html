@@ -1,0 +1,25 @@
+{% extends "admin/change_form.html" %}
+{% load static %}
+
+{% block admin_change_form_document_ready %}
+{{ block.super }}
+<script>
+(function() {
+  var programCenterMap = {{ program_center_map_json|safe }};
+  var programField = document.getElementById('id_program');
+  var centerField = document.getElementById('id_center');
+  if (!programField || !centerField) return;
+
+  function updateCenter() {
+    var program = programField.value;
+    var center = programCenterMap[program] || '1';
+    centerField.value = center;
+  }
+
+  programField.addEventListener('change', updateCenter);
+  if (!centerField.value && programField.value) {
+    updateCenter();
+  }
+})();
+</script>
+{% endblock %}

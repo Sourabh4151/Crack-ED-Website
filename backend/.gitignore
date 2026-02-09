@@ -1,0 +1,23 @@
+# Virtual env
+.venv/
+venv/
+env/
+
+# Database
+db.sqlite3
+*.sqlite3
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+*.so
+.env
+.env.local
+
+# Django
+*.log
+local_settings.py
+staticfiles/
+media/

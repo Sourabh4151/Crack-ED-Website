@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './EnquireSection.css'
-import { submitLeadToCRMDirect } from '../../services/crmService'
+import { submitLeadToCRMDirect, submitLeadToCRM } from '../../services/crmService'
 
 const STATES = [
   'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 'Goa', 'Gujarat', 'Haryana',
@@ -69,6 +69,11 @@ const EnquireSection = () => {
     setSubmitError(null)
     setSubmitSuccess(false)
     try {
+      try {
+        await submitLeadToCRM(formData)
+      } catch (backendErr) {
+        console.warn('Could not save lead to backend:', backendErr)
+      }
       await submitLeadToCRMDirect(formData)
       setSubmitSuccess(true)
       setFormData({ fullName: '', mobileNumber: '', emailId: '', state: '', program: '' })
