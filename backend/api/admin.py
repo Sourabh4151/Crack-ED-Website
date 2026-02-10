@@ -34,8 +34,8 @@ class ExampleAdmin(admin.ModelAdmin):
 
 @admin.register(QuizSubmission)
 class QuizSubmissionAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'email', 'mobile', 'program', 'created_at']
-    search_fields = ['name', 'email', 'program']
+    list_display = ['id', 'name', 'email', 'mobile', 'program', 'source_page', 'created_at']
+    search_fields = ['name', 'email', 'program', 'source_page']
 
 
 class LeadAdminForm(forms.ModelForm):
@@ -59,8 +59,8 @@ class LeadAdminForm(forms.ModelForm):
 @admin.register(Lead)
 class LeadAdmin(admin.ModelAdmin):
     form = LeadAdminForm
-    list_display = ['id', 'first_name', 'last_name', 'email', 'mobile', 'program', 'source_page', 'created_at']
-    search_fields = ['first_name', 'last_name', 'email', 'program', 'source_page']
+    list_display = ['id', 'first_name', 'last_name', 'email', 'mobile', 'program', 'state', 'source_page', 'created_at']
+    search_fields = ['first_name', 'last_name', 'email', 'program', 'state', 'source_page']
     change_form_template = 'admin/api/lead/change_form.html'
 
     def change_view(self, request, object_id, form_url='', extra_context=None):

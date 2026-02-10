@@ -1,0 +1,117 @@
+.privacy-page {
+  max-width: 100vw;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  background-color: #050505;
+  color: rgba(250, 250, 250, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.privacy-main {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 48px 120px 48px;
+  display: flex;
+  justify-content: center;
+}
+
+.privacy-card {
+  width: 100%;
+  max-width: 1200px;
+  padding: 48px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.privacy-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1;
+  color: rgba(250, 250, 250, 1);
+  margin: 0;
+}
+
+.privacy-subtitle {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  color: rgba(250, 250, 250, 1);
+  margin: 0;
+}
+
+.privacy-text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  color: rgba(250, 250, 250, 0.8);
+  margin: 0;
+}
+
+.privacy-list {
+  margin: 0;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  color: rgba(250, 250, 250, 0.8);
+}
+
+.privacy-email {
+  color: rgba(26, 158, 183, 1);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  white-space: nowrap;
+}
+
+.privacy-updated {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+  color: rgba(250, 250, 250, 0.8);
+  margin-top: 8px;
+}
+
+@media (max-width: 1024px) {
+  .privacy-main {
+    padding: 40px 40px 40px;
+  }
+
+  .privacy-card {
+    padding: 32px 28px;
+  }
+}
+
+@media (max-width: 768px) {
+  .privacy-main {
+    padding: 80px 24px 32px;
+  }
+
+  .privacy-card {
+    padding: 24px 20px;
+  }
+
+  .privacy-title {
+    font-size: 24px;
+  }
+
+  .privacy-text,
+  .privacy-subtitle,
+  .privacy-list {
+    font-size: 14px;
+    line-height: 22px;
+  }
+}
+

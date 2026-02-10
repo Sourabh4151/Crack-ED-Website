@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { submitQuizLeadToCRMDirect, getApiBase } from '../../services/crmService';
 import 'react-toastify/dist/ReactToastify.css';
@@ -115,7 +116,7 @@ const OPTION_TO_PROGRAMS = [
   },
 ];
 
-const CareerQuiz = () => {
+const CareerQuiz = ({ showOnlyTopProgram = false }) => {
   const questions = [
     { id: 1, question: "Do you enjoy interacting with people in your daily life?", options: [
       { text: "Yes, I enjoy talking to many people", mapping: "A" },
@@ -252,7 +253,11 @@ const CareerQuiz = () => {
 
     setLoading(true);
     const { perfectFit } = calculateResults();
-    const payload = { ...formData, selections, bestFit: perfectFit };
+    const sourcePage =
+      typeof window !== 'undefined'
+        ? (window.location.pathname || window.location.href || '')
+        : '';
+    const payload = { ...formData, selections, bestFit: perfectFit, sourcePage };
 
     try {
       await submitQuizLeadToCRMDirect({
@@ -309,24 +314,38 @@ const CareerQuiz = () => {
             </div>
           </div>
         </div>
-        <p className="section-title">ALTERNATE PROGRAM SUGGESTIONS</p>
-        <div className="alt-grid">
-          {alternatives.map((progName, i) => {
-            const details = PROGRAM_DETAILS[progName];
-            const d = details?.details || '';
-            const link = details?.link || '#';
-            return (
-              <div key={i} className="alt-card">
-                <h3>{progName} - {d}</h3>
-                <div style={{ display: "inline-block" }}>
-                  <a href={link} target="_blank" rel="noopener noreferrer">
-                    <button className="secondary-btn-outline">Explore Program</button>
-                  </a>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+        {!showOnlyTopProgram && (
+          <>
+            <p className="section-title">ALTERNATE PROGRAM SUGGESTIONS</p>
+            <div className="alt-grid">
+              {alternatives.map((progName, i) => {
+                const details = PROGRAM_DETAILS[progName];
+                const d = details?.details || '';
+                const link = details?.link || '#';
+                return (
+                  <div key={i} className="alt-card">
+                    <h3>{progName} - {d}</h3>
+                    <div style={{ display: "inline-block" }}>
+                      <a href={link} target="_blank" rel="noopener noreferrer">
+                        <button className="secondary-btn-outline">Explore Program</button>
+                      </a>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </>
+        )}
+        {showOnlyTopProgram && (
+          <div className="inf-cf-explore-card">
+            <p className="inf-cf-explore-text">
+              Want to explore more options? Browse all programs and compare roles.
+            </p>
+            <Link to="/programs" className="inf-cf-explore-btn">
+              Explore All Programs
+            </Link>
+          </div>
+        )}
       </div>
     );
   }

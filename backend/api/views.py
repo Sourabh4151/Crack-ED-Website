@@ -3,7 +3,8 @@ API views - REST endpoints.
 """
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import viewsets, status
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 from .models import Example, QuizSubmission, Lead, JobApplication, JobListing
@@ -43,6 +44,8 @@ def job_detail(request, pk):
 
 @csrf_exempt
 @api_view(['POST'])
+@authentication_classes([])
+@permission_classes([AllowAny])
 def quiz_submit(request):
     """Save career quiz submission from frontend."""
     data = request.data or {}
@@ -50,6 +53,7 @@ def quiz_submit(request):
     email = (data.get('email') or '').strip()
     mobile = str(data.get('mobile') or data.get('mobileNumber') or '').strip()[:20]
     program = (data.get('bestFit') or data.get('program') or '').strip()
+    source_page = (data.get('sourcePage') or data.get('source_page') or '').strip()[:500]
     if not name or not email or not mobile:
         return Response(
             {'error': 'name, email, and mobile are required'},
@@ -60,6 +64,7 @@ def quiz_submit(request):
         email=email,
         mobile=mobile,
         program=program,
+        source_page=source_page or '',
         payload=data,
     )
     print(f'[API] Quiz submission saved: {name} <{email}> -> {program}')
@@ -68,6 +73,8 @@ def quiz_submit(request):
 
 @csrf_exempt
 @api_view(['POST'])
+@authentication_classes([])
+@permission_classes([AllowAny])
 def submit_lead(request):
     """Save lead from frontend (form/CRM flow)."""
     data = request.data or {}
@@ -79,6 +86,7 @@ def submit_lead(request):
     mobile = str(mobile).replace(' ', '').strip()[:20]
     program = (data.get('program') or '').strip()
     center = (data.get('center') or '').strip()
+    state = (data.get('state') or '').strip()
     source_page = (data.get('sourcePage') or data.get('source_page') or '').strip()[:500]
     full_name = (data.get('fullName') or '').strip()
     if not first_name and not last_name and full_name:
@@ -101,6 +109,7 @@ def submit_lead(request):
         mobile=mobile,
         program=program,
         center=center or '0',
+        state=state or '',
         source_page=source_page or '',
     )
     # So you can see in runserver console that the lead was saved
@@ -110,6 +119,8 @@ def submit_lead(request):
 
 @csrf_exempt
 @api_view(['POST'])
+@authentication_classes([])
+@permission_classes([AllowAny])
 def job_apply(request):
     """Save job application (Apply For This Role form). Resume is required."""
     # Multipart form: use request.POST and request.FILES

@@ -268,6 +268,25 @@
   width: 100%;
 }
 
+.job-detail-input-error {
+  border: 1px solid rgba(220, 38, 38, 0.6) !important;
+  background: rgba(220, 38, 38, 0.06) !important;
+}
+
+.job-detail-input-error:focus {
+  border-color: rgba(220, 38, 38, 0.8) !important;
+}
+
+.job-detail-field-error {
+  display: block;
+  color: rgba(248, 113, 113, 1);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
 .job-detail-form-input {
   width: 698px;
   max-width: 100%;
@@ -364,6 +383,35 @@
   width: 698px;
   max-width: 100%;
   align-self: flex-start;
+}
+
+.job-detail-form-message {
+  width: 698px;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin-top: 4px;
+}
+
+.job-detail-form-message-error {
+  background: rgba(220, 38, 38, 0.1);
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  color: rgba(248, 113, 113, 1);
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.job-detail-form-message-success {
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  color: rgba(74, 222, 128, 1);
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
 }
 
 .job-detail-submit-button {

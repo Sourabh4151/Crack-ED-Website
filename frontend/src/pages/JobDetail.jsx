@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { toast } from 'react-toastify'
 import Header from '../components/Header/Header'
 import Footer from '../components/Footer/Footer'
 import { getApiBase } from '../services/crmService'
 import './JobDetail.css'
-import 'react-toastify/dist/ReactToastify.css'
 
 const JobDetail = () => {
   const { id } = useParams()
@@ -50,56 +48,146 @@ const JobDetail = () => {
     email: '',
     resume: null
   })
+  const [errors, setErrors] = useState({
+    fullName: '',
+    mobileNumber: '',
+    email: '',
+    resume: ''
+  })
+  const [submitError, setSubmitError] = useState('')
+  const [submitSuccess, setSubmitSuccess] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
+    let nextValue = value
+
+    // Restrict mobile number to digits only and max 10 characters
+    if (name === 'mobileNumber') {
+      nextValue = value.replace(/\D/g, '').slice(0, 10)
+    }
+
     setFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: nextValue
     }))
+
+    // clear field-specific error and global messages as user edits
+    setErrors(prev => ({
+      ...prev,
+      [name]: ''
+    }))
+    setSubmitError('')
+    setSubmitSuccess('')
   }
 
   const handleFileChange = (e) => {
+    const file = e.target.files[0] || null
     setFormData(prev => ({
       ...prev,
-      resume: e.target.files[0]
+      resume: file
     }))
+    setErrors(prev => ({
+      ...prev,
+      resume: ''
+    }))
+    setSubmitError('')
+    setSubmitSuccess('')
+  }
+
+  const validateFullName = (name) => {
+    const trimmed = name.trim()
+    if (!trimmed) return 'Full name is required.'
+    if (trimmed.length < 3) return 'Full name must be at least 3 characters.'
+    if (!/^[a-zA-Z\s.]+$/.test(trimmed)) {
+      return 'Full name should contain only letters and spaces.'
+    }
+    return ''
+  }
+
+  const validateMobileNumber = (digits) => {
+    if (!digits) return 'Mobile number is required.'
+    if (!/^\d+$/.test(digits)) return 'Mobile number should contain only digits.'
+    if (digits.length !== 10) return 'Mobile number must be exactly 10 digits.'
+    return ''
+  }
+
+  const validateEmail = (email) => {
+    const trimmed = email.trim()
+    if (!trimmed) return 'Email is required.'
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailPattern.test(trimmed)) return 'Please enter a valid email address.'
+    return ''
+  }
+
+  const validateResume = (file) => {
+    if (!file) return 'Resume is required.'
+    const allowedTypes = [
+      'application/pdf',
+      'application/msword',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+    ]
+    if (file.type && !allowedTypes.includes(file.type)) {
+      return 'Only PDF or Word documents are allowed for resume.'
+    }
+    return ''
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if (!formData.resume) {
-      toast.error('Please upload your resume. Resume is required.')
+
+    const fullName = formData.fullName.trim()
+    const mobileDigits = String(formData.mobileNumber).replace(/\D/g, '')
+    const email = formData.email.trim()
+    const resumeFile = formData.resume
+
+    // Field-level validation (inline error messages)
+    const newErrors = {
+      fullName: validateFullName(fullName),
+      mobileNumber: validateMobileNumber(mobileDigits),
+      email: validateEmail(email),
+      resume: validateResume(resumeFile)
+    }
+
+    setErrors(newErrors)
+    setSubmitError('')
+    setSubmitSuccess('')
+
+    if (Object.values(newErrors).some(msg => msg)) {
+      setSubmitError('Please correct the highlighted fields.')
       return
     }
+
     setIsSubmitting(true)
     try {
       const apiBase = getApiBase()
       const body = new FormData()
-      body.append('fullName', formData.fullName.trim())
-      body.append('mobileNumber', String(formData.mobileNumber).replace(/\D/g, '').slice(0, 15))
-      body.append('email', formData.email.trim())
+      body.append('fullName', fullName)
+      body.append('mobileNumber', mobileDigits.slice(0, 10))
+      body.append('email', email)
       body.append('jobId', id || '')
       body.append('jobTitle', job?.title || '')
       body.append('sourcePage', typeof window !== 'undefined' ? (window.location.pathname || '') : '')
-      body.append('resume', formData.resume)
+      body.append('resume', resumeFile)
       const res = await fetch(`${apiBase}/api/job-apply/`, {
         method: 'POST',
         body,
       })
       const data = await res.json().catch(() => ({}))
       if (!res.ok) {
-        toast.error(data?.error || 'Submission failed. Please try again.')
+        setSubmitError(data?.error || 'Submission failed. Please try again.')
+        setSubmitSuccess('')
         return
       }
-      toast.success('Application submitted successfully!')
+      setSubmitSuccess('Application submitted successfully!')
+      setSubmitError('')
       setFormData({ fullName: '', mobileNumber: '', email: '', resume: null })
       const fileInput = document.getElementById('job-apply-resume')
       if (fileInput) fileInput.value = ''
     } catch (err) {
       console.error('Job apply error:', err)
-      toast.error('Something went wrong. Please try again.')
+      setSubmitError('Something went wrong. Please try again.')
+      setSubmitSuccess('')
     } finally {
       setIsSubmitting(false)
     }
@@ -204,7 +292,7 @@ const JobDetail = () => {
               </div>
 
               <div id="apply-form-section" className="job-detail-apply-form-section">
-                <form onSubmit={handleSubmit} className="job-detail-apply-form">
+                <form onSubmit={handleSubmit} className="job-detail-apply-form" noValidate>
                   <h2 className="job-detail-apply-form-title">Apply For This Role</h2>
                   <div className="job-detail-form-separator"></div>
                   <div className="job-detail-form-field">
@@ -214,9 +302,12 @@ const JobDetail = () => {
                       placeholder="Full name"
                       value={formData.fullName}
                       onChange={handleInputChange}
-                      className="job-detail-form-input"
+                      className={`job-detail-form-input ${errors.fullName ? 'job-detail-input-error' : ''}`}
                       required
                     />
+                    {errors.fullName && (
+                      <span className="job-detail-field-error">{errors.fullName}</span>
+                    )}
                   </div>
                   <div className="job-detail-form-field">
                     <input
@@ -225,9 +316,14 @@ const JobDetail = () => {
                       placeholder="Mobile number"
                       value={formData.mobileNumber}
                       onChange={handleInputChange}
-                      className="job-detail-form-input"
+                      className={`job-detail-form-input ${errors.mobileNumber ? 'job-detail-input-error' : ''}`}
+                      inputMode="numeric"
+                      maxLength={10}
                       required
                     />
+                    {errors.mobileNumber && (
+                      <span className="job-detail-field-error">{errors.mobileNumber}</span>
+                    )}
                   </div>
                   <div className="job-detail-form-field">
                     <input
@@ -236,9 +332,12 @@ const JobDetail = () => {
                       placeholder="Email ID"
                       value={formData.email}
                       onChange={handleInputChange}
-                      className="job-detail-form-input"
+                      className={`job-detail-form-input ${errors.email ? 'job-detail-input-error' : ''}`}
                       required
                     />
+                    {errors.email && (
+                      <span className="job-detail-field-error">{errors.email}</span>
+                    )}
                   </div>
                   <div className="job-detail-form-field">
                     <label className="job-detail-upload-label">
@@ -265,7 +364,20 @@ const JobDetail = () => {
                         </span>
                       </div>
                     </label>
+                    {errors.resume && (
+                      <span className="job-detail-field-error">{errors.resume}</span>
+                    )}
                   </div>
+                  {submitError && (
+                    <div className="job-detail-form-message job-detail-form-message-error">
+                      {submitError}
+                    </div>
+                  )}
+                  {submitSuccess && (
+                    <div className="job-detail-form-message job-detail-form-message-success">
+                      {submitSuccess}
+                    </div>
+                  )}
                   <div className="job-detail-form-actions">
                     <button type="submit" className="job-detail-submit-button" disabled={isSubmitting}>
                       {isSubmitting ? 'Submitting...' : 'Submit'}

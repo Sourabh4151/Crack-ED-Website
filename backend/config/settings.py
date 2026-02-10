@@ -56,7 +56,7 @@ ROOT_URLCONF = 'config.urls'
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-# Database: PostgreSQL when DATABASE_URL or DB_* are set, else SQLite
+# Database: PostgreSQL only (DATABASE_URL or DB_* required)
 if os.environ.get('DATABASE_URL'):
     import dj_database_url
     DATABASES = {'default': dj_database_url.config(conn_max_age=600, conn_health_checks=True)}
@@ -72,12 +72,9 @@ elif os.environ.get('DB_NAME'):
         }
     }
 else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
+    raise RuntimeError(
+        'Database not configured. Set DATABASE_URL or DB_NAME (and DB_USER, DB_PASSWORD, etc.) in .env'
+    )
 
 TEMPLATES = [
     {

@@ -1,6 +1,6 @@
 # CRACK-ED Django Backend
 
-Django REST API with SQLite database (default). Optional PostgreSQL support.
+Django REST API with PostgreSQL database.
 
 ## Setup
 
@@ -15,7 +15,7 @@ Django REST API with SQLite database (default). Optional PostgreSQL support.
    pip install -r requirements.txt
    ```
 
-3. **Run migrations** (creates `db.sqlite3`):
+3. **Configure PostgreSQL** (see Database section below), then **run migrations**:
    ```bash
    python manage.py migrate
    ```
@@ -37,14 +37,14 @@ Django REST API with SQLite database (default). Optional PostgreSQL support.
 - **Examples (CRUD):** `GET/POST/PUT/PATCH/DELETE /api/examples/`
 - **Admin:** http://127.0.0.1:8000/admin/
 
-## Database
+## Database (PostgreSQL required)
 
-- **SQLite (default):** If no DB env vars are set, Django uses `backend/db.sqlite3`.
-- **PostgreSQL:** Set either:
-  - **Option 1:** `DATABASE_URL=postgresql://user:password@localhost:5432/dbname` in `.env`
-  - **Option 2:** `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `DB_HOST` (optional, default `localhost`), `DB_PORT` (optional, default `5432`) in `.env`
+Set either:
 
-  Then create the DB (e.g. `createdb cracked_db`), run `pip install -r requirements.txt` (includes `psycopg2-binary`), and run `python manage.py migrate`.
+- **Option 1:** `DATABASE_URL=postgresql://user:password@localhost:5432/dbname` in `.env`
+- **Option 2:** `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `DB_HOST` (optional, default `localhost`), `DB_PORT` (optional, default `5432`) in `.env`
+
+Then create the DB (e.g. `createdb cracked_db`), run `pip install -r requirements.txt` (includes `psycopg2-binary`), and run `python manage.py migrate`.
 
 ## HR login (Job Applications only)
 

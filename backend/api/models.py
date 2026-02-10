@@ -24,6 +24,11 @@ class QuizSubmission(models.Model):
     email = models.EmailField()
     mobile = models.CharField(max_length=20)
     program = models.CharField(max_length=255)
+    source_page = models.CharField(
+        max_length=500,
+        blank=True,
+        help_text='Page path where the quiz was taken (e.g. /, /career-quiz)',
+    )
     payload = models.JSONField(default=dict, blank=True)  # full quiz payload
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -61,13 +66,19 @@ class JobListing(models.Model):
 
 class Lead(models.Model):
     """Lead submission (submit-lead from forms/CRM flow)."""
+
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     email = models.EmailField()
     mobile = models.CharField(max_length=20)
     program = models.CharField(max_length=255)
     center = models.CharField(max_length=50, blank=True)
-    source_page = models.CharField(max_length=500, blank=True, help_text='Page path where the lead submitted (e.g. /, /about)')
+    state = models.CharField(max_length=100, blank=True)
+    source_page = models.CharField(
+        max_length=500,
+        blank=True,
+        help_text='Page path where the lead submitted (e.g. /, /about)',
+    )
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

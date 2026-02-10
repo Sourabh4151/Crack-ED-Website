@@ -79,6 +79,7 @@ export const submitLeadToCRM = async (formData) => {
     mobile,
     program,
     center,
+    state: formData?.state || '',
     sourcePage,
   }
 
@@ -167,6 +168,7 @@ export const submitQuizLeadToCRM = async (formData) => {
     mobile: formData.mobile,
     program: formData.program,
     center,
+    state: formData.state || '',
     sourcePage,
   }
 

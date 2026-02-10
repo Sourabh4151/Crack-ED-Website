@@ -71,12 +71,11 @@ const Footer = () => {
     <footer className="footer-section">
       <div className="footer-container">
         <div className="footer-content">
-          {/* Brand and Copyright Section */}
+          {/* Brand Section */}
           <div className="footer-brand">
             <Link to="/">
               <img src={logo} alt="CRACK-ED" className="footer-logo" />
             </Link>
-            <p className="footer-copyright">© 2026 CRACK-ED. All rights reserved.</p>
           </div>
 
           {/* Grouped Sections: Quick Links, Job-Linked Programs, and Contact */}
@@ -183,13 +182,24 @@ const Footer = () => {
                   </a>
                 </div>
               </div>
-              {/* Mobile Copyright Section */}
-              <div className="footer-mobile-copyright">
-                <hr className="footer-divider" />
-                <p className="footer-copyright-mobile">© 2026 CRACK-ED. All rights reserved.</p>
-              </div>
             </div>
           </div>
+        </div>
+        <div className="footer-bottom-divider" />
+        <div className="footer-bottom-bar">
+          <p className="footer-copyright">
+            © 2026 CRACK-ED. All rights reserved.
+          </p>
+          <div className="footer-bottom-links">
+            <Link to="/refund-policy">Refund Policy</Link>
+            <Link to="/privacy-policy">Privacy Policy</Link>
+            <Link to="/terms-conditions">Terms &amp; Conditions</Link>
+          </div>
+        </div>
+        {/* Mobile Copyright Section */}
+        <div className="footer-mobile-copyright">
+          <hr className="footer-divider" />
+          <p className="footer-copyright-mobile">© 2026 CRACK-ED. All rights reserved.</p>
         </div>
       </div>
     </footer>

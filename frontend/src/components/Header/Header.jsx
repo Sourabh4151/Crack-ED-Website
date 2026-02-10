@@ -25,6 +25,10 @@ const Header = () => {
     if (path.startsWith('/resources/blog/')) return document.querySelector('.blog-post-scroll')
     if (path === '/careers') return document.querySelector('.careers-scroll-wrapper')
     if (path.startsWith('/careers/job/')) return document.querySelector('.job-detail-page')
+    if (path === '/influencer') return document.querySelector('.influencer-page')
+    if (path === '/refund-policy') return document.querySelector('.refund-page')
+    if (path === '/privacy-policy') return document.querySelector('.privacy-page')
+    if (path === '/terms-conditions') return document.querySelector('.terms-page')
     return null
   }
 
