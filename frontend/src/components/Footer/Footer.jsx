@@ -161,7 +161,7 @@ const Footer = () => {
                     <svg className="contact-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M16.6667 3.33333H3.33333C2.41286 3.33333 1.66667 4.07952 1.66667 5V15C1.66667 15.9205 2.41286 16.6667 3.33333 16.6667H16.6667C17.5871 16.6667 18.3333 15.9205 18.3333 15V5C18.3333 4.07952 17.5871 3.33333 16.6667 3.33333ZM16.6667 5L10 9.58333L3.33333 5H16.6667ZM3.33333 15V6.66667L10 11.25L16.6667 6.66667V15H3.33333Z" fill="white"/>
                     </svg>
-                    <span>crack-ed@gimarsoft.com</span>
+                    <span>crack-ed@girnarsoft.com</span>
                   </div>
                 </div>
               </div>
