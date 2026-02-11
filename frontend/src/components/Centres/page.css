@@ -111,7 +111,7 @@
   padding: 8px;
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(26, 158, 183, 1);
+  border: 1px solid transparent; /* remove blue outline around icon wrapper */
 }
 
 .centres-item-svg {
@@ -131,7 +131,8 @@
   font-weight: 500;       /* Figma: weight 500 (Medium) */
   line-height: 24px;      /* Figma: line height 24px */
   color: rgba(98, 203, 228, 1); /* Figma: teal text color */
-  transform: translateY(2px); /* slight vertical tweak inside pin */
+  /* slight nudge up so it looks optically centred inside the pin */
+  transform: translateY(-1px);
 }
 
 .centres-item-label {

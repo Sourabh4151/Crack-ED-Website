@@ -5,16 +5,21 @@ import frame343Icon from "../../assets/Frame 343.svg";
 
 const centres = [
   {
+    name: "Ahmedabad",
+    details:
+      "5th Floor, Gala Argos, Netaji Rd, Ellisbridge, Ahmedabad, Gujarat 380006",
+    mapQuery:
+      "Gala Argos, Netaji Rd, Ellisbridge, Ahmedabad, Gujarat 380006, India",
+  },
+  {
+    name: "Bangalore",
+    details: "DBS House, 26 Cunningham Road, Bangalore – 560052",
+    mapQuery: "DBS House, 26 Cunningham Road, Bengaluru, Karnataka 560052",
+  },
+  {
     name: "Gurgaon",
     details: "7th Floor Imperia Mindspace, Sector 62, Gurgaon",
     mapQuery: "Imperia Mindspace, Sector 62, Gurgaon, Haryana, India",
-  },
-  {
-    name: "Kolkata",
-    details:
-      "9th Floor, Anaya Chambers, GN 38/5, GN Block, Sector V, Bidhannagar, Kolkata, West Bengal 700091",
-    mapQuery:
-      "Anaya Chambers, GN 38/5, GN Block, Sector V, Bidhannagar, Kolkata, West Bengal 700091, India",
   },
   {
     name: "Hyderabad",
@@ -24,6 +29,20 @@ const centres = [
       "Manjeera Trinity Corporate, JNTU Hitech City Road, Kukatpally, Hyderabad 500072, India",
   },
   {
+    name: "Indore - 1",
+    details:
+      "14 DF, Scheme No 74C, Indore, Madhya Pradesh 452010, Estancia ProWorking Space",
+    mapQuery:
+      "Estancia ProWorking Space, Scheme No 74C, Indore, Madhya Pradesh 452010",
+  },
+  {
+    name: "Indore - 2",
+    details:
+      "Virtual Co-working Space, 101 1st Floor, Platinum Plaza, PU4 Scheme No 54, Vijay Nagar, Indore, Madhya Pradesh 452010",
+    mapQuery:
+      "Platinum Plaza, Scheme No 54, Vijay Nagar, Indore, Madhya Pradesh 452010, India",
+  },
+  {
     name: "Jaipur",
     details:
       "372-B, Adarsh Nagar, Near Bhag Singh Chowk, Jaipur, Rajasthan 302004",
@@ -31,11 +50,11 @@ const centres = [
       "372-B, Adarsh Nagar, Near Bhag Singh Chowk, Jaipur, Rajasthan 302004",
   },
   {
-    name: "Indore",
+    name: "Kolkata",
     details:
-      "14 DF, Scheme No 74C, Indore, Madhya Pradesh 452010, Estancia ProWorking Space",
+      "9th Floor, Anaya Chambers, GN 38/5, GN Block, Sector V, Bidhannagar, Kolkata, West Bengal 700091",
     mapQuery:
-      "Estancia ProWorking Space, Scheme No 74C, Indore, Madhya Pradesh 452010",
+      "Anaya Chambers, GN 38/5, GN Block, Sector V, Bidhannagar, Kolkata, West Bengal 700091, India",
   },
   {
     name: "Mumbai",
@@ -43,25 +62,6 @@ const centres = [
       "5th Floor, B Wing, Community Co-working Space, Ackruti Trade Centre",
     mapQuery:
       "Ackruti Trade Centre, MIDC, Andheri East, Mumbai, Maharashtra, India",
-  },
-  {
-    name: "Bangalore",
-    details: "DBS House, 26 Cunningham Road, Bangalore – 560052",
-    mapQuery: "DBS House, 26 Cunningham Road, Bengaluru, Karnataka 560052",
-  },
-  {
-    name: "Ahmedabad",
-    details:
-      "5th Floor, Gala Argos, Netaji Rd, Ellisbridge, Ahmedabad, Gujarat 380006",
-    mapQuery:
-      "Gala Argos, Netaji Rd, Ellisbridge, Ahmedabad, Gujarat 380006, India",
-  },
-  {
-    name: "Indore",
-    details:
-      "Virtual Co-working Space, 101 1st Floor, Platinum Plaza, PU4 Scheme No 54, Vijay Nagar, Indore, Madhya Pradesh 452010",
-    mapQuery:
-      "Platinum Plaza, Scheme No 54, Vijay Nagar, Indore, Madhya Pradesh 452010, India",
   },
 ];
 
