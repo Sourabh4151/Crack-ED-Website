@@ -93,17 +93,18 @@
   transition: opacity 0.3s ease;
 }
 
-.stat-card:hover::after {
+/* GSAP ScrollTrigger only: no hover - class .stat-card--at-top toggled by GSAP */
+.stat-card.stat-card--at-top::after {
   opacity: 0;
 }
 
-.stat-card:hover {
+.stat-card.stat-card--at-top {
   transform: translateY(-4px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
-.stat-card:hover .stat-value,
-.stat-card:hover .stat-description {
+.stat-card.stat-card--at-top .stat-value,
+.stat-card.stat-card--at-top .stat-description {
   opacity: 0.3;
   transition: opacity 0.3s ease;
 }
@@ -174,7 +175,7 @@
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-.stat-card:hover .stat-hover-text {
+.stat-card.stat-card--at-top .stat-hover-text {
   transform: translateY(-50%);
   opacity: 1;
 }
@@ -246,12 +247,6 @@
   /* Hide gradient overlay on mobile - all content always visible */
   .stat-card::after {
     display: none;
-  }
-
-  /* Keep value and description fully visible on mobile (no hover fade) */
-  .stat-card:hover .stat-value,
-  .stat-card:hover .stat-description {
-    opacity: 1;
   }
 
   .stat-icon {

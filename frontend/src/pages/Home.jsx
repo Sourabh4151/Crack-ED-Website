@@ -9,6 +9,7 @@ import CareerForward from '../components/CareerForward/CareerForward'
 import './Home.css'
 import Whychooseus from '../components/whychoseus/page'
 import Analysis from '../components/analysis/page'
+import Centres from '../components/Centres/page'
 import Media from '../components/mediasection/page'
 import Analyse from '../components/analyse/page'
 import EnquireSection from '../components/EnquireSection/EnquireSection'
@@ -27,6 +28,7 @@ const Home = () => {
       <Analysis />
       <Analyse />
       <Stats />
+      <Centres />
       <Media />
       <Partners />
       <Testimonial />

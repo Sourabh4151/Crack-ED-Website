@@ -3,7 +3,8 @@
     background-color: #000;
     padding: 100px 20px;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
+    align-items: center;
     min-height: 100vh;
 }
 
@@ -12,15 +13,16 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
 }
 
 .media-mentions-section .media-header,
 .media-section.media-mentions-section .media-header {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 24px;
+    text-align: center;
 }
 
 .media-mentions-section .media-headline,
@@ -33,7 +35,7 @@
 .media-mentions-section .stats-header,
 .media-section.media-mentions-section .stats-header {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     margin: 0;
     margin-bottom: 24px;
     padding: 0;
@@ -56,7 +58,7 @@
 .media-section.media-mentions-section .slider-wrapper {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: center;
     gap: 24px;
 }
 
@@ -143,13 +145,13 @@
     font-style: normal;
 }
 
-/* Override partners .slider-controls position:absolute - keep controls below container, right-aligned */
+/* Override partners .slider-controls position:absolute - keep controls below container, centered */
 .media-mentions-section .slider-controls,
 .media-section.media-mentions-section .slider-controls {
     position: static !important;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
     gap: 25px;
     margin-top: 0;
 }
@@ -162,7 +164,7 @@
         padding: 67px 120px;
         background-color: rgba(0, 0, 0, 1);
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
         gap: 10px;
     }
 
@@ -173,17 +175,23 @@
         gap: 40px;
         max-width: 1440px;
         width: 100%;
+        margin: 0 auto;
+        padding-left: 0;
+        padding-right: 0;
     }
 
-    /* Header: badge + headline - 24px gap */
+    /* Header: same width as slider (1200px) so badge/headline align with image left edge */
     .media-mentions-section .media-header,
     .media-section.media-mentions-section .media-header {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         gap: 24px;
-        width: 100%;
-        max-width: 722px;
+        width: 1200px;
+        max-width: 100%;
+        padding: 0;
+        margin: 0;
+        text-align: left;
     }
 
     .media-mentions-section .media-headline,
@@ -199,13 +207,14 @@
         padding: 0;
     }
 
-    /* Badge: override partners .stats-header margin-bottom: 50px - zero gap between badge and headline */
+    /* Badge: no left padding/margin so it aligns with image */
     .media-mentions-section .stats-header,
     .media-section.media-mentions-section .stats-header {
         margin: 0 !important;
         padding: 0 !important;
         gap: 0 !important;
         justify-content: flex-start;
+        width: 100%;
     }
 
     .media-mentions-section .stats-badge,
@@ -231,7 +240,7 @@
     .media-section.media-mentions-section .slider-wrapper {
         width: 1200px;
         max-width: 100%;
-        align-items: flex-end;
+        align-items: flex-start;
         gap: 48px;
     }
 
@@ -247,6 +256,13 @@
         align-items: inherit;
         width: 100%;
         gap: 48px;
+    }
+
+    /* Slider controls (arrows + counter) on the right end of the card on desktop */
+    .media-mentions-section .slider-controls,
+    .media-section.media-mentions-section .slider-controls {
+        justify-content: flex-end;
+        width: 100%;
     }
 
     /* Frame 394: 1200×440px, 16px radius, bg rgba(13,13,13,1) */
@@ -400,10 +416,10 @@
 
 /* Mobile styles (768px and below) - Design specs */
 @media (max-width: 768px) {
-    /* Frame 478: Section - padding 16 top/bottom, 8 left/right */
+    /* Section: no top padding so card image sits higher; 8 left/right */
     .media-mentions-section,
     .media-section.media-mentions-section {
-        padding: 16px 8px 60px;
+        padding: 0 8px 60px;
         margin-top: 0;
         min-height: auto;
         align-items: center;
@@ -450,8 +466,9 @@
     .media-mentions-section .media-header,
     .media-section.media-mentions-section .media-header {
         align-items: center;
-        margin-top: 24px;
+        margin-top: 0;
         gap: 8px;
+        padding-top: 12px;
     }
 
     /* Show headline on mobile - design specs: Montserrat 500, 18px, 100% line-height, center */
@@ -469,7 +486,7 @@
         padding: 0;
     }
 
-    /* Frame 394: Slider card - 304px width, 510px fixed height, 16px radius, 24px gap */
+    /* Frame 394: Slider card - 304px width, 510px fixed height, 16px radius, no padding so image touches top */
     .media-mentions-section .slider-card,
     .media-section.media-mentions-section .slider-card {
         background: rgba(13, 13, 13, 1);
@@ -480,24 +497,30 @@
         min-height: 510px;
         max-height: 510px;
         margin: 0 auto;
+        padding: 0;
+        overflow: hidden;
     }
 
     .media-mentions-section .mainsection123,
     .media-section.media-mentions-section .mainsection123 {
         flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
         height: 510px;
         min-height: 510px;
         gap: 24px;
         padding: 0;
+        margin: 0;
     }
 
-    /* Image - fixed height for consistent size across all cards on mobile */
+    /* Image - fixed height, flush to top of card, no gap above */
     .media-mentions-section .sec11111,
     .media-section.media-mentions-section .sec11111 {
         width: 100%;
         height: 270px;
         min-height: 270px;
         max-height: 270px;
+        flex-shrink: 0;
         padding: 0;
         margin: 0;
         border-radius: 16px 16px 0 0;
@@ -509,7 +532,8 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        object-position: center;
+        object-position: top center;
+        display: block;
         border-radius: 16px 16px 0 0;
     }
 
@@ -560,7 +584,7 @@
         width: 100%;
     }
 
-    /* Mobile: Horizontal scroll of all cards */
+    /* Mobile: Horizontal scroll of all cards; padding centers first card */
     .media-mentions-section .mobile-cards-scroll,
     .media-section.media-mentions-section .mobile-cards-scroll {
         display: flex;
@@ -573,7 +597,10 @@
         scrollbar-width: none;
         -ms-overflow-style: none;
         padding-bottom: 8px;
+        padding-left: max(8px, calc((100% - 304px) / 2));
+        padding-right: max(8px, calc((100% - 304px) / 2));
         width: 100%;
+        box-sizing: border-box;
     }
 
     .media-mentions-section .mobile-cards-scroll::-webkit-scrollbar,

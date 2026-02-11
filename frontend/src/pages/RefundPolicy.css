@@ -94,5 +94,14 @@
     font-size: 14px;
     line-height: 22px;
   }
+
+  /* Allow "Reach out to..." sentence to wrap on mobile so it doesn't get cut off */
+  .refund-nowrap {
+    white-space: normal;
+  }
+
+  .refund-email {
+    white-space: normal;
+  }
 }
 
