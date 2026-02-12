@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import Header from '../components/Header/Header'
 import Footer from '../components/Footer/Footer'
-import { getApiBase } from '../services/crmService'
+import { getApiBase, getUtmParams, isBackendUnreachable, BACKEND_DOWN_MESSAGE } from '../services/crmService'
 import './JobDetail.css'
 
 const JobDetail = () => {
@@ -168,6 +168,10 @@ const JobDetail = () => {
       body.append('jobId', id || '')
       body.append('jobTitle', job?.title || '')
       body.append('sourcePage', typeof window !== 'undefined' ? (window.location.pathname || '') : '')
+      const utmParams = getUtmParams()
+      if (Object.keys(utmParams).length > 0) {
+        body.append('utmParams', JSON.stringify(utmParams))
+      }
       body.append('resume', resumeFile)
       const res = await fetch(`${apiBase}/api/job-apply/`, {
         method: 'POST',
@@ -186,7 +190,7 @@ const JobDetail = () => {
       if (fileInput) fileInput.value = ''
     } catch (err) {
       console.error('Job apply error:', err)
-      setSubmitError('Something went wrong. Please try again.')
+      setSubmitError(isBackendUnreachable(err) ? BACKEND_DOWN_MESSAGE : 'Something went wrong. Please try again.')
       setSubmitSuccess('')
     } finally {
       setIsSubmitting(false)

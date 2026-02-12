@@ -34,7 +34,7 @@ class ExampleAdmin(admin.ModelAdmin):
 
 @admin.register(QuizSubmission)
 class QuizSubmissionAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'email', 'mobile', 'program', 'source_page', 'created_at']
+    list_display = ['id', 'name', 'email', 'mobile', 'program', 'utm_source', 'utm_medium', 'utm_campaign', 'source_page', 'created_at']
     search_fields = ['name', 'email', 'program', 'source_page']
 
 
@@ -59,7 +59,7 @@ class LeadAdminForm(forms.ModelForm):
 @admin.register(Lead)
 class LeadAdmin(admin.ModelAdmin):
     form = LeadAdminForm
-    list_display = ['id', 'first_name', 'last_name', 'email', 'mobile', 'program', 'state', 'source_page', 'created_at']
+    list_display = ['id', 'first_name', 'last_name', 'email', 'mobile', 'program', 'state', 'utm_source', 'utm_medium', 'utm_campaign', 'source_page', 'created_at']
     search_fields = ['first_name', 'last_name', 'email', 'program', 'state', 'source_page']
     change_form_template = 'admin/api/lead/change_form.html'
 
@@ -76,7 +76,7 @@ class LeadAdmin(admin.ModelAdmin):
 
 @admin.register(JobApplication)
 class JobApplicationAdmin(admin.ModelAdmin):
-    list_display = ['id', 'full_name', 'email', 'mobile', 'job_id', 'job_title', 'resume_download', 'source_page', 'created_at']
+    list_display = ['id', 'full_name', 'email', 'mobile', 'job_id', 'job_title', 'resume_download', 'utm_source', 'utm_medium', 'utm_campaign', 'source_page', 'created_at']
     search_fields = ['full_name', 'email', 'job_id', 'job_title']
     list_filter = ['created_at']
 

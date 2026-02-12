@@ -1,17 +1,11 @@
 /**
- * CRM Service - Handles form submissions to CRM
- * 
- * IMPORTANT SECURITY NOTE:
- * For production, this should call YOUR backend API endpoint, not the CRM directly.
- * Exposing AuthToken in frontend code is a security risk.
- * 
- * Option 1 (RECOMMENDED): Call your backend API
- *   - Frontend -> Your Backend API -> CRM
- *   - AuthToken stays secure on backend
- * 
- * Option 2 (NOT RECOMMENDED): Direct call from frontend
- *   - Frontend -> CRM (AuthToken exposed in code)
- *   - Only use for development/testing
+ * CRM Service - Handles form submissions via your backend only.
+ *
+ * Flow: Frontend -> Your Backend API -> (DB + Extraaedge CRM).
+ * The backend holds the CRM auth token (EXTRAEDGE_AUTH_TOKEN); the frontend never calls the CRM directly.
+ *
+ * submitLeadToCRM / submitQuizLeadToCRM: use these (they call your backend).
+ * submitLeadToCRMDirect / submitQuizLeadToCRMDirect: deprecated; only for local/dev fallback if needed.
  */
 
 // Program to Center mapping
@@ -35,6 +29,83 @@ const PROGRAM_TO_CENTER_MAP = {
 
 /** Base URL for our Django backend (set in .env as VITE_API_URL, or use proxy with '') */
 export const getApiBase = () => (typeof import.meta !== 'undefined' && import.meta.env?.VITE_API_URL) || ''
+
+/** Message shown when backend is not running or unreachable */
+export const BACKEND_DOWN_MESSAGE = 'Backend is not running or unreachable. Your response was not saved. Please try again later.'
+
+/**
+ * Returns true if the error is due to backend/network being unreachable (e.g. backend stopped).
+ */
+export const isBackendUnreachable = (error) => {
+  if (!error) return false
+  const msg = (error.message || '').toLowerCase()
+  if (error.name === 'TypeError' && (msg.includes('fetch') || msg.includes('network'))) return true
+  if (msg.includes('failed to fetch') || msg.includes('network error')) return true
+  return false
+}
+
+/** Standard UTM parameter names */
+const UTM_PARAM_NAMES = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content']
+
+/**
+ * Get UTM parameters from the current URL. If present, they are stored in sessionStorage
+ * so they persist across navigation (e.g. user lands with ?utm_source=google then submits later).
+ * @returns {{ [key: string]: string }} Object with utm_* keys and string values (only keys that are set).
+ */
+export const getUtmParams = () => {
+  if (typeof window === 'undefined') return {}
+  const params = new URLSearchParams(window.location.search)
+  const utm = {}
+  for (const name of UTM_PARAM_NAMES) {
+    const value = params.get(name)
+    if (value != null && value.trim() !== '') utm[name] = String(value).trim().slice(0, 500)
+  }
+  if (Object.keys(utm).length > 0) {
+    try {
+      sessionStorage.setItem('crack_ed_utm', JSON.stringify(utm))
+    } catch (_) {}
+  }
+  const stored = (() => {
+    try {
+      const raw = sessionStorage.getItem('crack_ed_utm')
+      return raw ? JSON.parse(raw) : {}
+    } catch (_) {
+      return {}
+    }
+  })()
+  return { ...stored, ...utm }
+}
+
+/**
+ * Read only stored UTM params from sessionStorage (no URL read, no write).
+ * Used when preserving UTM in the URL on navigation.
+ * @returns {{ [key: string]: string }}
+ */
+export const getStoredUtmParams = () => {
+  if (typeof window === 'undefined') return {}
+  try {
+    const raw = sessionStorage.getItem('crack_ed_utm')
+    return raw ? JSON.parse(raw) : {}
+  } catch (_) {
+    return {}
+  }
+}
+
+/**
+ * Build search string that merges current search with stored UTM params (stored wins for utm_*).
+ * Preserves non-UTM query params from current URL.
+ */
+export const buildSearchWithUtm = (currentSearch, storedUtm) => {
+  if (!storedUtm || Object.keys(storedUtm).length === 0) return currentSearch
+  const current = new URLSearchParams(currentSearch)
+  for (const [key, value] of Object.entries(storedUtm)) {
+    if (key.startsWith('utm_') && value != null && String(value).trim() !== '') {
+      current.set(key, String(value).trim().slice(0, 500))
+    }
+  }
+  const str = current.toString()
+  return str ? `?${str}` : ''
+}
 
 /**
  * Split full name into first and last name
@@ -72,15 +143,18 @@ export const submitLeadToCRM = async (formData) => {
   const mobile = (formData?.mobileNumber ?? formData?.mobile ?? '').toString().replace(/\D/g, '').slice(0, 15)
 
   const sourcePage = typeof window !== 'undefined' ? (window.location.pathname || window.location.href || '') : ''
+  const utmParams = getUtmParams()
   const payload = {
+    fullName: fullName || undefined,
     firstName: firstName || '—',
-    lastName: lastName || '—',
+    lastName: lastName || '', // leave empty when no last name so CRM shows blank, not "—"
     email,
     mobile,
     program,
     center,
     state: formData?.state || '',
     sourcePage,
+    ...(Object.keys(utmParams).length > 0 ? { utmParams } : {}),
   }
 
   const apiBase = getApiBase() // use same base for consistency
@@ -160,6 +234,7 @@ export const submitQuizLeadToCRM = async (formData) => {
   const { firstName, lastName } = splitName(formData.name)
   const center = getCenterByProgram(formData.program)
   const sourcePage = typeof window !== 'undefined' ? (window.location.pathname || window.location.href || '') : ''
+  const utmParams = getUtmParams()
 
   const payload = {
     firstName,
@@ -170,6 +245,7 @@ export const submitQuizLeadToCRM = async (formData) => {
     center,
     state: formData.state || '',
     sourcePage,
+    ...(Object.keys(utmParams).length > 0 ? { utmParams } : {}),
   }
 
   const url = `${getApiBase()}/api/submit-lead/`

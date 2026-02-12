@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './EnquireModal.css'
-import { submitLeadToCRMDirect, submitLeadToCRM } from '../../services/crmService'
+import { submitLeadToCRM, isBackendUnreachable, BACKEND_DOWN_MESSAGE } from '../../services/crmService'
 
 const EnquireModal = ({ isOpen, onClose }) => {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -231,18 +231,8 @@ const EnquireModal = ({ isOpen, onClose }) => {
     setSubmitSuccess(false)
 
     try {
-      // Save to our Django backend first (so it appears in Django admin)
-      try {
-        await submitLeadToCRM(formData)
-      } catch (backendErr) {
-        console.warn('Could not save lead to backend:', backendErr)
-      }
-      // Call CRM API directly
-      await submitLeadToCRMDirect(formData)
-      
+      await submitLeadToCRM(formData)
       setSubmitSuccess(true)
-      
-      // Reset form and errors
       setFormData({
         fullName: '',
         mobileNumber: '',
@@ -257,15 +247,13 @@ const EnquireModal = ({ isOpen, onClose }) => {
         state: '',
         program: ''
       })
-      
-      // Close modal after 1.5 seconds
       setTimeout(() => {
         onClose()
         setSubmitSuccess(false)
       }, 1500)
     } catch (error) {
       console.error('Submission error:', error)
-      setSubmitError('Failed to submit. Please try again.')
+      setSubmitError(isBackendUnreachable(error) ? BACKEND_DOWN_MESSAGE : 'Failed to submit. Please try again.')
     } finally {
       setIsSubmitting(false)
     }

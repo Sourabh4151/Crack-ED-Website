@@ -106,7 +106,7 @@
 .stat-card.stat-card--at-top .stat-value,
 .stat-card.stat-card--at-top .stat-description {
   opacity: 0.3;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.6s ease;
 }
 
 .stat-icon {
@@ -172,7 +172,7 @@
   right: 20px;
   transform: translateY(calc(50% + 100px));
   opacity: 0;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition: transform 0.7s ease, opacity 0.7s ease;
 }
 
 .stat-card.stat-card--at-top .stat-hover-text {

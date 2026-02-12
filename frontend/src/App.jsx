@@ -15,12 +15,14 @@ import RefundPolicy from './pages/RefundPolicy'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import TermsConditions from './pages/TermsConditions'
 import ScrollToTop from './components/ScrollToTop/ScrollToTop'
+import PreserveUtmParams from './components/PreserveUtmParams/PreserveUtmParams'
 import './App.css'
 
 function App() {
   return (
     <Router>
       <ScrollToTop />
+      <PreserveUtmParams />
       <div className="App">
         <ToastContainer
           position="top-right"

@@ -29,6 +29,14 @@ class QuizSubmission(models.Model):
         blank=True,
         help_text='Page path where the quiz was taken (e.g. /, /career-quiz)',
     )
+    utm_params = models.JSONField(
+        default=dict,
+        blank=True,
+        help_text='UTM parameters from URL (utm_source, utm_medium, utm_campaign, etc.)',
+    )
+    utm_source = models.CharField(max_length=500, blank=True)
+    utm_medium = models.CharField(max_length=500, blank=True)
+    utm_campaign = models.CharField(max_length=500, blank=True)
     payload = models.JSONField(default=dict, blank=True)  # full quiz payload
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -79,6 +87,14 @@ class Lead(models.Model):
         blank=True,
         help_text='Page path where the lead submitted (e.g. /, /about)',
     )
+    utm_params = models.JSONField(
+        default=dict,
+        blank=True,
+        help_text='UTM parameters from URL (utm_source, utm_medium, utm_campaign, etc.)',
+    )
+    utm_source = models.CharField(max_length=500, blank=True)
+    utm_medium = models.CharField(max_length=500, blank=True)
+    utm_campaign = models.CharField(max_length=500, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -107,6 +123,14 @@ class JobApplication(models.Model):
     job_id = models.CharField(max_length=50, blank=True, help_text='Job listing ID from URL')
     job_title = models.CharField(max_length=255, blank=True)
     source_page = models.CharField(max_length=500, blank=True)
+    utm_params = models.JSONField(
+        default=dict,
+        blank=True,
+        help_text='UTM parameters from URL (utm_source, utm_medium, utm_campaign, etc.)',
+    )
+    utm_source = models.CharField(max_length=500, blank=True)
+    utm_medium = models.CharField(max_length=500, blank=True)
+    utm_campaign = models.CharField(max_length=500, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { submitQuizLeadToCRMDirect, getApiBase } from '../../services/crmService';
+import { getApiBase, getUtmParams, isBackendUnreachable, BACKEND_DOWN_MESSAGE } from '../../services/crmService';
 import 'react-toastify/dist/ReactToastify.css';
 
 // Program fees (₹) - used for tie-breaking when counts are equal
@@ -257,18 +257,14 @@ const CareerQuiz = ({ showOnlyTopProgram = false }) => {
       typeof window !== 'undefined'
         ? (window.location.pathname || window.location.href || '')
         : '';
-    const payload = { ...formData, selections, bestFit: perfectFit, sourcePage };
-
-    try {
-      await submitQuizLeadToCRMDirect({
-        name: formData.name,
-        email: formData.email,
-        mobile: formData.mobile,
-        program: perfectFit,
-      });
-    } catch (crmErr) {
-      console.warn('CRM submission failed (results still shown):', crmErr);
-    }
+    const utmParams = getUtmParams();
+    const payload = {
+      ...formData,
+      selections,
+      bestFit: perfectFit,
+      sourcePage,
+      ...(Object.keys(utmParams).length > 0 ? { utmParams } : {}),
+    };
 
     try {
       const apiBase = getApiBase();
@@ -286,7 +282,11 @@ const CareerQuiz = ({ showOnlyTopProgram = false }) => {
       }
     } catch (err) {
       console.error('Quiz submit error:', err);
-      toast.info("Showing results...");
+      if (isBackendUnreachable(err)) {
+        toast.error(BACKEND_DOWN_MESSAGE);
+      } else {
+        toast.info("Showing results...");
+      }
     } finally {
       setView('result');
       setLoading(false);
