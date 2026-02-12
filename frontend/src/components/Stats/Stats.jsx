@@ -40,14 +40,14 @@ const Stats = () => {
       icon: icon1,
       value: "12+ Programs",
       description: "A growing portfolio of job-linked programs across high-demand industries.",
-      hoverText: "BUILT TO SCALE"
+      hoverText: "CROSS SECTOR CAREERS"
     },
     {
       id: 2,
       icon: icon2,
       value: "Avg CTC of Rs 3.2 LPA",
       description: "Our learners don't just get trained, they get paid what they deserve.",
-      hoverText: "CAREERS THAT PAY"
+      hoverText: "GROWTH THAT PAYS"
     },
     {
       id: 3,
@@ -61,7 +61,7 @@ const Stats = () => {
       icon: icon4,
       value: "9 Centers",
       description: "A real, on-ground presence where training and hiring actually happens.",
-      hoverText: "NATIONWIDE FOOTPRINT"
+      hoverText: "NATION WIDE FOOTPRINT"
     }
   ]
 
