@@ -138,3 +138,31 @@ class JobApplication(models.Model):
 
     def __str__(self):
         return f"{self.full_name} – {self.job_title or self.job_id or 'Job'}"
+
+
+def bid_episode_thumbnail_path(instance, filename):
+    """Store BID episode thumbnails as bid_episodes/YYYY-MM-DD/unique_originalname."""
+    import uuid
+    from django.utils import timezone
+    date_str = timezone.now().strftime('%Y-%m-%d')
+    safe_name = (filename or 'thumb').replace(' ', '_')
+    unique = uuid.uuid4().hex[:8]
+    return f'bid_episodes/{date_str}/{unique}_{safe_name}'
+
+
+class BIDEpisode(models.Model):
+    """Badhta India Dekho featured episode (bigLeft slot). Managed from Django admin."""
+    title = models.CharField(max_length=500)
+    published_date = models.DateField(help_text='Date shown on the episode card (e.g. January 25, 2026)')
+    youtube_url = models.URLField(max_length=500, help_text='Full YouTube watch URL (e.g. https://www.youtube.com/watch?v=...)')
+    thumbnail = models.ImageField(upload_to=bid_episode_thumbnail_path, help_text='Image for the big left episode card')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-published_date', '-created_at']
+        verbose_name = 'BID Episode'
+        verbose_name_plural = 'BID Episodes'
+
+    def __str__(self):
+        return self.title[:60] + ('…' if len(self.title) > 60 else '')

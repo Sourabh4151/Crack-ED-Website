@@ -48,6 +48,9 @@ const PROGRAMS = [
     link: '/programs',
     links: [
       { label: 'Cashier / Teller', href: 'https://udaan.crack-ed.com/portal' },
+      { label: 'Virtual Relationship Manager', href: 'https://udaanvrm.crack-ed.com' },
+      { label: 'Relationship Manager', href: 'https://udaanrm.crack-ed.com' },
+      { label: 'Business Loan Associate', href: 'https://udaanbusiness.crack-ed.com' },
     ],
   },
   {

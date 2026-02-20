@@ -8,7 +8,7 @@ from django.contrib import admin
 from django.http import FileResponse, Http404
 from django.urls import path, reverse
 from django.utils.html import format_html
-from .models import Example, QuizSubmission, Lead, JobApplication, JobListing
+from .models import Example, QuizSubmission, Lead, JobApplication, JobListing, BIDEpisode
 from .constants import PROGRAM_CHOICES, PROGRAM_TO_CENTER, get_center_for_program
 
 
@@ -114,3 +114,22 @@ class JobApplicationAdmin(admin.ModelAdmin):
             view_url,
             download_url
         )
+
+
+@admin.register(BIDEpisode)
+class BIDEpisodeAdmin(admin.ModelAdmin):
+    list_display = ['id', 'title_short', 'published_date', 'youtube_url', 'has_thumbnail', 'created_at']
+    list_filter = ['published_date', 'created_at']
+    search_fields = ['title']
+    date_hierarchy = 'published_date'
+    fieldsets = (
+        (None, {'fields': ('title', 'published_date', 'youtube_url', 'thumbnail')}),
+    )
+
+    @admin.display(description='Title')
+    def title_short(self, obj):
+        return obj.title[:60] + ('…' if len(obj.title) > 60 else '')
+
+    @admin.display(description='Thumbnail', boolean=True)
+    def has_thumbnail(self, obj):
+        return bool(obj.thumbnail)

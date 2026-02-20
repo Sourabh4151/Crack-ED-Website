@@ -7,11 +7,13 @@ const Header = () => {
   const location = useLocation()
   const [isProgramsOpen, setIsProgramsOpen] = useState(false)
   const [isAurumSubmenuOpen, setIsAurumSubmenuOpen] = useState(false)
+  const [isUdaanSubmenuOpen, setIsUdaanSubmenuOpen] = useState(false)
   const [isLenskartSubmenuOpen, setIsLenskartSubmenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const closeTimeoutRef = useRef(null)
   const aurumTimeoutRef = useRef(null)
+  const udaanTimeoutRef = useRef(null)
   const lenskartTimeoutRef = useRef(null)
 
   // On BID, Resources, and Careers the page uses an inner scroll container, so window.scrollY stays 0.
@@ -46,6 +48,10 @@ const Header = () => {
       clearTimeout(aurumTimeoutRef.current)
       aurumTimeoutRef.current = null
     }
+    if (udaanTimeoutRef.current) {
+      clearTimeout(udaanTimeoutRef.current)
+      udaanTimeoutRef.current = null
+    }
     if (lenskartTimeoutRef.current) {
       clearTimeout(lenskartTimeoutRef.current)
       lenskartTimeoutRef.current = null
@@ -78,6 +84,7 @@ const Header = () => {
         setIsMobileMenuOpen(false)
         setIsProgramsOpen(false)
         setIsAurumSubmenuOpen(false)
+        setIsUdaanSubmenuOpen(false)
         setIsLenskartSubmenuOpen(false)
       }
     }
@@ -125,17 +132,23 @@ const Header = () => {
     setIsMobileMenuOpen(false)
     setIsProgramsOpen(false)
     setIsAurumSubmenuOpen(false)
+    setIsUdaanSubmenuOpen(false)
     setIsLenskartSubmenuOpen(false)
   }
 
   const toggleProgramsMobile = () => {
     setIsProgramsOpen(!isProgramsOpen)
     setIsAurumSubmenuOpen(false)
+    setIsUdaanSubmenuOpen(false)
     setIsLenskartSubmenuOpen(false)
   }
 
   const toggleAurumSubmenuMobile = () => {
     setIsAurumSubmenuOpen(!isAurumSubmenuOpen)
+  }
+
+  const toggleUdaanSubmenuMobile = () => {
+    setIsUdaanSubmenuOpen(!isUdaanSubmenuOpen)
   }
 
   const toggleLenskartSubmenuMobile = () => {
@@ -179,6 +192,7 @@ const Header = () => {
                   closeTimeoutRef.current = setTimeout(() => {
                     setIsProgramsOpen(false)
                     setIsAurumSubmenuOpen(false)
+                    setIsUdaanSubmenuOpen(false)
                     setIsLenskartSubmenuOpen(false)
                   }, 300)
                 }
@@ -209,6 +223,7 @@ const Header = () => {
                       closeTimeoutRef.current = setTimeout(() => {
                         setIsProgramsOpen(false)
                         setIsAurumSubmenuOpen(false)
+                        setIsUdaanSubmenuOpen(false)
                         setIsLenskartSubmenuOpen(false)
                       }, 300)
                     }
@@ -220,6 +235,8 @@ const Header = () => {
                       if (window.innerWidth > 768) {
                         clearAllTimeouts()
                         setIsAurumSubmenuOpen(true)
+                        setIsUdaanSubmenuOpen(false)
+                        setIsLenskartSubmenuOpen(false)
                         setIsProgramsOpen(true)
                       }
                     }}
@@ -293,13 +310,88 @@ const Header = () => {
                     )}
                   </li>
                   <li><a href="https://piramal.crack-ed.com/portal" onClick={closeMobileMenu}>Piramal ProEdge Program</a></li>
-                  <li><a href="https://udaan.crack-ed.com/portal" onClick={closeMobileMenu}>Udaan Program</a></li>
+                  <li 
+                    className={`dropdown-item-with-submenu ${isUdaanSubmenuOpen ? 'active' : ''}`}
+                    onMouseEnter={() => {
+                      if (window.innerWidth > 768) {
+                        clearAllTimeouts()
+                        setIsAurumSubmenuOpen(false)
+                        setIsUdaanSubmenuOpen(true)
+                        setIsLenskartSubmenuOpen(false)
+                        setIsProgramsOpen(true)
+                      }
+                    }}
+                    onMouseLeave={() => {
+                      if (window.innerWidth > 768) {
+                        udaanTimeoutRef.current = setTimeout(() => {
+                          setIsUdaanSubmenuOpen(false)
+                        }, 150)
+                      }
+                    }}
+                  >
+                    <a 
+                      href="#programs/udaan" 
+                      className="dropdown-link-with-arrow"
+                      onClick={(e) => {
+                        if (window.innerWidth <= 768) {
+                          e.preventDefault()
+                          toggleUdaanSubmenuMobile()
+                        }
+                      }}
+                    >
+                      Udaan Program
+                      <svg 
+                        className="submenu-arrow" 
+                        width="16" 
+                        height="16" 
+                        viewBox="0 0 16 16" 
+                        fill="none" 
+                        xmlns="http://www.w3.org/2000/svg"
+                        onClick={(e) => {
+                          e.preventDefault()
+                          if (window.innerWidth <= 768) {
+                            toggleUdaanSubmenuMobile()
+                          } else {
+                            setIsUdaanSubmenuOpen(!isUdaanSubmenuOpen)
+                          }
+                        }}
+                      >
+                        <path d="M6 4L10 8L6 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </a>
+                    {isUdaanSubmenuOpen && (
+                      <ul 
+                        className="nested-dropdown-menu"
+                        onMouseEnter={() => {
+                          if (window.innerWidth > 768) {
+                            clearAllTimeouts()
+                            setIsUdaanSubmenuOpen(true)
+                            setIsProgramsOpen(true)
+                          }
+                        }}
+                        onMouseLeave={() => {
+                          if (window.innerWidth > 768) {
+                            udaanTimeoutRef.current = setTimeout(() => {
+                              setIsUdaanSubmenuOpen(false)
+                            }, 150)
+                          }
+                        }}
+                      >
+                        <li><a href="https://udaan.crack-ed.com/portal" onClick={closeMobileMenu}>Cashier / Teller</a></li>
+                        <li><a href="https://udaanvrm.crack-ed.com" onClick={closeMobileMenu}>Virtual Relationship Manager</a></li>
+                        <li><a href="https://udaanrm.crack-ed.com" onClick={closeMobileMenu}>Relationship Manager</a></li>
+                        <li><a href="https://udaanbusiness.crack-ed.com" onClick={closeMobileMenu}>Business Loan Associate</a></li>
+                      </ul>
+                    )}
+                  </li>
                   <li><a href="https://paytm.crack-ed.com/portal" onClick={closeMobileMenu}>Paytm Disha Program</a></li>
                   <li 
                     className={`dropdown-item-with-submenu ${isLenskartSubmenuOpen ? 'active' : ''}`}
                     onMouseEnter={() => {
                       if (window.innerWidth > 768) {
                         clearAllTimeouts()
+                        setIsAurumSubmenuOpen(false)
+                        setIsUdaanSubmenuOpen(false)
                         setIsLenskartSubmenuOpen(true)
                         setIsProgramsOpen(true)
                       }

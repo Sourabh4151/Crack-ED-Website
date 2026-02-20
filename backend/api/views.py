@@ -14,8 +14,8 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 from .constants import get_center_for_program
-from .models import Example, QuizSubmission, Lead, JobApplication, JobListing
-from .serializers import ExampleSerializer, JobListingSerializer
+from .models import Example, QuizSubmission, Lead, JobApplication, JobListing, BIDEpisode
+from .serializers import ExampleSerializer, JobListingSerializer, BIDEpisodeSerializer
 
 EXTRAEDGE_URL = 'https://publisher.extraaedge.com/api/Webhook/addPublisherLead'
 
@@ -92,6 +92,16 @@ def job_list(request):
     """List published job listings for careers page."""
     jobs = JobListing.objects.filter(is_published=True).order_by('-created_at')
     serializer = JobListingSerializer(jobs, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def bid_featured_episode(request):
+    """Latest BID episode for the bigLeft slot (by published_date). Returns null if none."""
+    episode = BIDEpisode.objects.order_by('-published_date', '-created_at').first()
+    if not episode:
+        return Response(None)
+    serializer = BIDEpisodeSerializer(episode, context={'request': request})
     return Response(serializer.data)
 
 

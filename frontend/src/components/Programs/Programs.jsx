@@ -19,6 +19,9 @@ import csovImage from '../../assets/csov.jpg'
 import lenskartRetailSalesImage from '../../assets/lenskart - retail sales associate.jpg'
 import clinicalTechnicianImage from '../../assets/clinical technician.jpg'
 import cashierTellerImage from '../../assets/cashier _ teller.jpg'
+import virtualRelationshipManagerUdaanImage from '../../assets/virtual_relationship_manager_udaan.jpg'
+import relationshipManagerRetailAgricultureImage from '../../assets/relationship_manager_retail_agriculture.jpg'
+import businessLoanAssociateImage from '../../assets/business_loan_associate.jpg'
 import relationshipManagerPiramalImage from '../../assets/relationship manager.jpg'
 import fieldSalesExecutiveImage from '../../assets/field sales executive_desktop.jpg'
 import udaanCardLogo from '../../assets/udaan_temporary_logo.png'
@@ -149,12 +152,30 @@ const Programs = () => {
     },
     {
       id: 14,
+      logo: udaanCardLogo,
+      title: 'Udaan Program - Virtual Relationship Manager',
+      url: 'https://udaanvrm.crack-ed.com',
+    },
+    {
+      id: 15,
+      logo: udaanCardLogo,
+      title: 'Udaan Program - Relationship Manager',
+      url: 'https://udaanrm.crack-ed.com',
+    },
+    {
+      id: 16,
+      logo: udaanCardLogo,
+      title: 'Udaan Program - Business Loan Associate',
+      url: 'https://udaanbusiness.crack-ed.com',
+    },
+    {
+      id: 17,
       logo: piramalCardLogo,
       title: 'Piramal ProEdge Program - Relationship Manager',
       url: 'https://piramal.crack-ed.com/portal',
     },
     {
-      id: 15,
+      id: 18,
       logo: paytmCardLogo,
       title: 'Paytm Disha Program - Field Sales Executive',
       url: 'https://paytm.crack-ed.com/portal',
@@ -183,6 +204,9 @@ const Programs = () => {
       'Lenskart EyeTech Program - Clinical Technician': clinicalTechnicianImage,
       'Lenskart EyeTech Program - Retail Sales Associate': lenskartRetailSalesImage,
       'Udaan Program - Cashier / Teller': cashierTellerImage,
+      'Udaan Program - Virtual Relationship Manager': virtualRelationshipManagerUdaanImage,
+      'Udaan Program - Relationship Manager': relationshipManagerRetailAgricultureImage,
+      'Udaan Program - Business Loan Associate': businessLoanAssociateImage,
       'Piramal ProEdge Program - Relationship Manager': relationshipManagerPiramalImage,
       'Paytm Disha Program - Field Sales Executive': fieldSalesExecutiveImage,
     }
@@ -195,6 +219,27 @@ const Programs = () => {
         details: 'Join as a Cashier / Teller with a CTC of upto Rs 3.5 LPA',
         duration: '2-month program',
         image: cashierTellerImage,
+      },
+      'Udaan Program - Virtual Relationship Manager': {
+        programLabel: 'Udaan Program',
+        logo: udaanCardLogo,
+        details: 'Join as a Virtual Relationship Manager with a CTC of upto Rs 2.8 LPA',
+        duration: '4-week program',
+        image: virtualRelationshipManagerUdaanImage,
+      },
+      'Udaan Program - Relationship Manager': {
+        programLabel: 'Udaan Program',
+        logo: udaanCardLogo,
+        details: 'Join as a Relationship Manager with a CTC of upto Rs 6.5 LPA',
+        duration: '3-week program',
+        image: relationshipManagerRetailAgricultureImage,
+      },
+      'Udaan Program - Business Loan Associate': {
+        programLabel: 'Udaan Program',
+        logo: udaanCardLogo,
+        details: 'Join as a Business Loan Associate with a CTC of upto Rs 2.8 LPA',
+        duration: '3-week program',
+        image: businessLoanAssociateImage,
       },
       'Piramal ProEdge Program - Relationship Manager': {
         programLabel: 'Piramal ProEdge Program',

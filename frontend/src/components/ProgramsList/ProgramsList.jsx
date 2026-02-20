@@ -100,6 +100,30 @@ const ProgramsList = () => {
           'Join as a Cashier / Teller with a CTC of upto Rs 3.5 LPA',
           '2-month program'
         ]
+      },
+      {
+        program: 'Udaan Program',
+        role: 'Virtual Relationship Manager',
+        details: [
+          'Join as a Virtual Relationship Manager with a CTC of upto Rs 2.8 LPA',
+          '4-week program'
+        ]
+      },
+      {
+        program: 'Udaan Program',
+        role: 'Relationship Manager',
+        details: [
+          'Join as a Relationship Manager with a CTC of upto Rs 6.5 LPA',
+          '3-week program'
+        ]
+      },
+      {
+        program: 'Udaan Program',
+        role: 'Business Loan Associate',
+        details: [
+          'Join as a Business Loan Associate with a CTC of upto Rs 2.8 LPA',
+          '3-week program'
+        ]
       }
     ],
     Retail: [
@@ -140,11 +164,12 @@ const ProgramsList = () => {
     ]
   }
 
-  const getProgramLink = (category, role) => {
+  const getProgramLink = (category, item) => {
+    const role = item?.role
     if (category === 'Banking') {
       switch (role) {
         case 'Relationship Manager':
-          return 'https://aurmroyale.crack-ed.com/'
+          return item?.program === 'Udaan Program' ? 'https://udaanrm.crack-ed.com' : 'https://aurmroyale.crack-ed.com/'
         case 'Relationship Officer':
           return 'https://aubank.ro.crack-ed.com/portal'
         case 'Bank Officer':
@@ -165,6 +190,10 @@ const ProgramsList = () => {
           return 'https://aubankbcso.crack-ed.com/portal'
         case 'Cashier / Teller':
           return 'https://udaan.crack-ed.com/portal'
+        case 'Virtual Relationship Manager':
+          return 'https://udaanvrm.crack-ed.com'
+        case 'Business Loan Associate':
+          return 'https://udaanbusiness.crack-ed.com'
         default:
           return null
       }
@@ -236,7 +265,7 @@ const ProgramsList = () => {
 
         <div className="programs-grid">
           {programs[activeTab].map((item, index) => {
-            const link = getProgramLink(activeTab, item.role)
+            const link = getProgramLink(activeTab, item)
             return (
               <a
                 key={index}

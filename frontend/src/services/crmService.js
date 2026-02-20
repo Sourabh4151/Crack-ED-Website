@@ -23,6 +23,9 @@ const PROGRAM_TO_CENTER_MAP = {
   'Lenskart EyeTech Program - Clinical Technician': '38',
   'Lenskart EyeTech Program - Retail Sales Associate': '61',
   'Udaan Program - Cashier / Teller': '33',
+  'Udaan Program - Virtual Relationship Manager': '68',
+  'Udaan Program - Relationship Manager': '72',
+  'Udaan Program - Business Loan Associate': '73',
   'Piramal ProEdge Program - Relationship Manager': '47',
   'Paytm Disha Program - Field Sales Executive': '55',
 }
