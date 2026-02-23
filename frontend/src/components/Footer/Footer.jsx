@@ -61,6 +61,24 @@ const PROGRAMS = [
       { label: 'Field Sales Executive', href: 'https://paytm.crack-ed.com/portal' },
     ],
   },
+  {
+    id: 'finpro',
+    name: 'FinPro Career Program',
+    link: '/programs',
+    links: [
+      { label: 'Gold Assayer', href: 'http://ponawallaga.crack-ed.com/' },
+      { label: 'Sales Executive', href: 'http://ponawallasa.crack-ed.com/' },
+    ],
+  },
+  {
+    id: 'aviva',
+    name: 'Aviva Nirmaan Program',
+    link: '/programs',
+    links: [
+      { label: 'Direct Sales Executive', href: 'https://avivads.crack-ed.com' },
+      { label: 'Agency Sales Executive', href: 'https://avivaas.crack-ed.com' },
+    ],
+  },
 ]
 
 const Footer = () => {

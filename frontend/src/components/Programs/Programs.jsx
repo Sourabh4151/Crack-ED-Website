@@ -34,6 +34,12 @@ import piramalHomeLogo from '../../assets/piramal_home_logo.png'
 import img1 from '../../assets/au_logo.png'
 import img2 from '../../assets/immmggg2.jpg'
 import checkinbg from '../../assets/checkinbg.png'
+import avivaDsImage from '../../assets/aviva_ds.png'
+import avivaAsImage from '../../assets/aviva_as.png'
+import avivaSmallLogo from '../../assets/aviva_logo_small_card.png'
+import poonawalaGaImage from '../../assets/poonawala_ga.jpg'
+import poonawalaSaImage from '../../assets/poonawala_sa.png'
+import poonawallaSmallLogo from '../../assets/poonawalla_logo_small_card.png'
 import './Programs.css'
 
 // Keep "LPA + PLP" on one line to prevent awkward wrapping
@@ -180,6 +186,30 @@ const Programs = () => {
       title: 'Paytm Disha Program - Field Sales Executive',
       url: 'https://paytm.crack-ed.com/portal',
     },
+    {
+      id: 19,
+      logo: avivaSmallLogo,
+      title: 'Aviva Nirmaan Program - Direct Sales Executive',
+      url: 'https://avivads.crack-ed.com',
+    },
+    {
+      id: 20,
+      logo: avivaSmallLogo,
+      title: 'Aviva Nirmaan Program - Agency Sales Executive',
+      url: 'https://avivaas.crack-ed.com',
+    },
+    {
+      id: 21,
+      logo: poonawallaSmallLogo,
+      title: 'FinPro Career Program - Gold Assayer',
+      url: 'http://ponawallaga.crack-ed.com/',
+    },
+    {
+      id: 22,
+      logo: poonawallaSmallLogo,
+      title: 'FinPro Career Program - Sales Executive',
+      url: 'http://ponawallasa.crack-ed.com/',
+    },
   ]
 
   // Featured card index: the first visible card in carousel (shown on main background)
@@ -254,6 +284,34 @@ const Programs = () => {
         details: 'Join as a Field Sales Executive with a CTC of Rs 2.5 LPA + incentives',
         duration: '2-week program (virtual)',
         image: fieldSalesExecutiveImage,
+      },
+      'Aviva Nirmaan Program - Direct Sales Executive': {
+        programLabel: 'Aviva Nirmaan Program',
+        logo: avivaDsImage,
+        details: 'Join as a Front Line Sales Executive - Direct Sales with a CTC of Rs 3.5 LPA + variable',
+        duration: '3-month program',
+        image: avivaDsImage,
+      },
+      'Aviva Nirmaan Program - Agency Sales Executive': {
+        programLabel: 'Aviva Nirmaan Program',
+        logo: avivaAsImage,
+        details: 'Join as a Front Line Sales Executive - Agency Sales with a CTC of Rs 3.5 LPA + variable',
+        duration: '3-month program',
+        image: avivaAsImage,
+      },
+      'FinPro Career Program - Gold Assayer': {
+        programLabel: 'FinPro Career Program',
+        logo: poonawalaGaImage,
+        details: 'Join as a Gold Assayer with a CTC of Rs 2.5 LPA + incentives',
+        duration: '1.5-month program',
+        image: poonawalaGaImage,
+      },
+      'FinPro Career Program - Sales Executive': {
+        programLabel: 'FinPro Career Program',
+        logo: poonawalaSaImage,
+        details: 'Join as a Sales Executive with a CTC of upto Rs 2.76 LPA + incentives',
+        duration: '3-week program',
+        image: poonawalaSaImage,
       },
     }
 
@@ -360,6 +418,8 @@ const Programs = () => {
       .replace('Udaan Program - ', '')
       .replace('Piramal ProEdge Program - ', '')
       .replace('Paytm Disha Program - ', '')
+      .replace('Aviva Nirmaan Program - ', '')
+      .replace('FinPro Career Program - ', '')
   }
 
   useEffect(() => {

@@ -6,6 +6,7 @@ import piramalLogo from '../../assets/piramal_small.png'
 
 import udaanLogo from '../../assets/udaan_temporary_logo.png'
 import paytmLogo from '../../assets/paytm_small_logo.png'
+import poonawallaLogoSmallCard from '../../assets/poonawalla_logo_small_card.png'
 import './ProgramsList.css'
 
 const ProgramsList = () => {
@@ -161,6 +162,23 @@ const ProgramsList = () => {
           '2-week program (virtual)'
         ]
       }
+      ,
+      {
+        program: 'FinPro Career Program - Gold Assayer',
+        role: 'Gold Assayer',
+        details: [
+          'Join as a Gold Assayer with a CTC of Rs 2.5 LPA + incentives',
+          '1.5-month program'
+        ]
+      },
+      {
+        program: 'FinPro Career Program - Sales Executive',
+        role: 'Sales Executive',
+        details: [
+          'Join as a Sales Executive with a CTC of upto Rs 2.76 LPA + incentives',
+          '3-week program'
+        ]
+      }
     ]
   }
 
@@ -216,6 +234,10 @@ const ProgramsList = () => {
           return 'https://piramal.crack-ed.com/portal'
         case 'Field Sales Executive':
           return 'https://paytm.crack-ed.com/portal'
+        case 'Gold Assayer':
+          return 'http://ponawallaga.crack-ed.com/'
+        case 'Sales Executive':
+          return 'http://ponawallasa.crack-ed.com/'
         default:
           return null
       }
@@ -232,6 +254,9 @@ const ProgramsList = () => {
     if (category === 'Retail') return <img src={lenskartCardLogo} alt="Lenskart" className="program-logo-img" />
     if (category === 'NBFC' && item?.program === 'Paytm Disha Program') {
       return <img src={paytmLogo} alt="Paytm" className="program-logo-img program-logo-paytm" />
+    }
+    if (category === 'NBFC' && item?.program && item.program.startsWith('FinPro Career Program')) {
+      return <img src={poonawallaLogoSmallCard} alt="Poonawalla" className="program-logo-img program-logo-poonawalla" />
     }
     if (category === 'NBFC') return <img src={piramalLogo} alt="Piramal" className="program-logo-img program-logo-piramal" />
     return null

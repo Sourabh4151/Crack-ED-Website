@@ -9,12 +9,16 @@ const Header = () => {
   const [isAurumSubmenuOpen, setIsAurumSubmenuOpen] = useState(false)
   const [isUdaanSubmenuOpen, setIsUdaanSubmenuOpen] = useState(false)
   const [isLenskartSubmenuOpen, setIsLenskartSubmenuOpen] = useState(false)
+  const [isFinProSubmenuOpen, setIsFinProSubmenuOpen] = useState(false)
+  const [isAvivaSubmenuOpen, setIsAvivaSubmenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const closeTimeoutRef = useRef(null)
   const aurumTimeoutRef = useRef(null)
   const udaanTimeoutRef = useRef(null)
   const lenskartTimeoutRef = useRef(null)
+  const finproTimeoutRef = useRef(null)
+  const avivaTimeoutRef = useRef(null)
 
   // On BID, Resources, and Careers the page uses an inner scroll container, so window.scrollY stays 0.
   // Listen to the actual scroll container so the header gets the black background when scrolled.
@@ -55,6 +59,14 @@ const Header = () => {
     if (lenskartTimeoutRef.current) {
       clearTimeout(lenskartTimeoutRef.current)
       lenskartTimeoutRef.current = null
+    }
+    if (finproTimeoutRef.current) {
+      clearTimeout(finproTimeoutRef.current)
+      finproTimeoutRef.current = null
+    }
+    if (avivaTimeoutRef.current) {
+      clearTimeout(avivaTimeoutRef.current)
+      avivaTimeoutRef.current = null
     }
   }
 
@@ -141,6 +153,8 @@ const Header = () => {
     setIsAurumSubmenuOpen(false)
     setIsUdaanSubmenuOpen(false)
     setIsLenskartSubmenuOpen(false)
+    setIsFinProSubmenuOpen(false)
+    setIsAvivaSubmenuOpen(false)
   }
 
   const toggleAurumSubmenuMobile = () => {
@@ -153,6 +167,14 @@ const Header = () => {
 
   const toggleLenskartSubmenuMobile = () => {
     setIsLenskartSubmenuOpen(!isLenskartSubmenuOpen)
+  }
+ 
+  const toggleFinProSubmenuMobile = () => {
+    setIsFinProSubmenuOpen(!isFinProSubmenuOpen)
+  }
+ 
+  const toggleAvivaSubmenuMobile = () => {
+    setIsAvivaSubmenuOpen(!isAvivaSubmenuOpen)
   }
 
   return (
@@ -454,6 +476,153 @@ const Header = () => {
                       >
                         <li><a href="https://lenskart.crack-ed.com/portal" onClick={closeMobileMenu}>Clinical Technician</a></li>
                         <li><a href="https://lenskartrsa.crack-ed.com/portal" onClick={closeMobileMenu}>Retail Sales Associate</a></li>
+                      </ul>
+                    )}
+                  </li>
+                  <li 
+                    className={`dropdown-item-with-submenu ${isFinProSubmenuOpen ? 'active' : ''}`}
+                    onMouseEnter={() => {
+                      if (window.innerWidth > 768) {
+                        clearAllTimeouts()
+                        setIsAurumSubmenuOpen(false)
+                        setIsUdaanSubmenuOpen(false)
+                        setIsLenskartSubmenuOpen(false)
+                        setIsFinProSubmenuOpen(true)
+                        setIsProgramsOpen(true)
+                      }
+                    }}
+                    onMouseLeave={() => {
+                      if (window.innerWidth > 768) {
+                        finproTimeoutRef.current = setTimeout(() => {
+                          setIsFinProSubmenuOpen(false)
+                        }, 150)
+                      }
+                    }}
+                  >
+                    <a 
+                      href="#programs/finpro" 
+                      className="dropdown-link-with-arrow"
+                      onClick={(e) => {
+                        if (window.innerWidth <= 768) {
+                          e.preventDefault()
+                          toggleFinProSubmenuMobile()
+                        }
+                      }}
+                    >
+                      FinPro Career Program
+                      <svg 
+                        className="submenu-arrow" 
+                        width="16" 
+                        height="16" 
+                        viewBox="0 0 16 16" 
+                        fill="none" 
+                        xmlns="http://www.w3.org/2000/svg"
+                        onClick={(e) => {
+                          e.preventDefault()
+                          if (window.innerWidth <= 768) {
+                            toggleFinProSubmenuMobile()
+                          } else {
+                            setIsFinProSubmenuOpen(!isFinProSubmenuOpen)
+                          }
+                        }}
+                      >
+                        <path d="M6 4L10 8L6 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </a>
+                    {isFinProSubmenuOpen && (
+                      <ul 
+                        className="nested-dropdown-menu"
+                        onMouseEnter={() => {
+                          if (window.innerWidth > 768) {
+                            clearAllTimeouts()
+                            setIsFinProSubmenuOpen(true)
+                            setIsProgramsOpen(true)
+                          }
+                        }}
+                        onMouseLeave={() => {
+                          if (window.innerWidth > 768) {
+                            finproTimeoutRef.current = setTimeout(() => {
+                              setIsFinProSubmenuOpen(false)
+                            }, 150)
+                          }
+                        }}
+                      >
+                        <li><a href="http://ponawallaga.crack-ed.com/" onClick={closeMobileMenu}>Gold Assayer</a></li>
+                        <li><a href="http://ponawallasa.crack-ed.com/" onClick={closeMobileMenu}>Sales Executive</a></li>
+                      </ul>
+                    )}
+                  </li>
+                  <li 
+                    className={`dropdown-item-with-submenu ${isAvivaSubmenuOpen ? 'active' : ''}`}
+                    onMouseEnter={() => {
+                      if (window.innerWidth > 768) {
+                        clearAllTimeouts()
+                        setIsAurumSubmenuOpen(false)
+                        setIsUdaanSubmenuOpen(false)
+                        setIsLenskartSubmenuOpen(false)
+                        setIsFinProSubmenuOpen(false)
+                        setIsAvivaSubmenuOpen(true)
+                        setIsProgramsOpen(true)
+                      }
+                    }}
+                    onMouseLeave={() => {
+                      if (window.innerWidth > 768) {
+                        avivaTimeoutRef.current = setTimeout(() => {
+                          setIsAvivaSubmenuOpen(false)
+                        }, 150)
+                      }
+                    }}
+                  >
+                    <a 
+                      href="#programs/aviva" 
+                      className="dropdown-link-with-arrow"
+                      onClick={(e) => {
+                        if (window.innerWidth <= 768) {
+                          e.preventDefault()
+                          toggleAvivaSubmenuMobile()
+                        }
+                      }}
+                    >
+                      Aviva Nirmaan Program
+                      <svg 
+                        className="submenu-arrow" 
+                        width="16" 
+                        height="16" 
+                        viewBox="0 0 16 16" 
+                        fill="none" 
+                        xmlns="http://www.w3.org/2000/svg"
+                        onClick={(e) => {
+                          e.preventDefault()
+                          if (window.innerWidth <= 768) {
+                            toggleAvivaSubmenuMobile()
+                          } else {
+                            setIsAvivaSubmenuOpen(!isAvivaSubmenuOpen)
+                          }
+                        }}
+                      >
+                        <path d="M6 4L10 8L6 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </a>
+                    {isAvivaSubmenuOpen && (
+                      <ul 
+                        className="nested-dropdown-menu"
+                        onMouseEnter={() => {
+                          if (window.innerWidth > 768) {
+                            clearAllTimeouts()
+                            setIsAvivaSubmenuOpen(true)
+                            setIsProgramsOpen(true)
+                          }
+                        }}
+                        onMouseLeave={() => {
+                          if (window.innerWidth > 768) {
+                            avivaTimeoutRef.current = setTimeout(() => {
+                              setIsAvivaSubmenuOpen(false)
+                            }, 150)
+                          }
+                        }}
+                      >
+                        <li><a href="https://avivads.crack-ed.com" onClick={closeMobileMenu}>Direct Sales Executive</a></li>
+                        <li><a href="https://avivaas.crack-ed.com" onClick={closeMobileMenu}>Agency Sales Executive</a></li>
                       </ul>
                     )}
                   </li>

@@ -99,6 +99,10 @@ const EnquireModal = ({ isOpen, onClose }) => {
     'Lenskart EyeTech Program - Retail Sales Associate',
     'Piramal ProEdge Program - Relationship Manager',
     'Paytm Disha Program - Field Sales Executive',
+    'Aviva Nirmaan Program - Agency Sales Executive',
+    'Aviva Nirmaan Program - Direct Sales Executive',
+    'FinPro Career Program - Sales Executive',
+    'FinPro Career Program - Gold Assayer',
   ]
 
   const validateFullName = (name) => {

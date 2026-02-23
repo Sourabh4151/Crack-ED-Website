@@ -28,6 +28,10 @@ const PROGRAM_TO_CENTER_MAP = {
   'Udaan Program - Business Loan Associate': '73',
   'Piramal ProEdge Program - Relationship Manager': '47',
   'Paytm Disha Program - Field Sales Executive': '55',
+  'Aviva Nirmaan Program - Agency Sales Executive': '69',
+  'Aviva Nirmaan Program - Direct Sales Executive': '70',
+  'FinPro Career Program - Sales Executive': '74',
+  'FinPro Career Program - Gold Assayer': '76',
 }
 
 /** Base URL for our Django backend (set in .env as VITE_API_URL, or use proxy with '') */
