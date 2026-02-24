@@ -174,7 +174,7 @@ const ProgramsList = () => {
         ]
       },
       {
-        program: 'Poonawalla FinPro Career Program - Gold Assayer',
+        program: 'Poonawalla FinPro Career Program',
         role: 'Gold Assayer',
         details: [
           'Join as a Gold Assayer with a CTC of Rs 2.5 LPA + incentives',
@@ -182,7 +182,7 @@ const ProgramsList = () => {
         ]
       },
       {
-        program: 'Poonawalla FinPro Career Program - Sales Executive',
+        program: 'Poonawalla FinPro Career Program',
         role: 'Sales Executive',
         details: [
           'Join as a Sales Executive with a CTC of upto Rs 2.76 LPA + incentives',
@@ -193,7 +193,7 @@ const ProgramsList = () => {
     ,
     Insurance: [
       {
-        program: 'Aviva Nirmaan Program - Direct Sales Executive',
+        program: 'Aviva Nirmaan Program',
         role: 'Direct Sales Executive',
         details: [
           'Join as a Front Line Sales Executive - Direct Sales with a CTC of Rs 3.5 LPA + variable',
@@ -201,7 +201,7 @@ const ProgramsList = () => {
         ]
       },
       {
-        program: 'Aviva Nirmaan Program - Agency Sales Executive',
+        program: 'Aviva Nirmaan Program',
         role: 'Agency Sales Executive',
         details: [
           'Join as a Front Line Sales Executive - Agency Sales with a CTC of Rs 3.5 LPA + variable',
