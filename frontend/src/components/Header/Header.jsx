@@ -547,8 +547,8 @@ const Header = () => {
                           }
                         }}
                       >
-                        <li><a href="http://ponawallaga.crack-ed.com/" onClick={closeMobileMenu}>Gold Assayer</a></li>
-                        <li><a href="http://ponawallasa.crack-ed.com/" onClick={closeMobileMenu}>Sales Executive</a></li>
+                        <li><a href="http://poonawallaga.crack-ed.com/" onClick={closeMobileMenu}>Gold Assayer</a></li>
+                        <li><a href="http://poonawallase.crack-ed.com/" onClick={closeMobileMenu}>Sales Executive</a></li>
                       </ul>
                     )}
                   </li>

@@ -66,8 +66,8 @@ const PROGRAMS = [
     name: 'FinPro Career Program',
     link: '/programs',
     links: [
-      { label: 'Gold Assayer', href: 'http://ponawallaga.crack-ed.com/' },
-      { label: 'Sales Executive', href: 'http://ponawallasa.crack-ed.com/' },
+      { label: 'Gold Assayer', href: 'http://poonawallaga.crack-ed.com/' },
+      { label: 'Sales Executive', href: 'http://poonawallase.crack-ed.com/' },
     ],
   },
   {

@@ -37,9 +37,11 @@ import checkinbg from '../../assets/checkinbg.png'
 import avivaDsImage from '../../assets/aviva_ds.png'
 import avivaAsImage from '../../assets/aviva_as.png'
 import avivaSmallLogo from '../../assets/aviva_logo_small_card.png'
+import avivaLogo from '../../assets/aviva_logo.png'
 import poonawalaGaImage from '../../assets/poonawala_ga.jpg'
 import poonawalaSaImage from '../../assets/poonawala_sa.png'
 import poonawallaSmallLogo from '../../assets/poonawalla_logo_small_card.png'
+import poonawallaLogo from '../../assets/poonawalla_logo.png'
 import './Programs.css'
 
 // Keep "LPA + PLP" on one line to prevent awkward wrapping
@@ -64,6 +66,8 @@ const getProgramHomeLogo = (programLabel) => {
     case 'Piramal ProEdge Program': return { src: piramalHomeLogo, alt: 'Piramal Finance' }
     case 'Lenskart Program': return { src: lenskartHomeLogo, alt: 'Lenskart' }
     case 'Lenskart EyeTech Program': return { src: lenskartHomeLogo, alt: 'Lenskart' }
+    case 'Aviva Nirmaan Program': return { src: avivaLogo, alt: 'Aviva' }
+    case 'FinPro Career Program': return { src: poonawallaLogo, alt: 'Poonawalla Fincorp' }
     case 'Udaan Program': return null
     default: return null
   }
@@ -202,13 +206,13 @@ const Programs = () => {
       id: 21,
       logo: poonawallaSmallLogo,
       title: 'FinPro Career Program - Gold Assayer',
-      url: 'http://ponawallaga.crack-ed.com/',
+      url: 'http://poonawallaga.crack-ed.com/',
     },
     {
       id: 22,
       logo: poonawallaSmallLogo,
       title: 'FinPro Career Program - Sales Executive',
-      url: 'http://ponawallasa.crack-ed.com/',
+      url: 'http://poonawallase.crack-ed.com/',
     },
   ]
 
@@ -558,8 +562,9 @@ const Programs = () => {
                               const logoInfo = getProgramHomeLogo(details.programLabel || (details.logo === auCardLogo ? 'AURUM Bankers Program' : 'Lenskart Program'))
                               if (!logoInfo) return null
                               const isPaytm = logoInfo.alt === 'Paytm'
+                              const isAviva = logoInfo.alt === 'Aviva'
                               return (
-                                <div className={`mobile-program-card-logo${isPaytm ? ' mobile-program-card-logo--paytm' : ''}`}>
+                                <div className={`mobile-program-card-logo${isPaytm ? ' mobile-program-card-logo--paytm' : ''}${isAviva ? ' mobile-program-card-logo--aviva' : ''}`}>
                                   <img src={logoInfo.src} alt={logoInfo.alt} />
                                 </div>
                               )

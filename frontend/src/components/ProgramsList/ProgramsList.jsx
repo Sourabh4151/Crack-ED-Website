@@ -7,6 +7,7 @@ import piramalLogo from '../../assets/piramal_small.png'
 import udaanLogo from '../../assets/udaan_temporary_logo.png'
 import paytmLogo from '../../assets/paytm_small_logo.png'
 import poonawallaLogoSmallCard from '../../assets/poonawalla_logo_small_card.png'
+import avivaLogoSmallCard from '../../assets/aviva_logo_small_card.png'
 import './ProgramsList.css'
 
 const ProgramsList = () => {
@@ -180,6 +181,25 @@ const ProgramsList = () => {
         ]
       }
     ]
+    ,
+    Insurance: [
+      {
+        program: 'Aviva Nirmaan Program - Direct Sales Executive',
+        role: 'Direct Sales Executive',
+        details: [
+          'Join as a Front Line Sales Executive - Direct Sales with a CTC of Rs 3.5 LPA + variable',
+          '3-month program'
+        ]
+      },
+      {
+        program: 'Aviva Nirmaan Program - Agency Sales Executive',
+        role: 'Agency Sales Executive',
+        details: [
+          'Join as a Front Line Sales Executive - Agency Sales with a CTC of Rs 3.5 LPA + variable',
+          '3-month program'
+        ]
+      }
+    ]
   }
 
   const getProgramLink = (category, item) => {
@@ -235,9 +255,20 @@ const ProgramsList = () => {
         case 'Field Sales Executive':
           return 'https://paytm.crack-ed.com/portal'
         case 'Gold Assayer':
-          return 'http://ponawallaga.crack-ed.com/'
+          return 'http://poonawallaga.crack-ed.com/'
         case 'Sales Executive':
-          return 'http://ponawallasa.crack-ed.com/'
+          return 'http://poonawallase.crack-ed.com/'
+        default:
+          return null
+      }
+    }
+    
+    if (category === 'Insurance') {
+      switch (role) {
+        case 'Direct Sales Executive':
+          return 'https://avivads.crack-ed.com'
+        case 'Agency Sales Executive':
+          return 'https://avivaas.crack-ed.com'
         default:
           return null
       }
@@ -259,6 +290,7 @@ const ProgramsList = () => {
       return <img src={poonawallaLogoSmallCard} alt="Poonawalla" className="program-logo-img program-logo-poonawalla" />
     }
     if (category === 'NBFC') return <img src={piramalLogo} alt="Piramal" className="program-logo-img program-logo-piramal" />
+    if (category === 'Insurance') return <img src={avivaLogoSmallCard} alt="Aviva" className="program-logo-img program-logo-aviva" />
     return null
   }
 
@@ -286,6 +318,12 @@ const ProgramsList = () => {
           >
             NBFC
           </button>
+        <button
+          className={`program-tab ${activeTab === 'Insurance' ? 'active' : ''}`}
+          onClick={() => setActiveTab('Insurance')}
+        >
+          Insurance
+        </button>
         </div>
 
         <div className="programs-grid">

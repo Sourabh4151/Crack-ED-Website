@@ -1076,14 +1076,26 @@ image.png.programs-section .program-details a,
   }
 
   .mobile-program-card-logo img {
-    height: 50px;
+    height: 36px;
     width: auto;
     object-fit: contain;
   }
 
   .mobile-program-card-logo--paytm img {
-    height: 46px;
-    max-width: 115px;
+    height: 34px;
+    max-width: 95px;
+  }
+ 
+  /* Smaller Aviva logo specifically on mobile cards */
+  .mobile-program-card-logo--aviva img {
+    height: 28px;
+    width: auto;
+    object-fit: contain;
+  }
+ 
+  /* Reduce featured/home logos on small screens so they don't overpower content */
+  .programs-section .program-logo-above img {
+    width: 90px;
   }
 
   /* AURUM Bankers Program - Montserrat SemiBold 12px, line-height 27px, center, rgba(250,250,250,0.7) */
