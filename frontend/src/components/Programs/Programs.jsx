@@ -70,8 +70,8 @@ const getProgramHomeLogo = (programLabel) => {
     case 'Lenskart Program': return { src: lenskartHomeLogo, alt: 'Lenskart' }
     case 'Lenskart EyeTech Program': return { src: lenskartHomeLogo, alt: 'Lenskart' }
     case 'Aviva Nirmaan Program': return { src: avivaLogo, alt: 'Aviva' }
-    case 'FinPro Career Program': return { src: poonawallaLogo, alt: 'Poonawalla Fincorp' }
-    case 'VyaparaMitra Program': return { src: finovaCardLogo, alt: 'Finova Capital' }
+    case 'Poonawalla FinPro Career Program': return { src: poonawallaLogo, alt: 'Poonawalla Fincorp' }
+    case 'Finova VyaparaMitra Program': return { src: finovaCardLogo, alt: 'Finova Capital' }
     case 'Udaan Program': return null
     default: return null
   }
@@ -209,19 +209,19 @@ const Programs = () => {
     {
       id: 21,
       logo: poonawallaSmallLogo,
-      title: 'FinPro Career Program - Gold Assayer',
+      title: 'Poonawalla FinPro Career Program - Gold Assayer',
       url: 'http://poonawallaga.crack-ed.com/',
     },
     {
       id: 22,
       logo: poonawallaSmallLogo,
-      title: 'FinPro Career Program - Sales Executive',
+      title: 'Poonawalla FinPro Career Program - Sales Executive',
       url: 'http://poonawallase.crack-ed.com/',
     },
     {
       id: 23,
       logo: finovaSmallLogo,
-      title: 'VyaparaMitra Program - Relationship Officer',
+      title: 'Finova VyaparaMitra Program - Relationship Officer',
       url: 'https://finovaro.crack-ed.com',
     },
   ]
@@ -313,22 +313,22 @@ const Programs = () => {
         duration: '3-month program',
         image: avivaAsImage,
       },
-      'FinPro Career Program - Gold Assayer': {
-        programLabel: 'FinPro Career Program',
+      'Poonawalla FinPro Career Program - Gold Assayer': {
+        programLabel: 'Poonawalla FinPro Career Program',
         logo: poonawalaGaImage,
         details: 'Join as a Gold Assayer with a CTC of Rs 2.5 LPA + incentives',
         duration: '1.5-month program',
         image: poonawalaGaImage,
       },
-      'FinPro Career Program - Sales Executive': {
-        programLabel: 'FinPro Career Program',
+      'Poonawalla FinPro Career Program - Sales Executive': {
+        programLabel: 'Poonawalla FinPro Career Program',
         logo: poonawalaSaImage,
         details: 'Join as a Sales Executive with a CTC of upto Rs 2.76 LPA + incentives',
         duration: '3-week program',
         image: poonawalaSaImage,
       },
-      'VyaparaMitra Program - Relationship Officer': {
-        programLabel: 'VyaparaMitra Program',
+      'Finova VyaparaMitra Program - Relationship Officer': {
+        programLabel: 'Finova VyaparaMitra Program',
         logo: finovaCardLogo,
         details: 'Join as a Relationship Officer with a CTC of Rs 2.4 LPA + variable',
         duration: '3-month program',
@@ -440,8 +440,8 @@ const Programs = () => {
       .replace('Piramal ProEdge Program - ', '')
       .replace('Paytm Disha Program - ', '')
       .replace('Aviva Nirmaan Program - ', '')
-      .replace('VyaparaMitra Program - ', '')
-      .replace('FinPro Career Program - ', '')
+      .replace('Finova VyaparaMitra Program - ', '')
+      .replace('Poonawalla FinPro Career Program - ', '')
   }
 
   useEffect(() => {

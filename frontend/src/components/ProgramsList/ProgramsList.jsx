@@ -166,7 +166,7 @@ const ProgramsList = () => {
       }
       ,
       {
-        program: 'VyaparaMitra Program',
+        program: 'Finova VyaparaMitra Program',
         role: 'Relationship Officer',
         details: [
           'Join as a Relationship Officer with a CTC of Rs 2.4 LPA + variable',
@@ -174,7 +174,7 @@ const ProgramsList = () => {
         ]
       },
       {
-        program: 'FinPro Career Program - Gold Assayer',
+        program: 'Poonawalla FinPro Career Program - Gold Assayer',
         role: 'Gold Assayer',
         details: [
           'Join as a Gold Assayer with a CTC of Rs 2.5 LPA + incentives',
@@ -182,7 +182,7 @@ const ProgramsList = () => {
         ]
       },
       {
-        program: 'FinPro Career Program - Sales Executive',
+        program: 'Poonawalla FinPro Career Program - Sales Executive',
         role: 'Sales Executive',
         details: [
           'Join as a Sales Executive with a CTC of upto Rs 2.76 LPA + incentives',
@@ -297,10 +297,10 @@ const ProgramsList = () => {
     if (category === 'NBFC' && item?.program === 'Paytm Disha Program') {
       return <img src={paytmLogo} alt="Paytm" className="program-logo-img program-logo-paytm" />
     }
-    if (category === 'NBFC' && item?.program && item.program.startsWith('FinPro Career Program')) {
+    if (category === 'NBFC' && item?.program && item.program.startsWith('Poonawalla FinPro Career Program')) {
       return <img src={poonawallaLogoSmallCard} alt="Poonawalla" className="program-logo-img program-logo-poonawalla" />
     }
-    if (category === 'NBFC' && item?.program && item.program.startsWith('VyaparaMitra Program')) {
+    if (category === 'NBFC' && item?.program && item.program.startsWith('Finova VyaparaMitra Program')) {
       return <img src={finovaSmallLogo} alt="Finova" className="program-logo-img program-logo-finova" />
     }
     if (category === 'NBFC') return <img src={piramalLogo} alt="Piramal" className="program-logo-img program-logo-piramal" />

@@ -101,9 +101,9 @@ const EnquireModal = ({ isOpen, onClose }) => {
     'Paytm Disha Program - Field Sales Executive',
     'Aviva Nirmaan Program - Agency Sales Executive',
     'Aviva Nirmaan Program - Direct Sales Executive',
-    'FinPro Career Program - Sales Executive',
-    'FinPro Career Program - Gold Assayer',
-    'VyaparaMitra Program - Relationship Officer',
+    'Poonawalla FinPro Career Program - Sales Executive',
+    'Poonawalla FinPro Career Program - Gold Assayer',
+    'Finova VyaparaMitra Program - Relationship Officer',
   ]
 
   const validateFullName = (name) => {

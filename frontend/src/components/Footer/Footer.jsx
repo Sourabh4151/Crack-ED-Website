@@ -63,7 +63,7 @@ const PROGRAMS = [
   },
   {
     id: 'finpro',
-    name: 'FinPro Career Program',
+    name: 'Poonawalla FinPro Career Program',
     link: '/programs',
     links: [
       { label: 'Gold Assayer', href: 'http://poonawallaga.crack-ed.com/' },
@@ -72,7 +72,7 @@ const PROGRAMS = [
   },
   {
     id: 'finova',
-    name: 'VyaparaMitra Program',
+    name: 'Finova VyaparaMitra Program',
     link: '/programs',
     links: [
       { label: 'Relationship Officer', href: 'https://finovaro.crack-ed.com' },
