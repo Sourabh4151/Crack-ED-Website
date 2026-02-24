@@ -42,9 +42,6 @@ import poonawalaGaImage from '../../assets/poonawala_ga.jpg'
 import poonawalaSaImage from '../../assets/poonawala_sa.png'
 import poonawallaSmallLogo from '../../assets/poonawalla_logo_small_card.png'
 import poonawallaLogo from '../../assets/poonawalla_logo.png'
-import finovaCardLogo from '../../assets/finova_logo.png'
-import finovaProgramImage from '../../assets/finova_program.jpg'
-import finovaSmallLogo from '../../assets/finova_small_logo.png'
 import './Programs.css'
 
 // Keep "LPA + PLP" on one line to prevent awkward wrapping
@@ -71,7 +68,6 @@ const getProgramHomeLogo = (programLabel) => {
     case 'Lenskart EyeTech Program': return { src: lenskartHomeLogo, alt: 'Lenskart' }
     case 'Aviva Nirmaan Program': return { src: avivaLogo, alt: 'Aviva' }
     case 'FinPro Career Program': return { src: poonawallaLogo, alt: 'Poonawalla Fincorp' }
-    case 'VyaparaMitra Program': return { src: finovaCardLogo, alt: 'Finova Capital' }
     case 'Udaan Program': return null
     default: return null
   }
@@ -218,12 +214,6 @@ const Programs = () => {
       title: 'FinPro Career Program - Sales Executive',
       url: 'http://poonawallase.crack-ed.com/',
     },
-    {
-      id: 23,
-      logo: finovaSmallLogo,
-      title: 'VyaparaMitra Program - Relationship Officer',
-      url: 'https://finovaro.crack-ed.com',
-    },
   ]
 
   // Featured card index: the first visible card in carousel (shown on main background)
@@ -326,13 +316,6 @@ const Programs = () => {
         details: 'Join as a Sales Executive with a CTC of upto Rs 2.76 LPA + incentives',
         duration: '3-week program',
         image: poonawalaSaImage,
-      },
-      'VyaparaMitra Program - Relationship Officer': {
-        programLabel: 'VyaparaMitra Program',
-        logo: finovaCardLogo,
-        details: 'Join as a Relationship Officer with a CTC of Rs 2.4 LPA + variable',
-        duration: '3-month program',
-        image: finovaProgramImage,
       },
     }
 
@@ -440,7 +423,6 @@ const Programs = () => {
       .replace('Piramal ProEdge Program - ', '')
       .replace('Paytm Disha Program - ', '')
       .replace('Aviva Nirmaan Program - ', '')
-      .replace('VyaparaMitra Program - ', '')
       .replace('FinPro Career Program - ', '')
   }
 

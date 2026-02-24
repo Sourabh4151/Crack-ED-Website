@@ -103,6 +103,7 @@ const EnquireModal = ({ isOpen, onClose }) => {
     'Aviva Nirmaan Program - Direct Sales Executive',
     'FinPro Career Program - Sales Executive',
     'FinPro Career Program - Gold Assayer',
+    'VyaparaMitra Program - Relationship Officer',
   ]
 
   const validateFullName = (name) => {

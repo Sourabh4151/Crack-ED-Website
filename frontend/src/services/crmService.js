@@ -32,6 +32,7 @@ const PROGRAM_TO_CENTER_MAP = {
   'Aviva Nirmaan Program - Direct Sales Executive': '70',
   'FinPro Career Program - Sales Executive': '74',
   'FinPro Career Program - Gold Assayer': '76',
+  'VyaparaMitra Program - Relationship Officer': '77',
 }
 
 /** Base URL for our Django backend (set in .env as VITE_API_URL, or use proxy with '') */

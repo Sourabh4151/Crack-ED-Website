@@ -71,6 +71,14 @@ const PROGRAMS = [
     ],
   },
   {
+    id: 'finova',
+    name: 'VyaparaMitra Program',
+    link: '/programs',
+    links: [
+      { label: 'Relationship Officer', href: 'https://finovaro.crack-ed.com' },
+    ],
+  },
+  {
     id: 'aviva',
     name: 'Aviva Nirmaan Program',
     link: '/programs',

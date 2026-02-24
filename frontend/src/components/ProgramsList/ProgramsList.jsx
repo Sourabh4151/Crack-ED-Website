@@ -8,6 +8,7 @@ import udaanLogo from '../../assets/udaan_temporary_logo.png'
 import paytmLogo from '../../assets/paytm_small_logo.png'
 import poonawallaLogoSmallCard from '../../assets/poonawalla_logo_small_card.png'
 import avivaLogoSmallCard from '../../assets/aviva_logo_small_card.png'
+import finovaSmallLogo from '../../assets/finova_small_logo.png'
 import './ProgramsList.css'
 
 const ProgramsList = () => {
@@ -165,6 +166,14 @@ const ProgramsList = () => {
       }
       ,
       {
+        program: 'VyaparaMitra Program',
+        role: 'Relationship Officer',
+        details: [
+          'Join as a Relationship Officer with a CTC of Rs 2.4 LPA + variable',
+          '3-month program'
+        ]
+      },
+      {
         program: 'FinPro Career Program - Gold Assayer',
         role: 'Gold Assayer',
         details: [
@@ -252,6 +261,8 @@ const ProgramsList = () => {
       switch (role) {
         case 'Relationship Manager':
           return 'https://piramal.crack-ed.com/portal'
+        case 'Relationship Officer':
+          return 'https://finovaro.crack-ed.com'
         case 'Field Sales Executive':
           return 'https://paytm.crack-ed.com/portal'
         case 'Gold Assayer':
@@ -288,6 +299,9 @@ const ProgramsList = () => {
     }
     if (category === 'NBFC' && item?.program && item.program.startsWith('FinPro Career Program')) {
       return <img src={poonawallaLogoSmallCard} alt="Poonawalla" className="program-logo-img program-logo-poonawalla" />
+    }
+    if (category === 'NBFC' && item?.program && item.program.startsWith('VyaparaMitra Program')) {
+      return <img src={finovaSmallLogo} alt="Finova" className="program-logo-img program-logo-finova" />
     }
     if (category === 'NBFC') return <img src={piramalLogo} alt="Piramal" className="program-logo-img program-logo-piramal" />
     if (category === 'Insurance') return <img src={avivaLogoSmallCard} alt="Aviva" className="program-logo-img program-logo-aviva" />

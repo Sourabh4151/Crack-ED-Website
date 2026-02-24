@@ -332,6 +332,7 @@ const Header = () => {
                     )}
                   </li>
                   <li><a href="https://piramal.crack-ed.com/portal" onClick={closeMobileMenu}>Piramal ProEdge Program</a></li>
+                  <li><a href="https://finovaro.crack-ed.com" onClick={closeMobileMenu}>VyaparaMitra Program</a></li>
                   <li 
                     className={`dropdown-item-with-submenu ${isUdaanSubmenuOpen ? 'active' : ''}`}
                     onMouseEnter={() => {
