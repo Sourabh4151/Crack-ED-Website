@@ -45,6 +45,8 @@ import poonawallaLogo from '../../assets/poonawalla_logo.png'
 import finovaCardLogo from '../../assets/finova_logo.png'
 import finovaProgramImage from '../../assets/finova_program.jpg'
 import finovaSmallLogo from '../../assets/finova_small_logo.png'
+import pgprmDesktopImage from '../../assets/RM_desktop.png'
+import pgpbmDesktopImage from '../../assets/bandhan_desktop.jpg'
 import './Programs.css'
 
 // Keep "LPA + PLP" on one line to prevent awkward wrapping
@@ -72,6 +74,8 @@ const getProgramHomeLogo = (programLabel) => {
     case 'Aviva Nirmaan Program': return { src: avivaLogo, alt: 'Aviva' }
     case 'Poonawalla FinPro Career Program': return { src: poonawallaLogo, alt: 'Poonawalla Fincorp' }
     case 'Finova VyaparaMitra Program': return { src: finovaCardLogo, alt: 'Finova Capital' }
+    case 'Postgraduate Program Relationship Management': return null
+    case 'Postgraduate Program Banking Management': return null
     case 'Udaan Program': return null
     default: return null
   }
@@ -224,6 +228,18 @@ const Programs = () => {
       title: 'Finova VyaparaMitra Program - Relationship Officer',
       url: 'https://finovaro.crack-ed.com',
     },
+    {
+      id: 24,
+      logo: udaanCardLogo,
+      title: 'Postgraduate Program Relationship Management - Relationship Manager',
+      url: 'https://pgprm.crack-ed.com',
+    },
+    {
+      id: 25,
+      logo: udaanCardLogo,
+      title: 'Postgraduate Program Banking Management - Assistant Manager',
+      url: 'https://pgpam.crack-ed.com',
+    },
   ]
 
   // Featured card index: the first visible card in carousel (shown on main background)
@@ -334,6 +350,20 @@ const Programs = () => {
         duration: '3-month program',
         image: finovaProgramImage,
       },
+      'Postgraduate Program Relationship Management - Relationship Manager': {
+        programLabel: 'Postgraduate Program Relationship Management',
+        logo: auCardLogo,
+        details: 'Join as a Relationship Manager with a CTC of Rs 5.5 LPA + incentives',
+        duration: '6-month program',
+        image: pgprmDesktopImage,
+      },
+      'Postgraduate Program Banking Management - Assistant Manager': {
+        programLabel: 'Postgraduate Program Banking Management',
+        logo: auCardLogo,
+        details: 'Join as an Assistant Manager with a CTC of Rs 4 LPA + incentives',
+        duration: '6-month program',
+        image: pgpbmDesktopImage,
+      },
     }
 
     if (newProgramsMap[card.title]) {
@@ -442,6 +472,8 @@ const Programs = () => {
       .replace('Aviva Nirmaan Program - ', '')
       .replace('Finova VyaparaMitra Program - ', '')
       .replace('Poonawalla FinPro Career Program - ', '')
+      .replace('Postgraduate Program Relationship Management - ', '')
+      .replace('Postgraduate Program Banking Management - ', '')
   }
 
   useEffect(() => {

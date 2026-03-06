@@ -87,6 +87,22 @@ const PROGRAMS = [
       { label: 'Agency Sales Executive', href: 'https://avivaas.crack-ed.com' },
     ],
   },
+  {
+    id: 'pgprm',
+    name: 'PGP - Relationship Management',
+    link: '/programs',
+    links: [
+      { label: 'Relationship Manager', href: 'https://pgprm.crack-ed.com/' },
+    ],
+  },
+  {
+    id: 'pgpbm',
+    name: 'PGP - Banking Management',
+    link: '/programs',
+    links: [
+      { label: 'Assistant Manager', href: 'https://pgpam.crack-ed.com/' },
+    ],
+  },
 ]
 
 const Footer = () => {

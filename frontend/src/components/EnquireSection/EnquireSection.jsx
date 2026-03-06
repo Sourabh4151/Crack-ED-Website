@@ -33,6 +33,8 @@ const PROGRAMS = [
   'Poonawalla FinPro Career Program - Sales Executive',
   'Poonawalla FinPro Career Program - Gold Assayer',
   'Finova VyaparaMitra Program - Relationship Officer',
+  'PGP - Banking Management',
+  'PGP - Relationship Management',
 ]
 
 const EnquireSection = () => {

@@ -197,7 +197,7 @@ const Header = () => {
         <nav className={`nav ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
           <ul className="nav-list">
             <li className="nav-item">
-              <Link to="/about" className="nav-link" onClick={closeMobileMenu}>
+              <Link to="/about" className="nav-link" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>
                 About Us
               </Link>
             </li>
@@ -318,21 +318,24 @@ const Header = () => {
                           }
                         }}
                       >
-                        <li><a href="https://aurmroyale.crack-ed.com/" onClick={closeMobileMenu}>Relationship Manager</a></li>
-                        <li><a href="https://aubank.ro.crack-ed.com/portal" onClick={closeMobileMenu}>Relationship Officer</a></li>
-                        <li><a href="https://aubankbo.crack-ed.com/portal" onClick={closeMobileMenu}>Bank Officer</a></li>
-                        <li><a href="https://aubankso.crack-ed.com/portal" onClick={closeMobileMenu}>Sales Officer</a></li>
-                        <li><a href="https://aubankto.crack-ed.com/portal" onClick={closeMobileMenu}>Transaction Officer</a></li>
-                        <li><a href="https://aubankcm.crack-ed.com/portal" onClick={closeMobileMenu}>Deputy Center Manager</a></li>
-                        <li><a href="https://aubankcso.crack-ed.com/portal" onClick={closeMobileMenu}>Customer Service Officer</a></li>
-                        <li><a href="https://aubanklro.crack-ed.com/portal" onClick={closeMobileMenu}>Late Recovery Officer</a></li>
-                        <li><a href="https://aubankmo.crack-ed.com/portal" onClick={closeMobileMenu}>Money Officer</a></li>
-                        <li><a href="https://aubankbcso.crack-ed.com/portal" onClick={closeMobileMenu}>Customer Service Officer Valuation</a></li>
+                        <li><a href="https://aurmroyale.crack-ed.com/" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Relationship Manager</a></li>
+                        <li><a href="https://aubank.ro.crack-ed.com/portal" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Relationship Officer</a></li>
+                        <li><a href="https://aubankbo.crack-ed.com/portal" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Bank Officer</a></li>
+                        <li><a href="https://aubankso.crack-ed.com/portal" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Sales Officer</a></li>
+                        <li><a href="https://aubankto.crack-ed.com/portal" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Transaction Officer</a></li>
+                        <li><a href="https://aubankcm.crack-ed.com/portal" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Deputy Center Manager</a></li>
+                        <li><a href="https://aubankcso.crack-ed.com/portal" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Customer Service Officer</a></li>
+                        <li><a href="https://aubanklro.crack-ed.com/portal" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Late Recovery Officer</a></li>
+                        <li><a href="https://aubankmo.crack-ed.com/portal" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Money Officer</a></li>
+                        <li><a href="https://aubankbcso.crack-ed.com/portal" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Customer Service Officer Valuation</a></li>
                       </ul>
                     )}
                   </li>
-                  <li><a href="https://piramal.crack-ed.com/portal" onClick={closeMobileMenu}>Piramal ProEdge Program</a></li>
-                  <li><a href="https://finovaro.crack-ed.com" onClick={closeMobileMenu}>Finova VyaparaMitra Program</a></li>
+                  <li><a href="https://piramal.crack-ed.com/portal" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Piramal ProEdge Program</a></li>
+                  <li><a href="https://finovaro.crack-ed.com" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Finova VyaparaMitra Program</a></li>
+                  <li><a href="https://pgprm.crack-ed.com/" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>PGP - Relationship Management
+                  </a></li>
+                  <li><a href="https://pgpam.crack-ed.com/" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>PGP - Banking Management</a></li>
                   <li 
                     className={`dropdown-item-with-submenu ${isUdaanSubmenuOpen ? 'active' : ''}`}
                     onMouseEnter={() => {
@@ -400,14 +403,14 @@ const Header = () => {
                           }
                         }}
                       >
-                        <li><a href="https://udaan.crack-ed.com/portal" onClick={closeMobileMenu}>Cashier / Teller</a></li>
-                        <li><a href="https://udaanvrm.crack-ed.com" onClick={closeMobileMenu}>Virtual Relationship Manager</a></li>
-                        <li><a href="https://udaanrm.crack-ed.com" onClick={closeMobileMenu}>Relationship Manager</a></li>
-                        <li><a href="https://udaanbusiness.crack-ed.com" onClick={closeMobileMenu}>Business Loan Associate</a></li>
+                        <li><a href="https://udaan.crack-ed.com/portal" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Cashier / Teller</a></li>
+                        <li><a href="https://udaanvrm.crack-ed.com" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Virtual Relationship Manager</a></li>
+                        <li><a href="https://udaanrm.crack-ed.com" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Relationship Manager</a></li>
+                        <li><a href="https://udaanbusiness.crack-ed.com" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Business Loan Associate</a></li>
                       </ul>
                     )}
                   </li>
-                  <li><a href="https://paytm.crack-ed.com/portal" onClick={closeMobileMenu}>Paytm Disha Program</a></li>
+                  <li><a href="https://paytm.crack-ed.com/portal" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Paytm Disha Program</a></li>
                   <li 
                     className={`dropdown-item-with-submenu ${isLenskartSubmenuOpen ? 'active' : ''}`}
                     onMouseEnter={() => {
@@ -475,8 +478,8 @@ const Header = () => {
                           }
                         }}
                       >
-                        <li><a href="https://lenskart.crack-ed.com/portal" onClick={closeMobileMenu}>Clinical Technician</a></li>
-                        <li><a href="https://lenskartrsa.crack-ed.com/portal" onClick={closeMobileMenu}>Retail Sales Associate</a></li>
+                        <li><a href="https://lenskart.crack-ed.com/portal" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Clinical Technician</a></li>
+                        <li><a href="https://lenskartrsa.crack-ed.com/portal" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Retail Sales Associate</a></li>
                       </ul>
                     )}
                   </li>
@@ -548,8 +551,8 @@ const Header = () => {
                           }
                         }}
                       >
-                        <li><a href="http://poonawallaga.crack-ed.com/" onClick={closeMobileMenu}>Gold Assayer</a></li>
-                        <li><a href="http://poonawallase.crack-ed.com/" onClick={closeMobileMenu}>Sales Executive</a></li>
+                        <li><a href="http://poonawallaga.crack-ed.com/" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Gold Assayer</a></li>
+                        <li><a href="http://poonawallase.crack-ed.com/" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Sales Executive</a></li>
                       </ul>
                     )}
                   </li>
@@ -622,8 +625,8 @@ const Header = () => {
                           }
                         }}
                       >
-                        <li><a href="https://avivads.crack-ed.com" onClick={closeMobileMenu}>Direct Sales Executive</a></li>
-                        <li><a href="https://avivaas.crack-ed.com" onClick={closeMobileMenu}>Agency Sales Executive</a></li>
+                        <li><a href="https://avivads.crack-ed.com" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Direct Sales Executive</a></li>
+                        <li><a href="https://avivaas.crack-ed.com" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Agency Sales Executive</a></li>
                       </ul>
                     )}
                   </li>
@@ -631,15 +634,15 @@ const Header = () => {
               )}
             </li>
             <li className="nav-item">
-              <Link to="/resources" className="nav-link" onClick={closeMobileMenu}>Resources</Link>
+              <Link to="/resources" className="nav-link" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Resources</Link>
             </li>
             <li className="nav-item">
-              <Link to="/badhta-india-dekho" className="nav-link" onClick={closeMobileMenu}>
+              <Link to="/badhta-india-dekho" className="nav-link" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>
                 Badhta India Dekho
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/careers" className="nav-link" onClick={closeMobileMenu}>Careers</Link>
+              <Link to="/careers" className="nav-link" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Careers</Link>
             </li>
           </ul>
         </nav>

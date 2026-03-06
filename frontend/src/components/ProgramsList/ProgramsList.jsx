@@ -127,6 +127,22 @@ const ProgramsList = () => {
           'Join as a Business Loan Associate with a CTC of upto Rs 2.8 LPA',
           '3-week program'
         ]
+      },
+      {
+        program: 'Postgraduate Program',
+        role: 'Relationship Manager',
+        details: [
+          'Join as a Relationship Manager with a CTC of Rs 5.5 LPA + incentives',
+          '6-month program'
+        ]
+      },
+      {
+        program: 'Postgraduate Program',
+        role: 'Assistant Manager',
+        details: [
+          'Join as an Assistant Manager with a CTC of Rs 4 LPA + incentives',
+          '6-month program'
+        ]
       }
     ],
     Retail: [
@@ -213,10 +229,13 @@ const ProgramsList = () => {
 
   const getProgramLink = (category, item) => {
     const role = item?.role
+    const program = item?.program
     if (category === 'Banking') {
+      if (program === 'Postgraduate Program' && role === 'Relationship Manager') return 'https://pgprm.crack-ed.com'
+      if (program === 'Postgraduate Program' && role === 'Assistant Manager') return 'https://pgpam.crack-ed.com'
       switch (role) {
         case 'Relationship Manager':
-          return item?.program === 'Udaan Program' ? 'https://udaanrm.crack-ed.com' : 'https://aurmroyale.crack-ed.com/'
+          return program === 'Udaan Program' ? 'https://udaanrm.crack-ed.com' : 'https://aurmroyale.crack-ed.com/'
         case 'Relationship Officer':
           return 'https://aubank.ro.crack-ed.com/portal'
         case 'Bank Officer':
@@ -289,7 +308,9 @@ const ProgramsList = () => {
   }
 
   const getIcon = (category, item) => {
-    if (category === 'Banking' && item?.program === 'Udaan Program') {
+    const program = item?.program
+    const useUdaanLogo = program === 'Udaan Program' || program === 'Postgraduate Program'
+    if (category === 'Banking' && useUdaanLogo) {
       return <img src={udaanLogo} alt="Udaan" className="program-logo-img program-logo-udaan" />
     }
     if (category === 'Banking') return <img src={auCardLogo} alt="AU Bank" className="program-logo-img" />

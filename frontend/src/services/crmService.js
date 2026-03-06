@@ -33,6 +33,8 @@ const PROGRAM_TO_CENTER_MAP = {
   'Poonawalla FinPro Career Program - Sales Executive': '74',
   'Poonawalla FinPro Career Program - Gold Assayer': '76',
   'Finova VyaparaMitra Program - Relationship Officer': '77',
+  'PGP - Banking Management': '78',
+  'PGP - Relationship Management': '79',
 }
 
 /** Base URL for our Django backend (set in .env as VITE_API_URL, or use proxy with '') */
