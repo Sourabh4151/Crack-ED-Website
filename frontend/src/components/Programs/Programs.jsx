@@ -73,8 +73,8 @@ const getProgramHomeLogo = (programLabel) => {
     case 'Aviva Nirmaan Program': return { src: avivaLogo, alt: 'Aviva' }
     case 'Poonawalla FinPro Career Program': return { src: poonawallaLogo, alt: 'Poonawalla Fincorp' }
     case 'Finova VyaparaMitra Program': return { src: finovaCardLogo, alt: 'Finova Capital' }
-    case 'Postgraduate Program Relationship Management': return null
-    case 'Postgraduate Program Banking Management': return null
+    case 'Postgraduate Program in Relationship Management': return null
+    case 'Postgraduate Program in Banking Management': return null
     case 'Udaan Program': return null
     default: return null
   }
@@ -91,93 +91,93 @@ const Programs = () => {
   const programCards = [
     {
       id: 1,
-      logo: lenskartCardLogo,
-      title: 'Lenskart EyeTech Program - Clinical Technician',
-      url: 'https://lenskart.crack-ed.com/portal',
-    },
-    {
-      id: 2,
-      logo: lenskartCardLogo,
-      title: 'Lenskart EyeTech Program - Retail Sales Associate',
-      url: 'https://lenskartrsa.crack-ed.com/portal',
-    },
-    {
-      id: 3,
-      logo: udaanCardLogo,
-      title: 'Udaan Program - Cashier / Teller',
-      url: 'https://udaan.crack-ed.com/portal',
-    },
-    {
-      id: 14,
-      logo: udaanCardLogo,
-      title: 'Udaan Program - Virtual Relationship Manager',
-      url: 'https://udaanvrm.crack-ed.com',
-    },
-    {
-      id: 15,
-      logo: udaanCardLogo,
-      title: 'Udaan Program - Relationship Manager',
-      url: 'https://udaanrm.crack-ed.com',
-    },
-    {
-      id: 16,
-      logo: udaanCardLogo,
-      title: 'Udaan Program - Business Loan Associate',
-      url: 'https://udaanbusiness.crack-ed.com',
-    },
-    {
-      id: 17,
-      logo: piramalCardLogo,
-      title: 'Piramal ProEdge Program - Relationship Manager',
-      url: 'https://piramal.crack-ed.com/portal',
-    },
-    {
-      id: 18,
-      logo: paytmCardLogo,
-      title: 'Paytm Disha Program - Field Sales Executive',
-      url: 'https://paytm.crack-ed.com/portal',
-    },
-    {
-      id: 19,
-      logo: avivaSmallLogo,
-      title: 'Aviva Nirmaan Program - Direct Sales Executive',
-      url: 'https://avivads.crack-ed.com',
-    },
-    {
-      id: 20,
-      logo: avivaSmallLogo,
-      title: 'Aviva Nirmaan Program - Agency Sales Executive',
-      url: 'https://avivaas.crack-ed.com',
-    },
-    {
-      id: 21,
-      logo: poonawallaSmallLogo,
-      title: 'Poonawalla FinPro Career Program - Gold Assayer',
-      url: 'http://poonawallaga.crack-ed.com/',
-    },
-    {
-      id: 22,
-      logo: poonawallaSmallLogo,
-      title: 'Poonawalla FinPro Career Program - Sales Executive',
-      url: 'http://poonawallase.crack-ed.com/',
-    },
-    {
-      id: 23,
-      logo: finovaSmallLogo,
-      title: 'Finova VyaparaMitra Program - Relationship Officer',
-      url: 'https://finovaro.crack-ed.com',
-    },
-    {
-      id: 24,
       logo: udaanCardLogo,
       title: 'Postgraduate Program Relationship Management - Relationship Manager',
       url: 'https://pgprm.crack-ed.com',
     },
     {
-      id: 25,
+      id: 2,
       logo: udaanCardLogo,
       title: 'Postgraduate Program Banking Management - Assistant Manager',
       url: 'https://pgpam.crack-ed.com',
+    },
+    {
+      id: 3,
+      logo: lenskartCardLogo,
+      title: 'Lenskart EyeTech Program - Clinical Technician',
+      url: 'https://lenskart.crack-ed.com/portal',
+    },
+    {
+      id: 4,
+      logo: lenskartCardLogo,
+      title: 'Lenskart EyeTech Program - Retail Sales Associate',
+      url: 'https://lenskartrsa.crack-ed.com/portal',
+    },
+    {
+      id: 5,
+      logo: udaanCardLogo,
+      title: 'Udaan Program - Cashier / Teller',
+      url: 'https://udaan.crack-ed.com/portal',
+    },
+    {
+      id: 6,
+      logo: udaanCardLogo,
+      title: 'Udaan Program - Virtual Relationship Manager',
+      url: 'https://udaanvrm.crack-ed.com',
+    },
+    {
+      id: 7,
+      logo: udaanCardLogo,
+      title: 'Udaan Program - Relationship Manager',
+      url: 'https://udaanrm.crack-ed.com',
+    },
+    {
+      id: 8,
+      logo: udaanCardLogo,
+      title: 'Udaan Program - Business Loan Associate',
+      url: 'https://udaanbusiness.crack-ed.com',
+    },
+    {
+      id: 9,
+      logo: piramalCardLogo,
+      title: 'Piramal ProEdge Program - Relationship Manager',
+      url: 'https://piramal.crack-ed.com/portal',
+    },
+    {
+      id: 10,
+      logo: paytmCardLogo,
+      title: 'Paytm Disha Program - Field Sales Executive',
+      url: 'https://paytm.crack-ed.com/portal',
+    },
+    {
+      id: 11,
+      logo: avivaSmallLogo,
+      title: 'Aviva Nirmaan Program - Direct Sales Executive',
+      url: 'https://avivads.crack-ed.com',
+    },
+    {
+      id: 12,
+      logo: avivaSmallLogo,
+      title: 'Aviva Nirmaan Program - Agency Sales Executive',
+      url: 'https://avivaas.crack-ed.com',
+    },
+    {
+      id: 13,
+      logo: poonawallaSmallLogo,
+      title: 'Poonawalla FinPro Career Program - Gold Assayer',
+      url: 'http://poonawallaga.crack-ed.com/',
+    },
+    {
+      id: 14,
+      logo: poonawallaSmallLogo,
+      title: 'Poonawalla FinPro Career Program - Sales Executive',
+      url: 'http://poonawallase.crack-ed.com/',
+    },
+    {
+      id: 15,
+      logo: finovaSmallLogo,
+      title: 'Finova VyaparaMitra Program - Relationship Officer',
+      url: 'https://finovaro.crack-ed.com',
     },
   ]
 
@@ -280,14 +280,16 @@ const Programs = () => {
         image: finovaProgramImage,
       },
       'Postgraduate Program Relationship Management - Relationship Manager': {
-        programLabel: 'Postgraduate Program Relationship Management',
+        programLabel: 'Postgraduate Program in Relationship Management',
+        shortProgramLabel: 'PGP - Relationship Management',
         logo: auCardLogo,
         details: 'Join as a Relationship Manager with a CTC of Rs 5.5 LPA + incentives',
         duration: '6-month program',
         image: pgprmDesktopImage,
       },
       'Postgraduate Program Banking Management - Assistant Manager': {
-        programLabel: 'Postgraduate Program Banking Management',
+        programLabel: 'Postgraduate Program in Banking Management',
+        shortProgramLabel: 'PGP - Banking Management',
         logo: auCardLogo,
         details: 'Join as an Assistant Manager with a CTC of Rs 4 LPA + incentives',
         duration: '6-month program',
@@ -300,6 +302,7 @@ const Programs = () => {
       return {
         logo: prog.logo,
         programLabel: prog.programLabel,
+        shortProgramLabel: prog.shortProgramLabel,
         title: card.title,
         details: prog.details,
         duration: prog.duration,
@@ -331,6 +334,13 @@ const Programs = () => {
   }
 
   const currentProgramDetails = getProgramDetailsForCard(programCards[featuredCardIndex])
+
+  // Short label for small/mini program cards (PGP only)
+  const getSmallCardTitle = (card) => {
+    if (card.title === 'Postgraduate Program Relationship Management - Relationship Manager') return 'PGP - Relationship Management'
+    if (card.title === 'Postgraduate Program Banking Management - Assistant Manager') return 'PGP - Banking Management'
+    return card.title
+  }
 
   // Get display title (strip program prefix)
   const getDisplayTitle = (title) => {
@@ -489,7 +499,7 @@ const Programs = () => {
                                 </div>
                               )
                             })()}
-                            <div className="mobile-program-card-label">{details.programLabel}</div>
+                            <div className="mobile-program-card-label">{details.shortProgramLabel ?? details.programLabel}</div>
                             <h3 className="mobile-program-card-title">{getDisplayTitle(details.title)}</h3>
                             <div className="mobile-program-card-details">
                               <div className="mobile-program-card-detail">
@@ -600,7 +610,7 @@ const Programs = () => {
                         <div className="program-mini-card-logo-wrap">
                           <img src={card.logo} alt={card.title} className="program-mini-card-logo" />
                         </div>
-                        <p className="program-mini-card-title">{card.title}</p>
+                        <p className="program-mini-card-title">{getSmallCardTitle(card)}</p>
                       </div>
                     </a>
                   ))}
@@ -618,7 +628,7 @@ const Programs = () => {
                         <div className="program-mini-card-logo-wrap">
                           <img src={programCards[0].logo} alt={programCards[0].title} className="program-mini-card-logo" />
                         </div>
-                        <p className="program-mini-card-title">{programCards[0].title}</p>
+                        <p className="program-mini-card-title">{getSmallCardTitle(programCards[0])}</p>
                       </div>
                     </a>
                   )}
