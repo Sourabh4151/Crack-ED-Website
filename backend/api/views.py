@@ -13,7 +13,7 @@ from rest_framework.decorators import api_view, authentication_classes, permissi
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
-from .constants import get_center_for_program
+from .constants import get_center_for_program, get_source_page_label
 from .models import Example, QuizSubmission, Lead, JobApplication, JobListing, BIDEpisode
 from .serializers import ExampleSerializer, JobListingSerializer, BIDEpisodeSerializer
 
@@ -31,32 +31,52 @@ def _utm_three(utm_params):
     )
 
 
-def _forward_lead_to_extraaedge(first_name, last_name, email, mobile, center, state=''):
-    """Forward lead to Extraaedge CRM. Auth token from env. Does not raise; logs on failure."""
+def build_extraaedge_payload(
+    first_name, last_name, email, mobile, center, state='',
+    source_page='', utm_source='', utm_medium='', utm_campaign='',
+):
+    """Build the JSON payload for Extraaedge addPublisherLead. Returns None if EXTRAEDGE_AUTH_TOKEN not set."""
     token = (os.environ.get('EXTRAEDGE_AUTH_TOKEN') or '').strip()
     if not token:
-        print('[API] EXTRAEDGE_AUTH_TOKEN not set; skipping CRM forward')
-        return
+        return None
     mobile_clean = re.sub(r'\D', '', str(mobile))[:15]
     try:
         mobile_int = int(mobile_clean) if mobile_clean else 0
     except ValueError:
         mobile_int = 0
     last_name_clean = (last_name or '').strip()
-    payload = {
+    return {
         'Source': 'crack-ed',
         'AuthToken': token,
         'FirstName': (first_name or '—').strip(),
-        'LastName': last_name_clean,  # empty when no last name so CRM shows blank, not "—"
+        'LastName': last_name_clean,
         'Email': (email or '').strip(),
         'MobileNumber': mobile_int,
         'State': (state or '').strip(),
         'Center': (center or '1').strip(),
+        'Field5': get_source_page_label(source_page or '')[:500],
+        'Field14': (utm_campaign or '').strip()[:500],
+        'Field15': (utm_source or '').strip()[:500],
+        'Textb5': (utm_medium or '').strip()[:500],
     }
+
+
+def _forward_lead_to_extraaedge(
+    first_name, last_name, email, mobile, center, state='',
+    source_page='', utm_source='', utm_medium='', utm_campaign='',
+):
+    """Forward lead to Extraaedge CRM. Auth token from env. Does not raise; logs on failure."""
+    payload = build_extraaedge_payload(
+        first_name, last_name, email, mobile, center, state=state,
+        source_page=source_page, utm_source=utm_source, utm_medium=utm_medium, utm_campaign=utm_campaign,
+    )
+    if not payload:
+        print('[API] EXTRAEDGE_AUTH_TOKEN not set; skipping CRM forward')
+        return
     try:
         r = requests.post(EXTRAEDGE_URL, json=payload, timeout=10)
         if r.ok:
-            log_name = f"{first_name} {last_name_clean}".strip() or first_name or '—'
+            log_name = f"{first_name} {(last_name or '').strip()}".strip() or first_name or '—'
             print(f'[API] Lead forwarded to Extraaedge: {log_name}')
         else:
             print(f'[API] Extraaedge returned {r.status_code}: {r.text[:200]}')
@@ -64,12 +84,21 @@ def _forward_lead_to_extraaedge(first_name, last_name, email, mobile, center, st
         print(f'[API] Extraaedge forward error: {e}')
 
 
-def _forward_lead_to_extraaedge_async(first_name, last_name, email, mobile, center, state=''):
+def _forward_lead_to_extraaedge_async(
+    first_name, last_name, email, mobile, center, state='',
+    source_page='', utm_source='', utm_medium='', utm_campaign='',
+):
     """Run CRM forward in a background thread so the API can return immediately."""
     thread = threading.Thread(
         target=_forward_lead_to_extraaedge,
         args=(first_name, last_name, email, mobile, center),
-        kwargs={'state': state or ''},
+        kwargs={
+            'state': state or '',
+            'source_page': source_page or '',
+            'utm_source': utm_source or '',
+            'utm_medium': utm_medium or '',
+            'utm_campaign': utm_campaign or '',
+        },
     )
     thread.daemon = True
     thread.start()
@@ -155,7 +184,10 @@ def quiz_submit(request):
     q_first = (parts[0] if parts else '—').strip()
     q_last = (parts[1] if len(parts) > 1 else '').strip()  # empty when single name so CRM shows blank
     center_val = get_center_for_program(program) or '1'
-    _forward_lead_to_extraaedge_async(q_first, q_last, email, mobile, center_val, state='')
+    _forward_lead_to_extraaedge_async(
+        q_first, q_last, email, mobile, center_val, state='',
+        source_page=source_page, utm_source=utm_source, utm_medium=utm_medium, utm_campaign=utm_campaign,
+    )
     return Response({'success': True}, status=status.HTTP_201_CREATED)
 
 
@@ -213,7 +245,10 @@ def submit_lead(request):
         utm_campaign=utm_campaign,
     )
     print(f'[API] Lead saved: {first_name} {last_name} <{email}>')
-    _forward_lead_to_extraaedge_async(first_name, last_name, email, mobile, center_val, state)
+    _forward_lead_to_extraaedge_async(
+        first_name, last_name, email, mobile, center_val, state,
+        source_page=source_page, utm_source=utm_source, utm_medium=utm_medium, utm_campaign=utm_campaign,
+    )
     return Response({'success': True}, status=status.HTTP_201_CREATED)
 
 
