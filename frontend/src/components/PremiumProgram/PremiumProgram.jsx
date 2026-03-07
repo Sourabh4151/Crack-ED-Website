@@ -1,6 +1,6 @@
 import React from 'react'
 // import premiumProgramImage from '../../assets/premium_program.jpg'
-import iimRohtakLogo from '../../assets/iim_rohtak.png'
+import iimLucknowLogo from '../../assets/iim_lucknow.svg'
 import crackEdPremiumLogo from '../../assets/crack-ed_premium.png'
 import premiumProgramImage from '../../assets/relationship manager_desktop.jpg'
 import './PremiumProgram.css'
@@ -27,10 +27,10 @@ const PremiumProgram = () => {
             <h3 className="premium-program-card-title">Relationship Manager</h3>
             <div className="premium-program-sponsors">
               <div className="sponsor-logo">
-                <img src={iimRohtakLogo} alt="IIM Rohtak" />
+                <img src={crackEdPremiumLogo} alt="CRACK-ED" />
               </div>
               <div className="sponsor-logo">
-                <img src={crackEdPremiumLogo} alt="CRACK-ED" />
+                <img src={iimLucknowLogo} alt="IIM Lucknow" style={{ width: '146px', height: '44.92px' }} />
               </div>
             </div>
             <a 
