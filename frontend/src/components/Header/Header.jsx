@@ -183,7 +183,7 @@ const Header = () => {
         <nav className={`nav ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
           <ul className="nav-list">
             <li className="nav-item">
-              <Link to="/about" className="nav-link" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>
+              <Link to="/about" className="nav-link" onClick={closeMobileMenu}>
                 About Us
               </Link>
             </li>
@@ -534,15 +534,15 @@ const Header = () => {
               )}
             </li>
             <li className="nav-item">
-              <Link to="/resources" className="nav-link" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Resources</Link>
+              <Link to="/resources" className="nav-link" onClick={closeMobileMenu}>Resources</Link>
             </li>
             <li className="nav-item">
-              <Link to="/badhta-india-dekho" className="nav-link" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>
+              <Link to="/badhta-india-dekho" className="nav-link" onClick={closeMobileMenu}>
                 Badhta India Dekho
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/careers" className="nav-link" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Careers</Link>
+              <Link to="/careers" className="nav-link" onClick={closeMobileMenu}>Careers</Link>
             </li>
           </ul>
         </nav>
