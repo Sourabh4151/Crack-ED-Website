@@ -81,16 +81,6 @@ const EnquireModal = ({ isOpen, onClose }) => {
   ]
 
   const programs = [
-    'AURUM Bankers Program - Relationship Manager',
-    'AURUM Bankers Program - Relationship Officer',
-    'AURUM Bankers Program - Bank Officer',
-    'AURUM Bankers Program - Sales Officer',
-    'AURUM Bankers Program - Transaction Officer',
-    'AURUM Bankers Program - Deputy Center Manager',
-    'AURUM Bankers Program - Customer Service Officer',
-    'AURUM Bankers Program - Deputy Late Recovery Officer',
-    'AURUM Bankers Program - Money Officer',
-    'AURUM Bankers Program - Customer Service Officer Valuation',
     'Udaan Program - Cashier / Teller',
     'Udaan Program - Virtual Relationship Manager',
     'Udaan Program - Relationship Manager',

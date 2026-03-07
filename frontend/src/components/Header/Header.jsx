@@ -6,7 +6,6 @@ import './Header.css'
 const Header = () => {
   const location = useLocation()
   const [isProgramsOpen, setIsProgramsOpen] = useState(false)
-  const [isAurumSubmenuOpen, setIsAurumSubmenuOpen] = useState(false)
   const [isUdaanSubmenuOpen, setIsUdaanSubmenuOpen] = useState(false)
   const [isLenskartSubmenuOpen, setIsLenskartSubmenuOpen] = useState(false)
   const [isFinProSubmenuOpen, setIsFinProSubmenuOpen] = useState(false)
@@ -14,7 +13,6 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const closeTimeoutRef = useRef(null)
-  const aurumTimeoutRef = useRef(null)
   const udaanTimeoutRef = useRef(null)
   const lenskartTimeoutRef = useRef(null)
   const finproTimeoutRef = useRef(null)
@@ -47,10 +45,6 @@ const Header = () => {
     if (closeTimeoutRef.current) {
       clearTimeout(closeTimeoutRef.current)
       closeTimeoutRef.current = null
-    }
-    if (aurumTimeoutRef.current) {
-      clearTimeout(aurumTimeoutRef.current)
-      aurumTimeoutRef.current = null
     }
     if (udaanTimeoutRef.current) {
       clearTimeout(udaanTimeoutRef.current)
@@ -95,7 +89,6 @@ const Header = () => {
       if (window.innerWidth > 768 && isMobileMenuOpen) {
         setIsMobileMenuOpen(false)
         setIsProgramsOpen(false)
-        setIsAurumSubmenuOpen(false)
         setIsUdaanSubmenuOpen(false)
         setIsLenskartSubmenuOpen(false)
       }
@@ -135,7 +128,6 @@ const Header = () => {
     // Close all dropdowns when toggling mobile menu
     if (!isMobileMenuOpen) {
       setIsProgramsOpen(false)
-      setIsAurumSubmenuOpen(false)
       setIsLenskartSubmenuOpen(false)
     }
   }
@@ -143,22 +135,16 @@ const Header = () => {
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false)
     setIsProgramsOpen(false)
-    setIsAurumSubmenuOpen(false)
     setIsUdaanSubmenuOpen(false)
     setIsLenskartSubmenuOpen(false)
   }
 
   const toggleProgramsMobile = () => {
     setIsProgramsOpen(!isProgramsOpen)
-    setIsAurumSubmenuOpen(false)
     setIsUdaanSubmenuOpen(false)
     setIsLenskartSubmenuOpen(false)
     setIsFinProSubmenuOpen(false)
     setIsAvivaSubmenuOpen(false)
-  }
-
-  const toggleAurumSubmenuMobile = () => {
-    setIsAurumSubmenuOpen(!isAurumSubmenuOpen)
   }
 
   const toggleUdaanSubmenuMobile = () => {
@@ -213,7 +199,6 @@ const Header = () => {
                 if (window.innerWidth > 768) {
                   closeTimeoutRef.current = setTimeout(() => {
                     setIsProgramsOpen(false)
-                    setIsAurumSubmenuOpen(false)
                     setIsUdaanSubmenuOpen(false)
                     setIsLenskartSubmenuOpen(false)
                   }, 300)
@@ -244,93 +229,12 @@ const Header = () => {
                     if (window.innerWidth > 768) {
                       closeTimeoutRef.current = setTimeout(() => {
                         setIsProgramsOpen(false)
-                        setIsAurumSubmenuOpen(false)
                         setIsUdaanSubmenuOpen(false)
                         setIsLenskartSubmenuOpen(false)
                       }, 300)
                     }
                   }}
                 >
-                  <li 
-                    className={`dropdown-item-with-submenu ${isAurumSubmenuOpen ? 'active' : ''}`}
-                    onMouseEnter={() => {
-                      if (window.innerWidth > 768) {
-                        clearAllTimeouts()
-                        setIsAurumSubmenuOpen(true)
-                        setIsUdaanSubmenuOpen(false)
-                        setIsLenskartSubmenuOpen(false)
-                        setIsProgramsOpen(true)
-                      }
-                    }}
-                    onMouseLeave={() => {
-                      if (window.innerWidth > 768) {
-                        aurumTimeoutRef.current = setTimeout(() => {
-                          setIsAurumSubmenuOpen(false)
-                        }, 150)
-                      }
-                    }}
-                  >
-                    <a 
-                      href="#programs/aurum-bankers" 
-                      className="dropdown-link-with-arrow"
-                      onClick={(e) => {
-                        if (window.innerWidth <= 768) {
-                          e.preventDefault()
-                          toggleAurumSubmenuMobile()
-                        }
-                      }}
-                    >
-                      Aurum Bankers Program
-                      <svg 
-                        className="submenu-arrow" 
-                        width="16" 
-                        height="16" 
-                        viewBox="0 0 16 16" 
-                        fill="none" 
-                        xmlns="http://www.w3.org/2000/svg"
-                        onClick={(e) => {
-                          e.preventDefault()
-                          if (window.innerWidth <= 768) {
-                            toggleAurumSubmenuMobile()
-                          } else {
-                            setIsAurumSubmenuOpen(!isAurumSubmenuOpen)
-                          }
-                        }}
-                      >
-                        <path d="M6 4L10 8L6 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                    </a>
-                    {isAurumSubmenuOpen && (
-                      <ul 
-                        className="nested-dropdown-menu"
-                        onMouseEnter={() => {
-                          if (window.innerWidth > 768) {
-                            clearAllTimeouts()
-                            setIsAurumSubmenuOpen(true)
-                            setIsProgramsOpen(true)
-                          }
-                        }}
-                        onMouseLeave={() => {
-                          if (window.innerWidth > 768) {
-                            aurumTimeoutRef.current = setTimeout(() => {
-                              setIsAurumSubmenuOpen(false)
-                            }, 150)
-                          }
-                        }}
-                      >
-                        <li><a href="https://aurmroyale.crack-ed.com/" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Relationship Manager</a></li>
-                        <li><a href="https://aubank.ro.crack-ed.com/portal" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Relationship Officer</a></li>
-                        <li><a href="https://aubankbo.crack-ed.com/portal" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Bank Officer</a></li>
-                        <li><a href="https://aubankso.crack-ed.com/portal" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Sales Officer</a></li>
-                        <li><a href="https://aubankto.crack-ed.com/portal" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Transaction Officer</a></li>
-                        <li><a href="https://aubankcm.crack-ed.com/portal" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Deputy Center Manager</a></li>
-                        <li><a href="https://aubankcso.crack-ed.com/portal" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Customer Service Officer</a></li>
-                        <li><a href="https://aubanklro.crack-ed.com/portal" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Late Recovery Officer</a></li>
-                        <li><a href="https://aubankmo.crack-ed.com/portal" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Money Officer</a></li>
-                        <li><a href="https://aubankbcso.crack-ed.com/portal" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Customer Service Officer Valuation</a></li>
-                      </ul>
-                    )}
-                  </li>
                   <li><a href="https://piramal.crack-ed.com/portal" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Piramal ProEdge Program</a></li>
                   <li><a href="https://finovaro.crack-ed.com" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Finova VyaparaMitra Program</a></li>
                   <li><a href="https://pgprm.crack-ed.com/" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>PGP - Relationship Management
@@ -341,7 +245,6 @@ const Header = () => {
                     onMouseEnter={() => {
                       if (window.innerWidth > 768) {
                         clearAllTimeouts()
-                        setIsAurumSubmenuOpen(false)
                         setIsUdaanSubmenuOpen(true)
                         setIsLenskartSubmenuOpen(false)
                         setIsProgramsOpen(true)
@@ -416,7 +319,6 @@ const Header = () => {
                     onMouseEnter={() => {
                       if (window.innerWidth > 768) {
                         clearAllTimeouts()
-                        setIsAurumSubmenuOpen(false)
                         setIsUdaanSubmenuOpen(false)
                         setIsLenskartSubmenuOpen(true)
                         setIsProgramsOpen(true)
@@ -488,7 +390,6 @@ const Header = () => {
                     onMouseEnter={() => {
                       if (window.innerWidth > 768) {
                         clearAllTimeouts()
-                        setIsAurumSubmenuOpen(false)
                         setIsUdaanSubmenuOpen(false)
                         setIsLenskartSubmenuOpen(false)
                         setIsFinProSubmenuOpen(true)
@@ -561,7 +462,6 @@ const Header = () => {
                     onMouseEnter={() => {
                       if (window.innerWidth > 768) {
                         clearAllTimeouts()
-                        setIsAurumSubmenuOpen(false)
                         setIsUdaanSubmenuOpen(false)
                         setIsLenskartSubmenuOpen(false)
                         setIsFinProSubmenuOpen(false)

@@ -367,7 +367,7 @@ image.png.programs-section .program-details a,
 .programs-section .program-logo-above {
   position: absolute;
   bottom: 100%;
-  left: 32px; /* Align with program-card-panel padding - same as AURUM Bankers Program content */
+  left: 32px; /* Align with program-card-panel padding */
   margin-bottom: -8px;
   z-index: 1;
 }
@@ -1098,7 +1098,7 @@ image.png.programs-section .program-details a,
     width: 90px;
   }
 
-  /* AURUM Bankers Program - Montserrat SemiBold 12px, line-height 27px, center, rgba(250,250,250,0.7) */
+  /* Program label - Montserrat SemiBold 12px, line-height 27px, center, rgba(250,250,250,0.7) */
   .mobile-program-card-label {
     font-family: 'Montserrat', sans-serif;
     font-size: 12px;

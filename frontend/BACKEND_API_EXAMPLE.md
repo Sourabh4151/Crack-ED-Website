@@ -25,18 +25,11 @@ app = Flask(__name__)
 
 # Program to Center mapping (same as frontend)
 PROGRAM_TO_CENTER_MAP = {
-    'AURUM Bankers Relationship Manager': '1',
-    'AURUM Bankers Relationship Officer': '2',
-    'AURUM Bankers Bank Officer': '3',
-    'AURUM Bankers Sales Officer': '4',
-    'AURUM Bankers Transaction Officer': '5',
-    'AURUM Bankers Deputy Center Manager': '6',
-    'AURUM Bankers Customer Service Officer': '7',
-    'AURUM Bankers Late Recovery Officer': '8',
-    'AURUM Bankers Money Officer': '9',
-    'AURUM Bankers Customer Service Officer Valuation': '10',
-    'Lenskart Clinical Technician Program': '11',
-    'Lenskart Retail Sales Associate Program': '12',
+    'Lenskart EyeTech Program - Clinical Technician': '38',
+    'Lenskart EyeTech Program - Retail Sales Associate': '61',
+    'Udaan Program - Cashier / Teller': '33',
+    'Piramal ProEdge Program - Relationship Manager': '47',
+    'Paytm Disha Program - Field Sales Executive': '55',
 }
 
 def get_center_by_program(program):
@@ -113,8 +106,10 @@ const app = express();
 app.use(express.json());
 
 const PROGRAM_TO_CENTER_MAP = {
-  'AURUM Bankers Relationship Manager': '1',
-  // ... same mapping as frontend
+  'Lenskart EyeTech Program - Clinical Technician': '38',
+  'Lenskart EyeTech Program - Retail Sales Associate': '61',
+  'Udaan Program - Cashier / Teller': '33',
+  // ... same mapping as frontend crmService.js
 };
 
 const getCenterByProgram = (program) => {
@@ -200,6 +195,6 @@ curl -X POST http://localhost:3001/api/submit-lead \
     "lastName": "Doe",
     "email": "john@example.com",
     "mobile": "1234567890",
-    "program": "AURUM Bankers Relationship Manager"
+    "program": "Lenskart EyeTech Program - Clinical Technician"
   }'
 ```

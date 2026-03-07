@@ -64,7 +64,7 @@ WEBSITE_CRACK-ED/
 
 ### Programs Component
 - Interactive carousel showcasing job-ready programs
-- Features AURUM Bankers and Lenskart programs
+- Features Lenskart, Udaan, Piramal, Paytm and other programs
 - Auto-advancing carousel with progress bar
 - Program details with CTC information and duration
 - Mini card navigation with circular wrapping

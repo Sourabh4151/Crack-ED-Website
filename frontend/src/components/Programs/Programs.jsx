@@ -66,7 +66,6 @@ const DetailsText = ({ text }) => {
 // Map program label to home logo (null = no logo)
 const getProgramHomeLogo = (programLabel) => {
   switch (programLabel) {
-    case 'AURUM Bankers Program': return { src: auHomeLogo, alt: 'AU Small Finance Bank' }
     case 'Paytm Disha Program': return { src: paytmHomeLogo, alt: 'Paytm' }
     case 'Piramal ProEdge Program': return { src: piramalHomeLogo, alt: 'Piramal Finance' }
     case 'Lenskart Program': return { src: lenskartHomeLogo, alt: 'Lenskart' }
@@ -92,78 +91,18 @@ const Programs = () => {
   const programCards = [
     {
       id: 1,
-      logo: auCardLogo,
-      title: 'AURUM Bankers Program - Relationship Manager',
-      url: 'https://aurmroyale.crack-ed.com/',
-    },
-    {
-      id: 2,
-      logo: auCardLogo,
-      title: 'AURUM Bankers Program - Bank Officer',
-      url: 'https://aubankbo.crack-ed.com/portal',
-    },
-    {
-      id: 3,
-      logo: auCardLogo,
-      title: 'AURUM Bankers Program - Relationship Officer',
-      url: 'https://aubank.ro.crack-ed.com/portal',
-    },
-    {
-      id: 4,
-      logo: auCardLogo,
-      title: 'AURUM Bankers Program - Sales Officer',
-      url: 'https://aubankso.crack-ed.com/portal',
-    },
-    {
-      id: 5,
       logo: lenskartCardLogo,
       title: 'Lenskart EyeTech Program - Clinical Technician',
       url: 'https://lenskart.crack-ed.com/portal',
     },
     {
-      id: 6,
+      id: 2,
       logo: lenskartCardLogo,
       title: 'Lenskart EyeTech Program - Retail Sales Associate',
       url: 'https://lenskartrsa.crack-ed.com/portal',
     },
     {
-      id: 7,
-      logo: auCardLogo,
-      title: 'AURUM Bankers Program - Transaction Officer',
-      url: 'https://aubankto.crack-ed.com/portal',
-    },
-    {
-      id: 8,
-      logo: auCardLogo,
-      title: 'AURUM Bankers Program - Deputy Center Manager',
-      url: 'https://aubankcm.crack-ed.com/portal',
-    },
-    {
-      id: 9,
-      logo: auCardLogo,
-      title: 'AURUM Bankers Program - Customer Service Officer',
-      url: 'https://aubankcso.crack-ed.com/portal',
-    },
-    {
-      id: 10,
-      logo: auCardLogo,
-      title: 'AURUM Bankers Program - Deputy Late Recovery Officer',
-      url: 'https://aubanklro.crack-ed.com/portal',
-    },
-    {
-      id: 11,
-      logo: auCardLogo,
-      title: 'AURUM Bankers Program - Money Officer',
-      url: 'https://aubankmo.crack-ed.com/portal',
-    },
-    {
-      id: 12,
-      logo: auCardLogo,
-      title: 'AURUM Bankers Program - Customer Service Officer Valuation',
-      url: 'https://aubankbcso.crack-ed.com/portal',
-    },
-    {
-      id: 13,
+      id: 3,
       logo: udaanCardLogo,
       title: 'Udaan Program - Cashier / Teller',
       url: 'https://udaan.crack-ed.com/portal',
@@ -251,16 +190,6 @@ const Programs = () => {
 
     // Map program titles to background images
     const imageMap = {
-      'AURUM Bankers Program - Relationship Manager': relationshipManagerImage,
-      'AURUM Bankers Program - Relationship Officer': goldLoanImage,
-      'AURUM Bankers Program - Bank Officer': casaImage,
-      'AURUM Bankers Program - Sales Officer': mblImage,
-      'AURUM Bankers Program - Transaction Officer': transactionOfficerImage,
-      'AURUM Bankers Program - Deputy Center Manager': deputyCentreManagerImage,
-      'AURUM Bankers Program - Customer Service Officer': csoImage,
-      'AURUM Bankers Program - Deputy Late Recovery Officer': lateRecoveryOfficerImage,
-      'AURUM Bankers Program - Money Officer': moneyOfficerImage,
-      'AURUM Bankers Program - Customer Service Officer Valuation': csovImage,
       'Lenskart EyeTech Program - Clinical Technician': clinicalTechnicianImage,
       'Lenskart EyeTech Program - Retail Sales Associate': lenskartRetailSalesImage,
       'Udaan Program - Cashier / Teller': cashierTellerImage,
@@ -379,64 +308,7 @@ const Programs = () => {
       }
     }
 
-    // Check if it's an AURUM Bankers card
-    if (card.logo === auCardLogo) {
-      // Map AURUM Bankers titles to details
-      const detailsMap = {
-        'AURUM Bankers Program - Relationship Manager': {
-          details: 'Join as a Relationship Manager with a CTC of Rs 5.5 LPA +\u00a0PLP',
-          duration: '6-months program',
-        },
-        'AURUM Bankers Program - Relationship Officer': {
-          details: 'Join as a Relationship Officer with a CTC of Rs 2.7 LPA +\u00a0PLP',
-          duration: '2-months program',
-        },
-        'AURUM Bankers Program - Bank Officer': {
-          details: 'Join as a Bank Officer with a CTC of Rs 3.5 LPA +\u00a0PLP',
-          duration: '4-months program',
-        },
-        'AURUM Bankers Program - Sales Officer': {
-          details: 'Join as a Sales Officer with a CTC of Rs 2.7 LPA +\u00a0PLP',
-          duration: '2-months program',
-        },
-        'AURUM Bankers Program - Transaction Officer': {
-          details: 'Join as a Transaction Officer with a CTC of upto Rs 2.7 LPA +\u00a0PLP',
-          duration: '2-months program',
-        },
-        'AURUM Bankers Program - Deputy Center Manager': {
-          details: 'Join as a Deputy Center Manager with a CTC of upto Rs 2.05 LPA +\u00a0PLP',
-          duration: '2-months program',
-        },
-        'AURUM Bankers Program - Customer Service Officer': {
-          details: 'Join as a Customer Service Officer with a CTC of Rs 2.75 LPA +\u00a0PLP',
-          duration: '2-months program',
-        },
-        'AURUM Bankers Program - Deputy Late Recovery Officer': {
-          details: 'Join as a Deputy Late Recovery Officer with a CTC of upto Rs 2.05 LPA +\u00a0PLP',
-          duration: '2-months program',
-        },
-        'AURUM Bankers Program - Money Officer': {
-          details: 'Join as a Money Officer with a CTC of Rs 2.75 LPA +\u00a0PLP',
-          duration: '2-months program',
-        },
-        'AURUM Bankers Program - Customer Service Officer Valuation': {
-          details: 'Join as a Customer Service Officer Valuation with a CTC of Rs 2.7 LPA +\u00a0PLP',
-          duration: '2.5-months program',
-        },
-      }
-      const baseImage = imageMap[card.title] || auBankImage
-      const mobileImage = card.title === 'AURUM Bankers Program - Relationship Manager' ? relationshipManagerMobileImage : baseImage
-      return {
-        logo: auCardLogo,
-        programLabel: 'AURUM Bankers Program',
-        title: card.title,
-        details: detailsMap[card.title]?.details || 'Join our program',
-        duration: detailsMap[card.title]?.duration || '3-month program',
-        image: baseImage,
-        mobileImage,
-      }
-    } else {
-      // Lenskart EyeTech cards
+    // Lenskart EyeTech cards
       const detailsMap = {
         'Lenskart EyeTech Program - Clinical Technician': {
           details: 'Join as a Clinical Technician with a CTC of Rs 2.64 LPA',
@@ -456,7 +328,6 @@ const Programs = () => {
         image: imageMap[card.title] || lenskartStoreImage,
         mobileImage: imageMap[card.title] || lenskartStoreImage,
       }
-    }
   }
 
   const currentProgramDetails = getProgramDetailsForCard(programCards[featuredCardIndex])
@@ -464,7 +335,6 @@ const Programs = () => {
   // Get display title (strip program prefix)
   const getDisplayTitle = (title) => {
     return title
-      .replace('AURUM Bankers Program - ', '')
       .replace('Lenskart EyeTech Program - ', '')
       .replace('Udaan Program - ', '')
       .replace('Piramal ProEdge Program - ', '')
@@ -609,7 +479,7 @@ const Programs = () => {
                         >
                           <div className="mobile-program-card-content">
                             {(() => {
-                              const logoInfo = getProgramHomeLogo(details.programLabel || (details.logo === auCardLogo ? 'AURUM Bankers Program' : 'Lenskart Program'))
+                              const logoInfo = getProgramHomeLogo(details.programLabel || 'Lenskart Program')
                               if (!logoInfo) return null
                               const isPaytm = logoInfo.alt === 'Paytm'
                               const isAviva = logoInfo.alt === 'Aviva'
@@ -657,7 +527,7 @@ const Programs = () => {
         <div
           className="programs-background-container"
           style={{
-            backgroundImage: `url(${currentProgramDetails?.image || (currentCardIndex < 10 ? auBankImage : lenskartStoreImage)})`,
+            backgroundImage: `url(${currentProgramDetails?.image || lenskartStoreImage})`,
             backgroundPosition: 'center 60%'
           }}
         >
@@ -674,7 +544,7 @@ const Programs = () => {
                   <div className="program-card-content">
                     <div className="program-card-panel">
                       {(() => {
-                        const programLabel = currentProgramDetails.programLabel || (currentProgramDetails.logo === auCardLogo ? 'AURUM Bankers Program' : 'Lenskart Program')
+                        const programLabel = currentProgramDetails.programLabel || 'Lenskart Program'
                         const logoInfo = getProgramHomeLogo(programLabel)
                         if (!logoInfo) return null
                         return (
@@ -684,7 +554,7 @@ const Programs = () => {
                         )
                       })()}
                       <div className="program-card-label">
-                        {currentProgramDetails.programLabel || (currentProgramDetails.logo === auCardLogo ? 'AURUM Bankers Program' : 'Lenskart Program')}
+                        {currentProgramDetails.programLabel || 'Lenskart Program'}
                       </div>
                       <div className="program-details">
                         <h3 className="program-card-title">

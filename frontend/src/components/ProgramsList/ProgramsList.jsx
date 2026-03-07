@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import auCardLogo from '../../assets/au_card_logo.png'
 import lenskartCardLogo from '../../assets/lenskart_card_logo.png'
 // import piramalLogo from '../../assets/piramal.png'
 import piramalLogo from '../../assets/piramal_small.png'
@@ -16,86 +15,6 @@ const ProgramsList = () => {
 
   const programs = {
     Banking: [
-      {
-        program: 'AURUM Bankers Program',
-        role: 'Relationship Manager',
-        details: [
-          'Join as a Relationship Manager with a CTC of Rs 5.5 LPA + PLP',
-          '6-month program'
-        ]
-      },
-      {
-        program: 'AURUM Bankers Program',
-        role: 'Bank Officer',
-        details: [
-          'Join as a Bank Officer with a CTC of Rs 3.5 LPA + PLP',
-          '4-month program'
-        ]
-      },
-      {
-        program: 'AURUM Bankers Program',
-        role: 'Relationship Officer',
-        details: [
-          'Join as a Relationship Officer with a CTC of Rs 2.7 LPA + PLP',
-          '2-month program'
-        ]
-      },
-      {
-        program: 'AURUM Bankers Program',
-        role: 'Sales Officer',
-        details: [
-          'Join as a Sales Officer with a CTC of Rs 2.7 LPA + PLP',
-          '2-month program'
-        ]
-      },
-      {
-        program: 'AURUM Bankers Program',
-        role: 'Money Officer',
-        details: [
-          'Join as a Money Officer with a CTC of Rs 2.75 LPA + PLP',
-          '2-month program'
-        ]
-      },
-      {
-        program: 'AURUM Bankers Program',
-        role: 'Transaction Officer',
-        details: [
-          'Join as a Transaction Officer with a CTC of upto Rs 2.7 LPA + PLP',
-          '2-month program'
-        ]
-      },
-      {
-        program: 'AURUM Bankers Program',
-        role: 'Customer Service Officer',
-        details: [
-          'Join as a Customer Service Officer with a CTC of Rs 2.75 LPA + PLP',
-          '2-month program'
-        ]
-      },
-      {
-        program: 'AURUM Bankers Program',
-        role: 'Deputy Center Manager',
-        details: [
-          'Join as a Deputy Center Manager with a CTC of upto Rs 2.05 LPA + PLP',
-          '2-month program'
-        ]
-      },
-      {
-        program: 'AURUM Bankers Program',
-        role: 'Deputy Late Recovery Officer',
-        details: [
-          'Join as a Deputy Late Recovery Officer with a CTC of upto Rs 2.05 LPA + PLP',
-          '2-month program'
-        ]
-      },
-      {
-        program: 'AURUM Bankers Program',
-        role: 'Customer Service Officer Valuation',
-        details: [
-          'Join as a Customer Service Officer Valuation with a CTC of Rs 2.7 LPA + PLP',
-          '2.5-month program'
-        ]
-      },
       {
         program: 'Udaan Program',
         role: 'Cashier / Teller',
@@ -235,25 +154,7 @@ const ProgramsList = () => {
       if (program === 'Postgraduate Program' && role === 'Assistant Manager') return 'https://pgpam.crack-ed.com'
       switch (role) {
         case 'Relationship Manager':
-          return program === 'Udaan Program' ? 'https://udaanrm.crack-ed.com' : 'https://aurmroyale.crack-ed.com/'
-        case 'Relationship Officer':
-          return 'https://aubank.ro.crack-ed.com/portal'
-        case 'Bank Officer':
-          return 'https://aubankbo.crack-ed.com/portal'
-        case 'Sales Officer':
-          return 'https://aubankso.crack-ed.com/portal'
-        case 'Transaction Officer':
-          return 'https://aubankto.crack-ed.com/portal'
-        case 'Deputy Center Manager':
-          return 'https://aubankcm.crack-ed.com/portal'
-        case 'Customer Service Officer':
-          return 'https://aubankcso.crack-ed.com/portal'
-        case 'Deputy Late Recovery Officer':
-          return 'https://aubanklro.crack-ed.com/portal'
-        case 'Money Officer':
-          return 'https://aubankmo.crack-ed.com/portal'
-        case 'Customer Service Officer Valuation':
-          return 'https://aubankbcso.crack-ed.com/portal'
+          return 'https://udaanrm.crack-ed.com'
         case 'Cashier / Teller':
           return 'https://udaan.crack-ed.com/portal'
         case 'Virtual Relationship Manager':
@@ -313,7 +214,7 @@ const ProgramsList = () => {
     if (category === 'Banking' && useUdaanLogo) {
       return <img src={udaanLogo} alt="Udaan" className="program-logo-img program-logo-udaan" />
     }
-    if (category === 'Banking') return <img src={auCardLogo} alt="AU Bank" className="program-logo-img" />
+    if (category === 'Banking') return <img src={udaanLogo} alt="Udaan" className="program-logo-img program-logo-udaan" />
     if (category === 'Retail') return <img src={lenskartCardLogo} alt="Lenskart" className="program-logo-img" />
     if (category === 'NBFC' && item?.program === 'Paytm Disha Program') {
       return <img src={paytmLogo} alt="Paytm" className="program-logo-img program-logo-paytm" />

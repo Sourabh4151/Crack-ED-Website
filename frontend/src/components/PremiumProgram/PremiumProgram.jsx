@@ -1,6 +1,5 @@
 import React from 'react'
 // import premiumProgramImage from '../../assets/premium_program.jpg'
-import auPremiumLogo from '../../assets/au_premium.png'
 import iimRohtakLogo from '../../assets/iim_rohtak.png'
 import crackEdPremiumLogo from '../../assets/crack-ed_premium.png'
 import premiumProgramImage from '../../assets/relationship manager_desktop.jpg'
@@ -24,12 +23,9 @@ const PremiumProgram = () => {
             <div className="premium-program-card-overlay"></div>
           </div>
           <div className="premium-program-card-content">
-            <div className="premium-program-card-tag">AURUM Bankers Program</div>
+            <div className="premium-program-card-tag">PGP - Relationship Management</div>
             <h3 className="premium-program-card-title">Relationship Manager</h3>
             <div className="premium-program-sponsors">
-              <div className="sponsor-logo">
-                <img src={auPremiumLogo} alt="AU Small Finance Bank" />
-              </div>
               <div className="sponsor-logo">
                 <img src={iimRohtakLogo} alt="IIM Rohtak" />
               </div>
@@ -38,7 +34,7 @@ const PremiumProgram = () => {
               </div>
             </div>
             <a 
-              href="https://aurmroyale.crack-ed.com/" 
+              href="https://pgprm.crack-ed.com/" 
               target="_blank" 
               rel="noopener noreferrer"
               className="premium-program-learn-more"

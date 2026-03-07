@@ -6,16 +6,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 // Program fees (₹) - used for tie-breaking when counts are equal
 const PROGRAM_FEES = {
-  'AURUM Bankers Program - Relationship Manager': 300000,
-  'AURUM Bankers Program - Bank Officer': 200000,
-  'AURUM Bankers Program - Customer Service Officer Valuation': 150000,
-  'AURUM Bankers Program - Relationship Officer': 100000,
-  'AURUM Bankers Program - Sales Officer': 100000,
-  'AURUM Bankers Program - Money Officer': 100000,
-  'AURUM Bankers Program - Transaction Officer': 100000,
-  'AURUM Bankers Program - Customer Service Officer': 100000,
-  'AURUM Bankers Program - Deputy Center Manager': 80000,
-  'AURUM Bankers Program - Deputy Late Recovery Officer': 80000,
   'Udaan Program - Cashier / Teller': 100000,
   'Lenskart EyeTech Program - Clinical Technician': 100000,
   'Lenskart EyeTech Program - Retail Sales Associate': 100000,
@@ -25,16 +15,6 @@ const PROGRAM_FEES = {
 
 // Program details for display (title, details, duration, link)
 const PROGRAM_DETAILS = {
-  'AURUM Bankers Program - Relationship Manager': { details: 'CTC of Rs 5.5 LPA + PLP', duration: '6-month program', link: 'https://aurmroyale.crack-ed.com/' },
-  'AURUM Bankers Program - Bank Officer': { details: 'CTC of Rs 3.5 LPA + PLP', duration: '4-month program', link: 'https://aubankbo.crack-ed.com/portal' },
-  'AURUM Bankers Program - Relationship Officer': { details: 'CTC of Rs 2.7 LPA + PLP', duration: '2-month program', link: 'https://aubank.ro.crack-ed.com/portal' },
-  'AURUM Bankers Program - Sales Officer': { details: 'CTC of Rs 2.7 LPA + PLP', duration: '2-month program', link: 'https://aubankso.crack-ed.com/portal' },
-  'AURUM Bankers Program - Money Officer': { details: 'CTC of Rs 2.75 LPA + PLP', duration: '2-month program', link: 'https://aubankmo.crack-ed.com/portal' },
-  'AURUM Bankers Program - Transaction Officer': { details: 'CTC of upto Rs 2.7 LPA + PLP', duration: '2-month program', link: 'https://aubankto.crack-ed.com/portal' },
-  'AURUM Bankers Program - Customer Service Officer': { details: 'CTC of Rs 2.75 LPA + PLP', duration: '2-month program', link: 'https://aubankcso.crack-ed.com/portal' },
-  'AURUM Bankers Program - Customer Service Officer Valuation': { details: 'CTC of Rs 2.7 LPA + PLP', duration: '2.5-month program', link: 'https://aubankbcso.crack-ed.com/portal' },
-  'AURUM Bankers Program - Deputy Center Manager': { details: 'CTC of upto Rs 2.05 LPA + PLP', duration: '2-month program', link: 'https://aubankcm.crack-ed.com/portal' },
-  'AURUM Bankers Program - Deputy Late Recovery Officer': { details: 'CTC of upto Rs 2.05 LPA + PLP', duration: '2-month program', link: 'https://aubanklro.crack-ed.com/portal' },
   'Udaan Program - Cashier / Teller': { details: 'CTC of upto Rs 3.5 LPA', duration: '2-month program', link: 'https://udaan.crack-ed.com/portal' },
   'Lenskart EyeTech Program - Clinical Technician': { details: 'CTC of Rs 2.64 LPA', duration: '6-month program', link: 'https://lenskart.crack-ed.com/portal' },
   'Lenskart EyeTech Program - Retail Sales Associate': { details: 'CTC of Rs 3 LPA', duration: '2-month program', link: 'https://lenskartrsa.crack-ed.com/portal' },
@@ -46,73 +26,73 @@ const PROGRAM_DETAILS = {
 const OPTION_TO_PROGRAMS = [
   // Q1: Do you enjoy interacting with people in your daily life?
   {
-    A: ['AURUM Bankers Program - Bank Officer', 'AURUM Bankers Program - Sales Officer'],
-    B: ['AURUM Bankers Program - Relationship Officer', 'AURUM Bankers Program - Relationship Manager'],
-    C: ['Lenskart EyeTech Program - Clinical Technician', 'AURUM Bankers Program - Customer Service Officer'],
-    D: ['AURUM Bankers Program - Customer Service Officer Valuation', 'Lenskart EyeTech Program - Clinical Technician'],
+    A: ['Paytm Disha Program - Field Sales Executive', 'Piramal ProEdge Program - Relationship Manager'],
+    B: ['Udaan Program - Cashier / Teller', 'Piramal ProEdge Program - Relationship Manager'],
+    C: ['Lenskart EyeTech Program - Clinical Technician', 'Udaan Program - Cashier / Teller'],
+    D: ['Lenskart EyeTech Program - Clinical Technician', 'Lenskart EyeTech Program - Retail Sales Associate'],
   },
   // Q2: What kind of daily routine sounds best to you?
   {
-    A: ['Paytm Disha Program - Field Sales Executive', 'AURUM Bankers Program - Sales Officer'],
-    B: ['AURUM Bankers Program - Bank Officer', 'Piramal ProEdge Program - Relationship Manager'],
-    C: ['AURUM Bankers Program - Customer Service Officer', 'Udaan Program - Cashier / Teller'],
-    D: ['AURUM Bankers Program - Customer Service Officer Valuation', 'Lenskart EyeTech Program - Clinical Technician'],
+    A: ['Paytm Disha Program - Field Sales Executive', 'Lenskart EyeTech Program - Retail Sales Associate'],
+    B: ['Piramal ProEdge Program - Relationship Manager', 'Udaan Program - Cashier / Teller'],
+    C: ['Udaan Program - Cashier / Teller', 'Lenskart EyeTech Program - Clinical Technician'],
+    D: ['Lenskart EyeTech Program - Clinical Technician', 'Lenskart EyeTech Program - Retail Sales Associate'],
   },
   // Q3: How do you feel about responsibility and pressure?
   {
-    A: ['AURUM Bankers Program - Bank Officer', 'Paytm Disha Program - Field Sales Executive'],
-    B: ['AURUM Bankers Program - Relationship Officer', 'AURUM Bankers Program - Relationship Manager'],
-    C: ['Lenskart EyeTech Program - Retail Sales Associate', 'AURUM Bankers Program - Customer Service Officer'],
-    D: ['AURUM Bankers Program - Customer Service Officer Valuation', 'AURUM Bankers Program - Transaction Officer'],
+    A: ['Paytm Disha Program - Field Sales Executive', 'Piramal ProEdge Program - Relationship Manager'],
+    B: ['Udaan Program - Cashier / Teller', 'Piramal ProEdge Program - Relationship Manager'],
+    C: ['Lenskart EyeTech Program - Retail Sales Associate', 'Udaan Program - Cashier / Teller'],
+    D: ['Lenskart EyeTech Program - Clinical Technician', 'Lenskart EyeTech Program - Retail Sales Associate'],
   },
   // Q4: Which of these best describes you?
   {
-    A: ['AURUM Bankers Program - Sales Officer', 'Paytm Disha Program - Field Sales Executive'],
-    B: ['AURUM Bankers Program - Relationship Manager', 'Piramal ProEdge Program - Relationship Manager'],
-    C: ['AURUM Bankers Program - Customer Service Officer Valuation', 'AURUM Bankers Program - Transaction Officer'],
-    D: ['Lenskart EyeTech Program - Retail Sales Associate', 'AURUM Bankers Program - Customer Service Officer'],
+    A: ['Paytm Disha Program - Field Sales Executive', 'Lenskart EyeTech Program - Retail Sales Associate'],
+    B: ['Piramal ProEdge Program - Relationship Manager', 'Udaan Program - Cashier / Teller'],
+    C: ['Lenskart EyeTech Program - Clinical Technician', 'Udaan Program - Cashier / Teller'],
+    D: ['Lenskart EyeTech Program - Retail Sales Associate', 'Udaan Program - Cashier / Teller'],
   },
   // Q5: What do you enjoy doing more?
   {
-    A: ['AURUM Bankers Program - Bank Officer', 'AURUM Bankers Program - Sales Officer'],
-    B: ['AURUM Bankers Program - Relationship Officer', 'AURUM Bankers Program - Relationship Manager'],
-    C: ['AURUM Bankers Program - Customer Service Officer Valuation', 'Lenskart EyeTech Program - Clinical Technician'],
-    D: ['Lenskart EyeTech Program - Retail Sales Associate', 'AURUM Bankers Program - Customer Service Officer'],
+    A: ['Paytm Disha Program - Field Sales Executive', 'Piramal ProEdge Program - Relationship Manager'],
+    B: ['Udaan Program - Cashier / Teller', 'Piramal ProEdge Program - Relationship Manager'],
+    C: ['Lenskart EyeTech Program - Clinical Technician', 'Lenskart EyeTech Program - Retail Sales Associate'],
+    D: ['Lenskart EyeTech Program - Retail Sales Associate', 'Udaan Program - Cashier / Teller'],
   },
   // Q6: How do you prefer to work most of the time?
   {
-    A: ['Paytm Disha Program - Field Sales Executive', 'AURUM Bankers Program - Sales Officer'],
-    B: ['AURUM Bankers Program - Bank Officer', 'AURUM Bankers Program - Relationship Officer'],
-    C: ['AURUM Bankers Program - Transaction Officer', 'Udaan Program - Cashier / Teller'],
-    D: ['AURUM Bankers Program - Customer Service Officer', 'Lenskart EyeTech Program - Retail Sales Associate'],
+    A: ['Paytm Disha Program - Field Sales Executive', 'Lenskart EyeTech Program - Retail Sales Associate'],
+    B: ['Udaan Program - Cashier / Teller', 'Piramal ProEdge Program - Relationship Manager'],
+    C: ['Udaan Program - Cashier / Teller', 'Lenskart EyeTech Program - Clinical Technician'],
+    D: ['Lenskart EyeTech Program - Retail Sales Associate', 'Udaan Program - Cashier / Teller'],
   },
   // Q7: How do you feel about handling important items, records, or details?
   {
-    A: ['AURUM Bankers Program - Customer Service Officer', 'Udaan Program - Cashier / Teller'],
-    B: ['AURUM Bankers Program - Transaction Officer', 'AURUM Bankers Program - Money Officer'],
-    C: ['AURUM Bankers Program - Customer Service Officer', 'Lenskart EyeTech Program - Retail Sales Associate'],
-    D: ['AURUM Bankers Program - Sales Officer', 'Paytm Disha Program - Field Sales Executive'],
+    A: ['Udaan Program - Cashier / Teller', 'Lenskart EyeTech Program - Clinical Technician'],
+    B: ['Udaan Program - Cashier / Teller', 'Piramal ProEdge Program - Relationship Manager'],
+    C: ['Lenskart EyeTech Program - Retail Sales Associate', 'Udaan Program - Cashier / Teller'],
+    D: ['Paytm Disha Program - Field Sales Executive', 'Lenskart EyeTech Program - Retail Sales Associate'],
   },
   // Q8: What type of work gives you satisfaction?
   {
-    A: ['AURUM Bankers Program - Sales Officer', 'Paytm Disha Program - Field Sales Executive'],
-    B: ['AURUM Bankers Program - Relationship Manager', 'Piramal ProEdge Program - Relationship Manager'],
-    C: ['AURUM Bankers Program - Transaction Officer', 'Udaan Program - Cashier / Teller'],
-    D: ['AURUM Bankers Program - Customer Service Officer Valuation', 'Lenskart EyeTech Program - Clinical Technician'],
+    A: ['Paytm Disha Program - Field Sales Executive', 'Lenskart EyeTech Program - Retail Sales Associate'],
+    B: ['Piramal ProEdge Program - Relationship Manager', 'Udaan Program - Cashier / Teller'],
+    C: ['Udaan Program - Cashier / Teller', 'Lenskart EyeTech Program - Clinical Technician'],
+    D: ['Lenskart EyeTech Program - Clinical Technician', 'Lenskart EyeTech Program - Retail Sales Associate'],
   },
   // Q9: How comfortable are you with travelling or going out for work when needed?
   {
-    A: ['AURUM Bankers Program - Deputy Center Manager', 'AURUM Bankers Program - Deputy Late Recovery Officer'],
-    B: ['AURUM Bankers Program - Relationship Officer', 'Piramal ProEdge Program - Relationship Manager'],
-    C: ['AURUM Bankers Program - Customer Service Officer', 'Lenskart EyeTech Program - Retail Sales Associate'],
-    D: ['AURUM Bankers Program - Customer Service Officer Valuation', 'Lenskart EyeTech Program - Clinical Technician'],
+    A: ['Paytm Disha Program - Field Sales Executive', 'Lenskart EyeTech Program - Retail Sales Associate'],
+    B: ['Piramal ProEdge Program - Relationship Manager', 'Udaan Program - Cashier / Teller'],
+    C: ['Lenskart EyeTech Program - Retail Sales Associate', 'Udaan Program - Cashier / Teller'],
+    D: ['Lenskart EyeTech Program - Clinical Technician', 'Lenskart EyeTech Program - Retail Sales Associate'],
   },
   // Q10: Which work style feels most natural to you?
   {
-    A: ['AURUM Bankers Program - Bank Officer', 'Paytm Disha Program - Field Sales Executive'],
-    B: ['AURUM Bankers Program - Relationship Manager', 'AURUM Bankers Program - Relationship Officer'],
-    C: ['AURUM Bankers Program - Transaction Officer', 'Udaan Program - Cashier / Teller'],
-    D: ['AURUM Bankers Program - Customer Service Officer Valuation', 'Lenskart EyeTech Program - Clinical Technician'],
+    A: ['Paytm Disha Program - Field Sales Executive', 'Lenskart EyeTech Program - Retail Sales Associate'],
+    B: ['Piramal ProEdge Program - Relationship Manager', 'Udaan Program - Cashier / Teller'],
+    C: ['Udaan Program - Cashier / Teller', 'Lenskart EyeTech Program - Clinical Technician'],
+    D: ['Lenskart EyeTech Program - Clinical Technician', 'Lenskart EyeTech Program - Retail Sales Associate'],
   },
 ];
 
@@ -219,7 +199,7 @@ const CareerQuiz = ({ showOnlyTopProgram = false }) => {
     });
 
     const programNames = sorted.map(([name]) => name);
-    const perfectFit = programNames[0] || 'AURUM Bankers Program - Relationship Manager';
+    const perfectFit = programNames[0] || 'Lenskart EyeTech Program - Clinical Technician';
     const alternatives = programNames.slice(1, 3);
 
     return { perfectFit, alternatives };

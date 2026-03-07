@@ -9,23 +9,6 @@ import './Footer.css'
 
 const PROGRAMS = [
   {
-    id: 'aurum',
-    name: 'AURUM Bankers Program',
-    link: '/programs',
-    links: [
-      { label: 'Relationship Manager', href: 'https://aurmroyale.crack-ed.com/' },
-      { label: 'Relationship Officer', href: 'https://aubank.ro.crack-ed.com/portal' },
-      { label: 'Bank Officer', href: 'https://aubankbo.crack-ed.com/portal' },
-      { label: 'Sales Officer', href: 'https://aubankso.crack-ed.com/portal' },
-      { label: 'Money Officer', href: 'https://aubankmo.crack-ed.com/portal' },
-      { label: 'Transaction Officer', href: 'https://aubankto.crack-ed.com/portal' },
-      { label: 'Customer Service Officer', href: 'https://aubankcso.crack-ed.com/portal' },
-      { label: 'Customer Service Officer Valuation', href: 'https://aubankbcso.crack-ed.com/portal' },
-      { label: 'Deputy Center Manager', href: 'https://aubankcm.crack-ed.com/portal' },
-      { label: 'Deputy Late Recovery Officer', href: 'https://aubanklro.crack-ed.com/portal' },
-    ],
-  },
-  {
     id: 'lenskart',
     name: 'Lenskart Eyetech Program',
     link: '/programs',
@@ -106,7 +89,7 @@ const PROGRAMS = [
 ]
 
 const Footer = () => {
-  const [openProgram, setOpenProgram] = useState('aurum')
+  const [openProgram, setOpenProgram] = useState('lenskart')
 
   const toggleProgram = (id) => {
     setOpenProgram((prev) => (prev === id ? null : id))

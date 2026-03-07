@@ -92,7 +92,7 @@ const CaseStudy = () => {
             </div>
             <div className="sec22" style={{ textAlign: "start" }}>
               <div ref={contentRef} className="content-wrapper1">
-                <h1 className="casestudyheader">AURUM Bankers Program - Relationship Manager</h1>
+                <h1 className="casestudyheader">Program Case Study</h1>
                 <p className="mediadesc1">{slides[currentIndex].desc}</p>
                 <div className="casestudybtn">
                   <button
