@@ -8,6 +8,7 @@ from django.contrib import admin
 from django.http import FileResponse, Http404
 from django.urls import path, reverse
 from django.utils.html import format_html
+from django.utils import timezone
 from .models import Example, QuizSubmission, Lead, JobApplication, JobListing, BIDEpisode
 from .constants import PROGRAM_CHOICES, PROGRAM_TO_CENTER, get_center_for_program
 
@@ -32,10 +33,84 @@ class ExampleAdmin(admin.ModelAdmin):
     search_fields = ['title', 'description']
 
 
+class QuizSubmissionInfluencerFilter(admin.SimpleListFilter):
+    title = 'Influencer page'
+    parameter_name = 'is_influencer'
+
+    def lookups(self, request, model_admin):
+        return [
+            ('yes', 'Influencer'),
+            ('no', 'Not influencer'),
+        ]
+
+    def queryset(self, request, queryset):
+        value = self.value()
+        if value == 'yes':
+            # Assuming influencer leads come from /influencer page (adjust if needed)
+            return queryset.filter(source_page__icontains='influencer')
+        if value == 'no':
+            return queryset.exclude(source_page__icontains='influencer')
+        return queryset
+
+
+class LeadCreatedAtFilter(admin.SimpleListFilter):
+    title = 'Created at'
+    parameter_name = 'created_at_range'
+
+    def lookups(self, request, model_admin):
+        return [
+            ('today', 'Today'),
+            ('past_7_days', 'Past 7 days'),
+            ('this_month', 'This month'),
+            ('this_year', 'This year'),
+            ('last_1_month', 'Last 1 month'),
+            ('last_2_months', 'Last 2 months'),
+        ]
+
+    def queryset(self, request, queryset):
+        value = self.value()
+        if not value:
+            return queryset
+
+        today = timezone.now().date()
+        this_month_start = today.replace(day=1)
+        this_year_start = today.replace(month=1, day=1)
+
+        if value == 'today':
+            return queryset.filter(created_at__date=today)
+
+        if value == 'past_7_days':
+            start_date = today - timezone.timedelta(days=7)
+            return queryset.filter(created_at__date__gte=start_date, created_at__date__lte=today)
+
+        if value == 'this_month':
+            return queryset.filter(created_at__date__gte=this_month_start, created_at__date__lte=today)
+
+        if value == 'this_year':
+            return queryset.filter(created_at__date__gte=this_year_start, created_at__date__lte=today)
+
+        # Previous calendar months
+        prev_month_end = this_month_start - timezone.timedelta(days=1)
+        prev_month_start = prev_month_end.replace(day=1)
+        two_months_ago_end = prev_month_start - timezone.timedelta(days=1)
+        two_months_ago_start = two_months_ago_end.replace(day=1)
+
+        if value == 'last_1_month':
+            start_date = prev_month_start          # previous month only
+        elif value == 'last_2_months':
+            start_date = two_months_ago_start      # previous two full months
+        else:
+            return queryset
+
+        end_date = this_month_start               # up to start of current month
+        return queryset.filter(created_at__date__gte=start_date, created_at__date__lt=end_date)
+
+
 @admin.register(QuizSubmission)
 class QuizSubmissionAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'email', 'mobile', 'program', 'utm_source', 'utm_medium', 'utm_campaign', 'source_page', 'created_at']
     search_fields = ['name', 'email', 'program', 'source_page']
+    list_filter = [LeadCreatedAtFilter, QuizSubmissionInfluencerFilter]
 
 
 class LeadAdminForm(forms.ModelForm):
@@ -61,6 +136,7 @@ class LeadAdmin(admin.ModelAdmin):
     form = LeadAdminForm
     list_display = ['id', 'first_name', 'last_name', 'email', 'mobile', 'program', 'state', 'utm_source', 'utm_medium', 'utm_campaign', 'source_page', 'created_at']
     search_fields = ['first_name', 'last_name', 'email', 'program', 'state', 'source_page']
+    list_filter = [LeadCreatedAtFilter]
     change_form_template = 'admin/api/lead/change_form.html'
 
     def change_view(self, request, object_id, form_url='', extra_context=None):
