@@ -126,11 +126,9 @@ def job_list(request):
 
 @api_view(['GET'])
 def bid_featured_episode(request):
-    """Latest BID episode for the bigLeft slot (by published_date). Returns null if none."""
-    episode = BIDEpisode.objects.order_by('-published_date', '-created_at').first()
-    if not episode:
-        return Response(None)
-    serializer = BIDEpisodeSerializer(episode, context={'request': request})
+    """Latest 3 BID episodes by published_date (newest first). 1st = bigLeft, 2nd = rightTop, 3rd = rightBottom."""
+    episodes = BIDEpisode.objects.order_by('-published_date', '-created_at')[:3]
+    serializer = BIDEpisodeSerializer(episodes, many=True, context={'request': request})
     return Response(serializer.data)
 
 

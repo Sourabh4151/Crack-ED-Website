@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import bigLeftFallback from '../../assets/big_left.jpg'
-import rightTopImg from '../../assets/right_top.jpg'
 import playIcon from '../../assets/Play.svg'
 import { getApiBase } from '../../services/crmService'
 import './BIDEpisodes.css'
@@ -15,44 +14,46 @@ const rightTopEpisode = {
   date: 'January 25, 2026',
 }
 
-// Previous rightTop → rightBottom slot (static)
+// RightBottom fallback: next newest = Jan 25 (same as previous bigLeft / rightTop)
 const rightBottomEpisode = {
-  url: 'https://www.youtube.com/watch?v=IVhB_one0GI',
-  image: rightTopImg,
-  imageAlt: 'Born in a Village Built for Impact episode thumbnail',
+  url: 'https://www.youtube.com/watch?v=POt7p9MiRNw',
+  image: bigLeftFallback,
+  imageAlt: 'How India Shops Today episode thumbnail',
   title:
-    'From Small Village To IIT to Impacting Millions | Anil Nagar (Adda Education) | Badhta India Dekho',
-  date: 'January 10, 2026',
+    "Why 99% Creators Don't Make Money On Social Media | Wishlink Founder Explains | Badhta India Dekho",
+  date: 'January 25, 2026',
 }
 
 const BIDEpisodes = () => {
-  const [featured, setFeatured] = useState(null)
+  const [episodes, setEpisodes] = useState([])
 
   useEffect(() => {
     const apiBase = getApiBase()
     fetch(`${apiBase}/api/bid-episode-featured/`)
       .then((res) => res.json())
       .then((data) => {
-        if (data && data.title) setFeatured(data)
+        if (Array.isArray(data) && data.length) setEpisodes(data)
       })
       .catch(() => {})
   }, [])
 
-  const bigLeftEpisode = featured
-    ? {
-        url: featured.youtubeUrl,
-        image: featured.thumbnailUrl,
-        imageAlt: `${featured.title} episode thumbnail`,
-        title: featured.title,
-        date: featured.date,
-      }
-    : {
-        url: rightTopEpisode.url,
-        image: bigLeftFallback,
-        imageAlt: rightTopEpisode.imageAlt,
-        title: rightTopEpisode.title,
-        date: rightTopEpisode.date,
-      }
+  // 1st by date → bigLeft, 2nd → rightTop, 3rd → rightBottom; fallback to static when missing
+  const toCard = (ep) => ({
+    url: ep.youtubeUrl,
+    image: ep.thumbnailUrl,
+    imageAlt: `${ep.title} episode thumbnail`,
+    title: ep.title,
+    date: ep.date,
+  })
+  const bigLeftEpisode = episodes[0]
+    ? toCard(episodes[0])
+    : { url: rightTopEpisode.url, image: bigLeftFallback, imageAlt: rightTopEpisode.imageAlt, title: rightTopEpisode.title, date: rightTopEpisode.date }
+  const rightTopCard = episodes[1]
+    ? toCard(episodes[1])
+    : rightTopEpisode
+  const rightBottomCard = episodes[2]
+    ? toCard(episodes[2])
+    : rightBottomEpisode
 
   return (
     <section className="bid-episodes">
@@ -80,39 +81,39 @@ const BIDEpisodes = () => {
           </a>
 
           <a
-            href={rightTopEpisode.url}
+            href={rightTopCard.url}
             target="_blank"
             rel="noreferrer"
             className="bid-episode-card"
           >
             <div className="bid-episode-thumbnail">
-              <img src={rightTopEpisode.image} alt={rightTopEpisode.imageAlt} />
+              <img src={rightTopCard.image} alt={rightTopCard.imageAlt} />
               <div className="bid-episode-thumbnail-overlay" />
               <div className="bid-episode-play">
                 <img src={playIcon} alt="" />
               </div>
               <div className="bid-episode-meta">
-                <h3 className="bid-episode-title">{rightTopEpisode.title}</h3>
-                <p className="bid-episode-date">{rightTopEpisode.date}</p>
+                <h3 className="bid-episode-title">{rightTopCard.title}</h3>
+                <p className="bid-episode-date">{rightTopCard.date}</p>
               </div>
             </div>
           </a>
 
           <a
-            href={rightBottomEpisode.url}
+            href={rightBottomCard.url}
             target="_blank"
             rel="noreferrer"
             className="bid-episode-card"
           >
             <div className="bid-episode-thumbnail">
-              <img src={rightBottomEpisode.image} alt={rightBottomEpisode.imageAlt} />
+              <img src={rightBottomCard.image} alt={rightBottomCard.imageAlt} />
               <div className="bid-episode-thumbnail-overlay" />
               <div className="bid-episode-play">
                 <img src={playIcon} alt="" />
               </div>
               <div className="bid-episode-meta">
-                <h3 className="bid-episode-title">{rightBottomEpisode.title}</h3>
-                <p className="bid-episode-date">{rightBottomEpisode.date}</p>
+                <h3 className="bid-episode-title">{rightBottomCard.title}</h3>
+                <p className="bid-episode-date">{rightBottomCard.date}</p>
               </div>
             </div>
           </a>
