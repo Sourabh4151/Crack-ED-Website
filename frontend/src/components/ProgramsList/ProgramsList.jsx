@@ -62,6 +62,14 @@ const ProgramsList = () => {
           'Join as an Assistant Manager with a CTC of Rs 4 LPA + incentives',
           '6-month program'
         ]
+      },
+      {
+        program: 'Postgraduate Certification',
+        role: 'Business Development Executive',
+        details: [
+          'Join as a Business Development Executive with a CTC of Rs 2.5 LPA + incentives',
+          '2-week program'
+        ]
       }
     ],
     Retail: [
@@ -152,6 +160,7 @@ const ProgramsList = () => {
     if (category === 'Banking') {
       if (program === 'Postgraduate Program' && role === 'Relationship Manager') return 'https://pgprm.crack-ed.com'
       if (program === 'Postgraduate Program' && role === 'Assistant Manager') return 'https://pgpam.crack-ed.com'
+      if (program === 'Postgraduate Certification' && role === 'Business Development Executive') return 'https://pgcbm.crack-ed.com'
       switch (role) {
         case 'Relationship Manager':
           return 'https://udaanrm.crack-ed.com'

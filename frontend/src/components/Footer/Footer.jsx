@@ -86,6 +86,14 @@ const PROGRAMS = [
       { label: 'Assistant Manager', href: 'https://pgpam.crack-ed.com/' },
     ],
   },
+  {
+    id: 'pgcbm',
+    name: 'PGC - Banking Management',
+    link: '/programs',
+    links: [
+      { label: 'Business Development Executive', href: 'https://pgcbm.crack-ed.com' },
+    ],
+  },
 ]
 
 const Footer = () => {

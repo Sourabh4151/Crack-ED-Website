@@ -96,6 +96,7 @@ const EnquireModal = ({ isOpen, onClose }) => {
     'Finova VyaparaMitra Program - Relationship Officer',
     'PGP - Banking Management',
     'PGP - Relationship Management',
+    'PGC - Banking Management',
   ]
 
   const validateFullName = (name) => {

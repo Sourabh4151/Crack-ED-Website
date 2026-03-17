@@ -240,6 +240,7 @@ const Header = () => {
                   <li><a href="https://pgprm.crack-ed.com/" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>PGP - Relationship Management
                   </a></li>
                   <li><a href="https://pgpam.crack-ed.com/" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>PGP - Banking Management</a></li>
+                  <li><a href="https://pgcbm.crack-ed.com" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>PGC - Banking Management</a></li>
                   <li 
                     className={`dropdown-item-with-submenu ${isUdaanSubmenuOpen ? 'active' : ''}`}
                     onMouseEnter={() => {

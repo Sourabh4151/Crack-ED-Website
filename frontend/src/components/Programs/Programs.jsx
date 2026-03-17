@@ -47,6 +47,7 @@ import finovaProgramImage from '../../assets/finova_program.jpg'
 import finovaSmallLogo from '../../assets/finova_small_logo.png'
 import pgprmDesktopImage from '../../assets/RM_desktop.png'
 import pgpbmDesktopImage from '../../assets/bandhan_desktop.jpg'
+import pgcbmDesktopImage from '../../assets/desktop_PGC_bde.jpg'
 import './Programs.css'
 
 // Keep "LPA + PLP" on one line to prevent awkward wrapping
@@ -103,78 +104,84 @@ const Programs = () => {
     },
     {
       id: 3,
+      logo: udaanCardLogo,
+      title: 'Postgraduate Certification Banking Management - Business Development Executive',
+      url: 'https://pgcbm.crack-ed.com',
+    },
+    {
+      id: 4,
       logo: lenskartCardLogo,
       title: 'Lenskart EyeTech Program - Clinical Technician',
       url: 'https://lenskart.crack-ed.com/portal',
     },
     {
-      id: 4,
+      id: 5,
       logo: lenskartCardLogo,
       title: 'Lenskart EyeTech Program - Retail Sales Associate',
       url: 'https://lenskartrsa.crack-ed.com/portal',
     },
     {
-      id: 5,
+      id: 6,
       logo: udaanCardLogo,
       title: 'Udaan Program - Cashier / Teller',
       url: 'https://udaan.crack-ed.com/portal',
     },
     {
-      id: 6,
+      id: 7,
       logo: udaanCardLogo,
       title: 'Udaan Program - Virtual Relationship Manager',
       url: 'https://udaanvrm.crack-ed.com',
     },
     {
-      id: 7,
+      id: 8,
       logo: udaanCardLogo,
       title: 'Udaan Program - Relationship Manager',
       url: 'https://udaanrm.crack-ed.com',
     },
     {
-      id: 8,
+      id: 9,
       logo: udaanCardLogo,
       title: 'Udaan Program - Business Loan Associate',
       url: 'https://udaanbusiness.crack-ed.com',
     },
     {
-      id: 9,
+      id: 10,
       logo: piramalCardLogo,
       title: 'Piramal ProEdge Program - Relationship Manager',
       url: 'https://piramal.crack-ed.com/portal',
     },
     {
-      id: 10,
+      id: 11,
       logo: paytmCardLogo,
       title: 'Paytm Disha Program - Field Sales Executive',
       url: 'https://paytm.crack-ed.com/portal',
     },
     {
-      id: 11,
+      id: 12,
       logo: avivaSmallLogo,
       title: 'Aviva Nirmaan Program - Direct Sales Executive',
       url: 'https://avivads.crack-ed.com',
     },
     {
-      id: 12,
+      id: 13,
       logo: avivaSmallLogo,
       title: 'Aviva Nirmaan Program - Agency Sales Executive',
       url: 'https://avivaas.crack-ed.com',
     },
     {
-      id: 13,
+      id: 14,
       logo: poonawallaSmallLogo,
       title: 'Poonawalla FinPro Career Program - Gold Assayer',
       url: 'http://poonawallaga.crack-ed.com/',
     },
     {
-      id: 14,
+      id: 15,
       logo: poonawallaSmallLogo,
       title: 'Poonawalla FinPro Career Program - Sales Executive',
       url: 'http://poonawallase.crack-ed.com/',
     },
     {
-      id: 15,
+      id: 16,
       logo: finovaSmallLogo,
       title: 'Finova VyaparaMitra Program - Relationship Officer',
       url: 'https://finovaro.crack-ed.com',
@@ -295,6 +302,14 @@ const Programs = () => {
         duration: '6-month program',
         image: pgpbmDesktopImage,
       },
+      'Postgraduate Certification Banking Management - Business Development Executive': {
+        programLabel: 'Postgraduate Certification in Banking Management',
+        shortProgramLabel: 'PGC - Banking Management',
+        logo: udaanCardLogo,
+        details: 'Join as a Business Development Executive with a CTC of Rs 2.5 LPA + incentives',
+        duration: '2-week program',
+        image: pgcbmDesktopImage,
+      },
     }
 
     if (newProgramsMap[card.title]) {
@@ -339,6 +354,7 @@ const Programs = () => {
   const getSmallCardTitle = (card) => {
     if (card.title === 'Postgraduate Program Relationship Management - Relationship Manager') return 'PGP - Relationship Management'
     if (card.title === 'Postgraduate Program Banking Management - Assistant Manager') return 'PGP - Banking Management'
+    if (card.title === 'Postgraduate Certification Banking Management - Business Development Executive') return 'PGC - Banking Management'
     return card.title
   }
 
@@ -354,6 +370,7 @@ const Programs = () => {
       .replace('Poonawalla FinPro Career Program - ', '')
       .replace('Postgraduate Program Relationship Management - ', '')
       .replace('Postgraduate Program Banking Management - ', '')
+      .replace('Postgraduate Certification Banking Management - ', '')
   }
 
   useEffect(() => {

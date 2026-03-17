@@ -25,6 +25,7 @@ const PROGRAMS = [
   'Finova VyaparaMitra Program - Relationship Officer',
   'PGP - Banking Management',
   'PGP - Relationship Management',
+  'PGC - Banking Management',
 ]
 
 const EnquireSection = () => {

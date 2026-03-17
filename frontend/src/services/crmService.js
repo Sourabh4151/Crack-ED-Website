@@ -25,6 +25,7 @@ const PROGRAM_TO_CENTER_MAP = {
   'Finova VyaparaMitra Program - Relationship Officer': '77',
   'PGP - Banking Management': '78',
   'PGP - Relationship Management': '79',
+  'PGC - Banking Management': '80',
 }
 
 /** Base URL for our Django backend (set in .env as VITE_API_URL, or use proxy with '') */
