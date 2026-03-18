@@ -5,7 +5,7 @@ import '../ResourcesFilter/ResourcesFilter.css'
 import './ExploreOtherBlogs.css'
 
 const ExploreOtherBlogs = ({ currentPostId }) => {
-  const otherPosts = BLOG_POSTS.filter((p) => p.id !== currentPostId).slice(0, 3)
+  const otherPosts = BLOG_POSTS.filter((p) => p.id !== currentPostId && !p.hideFromResources).slice(0, 3)
 
   if (otherPosts.length === 0) return null
 

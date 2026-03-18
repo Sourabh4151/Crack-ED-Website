@@ -1,13 +1,15 @@
 import React from 'react'
 import ResourcesBlogCard from '../ResourcesBlogCard/ResourcesBlogCard'
+import premiumImage from '../../assets/premium_image.png'
 import './ResourcesBlogList.css'
 
 const defaultBlog = {
-  title: "Beginner's Guide To Banking Courses: How To Start A Career In The Banking Sector",
-  date: 'April 7, 2025',
+  title: '7 Skills Every Successful Relationship Manager Must Have',
+  date: 'MARCH 18, 2026',
   description:
-    "Discover how a practical banking course can help you launch a successful career in the BFSI sector. Learn skills in credit, legal, and tech underwriting, and find job-ready training with Crack-ED.",
-  link: '/resources/blog/1',
+    'Discover the 7 must-have skills every relationship manager needs to succeed in client management, build trust, and grow your career.',
+  link: '/resources/blog/7',
+  image: premiumImage,
 }
 
 const ResourcesBlogList = ({ blogs = [defaultBlog] }) => {

@@ -79,7 +79,7 @@
 
 .resources-filter-category--active {
   color: rgba(250, 250, 250, 1);
-  border-bottom-color: rgba(59, 130, 246, 1);
+  border-bottom-color: rgba(255, 255, 255, 1);
 }
 
 /* Row 3: Blog cards grid (Frame 519) — 3 cols, row/column gap 20px */

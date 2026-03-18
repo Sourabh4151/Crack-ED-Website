@@ -146,15 +146,22 @@ const BlogPost = () => {
                 <div className="blog-post-text">
                   {post.content.split('\n\n').map((para, i) => {
                     const isIntroHeading = i === 0 && para.trim() === 'Introduction'
-                    const isFirstSection = i === 0 && post.id !== '4' && post.id !== '5'
+                    const isLead =
+                      para.trim().startsWith('The best relationship managers share a core set of skills')
+                    const isFirstSection =
+                      i === 0 && post.id !== '4' && post.id !== '5' && !post.excludeIntroFromToc
                     return (
-                      <p key={i} data-toc-section={isFirstSection ? '' : undefined} className={isIntroHeading ? 'blog-post-intro-heading' : undefined}>
+                      <p
+                        key={i}
+                        data-toc-section={isFirstSection ? '' : undefined}
+                        className={isIntroHeading ? 'blog-post-intro-heading' : isLead ? 'blog-post-lead' : undefined}
+                      >
                         {para}
                       </p>
                     )
                   })}
                 </div>
-                {!(post.id === '6' && !post.bodyImage) && (
+                {!post.hideBodyImage && !(post.id === '6' && !post.bodyImage) && (
                   <div className="blog-post-image-wrap">
                     <img src={post.bodyImage || post.image} alt="" className="blog-post-image" />
                   </div>
@@ -164,9 +171,24 @@ const BlogPost = () => {
                     {post.contentAfterImage.split('\n\n').map((para, i) => {
                       const isEmergingTrends = para.trim() === 'Emerging Trends and In-Demand Skills'
                       const isKeySkills = para.trim() === 'Key Skills Gained from a Banking Course'
+                      const isPracticeHeading =
+                        post.practiceBullets?.length &&
+                        /^How to practi[cs]e it:$/.test(para.trim())
                       const isShortTitle = para.trim().length < 80
                       const isHeading = (i === 0 && isShortTitle) || isKeySkills || isEmergingTrends
                       const isTocSection = (i === 0 && isShortTitle) || isKeySkills || isEmergingTrends
+                      if (isPracticeHeading) {
+                        return (
+                          <React.Fragment key={`practice-${i}`}>
+                            <p className="blog-post-subhead">{para}</p>
+                            <ul className="blog-post-bullets">
+                              {post.practiceBullets.map((item, idx) => (
+                                <li key={idx}>{item}</li>
+                              ))}
+                            </ul>
+                          </React.Fragment>
+                        )
+                      }
                       return (
                         <p key={i} data-toc-section={isTocSection ? '' : undefined} className={isHeading ? 'blog-post-intro-heading' : undefined}>
                           {wrapIntroTerms(para)}
@@ -194,6 +216,16 @@ const BlogPost = () => {
                   const listItems = parts.filter((p) => rolePattern.test(p))
                   const nonListParts = parts.filter((p) => !rolePattern.test(p))
                   const heading = nonListParts[0]
+                  const renderPara = (para, key) => {
+                    if (typeof para === 'string' && para.startsWith('Tip:')) {
+                      return (
+                        <div key={key} className="blog-post-tip" role="note" aria-label="Tip">
+                          <p>{para}</p>
+                        </div>
+                      )
+                    }
+                    return <p key={key}>{para}</p>
+                  }
                   if (listItems.length === 0) {
                     if (nonListParts.length === 1) {
                       return (
@@ -207,18 +239,14 @@ const BlogPost = () => {
                         <div className="blog-post-text">
                           <p>{nonListParts[0]}</p>
                           <p data-toc-section="" className="blog-post-intro-heading">{nonListParts[1]}</p>
-                          {nonListParts.slice(2).map((para, i) => (
-                            <p key={i}>{para}</p>
-                          ))}
+                          {nonListParts.slice(2).map((para, i) => renderPara(para, i))}
                         </div>
                       )
                     }
                     return (
                       <div className="blog-post-text">
                         <p data-toc-section="" className="blog-post-intro-heading">{heading}</p>
-                        {nonListParts.slice(1).map((para, i) => (
-                          <p key={i}>{para}</p>
-                        ))}
+                        {nonListParts.slice(1).map((para, i) => renderPara(para, i))}
                       </div>
                     )
                   }
@@ -277,9 +305,20 @@ const BlogPost = () => {
                           )
                         })()
                       : post.contentAfterImage4.split('\n\n').map((para, i) => (
-                          <p key={i} data-toc-section={i === 0 && post.id !== '4' ? '' : undefined} className={i === 0 && post.id !== '4' ? 'blog-post-intro-heading' : undefined}>
-                            {para}
-                          </p>
+                          para.trim() === 'Try this approach:' && post.approachBullets?.length ? (
+                            <React.Fragment key={`approach-${i}`}>
+                              <p className="blog-post-subhead">{para}</p>
+                              <ul className="blog-post-bullets">
+                                {post.approachBullets.map((item, idx) => (
+                                  <li key={idx}>{item}</li>
+                                ))}
+                              </ul>
+                            </React.Fragment>
+                          ) : (
+                            <p key={i} data-toc-section={i === 0 && post.id !== '4' ? '' : undefined} className={i === 0 && post.id !== '4' ? 'blog-post-intro-heading' : undefined}>
+                              {para}
+                            </p>
+                          )
                         ))}
                   </div>
                 )}
@@ -310,11 +349,22 @@ const BlogPost = () => {
                 )}
                 {post.contentAfterImage6 && (
                   <div className="blog-post-text blog-post-cta">
-                    {post.contentAfterImage6.split('\n\n').map((para, i) => (
-                      <p key={i} data-toc-section={i === 0 ? '' : undefined} className={i === 0 ? 'blog-post-intro-heading' : undefined}>
-                        {para}
-                      </p>
-                    ))}
+                    {post.contentAfterImage6.split('\n\n').map((para, i) =>
+                      para.trim() === 'Quick habits that help:' && post.habitsBullets?.length ? (
+                        <React.Fragment key={`habits-${i}`}>
+                          <p className="blog-post-subhead">{para}</p>
+                          <ul className="blog-post-bullets">
+                            {post.habitsBullets.map((item, idx) => (
+                              <li key={idx}>{item}</li>
+                            ))}
+                          </ul>
+                        </React.Fragment>
+                      ) : (
+                        <p key={i} data-toc-section={i === 0 ? '' : undefined} className={i === 0 ? 'blog-post-intro-heading' : undefined}>
+                          {para}
+                        </p>
+                      )
+                    )}
                     {post.ctaLinks && post.ctaLinks.length > 0 && (
                       <div className="blog-post-cta-links" data-toc-section="">
                         {post.ctaLinks.map((cta, i) => (
@@ -333,11 +383,28 @@ const BlogPost = () => {
                 )}
                 {post.contentAfterImage7 && (
                   <div className="blog-post-text">
-                    {post.contentAfterImage7.split('\n\n').map((para, i) => (
-                      <p key={i} data-toc-section={i === 0 ? '' : undefined} className={i === 0 ? 'blog-post-intro-heading' : undefined}>
-                        {para}
-                      </p>
-                    ))}
+                    {post.contentAfterImage7.split('\n\n').map((para, i) => {
+                      const isSectionTitle = para.trim() === 'The Bottom Line: Skills That Pay Off Long-Term'
+                      const isEmphasis =
+                        para.trim().startsWith('The professionals who master these skills')
+                      return (
+                        <p
+                          key={i}
+                          data-toc-section={i === 0 ? '' : undefined}
+                          className={
+                            i === 0
+                              ? 'blog-post-intro-heading'
+                              : isSectionTitle
+                                ? 'blog-post-section-heading'
+                                : isEmphasis
+                                  ? 'blog-post-emphasis'
+                                  : undefined
+                          }
+                        >
+                          {para}
+                        </p>
+                      )
+                    })}
                   </div>
                 )}
                 {post.contentAfterImage8 && (
@@ -399,7 +466,28 @@ const BlogPost = () => {
                       return (
                         <li key={i} className={activeTocIndex === i ? 'active' : ''}>
                           {post.tocNumbers && <span className="blog-post-toc-num">{numLabel}</span>}
-                          <a href={`#toc-${i}`} onClick={(e) => { e.preventDefault(); document.getElementById(`toc-${i}`)?.scrollIntoView({ behavior: 'smooth' }) }}>
+                          <a
+                            href={item === 'Enquire Now' ? '#enquire-now' : `#toc-${i}`}
+                            onClick={(e) => {
+                              e.preventDefault()
+                              const targetId = item === 'Enquire Now' ? 'enquire-now' : `toc-${i}`
+                              const scrollEl = scrollRef.current
+                              const target = scrollEl?.querySelector(`#${targetId}`) || document.getElementById(targetId)
+                              if (scrollEl && target && scrollEl.contains(target)) {
+                                const scrollRect = scrollEl.getBoundingClientRect()
+                                const targetRect = target.getBoundingClientRect()
+                                const top = targetRect.top - scrollRect.top + scrollEl.scrollTop
+                                const offset = i === 0 || item === 'Enquire Now' ? 0 : 80
+                                scrollEl.scrollTo({ top: Math.max(0, top - offset), behavior: 'smooth' })
+                                return
+                              }
+                              if (target) {
+                                target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                                return
+                              }
+                              if (scrollEl && item === 'Enquire Now') scrollEl.scrollTo({ top: scrollEl.scrollHeight, behavior: 'smooth' })
+                            }}
+                          >
                             {item}
                           </a>
                         </li>
@@ -413,13 +501,9 @@ const BlogPost = () => {
         </article>
         <div className="blog-post-end-line" aria-hidden="true" />
         <ExploreOtherBlogs currentPostId={post.id} />
-        {post.toc?.length && post.toc[post.toc.length - 1] === 'Enquire Now' && !post.ctaLinks ? (
-          <div data-toc-section="">
-            <EnquireSection />
-          </div>
-        ) : (
+        <div id="enquire-now">
           <EnquireSection />
-        )}
+        </div>
         <Footer />
       </div>
     </div>

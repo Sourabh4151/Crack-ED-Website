@@ -182,12 +182,67 @@
   color: rgba(250, 250, 250, 1);
 }
 
+.blog-post-section-heading {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 27px;
+  letter-spacing: 0%;
+  text-align: justify;
+  color: rgba(250, 250, 250, 1);
+}
+
+.blog-post-emphasis {
+  font-weight: 600;
+  color: rgba(250, 250, 250, 0.8);
+}
+
 .blog-post-text p {
   margin: 0 0 1em 0;
 }
 
 .blog-post-text p:last-child {
   margin-bottom: 0;
+}
+
+.blog-post-lead {
+  font-weight: 600;
+}
+
+.blog-post-subhead {
+  font-weight: 600;
+}
+
+.blog-post-bullets {
+  margin: 0 0 1em 0;
+  padding-left: 1.5em;
+  list-style-type: disc;
+}
+
+.blog-post-bullets li {
+  margin-bottom: 0.5em;
+}
+
+.blog-post-bullets li:last-child {
+  margin-bottom: 0;
+}
+
+.blog-post-tip {
+  background: rgba(26, 158, 183, 0.16);
+  border-radius: 8px;
+  padding: 16px;
+  margin: 0 0 1em 0;
+}
+
+.blog-post-tip p {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0%;
+  text-align: justify;
+  color: rgba(250, 250, 250, 0.8);
 }
 
 .blog-post-role-list {
@@ -488,19 +543,19 @@
     color: rgba(250, 250, 250, 0.75);
   }
 
-  /* Body text: Montserrat 400, 14px, 21px line-height, justified, white */
+  /* Body text: Montserrat 400, 16px, 24px line-height, justified, rgba(250,250,250,0.8) */
   .blog-post-text {
-    font-size: 14px;
-    line-height: 21px;
-    color: rgba(250, 250, 250, 1);
-  }
-
-  /* Intro/section headings in body: Montserrat 400, 14px, 21px line-height, justified, white */
-  .blog-post-intro-heading {
-    font-weight: 400;
     font-size: 16px;
     line-height: 24px;
-    text-align: justify;
+    color: rgba(250, 250, 250, 0.8);
+  }
+
+  /* Headings in body on mobile: 18px, white */
+  .blog-post-intro-heading,
+  .blog-post-section-heading,
+  .blog-post-subhead {
+    font-size: 18px;
+    line-height: 27px;
     color: rgba(250, 250, 250, 1);
   }
 

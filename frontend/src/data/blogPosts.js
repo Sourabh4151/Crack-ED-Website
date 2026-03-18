@@ -301,4 +301,153 @@ In the ever-evolving landscape, committing to continuous learning isn't just a c
     toc: ['Navigating Career Agility', "But What's Career Agility?", 'The Swift Pace of Transformation', 'Why It Matters for Women Professionals?', 'The Lowdown on Continuous Learning', 'Lifelong Learning in Entrepreneurship', 'Skills Buffet', 'Confidence Game', 'Networking Gold', 'Fueling the Entrepreneurial Fire', 'Enquire Now'],
     tocNumbers: ['1', '1.1', '1.2', '1.3', '2', '3', '3.1', '3.2', '3.3', '3.4', '4'],
   },
+  {
+    id: '7',
+    image: image6,
+    title: '7 Skills Every Successful Relationship Manager Must Have',
+    date: 'MARCH 18, 2026',
+    tags: ['Career', 'Upskilling'],
+    hideBodyImage: true,
+    hideFromResources: true,
+    excludeIntroFromToc: true,
+    content: `You just landed your first corporate job as a Relationship Manager. Exciting — but also a little confusing. What exactly does the role involve, and what separates average relationship managers from truly exceptional ones?
+A relationship manager is the bridge between a company and its clients. You are the person clients call when something goes wrong — and the person they trust when everything is going right. It is a role that blends strategy, empathy, and communication in a way that very few jobs do.
+The good news? These skills can be learned. Whether you are just starting out or looking to level up, this guide breaks down the seven core competencies that set top-performing relationship managers apart from the rest.
+
+The best relationship managers share a core set of skills that allow them to build trust, solve problems, and grow long-term client relationships. Here are the seven most important ones.`,
+    contentAfterImage: `1. Active Listening
+
+Most people hear. Few people actually listen. As a relationship manager,
+active listening is your single most valuable tool.
+When a client speaks, your job is not just to wait for your turn to talk. It is
+to understand what they need, what worries them, and what they are not
+saying out loud.
+This kind of deep listening builds the trust that turns a one-time client into a
+long-term partner.
+
+How to practise it:`,
+    practiceBullets: [
+      'Maintain eye contact and avoid checking your phone during client calls.',
+      'Summarise what the client said before responding — this shows you were paying attention.',
+      'Ask follow-up questions that go deeper, not just surface-level clarifications.',
+    ],
+    contentAfterImage2: `2. Clear Communication Skills
+
+A great relationship manager knows how to communicate complex ideas in
+simple, clear language. Whether you are writing an email, presenting a
+proposal, or handling a difficult phone call — clarity wins every time.
+
+Clients do not want jargon. They want to understand what is happening,
+why it matters, and what comes next. Strong communication skills in client
+management also mean knowing when to pick up the phone instead of
+sending a long email chain.
+
+Tip: After every important client interaction, send a brief follow-up message summarising key points and next steps. This builds accountability and reduces misunderstandings
+`,
+    contentAfterImage3: `3. Emotional Intelligence (EQ)
+
+Emotional intelligence is the ability to understand and manage your own
+emotions — and to recognise and respond to the emotions of others. For a
+relationship manager, this is non-negotiable.
+
+Think about it: clients are human beings. They have stressful days, budget
+pressures, and internal politics to deal with. A relationship manager with
+high EQ can sense when a client is frustrated, know when to push forward
+and when to back off, and always make the client feel genuinely heard.
+
+Research consistently shows that professionals with high emotional
+intelligence perform better in client-facing roles than those who rely purely
+on technical knowledge. EQ is the edge that separates good from great.
+`,
+    contentAfterImage4: `4. Problem-Solving and Strategic Thinking
+
+Clients do not come to you just to chat — they come to you because they
+ have challenges to solve. A strong relationship manager does not just pass
+problems along to another department. Instead, they take ownership and
+think through solutions proactively.
+
+Strategic thinking means looking beyond today's problem. It means
+understanding your client's bigger business goals and helping them see how
+your solutions fit into their long-term picture.
+
+This kind of account management skill is what makes clients want to stay
+with you — and expand their relationship with your company.
+
+Try this approach:`,
+    approachBullets: [
+      'When a client raises an issue, first acknowledge it, then investigate before jumping to solutions.',
+      'Bring at least two options to every problem-solving conversation.',
+      "Always link your solution back to the client's stated business goals.",
+    ],
+    contentAfterImage5: `5. Negotiation and Conflict Resolution
+
+No client relationship is perfectly smooth 100% of the time. Contracts get
+disputed. Expectations do not always match. Deadlines get missed. When
+this happens, your ability to negotiate and resolve conflict calmly is what
+defines your reputation as a relationship manager.
+
+Good negotiation is not about winning. It is about finding a solution where
+both sides feel respected and valued. The goal is always to preserve the
+relationship while finding a fair path forward.
+
+Furthermore, addressing conflict early — before it grows into a bigger issue
+— is a mark of a truly skilled professional. Do not let small tensions fester.
+`,
+    contentAfterImage6: `6. Time Management and Organisation
+
+A relationship manager typically handles multiple client accounts at once.
+Without strong organisational skills, things fall through the cracks — and in
+client management, that can cost the company serious money and trust.
+
+In addition to juggling meetings, emails, and reports, you also need to stay
+on top of each client's unique situation. Using a CRM (Customer
+Relationship Management) tool effectively is a baseline expectation in most
+companies today.
+
+Quick habits that help:
+`,
+    habitsBullets: [
+      'Block dedicated time slots for client check-ins every week.',
+      'Keep detailed notes in your CRM after every interaction.',
+      'Set reminders for key dates: contract renewals, quarterly reviews, and client anniversaries.',
+    ],
+    contentAfterImage7: `7. Product Knowledge and Industry Awareness
+
+You cannot effectively manage a client relationship if you do not deeply
+understand what your company offers — and what is happening in your
+client's industry. Clients trust relationship managers who speak their
+language.
+
+This means staying updated on your company's products, services, and
+pricing. It also means reading up on your clients' industries, their
+competitors, and the challenges they face. When you walk into a meeting
+already knowing what keeps your client up at night, you become far more
+valuable than a manager who just waits for them to explain it.
+
+Additionally, strong product knowledge helps you identify upselling
+opportunities naturally — not in a pushy sales way, but as a genuine advisor
+who spots gaps and offers relevant solutions.
+
+The Bottom Line: Skills That Pay Off Long-Term
+
+Becoming a standout relationship manager does not happen overnight. However, every skill on this list is something you can actively build and improve with intention and practice.
+
+To recap: active listening helps you understand clients on a deeper level. Clear communication eliminates confusion. Emotional intelligence makes clients feel valued. Problem-solving and strategic thinking make you indispensable. Negotiation skills protect relationships under pressure. Strong time management keeps every client happy. And deep product knowledge turns you from a contact person into a trusted advisor.
+
+As a fresh graduate stepping into client management, focus on one or two of these skills each quarter. Ask for feedback. Observe the senior relationship managers around you. Most importantly, treat every client interaction as a learning opportunity.
+
+The professionals who master these skills do not just keep their jobs — they build careers that grow as fast as the trust they earn from the people they serve.
+`,
+    toc: [
+      'Active Listening: The Foundation of Client Relationships',
+      'Clear Communication Skills',
+      'Emotional Intelligence (EQ)',
+      'Problem-Solving and Strategic Thinking',
+      'Negotiation and Conflict Resolution',
+      'Time Management and Organisation',
+      'Product Knowledge and Industry Awareness',
+      'Enquire Now',
+    ],
+    tocNumbers: ['1', '2', '3', '4', '5', '6', '7', '8'],
+  },
 ]

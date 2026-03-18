@@ -43,7 +43,7 @@ const ResourcesFilter = ({ activeCategory = 'all', onCategoryChange }) => {
           </div>
           {/* Row 3: Blog cards grid (Frame 519) — below Interview Upskilling Career */}
           <div className="resources-filter-grid" aria-label="Blog posts">
-            {BLOG_POSTS.map((card) => (
+            {BLOG_POSTS.filter((p) => !p.hideFromResources).map((card) => (
               <article key={card.id} className="resources-filter-card">
                 <div className="resources-filter-card-image">
                   <img src={card.image} alt="" />
