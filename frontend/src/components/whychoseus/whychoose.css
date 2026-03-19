@@ -2,7 +2,7 @@
 
 .char {
   opacity: 0;
-  display: inline-block;
+  display: inline;
 }
 
 
@@ -62,11 +62,6 @@ background: linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255,
 .char {
   display: inline-block;
   opacity: 0.15;
-}
-.space {
-  display: inline;
-  /* width: 0.25em; */
-  white-space: pre;
 }
 .line {
   display: block;       

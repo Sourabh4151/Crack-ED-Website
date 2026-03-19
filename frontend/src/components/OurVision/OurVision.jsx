@@ -17,7 +17,7 @@ const OurVision = () => {
 
       gsap.set(chars, {
         opacity: 0.15,
-        color: '#ffffff'
+        color: '#fafafa'
       })
 
       const tl = gsap.timeline({
@@ -30,13 +30,6 @@ const OurVision = () => {
         }
       })
 
-      tl.to(textRef.current, {
-        opacity: 0.15,
-        scale: 1,
-        ease: 'none',
-        duration: 1
-      })
-
       tl.to(
         chars,
         {
@@ -45,7 +38,7 @@ const OurVision = () => {
           ease: 'none',
           duration: 4
         },
-        -20
+        0
       )
     })
 

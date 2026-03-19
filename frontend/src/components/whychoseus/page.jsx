@@ -63,15 +63,17 @@ const Whychooseus = () => {
         </h2>
         <p ref={revealRef} className="typing-text">
 
-          {paragraph.split(" ").map((word, i) => (
-            <span key={i} className="word">
-              {word.split("").map((char, j) => (
-                <span key={j} className="char">
-                  {char}
-                </span>
-              ))}
-              <span className="space">&nbsp;</span>
-            </span>
+          {paragraph.split(" ").map((word, i, words) => (
+            <React.Fragment key={i}>
+              <span className="word">
+                {word.split("").map((char, j) => (
+                  <span key={j} className="char">
+                    {char}
+                  </span>
+                ))}
+              </span>
+              {i < words.length - 1 ? " " : null}
+            </React.Fragment>
           ))}
 
         </p>

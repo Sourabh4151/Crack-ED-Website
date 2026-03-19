@@ -50,7 +50,7 @@ useEffect(() => {
       scrollTrigger: {
         trigger: sectionRef.current,
         start: "top top",
-        end: "+=3000", 
+        end: "+=2000", 
         scrub: 1,  
         pin: true,     
         anticipatePin: 1,
@@ -59,23 +59,26 @@ useEffect(() => {
     tl.to(".slide-2", {
       yPercent: 0,
       ease: "none",
+      duration: 1,
        pointerEvents: "auto",
     })
     .to(".slide-1", { 
       yPercent: -20, 
       autoAlpha: 0, 
+      duration: 1,
        pointerEvents: "auto",
       ease: "none" 
     }, "<") 
-    tl.to({}, { duration: 0.5 });
     tl.to(".slide-3", {
       yPercent: 0,
+      duration: 1,
        pointerEvents: "auto",
       ease: "none",
     })
     .to(".slide-2", { 
       yPercent: -20, 
       autoAlpha: 0, 
+      duration: 1,
        pointerEvents: "auto",
       ease: "none" 
     }, "<");

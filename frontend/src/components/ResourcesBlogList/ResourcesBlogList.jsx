@@ -1,6 +1,6 @@
 import React from 'react'
 import ResourcesBlogCard from '../ResourcesBlogCard/ResourcesBlogCard'
-import premiumImage from '../../assets/premium_image.png'
+import premiumImage from '../../assets/premium_image.jpeg'
 import './ResourcesBlogList.css'
 
 const defaultBlog = {

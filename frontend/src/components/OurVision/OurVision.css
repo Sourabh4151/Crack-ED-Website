@@ -7,21 +7,22 @@
 
 .our-vision-sticky-wrapper {
   height: 100vh;
+  width: 100%;
+  margin: 0 auto;
   position: relative;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 0 120px;
 }
 
 .our-vision-heading {
   position: absolute;
-  font-family: 'Poppins', sans-serif;
-  font-size: clamp(40px, 10vw, 180px);
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(40px, 10vw, 150px);
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.12);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.04) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
   text-align: center;
   width: 100%;
   z-index: 1;
@@ -30,25 +31,32 @@
   text-transform: uppercase;
   letter-spacing: 0.15em;
   white-space: nowrap;
+  pointer-events: none;
 }
 
 .our-vision-typing-text {
   font-family: 'Poppins', sans-serif;
   font-size: 40px;
-  /* Constrain width so justify doesn't create huge word gaps */
-  width: 100%;
-  max-width: 700px;
+  width: 70vw;
+  padding: 0 120px;
   line-height: 1.3;
   z-index: 2;
-  color: #ffffff;
-  margin: 0;
+  color: #1e1e1e;
+  margin: 165px auto 0;
   text-align: justify;
   text-justify: inter-word;
+  text-align-last: justify;
   /* Keep justify, but avoid mid-word breaks (prefer hyphenation) */
   hyphens: auto;
   overflow-wrap: normal;
   word-break: normal;
   white-space: normal;
+}
+
+@media (min-width: 1400px) {
+  .our-vision-typing-text {
+    margin-top: 230px;
+  }
 }
 
 .our-vision-typing-text .char {
@@ -60,16 +68,16 @@
 
 @media (max-width: 768px) {
   .our-vision-section {
-    min-height: auto;
+    min-height: 100vh;
   }
 
   .our-vision-sticky-wrapper {
-    height: auto;
-    min-height: auto;
-    padding: 48px 24px 56px;
+    height: 100vh;
+    min-height: 100vh;
+    padding: 48px 20px 56px;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     position: relative;
     gap: 0px;
   }
@@ -82,13 +90,15 @@
     right: auto;
     margin-left: auto;
     margin-right: auto;
-    width: 100%;
+    width: 90vw;
     max-width: 100%;
-    padding: 0;
+    padding: 0 20px;
     text-align: center;
     box-sizing: border-box;
     letter-spacing: 0.12em;
     white-space: nowrap;
+    margin-bottom: 56px;
+    z-index: 3;
   }
 
   .our-vision-typing-text {
@@ -96,12 +106,12 @@
     font-size: 24px;
     left: auto;
     right: auto;
-    width: 100%;
+    width: 90vw;
     max-width: 100%;
     line-height: 1.4;
     z-index: 2;
     margin: 0;
-    padding: 0;
+    padding: 0 20px;
     box-sizing: border-box;
     text-align: justify;
     text-justify: inter-word;
