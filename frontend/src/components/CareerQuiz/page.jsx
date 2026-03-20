@@ -7,126 +7,308 @@ import 'react-toastify/dist/ReactToastify.css';
 // Program fees (₹) - used for tie-breaking when counts are equal
 const PROGRAM_FEES = {
   'Udaan Program - Cashier / Teller': 100000,
+  'Udaan Program - Virtual Relationship Manager': 80000,
+  'Udaan Program - Relationship Manager': 100000,
   'Lenskart EyeTech Program - Clinical Technician': 100000,
   'Lenskart EyeTech Program - Retail Sales Associate': 100000,
   'Piramal ProEdge Program - Relationship Manager': 100000,
-  'Paytm Disha Program - Field Sales Executive': 59000,
+  'Paytm Disha Program - Field Sales Executive': 50000,
+  'Aviva Nirmaan Program - Direct Sales Executive': 100000,
+  'Aviva Nirmaan Program - Agency Sales Executive': 100000,
+  'Poonawalla FinPro Career Program - Sales Executive': 50000,
+  'Poonawalla FinPro Career Program - Gold Assayer': 134746,
+  'Finova VyaparaMitra Program - Relationship Officer': 84746,
+  'Postgraduate Program Relationship Management - Relationship Manager': 254238,
+  'Postgraduate Program Banking Management - Assistant Manager': 169492,
+  'Postgraduate Certification Banking Management - Business Development Executive': 50848,
+  'Udaan Program - Business Loan Associate': 80000,
 };
 
 // Program details for display (title, details, duration, link)
 const PROGRAM_DETAILS = {
   'Udaan Program - Cashier / Teller': { details: 'CTC of upto Rs 3.5 LPA', duration: '2-month program', link: 'https://udaan.crack-ed.com/portal' },
+  'Udaan Program - Virtual Relationship Manager': { details: 'CTC of upto Rs 2.8 LPA', duration: '4-week program', link: 'https://udaanvrm.crack-ed.com' },
+  'Udaan Program - Relationship Manager': { details: 'CTC of upto Rs 6.5 LPA', duration: '3-week program', link: 'https://udaanrm.crack-ed.com' },
   'Lenskart EyeTech Program - Clinical Technician': { details: 'CTC of Rs 2.64 LPA', duration: '6-month program', link: 'https://lenskart.crack-ed.com/portal' },
-  'Lenskart EyeTech Program - Retail Sales Associate': { details: 'CTC of Rs 3 LPA', duration: '2-month program', link: 'https://lenskartrsa.crack-ed.com/portal' },
-  'Piramal ProEdge Program - Relationship Manager': { details: 'CTC of Rs 2.74 LPA', duration: '13-week program', link: 'https://piramal.crack-ed.com/portal' },
+  'Lenskart EyeTech Program - Retail Sales Associate': { details: 'CTC of Rs 3 LPA + incentives', duration: '9-weeks program', link: 'https://lenskartrsa.crack-ed.com/portal' },
+  'Piramal ProEdge Program - Relationship Manager': { details: 'CTC of Rs 2.74 LPA + variable', duration: '13-weeks program', link: 'https://piramal.crack-ed.com/portal' },
   'Paytm Disha Program - Field Sales Executive': { details: 'CTC of Rs 2.5 LPA + incentives', duration: '2-week program (virtual)', link: 'https://paytm.crack-ed.com/portal' },
+  'Aviva Nirmaan Program - Direct Sales Executive': { details: 'CTC of Rs 3.5 LPA + variable', duration: '3-month program', link: 'https://avivads.crack-ed.com' },
+  'Aviva Nirmaan Program - Agency Sales Executive': { details: 'CTC of Rs 3.5 LPA + variable', duration: '3-month program', link: 'https://avivaas.crack-ed.com' },
+  'Poonawalla FinPro Career Program - Sales Executive': { details: 'CTC of upto Rs 2.76 LPA + incentives', duration: '3-week program', link: 'http://poonawallase.crack-ed.com/' },
+  'Poonawalla FinPro Career Program - Gold Assayer': { details: 'CTC of Rs 2.5 LPA + incentives', duration: '1.5-month program', link: 'http://poonawallaga.crack-ed.com/' },
+  'Finova VyaparaMitra Program - Relationship Officer': { details: 'CTC of Rs 2.4 LPA + variable', duration: '3-month program', link: 'https://finovaro.crack-ed.com' },
+  'Postgraduate Program Relationship Management - Relationship Manager': { details: 'CTC of Rs 5.5 LPA + incentives', duration: '6-month program', link: 'https://pgprm.crack-ed.com' },
+  'Postgraduate Program Banking Management - Assistant Manager': { details: 'CTC of Rs 4 LPA + incentives', duration: '6-month program', link: 'https://pgpam.crack-ed.com' },
+  'Postgraduate Certification Banking Management - Business Development Executive': { details: 'CTC of Rs 2.5 LPA + incentives', duration: '2-week program', link: 'https://pgcbm.crack-ed.com' },
+  'Udaan Program - Business Loan Associate': { details: 'CTC of upto Rs 2.8 LPA', duration: '3-week program', link: 'https://udaanbusiness.crack-ed.com' },
 };
 
-// For each question: option (A/B/C/D) -> [program1, program2] - both get +1 count when selected
+// For each question: option (A/B/C/D) -> [program1, program2, program3] — each gets +1 count when selected
 const OPTION_TO_PROGRAMS = [
-  // Q1: Do you enjoy interacting with people in your daily life?
+  // Q1: How do you generally feel about interacting with people?
   {
-    A: ['Paytm Disha Program - Field Sales Executive', 'Piramal ProEdge Program - Relationship Manager'],
-    B: ['Udaan Program - Cashier / Teller', 'Piramal ProEdge Program - Relationship Manager'],
-    C: ['Lenskart EyeTech Program - Clinical Technician', 'Udaan Program - Cashier / Teller'],
-    D: ['Lenskart EyeTech Program - Clinical Technician', 'Lenskart EyeTech Program - Retail Sales Associate'],
+    A: [
+      'Aviva Nirmaan Program - Direct Sales Executive',
+      'Poonawalla FinPro Career Program - Sales Executive',
+      'Postgraduate Certification Banking Management - Business Development Executive',
+    ],
+    B: [
+      'Postgraduate Program Relationship Management - Relationship Manager',
+      'Piramal ProEdge Program - Relationship Manager',
+      'Finova VyaparaMitra Program - Relationship Officer',
+    ],
+    C: [
+      'Lenskart EyeTech Program - Retail Sales Associate',
+      'Udaan Program - Virtual Relationship Manager',
+      'Udaan Program - Relationship Manager',
+    ],
+    D: [
+      'Lenskart EyeTech Program - Clinical Technician',
+      'Poonawalla FinPro Career Program - Gold Assayer',
+      'Udaan Program - Cashier / Teller',
+    ],
   },
-  // Q2: What kind of daily routine sounds best to you?
+  // Q2: Which type of daily routine appeals to you the most?
   {
-    A: ['Paytm Disha Program - Field Sales Executive', 'Lenskart EyeTech Program - Retail Sales Associate'],
-    B: ['Piramal ProEdge Program - Relationship Manager', 'Udaan Program - Cashier / Teller'],
-    C: ['Udaan Program - Cashier / Teller', 'Lenskart EyeTech Program - Clinical Technician'],
-    D: ['Lenskart EyeTech Program - Clinical Technician', 'Lenskart EyeTech Program - Retail Sales Associate'],
+    A: [
+      'Aviva Nirmaan Program - Direct Sales Executive',
+      'Poonawalla FinPro Career Program - Sales Executive',
+      'Postgraduate Certification Banking Management - Business Development Executive',
+    ],
+    B: [
+      'Postgraduate Program Banking Management - Assistant Manager',
+      'Piramal ProEdge Program - Relationship Manager',
+      'Finova VyaparaMitra Program - Relationship Officer',
+    ],
+    C: [
+      'Udaan Program - Cashier / Teller',
+      'Udaan Program - Business Loan Associate',
+      'Udaan Program - Relationship Manager',
+    ],
+    D: [
+      'Lenskart EyeTech Program - Clinical Technician',
+      'Poonawalla FinPro Career Program - Gold Assayer',
+      'Udaan Program - Virtual Relationship Manager',
+    ],
   },
-  // Q3: How do you feel about responsibility and pressure?
+  // Q3: How do you usually respond to responsibility and pressure?
   {
-    A: ['Paytm Disha Program - Field Sales Executive', 'Piramal ProEdge Program - Relationship Manager'],
-    B: ['Udaan Program - Cashier / Teller', 'Piramal ProEdge Program - Relationship Manager'],
-    C: ['Lenskart EyeTech Program - Retail Sales Associate', 'Udaan Program - Cashier / Teller'],
-    D: ['Lenskart EyeTech Program - Clinical Technician', 'Lenskart EyeTech Program - Retail Sales Associate'],
+    A: [
+      'Aviva Nirmaan Program - Agency Sales Executive',
+      'Aviva Nirmaan Program - Direct Sales Executive',
+      'Poonawalla FinPro Career Program - Sales Executive',
+    ],
+    B: [
+      'Postgraduate Program Banking Management - Assistant Manager',
+      'Udaan Program - Relationship Manager',
+      'Finova VyaparaMitra Program - Relationship Officer',
+    ],
+    C: [
+      'Lenskart EyeTech Program - Retail Sales Associate',
+      'Udaan Program - Virtual Relationship Manager',
+      'Piramal ProEdge Program - Relationship Manager',
+    ],
+    D: [
+      'Poonawalla FinPro Career Program - Gold Assayer',
+      'Udaan Program - Cashier / Teller',
+      'Lenskart EyeTech Program - Clinical Technician',
+    ],
   },
-  // Q4: Which of these best describes you?
+  // Q4: Which description fits you best?
   {
-    A: ['Paytm Disha Program - Field Sales Executive', 'Lenskart EyeTech Program - Retail Sales Associate'],
-    B: ['Piramal ProEdge Program - Relationship Manager', 'Udaan Program - Cashier / Teller'],
-    C: ['Lenskart EyeTech Program - Clinical Technician', 'Udaan Program - Cashier / Teller'],
-    D: ['Lenskart EyeTech Program - Retail Sales Associate', 'Udaan Program - Cashier / Teller'],
+    A: [
+      'Aviva Nirmaan Program - Agency Sales Executive',
+      'Poonawalla FinPro Career Program - Sales Executive',
+      'Postgraduate Certification Banking Management - Business Development Executive',
+    ],
+    B: [
+      'Postgraduate Program Relationship Management - Relationship Manager',
+      'Piramal ProEdge Program - Relationship Manager',
+      'Finova VyaparaMitra Program - Relationship Officer',
+    ],
+    C: [
+      'Udaan Program - Cashier / Teller',
+      'Poonawalla FinPro Career Program - Gold Assayer',
+      'Udaan Program - Business Loan Associate',
+    ],
+    D: [
+      'Lenskart EyeTech Program - Retail Sales Associate',
+      'Udaan Program - Virtual Relationship Manager',
+      'Postgraduate Program Banking Management - Assistant Manager',
+    ],
   },
   // Q5: What do you enjoy doing more?
   {
-    A: ['Paytm Disha Program - Field Sales Executive', 'Piramal ProEdge Program - Relationship Manager'],
-    B: ['Udaan Program - Cashier / Teller', 'Piramal ProEdge Program - Relationship Manager'],
-    C: ['Lenskart EyeTech Program - Clinical Technician', 'Lenskart EyeTech Program - Retail Sales Associate'],
-    D: ['Lenskart EyeTech Program - Retail Sales Associate', 'Udaan Program - Cashier / Teller'],
+    A: [
+      'Aviva Nirmaan Program - Direct Sales Executive',
+      'Poonawalla FinPro Career Program - Sales Executive',
+      'Postgraduate Certification Banking Management - Business Development Executive',
+    ],
+    B: [
+      'Postgraduate Program Relationship Management - Relationship Manager',
+      'Udaan Program - Business Loan Associate',
+      'Finova VyaparaMitra Program - Relationship Officer',
+    ],
+    C: [
+      'Poonawalla FinPro Career Program - Gold Assayer',
+      'Lenskart EyeTech Program - Clinical Technician',
+      'Udaan Program - Cashier / Teller',
+    ],
+    D: [
+      'Lenskart EyeTech Program - Retail Sales Associate',
+      'Udaan Program - Virtual Relationship Manager',
+      'Piramal ProEdge Program - Relationship Manager',
+    ],
   },
   // Q6: How do you prefer to work most of the time?
   {
-    A: ['Paytm Disha Program - Field Sales Executive', 'Lenskart EyeTech Program - Retail Sales Associate'],
-    B: ['Udaan Program - Cashier / Teller', 'Piramal ProEdge Program - Relationship Manager'],
-    C: ['Udaan Program - Cashier / Teller', 'Lenskart EyeTech Program - Clinical Technician'],
-    D: ['Lenskart EyeTech Program - Retail Sales Associate', 'Udaan Program - Cashier / Teller'],
+    A: [
+      'Aviva Nirmaan Program - Agency Sales Executive',
+      'Aviva Nirmaan Program - Direct Sales Executive',
+      'Poonawalla FinPro Career Program - Sales Executive',
+    ],
+    B: [
+      'Postgraduate Program Banking Management - Assistant Manager',
+      'Postgraduate Program Relationship Management - Relationship Manager',
+      'Finova VyaparaMitra Program - Relationship Officer',
+    ],
+    C: [
+      'Udaan Program - Cashier / Teller',
+      'Udaan Program - Business Loan Associate',
+      'Udaan Program - Relationship Manager',
+    ],
+    D: [
+      'Udaan Program - Virtual Relationship Manager',
+      'Lenskart EyeTech Program - Retail Sales Associate',
+      'Piramal ProEdge Program - Relationship Manager',
+    ],
   },
-  // Q7: How do you feel about handling important items, records, or details?
+  // Q7: How do you feel about handling important records or sensitive details?
   {
-    A: ['Udaan Program - Cashier / Teller', 'Lenskart EyeTech Program - Clinical Technician'],
-    B: ['Udaan Program - Cashier / Teller', 'Piramal ProEdge Program - Relationship Manager'],
-    C: ['Lenskart EyeTech Program - Retail Sales Associate', 'Udaan Program - Cashier / Teller'],
-    D: ['Paytm Disha Program - Field Sales Executive', 'Lenskart EyeTech Program - Retail Sales Associate'],
+    A: [
+      'Poonawalla FinPro Career Program - Gold Assayer',
+      'Udaan Program - Cashier / Teller',
+      'Udaan Program - Business Loan Associate',
+    ],
+    B: [
+      'Postgraduate Program Banking Management - Assistant Manager',
+      'Udaan Program - Relationship Manager',
+      'Piramal ProEdge Program - Relationship Manager',
+    ],
+    C: [
+      'Udaan Program - Virtual Relationship Manager',
+      'Lenskart EyeTech Program - Retail Sales Associate',
+      'Finova VyaparaMitra Program - Relationship Officer',
+    ],
+    D: [
+      'Aviva Nirmaan Program - Direct Sales Executive',
+      'Aviva Nirmaan Program - Agency Sales Executive',
+      'Poonawalla FinPro Career Program - Sales Executive',
+    ],
   },
-  // Q8: What type of work gives you satisfaction?
+  // Q8: What type of work gives you the most satisfaction?
   {
-    A: ['Paytm Disha Program - Field Sales Executive', 'Lenskart EyeTech Program - Retail Sales Associate'],
-    B: ['Piramal ProEdge Program - Relationship Manager', 'Udaan Program - Cashier / Teller'],
-    C: ['Udaan Program - Cashier / Teller', 'Lenskart EyeTech Program - Clinical Technician'],
-    D: ['Lenskart EyeTech Program - Clinical Technician', 'Lenskart EyeTech Program - Retail Sales Associate'],
+    A: [
+      'Aviva Nirmaan Program - Direct Sales Executive',
+      'Poonawalla FinPro Career Program - Sales Executive',
+      'Postgraduate Certification Banking Management - Business Development Executive',
+    ],
+    B: [
+      'Postgraduate Program Relationship Management - Relationship Manager',
+      'Piramal ProEdge Program - Relationship Manager',
+      'Finova VyaparaMitra Program - Relationship Officer',
+    ],
+    C: [
+      'Udaan Program - Business Loan Associate',
+      'Udaan Program - Cashier / Teller',
+      'Udaan Program - Relationship Manager',
+    ],
+    D: [
+      'Lenskart EyeTech Program - Clinical Technician',
+      'Poonawalla FinPro Career Program - Gold Assayer',
+      'Udaan Program - Virtual Relationship Manager',
+    ],
   },
-  // Q9: How comfortable are you with travelling or going out for work when needed?
+  // Q9: How comfortable are you with travelling or going out when required?
   {
-    A: ['Paytm Disha Program - Field Sales Executive', 'Lenskart EyeTech Program - Retail Sales Associate'],
-    B: ['Piramal ProEdge Program - Relationship Manager', 'Udaan Program - Cashier / Teller'],
-    C: ['Lenskart EyeTech Program - Retail Sales Associate', 'Udaan Program - Cashier / Teller'],
-    D: ['Lenskart EyeTech Program - Clinical Technician', 'Lenskart EyeTech Program - Retail Sales Associate'],
+    A: [
+      'Aviva Nirmaan Program - Direct Sales Executive',
+      'Finova VyaparaMitra Program - Relationship Officer',
+      'Poonawalla FinPro Career Program - Sales Executive',
+    ],
+    B: [
+      'Piramal ProEdge Program - Relationship Manager',
+      'Udaan Program - Relationship Manager',
+      'Postgraduate Program Banking Management - Assistant Manager',
+    ],
+    C: [
+      'Lenskart EyeTech Program - Retail Sales Associate',
+      'Udaan Program - Cashier / Teller',
+      'Udaan Program - Business Loan Associate',
+    ],
+    D: [
+      'Udaan Program - Virtual Relationship Manager',
+      'Lenskart EyeTech Program - Clinical Technician',
+      'Poonawalla FinPro Career Program - Gold Assayer',
+    ],
   },
-  // Q10: Which work style feels most natural to you?
+  // Q10: WWhich work style feels most natural to you?
   {
-    A: ['Paytm Disha Program - Field Sales Executive', 'Lenskart EyeTech Program - Retail Sales Associate'],
-    B: ['Piramal ProEdge Program - Relationship Manager', 'Udaan Program - Cashier / Teller'],
-    C: ['Udaan Program - Cashier / Teller', 'Lenskart EyeTech Program - Clinical Technician'],
-    D: ['Lenskart EyeTech Program - Clinical Technician', 'Lenskart EyeTech Program - Retail Sales Associate'],
+    A: [
+      'Aviva Nirmaan Program - Agency Sales Executive',
+      'Poonawalla FinPro Career Program - Sales Executive',
+      'Postgraduate Certification Banking Management - Business Development Executive',
+    ],
+    B: [
+      'Postgraduate Program Relationship Management - Relationship Manager',
+      'Udaan Program - Relationship Manager',
+      'Postgraduate Program Banking Management - Assistant Manager',
+    ],
+    C: [
+      'Udaan Program - Cashier / Teller',
+      'Udaan Program - Business Loan Associate',
+      'Piramal ProEdge Program - Relationship Manager',
+    ],
+    D: [
+      'Lenskart EyeTech Program - Clinical Technician',
+      'Poonawalla FinPro Career Program - Gold Assayer',
+      'Udaan Program - Virtual Relationship Manager',
+    ],
   },
 ];
 
 const CareerQuiz = ({ showOnlyTopProgram = false }) => {
   const questions = [
-    { id: 1, question: "Do you enjoy interacting with people in your daily life?", options: [
-      { text: "Yes, I enjoy talking to many people", mapping: "A" },
-      { text: "I like talking when there is a clear reason", mapping: "B" },
+    { id: 1, question: "How do you generally feel about interacting with people?", options: [
+      { text: "I enjoy meeting and talking to many people", mapping: "A" },
+      { text: "I like interaction when there is a clear purpose", mapping: "B" },
       { text: "I am comfortable but prefer limited interaction", mapping: "C" },
       { text: "I prefer calm, one-to-one interaction", mapping: "D" },
     ]},
-    { id: 2, question: "What kind of daily routine sounds best to you?", options: [
+    { id: 2, question: "Which type of daily routine appeals to you the most?", options: [
       { text: "Being active and moving around most of the day", mapping: "A" },
-      { text: "A mix of movement and structured work", mapping: "B" },
-      { text: "Mostly indoor, organised work", mapping: "C" },
-      { text: "Fixed location with steady tasks", mapping: "D" },
+      { text: "A balance of movement and structured work", mapping: "B" },
+      { text: "Mostly indoor work with organised tasks", mapping: "C" },
+      { text: "Fixed location with steady, predictable tasks", mapping: "D" },
     ]},
-    { id: 3, question: "How do you feel about responsibility and pressure?", options: [
-      { text: "I like challenges and pushing myself", mapping: "A" },
-      { text: "I can handle responsibility with guidance", mapping: "B" },
-      { text: "I prefer moderate responsibility", mapping: "C" },
-      { text: "I prefer accuracy over pressure", mapping: "D" },
+    { id: 3, question: "How do you usually respond to responsibility and pressure?", options: [
+      { text: "I enjoy challenges and pushing my limits", mapping: "A" },
+      { text: "I can manage responsibility with some guidance", mapping: "B" },
+      { text: "I prefer moderate and manageable responsibility", mapping: "C" },
+      { text: "I focus more on accuracy than pressure", mapping: "D" },
     ]},
-    { id: 4, question: "Which of these best describes you?", options: [
+    { id: 4, question: "Which description fits you best?", options: [
       { text: "Energetic and confident", mapping: "A" },
       { text: "Patient and understanding", mapping: "B" },
       { text: "Detail-oriented and organised", mapping: "C" },
       { text: "Friendly and service-focused", mapping: "D" },
     ]},
     { id: 5, question: "What do you enjoy doing more?", options: [
-      { text: "Explaining things and convincing people", mapping: "A" },
-      { text: "Helping people with important decisions", mapping: "B" },
-      { text: "Handling work that needs accuracy", mapping: "C" },
-      { text: "Helping people feel comfortable and supported", mapping: "D" },
+      { text: "Explaining things and influencing decisions", mapping: "A" },
+      { text: "Helping people make important choices", mapping: "B" },
+      { text: "Handling work that requires accuracy", mapping: "C" },
+      { text: "Supporting people and making them feel comfortable", mapping: "D" },
     ]},
     { id: 6, question: "How do you prefer to work most of the time?", options: [
       { text: "Independently and actively", mapping: "A" },
@@ -134,29 +316,29 @@ const CareerQuiz = ({ showOnlyTopProgram = false }) => {
       { text: "With systems, rules, and processes", mapping: "C" },
       { text: "In a calm, customer-focused environment", mapping: "D" },
     ]},
-    { id: 7, question: "How do you feel about handling important items, records, or details?", options: [
-      { text: "I am very careful and alert", mapping: "A" },
-      { text: "I am comfortable with proper checks", mapping: "B" },
+    { id: 7, question: "How do you feel about handling important records or sensitive details?", options: [
+      { text: "I am very careful and attentive", mapping: "A" },
+      { text: "I am comfortable with proper checks and rules", mapping: "B" },
       { text: "I prefer light responsibility", mapping: "C" },
-      { text: "I prefer not to handle such things", mapping: "D" },
+      { text: "I prefer not to handle such tasks", mapping: "D" },
     ]},
-    { id: 8, question: "What type of work gives you satisfaction?", options: [
-      { text: "Achieving visible results through effort", mapping: "A" },
-      { text: "Building trust over time", mapping: "B" },
+    { id: 8, question: "What type of work gives you the most satisfaction?", options: [
+      { text: "Seeing results from effort and action", mapping: "A" },
+      { text: "Building trust and long-term connections", mapping: "B" },
       { text: "Completing tasks correctly and on time", mapping: "C" },
-      { text: "Using specialised skills and knowledge", mapping: "D" },
+      { text: "Using specialised skills with precision", mapping: "D" },
     ]},
     { id: 9, question: "How comfortable are you with travelling or going out for work when needed?", options: [
       { text: "Very comfortable, I enjoy it", mapping: "A" },
-      { text: "Comfortable if there is a purpose", mapping: "B" },
-      { text: "Prefer staying in one place", mapping: "C" },
-      { text: "Prefer indoor, focused work", mapping: "D" },
+      { text: "Comfortable if there is a clear reason", mapping: "B" },
+      { text: "I prefer staying in one place", mapping: "C" },
+      { text: "I prefer indoor, focused work", mapping: "D" },
     ]},
     { id: 10, question: "Which work style feels most natural to you?", options: [
       { text: "Fast-paced and energetic", mapping: "A" },
       { text: "Relationship-driven and people-oriented", mapping: "B" },
       { text: "Structured and process-driven", mapping: "C" },
-      { text: "Calm, precise, and skill-focused", mapping: "D" },
+      { text: "Calm, focused, and detail-oriented", mapping: "D" },
     ]},
   ];
 
@@ -173,9 +355,9 @@ const CareerQuiz = ({ showOnlyTopProgram = false }) => {
   };
 
   /**
-   * New logic: Each option maps to 2 programs. Add +1 to both for each selection.
+   * Each option maps to 3 programs. Add +1 to each for that selection.
    * Rank by count (highest first). Tie-break by fee (highest fee = first priority).
-   * Returns: { perfectFit, alternatives } - perfectFit is 1st, alternatives are 2nd & 3rd
+   * Returns: { perfectFit, alternatives } — perfectFit is 1st, alternatives are 2nd & 3rd.
    */
   const calculateResults = () => {
     const counts = {};
