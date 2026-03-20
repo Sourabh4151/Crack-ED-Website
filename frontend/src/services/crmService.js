@@ -26,6 +26,12 @@ const PROGRAM_TO_CENTER_MAP = {
   'PGP - Banking Management': '78',
   'PGP - Relationship Management': '79',
   'PGC - Banking Management': '80',
+  'Mahindra Finance Prarambh Program - Business Executive': '81',
+  // Full titles (career quiz & site) — same IDs as shorthand above
+  'Postgraduate Program Relationship Management - Relationship Manager': '79',
+  'Postgraduate Program Banking Management - Assistant Manager': '78',
+  'Postgraduate Certification Banking Management - Business Development Executive': '80',
+  'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)': '81',
 }
 
 /** Base URL for our Django backend (set in .env as VITE_API_URL, or use proxy with '') */
