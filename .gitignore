@@ -1,2 +1,8 @@
 /node_modules
 frontend/node_modules
+
+# Local secrets & env (never commit real tokens)
+backend/.env
+frontend/.env
+.env
+.env.local
