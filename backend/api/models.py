@@ -166,3 +166,88 @@ class BIDEpisode(models.Model):
 
     def __str__(self):
         return self.title[:60] + ('…' if len(self.title) > 60 else '')
+
+
+def marketing_blog_cover_path(instance, filename):
+    """Blog cover images under blog_covers/YYYY-MM-DD/."""
+    import uuid
+    from django.utils import timezone
+    date_str = timezone.now().strftime('%Y-%m-%d')
+    safe_name = (filename or 'cover').replace(' ', '_')
+    unique = uuid.uuid4().hex[:8]
+    return f'blog_covers/{date_str}/{unique}_{safe_name}'
+
+
+def marketing_blog_upload_path(instance, filename):
+    """Inline editor uploads under blog_uploads/YYYY-MM-DD/."""
+    import uuid
+    from django.utils import timezone
+    date_str = timezone.now().strftime('%Y-%m-%d')
+    safe_name = (filename or 'image').replace(' ', '_')
+    unique = uuid.uuid4().hex[:8]
+    return f'blog_uploads/{date_str}/{unique}_{safe_name}'
+
+
+class MarketingBlog(models.Model):
+    """
+    Blog posts created by marketing (React admin + Tiptap).
+    Published posts are merged with legacy static blogs on the frontend.
+    """
+    slug = models.SlugField(max_length=220, unique=True, db_index=True)
+    title = models.CharField(max_length=500)
+    excerpt = models.TextField(blank=True, help_text='Short summary for cards / SEO')
+    date_display = models.CharField(
+        max_length=80,
+        blank=True,
+        help_text='Display date e.g. MARCH 18, 2026 (shown on cards)',
+    )
+    tags = models.JSONField(
+        default=list,
+        blank=True,
+        help_text='List of strings e.g. ["Career", "Interview"]',
+    )
+    content_json = models.JSONField(
+        default=dict,
+        blank=True,
+        help_text='Tiptap JSON document',
+    )
+    cover_image = models.ImageField(
+        upload_to=marketing_blog_cover_path,
+        blank=True,
+        null=True,
+        help_text='Thumbnail for listing / featured card',
+    )
+    hide_from_resources = models.BooleanField(
+        default=False,
+        help_text='If true, hide from /resources grid (still open via direct URL)',
+    )
+    featured_on_resources = models.BooleanField(
+        default=False,
+        help_text='Show as the wide featured card on /resources (only one recommended)',
+    )
+    is_published = models.BooleanField(default=False)
+    author = models.CharField(max_length=200, blank=True)
+    meta_title = models.CharField(max_length=300, blank=True)
+    meta_description = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-updated_at']
+        verbose_name = 'Marketing blog'
+        verbose_name_plural = 'Marketing blogs'
+
+    def __str__(self):
+        return self.title[:80]
+
+
+class MarketingBlogUpload(models.Model):
+    """Uploaded image from marketing editor (referenced by URL in Tiptap)."""
+    file = models.ImageField(upload_to=marketing_blog_upload_path)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return self.file.name

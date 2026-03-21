@@ -8,6 +8,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Load .env from backend directory so DB_NAME, DB_USER, etc. are set
 from dotenv import load_dotenv
+from corsheaders.defaults import default_headers
+
 load_dotenv(BASE_DIR / '.env')
 
 SECRET_KEY = os.environ.get(
@@ -119,6 +121,11 @@ CORS_ALLOWED_ORIGINS = [
 ] + _extra_origins
 CORS_ALLOW_CREDENTIALS = True
 
+# Allow marketing admin UI (Vite on :5173/:5174) to send X-Admin-Token on cross-origin API calls
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    'x-admin-token',
+]
+
 # REST framework
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
@@ -136,3 +143,6 @@ LOGGING = {
         'django.server': {'level': 'CRITICAL'},
     },
 }
+
+# Marketing blog admin API: set BLOG_ADMIN_TOKEN in .env; send header X-Admin-Token on write requests.
+BLOG_ADMIN_TOKEN = (os.environ.get('BLOG_ADMIN_TOKEN') or '').strip()

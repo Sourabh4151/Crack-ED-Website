@@ -8,8 +8,13 @@ from . import views
 
 router = DefaultRouter()
 router.register(r'examples', views.ExampleViewSet, basename='example')
+router.register(r'blogs/admin', views.MarketingBlogAdminViewSet, basename='marketing-blog-admin')
 
 urlpatterns = [
+    path('blogs/', views.blog_published_list),
+    path('blogs/featured/', views.blog_featured),
+    path('blogs/detail/<str:lookup>/', views.blog_public_detail),
+    path('blogs/upload/', views.blog_upload_image),
     path('', include(router.urls)),
     path('health/', views.health),
     path('jobs/', views.job_list),

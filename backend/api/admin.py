@@ -9,7 +9,7 @@ from django.http import FileResponse, Http404
 from django.urls import path, reverse
 from django.utils.html import format_html
 from django.utils import timezone
-from .models import Example, QuizSubmission, Lead, JobApplication, JobListing, BIDEpisode
+from .models import Example, QuizSubmission, Lead, JobApplication, JobListing, BIDEpisode, MarketingBlog, MarketingBlogUpload
 from .constants import PROGRAM_CHOICES, PROGRAM_TO_CENTER, get_center_for_program
 
 
@@ -190,6 +190,19 @@ class JobApplicationAdmin(admin.ModelAdmin):
             view_url,
             download_url
         )
+
+
+@admin.register(MarketingBlog)
+class MarketingBlogAdmin(admin.ModelAdmin):
+    list_display = ['id', 'slug', 'title', 'is_published', 'featured_on_resources', 'hide_from_resources', 'updated_at']
+    list_filter = ['is_published', 'featured_on_resources', 'hide_from_resources']
+    search_fields = ['slug', 'title', 'excerpt']
+    prepopulated_fields = {'slug': ('title',)}
+
+
+@admin.register(MarketingBlogUpload)
+class MarketingBlogUploadAdmin(admin.ModelAdmin):
+    list_display = ['id', 'file', 'created_at']
 
 
 @admin.register(BIDEpisode)

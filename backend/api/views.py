@@ -7,15 +7,24 @@ import re
 import threading
 
 import requests
+from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import viewsets, status
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, BasePermission
 from rest_framework.response import Response
 
 from .constants import get_center_for_program, get_source_page_label
-from .models import Example, QuizSubmission, Lead, JobApplication, JobListing, BIDEpisode
-from .serializers import ExampleSerializer, JobListingSerializer, BIDEpisodeSerializer
+from .models import Example, QuizSubmission, Lead, JobApplication, JobListing, BIDEpisode, MarketingBlog, MarketingBlogUpload
+from .serializers import (
+    ExampleSerializer,
+    JobListingSerializer,
+    BIDEpisodeSerializer,
+    MarketingBlogListSerializer,
+    MarketingBlogDetailSerializer,
+    MarketingBlogAdminSerializer,
+)
+from django.conf import settings
 
 EXTRAEDGE_URL = 'https://publisher.extraaedge.com/api/Webhook/addPublisherLead'
 
@@ -304,3 +313,84 @@ def job_apply(request):
     app.save()
     print(f'[API] Job application saved: {full_name} <{email}> job={job_id or job_title}')
     return Response({'success': True}, status=status.HTTP_201_CREATED)
+
+
+class BlogAdminTokenPermission(BasePermission):
+    """Require X-Admin-Token matching settings.BLOG_ADMIN_TOKEN for any method on admin endpoints."""
+
+    def has_permission(self, request, view):
+        expected = getattr(settings, 'BLOG_ADMIN_TOKEN', '') or ''
+        if not expected:
+            return False
+        got = (
+            (request.headers.get('X-Admin-Token') or request.META.get('HTTP_X_ADMIN_TOKEN') or '')
+            .strip()
+        )
+        return got == expected
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def blog_published_list(request):
+    """Published marketing blogs for /resources merge."""
+    qs = MarketingBlog.objects.filter(is_published=True).order_by('-updated_at')
+    ser = MarketingBlogListSerializer(qs, many=True, context={'request': request})
+    return Response(ser.data)
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def blog_featured(request):
+    """Single featured card for /resources (featured_on_resources=True)."""
+    obj = (
+        MarketingBlog.objects.filter(is_published=True, featured_on_resources=True)
+        .order_by('-updated_at')
+        .first()
+    )
+    if not obj:
+        return Response({'blog': None})
+    ser = MarketingBlogListSerializer(obj, context={'request': request})
+    return Response({'blog': ser.data})
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def blog_public_detail(request, lookup):
+    """Published blog by numeric id or slug."""
+    qs = MarketingBlog.objects.filter(is_published=True)
+    post = None
+    if lookup.isdigit():
+        post = qs.filter(pk=int(lookup)).first()
+    if post is None:
+        post = qs.filter(slug=lookup).first()
+    if not post:
+        return Response({'detail': 'Not found.'}, status=status.HTTP_404_NOT_FOUND)
+    ser = MarketingBlogDetailSerializer(post, context={'request': request})
+    return Response(ser.data)
+
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes([BlogAdminTokenPermission])
+def blog_upload_image(request):
+    """Image upload for Tiptap (returns absolute URL)."""
+    f = request.FILES.get('file') or request.FILES.get('image')
+    if not f:
+        return Response({'error': 'file or image field required'}, status=status.HTTP_400_BAD_REQUEST)
+    up = MarketingBlogUpload.objects.create(file=f)
+    url = request.build_absolute_uri(up.file.url)
+    return Response({'url': url}, status=status.HTTP_201_CREATED)
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class MarketingBlogAdminViewSet(viewsets.ModelViewSet):
+    """List/create/update/delete all marketing blogs (token required)."""
+    queryset = MarketingBlog.objects.all().order_by('-updated_at')
+    serializer_class = MarketingBlogAdminSerializer
+    permission_classes = [BlogAdminTokenPermission]
+    pagination_class = None
+
+    def get_serializer_context(self):
+        ctx = super().get_serializer_context()
+        ctx['request'] = self.request
+        return ctx
