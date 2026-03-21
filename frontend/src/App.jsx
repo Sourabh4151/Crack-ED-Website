@@ -24,6 +24,8 @@ import Influencer from './pages/Influencer'
 import RefundPolicy from './pages/RefundPolicy'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import TermsConditions from './pages/TermsConditions'
+import AdminBlogs from './pages/AdminBlogs'
+import AdminBlogEdit from './pages/AdminBlogEdit'
 
 // 1. Initialize GTM with your Container ID
 // Replace the old GTM-K4Z3BMQ with your new GT ID
@@ -82,6 +84,9 @@ function App() {
           <Route path="/refund-policy" element={<RefundPolicy />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-conditions" element={<TermsConditions />} />
+          <Route path="/admin/blogs" element={<AdminBlogs />} />
+          <Route path="/admin/blogs/new" element={<AdminBlogEdit />} />
+          <Route path="/admin/blogs/edit/:id" element={<AdminBlogEdit />} />
         </Routes>
       </div>
     </Router>
