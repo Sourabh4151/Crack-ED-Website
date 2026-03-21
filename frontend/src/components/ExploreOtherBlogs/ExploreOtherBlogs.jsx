@@ -1,11 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { BLOG_POSTS } from '../../data/blogPosts'
+import { useMergedBlogPosts } from '../../hooks/useMergedBlogPosts'
 import '../ResourcesFilter/ResourcesFilter.css'
 import './ExploreOtherBlogs.css'
 
 const ExploreOtherBlogs = ({ currentPostId }) => {
-  const otherPosts = BLOG_POSTS.filter((p) => p.id !== currentPostId && !p.hideFromResources).slice(0, 3)
+  const { cards } = useMergedBlogPosts()
+  const otherPosts = cards
+    .filter((p) => String(p.id) !== String(currentPostId))
+    .slice(0, 3)
 
   if (otherPosts.length === 0) return null
 
@@ -16,7 +19,7 @@ const ExploreOtherBlogs = ({ currentPostId }) => {
         <div className="explore-other-blogs-grid resources-filter-grid">
           {otherPosts.map((post) => (
             <Link
-              key={post.id}
+              key={`${post.source || 'x'}-${post.id}`}
               to={`/resources/blog/${post.id}`}
               className="explore-other-blogs-card-link"
             >
@@ -34,6 +37,9 @@ const ExploreOtherBlogs = ({ currentPostId }) => {
                       </span>
                     ))}
                   </div>
+                  {post.excerpt ? (
+                    <p className="resources-filter-card-excerpt">{post.excerpt}</p>
+                  ) : null}
                   <div className="resources-filter-card-footer">
                     <div className="resources-filter-card-divider" aria-hidden="true" />
                     <span className="resources-filter-card-read-more">Read More</span>

@@ -4,7 +4,11 @@ import Header from '../components/Header/Header'
 import EnquireSection from '../components/EnquireSection/EnquireSection'
 import ExploreOtherBlogs from '../components/ExploreOtherBlogs/ExploreOtherBlogs'
 import Footer from '../components/Footer/Footer'
+import BlogPostApiBody from '../components/BlogPostApi/BlogPostApiBody'
 import { BLOG_POSTS } from '../data/blogPosts'
+import { getApiBase } from '../services/crmService'
+import { fetchMarketingBlogDetail } from '../services/blogApi'
+import { applyBlogPostMeta, clearBlogPostMeta, staticSeoDescription, absolutizeMediaUrl } from '../lib/blogPostMeta'
 import './BlogPost.css'
 
 const INTRO_TERMS = ['Property Evaluation (Tech Underwriting)', 'Credit Underwriting', 'Legal Underwriting', '(Tech Underwriting)', 'Tech Underwriting']
@@ -36,7 +40,9 @@ function wrapIntroTerms (text) {
 
 const BlogPost = () => {
   const { id } = useParams()
-  const post = BLOG_POSTS.find((p) => p.id === id)
+  const staticPost = BLOG_POSTS.find((p) => p.id === id)
+  const [apiPost, setApiPost] = useState(null)
+  const [loadState, setLoadState] = useState(() => (staticPost ? 'ready' : 'loading'))
   const [tocExpanded, setTocExpanded] = useState(true)
   const [activeTocIndex, setActiveTocIndex] = useState(0)
   const scrollRef = useRef(null)
@@ -47,16 +53,45 @@ const BlogPost = () => {
   }, [id])
 
   useEffect(() => {
-    if (!post?.toc?.length || !scrollRef.current) return
+    if (staticPost) {
+      setApiPost(null)
+      setLoadState('ready')
+      return
+    }
+    let cancelled = false
+    setLoadState('loading')
+    setApiPost(null)
+    const base = getApiBase()
+    if (!base) {
+      setLoadState('notfound')
+      return
+    }
+    fetchMarketingBlogDetail(id)
+      .then((data) => {
+        if (!cancelled) {
+          setApiPost(data)
+          setLoadState('ready')
+        }
+      })
+      .catch(() => {
+        if (!cancelled) setLoadState('notfound')
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [id, staticPost])
+
+  useEffect(() => {
+    if (!staticPost?.toc?.length || !scrollRef.current) return
     const sections = scrollRef.current.querySelectorAll('[data-toc-section]')
     sections.forEach((el, i) => {
       el.id = `toc-${i}`
       el.setAttribute('data-toc-index', String(i))
     })
-  }, [id, post?.toc?.length])
+  }, [id, staticPost?.toc?.length])
 
   useEffect(() => {
-    if (!post?.toc?.length || !scrollRef.current) return
+    if (!staticPost?.toc?.length || !scrollRef.current) return
     const scrollEl = scrollRef.current
     const observer = new IntersectionObserver(
       (entries) => {
@@ -71,9 +106,93 @@ const BlogPost = () => {
     const nodes = scrollRef.current.querySelectorAll('[data-toc-index]')
     nodes.forEach((el) => observer.observe(el))
     return () => observer.disconnect()
-  }, [id, post?.toc?.length])
+  }, [id, staticPost?.toc?.length])
 
-  if (!post) {
+  useEffect(() => {
+    if (loadState === 'loading') {
+      return undefined
+    }
+    if (!staticPost && loadState === 'notfound') {
+      clearBlogPostMeta()
+      return undefined
+    }
+    if (apiPost && !staticPost) {
+      const pageTitle = (apiPost.meta_title || '').trim() || `${apiPost.title} | CRACK-ED`
+      const description = (apiPost.meta_description || apiPost.excerpt || '').trim() || apiPost.title
+      applyBlogPostMeta({
+        pageTitle,
+        description,
+        imageUrl: absolutizeMediaUrl(apiPost.cover_image_url || ''),
+      })
+      return () => clearBlogPostMeta()
+    }
+    if (staticPost) {
+      applyBlogPostMeta({
+        pageTitle: `${staticPost.title} | CRACK-ED`,
+        description: staticSeoDescription(staticPost),
+        imageUrl: absolutizeMediaUrl(typeof staticPost.image === 'string' ? staticPost.image : ''),
+      })
+      return () => clearBlogPostMeta()
+    }
+    return undefined
+  }, [id, loadState, staticPost, apiPost])
+
+  if (!staticPost && loadState === 'loading') {
+    return (
+      <div className="blog-post-page">
+        <Header />
+        <div className="blog-post-scroll blog-post-loading">
+          <p className="blog-post-loading-text">Loading…</p>
+          <Footer />
+        </div>
+      </div>
+    )
+  }
+
+  if (apiPost && !staticPost) {
+    return (
+      <div className="blog-post-page">
+        <Header />
+        <div className="blog-post-scroll" ref={scrollRef}>
+          <article className="blog-post">
+            <div className="blog-post-inner">
+              <Link to="/resources" className="blog-post-back" aria-label="Back to blog listing">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M12 4L6 10L12 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                Back to All Blogs
+              </Link>
+              <div className="blog-post-badges">
+                {(apiPost.tags || []).map((tag) => (
+                  <span key={tag} className="blog-post-badge">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <h1 className="blog-post-title">{apiPost.title}</h1>
+              <time className="blog-post-date">{apiPost.date_display}</time>
+              {apiPost.author && (
+                <p className="blog-post-author">Author – {apiPost.author}</p>
+              )}
+              <div className="blog-post-body blog-post-body--api">
+                <div className="blog-post-content blog-post-content--full">
+                  <BlogPostApiBody contentJson={apiPost.content_json} />
+                </div>
+              </div>
+            </div>
+          </article>
+          <div className="blog-post-end-line" aria-hidden="true" />
+          <ExploreOtherBlogs currentPostId={apiPost.slug} />
+          <div id="enquire-now">
+            <EnquireSection />
+          </div>
+          <Footer />
+        </div>
+      </div>
+    )
+  }
+
+  if (!staticPost && loadState === 'notfound') {
     return (
       <div className="blog-post-page">
         <Header />
@@ -92,6 +211,8 @@ const BlogPost = () => {
       </div>
     )
   }
+
+  const post = staticPost
 
   return (
     <div className="blog-post-page">

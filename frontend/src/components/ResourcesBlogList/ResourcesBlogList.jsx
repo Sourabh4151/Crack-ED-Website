@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import ResourcesBlogCard from '../ResourcesBlogCard/ResourcesBlogCard'
 import premiumImage from '../../assets/premium_image.jpeg'
 import './ResourcesBlogList.css'
 
-const defaultBlog = {
+const fallbackFeatured = {
   title: '7 Skills Every Successful Relationship Manager Must Have',
   date: 'MARCH 18, 2026',
   description:
@@ -12,11 +12,26 @@ const defaultBlog = {
   image: premiumImage,
 }
 
-const ResourcesBlogList = ({ blogs = [defaultBlog] }) => {
+const ResourcesBlogList = ({ featuredFromApi = null, blogs }) => {
+  const defaultBlog = useMemo(() => {
+    if (featuredFromApi) {
+      return {
+        title: featuredFromApi.title,
+        date: featuredFromApi.date_display || '',
+        description: featuredFromApi.excerpt || '',
+        link: `/resources/blog/${featuredFromApi.slug}`,
+        image: featuredFromApi.cover_image_url || premiumImage,
+      }
+    }
+    return fallbackFeatured
+  }, [featuredFromApi])
+
+  const list = blogs ?? [defaultBlog]
+
   return (
     <section className="resources-blog-list">
       <div className="resources-blog-list-container">
-        {blogs.map((blog, index) => (
+        {list.map((blog, index) => (
           <ResourcesBlogCard
             key={index}
             title={blog.title}

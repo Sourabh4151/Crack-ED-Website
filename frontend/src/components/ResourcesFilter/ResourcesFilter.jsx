@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
-import { BLOG_POSTS } from '../../data/blogPosts'
 import './ResourcesFilter.css'
 
 const CATEGORIES = [
@@ -9,8 +8,18 @@ const CATEGORIES = [
   { id: 'career', label: 'Career' },
 ]
 
-const ResourcesFilter = ({ activeCategory = 'all', onCategoryChange }) => {
+const tagMatchesCategory = (tags, categoryId) => {
+  if (!categoryId || categoryId === 'all') return true
+  return (tags || []).some((t) => String(t).toLowerCase() === categoryId)
+}
+
+const ResourcesFilter = ({ blogCards = [], activeCategory = 'all', onCategoryChange }) => {
   const [active, setActive] = useState(activeCategory)
+
+  const filteredCards = useMemo(
+    () => blogCards.filter((c) => tagMatchesCategory(c.tags, active)),
+    [blogCards, active]
+  )
 
   const handleClick = (id) => {
     setActive(id)
@@ -43,8 +52,8 @@ const ResourcesFilter = ({ activeCategory = 'all', onCategoryChange }) => {
           </div>
           {/* Row 3: Blog cards grid (Frame 519) — below Interview Upskilling Career */}
           <div className="resources-filter-grid" aria-label="Blog posts">
-            {BLOG_POSTS.filter((p) => !p.hideFromResources).map((card) => (
-              <article key={card.id} className="resources-filter-card">
+            {filteredCards.map((card) => (
+              <article key={`${card.source || 'x'}-${card.id}`} className="resources-filter-card">
                 <div className="resources-filter-card-image">
                   <img src={card.image} alt="" />
                 </div>
@@ -52,12 +61,15 @@ const ResourcesFilter = ({ activeCategory = 'all', onCategoryChange }) => {
                   <h2 className="resources-filter-card-title">{card.title}</h2>
                   <time className="resources-filter-card-date">{card.date}</time>
                   <div className="resources-filter-card-tags">
-                    {card.tags.map((tag) => (
+                    {(card.tags || []).map((tag) => (
                       <span key={tag} className="resources-filter-card-tag">
                         {tag}
                       </span>
                     ))}
                   </div>
+                  {card.excerpt ? (
+                    <p className="resources-filter-card-excerpt">{card.excerpt}</p>
+                  ) : null}
                   <div className="resources-filter-card-footer">
                     <div className="resources-filter-card-divider" aria-hidden="true" />
                     <Link

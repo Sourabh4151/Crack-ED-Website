@@ -191,6 +191,21 @@
   padding: 4px 8px;
 }
 
+.resources-filter-card-excerpt {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(250, 250, 250, 0.72);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  overflow-wrap: break-word;
+}
+
 /* Separator: 1px line; exactly 16px gap above Read More (no 8px gap) */
 .resources-filter-card-divider {
   width: 100%;
