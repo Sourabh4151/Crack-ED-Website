@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import {
-  getBlogAdminToken,
-  setBlogAdminToken,
+  initBlogAdminCsrf,
+  loginBlogAdmin,
+  logoutBlogAdmin,
+  fetchBlogAdminSession,
   fetchAdminBlogList,
 } from '../services/blogApi'
 import { getApiBase } from '../services/crmService'
@@ -10,7 +12,9 @@ import './AdminBlogs.css'
 
 const AdminBlogs = () => {
   const navigate = useNavigate()
-  const [tokenInput, setTokenInput] = useState(getBlogAdminToken())
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [sessionUser, setSessionUser] = useState(null)
   const [items, setItems] = useState([])
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
@@ -32,12 +36,58 @@ const AdminBlogs = () => {
   }
 
   useEffect(() => {
-    if (getBlogAdminToken() && base) load()
+    let cancelled = false
+    ;(async () => {
+      if (!base) return
+      try {
+        await initBlogAdminCsrf()
+        const session = await fetchBlogAdminSession()
+        if (cancelled) return
+        setSessionUser(session)
+        if (session) await load()
+      } catch (e) {
+        if (!cancelled) {
+          setSessionUser(null)
+          setItems([])
+        }
+      }
+    })()
+    return () => {
+      cancelled = true
+    }
   }, [base])
 
-  const saveToken = () => {
-    setBlogAdminToken(tokenInput)
-    load()
+  const handleLogin = async () => {
+    setError('')
+    setLoading(true)
+    try {
+      await initBlogAdminCsrf()
+      const session = await loginBlogAdmin(username.trim(), password)
+      setSessionUser(session)
+      setPassword('')
+      await load()
+    } catch (e) {
+      setSessionUser(null)
+      setItems([])
+      setError(String(e.message || e))
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleLogout = async () => {
+    setError('')
+    setLoading(true)
+    try {
+      await logoutBlogAdmin()
+      setSessionUser(null)
+      setItems([])
+      setPassword('')
+    } catch (e) {
+      setError(String(e.message || e))
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -53,30 +103,50 @@ const AdminBlogs = () => {
         </div>
       )}
 
-      <section className="admin-blogs-token">
-        <label htmlFor="admin-token">Admin token</label>
-        <div className="admin-blogs-token-row">
-          <input
-            id="admin-token"
-            type="password"
-            autoComplete="off"
-            value={tokenInput}
-            onChange={(e) => setTokenInput(e.target.value)}
-            placeholder="X-Admin-Token value"
-          />
-          <button type="button" className="admin-blogs-btn" onClick={saveToken}>
-            Save &amp; load
-          </button>
-        </div>
-      </section>
+      {!sessionUser ? (
+        <section className="admin-blogs-token">
+          <label htmlFor="admin-username">Marketing login</label>
+          <div className="admin-blogs-token-row">
+            <input
+              id="admin-username"
+              type="text"
+              autoComplete="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Username"
+            />
+            <input
+              id="admin-password"
+              type="password"
+              autoComplete="current-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+            />
+            <button type="button" className="admin-blogs-btn" onClick={handleLogin} disabled={loading || !username || !password}>
+              Login
+            </button>
+          </div>
+        </section>
+      ) : (
+        <section className="admin-blogs-token">
+          <label>Signed in</label>
+          <div className="admin-blogs-token-row">
+            <input type="text" value={sessionUser.username || ''} disabled />
+            <button type="button" className="admin-blogs-btn" onClick={handleLogout} disabled={loading}>
+              Logout
+            </button>
+          </div>
+        </section>
+      )}
 
       {error && <div className="admin-blogs-banner admin-blogs-banner--error">{error}</div>}
 
       <div className="admin-blogs-actions">
-        <button type="button" className="admin-blogs-btn admin-blogs-btn--primary" onClick={() => navigate('/marketing/blogs/new')}>
+        <button type="button" className="admin-blogs-btn admin-blogs-btn--primary" onClick={() => navigate('/marketing/blogs/new')} disabled={!sessionUser}>
           New blog
         </button>
-        <button type="button" className="admin-blogs-btn" onClick={load} disabled={loading || !getBlogAdminToken()}>
+        <button type="button" className="admin-blogs-btn" onClick={load} disabled={loading || !sessionUser}>
           Refresh
         </button>
       </div>
@@ -114,7 +184,7 @@ const AdminBlogs = () => {
         </tbody>
       </table>
 
-      {items.length === 0 && !loading && getBlogAdminToken() ? (
+      {items.length === 0 && !loading && sessionUser ? (
         <p className="admin-blogs-muted">No blogs yet. Create one with &quot;New blog&quot;.</p>
       ) : null}
       </div>

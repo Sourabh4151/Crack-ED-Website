@@ -6,7 +6,8 @@ import {
   updateAdminBlog,
   fetchAdminBlog,
   patchAdminBlogCover,
-  getBlogAdminToken,
+  initBlogAdminCsrf,
+  fetchBlogAdminSession,
 } from '../services/blogApi'
 import { getApiBase } from '../services/crmService'
 import './AdminBlogs.css'
@@ -32,9 +33,34 @@ const AdminBlogEdit = () => {
   const [error, setError] = useState('')
   const [saving, setSaving] = useState(false)
   const [loading, setLoading] = useState(!isNew)
+  const [sessionReady, setSessionReady] = useState(false)
 
   useEffect(() => {
-    if (isNew || !getBlogAdminToken()) {
+    let cancelled = false
+    ;(async () => {
+      try {
+        if (!getApiBase()) return
+        await initBlogAdminCsrf()
+        const session = await fetchBlogAdminSession()
+        if (!session && !cancelled) {
+          navigate('/marketing/blogs')
+          return
+        }
+      } catch {
+        if (!cancelled) navigate('/marketing/blogs')
+        return
+      } finally {
+        if (!cancelled) setSessionReady(true)
+      }
+    })()
+    return () => {
+      cancelled = true
+    }
+  }, [navigate])
+
+  useEffect(() => {
+    if (!sessionReady) return
+    if (isNew) {
       setLoading(false)
       return
     }
@@ -62,7 +88,7 @@ const AdminBlogEdit = () => {
     return () => {
       cancelled = true
     }
-  }, [id, isNew])
+  }, [id, isNew, sessionReady])
 
   const parseTags = () =>
     tagsStr
@@ -78,10 +104,6 @@ const AdminBlogEdit = () => {
     }
     if (!getApiBase()) {
       setError('VITE_API_URL is not set.')
-      return
-    }
-    if (!getBlogAdminToken()) {
-      setError('Save your admin token on the blogs list page first.')
       return
     }
     setSaving(true)
@@ -116,6 +138,16 @@ const AdminBlogEdit = () => {
   }
 
   if (loading) {
+    return (
+      <div className="admin-blog-viewport">
+        <div className="admin-blogs-page">
+          <p className="admin-blogs-muted">Loading…</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (!sessionReady) {
     return (
       <div className="admin-blog-viewport">
         <div className="admin-blogs-page">

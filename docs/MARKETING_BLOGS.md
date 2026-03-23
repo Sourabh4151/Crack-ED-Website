@@ -4,13 +4,13 @@ Marketing can create and edit blogs from the **React admin UI** or from **Django
 
 ## Quick setup (checklist)
 
-1. **Backend `.env`**: set `BLOG_ADMIN_TOKEN` (long random secret; must match what you paste in `/marketing/blogs`).
+1. Create a Django **staff** user for marketing (or use an existing staff account).
 2. **Frontend `.env`**: set `VITE_API_URL` for local dev and **again for production builds** (see below).
 3. Run **`python manage.py migrate`** in `backend/`.
-4. **Restart Django** after changing `BLOG_ADMIN_TOKEN` in `.env`.
+4. Restart Django after deploying backend auth/permission changes.
 5. **Slugs**: use word slugs like `my-post`, not pure numbers like `7`, so `/api/blogs/detail/7/` does not collide with a post whose **database id** is `7`.
 
-**403 / “Failed to fetch” on `/api/blogs/admin/`:** the backend must allow the custom header `X-Admin-Token` in CORS (`CORS_ALLOW_HEADERS` in `settings.py`). Without it, the browser blocks the request from Vite (`localhost:5174`) to the API (`127.0.0.1:8000`).
+**Auth note:** `/marketing/blogs` now uses Django session login (username/password) and CSRF. You must be logged in as a **staff** user.
 
 ## Stack
 
@@ -23,8 +23,8 @@ Marketing can create and edit blogs from the **React admin UI** or from **Django
 ### 1. Backend `.env`
 
 ```env
-# Required for marketing React UI + image upload (same value you paste in the UI)
-BLOG_ADMIN_TOKEN=your-long-random-secret
+# Create a staff user for marketing (example):
+# python manage.py createsuperuser
 ```
 
 Run migrations:
@@ -57,7 +57,7 @@ After changing it: **restart** `vite` in dev; in production, **rebuild** the fro
 
 Open: **`/marketing/blogs`**
 
-1. Paste the **same** token as `BLOG_ADMIN_TOKEN` → **Save & load**
+1. Sign in with a Django staff username/password
 2. **New blog** → fill slug, title, excerpt, tags, content, check **Published** to show on site
 3. Optional: **Featured banner on /resources** (only one recommended)
 4. Optional: **Cover image** (uploads after save via `PATCH`)
@@ -69,8 +69,11 @@ Open: **`/marketing/blogs`**
 | GET | `/api/blogs/` | Public — published list |
 | GET | `/api/blogs/featured/` | Public — `{ "blog": {...} \| null }` |
 | GET | `/api/blogs/detail/<slug-or-id>/` | Public — published detail |
-| POST | `/api/blogs/upload/` | Header `X-Admin-Token` |
-| * | `/api/blogs/admin/` … | Header `X-Admin-Token` (CRUD) |
+| POST | `/api/blogs/auth/login/` | Public + CSRF, creates session |
+| POST | `/api/blogs/auth/logout/` | Staff session |
+| GET | `/api/blogs/auth/session/` | Staff session |
+| POST | `/api/blogs/upload/` | Staff session + CSRF |
+| * | `/api/blogs/admin/` … | Staff session + CSRF (CRUD) |
 
 ## URLs on the site
 
@@ -78,6 +81,6 @@ Open: **`/marketing/blogs`**
 
 ## Security notes
 
-- Keep `BLOG_ADMIN_TOKEN` secret; use HTTPS in production.
+- Keep marketing staff credentials secure; use HTTPS in production.
 - Rendered HTML is passed through **DOMPurify** on the public blog page.
 - Prefer storing images via upload (served under `/media/`) rather than untrusted remote URLs in HTML.

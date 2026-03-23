@@ -27,6 +27,10 @@ _extra_origins = [o.strip() for o in _origins_env.split(',') if o.strip()]
 CSRF_TRUSTED_ORIGINS = [
     'http://127.0.0.1:8000',
     'http://localhost:8000',
+    'http://127.0.0.1:5173',
+    'http://localhost:5173',
+    'http://127.0.0.1:5174',
+    'http://localhost:5174',
 ] + _extra_origins
 
 INSTALLED_APPS = [
@@ -121,10 +125,8 @@ CORS_ALLOWED_ORIGINS = [
 ] + _extra_origins
 CORS_ALLOW_CREDENTIALS = True
 
-# Allow marketing admin UI (Vite on :5173/:5174) to send X-Admin-Token on cross-origin API calls
-CORS_ALLOW_HEADERS = list(default_headers) + [
-    'x-admin-token',
-]
+# Keep default CORS headers for API requests (session auth uses cookies + CSRF header).
+CORS_ALLOW_HEADERS = list(default_headers)
 
 # REST framework
 REST_FRAMEWORK = {
@@ -144,5 +146,3 @@ LOGGING = {
     },
 }
 
-# Marketing blog admin API: set BLOG_ADMIN_TOKEN in .env; send header X-Admin-Token on write requests.
-BLOG_ADMIN_TOKEN = (os.environ.get('BLOG_ADMIN_TOKEN') or '').strip()

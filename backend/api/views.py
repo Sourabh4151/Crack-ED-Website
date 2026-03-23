@@ -7,8 +7,9 @@ import re
 import threading
 
 import requests
+from django.contrib.auth import authenticate, login, logout
 from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
 from rest_framework import viewsets, status
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.permissions import AllowAny, BasePermission
@@ -24,7 +25,6 @@ from .serializers import (
     MarketingBlogDetailSerializer,
     MarketingBlogAdminSerializer,
 )
-from django.conf import settings
 
 EXTRAEDGE_URL = 'https://publisher.extraaedge.com/api/Webhook/addPublisherLead'
 
@@ -315,18 +315,51 @@ def job_apply(request):
     return Response({'success': True}, status=status.HTTP_201_CREATED)
 
 
-class BlogAdminTokenPermission(BasePermission):
-    """Require X-Admin-Token matching settings.BLOG_ADMIN_TOKEN for any method on admin endpoints."""
+class IsMarketingStaff(BasePermission):
+    """Require authenticated Django staff user."""
 
     def has_permission(self, request, view):
-        expected = getattr(settings, 'BLOG_ADMIN_TOKEN', '') or ''
-        if not expected:
-            return False
-        got = (
-            (request.headers.get('X-Admin-Token') or request.META.get('HTTP_X_ADMIN_TOKEN') or '')
-            .strip()
-        )
-        return got == expected
+        user = getattr(request, 'user', None)
+        return bool(user and user.is_authenticated and user.is_staff)
+
+
+@ensure_csrf_cookie
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def blog_admin_csrf(request):
+    """Set CSRF cookie for session-authenticated marketing admin requests."""
+    return Response({'ok': True})
+
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def blog_admin_login(request):
+    """Session login for marketing blog editor (staff only)."""
+    username = str(request.data.get('username') or '').strip()
+    password = str(request.data.get('password') or '')
+    if not username or not password:
+        return Response({'detail': 'Username and password are required.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    user = authenticate(request, username=username, password=password)
+    if not user or not user.is_staff:
+        return Response({'detail': 'Invalid credentials.'}, status=status.HTTP_403_FORBIDDEN)
+
+    login(request, user)
+    return Response({'username': user.get_username(), 'is_staff': True})
+
+
+@api_view(['POST'])
+@permission_classes([IsMarketingStaff])
+def blog_admin_logout(request):
+    logout(request)
+    return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['GET'])
+@permission_classes([IsMarketingStaff])
+def blog_admin_session(request):
+    user = request.user
+    return Response({'username': user.get_username(), 'is_staff': True})
 
 
 @api_view(['GET'])
@@ -369,9 +402,8 @@ def blog_public_detail(request, lookup):
     return Response(ser.data)
 
 
-@csrf_exempt
 @api_view(['POST'])
-@permission_classes([BlogAdminTokenPermission])
+@permission_classes([IsMarketingStaff])
 def blog_upload_image(request):
     """Image upload for Tiptap (returns absolute URL)."""
     f = request.FILES.get('file') or request.FILES.get('image')
@@ -382,12 +414,11 @@ def blog_upload_image(request):
     return Response({'url': url}, status=status.HTTP_201_CREATED)
 
 
-@method_decorator(csrf_exempt, name='dispatch')
 class MarketingBlogAdminViewSet(viewsets.ModelViewSet):
-    """List/create/update/delete all marketing blogs (token required)."""
+    """List/create/update/delete all marketing blogs (staff session required)."""
     queryset = MarketingBlog.objects.all().order_by('-updated_at')
     serializer_class = MarketingBlogAdminSerializer
-    permission_classes = [BlogAdminTokenPermission]
+    permission_classes = [IsMarketingStaff]
     pagination_class = None
 
     def get_serializer_context(self):

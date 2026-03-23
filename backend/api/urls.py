@@ -11,6 +11,10 @@ router.register(r'examples', views.ExampleViewSet, basename='example')
 router.register(r'blogs/admin', views.MarketingBlogAdminViewSet, basename='marketing-blog-admin')
 
 urlpatterns = [
+    path('blogs/auth/csrf/', views.blog_admin_csrf),
+    path('blogs/auth/login/', views.blog_admin_login),
+    path('blogs/auth/logout/', views.blog_admin_logout),
+    path('blogs/auth/session/', views.blog_admin_session),
     path('blogs/', views.blog_published_list),
     path('blogs/featured/', views.blog_featured),
     path('blogs/detail/<str:lookup>/', views.blog_public_detail),
