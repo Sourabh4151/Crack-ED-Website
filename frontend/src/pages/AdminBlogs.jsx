@@ -45,10 +45,6 @@ const AdminBlogs = () => {
       <div className="admin-blogs-page">
       <header className="admin-blogs-header">
         <h1>Marketing — Blogs</h1>
-        <p className="admin-blogs-sub">
-          Set <code>BLOG_ADMIN_TOKEN</code> in backend <code>.env</code> and paste it below. Frontend needs{' '}
-          <code>VITE_API_URL</code> (e.g. <code>http://127.0.0.1:8000</code>).
-        </p>
       </header>
 
       {!base && (
@@ -77,7 +73,7 @@ const AdminBlogs = () => {
       {error && <div className="admin-blogs-banner admin-blogs-banner--error">{error}</div>}
 
       <div className="admin-blogs-actions">
-        <button type="button" className="admin-blogs-btn admin-blogs-btn--primary" onClick={() => navigate('/admin/blogs/new')}>
+        <button type="button" className="admin-blogs-btn admin-blogs-btn--primary" onClick={() => navigate('/marketing/blogs/new')}>
           New blog
         </button>
         <button type="button" className="admin-blogs-btn" onClick={load} disabled={loading || !getBlogAdminToken()}>
@@ -105,7 +101,7 @@ const AdminBlogs = () => {
               <td>{row.title}</td>
               <td>{row.is_published ? 'Yes' : 'No'}</td>
               <td>
-                <Link className="admin-blogs-link" to={`/admin/blogs/edit/${row.id}`}>
+                <Link className="admin-blogs-link" to={`/marketing/blogs/edit/${row.id}`}>
                   Edit
                 </Link>
                 {' · '}

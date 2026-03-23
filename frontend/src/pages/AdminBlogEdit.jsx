@@ -107,7 +107,7 @@ const AdminBlogEdit = () => {
       if (coverFile && saved?.id) {
         await patchAdminBlogCover(saved.id, coverFile)
       }
-      navigate('/admin/blogs')
+      navigate('/marketing/blogs')
     } catch (e) {
       setError(String(e.message || e))
     } finally {
@@ -129,7 +129,7 @@ const AdminBlogEdit = () => {
     <div className="admin-blog-viewport">
       <div className="admin-blogs-page admin-blog-edit">
       <p>
-        <Link className="admin-blogs-link" to="/admin/blogs">
+        <Link className="admin-blogs-link" to="/marketing/blogs">
           ← Back to list
         </Link>
       </p>
@@ -191,7 +191,7 @@ const AdminBlogEdit = () => {
         <button type="button" className="admin-blogs-btn admin-blogs-btn--primary" onClick={handleSave} disabled={saving}>
           {saving ? 'Saving…' : 'Save'}
         </button>
-        <button type="button" className="admin-blogs-btn" onClick={() => navigate('/admin/blogs')} disabled={saving}>
+        <button type="button" className="admin-blogs-btn" onClick={() => navigate('/marketing/blogs')} disabled={saving}>
           Cancel
         </button>
       </div>

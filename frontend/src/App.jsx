@@ -84,9 +84,9 @@ function App() {
           <Route path="/refund-policy" element={<RefundPolicy />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-conditions" element={<TermsConditions />} />
-          <Route path="/admin/blogs" element={<AdminBlogs />} />
-          <Route path="/admin/blogs/new" element={<AdminBlogEdit />} />
-          <Route path="/admin/blogs/edit/:id" element={<AdminBlogEdit />} />
+          <Route path="/marketing/blogs" element={<AdminBlogs />} />
+          <Route path="/marketing/blogs/new" element={<AdminBlogEdit />} />
+          <Route path="/marketing/blogs/edit/:id" element={<AdminBlogEdit />} />
         </Routes>
       </div>
     </Router>

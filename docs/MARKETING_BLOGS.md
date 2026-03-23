@@ -4,7 +4,7 @@ Marketing can create and edit blogs from the **React admin UI** or from **Django
 
 ## Quick setup (checklist)
 
-1. **Backend `.env`**: set `BLOG_ADMIN_TOKEN` (long random secret; must match what you paste in `/admin/blogs`).
+1. **Backend `.env`**: set `BLOG_ADMIN_TOKEN` (long random secret; must match what you paste in `/marketing/blogs`).
 2. **Frontend `.env`**: set `VITE_API_URL` for local dev and **again for production builds** (see below).
 3. Run **`python manage.py migrate`** in `backend/`.
 4. **Restart Django** after changing `BLOG_ADMIN_TOKEN` in `.env`.
@@ -40,7 +40,7 @@ Vite injects this at **build time** (`npm run build`), not on the server after d
 
 | Environment | Required? | Typical value |
 |-------------|-----------|----------------|
-| **Local dev** | Yes (for `/admin/blogs` and API blogs unless you rely only on the dev proxy) | `http://127.0.0.1:8000` |
+| **Local dev** | Yes (for `/marketing/blogs` and API blogs unless you rely only on the dev proxy) | `http://127.0.0.1:8000` |
 | **Production** | **Yes**, when you run the production build, unless the live site calls the API on the **same origin** (e.g. `https://crack-ed.com` serves both the SPA and `/api/...` so the app can use relative URLs with an empty base). | `https://api.crack-ed.com` (no trailing slash) |
 
 ```env
@@ -55,7 +55,7 @@ After changing it: **restart** `vite` in dev; in production, **rebuild** the fro
 
 ### 3. Marketing UI
 
-Open: **`/admin/blogs`**
+Open: **`/marketing/blogs`**
 
 1. Paste the **same** token as `BLOG_ADMIN_TOKEN` → **Save & load**
 2. **New blog** → fill slug, title, excerpt, tags, content, check **Published** to show on site
