@@ -135,6 +135,18 @@ class JobApplication(models.Model):
 
     class Meta:
         ordering = ['-created_at']
+        constraints = [
+            models.UniqueConstraint(
+                fields=['job_id', 'email'],
+                condition=~models.Q(job_id=''),
+                name='uniq_jobapplication_jobid_email',
+            ),
+            models.UniqueConstraint(
+                fields=['job_id', 'mobile'],
+                condition=~models.Q(job_id=''),
+                name='uniq_jobapplication_jobid_mobile',
+            ),
+        ]
 
     def __str__(self):
         return f"{self.full_name} – {self.job_title or self.job_id or 'Job'}"

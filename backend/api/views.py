@@ -8,6 +8,7 @@ import threading
 
 import requests
 from django.contrib.auth import authenticate, login, logout
+from django.db.models import Q
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
 from rest_framework import viewsets, status
@@ -294,6 +295,14 @@ def job_apply(request):
     if not resume_file:
         return Response(
             {'error': 'Resume is required. Please upload your resume (PDF, DOC, or DOCX).'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+    duplicate_exists = JobApplication.objects.filter(job_id=job_id).filter(
+        Q(email__iexact=email) | Q(mobile=mobile)
+    ).exists()
+    if duplicate_exists:
+        return Response(
+            {'error': 'You have already applied for this job with this email or mobile number.'},
             status=status.HTTP_400_BAD_REQUEST
         )
     utm_source, utm_medium, utm_campaign = _utm_three(utm_params)
