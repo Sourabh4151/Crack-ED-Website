@@ -10,6 +10,7 @@ import TextStyle from '@tiptap/extension-text-style'
 import Color from '@tiptap/extension-color'
 import FontFamily from '@tiptap/extension-font-family'
 import { MarketingFontSize } from './tiptapFontSize'
+import { HeadingWithToc } from './tiptapHeadingWithToc'
 import {
   MarketingSpecialCallout,
   MarketingVideo,
@@ -19,8 +20,9 @@ import {
 export function getTiptapExtensions () {
   return [
     StarterKit.configure({
-      heading: { levels: [1, 2, 3, 4, 5, 6] },
+      heading: false,
     }),
+    HeadingWithToc.configure({ levels: [1, 2, 3, 4, 5, 6] }),
     Underline,
     Link.configure({
       openOnClick: true,

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useMemo, useState, useRef } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import Header from '../components/Header/Header'
 import EnquireSection from '../components/EnquireSection/EnquireSection'
@@ -12,6 +12,28 @@ import { applyBlogPostMeta, clearBlogPostMeta, staticSeoDescription, absolutizeM
 import './BlogPost.css'
 
 const INTRO_TERMS = ['Property Evaluation (Tech Underwriting)', 'Credit Underwriting', 'Legal Underwriting', '(Tech Underwriting)', 'Tech Underwriting']
+
+function collectNodeText (node) {
+  if (!node || typeof node !== 'object') return ''
+  if (typeof node.text === 'string') return node.text
+  if (node.type === 'hardBreak') return '\n'
+  const children = Array.isArray(node.content) ? node.content : []
+  return children.map(collectNodeText).join('')
+}
+
+function extractApiToc (doc) {
+  if (!doc || typeof doc !== 'object' || !Array.isArray(doc.content)) return []
+  const out = []
+  for (const node of doc.content) {
+    if (node?.type !== 'heading') continue
+    if (!node?.attrs?.marketingToc) continue
+    const raw = collectNodeText(node).trim()
+    const title = raw.split('\n').map((v) => v.trim()).find(Boolean) || ''
+    if (!title) continue
+    out.push(title)
+  }
+  return out
+}
 
 function wrapIntroTerms (text) {
   if (typeof text !== 'string') return [text]
@@ -46,6 +68,7 @@ const BlogPost = () => {
   const [tocExpanded, setTocExpanded] = useState(true)
   const [activeTocIndex, setActiveTocIndex] = useState(0)
   const scrollRef = useRef(null)
+  const apiToc = useMemo(() => extractApiToc(apiPost?.content_json), [apiPost?.content_json])
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -89,6 +112,25 @@ const BlogPost = () => {
       el.setAttribute('data-toc-index', String(i))
     })
   }, [id, staticPost?.toc?.length])
+
+  useEffect(() => {
+    if (!apiToc.length || !scrollRef.current || staticPost) return
+    const scrollEl = scrollRef.current
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue
+          const idAttr = entry.target.getAttribute('id') || ''
+          const idx = parseInt(idAttr.replace('api-toc-', ''), 10)
+          if (!Number.isNaN(idx)) setActiveTocIndex(idx)
+        }
+      },
+      { root: scrollEl, rootMargin: '-20% 0px -60% 0px', threshold: 0 }
+    )
+    const nodes = scrollEl.querySelectorAll('[id^="api-toc-"]')
+    nodes.forEach((el) => observer.observe(el))
+    return () => observer.disconnect()
+  }, [id, apiToc, staticPost])
 
   useEffect(() => {
     if (!staticPost?.toc?.length || !scrollRef.current) return
@@ -175,9 +217,54 @@ const BlogPost = () => {
                 <p className="blog-post-author">Author – {apiPost.author}</p>
               )}
               <div className="blog-post-body blog-post-body--api">
-                <div className="blog-post-content blog-post-content--full">
+                <div className={`blog-post-content${apiToc.length ? '' : ' blog-post-content--full'}`}>
                   <BlogPostApiBody contentJson={apiPost.content_json} />
                 </div>
+                {apiToc.length > 0 && (
+                  <aside className={`blog-post-toc${!tocExpanded ? ' blog-post-toc--collapsed' : ''}`} aria-label="Table of contents">
+                    <div className="blog-post-toc-header">
+                      <h2 className="blog-post-toc-title">Table of Content</h2>
+                      <button
+                        type="button"
+                        className="blog-post-toc-toggle"
+                        aria-expanded={tocExpanded}
+                        aria-label={tocExpanded ? 'Collapse table of contents' : 'Expand table of contents'}
+                        onClick={() => setTocExpanded((v) => !v)}
+                      >
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                          <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                      </button>
+                    </div>
+                    <div className="blog-post-toc-list-wrap" style={{ display: tocExpanded ? undefined : 'none' }}>
+                      <ol className="blog-post-toc-list">
+                        {apiToc.map((item, i) => (
+                          <li key={i} className={activeTocIndex === i ? 'active' : ''}>
+                            <a
+                              href={`#api-toc-${i}`}
+                              onClick={(e) => {
+                                e.preventDefault()
+                                const targetId = `api-toc-${i}`
+                                const scrollEl = scrollRef.current
+                                const target = scrollEl?.querySelector(`#${targetId}`) || document.getElementById(targetId)
+                                if (scrollEl && target && scrollEl.contains(target)) {
+                                  const scrollRect = scrollEl.getBoundingClientRect()
+                                  const targetRect = target.getBoundingClientRect()
+                                  const top = targetRect.top - scrollRect.top + scrollEl.scrollTop
+                                  scrollEl.scrollTo({ top: Math.max(0, top - 80), behavior: 'smooth' })
+                                  return
+                                }
+                                target?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                              }}
+                            >
+                              {item}
+                            </a>
+                          </li>
+                        ))}
+                      </ol>
+                    </div>
+                  </aside>
+                )}
               </div>
             </div>
           </article>

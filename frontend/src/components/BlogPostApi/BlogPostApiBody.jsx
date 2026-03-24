@@ -15,6 +15,10 @@ function marketingJsonToHtml (docJson, extensions) {
   const fragment = DOMSerializer.fromSchema(schema).serializeFragment(root.content)
   const wrap = document.createElement('div')
   wrap.appendChild(fragment)
+  const tocNodes = wrap.querySelectorAll('[data-marketing-toc-heading="true"]')
+  tocNodes.forEach((el, idx) => {
+    el.setAttribute('id', `api-toc-${idx}`)
+  })
   return wrap.innerHTML
 }
 
@@ -42,11 +46,13 @@ const BlogPostApiBody = ({ contentJson }) => {
           'loading',
           'title',
           'class',
+          'id',
           'data-marketing-callout',
           'data-marketing-video',
           'data-marketing-youtube',
+          'data-marketing-toc-heading',
         ],
-        ALLOW_DATA_ATTR: false,
+        ALLOW_DATA_ATTR: true,
       })
     } catch {
       return ''

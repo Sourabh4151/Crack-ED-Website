@@ -140,6 +140,10 @@ const MarketingBlogEditor = ({ value, onChange, editable = true }) => {
     editor,
     selector: ({ editor: ed }) => (ed ? ed.getAttributes('textStyle') : {}),
   })
+  const headingAttrs = useEditorState({
+    editor,
+    selector: ({ editor: ed }) => (ed ? ed.getAttributes('heading') : {}),
+  })
 
   const removeSelectedImage = () => {
     if (!editor || !isImageNodeSelected(editor)) return
@@ -168,6 +172,15 @@ const MarketingBlogEditor = ({ value, onChange, editable = true }) => {
         ))}
         <button type="button" onClick={() => editor.chain().focus().toggleBulletList().run()}>
           List
+        </button>
+        <button
+          type="button"
+          className={headingAttrs?.marketingToc ? 'is-active' : ''}
+          disabled={!editor.isActive('heading')}
+          title="Mark selected heading to appear in Table of Contents"
+          onClick={() => editor.chain().focus().updateAttributes('heading', { marketingToc: !headingAttrs?.marketingToc }).run()}
+        >
+          TOC
         </button>
         <button
           type="button"
@@ -310,7 +323,7 @@ const MarketingBlogEditor = ({ value, onChange, editable = true }) => {
           ))}
         </select>
         <p className="marketing-blog-editor-toolbar-hint" role="note">
-          <strong>Tip:</strong> Use <strong>H1–H6</strong> for real section titles (SEO and accessibility). Use <strong>Size…</strong> for small inline emphasis only. Select text first for size or font; choose “Size…” / “Font…” again to clear.
+          <strong>Tip:</strong> Use <strong>H1–H6</strong> for real section titles. Use <strong>TOC</strong> to include the current heading in Table of Contents. Use <strong>Size…</strong> only for inline emphasis.
         </p>
       </div>
       <div className="marketing-blog-editor-body">
