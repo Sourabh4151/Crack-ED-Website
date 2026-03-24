@@ -85,8 +85,8 @@ const ProgramsList = () => {
         program: 'Lenskart EyeTech Program',
         role: 'Retail Sales Associate',
         details: [
-          'Join as a Retail Sales Associate with a CTC of Rs 3 LPA + incentives',
-          '9-week program'
+          'Join as a Retail Sales Associate with a CTC of Rs 3.5 LPA',
+          '10-day program'
         ]
       }
     ],
