@@ -86,7 +86,7 @@ const ProgramsList = () => {
         role: 'Retail Sales Associate',
         details: [
           'Join as a Retail Sales Associate with a CTC of Rs 3.5 LPA',
-          '10-day program'
+          '5 week program'
         ]
       }
     ],
