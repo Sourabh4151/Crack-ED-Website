@@ -216,28 +216,28 @@ image.png.programs-section .program-details a,
   pointer-events: auto;
   cursor: pointer;
   background: transparent;
-  border: 1px solid #FAFAFA;
-  color: #FAFAFA;
-  width: 43px;
-  height: 43px;
-  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
   transition: all 0.3s ease;
   padding: 0;
-  font-size: 18px;
-  font-weight: 900;
-  line-height: 1;
-  min-width: 43px;
-  min-height: 43px;
-  font-family: 'Arial', sans-serif;
+  min-width: 50px;
+  min-height: 50px;
 }
 
 .card-nav-arrow:hover {
   background: rgba(255, 255, 255, 0.1);
-  border-color: #FAFAFA;
+  border-color: #fff;
+}
+
+.card-nav-arrow svg {
+  width: 20px;
+  height: 20px;
 }
 
 .card-nav-indicator {
@@ -376,6 +376,12 @@ image.png.programs-section .program-details a,
   width: 140px;
   height: auto;
   object-fit: contain;
+}
+
+/* Larger featured logo specifically for Mahindra Finance */
+.program-logo-above--mahindra img {
+  width: 400px;
+  max-width: min(400px, 48vw);
 }
 
 /* Mobile banner - logo above content without pushing it down */
@@ -971,12 +977,15 @@ image.png.programs-section .program-details a,
   }
 
   .card-nav-arrow {
-    width: 38px;
-    height: 38px;
-    min-width: 38px;
-    min-height: 38px;
-    font-size: 16px;
-    font-weight: 900;
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    min-height: 42px;
+  }
+
+  .card-nav-arrow svg {
+    width: 16px;
+    height: 16px;
   }
 
   .card-nav-indicator {
@@ -1092,10 +1101,28 @@ image.png.programs-section .program-details a,
     width: auto;
     object-fit: contain;
   }
+
+  .mobile-program-card-logo--mahindra img {
+    height:30px;
+    max-width: 170px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  /* Pull Mahindra logo closer to the program label on mobile */
+  .mobile-program-card-logo.mobile-program-card-logo--mahindra {
+    margin-bottom: 0;
+  }
  
   /* Reduce featured/home logos on small screens so they don't overpower content */
   .programs-section .program-logo-above img {
     width: 90px;
+  }
+
+  /* Mahindra Finance logo larger on small viewports where panel still shows */
+  .program-logo-above--mahindra img {
+    width: 170px;
+    max-width: 55vw;
   }
 
   /* Program label - Montserrat SemiBold 12px, line-height 27px, center, rgba(250,250,250,0.7) */

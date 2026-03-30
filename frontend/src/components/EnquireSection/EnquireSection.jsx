@@ -26,6 +26,7 @@ const PROGRAMS = [
   'PGP - Banking Management',
   'PGP - Relationship Management',
   'PGC - Banking Management',
+  'Mahindra Finance Prarambh Program - Business Executive',
 ]
 
 const EnquireSection = () => {

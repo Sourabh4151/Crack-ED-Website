@@ -97,6 +97,7 @@ const EnquireModal = ({ isOpen, onClose }) => {
     'PGP - Banking Management',
     'PGP - Relationship Management',
     'PGC - Banking Management',
+    'Mahindra Finance Prarambh Program - Business Executive',
   ]
 
   const validateFullName = (name) => {

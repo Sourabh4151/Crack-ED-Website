@@ -70,6 +70,14 @@ const ProgramsList = () => {
           'Join as a Business Development Executive with a CTC of Rs 2.5 LPA + incentives',
           '2-week program'
         ]
+      },
+      {
+        program: 'Mahindra Finance Prarambh Program',
+        role: 'Business Executive',
+        details: [
+          'Join as a Business Executive (Vehicle Loan - Field Sales) with a CTC of Rs 3.5 LPA + incentives',
+          '1-month online program'
+        ]
       }
     ],
     Retail: [
@@ -86,7 +94,7 @@ const ProgramsList = () => {
         role: 'Retail Sales Associate',
         details: [
           'Join as a Retail Sales Associate with a CTC of Rs 3.5 LPA',
-          '5 week program'
+          '5-week program'
         ]
       }
     ],
@@ -161,6 +169,7 @@ const ProgramsList = () => {
       if (program === 'Postgraduate Program' && role === 'Relationship Manager') return 'https://pgprm.crack-ed.com'
       if (program === 'Postgraduate Program' && role === 'Assistant Manager') return 'https://pgpam.crack-ed.com'
       if (program === 'Postgraduate Certification' && role === 'Business Development Executive') return 'https://pgcbm.crack-ed.com'
+      if (program === 'Mahindra Finance Prarambh Program' && role === 'Business Executive') return 'https://mahindrafinancebe.crack-ed.com/'
       switch (role) {
         case 'Relationship Manager':
           return 'https://udaanrm.crack-ed.com'

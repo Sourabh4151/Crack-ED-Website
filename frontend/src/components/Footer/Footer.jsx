@@ -44,6 +44,7 @@ const PROGRAMS = [
       { label: 'Field Sales Executive', href: 'https://paytm.crack-ed.com/portal' },
     ],
   },
+  
   {
     id: 'finpro',
     name: 'Poonawalla FinPro Career Program',
@@ -92,6 +93,14 @@ const PROGRAMS = [
     link: '/programs',
     links: [
       { label: 'Business Development Executive', href: 'https://pgcbm.crack-ed.com' },
+    ],
+  },
+  {
+    id: 'mahindra',
+    name: 'Mahindra Finance Prarambh Program',
+    link: '/programs',
+    links: [
+      { label: 'Business Executive', href: 'https://mahindrafinancebe.crack-ed.com/' },
     ],
   },
 ]

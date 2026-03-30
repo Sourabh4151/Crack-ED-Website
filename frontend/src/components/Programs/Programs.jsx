@@ -45,6 +45,9 @@ import poonawallaLogo from '../../assets/poonawalla_logo.png'
 import finovaCardLogo from '../../assets/finova_logo.png'
 import finovaProgramImage from '../../assets/finova_program.jpg'
 import finovaSmallLogo from '../../assets/finova_small_logo.png'
+import mahindraProgramImage from '../../assets/desk.jpeg'
+import mahindraFinanceSmallLogo from '../../assets/mahindra_finance_small_logo_logo.png'
+import mahindraFinanceHomeLogo from '../../assets/mahindra_finance_logo.png'
 import pgprmDesktopImage from '../../assets/RM_desktop.png'
 import pgpbmDesktopImage from '../../assets/bandhan_desktop.jpg'
 import pgcbmDesktopImage from '../../assets/desktop_PGC_bde.jpg'
@@ -74,6 +77,7 @@ const getProgramHomeLogo = (programLabel) => {
     case 'Aviva Nirmaan Program': return { src: avivaLogo, alt: 'Aviva' }
     case 'Poonawalla FinPro Career Program': return { src: poonawallaLogo, alt: 'Poonawalla Fincorp' }
     case 'Finova VyaparaMitra Program': return { src: finovaCardLogo, alt: 'Finova Capital' }
+    case 'Mahindra Finance Prarambh Program': return { src: mahindraFinanceHomeLogo, alt: 'Mahindra Finance' }
     case 'Postgraduate Program in Relationship Management': return null
     case 'Postgraduate Program in Banking Management': return null
     case 'Udaan Program': return null
@@ -110,78 +114,84 @@ const Programs = () => {
     },
     {
       id: 4,
+      logo: mahindraFinanceSmallLogo,
+      title: 'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)',
+      url: 'https://mahindrafinancebe.crack-ed.com/',
+    },
+    {
+      id: 5,
       logo: lenskartCardLogo,
       title: 'Lenskart EyeTech Program - Clinical Technician',
       url: 'https://lenskart.crack-ed.com/portal',
     },
     {
-      id: 5,
+      id: 6,
       logo: lenskartCardLogo,
       title: 'Lenskart EyeTech Program - Retail Sales Associate',
       url: 'https://lenskartrsa.crack-ed.com/portal',
     },
     {
-      id: 6,
+      id: 7,
       logo: udaanCardLogo,
       title: 'Udaan Program - Cashier / Teller',
       url: 'https://udaan.crack-ed.com/portal',
     },
     {
-      id: 7,
+      id: 8,
       logo: udaanCardLogo,
       title: 'Udaan Program - Virtual Relationship Manager',
       url: 'https://udaanvrm.crack-ed.com',
     },
     {
-      id: 8,
+      id: 9,
       logo: udaanCardLogo,
       title: 'Udaan Program - Relationship Manager',
       url: 'https://udaanrm.crack-ed.com',
     },
     {
-      id: 9,
+      id: 10,
       logo: udaanCardLogo,
       title: 'Udaan Program - Business Loan Associate',
       url: 'https://udaanbusiness.crack-ed.com',
     },
     {
-      id: 10,
+      id: 11,
       logo: piramalCardLogo,
       title: 'Piramal ProEdge Program - Relationship Manager',
       url: 'https://piramal.crack-ed.com/portal',
     },
     {
-      id: 11,
+      id: 12,
       logo: paytmCardLogo,
       title: 'Paytm Disha Program - Field Sales Executive',
       url: 'https://paytm.crack-ed.com/portal',
     },
     {
-      id: 12,
+      id: 13,
       logo: avivaSmallLogo,
       title: 'Aviva Nirmaan Program - Direct Sales Executive',
       url: 'https://avivads.crack-ed.com',
     },
     {
-      id: 13,
+      id: 14,
       logo: avivaSmallLogo,
       title: 'Aviva Nirmaan Program - Agency Sales Executive',
       url: 'https://avivaas.crack-ed.com',
     },
     {
-      id: 14,
+      id: 15,
       logo: poonawallaSmallLogo,
       title: 'Poonawalla FinPro Career Program - Gold Assayer',
       url: 'http://poonawallaga.crack-ed.com/',
     },
     {
-      id: 15,
+      id: 16,
       logo: poonawallaSmallLogo,
       title: 'Poonawalla FinPro Career Program - Sales Executive',
       url: 'http://poonawallase.crack-ed.com/',
     },
     {
-      id: 16,
+      id: 17,
       logo: finovaSmallLogo,
       title: 'Finova VyaparaMitra Program - Relationship Officer',
       url: 'https://finovaro.crack-ed.com',
@@ -205,6 +215,7 @@ const Programs = () => {
       'Udaan Program - Business Loan Associate': businessLoanAssociateImage,
       'Piramal ProEdge Program - Relationship Manager': relationshipManagerPiramalImage,
       'Paytm Disha Program - Field Sales Executive': fieldSalesExecutiveImage,
+      'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)': mahindraProgramImage,
     }
 
     // Udaan, Piramal, Paytm programs
@@ -250,6 +261,13 @@ const Programs = () => {
         details: 'Join as a Field Sales Executive with a CTC of Rs 2.5 LPA + incentives',
         duration: '2-week program (virtual)',
         image: fieldSalesExecutiveImage,
+      },
+      'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)': {
+        programLabel: 'Mahindra Finance Prarambh Program',
+        logo: mahindraFinanceHomeLogo,
+        details: 'Join as a Business Executive (Vehicle Loan - Field Sales) with a CTC of Rs 3.5 LPA + incentives',
+        duration: '1-month online program',
+        image: mahindraProgramImage,
       },
       'Aviva Nirmaan Program - Direct Sales Executive': {
         programLabel: 'Aviva Nirmaan Program',
@@ -334,7 +352,7 @@ const Programs = () => {
         },
         'Lenskart EyeTech Program - Retail Sales Associate': {
           details: 'Join as a Sales Associate with a CTC of Rs 3.5 LPA',
-          duration: '5 week program',
+          duration: '5-week program',
         },
       }
       return {
@@ -355,11 +373,15 @@ const Programs = () => {
     if (card.title === 'Postgraduate Program Relationship Management - Relationship Manager') return 'PGP - Relationship Management'
     if (card.title === 'Postgraduate Program Banking Management - Assistant Manager') return 'PGP - Banking Management'
     if (card.title === 'Postgraduate Certification Banking Management - Business Development Executive') return 'PGC - Banking Management'
+    if (card.title === 'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)') return 'Mahindra Finance Prarambh'
     return card.title
   }
 
   // Get display title (strip program prefix)
   const getDisplayTitle = (title) => {
+    if (title === 'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)') {
+      return 'Business Executive'
+    }
     return title
       .replace('Lenskart EyeTech Program - ', '')
       .replace('Udaan Program - ', '')
@@ -371,6 +393,7 @@ const Programs = () => {
       .replace('Postgraduate Program Relationship Management - ', '')
       .replace('Postgraduate Program Banking Management - ', '')
       .replace('Postgraduate Certification Banking Management - ', '')
+      .replace('Mahindra Finance Prarambh Program - ', '')
   }
 
   useEffect(() => {
@@ -486,6 +509,7 @@ const Programs = () => {
                 {programCards.map((card) => {
                   const details = getProgramDetailsForCard(card)
                   if (!details) return null
+                  const isMahindraProgram = details.programLabel === 'Mahindra Finance Prarambh Program'
                   return (
                     <a
                       key={card.id}
@@ -500,7 +524,7 @@ const Programs = () => {
                           style={{
                             backgroundImage: `url(${details.mobileImage || details.image})`,
                             backgroundSize: 'cover',
-                            backgroundPosition: 'center',
+                            backgroundPosition: isMahindraProgram ? '30% center' : 'center',
                             backgroundRepeat: 'no-repeat'
                           }}
                         >
@@ -510,8 +534,9 @@ const Programs = () => {
                               if (!logoInfo) return null
                               const isPaytm = logoInfo.alt === 'Paytm'
                               const isAviva = logoInfo.alt === 'Aviva'
+                              const isMahindra = logoInfo.alt === 'Mahindra Finance'
                               return (
-                                <div className={`mobile-program-card-logo${isPaytm ? ' mobile-program-card-logo--paytm' : ''}${isAviva ? ' mobile-program-card-logo--aviva' : ''}`}>
+                                <div className={`mobile-program-card-logo${isPaytm ? ' mobile-program-card-logo--paytm' : ''}${isAviva ? ' mobile-program-card-logo--aviva' : ''}${isMahindra ? ' mobile-program-card-logo--mahindra' : ''}`}>
                                   <img src={logoInfo.src} alt={logoInfo.alt} />
                                 </div>
                               )
@@ -575,7 +600,7 @@ const Programs = () => {
                         const logoInfo = getProgramHomeLogo(programLabel)
                         if (!logoInfo) return null
                         return (
-                          <div className="program-logo-above">
+                          <div className={`program-logo-above${logoInfo.alt === 'Mahindra Finance' ? ' program-logo-above--mahindra' : ''}`}>
                             <img src={logoInfo.src} alt={logoInfo.alt} />
                           </div>
                         )
@@ -654,11 +679,17 @@ const Programs = () => {
               <div className="program-cards-navigation">
                 <div className="navigation-controls">
                   <button className="card-nav-arrow" onClick={prevCard}>
-                    ←
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="19" y1="12" x2="5" y2="12"></line>
+                      <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
                   </button>
                   <span className="card-nav-indicator">{currentCardIndex + 1} / {Math.max(1, programCards.length)}</span>
                   <button className="card-nav-arrow" onClick={nextCard}>
-                    →
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
                   </button>
                 </div>
               </div>
