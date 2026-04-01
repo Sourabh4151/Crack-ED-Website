@@ -23,13 +23,14 @@ const PROGRAM_TO_CENTER_MAP = {
   'Poonawalla FinPro Career Program - Sales Executive': '74',
   'Poonawalla FinPro Career Program - Gold Assayer': '76',
   'Finova VyaparaMitra Program - Relationship Officer': '77',
-  'PGP - Banking Management': '78',
+  'Bandhan Career Bridge Program': '78',
+  'Bandhan Career Bridge Program - Assistant Manager': '78',
   'PGP - Relationship Management': '79',
   'PGC - Banking Management': '80',
   'Mahindra Finance Prarambh Program - Business Executive': '81',
   // Full titles (career quiz & site) — same IDs as shorthand above
   'Postgraduate Program Relationship Management - Relationship Manager': '79',
-  'Postgraduate Program Banking Management - Assistant Manager': '78',
+  'Bandhan Career Bridge Program - Assistant Manager': '78',
   'Postgraduate Certification Banking Management - Business Development Executive': '80',
   'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)': '81',
 }

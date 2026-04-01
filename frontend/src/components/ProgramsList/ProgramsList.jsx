@@ -8,6 +8,7 @@ import paytmLogo from '../../assets/paytm_small_logo.png'
 import poonawallaLogoSmallCard from '../../assets/poonawalla_logo_small_card.png'
 import avivaLogoSmallCard from '../../assets/aviva_logo_small_card.png'
 import finovaSmallLogo from '../../assets/finova_small_logo.png'
+import bandhanLogoSmall from '../../assets/bandhan_small_logo.png'
 import './ProgramsList.css'
 
 const ProgramsList = () => {
@@ -56,7 +57,7 @@ const ProgramsList = () => {
         ]
       },
       {
-        program: 'Postgraduate Program',
+        program: 'Bandhan Career Bridge Program',
         role: 'Assistant Manager',
         details: [
           'Join as an Assistant Manager with a CTC of Rs 4 LPA + incentives',
@@ -167,7 +168,7 @@ const ProgramsList = () => {
     const program = item?.program
     if (category === 'Banking') {
       if (program === 'Postgraduate Program' && role === 'Relationship Manager') return 'https://pgprm.crack-ed.com'
-      if (program === 'Postgraduate Program' && role === 'Assistant Manager') return 'https://pgpam.crack-ed.com'
+      if (program === 'Bandhan Career Bridge Program' && role === 'Assistant Manager') return 'https://bandhanbankam.crack-ed.com/'
       if (program === 'Postgraduate Certification' && role === 'Business Development Executive') return 'https://pgcbm.crack-ed.com'
       if (program === 'Mahindra Finance Prarambh Program' && role === 'Business Executive') return 'https://mahindrafinancebe.crack-ed.com/'
       switch (role) {
@@ -229,6 +230,9 @@ const ProgramsList = () => {
   const getIcon = (category, item) => {
     const program = item?.program
     const useUdaanLogo = program === 'Udaan Program' || program === 'Postgraduate Program'
+    if (category === 'Banking' && program === 'Bandhan Career Bridge Program') {
+      return <img src={bandhanLogoSmall} alt="Bandhan Bank" className="program-logo-img program-logo-bandhan" />
+    }
     if (category === 'Banking' && useUdaanLogo) {
       return <img src={udaanLogo} alt="Udaan" className="program-logo-img program-logo-udaan" />
     }

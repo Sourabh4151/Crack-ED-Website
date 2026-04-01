@@ -94,7 +94,7 @@ const EnquireModal = ({ isOpen, onClose }) => {
     'Poonawalla FinPro Career Program - Sales Executive',
     'Poonawalla FinPro Career Program - Gold Assayer',
     'Finova VyaparaMitra Program - Relationship Officer',
-    'PGP - Banking Management',
+    'Bandhan Career Bridge Program - Assistant Manager',
     'PGP - Relationship Management',
     'PGC - Banking Management',
     'Mahindra Finance Prarambh Program - Business Executive',

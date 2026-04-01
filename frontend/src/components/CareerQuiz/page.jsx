@@ -19,7 +19,7 @@ const PROGRAM_FEES = {
   'Poonawalla FinPro Career Program - Gold Assayer': 134746,
   'Finova VyaparaMitra Program - Relationship Officer': 84746,
   'Postgraduate Program Relationship Management - Relationship Manager': 254238,
-  'Postgraduate Program Banking Management - Assistant Manager': 169492,
+  'Bandhan Career Bridge Program - Assistant Manager': 169492,
   'Postgraduate Certification Banking Management - Business Development Executive': 50848,
   'Udaan Program - Business Loan Associate': 80000,
 };
@@ -39,7 +39,7 @@ const PROGRAM_DETAILS = {
   'Poonawalla FinPro Career Program - Gold Assayer': { details: 'CTC of Rs 2.5 LPA + incentives', duration: '1.5-month program', link: 'http://poonawallaga.crack-ed.com/' },
   'Finova VyaparaMitra Program - Relationship Officer': { details: 'CTC of Rs 2.4 LPA + variable', duration: '3-month program', link: 'https://finovaro.crack-ed.com' },
   'Postgraduate Program Relationship Management - Relationship Manager': { details: 'CTC of Rs 5.5 LPA + incentives', duration: '6-month program', link: 'https://pgprm.crack-ed.com' },
-  'Postgraduate Program Banking Management - Assistant Manager': { details: 'CTC of Rs 4 LPA + incentives', duration: '6-month program', link: 'https://pgpam.crack-ed.com' },
+  'Bandhan Career Bridge Program - Assistant Manager': { details: 'CTC of Rs 4 LPA + incentives', duration: '6-month program', link: 'https://bandhanbankam.crack-ed.com/' },
   'Postgraduate Certification Banking Management - Business Development Executive': { details: 'CTC of Rs 2.5 LPA + incentives', duration: '2-week program', link: 'https://pgcbm.crack-ed.com' },
   'Udaan Program - Business Loan Associate': { details: 'CTC of upto Rs 2.8 LPA', duration: '3-week program', link: 'https://udaanbusiness.crack-ed.com' },
 };
@@ -77,7 +77,7 @@ const OPTION_TO_PROGRAMS = [
       'Postgraduate Certification Banking Management - Business Development Executive',
     ],
     B: [
-      'Postgraduate Program Banking Management - Assistant Manager',
+      'Bandhan Career Bridge Program - Assistant Manager',
       'Piramal ProEdge Program - Relationship Manager',
       'Finova VyaparaMitra Program - Relationship Officer',
     ],
@@ -100,7 +100,7 @@ const OPTION_TO_PROGRAMS = [
       'Poonawalla FinPro Career Program - Sales Executive',
     ],
     B: [
-      'Postgraduate Program Banking Management - Assistant Manager',
+      'Bandhan Career Bridge Program - Assistant Manager',
       'Udaan Program - Relationship Manager',
       'Finova VyaparaMitra Program - Relationship Officer',
     ],
@@ -135,7 +135,7 @@ const OPTION_TO_PROGRAMS = [
     D: [
       'Lenskart EyeTech Program - Retail Sales Associate',
       'Udaan Program - Virtual Relationship Manager',
-      'Postgraduate Program Banking Management - Assistant Manager',
+      'Bandhan Career Bridge Program - Assistant Manager',
     ],
   },
   // Q5: What do you enjoy doing more?
@@ -169,7 +169,7 @@ const OPTION_TO_PROGRAMS = [
       'Poonawalla FinPro Career Program - Sales Executive',
     ],
     B: [
-      'Postgraduate Program Banking Management - Assistant Manager',
+      'Bandhan Career Bridge Program - Assistant Manager',
       'Postgraduate Program Relationship Management - Relationship Manager',
       'Finova VyaparaMitra Program - Relationship Officer',
     ],
@@ -192,7 +192,7 @@ const OPTION_TO_PROGRAMS = [
       'Udaan Program - Business Loan Associate',
     ],
     B: [
-      'Postgraduate Program Banking Management - Assistant Manager',
+      'Bandhan Career Bridge Program - Assistant Manager',
       'Udaan Program - Relationship Manager',
       'Piramal ProEdge Program - Relationship Manager',
     ],
@@ -240,7 +240,7 @@ const OPTION_TO_PROGRAMS = [
     B: [
       'Piramal ProEdge Program - Relationship Manager',
       'Udaan Program - Relationship Manager',
-      'Postgraduate Program Banking Management - Assistant Manager',
+      'Bandhan Career Bridge Program - Assistant Manager',
     ],
     C: [
       'Lenskart EyeTech Program - Retail Sales Associate',
@@ -263,7 +263,7 @@ const OPTION_TO_PROGRAMS = [
     B: [
       'Postgraduate Program Relationship Management - Relationship Manager',
       'Udaan Program - Relationship Manager',
-      'Postgraduate Program Banking Management - Assistant Manager',
+      'Bandhan Career Bridge Program - Assistant Manager',
     ],
     C: [
       'Udaan Program - Cashier / Teller',

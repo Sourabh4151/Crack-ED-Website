@@ -239,7 +239,7 @@ const Header = () => {
                   <li><a href="https://finovaro.crack-ed.com" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Finova VyaparaMitra Program</a></li>
                   <li><a href="https://pgprm.crack-ed.com/" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>PGP - Relationship Management
                   </a></li>
-                  <li><a href="https://pgpam.crack-ed.com/" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>PGP - Banking Management</a></li>
+                  <li><a href="https://bandhanbankam.crack-ed.com/" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Bandhan Career Bridge Program</a></li>
                   <li><a href="https://pgcbm.crack-ed.com" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>PGC - Banking Management</a></li>
                   <li><a href="https://mahindrafinancebe.crack-ed.com/" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Mahindra Finance Prarambh Program</a></li>
                   <li 

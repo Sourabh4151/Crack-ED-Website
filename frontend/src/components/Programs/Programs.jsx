@@ -51,6 +51,8 @@ import mahindraFinanceHomeLogo from '../../assets/mahindra_finance_logo.png'
 import pgprmDesktopImage from '../../assets/RM_desktop.png'
 import pgpbmDesktopImage from '../../assets/bandhan_desktop.jpg'
 import pgcbmDesktopImage from '../../assets/desktop_PGC_bde.jpg'
+import bandhanLogo from '../../assets/bandhan_bank_svg.svg'
+import bandhanLogoSmall from '../../assets/bandhan_small_logo.png'
 import './Programs.css'
 
 // Keep "LPA + PLP" on one line to prevent awkward wrapping
@@ -78,6 +80,7 @@ const getProgramHomeLogo = (programLabel) => {
     case 'Poonawalla FinPro Career Program': return { src: poonawallaLogo, alt: 'Poonawalla Fincorp' }
     case 'Finova VyaparaMitra Program': return { src: finovaCardLogo, alt: 'Finova Capital' }
     case 'Mahindra Finance Prarambh Program': return { src: mahindraFinanceHomeLogo, alt: 'Mahindra Finance' }
+    case 'Bandhan Career Bridge Program': return { src: bandhanLogo, alt: 'Bandhan Bank' }
     case 'Postgraduate Program in Relationship Management': return null
     case 'Postgraduate Program in Banking Management': return null
     case 'Udaan Program': return null
@@ -102,9 +105,9 @@ const Programs = () => {
     },
     {
       id: 2,
-      logo: udaanCardLogo,
-      title: 'Postgraduate Program Banking Management - Assistant Manager',
-      url: 'https://pgpam.crack-ed.com',
+      logo: bandhanLogoSmall,
+      title: 'Bandhan Career Bridge Program - Assistant Manager',
+      url: 'https://bandhanbankam.crack-ed.com/',
     },
     {
       id: 3,
@@ -312,9 +315,9 @@ const Programs = () => {
         duration: '6-month program',
         image: pgprmDesktopImage,
       },
-      'Postgraduate Program Banking Management - Assistant Manager': {
-        programLabel: 'Postgraduate Program in Banking Management',
-        shortProgramLabel: 'PGP - Banking Management',
+      'Bandhan Career Bridge Program - Assistant Manager': {
+        programLabel: 'Bandhan Career Bridge Program',
+        shortProgramLabel: 'Bandhan Career Bridge Program',
         logo: auCardLogo,
         details: 'Join as an Assistant Manager with a CTC of Rs 4 LPA + incentives',
         duration: '6-month program',
@@ -371,9 +374,9 @@ const Programs = () => {
   // Short label for small/mini program cards (PGP only)
   const getSmallCardTitle = (card) => {
     if (card.title === 'Postgraduate Program Relationship Management - Relationship Manager') return 'PGP - Relationship Management'
-    if (card.title === 'Postgraduate Program Banking Management - Assistant Manager') return 'PGP - Banking Management'
+    if (card.title === 'Bandhan Career Bridge Program - Assistant Manager') return 'Bandhan Career Bridge Program - Assistant Manager'
     if (card.title === 'Postgraduate Certification Banking Management - Business Development Executive') return 'PGC - Banking Management'
-    if (card.title === 'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)') return 'Mahindra Finance Prarambh'
+    if (card.title === 'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)') return 'Mahindra Finance Prarambh - Business Executive'
     return card.title
   }
 
@@ -383,6 +386,7 @@ const Programs = () => {
       return 'Business Executive'
     }
     return title
+      .replace('Bandhan Career Bridge Program - ', '')
       .replace('Lenskart EyeTech Program - ', '')
       .replace('Udaan Program - ', '')
       .replace('Piramal ProEdge Program - ', '')
@@ -535,8 +539,9 @@ const Programs = () => {
                               const isPaytm = logoInfo.alt === 'Paytm'
                               const isAviva = logoInfo.alt === 'Aviva'
                               const isMahindra = logoInfo.alt === 'Mahindra Finance'
+                              const isBandhan = logoInfo.alt === 'Bandhan Bank'
                               return (
-                                <div className={`mobile-program-card-logo${isPaytm ? ' mobile-program-card-logo--paytm' : ''}${isAviva ? ' mobile-program-card-logo--aviva' : ''}${isMahindra ? ' mobile-program-card-logo--mahindra' : ''}`}>
+                                <div className={`mobile-program-card-logo${isPaytm ? ' mobile-program-card-logo--paytm' : ''}${isAviva ? ' mobile-program-card-logo--aviva' : ''}${isMahindra ? ' mobile-program-card-logo--mahindra' : ''}${isBandhan ? ' mobile-program-card-logo--bandhan' : ''}`}>
                                   <img src={logoInfo.src} alt={logoInfo.alt} />
                                 </div>
                               )
@@ -599,8 +604,10 @@ const Programs = () => {
                         const programLabel = currentProgramDetails.programLabel || 'Lenskart Program'
                         const logoInfo = getProgramHomeLogo(programLabel)
                         if (!logoInfo) return null
+                        const isMahindra = logoInfo.alt === 'Mahindra Finance'
+                        const isBandhan = logoInfo.alt === 'Bandhan Bank'
                         return (
-                          <div className={`program-logo-above${logoInfo.alt === 'Mahindra Finance' ? ' program-logo-above--mahindra' : ''}`}>
+                          <div className={`program-logo-above${isMahindra ? ' program-logo-above--mahindra' : ''}${isBandhan ? ' program-logo-above--bandhan' : ''}`}>
                             <img src={logoInfo.src} alt={logoInfo.alt} />
                           </div>
                         )

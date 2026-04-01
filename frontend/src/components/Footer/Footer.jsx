@@ -81,10 +81,10 @@ const PROGRAMS = [
   },
   {
     id: 'pgpbm',
-    name: 'PGP - Banking Management',
+    name: 'Bandhan Career Bridge Program',
     link: '/programs',
     links: [
-      { label: 'Assistant Manager', href: 'https://pgpam.crack-ed.com/' },
+      { label: 'Assistant Manager', href: 'https://bandhanbankam.crack-ed.com/' },
     ],
   },
   {

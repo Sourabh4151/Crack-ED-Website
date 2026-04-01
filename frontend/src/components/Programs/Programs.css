@@ -384,6 +384,11 @@ image.png.programs-section .program-details a,
   max-width: min(400px, 48vw);
 }
 
+.program-logo-above--bandhan img {
+  width: 180px;
+  height: 49px;
+}
+
 /* Mobile banner - logo above content without pushing it down */
 .program-banner-with-logo {
   position: relative;
@@ -1109,6 +1114,13 @@ image.png.programs-section .program-details a,
     object-fit: contain;
   }
 
+  .mobile-program-card-logo--bandhan img {
+    width: auto;
+    max-width: min(128px, 78vw);
+    height: 32px;
+    object-fit: contain;
+  }
+
   /* Pull Mahindra logo closer to the program label on mobile */
   .mobile-program-card-logo.mobile-program-card-logo--mahindra {
     margin-bottom: 0;
@@ -1123,6 +1135,13 @@ image.png.programs-section .program-details a,
   .program-logo-above--mahindra img {
     width: 170px;
     max-width: 55vw;
+  }
+
+  .programs-section .program-logo-above--bandhan img {
+    width: auto;
+    max-width: min(138px, 62vw);
+    height: 36px;
+    object-fit: contain;
   }
 
   /* Program label - Montserrat SemiBold 12px, line-height 27px, center, rgba(250,250,250,0.7) */
