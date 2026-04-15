@@ -1,37 +1,37 @@
 /**
  * CRM Service - Handles form submissions via your backend only.
  *
- * Flow: Frontend -> Your Backend API -> (DB + Extraaedge CRM).
- * The backend holds the CRM auth token (EXTRAEDGE_AUTH_TOKEN); the frontend never calls the CRM directly.
+ * Flow: Frontend -> Your Backend API -> (DB + NoPaperForms CRM).
+ * The backend holds NOPAPERFORMS_ACCESS_KEY / NOPAPERFORMS_SECRET_KEY; the frontend never calls the CRM directly.
  *
  * submitLeadToCRM / submitQuizLeadToCRM: use these (they call your backend).
- * submitLeadToCRMDirect / submitQuizLeadToCRMDirect: deprecated; only for local/dev fallback if needed.
+ * submitLeadToCRMDirect / submitQuizLeadToCRMDirect: deprecated; delegate to backend (no browser-side CRM keys).
  */
 
-// Program to Center mapping
-const PROGRAM_TO_CENTER_MAP = {
-  'Lenskart EyeTech Program - Clinical Technician': '38',
-  'Lenskart EyeTech Program - Retail Sales Associate': '61',
-  'Udaan Program - Cashier / Teller': '33',
-  'Udaan Program - Virtual Relationship Manager': '68',
-  'Udaan Program - Relationship Manager': '72',
-  'Udaan Program - Business Loan Associate': '73',
-  'Piramal ProEdge Program - Relationship Manager': '47',
-  'Paytm Disha Program - Field Sales Executive': '55',
-  'Aviva Nirmaan Program - Agency Sales Executive': '69',
-  'Aviva Nirmaan Program - Direct Sales Executive': '70',
-  'Poonawalla FinPro Career Program - Sales Executive': '74',
-  'Poonawalla FinPro Career Program - Gold Assayer': '76',
-  'Finova VyaparaMitra Program - Relationship Officer': '77',
-  'PGP - Banking Management': '78',
-  'PGP - Relationship Management': '79',
-  'PGC - Banking Management': '80',
-  'Mahindra Finance Prarambh Program - Business Executive': '81',
+// Program → NoPaperForms cf_program (keep in sync with backend api/constants.py PROGRAM_TO_CENTER)
+const PROGRAM_TO_CF_PROGRAM_MAP = {
+  'Lenskart EyeTech Program - Clinical Technician': 'Lenskart - CT',
+  'Lenskart EyeTech Program - Retail Sales Associate': 'Lenskart - RSA',
+  'Udaan Program - Cashier / Teller': 'HDFC - Teller',
+  'Udaan Program - Virtual Relationship Manager': 'HDFC - VRM',
+  'Udaan Program - Relationship Manager': 'HDFC - RM',
+  'Udaan Program - Business Loan Associate': 'HDFC - Buisiness',
+  'Piramal ProEdge Program - Relationship Manager': 'Piramal - RM',
+  'Paytm Disha Program - Field Sales Executive': 'Paytm - FSE',
+  'Aviva Nirmaan Program - Agency Sales Executive': 'Aviva - AS',
+  'Aviva Nirmaan Program - Direct Sales Executive': 'Aviva - DS',
+  'Poonawalla FinPro Career Program - Sales Executive': 'Poonawalla - SE',
+  'Poonawalla FinPro Career Program - Gold Assayer': 'Poonawalla - GA',
+  'Finova VyaparaMitra Program - Relationship Officer': 'Finova - RO',
+  'PGP - Banking Management': 'Bandhan Bank - AM',
+  'PGP - Relationship Management': 'Relationship Manager',
+  'PGC - Banking Management': 'IndusInd',
+  'Mahindra Finance Prarambh Program - Business Executive': 'Mahindra - BE',
   // Full titles (career quiz & site) — same IDs as shorthand above
-  'Postgraduate Program Relationship Management - Relationship Manager': '79',
-  'Postgraduate Program Banking Management - Assistant Manager': '78',
-  'Postgraduate Certification Banking Management - Business Development Executive': '80',
-  'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)': '81',
+  'Postgraduate Program Relationship Management - Relationship Manager': 'Relationship Manager',
+  'Postgraduate Program Banking Management - Assistant Manager': 'Bandhan Bank - AM',
+  'Postgraduate Certification Banking Management - Business Development Executive': 'IndusInd',
+  'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)': 'Mahindra - BE',
 }
 
 /** Base URL for our Django backend (set in .env as VITE_API_URL, or use proxy with '') */
@@ -129,12 +129,16 @@ const splitName = (fullName) => {
   return { firstName, lastName }
 }
 
-/**
- * Get center ID based on selected program
- */
-export const getCenterByProgram = (program) => {
-  return PROGRAM_TO_CENTER_MAP[program] || '1' // Default to '1' if program not found
+/** NoPaperForms cf_program label for the selected program (empty if unknown). */
+export const getCfProgramByProgram = (program) => {
+  const v = PROGRAM_TO_CF_PROGRAM_MAP[program]
+  return v != null && String(v).trim() !== '' ? String(v).trim() : ''
 }
+
+/**
+ * Stored on Lead.center / submit payload; same as cf_program when known, else '0'.
+ */
+export const getCenterByProgram = (program) => getCfProgramByProgram(program) || '0'
 
 /**
  * Submit lead to CRM via YOUR backend API (RECOMMENDED)
@@ -146,6 +150,7 @@ export const submitLeadToCRM = async (formData) => {
   const { firstName, lastName } = splitName(fullName)
   const program = formData?.program ?? ''
   const center = getCenterByProgram(program)
+  const cfProgram = getCfProgramByProgram(program)
   const email = (formData?.emailId ?? formData?.email ?? '').toString().trim()
   const mobile = (formData?.mobileNumber ?? formData?.mobile ?? '').toString().replace(/\D/g, '').slice(0, 15)
 
@@ -159,6 +164,7 @@ export const submitLeadToCRM = async (formData) => {
     mobile,
     program,
     center,
+    ...(cfProgram ? { cfProgram } : {}),
     state: formData?.state || '',
     sourcePage,
     ...(Object.keys(utmParams).length > 0 ? { utmParams } : {}),
@@ -187,59 +193,20 @@ export const submitLeadToCRM = async (formData) => {
 }
 
 /**
- * Submit lead directly to CRM (NOT RECOMMENDED - Only for development)
- * 
- * WARNING: This exposes your AuthToken in the frontend code.
- * Anyone can view your source code and use your token.
- * 
- * Only use this if:
- * 1. You're in development/testing
- * 2. The CRM API allows CORS from your domain
- * 3. You understand the security implications
+ * @deprecated Use submitLeadToCRM — forwards via Django to NoPaperForms (keys stay on the server).
  */
 export const submitLeadToCRMDirect = async (formData) => {
-  const { firstName, lastName } = splitName(formData.fullName)
-  const center = getCenterByProgram(formData.program)
-
-  const payload = {
-    Source: 'crack-ed',
-    AuthToken: 'crack-ed_29-01-2025', // ⚠️ EXPOSED IN FRONTEND CODE
-    FirstName: firstName,
-    LastName: lastName,
-    Email: formData.emailId,
-    MobileNumber: parseInt(formData.mobileNumber.replace(/\D/g, ''), 10), // Remove non-digits
-    State: formData.state || '',
-    Center: center,
-  }
-
-  try {
-    const response = await fetch('https://publisher.extraaedge.com/api/Webhook/addPublisherLead', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload),
-    })
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`)
-    }
-
-    const data = await response.json()
-    return { success: true, data }
-  } catch (error) {
-    console.error('Error submitting lead to CRM:', error)
-    throw error
-  }
+  return submitLeadToCRM(formData)
 }
 
 /**
  * Submit quiz lead to CRM via YOUR backend API
- * Uses program from "Your Perfect Fit" to pass Center value
+ * Uses program from "Your Perfect Fit" (backend maps to CRM program/course field)
  */
 export const submitQuizLeadToCRM = async (formData) => {
   const { firstName, lastName } = splitName(formData.name)
   const center = getCenterByProgram(formData.program)
+  const cfProgram = getCfProgramByProgram(formData.program)
   const sourcePage = typeof window !== 'undefined' ? (window.location.pathname || window.location.href || '') : ''
   const utmParams = getUtmParams()
 
@@ -250,6 +217,7 @@ export const submitQuizLeadToCRM = async (formData) => {
     mobile: formData.mobile,
     program: formData.program,
     center,
+    ...(cfProgram ? { cfProgram } : {}),
     state: formData.state || '',
     sourcePage,
     ...(Object.keys(utmParams).length > 0 ? { utmParams } : {}),
@@ -272,41 +240,32 @@ export const submitQuizLeadToCRM = async (formData) => {
 }
 
 /**
- * Submit quiz lead directly to CRM
- * Uses program from "Your Perfect Fit" to pass Center value to Extraaedge
- * NOT RECOMMENDED - Only for development. AuthToken exposed in frontend.
+ * @deprecated Post to /api/quiz/submit/ (same as Career Quiz). CRM keys remain on the backend.
  */
 export const submitQuizLeadToCRMDirect = async (formData) => {
-  const { firstName, lastName } = splitName(formData.name)
-  const center = getCenterByProgram(formData.program)
-
+  const sourcePage =
+    typeof window !== 'undefined' ? (window.location.pathname || window.location.href || '') : ''
+  const utmParams = getUtmParams()
+  const perfect = formData.program
+  const cfProgram = getCfProgramByProgram(perfect)
   const payload = {
-    Source: 'crack-ed',
-    AuthToken: 'crack-ed_29-01-2025', // ⚠️ EXPOSED IN FRONTEND CODE
-    FirstName: firstName,
-    LastName: lastName,
-    Email: formData.email,
-    MobileNumber: parseInt(String(formData.mobile).replace(/\D/g, ''), 10),
-    Center: center,
+    name: formData.name,
+    email: formData.email,
+    mobile: formData.mobile,
+    program: formData.program,
+    bestFit: formData.program,
+    ...(cfProgram ? { cfProgram } : {}),
+    sourcePage,
+    ...(Object.keys(utmParams).length > 0 ? { utmParams } : {}),
   }
-
-  try {
-    const response = await fetch('https://publisher.extraaedge.com/api/Webhook/addPublisherLead', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload),
-    })
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`)
-    }
-
-    const data = await response.json()
-    return { success: true, data }
-  } catch (error) {
-    console.error('Error submitting quiz lead to CRM:', error)
-    throw error
+  const response = await fetch(`${getApiBase()}/api/quiz/submit/`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  })
+  const data = await response.json().catch(() => ({}))
+  if (!response.ok) {
+    throw new Error(data?.error || `HTTP ${response.status}`)
   }
+  return { success: true, data }
 }

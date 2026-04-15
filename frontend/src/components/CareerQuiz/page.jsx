@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { getApiBase, getUtmParams, isBackendUnreachable, BACKEND_DOWN_MESSAGE } from '../../services/crmService';
+import {
+  getApiBase,
+  getUtmParams,
+  getCfProgramByProgram,
+  isBackendUnreachable,
+  BACKEND_DOWN_MESSAGE,
+} from '../../services/crmService';
+import { trackMicrositeClick, markQuizCompleted } from '../../utils/analytics';
 import 'react-toastify/dist/ReactToastify.css';
 
 // Program fees (₹) - used for tie-breaking when counts are equal
@@ -415,6 +422,7 @@ const CareerQuiz = ({ showOnlyTopProgram = false }) => {
 
     setLoading(true);
     const { perfectFit } = calculateResults();
+    const cfProgram = getCfProgramByProgram(perfectFit);
     const sourcePage =
       typeof window !== 'undefined'
         ? (window.location.pathname || window.location.href || '')
@@ -424,6 +432,7 @@ const CareerQuiz = ({ showOnlyTopProgram = false }) => {
       ...formData,
       selections,
       bestFit: perfectFit,
+      ...(cfProgram ? { cfProgram } : {}),
       sourcePage,
       ...(Object.keys(utmParams).length > 0 ? { utmParams } : {}),
     };
@@ -456,6 +465,7 @@ const CareerQuiz = ({ showOnlyTopProgram = false }) => {
   };
 
   if (view === 'result') {
+    markQuizCompleted();
     const { perfectFit, alternatives } = calculateResults();
     const perfectFitDetails = PROGRAM_DETAILS[perfectFit] || { details: '', duration: '', link: '#' };
 
@@ -470,7 +480,7 @@ const CareerQuiz = ({ showOnlyTopProgram = false }) => {
               <li><span className="check">✔</span> {perfectFitDetails.duration}</li>
             </ul>
             <div style={{ display: "inline-block" }}>
-              <a style={{ textDecoration: "none" }} href={perfectFitDetails.link} target="_blank" rel="noopener noreferrer">
+              <a style={{ textDecoration: "none" }} href={perfectFitDetails.link} target="_blank" rel="noopener noreferrer" onClick={() => trackMicrositeClick(perfectFit)}>
                 <button className="hero-cta-button">Explore Program</button>
               </a>
             </div>
@@ -488,7 +498,7 @@ const CareerQuiz = ({ showOnlyTopProgram = false }) => {
                   <div key={i} className="alt-card">
                     <h3>{progName} - {d}</h3>
                     <div style={{ display: "inline-block" }}>
-                      <a href={link} target="_blank" rel="noopener noreferrer">
+                      <a href={link} target="_blank" rel="noopener noreferrer" onClick={() => trackMicrositeClick(progName)}>
                         <button className="secondary-btn-outline">Explore Program</button>
                       </a>
                     </div>
@@ -558,8 +568,12 @@ const CareerQuiz = ({ showOnlyTopProgram = false }) => {
         ))}
       </div>
       <div className="navigation-footer">
-        <button className="back-link" onClick={() => setStep(step - 1)} disabled={step === 0}>Back</button>
-        <button className="view-results-btn" onClick={() => step === 9 ? setView('form') : setStep(step + 1)} disabled={!selections[step]}>
+        {step > 0 && (
+          <button type="button" className="back-link" onClick={() => setStep(step - 1)}>
+            Back
+          </button>
+        )}
+        <button type="button" className="view-results-btn" onClick={() => step === 9 ? setView('form') : setStep(step + 1)} disabled={!selections[step]}>
           {step === 9 ? "Finish" : "Next"}
         </button>
       </div>

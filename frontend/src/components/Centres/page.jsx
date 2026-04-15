@@ -5,42 +5,9 @@ import frame343Icon from "../../assets/Frame 343.svg";
 
 const centres = [
   {
-    name: "Ahmedabad",
-    details:
-      "5th Floor, Gala Argos, Netaji Rd, Ellisbridge, Ahmedabad, Gujarat 380006",
-    mapQuery:
-      "Gala Argos, Netaji Rd, Ellisbridge, Ahmedabad, Gujarat 380006, India",
-  },
-  {
-    name: "Bangalore",
-    details: "DBS House, 26 Cunningham Road, Bangalore – 560052",
-    mapQuery: "DBS House, 26 Cunningham Road, Bengaluru, Karnataka 560052",
-  },
-  {
     name: "Gurgaon",
-    details: "7th Floor Imperia Mindspace, Sector 62, Gurgaon",
+    details: "7th Floor Imperia Mindspace Sector 62 Gurgaon",
     mapQuery: "Imperia Mindspace, Sector 62, Gurgaon, Haryana, India",
-  },
-  {
-    name: "Hyderabad",
-    details:
-      "Geek Space Business Centre, 12th Floor, Manjeera Trinity Corporate, JNTU - Hitech City Road, K PHB Phase 3, Kukatpally, Hyderabad - 500072",
-    mapQuery:
-      "Manjeera Trinity Corporate, JNTU Hitech City Road, Kukatpally, Hyderabad 500072, India",
-  },
-  {
-    name: "Indore - 1",
-    details:
-      "14 DF, Scheme No 74C, Indore, Madhya Pradesh 452010, Estancia ProWorking Space",
-    mapQuery:
-      "Estancia ProWorking Space, Scheme No 74C, Indore, Madhya Pradesh 452010",
-  },
-  {
-    name: "Indore - 2",
-    details:
-      "Virtual Co-working Space, 101 1st Floor, Platinum Plaza, PU4 Scheme No 54, Vijay Nagar, Indore, Madhya Pradesh 452010",
-    mapQuery:
-      "Platinum Plaza, Scheme No 54, Vijay Nagar, Indore, Madhya Pradesh 452010, India",
   },
   {
     name: "Jaipur",
@@ -50,16 +17,16 @@ const centres = [
       "372-B, Adarsh Nagar, Near Bhag Singh Chowk, Jaipur, Rajasthan 302004",
   },
   {
-    name: "Kolkata",
+    name: "Indore",
     details:
-      "9th Floor, Anaya Chambers, GN 38/5, GN Block, Sector V, Bidhannagar, Kolkata, West Bengal 700091",
+      "14 DF, Scheme No 74C, Indore, Madhya Pradesh 452010 Estancia ProWorking space",
     mapQuery:
-      "Anaya Chambers, GN 38/5, GN Block, Sector V, Bidhannagar, Kolkata, West Bengal 700091, India",
+      "Estancia ProWorking Space, Scheme No 74C, Indore, Madhya Pradesh 452010",
   },
   {
     name: "Mumbai",
     details:
-      "5th Floor, B Wing, Community Co-working Space, Ackruti Trade Centre",
+      "5th Floor, B wing, community co working space, Ackruti Trade Centre",
     mapQuery:
       "Ackruti Trade Centre, MIDC, Andheri East, Mumbai, Maharashtra, India",
   },

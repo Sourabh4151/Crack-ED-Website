@@ -19,23 +19,32 @@ Set these on your server (e.g. in `.env` or your host’s env config):
 | `ALLOWED_HOSTS` | Your API domain(s), comma-separated, e.g. `crack-ed.com,api.crack-ed.com` |
 | `CORS_ORIGINS` | Your frontend URL(s), comma-separated, e.g. `https://crack-ed.com,https://www.crack-ed.com` |
 | `DB_NAME` + `DB_USER` + `DB_PASSWORD` + `DB_HOST` + `DB_PORT` | Or use `DATABASE_URL` (PostgreSQL) |
-| **`EXTRAEDGE_AUTH_TOKEN`** | **Your Extraaedge CRM auth token** (from Extraaedge). Required for leads/quiz to be forwarded to CRM. If missing, leads save in Django only. |
+| **`NOPAPERFORMS_ACCESS_KEY`** | **NoPaperForms access key** (from NoPaperForms). Required with `NOPAPERFORMS_SECRET_KEY` for leads/quiz to be forwarded to CRM. If either is missing, leads save in Django only. |
+| **`NOPAPERFORMS_SECRET_KEY`** | **NoPaperForms secret key** (keep private). |
+| `NOPAPERFORMS_API_URL` | Optional. Default: `https://api.nopaperforms.io/lead/v1/createOrUpdate` |
+| (payload) | The API is called with a **minimal body** (name, email, mobile, `search_criteria: mobile`, plus state/city only when the form sends them). Program/campus are not sent, to match the working Postman flow. |
+| `NOPAPERFORMS_AUTH_MODE` | Optional. `headers` (default), `body` (put `access_key` / `secret_key` in JSON), or `basic` (HTTP Basic auth). |
+| `NOPAPERFORMS_ACCESS_HEADER` / `NOPAPERFORMS_SECRET_HEADER` | Optional. HTTP header names when using `headers` mode (defaults: `access-key`, `secret-key`). Use `access_key` / `secret_key` only if your Postman collection uses those exact names. |
 
-### 1b. Leads not appearing in Extraaedge CRM?
+### 1b. Leads not appearing in NoPaperForms?
 
-If leads show in Django admin but **not** in Extraaedge (crack-ed.extraaedge.com):
+If leads show in Django admin but **not** in NoPaperForms:
 
-1. **Set `EXTRAEDGE_AUTH_TOKEN` in production**  
-   The backend only forwards to CRM when this env var is set.  
-   - If you use a **.env file** on the server: add `EXTRAEDGE_AUTH_TOKEN=your-token` in `backend/.env` (same value as in `.env.example` or the one provided by Extraaedge).  
-   - If you use a **host dashboard** (Railway, Render, Heroku, etc.): add `EXTRAEDGE_AUTH_TOKEN` in the project’s Environment / Config Vars and redeploy.
+1. **Set `NOPAPERFORMS_ACCESS_KEY` and `NOPAPERFORMS_SECRET_KEY` in production** (same values as in the NoPaperForms API / Postman setup).  
+   - **.env** on the server: add both in `backend/.env`.  
+   - **Host dashboard**: add both in Environment / Config Vars and redeploy.
 
-2. **Confirm the variable is loaded**  
-   After deploy, check backend logs when a lead is submitted. If you see  
-   `[API] EXTRAEDGE_AUTH_TOKEN not set; skipping CRM forward`  
-   then the token is still not available to the app (wrong env name, .env not in working directory, or host not injecting it).
+2. **Confirm the variables are loaded**  
+   If logs show  
+   `[API] NoPaperForms: NOPAPERFORMS_ACCESS_KEY / NOPAPERFORMS_SECRET_KEY not set; skipping CRM forward`  
+   the process is not seeing the keys (wrong names, file not loaded, or host not injecting them).
 
-3. **Redeploy** after adding or changing env vars so the running process picks them up.
+3. **If you get 401**  
+   - Confirm the access/secret values match NoPaperForms.  
+   - Try `NOPAPERFORMS_AUTH_MODE=body` if credentials belong in the JSON body.  
+   - Or set `NOPAPERFORMS_ACCESS_HEADER` / `NOPAPERFORMS_SECRET_HEADER` to match Postman exactly (defaults use hyphenated `access-key` / `secret-key`).
+
+4. **Redeploy** after changing env vars so the running process picks them up.
 
 ### 2. Commands before first deploy
 
@@ -97,7 +106,7 @@ If the frontend and backend are on the same domain (e.g. [crack-ed.com](https://
 | Backend host | Set `ALLOWED_HOSTS=crack-ed.com,api.crack-ed.com` |
 | Backend CORS/CSRF | Set `CORS_ORIGINS=https://crack-ed.com,https://www.crack-ed.com` |
 | Backend DB | Use PostgreSQL via `DB_*` or `DATABASE_URL` |
-| **Extraaedge CRM** | Set `EXTRAEDGE_AUTH_TOKEN` (production env or `backend/.env`) so leads are forwarded to CRM |
+| **NoPaperForms CRM** | Set `NOPAPERFORMS_ACCESS_KEY` and `NOPAPERFORMS_SECRET_KEY` so leads are forwarded to CRM |
 | Frontend API URL | Set `VITE_API_URL=https://api.crack-ed.com` when running `npm run build` (or leave unset if using same-domain proxy) |
 | Static/media | Run `collectstatic`; serve `staticfiles/` and `media/` |
 

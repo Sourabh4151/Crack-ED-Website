@@ -1,17 +1,15 @@
 """
-Management command to re-post existing Lead and QuizSubmission records to Extraaedge
-with Field5 (source page label), Field14/15, Textb5 (UTM) populated.
+Re-post existing Lead and QuizSubmission records to NoPaperForms (createOrUpdate).
 
 Usage:
-  python manage.py backfill_extraaedge          # dry-run (default): print what would be sent
-  python manage.py backfill_extraaedge --send   # actually POST to Extraaedge
-  python manage.py backfill_extraaedge --send --leads-only
-  python manage.py backfill_extraaedge --send --quiz-only
-  python manage.py backfill_extraaedge --send --limit 100
+  python manage.py backfill_nopaperforms          # dry-run (default)
+  python manage.py backfill_nopaperforms --send   # actually POST
+  python manage.py backfill_nopaperforms --send --leads-only
+  python manage.py backfill_nopaperforms --send --quiz-only
+  python manage.py backfill_nopaperforms --send --limit 100
 
-Note: addPublisherLead typically creates a new lead in CRM. If Extraaedge deduplicates
-by email/mobile, re-posting may update; otherwise you may get duplicates. Confirm with
-Extraaedge before running with --send on large datasets.
+Requires NOPAPERFORMS_ACCESS_KEY and NOPAPERFORMS_SECRET_KEY. Re-posting may create
+duplicates unless NoPaperForms deduplicates by mobile — confirm with them before --send.
 """
 import time
 
@@ -20,17 +18,17 @@ from django.core.management.base import BaseCommand
 
 from api.constants import get_center_for_program
 from api.models import Lead, QuizSubmission
-from api.views import EXTRAEDGE_URL, build_extraaedge_payload
+from api.views import build_nopaperforms_body, get_nopaperforms_url, prepare_nopaperforms_post
 
 
 class Command(BaseCommand):
-    help = 'Re-post existing leads/quiz submissions to Extraaedge with Field5 + UTM (optional --send).'
+    help = 'Re-post existing leads/quiz submissions to NoPaperForms (optional --send).'
 
     def add_arguments(self, parser):
         parser.add_argument(
             '--send',
             action='store_true',
-            help='Actually POST to Extraaedge. Default is dry-run (no requests).',
+            help='Actually POST to NoPaperForms. Default is dry-run (no requests).',
         )
         parser.add_argument(
             '--leads-only',
@@ -56,20 +54,24 @@ class Command(BaseCommand):
         limit = options['limit'] or 0
 
         if not do_send:
-            self.stdout.write(self.style.WARNING('DRY-RUN: no requests will be made. Use --send to POST to Extraaedge.'))
+            self.stdout.write(
+                self.style.WARNING(
+                    'DRY-RUN: no requests will be made. Use --send to POST to NoPaperForms.'
+                )
+            )
 
-        payload = build_extraaedge_payload(
-            'Test', '', 'test@test.com', '9999999999', '1',
-            source_page='/about', utm_source='google', utm_medium='cpc', utm_campaign='test',
-        )
-        if not payload:
-            self.stdout.write(self.style.ERROR('EXTRAEDGE_AUTH_TOKEN not set. Set it in env or backend/.env and retry.'))
+        url = get_nopaperforms_url()
+        probe_headers, _ = prepare_nopaperforms_post({})
+        if probe_headers is None:
+            self.stdout.write(
+                self.style.ERROR(
+                    'NOPAPERFORMS_ACCESS_KEY / NOPAPERFORMS_SECRET_KEY not set. '
+                    'Set them in env or backend/.env and retry.'
+                )
+            )
             return
-
         total_sent = 0
-        total_skipped = 0
 
-        # ---- Leads ----
         if not quiz_only:
             qs = Lead.objects.all().order_by('id')
             if limit:
@@ -77,37 +79,40 @@ class Command(BaseCommand):
             count = qs.count()
             self.stdout.write(f'Leads: {count} record(s)')
             for lead in qs:
-                payload = build_extraaedge_payload(
+                cf = (get_center_for_program(lead.program) or '')[:500]
+                body = build_nopaperforms_body(
                     lead.first_name,
                     lead.last_name,
                     lead.email,
                     lead.mobile,
-                    lead.center or get_center_for_program(lead.program) or '1',
                     state=lead.state or '',
+                    city='',
+                    cf_program=cf,
                     source_page=lead.source_page or '',
                     utm_source=lead.utm_source or '',
                     utm_medium=lead.utm_medium or '',
                     utm_campaign=lead.utm_campaign or '',
                 )
-                if not payload:
-                    total_skipped += 1
-                    continue
                 if do_send:
                     try:
-                        r = requests.post(EXTRAEDGE_URL, json=payload, timeout=10)
+                        h, payload = prepare_nopaperforms_post(body)
+                        r = requests.post(url, json=payload, headers=h, timeout=15)
                         if r.ok:
                             total_sent += 1
                             self.stdout.write(f'  OK Lead id={lead.id} {lead.email}')
                         else:
-                            self.stdout.write(self.style.WARNING(f'  HTTP {r.status_code} Lead id={lead.id} {r.text[:100]}'))
+                            self.stdout.write(
+                                self.style.WARNING(
+                                    f'  HTTP {r.status_code} Lead id={lead.id} {r.text[:100]}'
+                                )
+                            )
                     except Exception as e:
                         self.stdout.write(self.style.ERROR(f'  Error Lead id={lead.id}: {e}'))
                     time.sleep(0.2)
                 else:
                     total_sent += 1
-                    self.stdout.write(f'  [dry-run] Lead id={lead.id} {lead.email} -> Field5={payload.get("Field5")}')
+                    self.stdout.write(f'  [dry-run] Lead id={lead.id} {lead.email} keys={list(body)}')
 
-        # ---- Quiz submissions ----
         if not leads_only:
             qs = QuizSubmission.objects.all().order_by('id')
             if limit:
@@ -118,39 +123,46 @@ class Command(BaseCommand):
                 parts = (quiz.name or '—').strip().split(None, 1)
                 first = (parts[0] if parts else '—').strip()
                 last = (parts[1] if len(parts) > 1 else '').strip()
-                center = get_center_for_program(quiz.program) or '1'
-                payload = build_extraaedge_payload(
+                cf = (get_center_for_program(quiz.program) or '')[:500]
+                body = build_nopaperforms_body(
                     first,
                     last,
                     quiz.email,
                     quiz.mobile,
-                    center,
                     state='',
+                    city='',
+                    cf_program=cf,
                     source_page=quiz.source_page or '',
                     utm_source=quiz.utm_source or '',
                     utm_medium=quiz.utm_medium or '',
                     utm_campaign=quiz.utm_campaign or '',
                 )
-                if not payload:
-                    total_skipped += 1
-                    continue
                 if do_send:
                     try:
-                        r = requests.post(EXTRAEDGE_URL, json=payload, timeout=10)
+                        h, payload = prepare_nopaperforms_post(body)
+                        r = requests.post(url, json=payload, headers=h, timeout=15)
                         if r.ok:
                             total_sent += 1
                             self.stdout.write(f'  OK Quiz id={quiz.id} {quiz.email}')
                         else:
-                            self.stdout.write(self.style.WARNING(f'  HTTP {r.status_code} Quiz id={quiz.id} {r.text[:100]}'))
+                            self.stdout.write(
+                                self.style.WARNING(
+                                    f'  HTTP {r.status_code} Quiz id={quiz.id} {r.text[:100]}'
+                                )
+                            )
                     except Exception as e:
                         self.stdout.write(self.style.ERROR(f'  Error Quiz id={quiz.id}: {e}'))
                     time.sleep(0.2)
                 else:
                     total_sent += 1
-                    self.stdout.write(f'  [dry-run] Quiz id={quiz.id} {quiz.email} -> Field5={payload.get("Field5")}')
+                    self.stdout.write(f'  [dry-run] Quiz id={quiz.id} {quiz.email} keys={list(body)}')
 
         self.stdout.write('')
         if do_send:
-            self.stdout.write(self.style.SUCCESS(f'Posted {total_sent} record(s) to Extraaedge.'))
+            self.stdout.write(self.style.SUCCESS(f'Posted {total_sent} record(s) to NoPaperForms.'))
         else:
-            self.stdout.write(self.style.SUCCESS(f'Dry-run: {total_sent} record(s) would be posted. Run with --send to submit.'))
+            self.stdout.write(
+                self.style.SUCCESS(
+                    f'Dry-run: {total_sent} record(s) would be posted. Run with --send to submit.'
+                )
+            )

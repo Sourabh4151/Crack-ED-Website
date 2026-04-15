@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import lenskartCardLogo from '../../assets/lenskart_card_logo.png'
 // import piramalLogo from '../../assets/piramal.png'
 import piramalLogo from '../../assets/piramal_small.png'
@@ -8,9 +8,12 @@ import paytmLogo from '../../assets/paytm_small_logo.png'
 import poonawallaLogoSmallCard from '../../assets/poonawalla_logo_small_card.png'
 import avivaLogoSmallCard from '../../assets/aviva_logo_small_card.png'
 import finovaSmallLogo from '../../assets/finova_small_logo.png'
+import { trackMicrositeClick, markProgramsPageVisited } from '../../utils/analytics'
 import './ProgramsList.css'
 
 const ProgramsList = () => {
+  useEffect(() => { markProgramsPageVisited() }, [])
+
   const [activeTab, setActiveTab] = useState('Banking')
 
   const programs = {
@@ -290,7 +293,7 @@ const ProgramsList = () => {
                 className="program-card"
                 target={link ? '_blank' : undefined}
                 rel={link ? 'noopener noreferrer' : undefined}
-                onClick={!link ? (e) => e.preventDefault() : undefined}
+                onClick={!link ? (e) => e.preventDefault() : () => trackMicrositeClick(`${item.program} - ${item.role}`)}
               >
                 <div className="program-card-top">
                   <div className="program-card-icon">{getIcon(activeTab, item)}</div>

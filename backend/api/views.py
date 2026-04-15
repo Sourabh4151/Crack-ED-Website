@@ -1,6 +1,7 @@
 """
 API views - REST endpoints.
 """
+import base64
 import json
 import os
 import re
@@ -27,7 +28,11 @@ from .serializers import (
     MarketingBlogAdminSerializer,
 )
 
-EXTRAEDGE_URL = 'https://publisher.extraaedge.com/api/Webhook/addPublisherLead'
+def get_nopaperforms_url():
+    return (
+        os.environ.get('NOPAPERFORMS_API_URL')
+        or 'https://api.nopaperforms.io/lead/v1/createOrUpdate'
+    ).strip()
 
 
 def _utm_three(utm_params):
@@ -41,69 +46,133 @@ def _utm_three(utm_params):
     )
 
 
-def build_extraaedge_payload(
-    first_name, last_name, email, mobile, center, state='',
-    source_page='', utm_source='', utm_medium='', utm_campaign='',
+def prepare_nopaperforms_post(body):
+    """
+    Build (headers, json_body) for NoPaperForms POST.
+
+    NOPAPERFORMS_AUTH_MODE (default: headers):
+      - headers: send keys as HTTP headers (default names access-key / secret-key — not access_key,
+        since many proxies drop underscore-prefixed request headers).
+      - body: merge access_key + secret_key into the JSON body (some NPF setups expect this).
+      - basic: Authorization: Basic base64(access:secret).
+
+    Override header names with NOPAPERFORMS_ACCESS_HEADER / NOPAPERFORMS_SECRET_HEADER.
+    Returns (None, None) if credentials are not configured.
+    """
+    access = (os.environ.get('NOPAPERFORMS_ACCESS_KEY') or '').strip()
+    secret = (os.environ.get('NOPAPERFORMS_SECRET_KEY') or '').strip()
+    if not access or not secret:
+        return None, None
+
+    mode = (os.environ.get('NOPAPERFORMS_AUTH_MODE') or 'headers').strip().lower()
+    base_headers = {'Content-Type': 'application/json'}
+    out_body = dict(body)
+
+    if mode == 'body':
+        out_body['access_key'] = access
+        out_body['secret_key'] = secret
+        return base_headers, out_body
+
+    if mode == 'basic':
+        token = base64.b64encode(f'{access}:{secret}'.encode()).decode()
+        base_headers['Authorization'] = f'Basic {token}'
+        return base_headers, out_body
+
+    access_h = (os.environ.get('NOPAPERFORMS_ACCESS_HEADER') or 'access-key').strip() or 'access-key'
+    secret_h = (os.environ.get('NOPAPERFORMS_SECRET_HEADER') or 'secret-key').strip() or 'secret-key'
+    h = dict(base_headers)
+    h[access_h] = access
+    h[secret_h] = secret
+    return h, out_body
+
+
+def build_nopaperforms_body(
+    first_name, last_name, email, mobile, state='', city='', cf_program='', source_page='',
+    utm_source='', utm_medium='', utm_campaign='',
 ):
-    """Build the JSON payload for Extraaedge addPublisherLead. Returns None if EXTRAEDGE_AUTH_TOKEN not set."""
-    token = (os.environ.get('EXTRAEDGE_AUTH_TOKEN') or '').strip()
-    if not token:
-        return None
+    """
+    JSON for NoPaperForms createOrUpdate: name, email, mobile, search_criteria;
+    optional state, city; cf_program when set; source fixed to Website;
+    cf_form_name from get_source_page_label(source_page);
+    UTM when set: cf_utm_id <- utm_source, medium <- utm_medium, campaign <- utm_campaign.
+    """
     mobile_clean = re.sub(r'\D', '', str(mobile))[:15]
-    try:
-        mobile_int = int(mobile_clean) if mobile_clean else 0
-    except ValueError:
-        mobile_int = 0
-    last_name_clean = (last_name or '').strip()
-    return {
-        'Source': 'crack-ed',
-        'AuthToken': token,
-        'FirstName': (first_name or '—').strip(),
-        'LastName': last_name_clean,
-        'Email': (email or '').strip(),
-        'MobileNumber': mobile_int,
-        'State': (state or '').strip(),
-        'Center': (center or '1').strip(),
-        'Field5': get_source_page_label(source_page or '')[:500],
-        'Field14': (utm_campaign or '').strip()[:500],
-        'Field15': (utm_source or '').strip()[:500],
-        'Textb5': (utm_medium or '').strip()[:500],
+    first = (first_name or '').strip()
+    last = (last_name or '').strip()
+    name = f'{first} {last}'.strip() or first or '—'
+
+    payload = {
+        'name': name[:500],
+        'email': (email or '').strip()[:500],
+        'mobile': mobile_clean,
+        'search_criteria': 'mobile',
+        'source': (os.environ.get('NOPAPERFORMS_SOURCE_VALUE') or 'Website').strip()[:200] or 'Website',
     }
+    state_clean = (state or '').strip()
+    if state_clean:
+        payload['state'] = state_clean[:200]
+    city_clean = (city or '').strip()
+    if city_clean:
+        payload['city'] = city_clean[:200]
+    cf_clean = (cf_program or '').strip()
+    if cf_clean:
+        payload['cf_program'] = cf_clean[:500]
+    form_name = get_source_page_label(source_page or '').strip()[:500]
+    if form_name:
+        payload['cf_form_name'] = form_name
+
+    us = (utm_source or '').strip()[:500]
+    if us:
+        payload['cf_utm_id'] = us
+    um = (utm_medium or '').strip()[:500]
+    if um:
+        payload['medium'] = um
+    uc = (utm_campaign or '').strip()[:500]
+    if uc:
+        payload['campaign'] = uc
+
+    return payload
 
 
-def _forward_lead_to_extraaedge(
-    first_name, last_name, email, mobile, center, state='',
-    source_page='', utm_source='', utm_medium='', utm_campaign='',
+def _forward_lead_to_nopaperforms(
+    first_name, last_name, email, mobile, state='', city='', cf_program='', source_page='',
+    utm_source='', utm_medium='', utm_campaign='',
 ):
-    """Forward lead to Extraaedge CRM. Auth token from env. Does not raise; logs on failure."""
-    payload = build_extraaedge_payload(
-        first_name, last_name, email, mobile, center, state=state,
-        source_page=source_page, utm_source=utm_source, utm_medium=utm_medium, utm_campaign=utm_campaign,
+    """Forward lead to NoPaperForms. Credentials from env. Does not raise; logs on failure."""
+    body = build_nopaperforms_body(
+        first_name, last_name, email, mobile,
+        state=state, city=city, cf_program=cf_program, source_page=source_page,
+        utm_source=utm_source, utm_medium=utm_medium, utm_campaign=utm_campaign,
     )
-    if not payload:
-        print('[API] EXTRAEDGE_AUTH_TOKEN not set; skipping CRM forward')
+    headers, payload = prepare_nopaperforms_post(body)
+    if headers is None:
+        print(
+            '[API] NoPaperForms: NOPAPERFORMS_ACCESS_KEY / NOPAPERFORMS_SECRET_KEY not set; skipping CRM forward'
+        )
         return
     try:
-        r = requests.post(EXTRAEDGE_URL, json=payload, timeout=10)
+        r = requests.post(get_nopaperforms_url(), json=payload, headers=headers, timeout=15)
         if r.ok:
             log_name = f"{first_name} {(last_name or '').strip()}".strip() or first_name or '—'
-            print(f'[API] Lead forwarded to Extraaedge: {log_name}')
+            print(f'[API] Lead forwarded to NoPaperForms: {log_name}')
         else:
-            print(f'[API] Extraaedge returned {r.status_code}: {r.text[:200]}')
+            print(f'[API] NoPaperForms returned {r.status_code}: {r.text[:200]}')
     except Exception as e:
-        print(f'[API] Extraaedge forward error: {e}')
+        print(f'[API] NoPaperForms forward error: {e}')
 
 
-def _forward_lead_to_extraaedge_async(
-    first_name, last_name, email, mobile, center, state='',
-    source_page='', utm_source='', utm_medium='', utm_campaign='',
+def _forward_lead_to_nopaperforms_async(
+    first_name, last_name, email, mobile, state='', city='', cf_program='', source_page='',
+    utm_source='', utm_medium='', utm_campaign='',
 ):
     """Run CRM forward in a background thread so the API can return immediately."""
     thread = threading.Thread(
-        target=_forward_lead_to_extraaedge,
-        args=(first_name, last_name, email, mobile, center),
+        target=_forward_lead_to_nopaperforms,
+        args=(first_name, last_name, email, mobile),
         kwargs={
             'state': state or '',
+            'city': city or '',
+            'cf_program': cf_program or '',
             'source_page': source_page or '',
             'utm_source': utm_source or '',
             'utm_medium': utm_medium or '',
@@ -191,10 +260,14 @@ def quiz_submit(request):
     parts = name.split(None, 1)
     q_first = (parts[0] if parts else '—').strip()
     q_last = (parts[1] if len(parts) > 1 else '').strip()  # empty when single name so CRM shows blank
-    center_val = get_center_for_program(program) or '1'
-    _forward_lead_to_extraaedge_async(
-        q_first, q_last, email, mobile, center_val, state='',
-        source_page=source_page, utm_source=utm_source, utm_medium=utm_medium, utm_campaign=utm_campaign,
+    cf_program = (
+        (data.get('cfProgram') or data.get('cf_program') or '').strip()
+        or (get_center_for_program(program) or '')
+    )[:500]
+    _forward_lead_to_nopaperforms_async(
+        q_first, q_last, email, mobile,
+        state='', city='', cf_program=cf_program, source_page=source_page or '',
+        utm_source=utm_source, utm_medium=utm_medium, utm_campaign=utm_campaign,
     )
     return Response({'success': True}, status=status.HTTP_201_CREATED)
 
@@ -214,6 +287,7 @@ def submit_lead(request):
     mobile = str(mobile).replace(' ', '').strip()[:20]
     program = (data.get('program') or '').strip()
     center = (data.get('center') or '').strip()
+    city = (data.get('city') or '').strip()[:200]
     state = (data.get('state') or '').strip()
     source_page = (data.get('sourcePage') or data.get('source_page') or '').strip()[:500]
     utm_params = data.get('utmParams') or data.get('utm_params') or {}
@@ -236,7 +310,11 @@ def submit_lead(request):
             {'error': 'email and mobile are required'},
             status=status.HTTP_400_BAD_REQUEST
         )
-    center_val = center or get_center_for_program(program) or '1'
+    cf_program = (
+        (data.get('cfProgram') or data.get('cf_program') or center or '').strip()
+        or (get_center_for_program(program) or '')
+    )[:500]
+    center_val = cf_program or '0'
     utm_source, utm_medium, utm_campaign = _utm_three(utm_params)
     Lead.objects.create(
         first_name=first_name,
@@ -253,9 +331,10 @@ def submit_lead(request):
         utm_campaign=utm_campaign,
     )
     print(f'[API] Lead saved: {first_name} {last_name} <{email}>')
-    _forward_lead_to_extraaedge_async(
-        first_name, last_name, email, mobile, center_val, state,
-        source_page=source_page, utm_source=utm_source, utm_medium=utm_medium, utm_campaign=utm_campaign,
+    _forward_lead_to_nopaperforms_async(
+        first_name, last_name, email, mobile,
+        state=state, city=city, cf_program=cf_program, source_page=source_page or '',
+        utm_source=utm_source, utm_medium=utm_medium, utm_campaign=utm_campaign,
     )
     return Response({'success': True}, status=status.HTTP_201_CREATED)
 

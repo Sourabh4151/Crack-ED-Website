@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
-import TagManager from 'react-gtm-module'
+//import TagManager from 'react-gtm-module'
 
 // Styling
 import 'react-toastify/dist/ReactToastify.css'
@@ -29,23 +29,39 @@ import AdminBlogEdit from './pages/AdminBlogEdit'
 
 // 1. Initialize GTM with your Container ID
 // Replace the old GTM-K4Z3BMQ with your new GT ID
-const tagManagerArgs = {
-  gtmId: 'GT-T9WGNWGH'
-}
-TagManager.initialize(tagManagerArgs)
+//const tagManagerArgs = {
+//  gtmId: 'GT-T9WGNWGH'
+//}
+//TagManager.initialize(tagManagerArgs)
 
 // 2. Analytics Component to track Page Views
 // This ensures GA4 sees the URL change even if the page doesn't hard-reload
+//const AnalyticsTracker = () => {
+//  const location = useLocation();
+//
+//  useEffect(() => {
+//    window.dataLayer = window.dataLayer || [];
+//    window.dataLayer.push({
+//      event: 'pageview',
+//      page_path: location.pathname + location.search,
+//      page_title: document.title
+//    });
+//  }, [location]);
+//
+//  return null;
+//};
+
 const AnalyticsTracker = () => {
   const location = useLocation();
 
   useEffect(() => {
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({
-      event: 'pageview',
-      page_path: location.pathname + location.search,
-      page_title: document.title
-    });
+    // Check if gtag is defined (it's loaded from index.html)
+    if (window.gtag) {
+      window.gtag('config', 'G-F0FFFY7C90', {
+        page_path: location.pathname + location.search,
+        page_title: document.title
+      });
+    }
   }, [location]);
 
   return null;

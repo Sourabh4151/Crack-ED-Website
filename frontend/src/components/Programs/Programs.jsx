@@ -51,6 +51,7 @@ import mahindraFinanceHomeLogo from '../../assets/mahindra_finance_logo.png'
 import pgprmDesktopImage from '../../assets/RM_desktop.png'
 import pgpbmDesktopImage from '../../assets/bandhan_desktop.jpg'
 import pgcbmDesktopImage from '../../assets/desktop_PGC_bde.jpg'
+import { trackMicrositeClick } from '../../utils/analytics'
 import './Programs.css'
 
 // Keep "LPA + PLP" on one line to prevent awkward wrapping
@@ -517,6 +518,7 @@ const Programs = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="mobile-program-card-link"
+                      onClick={() => trackMicrositeClick(card.title)}
                     >
                       <div className="mobile-program-card">
                         <div
@@ -616,7 +618,7 @@ const Programs = () => {
                           <li><DetailsText text={currentProgramDetails.details} /></li>
                           <li>{currentProgramDetails.duration}</li>
                         </ul>
-                        <a href={programCards[featuredCardIndex]?.url || '#'} target="_blank" rel="noopener noreferrer">
+                        <a href={programCards[featuredCardIndex]?.url || '#'} target="_blank" rel="noopener noreferrer" onClick={() => trackMicrositeClick(programCards[featuredCardIndex]?.title)}>
                           <button className="learn-more-button">Learn More</button>
                         </a>
                       </div>
@@ -647,6 +649,7 @@ const Programs = () => {
                       rel="noopener noreferrer"
                       className="program-mini-card-link"
                       ref={(el) => (cardRefs.current[index] = el)}
+                      onClick={() => trackMicrositeClick(card.title)}
                     >
                       <div className="program-mini-card">
                         <div className="program-mini-card-logo-wrap">
@@ -665,6 +668,7 @@ const Programs = () => {
                       rel="noopener noreferrer"
                       className="program-mini-card-link"
                       ref={(el) => (cardRefs.current[programCards.length] = el)}
+                      onClick={() => trackMicrositeClick(programCards[0].title)}
                     >
                       <div className="program-mini-card">
                         <div className="program-mini-card-logo-wrap">

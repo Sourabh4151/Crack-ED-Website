@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './EnquireModal.css'
 import { submitLeadToCRM, isBackendUnreachable, BACKEND_DOWN_MESSAGE } from '../../services/crmService'
+import { trackGenerateLead } from '../../utils/analytics'
 
 const EnquireModal = ({ isOpen, onClose }) => {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -234,6 +235,7 @@ const EnquireModal = ({ isOpen, onClose }) => {
 
     try {
       await submitLeadToCRM(formData)
+      trackGenerateLead()
       setSubmitSuccess(true)
       setFormData({
         fullName: '',

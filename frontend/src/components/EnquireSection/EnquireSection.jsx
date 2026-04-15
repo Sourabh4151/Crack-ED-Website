@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './EnquireSection.css'
 import { submitLeadToCRM } from '../../services/crmService'
+import { trackGenerateLead } from '../../utils/analytics'
 
 const STATES = [
   'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 'Goa', 'Gujarat', 'Haryana',
@@ -72,6 +73,7 @@ const EnquireSection = () => {
     setSubmitSuccess(false)
     try {
       await submitLeadToCRM(formData)
+      trackGenerateLead()
       setSubmitSuccess(true)
       setFormData({ fullName: '', mobileNumber: '', emailId: '', state: '', program: '' })
     } catch (err) {
