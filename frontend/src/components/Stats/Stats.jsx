@@ -59,7 +59,7 @@ const Stats = () => {
     {
       id: 4,
       icon: icon4,
-      value: "9 Centers",
+      value: "4 Centers",
       description: "A real, on-ground presence where training and hiring actually happens.",
       hoverText: "NATION WIDE FOOTPRINT"
     }
