@@ -1,0 +1,164 @@
+// import React, { useState, useEffect } from 'react'
+// import './Testimonial.css'
+
+// const Testimonial = () => {
+//   const [isMobile, setIsMobile] = useState(false)
+
+//   useEffect(() => {
+//     const checkMobile = () => {
+//       setIsMobile(window.innerWidth <= 768)
+//     }
+    
+//     checkMobile()
+//     window.addEventListener('resize', checkMobile)
+    
+//     return () => window.removeEventListener('resize', checkMobile)
+//   }, [])
+
+//   const testimonials = []
+
+//   const testimonialsToShow = isMobile ? testimonials : [...testimonials, ...testimonials]
+
+//   return (
+//     <section className="testimonial-section">
+//       <div className="testimonial-container">
+//         <div className="testimonial-header">
+   
+//         </div>
+//         <div className="testimonial-cards-wrapper">
+//           <div className="testimonial-cards">
+//             {testimonialsToShow.map((testimonial, index) => (
+//               <div key={`${testimonial.id}-${index}`} className="testimonial-card">
+//                 <div className="testimonial-image-container">
+//                   <img src={testimonial.image} alt={testimonial.name} className="testimonial-image" />
+//                   <div className="testimonial-content">
+//                     <h3 className="testimonial-name">{testimonial.name}</h3>
+//                     <p className="testimonial-title">{testimonial.title}</p>
+//                     <p className="testimonial-description">{testimonial.description}</p>
+//                   </div>
+//                 </div>
+//               </div>
+//             ))}
+//           </div>
+//         </div>
+//       </div>
+//     </section>
+//   )
+// }
+
+// export default Testimonial
+
+import React, { useState, useEffect } from 'react'
+import ShubhamMBL from '../../assets/Shubham_MBL.jpeg'
+import RohitKhatanaCASA from '../../assets/RohitKhatana_CASA.jpeg'
+import RohitashMBL from '../../assets/Rohitash_MBL.jpeg'
+import KuldeepMBL from '../../assets/Kuldeep_MBL.jpeg'
+import KrishnakantCASA from '../../assets/Krishnakant_CASA.jpeg'
+import IlaKumariGL from '../../assets/IlaKumari_GL.jpeg'
+import BalaYadavGL from '../../assets/BalaYadav_GL.jpeg'
+import AbhijeetCASA from '../../assets/Abhijeet_CASA.jpeg'
+import './Testimonial.css'
+
+const Testimonial = () => {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768)
+    }
+    
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  const testimonials = [
+    {
+      id: 1,
+      image: KuldeepMBL,
+      name: "Kuldeep Agnihotri",
+      title: "AURUM Bankers Program - Sales Officer",
+      description: "Learning with Crack-ED's AU Bank Microbusiness Loan course gave me clarity on customer needs, boosted my confidence, and made me more professional in my work."
+    },
+    {
+      id: 2,
+      image: ShubhamMBL,
+      name: "Shubham Kumar",
+      title: "AURUM Bankers Program - Sales Officer",
+      description: "I started at Crack-ED with little knowledge, but their support and training helped me learn banking and grow into a more confident person."
+    },
+    {
+      id: 3,
+      image: RohitKhatanaCASA,
+      name: "Rohit Khatana",
+      title: "AURUM Bankers Program - Bank Officer",
+      description: "This program helped me learn core banking, develop customer-handling skills, and prepared me with the right mindset for a banking career."
+    },
+    {
+      id: 4,
+      image: AbhijeetCASA,
+      name: "Abhijeet",
+      title: "AURUM Bankers Program - Bank Officer",
+      description: "Crack-ED truly strengthened my banking preparation. The teachers share real experience, clear doubts patiently, and their guidance gave me confidence for my career."
+    },
+    {
+      id: 5,
+      image: IlaKumariGL,
+      name: "Ila Kumari",
+      title: "AURUM Bankers Program - Relationship Officer",
+      description: "I joined Crack-ED with low confidence, but within a month I improved my grooming, communication, and personality. I'm truly happy to be here."
+    },
+    {
+      id: 6,
+      image: BalaYadavGL,
+      name: "Bala Yadav",
+      title: "AURUM Bankers Program - Relationship Officer",
+      description: "The support from my trainers at Crack-ED meant a lot. I learned banking, communication, and confidence, and I'll always remember this journey fondly."
+    },
+    {
+      id: 7,
+      image: RohitashMBL,
+      name: "Rohitash",
+      title: "AURUM Bankers Program - Sales Officer",
+      description: "Crack-ED transformed me from someone with no banking knowledge or confidence into someone who can introduce myself and speak comfortably with anyone."
+    },
+    {
+      id: 8,
+      image: KrishnakantCASA,
+      name: "Krishnakant",
+      title: "AURUM Bankers Program - Bank Officer",
+      description: "Through the AURUM Banker Program, I gained banking knowledge and confidence. The trainers' guidance has prepared me well for a bright career in banking."
+    }
+  ]
+
+  const testimonialsToShow = isMobile ? testimonials : [...testimonials, ...testimonials]
+
+  return (
+    <section className="testimonial-section">
+      <div className="testimonial-container">
+        <div className="testimonial-header">
+   
+        </div>
+        <div className="testimonial-cards-wrapper">
+          <div className="testimonial-cards">
+            {testimonialsToShow.map((testimonial, index) => (
+              <div key={`${testimonial.id}-${index}`} className="testimonial-card">
+                <div className="testimonial-image-container">
+                  <img src={testimonial.image} alt={testimonial.name} className="testimonial-image" />
+                  <div className="testimonial-content">
+                    <h3 className="testimonial-name">{testimonial.name}</h3>
+                    <p className="testimonial-title">{testimonial.title}</p>
+                    <p className="testimonial-description">{testimonial.description}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export default Testimonial

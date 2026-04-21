@@ -1,0 +1,297 @@
+.programs-hero {
+  position: relative;
+  width: 100%;
+  height: 726px;
+  display: flex;
+  align-items: center;
+  overflow: visible;
+}
+
+.programs-hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.programs-hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.programs-hero-bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+@media (max-width: 768px) {
+  .programs-hero-background {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .programs-hero-bg-image {
+    object-fit: cover;
+    object-position: 85% center;
+    width: 120%;
+    height: 100%;
+    margin-left: -10%;
+  }
+}
+
+@media (max-width: 480px) {
+  .programs-hero-background {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .programs-hero-bg-image {
+    object-fit: cover;
+    object-position: 85% center;
+    width: 130%;
+    height: 100%;
+    margin-left: -15%;
+  }
+}
+
+.programs-hero-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.programs-hero-container {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  align-items: flex-start;
+  height: 100%;
+  position: relative;
+}
+
+.programs-hero-text-section {
+  position: absolute;
+  top: 206px;
+  left: 120px;
+  display: flex;
+  flex-direction: column;
+  width: 588px;
+  height: auto;
+  gap: 24px;
+  color: white;
+}
+
+.programs-hero-text-content {
+  display: flex;
+  flex-direction: column;
+  width: 588px;
+  gap: 15px;
+}
+
+.programs-hero-headline {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 48px;
+  font-weight: 600;
+  font-style: normal;
+  line-height: 100%;
+  letter-spacing: 0%;
+  margin: 0;
+  color: rgba(250, 250, 250, 1);
+}
+
+.programs-hero-subheadline {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 27px;
+  letter-spacing: 0%;
+  width: 588px;
+  color: rgba(250, 250, 250, 0.75);
+  margin: 0;
+}
+
+.programs-hero-cta-button {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  font-style: normal;
+  line-height: 100%;
+  letter-spacing: 0%;
+  background: rgba(26, 158, 183, 1);
+  color: rgba(30, 30, 30, 1);
+  border: none;
+  padding: 14px 40px;
+  border-radius: 10px;
+  cursor: pointer;
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+@media (max-width: 1440px) {
+  .programs-hero-text-section {
+    left: 60px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .programs-hero {
+    height: auto;
+    min-height: 726px;
+  }
+
+  .programs-hero-container {
+    text-align: center;
+    justify-content: center;
+  }
+
+  .programs-hero-text-section {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    max-width: 588px;
+    height: auto;
+    align-items: center;
+    text-align: center;
+    margin: 2rem auto;
+  }
+
+  .programs-hero-text-content {
+    width: 100%;
+    max-width: 588px;
+    height: auto;
+    align-items: center;
+  }
+
+  .programs-hero-headline {
+    font-size: 36px;
+  }
+
+  .programs-hero-subheadline {
+    width: 100%;
+    max-width: 588px;
+    height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .programs-hero {
+    height: auto;
+    min-height: 550px;
+    padding-top: 160px; /* move overall content further down on mobile */
+  }
+
+  .programs-hero-overlay {
+    background: rgba(0, 0, 0, 0.9);
+  }
+
+  .programs-hero-container {
+    gap: 2rem;
+    padding: 0 24px;
+  }
+
+  .programs-hero-text-section {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    /* push headline/subtext/button even further down so they sit lower on the image */
+    margin: 6rem auto 2rem;
+    padding: 0 20px;
+    gap: 24px;
+    align-items: center;
+  }
+
+  .programs-hero-text-content {
+    width: 100%;
+    height: auto;
+    gap: 12px;
+    text-align: center;
+  }
+
+  .programs-hero-headline {
+    font-size: 32px;
+    line-height: 110%;
+    text-align: center;
+  }
+
+  .programs-hero-subheadline {
+    width: 100%;
+    height: auto;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+  }
+
+  .programs-hero-cta-button {
+    padding: 14px 36px;
+    font-size: 14px;
+    margin: 0 auto;
+    width: fit-content;
+  }
+}
+
+@media (max-width: 480px) {
+  .programs-hero {
+    min-height: 500px;
+    padding-top: 120px; /* move content further down on very small screens */
+  }
+
+  .programs-hero-overlay {
+    background: rgba(0, 0, 0, 0.6);
+  }
+
+  .programs-hero-container {
+    padding: 0 20px;
+  }
+
+  .programs-hero-text-section {
+    /* move text block significantly lower on very small screens as well */
+    margin: 6rem auto 2rem;
+    gap: 20px;
+    padding: 43px 16px;
+  }
+
+  .programs-hero-text-content {
+    gap: 10px;
+  }
+
+  .programs-hero-headline {
+    font-size: 24px;
+    line-height: 120%;
+  }
+
+  .programs-hero-subheadline {
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .programs-hero-cta-button {
+    padding: 12px 28px;
+    font-size: 13px;
+    width: 100%;
+    max-width: 200px;
+  }
+}

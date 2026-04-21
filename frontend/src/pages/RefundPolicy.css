@@ -1,0 +1,107 @@
+.refund-page {
+  max-width: 100vw;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  background-color: #050505;
+  color: rgba(250, 250, 250, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.refund-main {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 48px 120px 48px;
+  display: flex;
+  justify-content: center;
+}
+
+.refund-card {
+  width: 100%;
+  max-width: 1200px;
+  padding: 48px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.refund-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1;
+  color: rgba(250, 250, 250, 1);
+  margin: 0;
+}
+
+.refund-subtitle {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  color: rgba(250, 250, 250, 1);
+  margin: 0;
+}
+
+.refund-text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  color: rgba(250, 250, 250, 0.8);
+  margin: 0;
+}
+
+.refund-email {
+  color: rgba(26, 158, 183, 1);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  white-space: nowrap;
+}
+
+.refund-nowrap {
+  white-space: nowrap;
+}
+
+@media (max-width: 1024px) {
+  .refund-main {
+    padding: 40px 40px 40px;
+  }
+
+  .refund-card {
+    padding: 32px 28px;
+  }
+}
+
+@media (max-width: 768px) {
+  .refund-main {
+    padding: 80px 24px 32px;
+  }
+
+  .refund-card {
+    padding: 24px 20px;
+  }
+
+  .refund-title {
+    font-size: 24px;
+  }
+
+  .refund-text,
+  .refund-subtitle {
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  /* Allow "Reach out to..." sentence to wrap on mobile so it doesn't get cut off */
+  .refund-nowrap {
+    white-space: normal;
+  }
+
+  .refund-email {
+    white-space: normal;
+  }
+}
+

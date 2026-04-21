@@ -1,0 +1,9 @@
+/* Scroll container: same pattern as BID page - one div scrolls, not the document */
+.influencer-page {
+  max-width: 100vw;
+  width: 100%;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}

@@ -1,0 +1,342 @@
+.stats-section {
+  width: 100%;
+  background: #000000;
+  padding: 80px 0 40px 0;
+  position: relative;
+}
+
+.stats-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.stats-section .stats-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  text-align: center;
+}
+
+.stats-section .stats-badge {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 27px;
+  letter-spacing: 0%;
+  text-align: center;
+  text-transform: none;
+  color: rgba(250, 250, 250, 1);
+  width: fit-content;
+  height: 35px;
+  padding: 4px 30px;
+  border: 1px solid #FAFAFA;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.stats-section .stats-subtitle {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 27px;
+  letter-spacing: 0%;
+  text-align: center;
+  color: rgba(250, 250, 250, 1);
+  margin: 0;
+  max-width: 800px;
+}
+
+.stats-grid {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  width: 100%;
+  height: auto;
+}
+
+.stat-card {
+  flex: 1;
+  min-width: 0;
+  height: 396px;
+  background: linear-gradient(180deg, rgba(89, 89, 89, 0.1) 0%, rgba(62, 62, 62, 0.1) 20%);
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, transparent 0%, #000000 100%);
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* GSAP ScrollTrigger only: no hover - class .stat-card--at-top toggled by GSAP */
+.stat-card.stat-card--at-top::after {
+  opacity: 0;
+}
+
+.stat-card.stat-card--at-top {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.stat-card.stat-card--at-top .stat-value,
+.stat-card.stat-card--at-top .stat-description {
+  opacity: 0.3;
+  transition: opacity 0.6s ease;
+}
+
+.stat-icon {
+  width: 84px;
+  height: 84px;
+  border-radius: 8px;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.stat-icon img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.stat-value {
+  font-family: 'Poppins', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  font-style: normal;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: left;
+  color: #FAFAFA;
+  margin: 0;
+  margin-top: 20px;
+  transition: opacity 0.3s ease;
+}
+
+.stat-description {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 140%;
+  letter-spacing: 0%;
+  text-align: justify;
+  color: rgba(250, 250, 250, 0.7);
+  margin: 0;
+  transition: opacity 0.3s ease;
+}
+
+.stat-hover-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  font-style: normal;
+  line-height: 38.4px;
+  letter-spacing: 0%;
+  text-align: left;
+  text-transform: uppercase;
+  color: #1A9EB7;
+  margin: 0;
+  position: absolute;
+  top: 75%;
+  left: 20px;
+  right: 20px;
+  transform: translateY(calc(50% + 100px));
+  opacity: 0;
+  transition: transform 0.7s ease, opacity 0.7s ease;
+}
+
+.stat-card.stat-card--at-top .stat-hover-text {
+  transform: translateY(-50%);
+  opacity: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1440px) {
+  .stats-container {
+    padding: 0 60px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .stats-grid {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .stat-card {
+    flex: 0 0 calc(50% - 10px);
+    max-width: none;
+  }
+
+  .stats-section .stats-subtitle {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 768px) {
+  .stats-section {
+    padding: 60px 0 10px 0;
+  }
+
+  .stats-container {
+    padding: 0 24px;
+    gap: 40px;
+  }
+
+  .stats-section .stats-header {
+    gap: 20px;
+  }
+
+  .stats-section .stats-badge {
+    font-size: 12px;
+    padding: 4px 20px;
+    height: auto;
+  }
+
+  .stats-section .stats-subtitle {
+    font-size: 22px;
+    line-height: 130%;
+  }
+
+  .stats-grid {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .stat-card {
+    flex: 0 0 100%;
+    max-width: 100%;
+    height: auto;
+    min-height: auto;
+    padding: 16px;
+    gap: 16px;
+    cursor: default;
+  }
+
+  /* Hide gradient overlay on mobile - all content always visible */
+  .stat-card::after {
+    display: none;
+  }
+
+  .stat-icon {
+    width: 84px;
+    height: 84px;
+    padding: 18px;
+    border-radius: 8px;
+  }
+
+  .stat-icon img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .stat-value {
+    font-size: 20px;
+    margin-top: 0;
+  }
+
+  .stat-description {
+    font-size: 13px;
+    line-height: 150%;
+  }
+
+  /* Blue text "CAREERS THAT PAY" always visible on mobile - no click needed */
+  .stat-hover-text {
+    position: static;
+    transform: none;
+    opacity: 1;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 100%;
+    color: rgba(26, 158, 183, 1);
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-section {
+    padding: 50px 0 8px 0;
+  }
+
+  .stats-container {
+    padding: 0 20px;
+    gap: 32px;
+  }
+
+  .stats-section .stats-header {
+    gap: 16px;
+  }
+
+  .stats-section .stats-badge {
+    font-size: 11px;
+    padding: 3px 16px;
+  }
+
+  .stats-section .stats-subtitle {
+    font-size: 20px;
+    line-height: 125%;
+  }
+
+  .stat-card {
+    min-height: auto;
+    padding: 14px;
+    gap: 14px;
+    cursor: default;
+  }
+
+  .stat-icon {
+    width: 84px;
+    height: 84px;
+    padding: 18px;
+  }
+
+  .stat-icon img {
+    width: 36px;
+    height: 36px;
+  }
+
+  .stat-value {
+    font-size: 18px;
+  }
+
+  .stat-description {
+    font-size: 12px;
+  }
+
+  /* Blue text always visible on mobile */
+  .stat-hover-text {
+    font-size: 16px;
+  }
+}

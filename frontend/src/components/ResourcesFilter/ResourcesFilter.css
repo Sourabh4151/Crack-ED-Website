@@ -1,0 +1,299 @@
+/* Filter section: above Enquire Now, dark background */
+.resources-filter {
+  width: 100%;
+  background: rgba(0, 0, 0, 1);
+  padding: 24px 120px 40px;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.resources-filter-inner {
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* Frame 549: vertical flow, fill 1200px, hug 94px, gap 24px */
+.resources-filter-frame {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  width: 100%;
+}
+
+.resources-filter-row {
+  display: flex;
+  align-items: center;
+}
+
+/* Row 1: All Blogs pill only */
+.resources-filter-row--all {
+  width: 100%;
+}
+
+/* All Blogs: simple badge (pill, white border + text on black), not a button */
+.resources-filter-all-badge {
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 27px;
+  letter-spacing: 0%;
+  text-align: center;
+  text-transform: capitalize;
+  color: rgba(250, 250, 250, 1);
+  background: rgba(0, 0, 0, 1);
+  border: 1px solid rgba(250, 250, 250, 1);
+  border-radius: 100px;
+  padding: 4px 30px;
+}
+
+/* Row 2: Interview, Upskilling, Career — horizontal, hug 596×35, gap 24px */
+.resources-filter-row--categories {
+  flex-direction: row;
+  gap: 24px;
+  min-height: 35px;
+}
+
+.resources-filter-category {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 27px;
+  letter-spacing: 0%;
+  text-align: center;
+  text-transform: capitalize;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px 0;
+  color: rgba(250, 250, 250, 0.7);
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.resources-filter-category:hover {
+  color: rgba(250, 250, 250, 1);
+}
+
+.resources-filter-category--active {
+  color: rgba(250, 250, 250, 1);
+  border-bottom-color: rgba(255, 255, 255, 1);
+}
+
+/* Row 3: Blog cards grid (Frame 519) — 3 cols, row/column gap 20px */
+.resources-filter-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  row-gap: 20px;
+  column-gap: 20px;
+  width: 100%;
+}
+
+/* Card: image flush with top/left/right; no gap between card and image */
+.resources-filter-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  gap: 0;
+  background: rgba(13, 13, 13, 1);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* 16:9 slot matches static cover PNGs (1920×1080); avoids letterboxing from a taller fixed-height box + object-fit: contain */
+.resources-filter-card-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 0;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: rgba(13, 13, 13, 1);
+}
+
+.resources-filter-card-image img {
+  display:block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Frame 543: vertical flow; footer (line + Read More) pinned to bottom with 16px between line and button */
+.resources-filter-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+  padding: 16px 16px 16px 16px;
+}
+
+/* Footer sticks to bottom so line is always 16px above Read More regardless of title length */
+.resources-filter-card-footer {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding-top: 16px;
+}
+
+/* Title: Poppins 500, 18px, line-height 27px, title case, white */
+.resources-filter-card-title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 27px;
+  letter-spacing: 0%;
+  text-transform: capitalize;
+  color: rgba(250, 250, 250, 1);
+  margin: 0;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+/* Date: Poppins 400, 14px, line-height 100%, uppercase, rgba(250,250,250,0.6); 16px gap below to tags */
+.resources-filter-card-date {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-transform: uppercase;
+  color: rgba(250, 250, 250, 0.6);
+  margin-bottom: 8px;
+}
+
+/* Tags: horizontal, gap 8px */
+.resources-filter-card-tags {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Tag (Interview/Career): radius 8px, padding 4px 8px, bg rgba(250,250,250,0.1), Montserrat 600 14px center title case rgba(250,250,250,0.7) */
+.resources-filter-card-tag {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 27px;
+  letter-spacing: 0%;
+  text-align: center;
+  text-transform: capitalize;
+  color: rgba(250, 250, 250, 0.7);
+  background: rgba(250, 250, 250, 0.1);
+  border-radius: 8px;
+  padding: 4px 8px;
+}
+
+.resources-filter-card-excerpt {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(250, 250, 250, 0.72);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  overflow-wrap: break-word;
+}
+
+/* Separator: 1px line; exactly 16px gap above Read More (no 8px gap) */
+.resources-filter-card-divider {
+  width: 100%;
+  height: 0;
+  border: none;
+  border-top: 1px solid rgba(250, 250, 250, 0.1);
+  margin: 0 0 16px 0;
+}
+
+/* Read More: Fill 355px, Hug 49px, radius 10px, padding 16px 32px, border 1px white, bg rgba(13,13,13,1); Montserrat 600 14px white */
+.resources-filter-card-read-more {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: rgba(250, 250, 250, 1);
+  background: rgba(13, 13, 13, 1);
+  border: 1px solid rgba(250, 250, 250, 1);
+  border-radius: 10px;
+  padding: 16px 32px;
+  width: 100%;
+  min-height: 49px;
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+  margin-top: auto;
+  box-sizing: border-box;
+}
+
+.resources-filter-card-read-more:hover {
+  background: rgba(250, 250, 250, 1);
+  color: rgba(30, 30, 30, 1);
+}
+
+@media (max-width: 1024px) {
+  .resources-filter {
+    padding: 24px 48px 32px;
+  }
+
+  .resources-filter-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .resources-filter {
+    padding: 20px 24px 28px;
+  }
+
+  .resources-filter-frame {
+    gap: 20px;
+  }
+
+  .resources-filter-row--categories {
+    gap: 16px;
+  }
+
+  .resources-filter-all-badge,
+  .resources-filter-category {
+    font-size: 13px;
+    line-height: 24px;
+  }
+
+  .resources-filter-all-badge {
+    padding: 4px 20px;
+  }
+
+  .resources-filter-grid {
+    grid-template-columns: 1fr;
+    row-gap: 16px;
+    column-gap: 16px;
+  }
+
+  .resources-filter-card-content {
+    padding: 12px;
+  }
+
+  .resources-filter-card-title {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .resources-filter-card-read-more {
+    width: 100%;
+  }
+}

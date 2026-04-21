@@ -1,0 +1,243 @@
+.building-careers {
+  width: 100%;
+  background: rgba(0, 0, 0, 1);
+  padding: 135px 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.building-careers-inner {
+  max-width: 1200px;
+  width: 100%;
+  background: rgba(13, 13, 13, 1);
+  border-radius: 24px;
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.building-careers-heading {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: rgba(250, 250, 250, 1);
+  margin: 0;
+  text-align: left;
+  text-transform: capitalize;
+}
+
+.building-careers-accent {
+  margin-top: 8px;
+  height: 2px;
+  width: 20px;
+  border-radius: 100px;
+  background: linear-gradient(90deg, rgba(12, 70, 81, 1), rgba(26, 158, 183, 1));
+}
+
+.building-careers.in-view .building-careers-accent {
+  animation: building-careers-accent-grow 600ms linear 1000ms forwards;
+}
+
+@keyframes building-careers-accent-grow {
+  from {
+    width: 20px;
+  }
+  to {
+    width: 200px;
+  }
+}
+
+@keyframes building-careers-accent-grow-mobile {
+  from {
+    width: 20px;
+  }
+  to {
+    width: 100px;
+  }
+}
+
+.building-careers-body {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.building-careers-paragraph {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 27px;
+  letter-spacing: 0%;
+  color: rgba(250, 250, 250, 0.6);
+  margin: 0;
+  text-align: justify;
+}
+
+/* Explore Programs: default = images 2 & 3, hover = images 4 & 5 */
+.building-careers-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 175px;
+  min-height: 49px;
+  padding: 16px 40px;
+  border-radius: 10px;
+  border: 1px solid rgba(250, 250, 250, 1);
+  background: rgba(13, 13, 13, 1);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: rgba(250, 250, 250, 1);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.building-careers-cta:hover {
+  background: rgba(214, 214, 214, 1);
+  color: rgba(30, 30, 30, 1);
+  border-color: rgba(214, 214, 214, 1);
+}
+
+@media (max-width: 1024px) {
+  .building-careers {
+    padding: 80px 60px;
+  }
+
+  .building-careers-inner {
+    padding: 40px;
+    gap: 28px;
+  }
+
+  .building-careers-heading {
+    font-size: 32px;
+  }
+
+  .building-careers-paragraph {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .building-careers {
+    padding: 60px 24px;
+    gap: 0;
+  }
+
+  .building-careers-inner {
+    padding: 32px 24px;
+    gap: 24px;
+    border-radius: 16px;
+  }
+
+  .building-careers-heading {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: rgba(250, 250, 250, 1);
+    text-align: left;
+    text-transform: capitalize;
+  }
+
+  .building-careers-body {
+    gap: 20px;
+  }
+
+  .building-careers-paragraph {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0%;
+    color: rgba(250, 250, 250, 0.6);
+    text-align: justify;
+  }
+
+  .building-careers-cta {
+    width: 100%;
+    min-height: 49px;
+    padding: 16px 40px;
+    border-radius: 10px;
+    background: rgba(250, 250, 250, 1);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: rgba(30, 30, 30, 1);
+    border: none;
+  }
+
+  .building-careers-cta:hover {
+    background: rgba(214, 214, 214, 1);
+    color: rgba(30, 30, 30, 1);
+    border-color: transparent;
+  }
+
+  .building-careers.in-view .building-careers-accent {
+    animation: building-careers-accent-grow-mobile 600ms linear 1000ms forwards;
+  }
+}
+
+@media (max-width: 480px) {
+  .building-careers {
+    padding: 48px 16px;
+  }
+
+  .building-careers-inner {
+    padding: 24px 20px;
+    gap: 20px;
+  }
+
+  .building-careers-heading {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: rgba(250, 250, 250, 1);
+    text-transform: capitalize;
+  }
+
+  .building-careers-paragraph {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0%;
+    color: rgba(250, 250, 250, 0.6);
+    text-align: justify;
+  }
+
+  .building-careers-cta {
+    width: 100%;
+    min-height: 49px;
+    padding: 16px 40px;
+    border-radius: 10px;
+    background: rgba(250, 250, 250, 1);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: rgba(30, 30, 30, 1);
+    border: none;
+  }
+
+  .building-careers-cta:hover {
+    background: rgba(214, 214, 214, 1);
+    color: rgba(30, 30, 30, 1);
+    border-color: transparent;
+  }
+}

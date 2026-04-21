@@ -1,0 +1,254 @@
+/* Influencer Career Forward - unique classes to avoid conflicts with CareerForward */
+
+.inf-cf-section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #000;
+}
+
+.inf-cf-sticky-wrapper {
+  min-height: 100vh;
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 120px 24px 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.inf-cf-container {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  align-items: center;
+  z-index: 10;
+}
+
+.inf-cf-container-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.inf-cf-heading {
+  font-size: 60px;
+  font-weight: 600;
+  color: #fafafa;
+  line-height: 100%;
+  margin-bottom: 34px;
+  font-family: 'Montserrat', sans-serif;
+  width: 100%;
+  max-width: 500px;
+}
+
+.inf-cf-paragraph {
+  color: #fafafa80;
+  font-size: 18px;
+  line-height: 28px;
+  max-width: 500px;
+  margin-bottom: 34px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.inf-cf-button {
+  pointer-events: auto !important;
+  z-index: 25;
+  position: relative;
+  padding: 14px 45px;
+  color: #fafafa;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 10px;
+  background: #000;
+  border: 1.5px solid transparent;
+  background-image: linear-gradient(#000, #000),
+    linear-gradient(180deg, #1a9eb7 0%, rgba(26, 158, 183, 0.2) 100%);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  box-shadow: 0px 20px 40px -15px rgba(26, 158, 183, 0.7);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-block;
+  outline: none;
+}
+
+.inf-cf-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0px 10px 25px 0px #1a9eb74d;
+  filter: brightness(1.2);
+}
+
+.inf-cf-button:active {
+  transform: translateY(0px);
+}
+
+.inf-cf-glow {
+  position: absolute;
+  right: 0%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: linear-gradient(
+    43.87deg,
+    rgba(26, 158, 183, 0.3) 14.65%,
+    rgba(26, 158, 183, 0.6) 32.66%,
+    #1a9eb7 49.99%,
+    rgba(26, 158, 183, 0.6) 67.66%,
+    rgba(26, 158, 183, 0.3) 85.33%
+  );
+  filter: blur(150px);
+  opacity: 0.6;
+  z-index: 1;
+}
+
+.inf-cf-content {
+  grid-column: span 6;
+  text-align: left;
+  z-index: 11;
+}
+
+.inf-cf-right-section {
+  grid-column: span 6;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+/* Explore All Programs card - shown in 2 places (left column + below quiz) */
+.inf-cf-explore-card {
+  margin-top: 24px;
+  padding: 24px;
+  border-radius: 16px;
+  background: rgba(250, 250, 250, 0.02);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 575px;
+}
+
+.inf-cf-explore-text {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  color: rgba(250, 250, 250, 0.8);
+}
+
+.inf-cf-explore-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 14px 40px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1;
+  color: rgba(250, 250, 250, 1);
+  background: rgba(18, 18, 18, 1);
+  border: 0.5px solid rgba(250, 250, 250, 0.4);
+  border-radius: 10px;
+  text-decoration: none;
+  transition: opacity 0.2s, border-color 0.2s;
+}
+
+.inf-cf-explore-btn:hover {
+  opacity: 0.95;
+  border-color: rgba(250, 250, 250, 0.6);
+}
+
+.inf-cf-quiz-fade-in {
+  width: 100%;
+  animation: infCfFadeInRight 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  z-index: 15;
+  background: #0d0d0d80;
+  padding: 20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid #fafafa33;
+}
+
+.inf-cf-quiz-fade-in .inf-cf-explore-card {
+  margin-top: 20px;
+}
+
+@keyframes infCfFadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (min-width: 1600px) {
+  .inf-cf-sticky-wrapper {
+    min-height: 100vh;
+    padding: 140px 24px 100px;
+  }
+}
+
+@media (max-width: 768px) {
+  section.inf-cf-section {
+    min-height: 100vh;
+    overflow: visible !important;
+  }
+
+  .inf-cf-sticky-wrapper {
+    min-height: 100vh;
+    padding: 100px 20px 60px;
+  }
+
+  .inf-cf-container {
+    padding: 0 20px;
+    display: block;
+    height: auto;
+    flex-direction: column;
+  }
+
+  .inf-cf-paragraph {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+
+  .inf-cf-heading {
+    font-size: 30px;
+    margin-bottom: 10px;
+    width: 100%;
+    max-width: 100% !important;
+  }
+
+  .inf-cf-quiz-fade-in {
+    padding: 0px !important;
+    border: transparent !important;
+  }
+
+  .inf-cf-explore-card {
+    margin-top: 20px;
+    padding: 20px;
+    max-width: 100%;
+  }
+
+  .inf-cf-explore-text {
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  .inf-cf-explore-btn {
+    padding: 12px 32px;
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,207 @@
+.bid-episodes {
+  background-color: #000;
+  padding: 56px 120px;
+  display: flex;
+  justify-content: center;
+}
+
+.bid-episodes-inner {
+  width: 100%;
+  max-width: 1440px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.bid-episodes-header-cta {
+  align-self: flex-start;
+  padding: 4px 30px;
+  min-height: 35px;
+  border-radius: 100px;
+  border: 1px solid rgba(250, 250, 250, 1);
+  background-color: transparent;
+  color: rgba(250, 250, 250, 1);
+  font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 27px;
+  cursor: default;
+}
+
+.bid-episodes-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  grid-auto-rows: minmax(0, 1fr);
+  column-gap: 24px;
+  row-gap: 24px;
+}
+
+.bid-episode-card {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.bid-episode-card--large {
+  grid-row: 1 / span 2;
+  grid-column: 1 / 2;
+}
+
+.bid-episode-thumbnail {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  height: 100%;
+}
+
+.bid-episode-thumbnail img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.bid-episode-thumbnail-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)),
+    linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+}
+
+.bid-episode-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.bid-episode-play svg {
+  width: 48px;
+  height: 48px;
+}
+
+.bid-episode-play img {
+  width: 48px;
+  height: 48px;
+  display: block;
+}
+
+.bid-episode-meta {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 10px 8px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+  text-align: left;
+  z-index: 1;
+}
+
+.bid-episode-meta--large {
+  padding: 32px 24px 24px;
+}
+
+.bid-episode-title {
+  margin: 0;
+  font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  color: rgba(250, 250, 250, 1);
+}
+
+.bid-episode-title--large {
+  font-size: 18px;
+  line-height: 27px;
+}
+
+.bid-episode-date {
+  margin: 0;
+  font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 12px;
+  color: rgba(250, 250, 250, 0.6);
+  text-transform: uppercase;
+}
+
+.bid-episodes-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.bid-episodes-view-all {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 175px;
+  min-height: 49px;
+  padding: 16px 40px;
+  border-radius: 10px;
+  background-color: rgba(250, 250, 250, 1);
+  color: rgba(30, 30, 30, 1);
+  font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.bid-episodes-view-all:hover {
+  background-color: rgba(200, 200, 200, 1);
+  color: rgba(30, 30, 30, 1);
+}
+
+@media (max-width: 1200px) {
+  .bid-episodes {
+    padding: 48px 48px;
+  }
+
+  .bid-episodes-grid {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  .bid-episodes {
+    padding: 40px 24px;
+  }
+
+  .bid-episodes-header-cta {
+    align-self: flex-start;
+    color: rgba(250, 250, 250, 0.7);
+    font-size: 14px;
+    line-height: 27px;
+    text-align: left;
+  }
+
+  .bid-episode-title {
+    font-size: 14px;
+    line-height: 21px;
+    color: rgba(250, 250, 250, 0.8);
+  }
+
+  .bid-episodes-footer {
+    justify-content: center;
+  }
+
+  .bid-episodes-view-all {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+

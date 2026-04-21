@@ -1,0 +1,19 @@
+# Virtual env
+.venv/
+venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+*.so
+.env
+.env.local
+
+# Django
+*.log
+local_settings.py
+staticfiles/
+media/

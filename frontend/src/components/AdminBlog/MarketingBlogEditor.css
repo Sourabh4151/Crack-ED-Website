@@ -1,0 +1,362 @@
+.marketing-blog-editor {
+  border: 1px solid rgba(250, 250, 250, 0.2);
+  border-radius: 12px;
+  overflow: visible;
+  background: rgba(13, 13, 13, 1);
+}
+
+.marketing-blog-editor-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  padding: 12px;
+  border-bottom: 1px solid rgba(250, 250, 250, 0.15);
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 12px 12px 0 0;
+}
+
+.marketing-blog-editor-toolbar-hint {
+  flex-basis: 100%;
+  width: 100%;
+  margin: 4px 0 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: rgba(250, 250, 250, 0.42);
+}
+
+.marketing-blog-editor-toolbar-hint strong {
+  color: rgba(250, 250, 250, 0.62);
+  font-weight: 600;
+}
+
+.marketing-blog-editor-toolbar-hint kbd {
+  display: inline-block;
+  padding: 1px 5px;
+  margin: 0 1px;
+  font-size: 10px;
+  font-family: inherit;
+  border: 1px solid rgba(250, 250, 250, 0.22);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(250, 250, 250, 0.75);
+}
+
+.marketing-blog-editor-toolbar button {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(250, 250, 250, 0.25);
+  background: transparent;
+  color: rgba(250, 250, 250, 0.9);
+  cursor: pointer;
+}
+
+.marketing-blog-editor-toolbar button.is-active {
+  background: rgba(26, 158, 183, 0.25);
+  border-color: rgba(26, 158, 183, 0.6);
+}
+
+.marketing-blog-editor-toolbar button:hover {
+  background: rgba(250, 250, 250, 0.08);
+}
+
+.marketing-blog-editor-heading-btn {
+  padding: 6px 7px;
+  min-width: 0;
+  font-size: 11px;
+}
+
+.marketing-blog-editor-toolbar .marketing-blog-editor-remove-callout:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.marketing-blog-editor-toolbar .marketing-blog-editor-remove-callout:not(:disabled):hover {
+  border-color: rgba(220, 100, 100, 0.55);
+  color: rgba(255, 200, 200, 0.95);
+}
+
+.marketing-blog-editor-toolbar .marketing-blog-editor-remove-callout:not(:disabled) {
+  border-color: rgba(250, 250, 250, 0.2);
+}
+
+.marketing-blog-editor-toolbar .marketing-blog-editor-remove-image:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.marketing-blog-editor-toolbar .marketing-blog-editor-remove-image:not(:disabled):hover {
+  border-color: rgba(220, 100, 100, 0.55);
+  color: rgba(255, 200, 200, 0.95);
+}
+
+.marketing-blog-editor-toolbar .marketing-blog-editor-remove-image:not(:disabled) {
+  border-color: rgba(250, 250, 250, 0.2);
+}
+
+.marketing-blog-editor-media-wrap {
+  position: relative;
+}
+
+.marketing-blog-editor-media-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.marketing-blog-editor-media-chevron {
+  font-size: 10px;
+  opacity: 0.85;
+}
+
+.marketing-blog-editor-media-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 40;
+  min-width: 232px;
+  padding: 8px;
+  border-radius: 12px;
+  border: 1px solid rgba(250, 250, 250, 0.12);
+  background: rgba(18, 22, 32, 0.98);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
+}
+
+.marketing-blog-editor-toolbar .marketing-blog-editor-media-menu .marketing-blog-editor-media-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  margin: 0;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: rgba(250, 250, 250, 0.95);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+
+.marketing-blog-editor-toolbar .marketing-blog-editor-media-menu .marketing-blog-editor-media-item:hover {
+  background: rgba(250, 250, 250, 0.08);
+}
+
+.marketing-blog-editor-media-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(250, 250, 250, 0.1);
+  color: rgba(250, 250, 250, 0.85);
+}
+
+.marketing-blog-editor-media-icon--yt {
+  color: #ff4b4b;
+}
+
+.marketing-blog-editor-sep {
+  width: 1px;
+  height: 20px;
+  background: rgba(250, 250, 250, 0.2);
+  margin: 0 4px;
+}
+
+.marketing-blog-editor-color {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: rgba(250, 250, 250, 0.8);
+}
+
+.marketing-blog-editor-color input {
+  width: 32px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+}
+
+.marketing-blog-editor-font {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(250, 250, 250, 0.25);
+  background: rgba(13, 13, 13, 1);
+  color: rgba(250, 250, 250, 0.9);
+}
+
+.marketing-blog-editor-body {
+  position: relative;
+}
+
+/* Tippy shell: transparent so only our inner bar shows */
+.tippy-box[data-theme~='marketing-bubble'] {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.tippy-box[data-theme~='marketing-bubble'] .tippy-content {
+  padding: 0;
+}
+
+.marketing-blog-bubble-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(22, 26, 36, 0.98);
+  border: 1px solid rgba(250, 250, 250, 0.18);
+  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.55);
+}
+
+.marketing-blog-bubble-inner button {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(250, 250, 250, 0.25);
+  background: rgba(0, 0, 0, 0.35);
+  color: rgba(250, 250, 250, 0.95);
+  cursor: pointer;
+}
+
+.marketing-blog-bubble-inner button.is-active {
+  background: rgba(26, 158, 183, 0.3);
+  border-color: rgba(26, 158, 183, 0.65);
+}
+
+.marketing-blog-bubble-inner button:hover {
+  background: rgba(250, 250, 250, 0.1);
+}
+
+.marketing-blog-bubble-inner .marketing-blog-bubble-remove-callout {
+  border-color: rgba(220, 100, 100, 0.45);
+  color: rgba(255, 200, 200, 0.95);
+}
+
+.marketing-blog-bubble-inner .marketing-blog-bubble-remove-callout:hover {
+  background: rgba(220, 80, 80, 0.2);
+  border-color: rgba(220, 100, 100, 0.7);
+}
+
+.marketing-blog-bubble-inner .marketing-blog-bubble-remove-image {
+  border-color: rgba(220, 100, 100, 0.45);
+  color: rgba(255, 200, 200, 0.95);
+}
+
+.marketing-blog-bubble-inner .marketing-blog-bubble-remove-image:hover {
+  background: rgba(220, 80, 80, 0.2);
+  border-color: rgba(220, 100, 100, 0.7);
+}
+
+.marketing-blog-editor-content {
+  border-radius: 0 0 12px 12px;
+}
+
+.marketing-blog-editor-content .ProseMirror {
+  min-height: 320px;
+  padding: 16px 20px 24px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgba(250, 250, 250, 0.9);
+  outline: none;
+}
+
+.marketing-blog-editor-content .ProseMirror p {
+  margin: 0 0 0.75em;
+}
+
+.marketing-blog-editor-content .ProseMirror img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.marketing-blog-editor-content .ProseMirror img.ProseMirror-selectednode {
+  outline: 2px solid rgba(26, 158, 183, 0.85);
+  outline-offset: 2px;
+}
+
+.marketing-blog-editor-content .ProseMirror .marketing-special-callout {
+  background-color: rgba(26, 158, 183, 0.16);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin: 0.75em 0;
+  color: rgba(250, 250, 250, 1);
+}
+
+.marketing-blog-editor-content .ProseMirror .marketing-special-callout p:last-child {
+  margin-bottom: 0;
+}
+
+.marketing-blog-editor-content .ProseMirror .marketing-inline-video {
+  display: block;
+  max-width: 100%;
+  border-radius: 8px;
+  margin: 0.75em 0;
+}
+
+.marketing-blog-editor-content .ProseMirror .marketing-youtube-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 720px;
+  margin: 0.75em 0;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.marketing-blog-editor-content .ProseMirror .marketing-youtube-wrap iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.marketing-blog-editor-content .ProseMirror h4 {
+  font-size: 1.15em;
+  font-weight: 600;
+  margin: 0.75em 0 0.35em;
+}
+
+.marketing-blog-editor-content .ProseMirror h5 {
+  font-size: 1.05em;
+  font-weight: 600;
+  margin: 0.75em 0 0.35em;
+}
+
+.marketing-blog-editor-content .ProseMirror h6 {
+  font-size: 1em;
+  font-weight: 600;
+  margin: 0.75em 0 0.35em;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.marketing-blog-editor-content .ProseMirror-focused {
+  outline: none;
+}

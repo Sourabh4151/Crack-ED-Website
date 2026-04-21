@@ -1,0 +1,727 @@
+.job-detail-page {
+  width: 100%;
+  min-height: 100vh;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  background: rgba(0, 0, 0, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.job-detail-section {
+  width: 100%;
+  padding: 140px 120px 60px 120px;
+}
+
+.job-detail-container {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 45px;
+}
+
+.job-detail-back-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 27px;
+  letter-spacing: 0%;
+  color: rgba(250, 250, 250, 0.75);
+  cursor: pointer;
+  width: fit-content;
+  padding: 0;
+  transition: color 0.3s ease;
+  margin-top: 60px;
+  margin-bottom: 0px;
+}
+
+.job-detail-back-link:hover {
+  color: rgba(250, 250, 250, 1);
+}
+
+.job-detail-header {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 32px;
+  width: 100%;
+}
+
+.job-detail-title-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+}
+
+.job-detail-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: rgba(250, 250, 250, 1);
+  margin: 0;
+}
+
+.job-detail-meta {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  width: fit-content;
+  height: 24px;
+}
+
+.job-detail-meta-item {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 24px;
+  letter-spacing: 0%;
+  text-transform: uppercase;
+  color: rgba(180, 187, 186, 1);
+}
+
+.job-detail-location {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 24px;
+  letter-spacing: 0%;
+  text-transform: uppercase;
+  color: rgba(180, 187, 186, 1);
+}
+
+.job-detail-apply-button {
+  padding: 14px 40px;
+  background: rgba(26, 158, 183, 1);
+  color: rgba(30, 30, 30, 1);
+  border: none;
+  border-radius: 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  font-style: normal;
+  line-height: 100%;
+  letter-spacing: 0%;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  white-space: nowrap;
+}
+
+.job-detail-apply-button:hover {
+  background: #1590a8;
+  transform: translateY(-2px);
+}
+
+.job-detail-separator {
+  width: 1200px;
+  max-width: 100%;
+  height: 0;
+  border-top: 1px solid rgba(250, 250, 250, 0.4);
+  margin: 0;
+}
+
+.job-detail-content {
+  width: 100%;
+  max-width: 1200px;
+}
+
+.job-detail-description {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+  align-items: flex-start;
+}
+
+.job-detail-section-block {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.job-detail-section-heading {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 24px;
+  letter-spacing: 0%;
+  text-align: justify;
+  color: rgba(250, 250, 250, 1);
+  margin: 0;
+}
+
+.job-detail-section-text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 24px;
+  letter-spacing: 0%;
+  text-align: justify;
+  color: rgba(250, 250, 250, 1);
+  margin: 0;
+}
+
+.job-detail-responsibility {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.job-detail-responsibility:last-child {
+  margin-bottom: 0;
+}
+
+.job-detail-responsibility-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 24px;
+  letter-spacing: 0%;
+  text-align: justify;
+  color: rgba(250, 250, 250, 1);
+  margin: 0;
+}
+
+.job-detail-responsibility-text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 24px;
+  letter-spacing: 0%;
+  text-align: justify;
+  color: rgba(250, 250, 250, 1);
+  margin: 0;
+}
+
+.job-detail-apply-form-section {
+  margin-top: 32px;
+  width: 792px !important;
+  min-width: 792px;
+  max-width: 792px;
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+
+.job-detail-apply-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 792px !important;
+  min-width: 792px;
+  max-width: 792px;
+  height: 492px;
+  background: rgba(13, 13, 13, 1);
+  border-radius: 16px;
+  padding: 40px 47px;
+  margin-top: 0;
+  box-sizing: border-box;
+}
+
+.job-detail-apply-form-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 27px;
+  letter-spacing: 0%;
+  color: rgba(250, 250, 250, 1);
+  margin: 0 0 0 0;
+}
+
+.job-detail-form-separator {
+  width: 698px;
+  max-width: 100%;
+  height: 0;
+  border: 1px solid rgba(250, 250, 250, 0.4);
+  margin: 0;
+  align-self: flex-start;
+}
+
+.job-detail-form-field {
+  position: relative;
+  width: 100%;
+}
+
+.job-detail-input-error {
+  border: 1px solid rgba(220, 38, 38, 0.6) !important;
+  background: rgba(220, 38, 38, 0.06) !important;
+}
+
+.job-detail-input-error:focus {
+  border-color: rgba(220, 38, 38, 0.8) !important;
+}
+
+.job-detail-field-error {
+  display: block;
+  color: rgba(248, 113, 113, 1);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+.job-detail-form-input {
+  width: 698px;
+  max-width: 100%;
+  height: 43px;
+  padding: 8px 16px;
+  background: rgba(250, 250, 250, 0.05);
+  border: none;
+  border-radius: 8px;
+  color: rgba(250, 250, 250, 0.6);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 27px;
+  letter-spacing: 0%;
+  outline: none;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.job-detail-form-input::placeholder {
+  color: rgba(250, 250, 250, 0.6);
+}
+
+.job-detail-form-input:focus {
+  background: rgba(250, 250, 250, 0.08);
+  color: rgba(250, 250, 250, 0.9);
+}
+
+.job-detail-form-input:not(:placeholder-shown) {
+  color: rgba(250, 250, 250, 0.9);
+}
+
+.job-detail-file-input {
+  display: none;
+}
+
+.job-detail-upload-label {
+  cursor: pointer;
+  display: block;
+  width: 100%;
+}
+
+.job-detail-upload-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 698px;
+  max-width: 100%;
+  min-width: 0;
+  min-height: 75px;
+  height: auto;
+  padding: 24px 16px;
+  background: rgba(250, 250, 250, 0.05);
+  border: 1px dashed rgba(250, 250, 250, 0.15);
+  border-radius: 8px;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.job-detail-upload-box:hover {
+  border-color: rgba(250, 250, 250, 0.25);
+  background: rgba(250, 250, 250, 0.08);
+}
+
+.job-detail-upload-box span {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 27px;
+  letter-spacing: 0%;
+  color: rgba(250, 250, 250, 0.6);
+}
+
+.job-detail-upload-text {
+  min-width: 0;
+  overflow: hidden;
+  text-align: center;
+}
+
+.job-detail-upload-filename {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  display: inline-block;
+  max-width: 100%;
+}
+
+.job-detail-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0;
+  width: 698px;
+  max-width: 100%;
+  align-self: flex-start;
+}
+
+.job-detail-form-message {
+  width: 698px;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin-top: 4px;
+}
+
+.job-detail-form-message-error {
+  background: rgba(220, 38, 38, 0.1);
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  color: rgba(248, 113, 113, 1);
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.job-detail-form-message-success {
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  color: rgba(74, 222, 128, 1);
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.job-detail-submit-button {
+  background: rgba(26, 158, 183, 1);
+  color: rgba(30, 30, 30, 1);
+  border: none;
+  padding: 14px 40px;
+  border-radius: 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  font-style: normal;
+  line-height: 100%;
+  letter-spacing: 0%;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  width: fit-content;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.job-detail-submit-button:hover {
+  background: #1590a8;
+  transform: translateY(-1px);
+}
+
+.job-detail-submit-button:active {
+  background: #117a8f;
+  transform: translateY(0);
+}
+
+.job-detail-apply-form {
+  width: 344px;
+  background: rgba(13, 13, 13, 1);
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid rgba(250, 250, 250, 0.1);
+  height: fit-content;
+  position: sticky;
+  top: 100px;
+}
+
+.job-apply-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.job-apply-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.job-apply-input {
+  width: 100%;
+  padding: 12px 16px;
+  background: rgba(13, 13, 13, 1);
+  border: 1px solid rgba(250, 250, 250, 0.1);
+  border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 27px;
+  letter-spacing: 0%;
+  color: rgba(250, 250, 250, 0.7);
+  outline: none;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+.job-apply-input::placeholder {
+  color: rgba(250, 250, 250, 0.5);
+}
+
+.job-apply-input:focus {
+  border-color: rgba(26, 158, 183, 0.5);
+  background: rgba(13, 13, 13, 0.8);
+  color: rgba(250, 250, 250, 0.9);
+}
+
+.job-apply-file-input {
+  display: none;
+}
+
+.job-apply-upload-label {
+  cursor: pointer;
+  display: block;
+}
+
+.job-apply-upload-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 24px;
+  border: 1px dashed rgba(250, 250, 250, 0.2);
+  border-radius: 8px;
+  background: rgba(13, 13, 13, 1);
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  min-height: 100px;
+}
+
+.job-apply-upload-box:hover {
+  border-color: rgba(250, 250, 250, 0.4);
+  background: rgba(13, 13, 13, 0.8);
+}
+
+.job-apply-upload-box span {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 27px;
+  letter-spacing: 0%;
+  color: rgba(250, 250, 250, 0.7);
+}
+
+.job-apply-file-name {
+  font-size: 12px;
+  color: rgba(26, 158, 183, 1);
+  margin-top: 4px;
+}
+
+.job-apply-submit-button {
+  padding: 14px 40px;
+  background: rgba(26, 158, 183, 1);
+  color: rgba(30, 30, 30, 1);
+  border: none;
+  border-radius: 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  font-style: normal;
+  line-height: 100%;
+  letter-spacing: 0%;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.job-apply-submit-button:hover {
+  background: #1590a8;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 1440px) {
+  .job-detail-section {
+    padding: 30px 60px 60px 60px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .job-detail-section {
+    padding: 30px 40px 60px 40px;
+  }
+
+  .job-detail-content {
+    flex-direction: column;
+  }
+
+  .job-detail-apply-form-section {
+    width: 100% !important;
+    max-width: 100%;
+    min-width: 0;
+    align-self: stretch;
+  }
+
+  .job-detail-apply-form {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    position: relative;
+    top: 0;
+    height: auto;
+    min-height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .job-detail-section {
+    padding: 24px 24px 40px 24px;
+  }
+
+  .job-detail-container {
+    gap: 32px;
+  }
+
+  .job-detail-header {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .job-detail-apply-button {
+    width: 100%;
+  }
+
+  .job-detail-meta {
+    gap: 24px;
+  }
+
+  /* Apply For This Role form – tablet/mobile */
+  .job-detail-apply-form-section {
+    width: 100% !important;
+    max-width: 100%;
+    min-width: 0;
+    align-self: stretch;
+  }
+
+  .job-detail-apply-form {
+    width: 100% !important;
+    max-width: 100%;
+    min-width: 0;
+    height: auto;
+    min-height: auto;
+    padding: 32px 24px;
+    gap: 14px;
+  }
+
+  .job-detail-apply-form-title {
+    font-size: 22px;
+  }
+
+  .job-detail-form-separator {
+    width: 100%;
+  }
+
+  .job-detail-form-input {
+    width: 100%;
+    min-height: 44px;
+    box-sizing: border-box;
+  }
+
+  .job-detail-upload-box {
+    width: 100%;
+    min-height: 64px;
+    padding: 20px 16px;
+    box-sizing: border-box;
+  }
+
+  .job-detail-form-actions {
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  .job-detail-submit-button {
+    width: 100%;
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 480px) {
+  .job-detail-section {
+    padding: 20px 20px 32px 20px;
+  }
+
+  .job-detail-title {
+    font-size: 20px;
+  }
+
+  .job-detail-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    height: auto;
+  }
+
+  /* Apply For This Role form – small mobile */
+  .job-detail-apply-form-section {
+    margin-top: 24px;
+  }
+
+  .job-detail-apply-form {
+    padding: 24px 20px;
+    gap: 12px;
+    min-height: auto;
+  }
+
+  .job-detail-apply-form-title {
+    font-size: 20px;
+    line-height: 1.3;
+  }
+
+  .job-detail-form-input {
+    padding: 10px 14px;
+    font-size: 16px; /* reduces zoom on iOS */
+    min-height: 48px;
+  }
+
+  .job-detail-upload-box {
+    min-height: 72px;
+    padding: 16px 14px;
+    align-items: center;
+  }
+
+  .job-detail-upload-box span {
+    font-size: 13px;
+  }
+
+  .job-detail-upload-filename {
+    text-align: center;
+  }
+
+  .job-detail-submit-button {
+    min-height: 48px;
+    padding: 14px 24px;
+  }
+}

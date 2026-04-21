@@ -1,0 +1,83 @@
+.framework-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  padding: 40px 60px;
+  font-family: "Montserrat", sans-serif;
+}
+
+/* TITLE */
+.title {
+  padding: 14px 36px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #1a9eb7, #126f80);
+  color: #000;
+  font-size: 18px;
+  font-weight: 600;
+  white-space: nowrap;
+  font-family: "Montserrat", sans-serif;
+  opacity: 0;
+  transform: translateX(-12px);
+}
+
+/* STEP PILLS */
+.pill {
+  padding: 12px 44px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.6);
+  white-space: nowrap;
+
+  background-image:
+    linear-gradient(#000, #000),
+    linear-gradient(180deg, #1a9eb7, rgba(26,158,183,0.35));
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  border: 1.5px solid transparent;
+
+  opacity: 0;
+  transform: translateX(-12px);
+}
+
+/* DOTTED LINE */
+.dot-line {
+  width: 48px;
+  height: 1px;
+  margin: 0 14px;
+  background-image: repeating-linear-gradient(
+    to right,
+    rgba(26,158,183,0.7),
+    rgba(26,158,183,0.7) 4px,
+    transparent 4px,
+    transparent 8px
+  );
+
+  transform: scaleX(0);
+  transform-origin: left;
+}
+@media (max-width: 768px) {
+  .framework-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 32px 20px;
+  }
+
+  .dot-line {
+    width: 1px;
+    height: 32px;
+    margin: 8px 0;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      rgba(26,158,183,0.7),
+      rgba(26,158,183,0.7) 4px,
+      transparent 4px,
+      transparent 8px
+    );
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+}

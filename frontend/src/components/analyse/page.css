@@ -1,0 +1,66 @@
+/* Default hidden for desktop as per your original code */
+.analyse {
+    display: none;
+    width: 100%;
+    height: 100vh;
+    background-color: #000;
+    overflow: hidden;
+    position: relative;
+}
+
+@media (max-width: 769px) {
+    .analyse {
+        display: block; /* Change to block for pin to work better */
+    }
+
+    .analyse-container {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #000; /* Ensure slides aren't transparent */
+    }
+
+    .analysecard {
+        width: 100%;
+        padding-top: 100px; /* Space for the big background text */
+        z-index: 2;
+        position: relative;
+    }
+
+    .analyse-text {
+        position: absolute;
+        top: 0%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: calc(100vw - 32px);
+        padding: 0 16px;
+        box-sizing: border-box;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+        text-align: center;
+        text-transform: uppercase;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.04) 100%);
+
+        /* background: linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.04) 100%); */
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        z-index: -1;
+        /* Shorter words fit at 64px; CALIBRATE needs to shrink on narrow viewports */
+        font-size: min(64px, 13.5vw);
+        margin-bottom: 34px;
+    }
+}

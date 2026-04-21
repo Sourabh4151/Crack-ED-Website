@@ -1,0 +1,365 @@
+.leadership-section {
+  width: 100%;
+  background: rgba(0, 0, 0, 1);
+  padding: 120px;
+  position: relative;
+}
+
+.leadership-container {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.leadership-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  text-align: left;
+}
+
+.leadership-badge {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 27px;
+  letter-spacing: 0%;
+  text-align: center;
+  text-transform: capitalize;
+  color: rgba(250, 250, 250, 1);
+  width: fit-content;
+  height: 35px;
+  padding: 4px 30px;
+  border: 1px solid rgba(250, 250, 250, 1);
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 1);
+}
+
+.leadership-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 36px;
+  letter-spacing: 0%;
+  text-align: left;
+  color: rgba(250, 250, 250, 1);
+  margin: 0;
+  max-width: 1200px;
+}
+
+.leadership-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 20px;
+  column-gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Before hover (image 1st): default state – 387×409, radius 12px */
+.leadership-card {
+  width: 100%;
+  max-width: 387px;
+  height: 409px;
+  background: rgba(13, 13, 13, 1);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  transform: translateY(0);
+  box-shadow: none;
+  /* Animation (image 2nd): smart animate, linear, 300ms */
+  transition: transform 300ms linear, background 300ms linear, box-shadow 300ms linear;
+}
+
+/* On hover (image 3rd / Variant2): width/height/radius unchanged; top shifts via translateY */
+.leadership-card:hover {
+  transform: translateY(-4px); /* visual "top" moves up 4px */
+  background: rgba(18, 18, 18, 1);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* Image area: full card, strip overlays bottom so image shows through strip */
+.leadership-card-image-wrap {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.leadership-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  transition: transform 300ms linear;
+}
+
+/* Nabeel Akhtar: shift image up so full figure is visible above the strip */
+.leadership-card.nabeel-akhtar .leadership-card-image {
+  object-position: center 50%;
+}
+
+/* Vipin Singh: lift image slightly so face sits higher above strip */
+.leadership-card.vipin-singh .leadership-card-image {
+  object-position: center 35%;
+}
+
+/* Ankit Mittal: zoom in on the left person (Ankit); scale from left, then position */
+.leadership-card.ankit-mittal .leadership-card-image {
+  object-fit: cover;
+  object-position: 15% 10%;
+  transform: scale(2.8);
+  transform-origin: 25% 30%;
+}
+
+.leadership-card:hover .leadership-card-image {
+  transform: scale(1.05);
+}
+
+.leadership-card.ankit-mittal:hover .leadership-card-image {
+  transform: scale(3);
+  transform-origin: 25% 30%;
+}
+
+/* Dark gradient overlay at bottom (before hover - image 1st); stronger black for text readability */
+.leadership-card-text-frame {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  min-height: 63px;
+  padding: 16px 24px 20px;
+  background:
+    linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0)),
+    linear-gradient(to top, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0)),
+    linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0)),
+    linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0)),
+    linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)),
+    linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+  box-sizing: border-box;
+  border: none;
+  transition: background 300ms linear;
+}
+
+/* On hover (image 2nd/3rd): remove/lighter overlay */
+.leadership-card:hover .leadership-card-text-frame {
+  background:
+    linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0)),
+    linear-gradient(to top, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0)),
+    linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0)),
+    linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0)),
+    linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)),
+    linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+}
+
+/* Details inside text frame: horizontal, space-between, left 24px */
+.leadership-card-details {
+  width: 100%;
+  max-width: 339px;
+  height: 63px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.leadership-card-details-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+}
+
+.leadership-card-name {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: rgba(250, 250, 250, 1);
+  text-transform: capitalize;
+  margin: 0;
+}
+
+.leadership-card-role {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: rgba(250, 250, 250, 0.6);
+  margin: 0;
+}
+
+.leadership-linkedin {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 200ms ease;
+}
+
+.leadership-linkedin:hover {
+  opacity: 0.85;
+}
+
+@media (max-width: 1440px) {
+  .leadership-section {
+    padding: 100px 60px;
+  }
+}
+
+@media (max-width: 1240px) {
+  .leadership-grid {
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+  }
+
+  .leadership-card {
+    max-width: 387px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .leadership-section {
+    padding: 80px 40px;
+  }
+
+  .leadership-container {
+    gap: 32px;
+  }
+
+  .leadership-title {
+    font-size: 20px;
+    line-height: 30px;
+  }
+
+  .leadership-card {
+    height: 420px;
+    min-height: 420px;
+  }
+
+  .leadership-card-image-wrap {
+    height: 100%;
+  }
+
+  .leadership-card-text-frame {
+    padding: 14px 24px 18px;
+  }
+
+  .leadership-card-details {
+    max-width: 100%;
+    height: auto;
+    min-height: 63px;
+  }
+}
+
+@media (max-width: 768px) {
+  .leadership-section {
+    padding: 60px 24px;
+  }
+
+  .leadership-container {
+    gap: 24px;
+  }
+
+  .leadership-badge {
+    font-size: 12px;
+    padding: 4px 24px;
+    height: 32px;
+  }
+
+  .leadership-title {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .leadership-grid {
+    grid-template-columns: 1fr;
+    row-gap: 16px;
+    column-gap: 16px;
+  }
+
+  .leadership-card {
+    max-width: 100%;
+    height: 420px;
+    min-height: 420px;
+  }
+
+  .leadership-card-image-wrap {
+    height: 100%;
+  }
+
+  .leadership-card-text-frame {
+    padding: 12px 24px 16px;
+  }
+
+  .leadership-card-details {
+    max-width: 100%;
+    height: auto;
+    min-height: 63px;
+  }
+
+  .leadership-card-name {
+    font-size: 16px;
+  }
+
+  .leadership-card-role {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .leadership-section {
+    padding: 40px 20px;
+  }
+
+  .leadership-container {
+    gap: 20px;
+  }
+
+  .leadership-badge {
+    font-size: 11px;
+    padding: 4px 20px;
+    height: 30px;
+  }
+
+  .leadership-title {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .leadership-card {
+    height: 400px;
+    min-height: 400px;
+  }
+
+  .leadership-card-image-wrap {
+    height: 100%;
+  }
+
+  .leadership-card-text-frame {
+    padding: 10px 16px 14px;
+  }
+
+  .leadership-card-details {
+    min-height: 56px;
+  }
+}

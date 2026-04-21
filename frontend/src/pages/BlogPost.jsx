@@ -1,0 +1,721 @@
+import React, { useEffect, useMemo, useState, useRef } from 'react'
+import { useParams, Link } from 'react-router-dom'
+import Header from '../components/Header/Header'
+import EnquireSection from '../components/EnquireSection/EnquireSection'
+import ExploreOtherBlogs from '../components/ExploreOtherBlogs/ExploreOtherBlogs'
+import Footer from '../components/Footer/Footer'
+import BlogPostApiBody from '../components/BlogPostApi/BlogPostApiBody'
+import { BLOG_POSTS } from '../data/blogPosts'
+import { getApiBase } from '../services/crmService'
+import { fetchMarketingBlogDetail } from '../services/blogApi'
+import { applyBlogPostMeta, clearBlogPostMeta, staticSeoDescription, absolutizeMediaUrl } from '../lib/blogPostMeta'
+import './BlogPost.css'
+
+const INTRO_TERMS = ['Property Evaluation (Tech Underwriting)', 'Credit Underwriting', 'Legal Underwriting', '(Tech Underwriting)', 'Tech Underwriting']
+
+function collectNodeText (node) {
+  if (!node || typeof node !== 'object') return ''
+  if (typeof node.text === 'string') return node.text
+  if (node.type === 'hardBreak') return '\n'
+  const children = Array.isArray(node.content) ? node.content : []
+  return children.map(collectNodeText).join('')
+}
+
+function extractApiToc (doc) {
+  if (!doc || typeof doc !== 'object' || !Array.isArray(doc.content)) return []
+  const out = []
+  for (const node of doc.content) {
+    if (node?.type !== 'heading') continue
+    if (!node?.attrs?.marketingToc) continue
+    const raw = collectNodeText(node).trim()
+    const title = raw.split('\n').map((v) => v.trim()).find(Boolean) || ''
+    if (!title) continue
+    out.push(title)
+  }
+  return out
+}
+
+function wrapIntroTerms (text) {
+  if (typeof text !== 'string') return [text]
+  const segments = []
+  let remaining = text
+  let key = 0
+  while (remaining.length > 0) {
+    let found = false
+    for (const term of INTRO_TERMS) {
+      const idx = remaining.indexOf(term)
+      if (idx !== -1) {
+        if (idx > 0) segments.push(remaining.slice(0, idx))
+        segments.push(<span key={`intro-${key++}`} className="blog-post-term-intro">{term}</span>)
+        remaining = remaining.slice(idx + term.length)
+        found = true
+        break
+      }
+    }
+    if (!found) {
+      segments.push(remaining)
+      break
+    }
+  }
+  return segments.length > 0 ? segments : [text]
+}
+
+const BlogPost = () => {
+  const { id } = useParams()
+  const staticPost = BLOG_POSTS.find((p) => p.id === id)
+  const [apiPost, setApiPost] = useState(null)
+  const [loadState, setLoadState] = useState(() => (staticPost ? 'ready' : 'loading'))
+  const [tocExpanded, setTocExpanded] = useState(true)
+  const [activeTocIndex, setActiveTocIndex] = useState(0)
+  const scrollRef = useRef(null)
+  const apiToc = useMemo(() => extractApiToc(apiPost?.content_json), [apiPost?.content_json])
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+    if (scrollRef.current) scrollRef.current.scrollTop = 0
+  }, [id])
+
+  useEffect(() => {
+    if (staticPost) {
+      setApiPost(null)
+      setLoadState('ready')
+      return
+    }
+    let cancelled = false
+    setLoadState('loading')
+    setApiPost(null)
+    const base = getApiBase()
+    if (!base) {
+      setLoadState('notfound')
+      return
+    }
+    fetchMarketingBlogDetail(id)
+      .then((data) => {
+        if (!cancelled) {
+          setApiPost(data)
+          setLoadState('ready')
+        }
+      })
+      .catch(() => {
+        if (!cancelled) setLoadState('notfound')
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [id, staticPost])
+
+  useEffect(() => {
+    if (!staticPost?.toc?.length || !scrollRef.current) return
+    const sections = scrollRef.current.querySelectorAll('[data-toc-section]')
+    sections.forEach((el, i) => {
+      el.id = `toc-${i}`
+      el.setAttribute('data-toc-index', String(i))
+    })
+  }, [id, staticPost?.toc?.length])
+
+  useEffect(() => {
+    if (!apiToc.length || !scrollRef.current || staticPost) return
+    const scrollEl = scrollRef.current
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue
+          const idAttr = entry.target.getAttribute('id') || ''
+          const idx = parseInt(idAttr.replace('api-toc-', ''), 10)
+          if (!Number.isNaN(idx)) setActiveTocIndex(idx)
+        }
+      },
+      { root: scrollEl, rootMargin: '-20% 0px -60% 0px', threshold: 0 }
+    )
+    const nodes = scrollEl.querySelectorAll('[id^="api-toc-"]')
+    nodes.forEach((el) => observer.observe(el))
+    return () => observer.disconnect()
+  }, [id, apiToc, staticPost])
+
+  useEffect(() => {
+    if (!staticPost?.toc?.length || !scrollRef.current) return
+    const scrollEl = scrollRef.current
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue
+          const idx = parseInt(entry.target.getAttribute('data-toc-index'), 10)
+            if (!Number.isNaN(idx)) setActiveTocIndex(idx)
+        }
+      },
+      { root: scrollEl, rootMargin: '-20% 0px -60% 0px', threshold: 0 }
+    )
+    const nodes = scrollRef.current.querySelectorAll('[data-toc-index]')
+    nodes.forEach((el) => observer.observe(el))
+    return () => observer.disconnect()
+  }, [id, staticPost?.toc?.length])
+
+  useEffect(() => {
+    if (loadState === 'loading') {
+      return undefined
+    }
+    if (!staticPost && loadState === 'notfound') {
+      clearBlogPostMeta()
+      return undefined
+    }
+    if (apiPost && !staticPost) {
+      const pageTitle = (apiPost.meta_title || '').trim() || `${apiPost.title} | CRACK-ED`
+      const description = (apiPost.meta_description || apiPost.excerpt || '').trim() || apiPost.title
+      applyBlogPostMeta({
+        pageTitle,
+        description,
+        imageUrl: absolutizeMediaUrl(apiPost.cover_image_url || ''),
+      })
+      return () => clearBlogPostMeta()
+    }
+    if (staticPost) {
+      applyBlogPostMeta({
+        pageTitle: `${staticPost.title} | CRACK-ED`,
+        description: staticSeoDescription(staticPost),
+        imageUrl: absolutizeMediaUrl(typeof staticPost.image === 'string' ? staticPost.image : ''),
+      })
+      return () => clearBlogPostMeta()
+    }
+    return undefined
+  }, [id, loadState, staticPost, apiPost])
+
+  if (!staticPost && loadState === 'loading') {
+    return (
+      <div className="blog-post-page">
+        <Header />
+        <div className="blog-post-scroll blog-post-loading">
+          <p className="blog-post-loading-text">Loading…</p>
+          <Footer />
+        </div>
+      </div>
+    )
+  }
+
+  if (apiPost && !staticPost) {
+    return (
+      <div className="blog-post-page">
+        <Header />
+        <div className="blog-post-scroll" ref={scrollRef}>
+          <article className="blog-post">
+            <div className="blog-post-inner">
+              <Link to="/resources" className="blog-post-back" aria-label="Back to blog listing">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M12 4L6 10L12 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                Back to All Blogs
+              </Link>
+              <div className="blog-post-badges">
+                {(apiPost.tags || []).map((tag) => (
+                  <span key={tag} className="blog-post-badge">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <h1 className="blog-post-title">{apiPost.title}</h1>
+              <time className="blog-post-date">{apiPost.date_display}</time>
+              {apiPost.author && (
+                <p className="blog-post-author">Author – {apiPost.author}</p>
+              )}
+              <div className="blog-post-body blog-post-body--api">
+                <div className={`blog-post-content${apiToc.length ? '' : ' blog-post-content--full'}`}>
+                  <BlogPostApiBody contentJson={apiPost.content_json} />
+                </div>
+                {apiToc.length > 0 && (
+                  <aside className={`blog-post-toc${!tocExpanded ? ' blog-post-toc--collapsed' : ''}`} aria-label="Table of contents">
+                    <div className="blog-post-toc-header">
+                      <h2 className="blog-post-toc-title">Table of Content</h2>
+                      <button
+                        type="button"
+                        className="blog-post-toc-toggle"
+                        aria-expanded={tocExpanded}
+                        aria-label={tocExpanded ? 'Collapse table of contents' : 'Expand table of contents'}
+                        onClick={() => setTocExpanded((v) => !v)}
+                      >
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                          <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                      </button>
+                    </div>
+                    <div className="blog-post-toc-list-wrap" style={{ display: tocExpanded ? undefined : 'none' }}>
+                      <ol className="blog-post-toc-list">
+                        {apiToc.map((item, i) => (
+                          <li key={i} className={activeTocIndex === i ? 'active' : ''}>
+                            <a
+                              href={`#api-toc-${i}`}
+                              onClick={(e) => {
+                                e.preventDefault()
+                                const targetId = `api-toc-${i}`
+                                const scrollEl = scrollRef.current
+                                const target = scrollEl?.querySelector(`#${targetId}`) || document.getElementById(targetId)
+                                if (scrollEl && target && scrollEl.contains(target)) {
+                                  const scrollRect = scrollEl.getBoundingClientRect()
+                                  const targetRect = target.getBoundingClientRect()
+                                  const top = targetRect.top - scrollRect.top + scrollEl.scrollTop
+                                  scrollEl.scrollTo({ top: Math.max(0, top - 80), behavior: 'smooth' })
+                                  return
+                                }
+                                target?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                              }}
+                            >
+                              {item}
+                            </a>
+                          </li>
+                        ))}
+                      </ol>
+                    </div>
+                  </aside>
+                )}
+              </div>
+            </div>
+          </article>
+          <div className="blog-post-end-line" aria-hidden="true" />
+          <ExploreOtherBlogs currentPostId={apiPost.slug} />
+          <div id="enquire-now">
+            <EnquireSection />
+          </div>
+          <Footer />
+        </div>
+      </div>
+    )
+  }
+
+  if (!staticPost && loadState === 'notfound') {
+    return (
+      <div className="blog-post-page">
+        <Header />
+        <div className="blog-post-scroll">
+          <div className="blog-post-not-found">
+            <p>Blog post not found.</p>
+          <Link to="/resources" className="blog-post-back">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M12 4L6 10L12 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            Back to All Blogs
+          </Link>
+          </div>
+          <Footer />
+        </div>
+      </div>
+    )
+  }
+
+  const post = staticPost
+
+  return (
+    <div className="blog-post-page">
+      <Header />
+      <div className="blog-post-scroll" ref={scrollRef}>
+        <article className="blog-post">
+          <div className="blog-post-inner">
+            <Link to="/resources" className="blog-post-back" aria-label="Back to blog listing">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M12 4L6 10L12 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              Back to All Blogs
+            </Link>
+            <div className="blog-post-badges">
+              {post.tags.map((tag) => (
+                <span key={tag} className="blog-post-badge">
+                  {tag}
+                </span>
+              ))}
+            </div>
+            <h1 className="blog-post-title">{post.title}</h1>
+            <time className="blog-post-date">{post.date}</time>
+            {post.author && (
+              <p className="blog-post-author">Author – {post.author}</p>
+            )}
+            <div className="blog-post-body">
+              <div className="blog-post-content">
+                {post.videoUrl && (() => {
+                  try {
+                    const url = new URL(post.videoUrl)
+                    const v = url.searchParams.get('v')
+                    const t = url.searchParams.get('t')
+                    if (!v) return null
+                    const start = t ? `?start=${parseInt(String(t).replace(/s$/, ''), 10) || 0}` : ''
+                    const embedSrc = `https://www.youtube.com/embed/${v}${start}`
+                    return (
+                      <div className="blog-post-video-wrap">
+                        <iframe
+                          src={embedSrc}
+                          title="YouTube video"
+                          frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                          allowFullScreen
+                          className="blog-post-video"
+                        />
+                      </div>
+                    )
+                  } catch {
+                    return null
+                  }
+                })()}
+                <div className="blog-post-text">
+                  {post.content.split('\n\n').map((para, i) => {
+                    const isIntroHeading = i === 0 && para.trim() === 'Introduction'
+                    const isLead =
+                      para.trim().startsWith('The best relationship managers share a core set of skills')
+                    const isFirstSection =
+                      i === 0 && post.id !== '4' && post.id !== '5' && !post.excludeIntroFromToc
+                    return (
+                      <p
+                        key={i}
+                        data-toc-section={isFirstSection ? '' : undefined}
+                        className={isIntroHeading ? 'blog-post-intro-heading' : isLead ? 'blog-post-lead' : undefined}
+                      >
+                        {para}
+                      </p>
+                    )
+                  })}
+                </div>
+                {!post.hideBodyImage && !(post.id === '6' && !post.bodyImage) && (
+                  <div className="blog-post-image-wrap">
+                    <img src={post.bodyImage || post.image} alt="" className="blog-post-image" />
+                  </div>
+                )}
+                {post.contentAfterImage ? (
+                  <div className="blog-post-text">
+                    {post.contentAfterImage.split('\n\n').map((para, i) => {
+                      const isEmergingTrends = para.trim() === 'Emerging Trends and In-Demand Skills'
+                      const isKeySkills = para.trim() === 'Key Skills Gained from a Banking Course'
+                      const isPracticeHeading =
+                        post.practiceBullets?.length &&
+                        /^How to practi[cs]e it:$/.test(para.trim())
+                      const isShortTitle = para.trim().length < 80
+                      const isHeading = (i === 0 && isShortTitle) || isKeySkills || isEmergingTrends
+                      const isTocSection = (i === 0 && isShortTitle) || isKeySkills || isEmergingTrends
+                      if (isPracticeHeading) {
+                        return (
+                          <React.Fragment key={`practice-${i}`}>
+                            <p className="blog-post-subhead">{para}</p>
+                            <ul className="blog-post-bullets">
+                              {post.practiceBullets.map((item, idx) => (
+                                <li key={idx}>{item}</li>
+                              ))}
+                            </ul>
+                          </React.Fragment>
+                        )
+                      }
+                      return (
+                        <p key={i} data-toc-section={isTocSection ? '' : undefined} className={isHeading ? 'blog-post-intro-heading' : undefined}>
+                          {wrapIntroTerms(para)}
+                        </p>
+                      )
+                    })}
+                  </div>
+                ) : (
+                  <div className="blog-post-text">
+                    {post.content.split('\n\n').slice(0, 2).map((para, i) => (
+                      <p key={i} className={i === 0 ? 'blog-post-intro-heading' : undefined}>
+                        {para}
+                      </p>
+                    ))}
+                  </div>
+                )}
+                {post.bodyImage2 && (
+                  <div className={`blog-post-image-wrap${post.id === '5' ? ' blog-post-image-wrap--constrained' : ''}`}>
+                    <img src={post.bodyImage2} alt="Career paths in banking" className="blog-post-image" />
+                  </div>
+                )}
+                {post.contentAfterImage2 && (() => {
+                  const parts = post.contentAfterImage2.split('\n\n').map((p) => p.trim()).filter(Boolean)
+                  const rolePattern = /^(Bank Officer|Credit Associate|Legal Associate|Tech Associate): (.+)$/
+                  const listItems = parts.filter((p) => rolePattern.test(p))
+                  const nonListParts = parts.filter((p) => !rolePattern.test(p))
+                  const heading = nonListParts[0]
+                  const renderPara = (para, key) => {
+                    if (typeof para === 'string' && para.startsWith('Tip:')) {
+                      return (
+                        <div key={key} className="blog-post-tip" role="note" aria-label="Tip">
+                          <p>{para}</p>
+                        </div>
+                      )
+                    }
+                    return <p key={key}>{para}</p>
+                  }
+                  if (listItems.length === 0) {
+                    if (nonListParts.length === 1) {
+                      return (
+                        <div className="blog-post-text">
+                          <p data-toc-section="">{nonListParts[0]}</p>
+                        </div>
+                      )
+                    }
+                    if (post.id === '4' && nonListParts.length >= 3) {
+                      return (
+                        <div className="blog-post-text">
+                          <p>{nonListParts[0]}</p>
+                          <p data-toc-section="" className="blog-post-intro-heading">{nonListParts[1]}</p>
+                          {nonListParts.slice(2).map((para, i) => renderPara(para, i))}
+                        </div>
+                      )
+                    }
+                    return (
+                      <div className="blog-post-text">
+                        <p data-toc-section="" className="blog-post-intro-heading">{heading}</p>
+                        {nonListParts.slice(1).map((para, i) => renderPara(para, i))}
+                      </div>
+                    )
+                  }
+                  const intro = nonListParts[1]
+                  const closing = nonListParts[nonListParts.length - 1]
+                  return (
+                    <div className="blog-post-text">
+                      <p data-toc-section="" className="blog-post-intro-heading">{heading}</p>
+                      <p>{intro}</p>
+                      <ul className="blog-post-role-list">
+                        {listItems.map((item, i) => {
+                          const match = item.match(rolePattern)
+                          if (!match) return null
+                          const [, title, description] = match
+                          return (
+                            <li key={i}>
+                              <strong className="blog-post-role-title">{title}</strong>: {description}
+                            </li>
+                          )
+                        })}
+                      </ul>
+                      <p>{closing}</p>
+                    </div>
+                  )
+                })()}
+                {post.bodyImage3 && (
+                  <div className={`blog-post-image-wrap${post.id === '5' ? ' blog-post-image-wrap--constrained' : ''}`}>
+                    <img src={post.bodyImage3} alt="Real world case study" className="blog-post-image" />
+                  </div>
+                )}
+                {post.contentAfterImage3 && (
+                  <div className="blog-post-text">
+                    {post.contentAfterImage3.split('\n\n').map((para, i) => (
+                      <p key={i} data-toc-section={i === 0 && post.id !== '5' ? '' : undefined} className={i === 0 && post.id !== '5' ? 'blog-post-intro-heading' : undefined}>
+                        {para}
+                      </p>
+                    ))}
+                  </div>
+                )}
+                {post.bodyImage4 && (
+                  <div className="blog-post-image-wrap">
+                    <img src={post.bodyImage4} alt="Best job placement success" className="blog-post-image" />
+                  </div>
+                )}
+                {post.contentAfterImage4 && (
+                  <div className="blog-post-text">
+                    {post.id === '5'
+                      ? (() => {
+                          const parts = post.contentAfterImage4.split('\n\n').map((p) => p.trim()).filter(Boolean)
+                          return parts.map((para, i) =>
+                            i === 1 ? (
+                              <p key={i} data-toc-section="" className="blog-post-intro-heading">{para}</p>
+                            ) : (
+                              <p key={i}>{para}</p>
+                            )
+                          )
+                        })()
+                      : post.contentAfterImage4.split('\n\n').map((para, i) => (
+                          para.trim() === 'Try this approach:' && post.approachBullets?.length ? (
+                            <React.Fragment key={`approach-${i}`}>
+                              <p className="blog-post-subhead">{para}</p>
+                              <ul className="blog-post-bullets">
+                                {post.approachBullets.map((item, idx) => (
+                                  <li key={idx}>{item}</li>
+                                ))}
+                              </ul>
+                            </React.Fragment>
+                          ) : (
+                            <p key={i} data-toc-section={i === 0 && post.id !== '4' ? '' : undefined} className={i === 0 && post.id !== '4' ? 'blog-post-intro-heading' : undefined}>
+                              {para}
+                            </p>
+                          )
+                        ))}
+                  </div>
+                )}
+                {post.bodyImage5 && (
+                  <div className="blog-post-image-wrap">
+                    <img src={post.bodyImage5} alt="" className="blog-post-image" />
+                  </div>
+                )}
+                {post.contentAfterImage5 && (
+                  <div className="blog-post-text">
+                    {post.id === '4'
+                      ? (() => {
+                          const parts = post.contentAfterImage5.split('\n\n').map((p) => p.trim()).filter(Boolean)
+                          return parts.map((para, i) =>
+                            i === 1 ? (
+                              <p key={i} data-toc-section="" className="blog-post-intro-heading">{para}</p>
+                            ) : (
+                              <p key={i}>{para}</p>
+                            )
+                          )
+                        })()
+                      : post.contentAfterImage5.split('\n\n').map((para, i) => (
+                          <p key={i} data-toc-section={i === 0 ? '' : undefined} className={i === 0 ? 'blog-post-intro-heading' : undefined}>
+                            {para}
+                          </p>
+                        ))}
+                  </div>
+                )}
+                {post.contentAfterImage6 && (
+                  <div className="blog-post-text blog-post-cta">
+                    {post.contentAfterImage6.split('\n\n').map((para, i) =>
+                      para.trim() === 'Quick habits that help:' && post.habitsBullets?.length ? (
+                        <React.Fragment key={`habits-${i}`}>
+                          <p className="blog-post-subhead">{para}</p>
+                          <ul className="blog-post-bullets">
+                            {post.habitsBullets.map((item, idx) => (
+                              <li key={idx}>{item}</li>
+                            ))}
+                          </ul>
+                        </React.Fragment>
+                      ) : (
+                        <p key={i} data-toc-section={i === 0 ? '' : undefined} className={i === 0 ? 'blog-post-intro-heading' : undefined}>
+                          {para}
+                        </p>
+                      )
+                    )}
+                    {post.ctaLinks && post.ctaLinks.length > 0 && (
+                      <div className="blog-post-cta-links" data-toc-section="">
+                        {post.ctaLinks.map((cta, i) => (
+                          <a key={i} href={cta.href} className="blog-post-cta-link">
+                            {cta.label}
+                          </a>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+                {post.bodyImage6 && (
+                  <div className="blog-post-image-wrap">
+                    <img src={post.bodyImage6} alt="" className="blog-post-image" />
+                  </div>
+                )}
+                {post.contentAfterImage7 && (
+                  <div className="blog-post-text">
+                    {post.contentAfterImage7.split('\n\n').map((para, i) => {
+                      const isSectionTitle = para.trim() === 'The Bottom Line: Skills That Pay Off Long-Term'
+                      const isEmphasis =
+                        para.trim().startsWith('The professionals who master these skills')
+                      return (
+                        <p
+                          key={i}
+                          data-toc-section={i === 0 ? '' : undefined}
+                          className={
+                            i === 0
+                              ? 'blog-post-intro-heading'
+                              : isSectionTitle
+                                ? 'blog-post-section-heading'
+                                : isEmphasis
+                                  ? 'blog-post-emphasis'
+                                  : undefined
+                          }
+                        >
+                          {para}
+                        </p>
+                      )
+                    })}
+                  </div>
+                )}
+                {post.contentAfterImage8 && (
+                  <div className="blog-post-text">
+                    {post.contentAfterImage8.split('\n\n').map((para, i) => (
+                      <p key={i} data-toc-section={i === 0 ? '' : undefined} className={i === 0 ? 'blog-post-intro-heading' : undefined}>
+                        {para}
+                      </p>
+                    ))}
+                  </div>
+                )}
+                {post.bodyImage8 && (
+                  <div className="blog-post-image-wrap">
+                    <img src={post.bodyImage8} alt="" className="blog-post-image" />
+                  </div>
+                )}
+                {post.contentAfterImage9 && (
+                  <div className="blog-post-text">
+                    {post.contentAfterImage9.split('\n\n').map((para, i) => (
+                      <p key={i} data-toc-section={i === 0 ? '' : undefined} className={i === 0 ? 'blog-post-intro-heading' : undefined}>
+                        {para}
+                      </p>
+                    ))}
+                  </div>
+                )}
+                {post.contentAfterImage10 && (
+                  <div className="blog-post-text">
+                    {post.contentAfterImage10.split('\n\n').map((para, i) => (
+                      <p key={i} data-toc-section={i === 0 ? '' : undefined} className={i === 0 ? 'blog-post-intro-heading' : undefined}>
+                        {para}
+                      </p>
+                    ))}
+                  </div>
+                )}
+                {post.toc?.length > 10 && (
+                  <div data-toc-section="" aria-hidden="true" style={{ height: 0, overflow: 'hidden' }} />
+                )}
+              </div>
+              <aside className={`blog-post-toc${!tocExpanded ? ' blog-post-toc--collapsed' : ''}`} aria-label="Table of contents">
+                <div className="blog-post-toc-header">
+                  <h2 className="blog-post-toc-title">Table of Content</h2>
+                  <button
+                    type="button"
+                    className="blog-post-toc-toggle"
+                    aria-expanded={tocExpanded}
+                    aria-label={tocExpanded ? 'Collapse table of contents' : 'Expand table of contents'}
+                    onClick={() => setTocExpanded((v) => !v)}
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </button>
+                </div>
+                <div className="blog-post-toc-list-wrap" style={{ display: tocExpanded ? undefined : 'none' }}>
+                  <ol className={`blog-post-toc-list${post.tocNumbers ? ' blog-post-toc-list--custom' : ''}`}>
+                    {post.toc.map((item, i) => {
+                      const num = post.tocNumbers && post.tocNumbers[i]
+                      const numLabel = num !== undefined && num !== '' ? `${num}. ` : ''
+                      return (
+                        <li key={i} className={activeTocIndex === i ? 'active' : ''}>
+                          {post.tocNumbers && <span className="blog-post-toc-num">{numLabel}</span>}
+                          <a
+                            href={item === 'Enquire Now' ? '#enquire-now' : `#toc-${i}`}
+                            onClick={(e) => {
+                              e.preventDefault()
+                              const targetId = item === 'Enquire Now' ? 'enquire-now' : `toc-${i}`
+                              const scrollEl = scrollRef.current
+                              const target = scrollEl?.querySelector(`#${targetId}`) || document.getElementById(targetId)
+                              if (scrollEl && target && scrollEl.contains(target)) {
+                                const scrollRect = scrollEl.getBoundingClientRect()
+                                const targetRect = target.getBoundingClientRect()
+                                const top = targetRect.top - scrollRect.top + scrollEl.scrollTop
+                                const offset = i === 0 || item === 'Enquire Now' ? 0 : 80
+                                scrollEl.scrollTo({ top: Math.max(0, top - offset), behavior: 'smooth' })
+                                return
+                              }
+                              if (target) {
+                                target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                                return
+                              }
+                              if (scrollEl && item === 'Enquire Now') scrollEl.scrollTo({ top: scrollEl.scrollHeight, behavior: 'smooth' })
+                            }}
+                          >
+                            {item}
+                          </a>
+                        </li>
+                      )
+                    })}
+                  </ol>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </article>
+        <div className="blog-post-end-line" aria-hidden="true" />
+        <ExploreOtherBlogs currentPostId={post.id} />
+        <div id="enquire-now">
+          <EnquireSection />
+        </div>
+        <Footer />
+      </div>
+    </div>
+  )
+}
+
+export default BlogPost
