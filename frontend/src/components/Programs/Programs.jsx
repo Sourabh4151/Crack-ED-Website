@@ -51,8 +51,11 @@ import mahindraFinanceHomeLogo from '../../assets/mahindra_finance_logo.png'
 import pgprmDesktopImage from '../../assets/RM_desktop.png'
 import pgpbmDesktopImage from '../../assets/bandhan_desktop.jpg'
 import pgcbmDesktopImage from '../../assets/desktop_PGC_bde.jpg'
-import bandhanLogo from '../../assets/bandhan_bank_svg.svg'
-import bandhanLogoSmall from '../../assets/bandhan_small_logo.png'
+import retailBankingDesktopImage from '../../assets/retail_banking_desktop.png'
+import retailBankingMobileImage from '../../assets/retail_banking_mobile.png'
+import bankingSalesDesktopImage from '../../assets/banking_sales_desktop.png'
+import mobileSalesOfficerImage from '../../assets/mobile_sales_officer.png'
+import { trackMicrositeClick } from '../../utils/analytics'
 import './Programs.css'
 
 // Keep "LPA + PLP" on one line to prevent awkward wrapping
@@ -80,9 +83,11 @@ const getProgramHomeLogo = (programLabel) => {
     case 'Poonawalla FinPro Career Program': return { src: poonawallaLogo, alt: 'Poonawalla Fincorp' }
     case 'Finova VyaparaMitra Program': return { src: finovaCardLogo, alt: 'Finova Capital' }
     case 'Mahindra Finance Prarambh Program': return { src: mahindraFinanceHomeLogo, alt: 'Mahindra Finance' }
-    case 'Bandhan Career Bridge Program': return { src: bandhanLogo, alt: 'Bandhan Bank' }
     case 'Postgraduate Program in Relationship Management': return null
     case 'Postgraduate Program in Banking Management': return null
+    case 'Postgraduate Program Retail Banking': return null
+    case 'Banking Sales Program':
+    case 'Banking Sales Program - Sales Officer': return null
     case 'Udaan Program': return null
     default: return null
   }
@@ -105,9 +110,9 @@ const Programs = () => {
     },
     {
       id: 2,
-      logo: bandhanLogoSmall,
-      title: 'Bandhan Career Bridge Program - Assistant Manager',
-      url: 'https://bandhanbankam.crack-ed.com/',
+      logo: udaanCardLogo,
+      title: 'Postgraduate Program Banking Management - Assistant Manager',
+      url: 'https://pgpam.crack-ed.com',
     },
     {
       id: 3,
@@ -117,84 +122,96 @@ const Programs = () => {
     },
     {
       id: 4,
+      logo: udaanCardLogo,
+      title: 'Postgraduate Program Retail Banking - Relationship Officer',
+      url: 'https://pgprb.crack-ed.com',
+    },
+    {
+      id: 5,
+      logo: udaanCardLogo,
+      title: 'Banking Sales Program - Sales Officer',
+      url: 'https://bspso.crack-ed.com',
+    },
+    {
+      id: 6,
       logo: mahindraFinanceSmallLogo,
       title: 'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)',
       url: 'https://mahindrafinancebe.crack-ed.com/',
     },
     {
-      id: 5,
+      id: 7,
       logo: lenskartCardLogo,
       title: 'Lenskart EyeTech Program - Clinical Technician',
       url: 'https://lenskart.crack-ed.com/portal',
     },
     {
-      id: 6,
+      id: 8,
       logo: lenskartCardLogo,
       title: 'Lenskart EyeTech Program - Retail Sales Associate',
       url: 'https://lenskartrsa.crack-ed.com/portal',
     },
     {
-      id: 7,
+      id: 9,
       logo: udaanCardLogo,
       title: 'Udaan Program - Cashier / Teller',
       url: 'https://udaan.crack-ed.com/portal',
     },
     {
-      id: 8,
+      id: 10,
       logo: udaanCardLogo,
       title: 'Udaan Program - Virtual Relationship Manager',
       url: 'https://udaanvrm.crack-ed.com',
     },
     {
-      id: 9,
+      id: 11,
       logo: udaanCardLogo,
       title: 'Udaan Program - Relationship Manager',
       url: 'https://udaanrm.crack-ed.com',
     },
     {
-      id: 10,
+      id: 12,
       logo: udaanCardLogo,
       title: 'Udaan Program - Business Loan Associate',
       url: 'https://udaanbusiness.crack-ed.com',
     },
     {
-      id: 11,
+      id: 13,
       logo: piramalCardLogo,
       title: 'Piramal ProEdge Program - Relationship Manager',
       url: 'https://piramal.crack-ed.com/portal',
     },
     {
-      id: 12,
+      id: 14,
       logo: paytmCardLogo,
       title: 'Paytm Disha Program - Field Sales Executive',
       url: 'https://paytm.crack-ed.com/portal',
     },
     {
-      id: 13,
+      id: 15,
       logo: avivaSmallLogo,
       title: 'Aviva Nirmaan Program - Direct Sales Executive',
       url: 'https://avivads.crack-ed.com',
     },
     {
-      id: 14,
+      id: 16,
       logo: avivaSmallLogo,
       title: 'Aviva Nirmaan Program - Agency Sales Executive',
       url: 'https://avivaas.crack-ed.com',
     },
     {
-      id: 15,
+      id: 17,
       logo: poonawallaSmallLogo,
       title: 'Poonawalla FinPro Career Program - Gold Assayer',
       url: 'http://poonawallaga.crack-ed.com/',
     },
     {
-      id: 16,
+      id: 18,
       logo: poonawallaSmallLogo,
       title: 'Poonawalla FinPro Career Program - Sales Executive',
       url: 'http://poonawallase.crack-ed.com/',
     },
     {
-      id: 17,
+      id: 19,
       logo: finovaSmallLogo,
       title: 'Finova VyaparaMitra Program - Relationship Officer',
       url: 'https://finovaro.crack-ed.com',
@@ -309,15 +326,15 @@ const Programs = () => {
       },
       'Postgraduate Program Relationship Management - Relationship Manager': {
         programLabel: 'Postgraduate Program in Relationship Management',
-        shortProgramLabel: 'PGP - Relationship Management',
+        shortProgramLabel: 'PGP - Relationship Management - Relationship Manager',
         logo: auCardLogo,
         details: 'Join as a Relationship Manager with a CTC of Rs 5.5 LPA + incentives',
         duration: '6-month program',
         image: pgprmDesktopImage,
       },
-      'Bandhan Career Bridge Program - Assistant Manager': {
-        programLabel: 'Bandhan Career Bridge Program',
-        shortProgramLabel: 'Bandhan Career Bridge Program',
+      'Postgraduate Program Banking Management - Assistant Manager': {
+        programLabel: 'Postgraduate Program in Banking Management',
+        shortProgramLabel: 'PGP - Banking Management - Assistant Manager',
         logo: auCardLogo,
         details: 'Join as an Assistant Manager with a CTC of Rs 4 LPA + incentives',
         duration: '6-month program',
@@ -325,11 +342,28 @@ const Programs = () => {
       },
       'Postgraduate Certification Banking Management - Business Development Executive': {
         programLabel: 'Postgraduate Certification in Banking Management',
-        shortProgramLabel: 'PGC - Banking Management',
+        shortProgramLabel: 'PGC - Banking Management - BDE',
         logo: udaanCardLogo,
         details: 'Join as a Business Development Executive with a CTC of Rs 2.5 LPA + incentives',
         duration: '2-week program',
         image: pgcbmDesktopImage,
+      },
+      'Postgraduate Program Retail Banking - Relationship Officer': {
+        programLabel: 'Postgraduate Program - Retail Banking',
+        shortProgramLabel: 'PGP - Retail Banking - Relationship Officer',
+        logo: udaanCardLogo,
+        details: 'Join as a Relationship Officer - Mortgage Field Sale with a CTC of upto Rs 3.1 LPA + incentives',
+        duration: '3-week program',
+        image: retailBankingDesktopImage,
+        mobileImage: retailBankingMobileImage,
+      },
+      'Banking Sales Program - Sales Officer': {
+        programLabel: 'Banking Sales Program - Sales Officer',
+        logo: udaanCardLogo,
+        details: 'Join as a Sales Officer with a CTC of Rs 2.5 LPA + incentives',
+        duration: '2-month program',
+        image: bankingSalesDesktopImage,
+        mobileImage: mobileSalesOfficerImage,
       },
     }
 
@@ -343,7 +377,7 @@ const Programs = () => {
         details: prog.details,
         duration: prog.duration,
         image: prog.image,
-        mobileImage: prog.image,
+        mobileImage: prog.mobileImage ?? prog.image,
       }
     }
 
@@ -373,9 +407,10 @@ const Programs = () => {
 
   // Short label for small/mini program cards (PGP only)
   const getSmallCardTitle = (card) => {
-    if (card.title === 'Postgraduate Program Relationship Management - Relationship Manager') return 'PGP - Relationship Management'
-    if (card.title === 'Bandhan Career Bridge Program - Assistant Manager') return 'Bandhan Career Bridge Program - Assistant Manager'
-    if (card.title === 'Postgraduate Certification Banking Management - Business Development Executive') return 'PGC - Banking Management'
+    if (card.title === 'Postgraduate Program Relationship Management - Relationship Manager') return 'PGP - Relationship Management - Relationship Manager'
+    if (card.title === 'Postgraduate Program Banking Management - Assistant Manager') return 'PGP - Banking Management - Assistant Manager'
+    if (card.title === 'Postgraduate Certification Banking Management - Business Development Executive') return 'PGC - Banking Management - BDE'
+    if (card.title === 'Postgraduate Program Retail Banking - Relationship Officer') return 'PGP - Retail Banking - Relationship Officer'
     if (card.title === 'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)') return 'Mahindra Finance Prarambh - Business Executive'
     return card.title
   }
@@ -386,7 +421,6 @@ const Programs = () => {
       return 'Business Executive'
     }
     return title
-      .replace('Bandhan Career Bridge Program - ', '')
       .replace('Lenskart EyeTech Program - ', '')
       .replace('Udaan Program - ', '')
       .replace('Piramal ProEdge Program - ', '')
@@ -396,8 +430,10 @@ const Programs = () => {
       .replace('Poonawalla FinPro Career Program - ', '')
       .replace('Postgraduate Program Relationship Management - ', '')
       .replace('Postgraduate Program Banking Management - ', '')
+      .replace('Postgraduate Program Retail Banking - ', '')
       .replace('Postgraduate Certification Banking Management - ', '')
       .replace('Mahindra Finance Prarambh Program - ', '')
+      .replace('Banking Sales Program - ', '')
   }
 
   useEffect(() => {
@@ -521,6 +557,7 @@ const Programs = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="mobile-program-card-link"
+                      onClick={() => trackMicrositeClick(card.title)}
                     >
                       <div className="mobile-program-card">
                         <div
@@ -539,9 +576,8 @@ const Programs = () => {
                               const isPaytm = logoInfo.alt === 'Paytm'
                               const isAviva = logoInfo.alt === 'Aviva'
                               const isMahindra = logoInfo.alt === 'Mahindra Finance'
-                              const isBandhan = logoInfo.alt === 'Bandhan Bank'
                               return (
-                                <div className={`mobile-program-card-logo${isPaytm ? ' mobile-program-card-logo--paytm' : ''}${isAviva ? ' mobile-program-card-logo--aviva' : ''}${isMahindra ? ' mobile-program-card-logo--mahindra' : ''}${isBandhan ? ' mobile-program-card-logo--bandhan' : ''}`}>
+                                <div className={`mobile-program-card-logo${isPaytm ? ' mobile-program-card-logo--paytm' : ''}${isAviva ? ' mobile-program-card-logo--aviva' : ''}${isMahindra ? ' mobile-program-card-logo--mahindra' : ''}`}>
                                   <img src={logoInfo.src} alt={logoInfo.alt} />
                                 </div>
                               )
@@ -605,9 +641,8 @@ const Programs = () => {
                         const logoInfo = getProgramHomeLogo(programLabel)
                         if (!logoInfo) return null
                         const isMahindra = logoInfo.alt === 'Mahindra Finance'
-                        const isBandhan = logoInfo.alt === 'Bandhan Bank'
                         return (
-                          <div className={`program-logo-above${isMahindra ? ' program-logo-above--mahindra' : ''}${isBandhan ? ' program-logo-above--bandhan' : ''}`}>
+                          <div className={`program-logo-above${logoInfo.alt === 'Mahindra Finance' ? ' program-logo-above--mahindra' : ''}`}>
                             <img src={logoInfo.src} alt={logoInfo.alt} />
                           </div>
                         )
@@ -623,7 +658,7 @@ const Programs = () => {
                           <li><DetailsText text={currentProgramDetails.details} /></li>
                           <li>{currentProgramDetails.duration}</li>
                         </ul>
-                        <a href={programCards[featuredCardIndex]?.url || '#'} target="_blank" rel="noopener noreferrer">
+                        <a href={programCards[featuredCardIndex]?.url || '#'} target="_blank" rel="noopener noreferrer" onClick={() => trackMicrositeClick(programCards[featuredCardIndex]?.title)}>
                           <button className="learn-more-button">Learn More</button>
                         </a>
                       </div>
@@ -654,6 +689,7 @@ const Programs = () => {
                       rel="noopener noreferrer"
                       className="program-mini-card-link"
                       ref={(el) => (cardRefs.current[index] = el)}
+                      onClick={() => trackMicrositeClick(card.title)}
                     >
                       <div className="program-mini-card">
                         <div className="program-mini-card-logo-wrap">
@@ -672,6 +708,7 @@ const Programs = () => {
                       rel="noopener noreferrer"
                       className="program-mini-card-link"
                       ref={(el) => (cardRefs.current[programCards.length] = el)}
+                      onClick={() => trackMicrositeClick(programCards[0].title)}
                     >
                       <div className="program-mini-card">
                         <div className="program-mini-card-logo-wrap">

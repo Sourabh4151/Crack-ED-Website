@@ -52,10 +52,15 @@ PROGRAM_TO_CENTER = {
     'PGP - Banking Management': '78',
     'PGP - Relationship Management': '79',
     'PGC - Banking Management': '80',
+    'PGC - Banking Management - BDE': '80',
+    'PGC - Banking Management - Business Development Executive': '80',
+    'PGP - Retail Banking - Relationship Officer': '82',
+    'Banking Sales Program - Sales Officer': '83',
     'Mahindra Finance Prarambh Program - Business Executive': '81',
     # Full titles (career quiz & site copy)
     'Postgraduate Program Relationship Management - Relationship Manager': '79',
     'Postgraduate Program Banking Management - Assistant Manager': '78',
+    'Postgraduate Program Retail Banking - Relationship Officer': '82',
     'Postgraduate Certification Banking Management - Business Development Executive': '80',
     'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)': '81',
 }

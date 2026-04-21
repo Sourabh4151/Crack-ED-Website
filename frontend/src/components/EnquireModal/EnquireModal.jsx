@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './EnquireModal.css'
 import { submitLeadToCRM, isBackendUnreachable, BACKEND_DOWN_MESSAGE } from '../../services/crmService'
+import { trackGenerateLead } from '../../utils/analytics'
 
 const EnquireModal = ({ isOpen, onClose }) => {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -94,9 +95,11 @@ const EnquireModal = ({ isOpen, onClose }) => {
     'Poonawalla FinPro Career Program - Sales Executive',
     'Poonawalla FinPro Career Program - Gold Assayer',
     'Finova VyaparaMitra Program - Relationship Officer',
-    'Bandhan Career Bridge Program - Assistant Manager',
-    'PGP - Relationship Management',
-    'PGC - Banking Management',
+    'PGP - Banking Management - Assistant Manager',
+    'PGP - Relationship Management - Relationship Manager',
+    'PGC - Banking Management - Business Development Executive',
+    'PGP - Retail Banking - Relationship Officer',
+    'Banking Sales Program - Sales Officer',
     'Mahindra Finance Prarambh Program - Business Executive',
   ]
 
@@ -234,6 +237,7 @@ const EnquireModal = ({ isOpen, onClose }) => {
 
     try {
       await submitLeadToCRM(formData)
+      trackGenerateLead()
       setSubmitSuccess(true)
       setFormData({
         fullName: '',

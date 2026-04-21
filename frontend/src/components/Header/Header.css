@@ -3,7 +3,8 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
+  /* Above page sections and modals that use z-index 1000 (e.g. enquire) */
+  z-index: 1100;
   background: transparent;
   transition: background 0.3s ease, backdrop-filter 0.3s ease;
 }
@@ -116,126 +117,252 @@
   flex-shrink: 0;
 }
 
-.nav-item-dropdown:hover .dropdown-arrow {
+/* Chevron follows React open state only — avoids mismatch when hover gap loses pointer */
+.nav-item-dropdown.active .dropdown-arrow {
   transform: rotate(180deg);
 }
 
-.dropdown-menu {
+/* Programs dropdown — 348px panel, 8px radius; expanded list: 24px padding + 24px gap, links 16/24 */
+.dropdown-menu.programs-dropdown-menu {
   position: absolute;
   top: 100%;
   left: 0;
-  margin-top: 8px;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-radius: 8px;
+  margin-top: 0;
+  padding: 8px 0 0;
+  width: min(348px, calc(100vw - 48px));
+  min-width: min(348px, calc(100vw - 48px));
+  max-width: min(348px, calc(100vw - 48px));
+  max-height: min(85vh, 720px);
   list-style: none;
-  min-width: 250px;
-  padding: 0.5rem 0;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  background: transparent;
   animation: fadeIn 0.3s ease;
   z-index: 1002;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
 }
 
-.dropdown-menu::before {
+.dropdown-menu.programs-dropdown-menu::before {
   content: '';
   position: absolute;
-  top: -10px;
+  top: -12px;
   left: 0;
   right: 0;
-  height: 10px;
+  height: 12px;
   background: transparent;
   pointer-events: auto;
 }
 
-.dropdown-menu li {
-  padding: 0;
-  position: relative;
-}
-
-.dropdown-item-with-submenu {
-  position: relative;
-}
-
-.dropdown-item-with-submenu:hover .dropdown-link-with-arrow {
-  background: #f0f0f0;
-  color: #00a8cc;
-}
-
-.dropdown-menu a {
-  display: block;
-  padding: 0.75rem 1.25rem;
-  color: #333;
-  text-decoration: none;
-  font-weight: 500;
-  transition: background 0.2s ease, color 0.2s ease;
-  white-space: nowrap;
-}
-
-.dropdown-link-with-arrow {
+.programs-dropdown-inner {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.75rem 1.25rem;
-  color: #333;
-  text-decoration: none;
-  font-weight: 500;
-  transition: background 0.2s ease, color 0.2s ease;
-  white-space: nowrap;
-}
-
-.dropdown-link-with-arrow:hover {
-  background: #f0f0f0;
-  color: #00a8cc;
-}
-
-.submenu-arrow {
-  width: 16px;
-  height: 16px;
-  display: inline-block;
-  color: currentColor;
-  flex-shrink: 0;
-  margin-left: 0.5rem;
-  cursor: pointer;
-}
-
-.dropdown-menu a:hover {
-  background: #f0f0f0;
-  color: #00a8cc;
-}
-
-.nested-dropdown-menu {
-  position: absolute;
-  top: 0;
-  left: 100%;
-  margin-left: 0;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+  max-height: min(85vh, 720px);
+  overflow: hidden;
+  background: rgba(0, 0, 0, 1);
   border-radius: 8px;
-  list-style: none;
-  min-width: 280px;
-  padding: 0.5rem 0;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  animation: fadeIn 0.3s ease;
-  z-index: 1001;
+  box-sizing: border-box;
 }
 
-.nested-dropdown-menu li {
-  padding: 0;
-}
-
-.nested-dropdown-menu a {
-  display: block;
-  padding: 0.75rem 1.25rem;
-  color: #333;
+.programs-dropdown-all {
+  display: flex;
+  align-items: center;
+  min-height: 72px;
+  padding: 24px;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 0;
+  color: rgba(250, 250, 250, 1);
   text-decoration: none;
-  font-weight: 500;
+  border: none;
+  border-bottom: 1px solid rgba(250, 250, 250, 0.2);
+  background: rgba(0, 0, 0, 1);
   transition: background 0.2s ease, color 0.2s ease;
-  white-space: nowrap;
+  flex-shrink: 0;
 }
 
-.nested-dropdown-menu a:hover {
-  background: #f0f0f0;
-  color: #00a8cc;
+.programs-dropdown-all:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(250, 250, 250, 1);
+}
+
+.programs-dropdown-categories {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 10px;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.28) rgba(255, 255, 255, 0.06);
+}
+
+.programs-dropdown-categories::-webkit-scrollbar {
+  width: 8px;
+}
+
+.programs-dropdown-categories::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
+}
+
+.programs-dropdown-categories::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: 4px;
+}
+
+.programs-dropdown-categories::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.38);
+}
+
+.programs-dropdown-category {
+  border-bottom: 1px solid rgba(250, 250, 250, 0.2);
+  background: rgba(0, 0, 0, 1);
+}
+
+.programs-dropdown-category:last-child {
+  border-bottom: none;
+}
+
+.programs-dropdown-category-toggle {
+  width: 100%;
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 24px;
+  box-sizing: border-box;
+  margin: 0;
+  border: none;
+  background: rgba(0, 0, 0, 1);
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 0;
+  color: rgba(250, 250, 250, 1);
+  text-align: left;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.programs-dropdown-category-toggle:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(250, 250, 250, 1);
+}
+
+.programs-dropdown-chevron {
+  flex-shrink: 0;
+  color: rgba(250, 250, 250, 1);
+  transition: transform 0.25s ease;
+}
+
+/* Closed: chevron down; open: rotate to point up */
+.programs-dropdown-category.is-open .programs-dropdown-chevron {
+  transform: rotate(180deg);
+}
+
+/* Expanded panel: tighter top so first item sits close under category title (e.g. Banking → Udaan) */
+.programs-dropdown-category-list {
+  list-style: none;
+  margin: 0;
+  padding: 0 24px 24px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  background: rgba(0, 0, 0, 1);
+}
+
+/* Top-level program links: Montserrat 500, 16/24, white */
+.programs-dropdown-category-list > li > a {
+  display: block;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 24px;
+  letter-spacing: 0;
+  color: rgba(250, 250, 250, 1);
+  text-decoration: none;
+  border-radius: 0;
+  transition: background 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+}
+
+.programs-dropdown-category-list > li > a:hover {
+  background: transparent;
+  color: #00d4ff;
+}
+
+/* Program subgroup (e.g. Udaan): max 300px wide, 16px vertical gap (Figma Frame 592) */
+.programs-dropdown-subgroup {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  max-width: 300px;
+  box-sizing: border-box;
+}
+
+/* Subgroup title (e.g. Udaan Program): white, semibold */
+.programs-dropdown-subgroup-label {
+  display: block;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  font-style: normal;
+  line-height: 24px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: rgba(250, 250, 250, 1);
+}
+
+/* Nested roles: 16px gap between rows, 20px horizontal padding (Figma) */
+.programs-dropdown-sublist {
+  list-style: none;
+  margin: 0;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* Nested role links: regular italic, 16/24, grey */
+.programs-dropdown-sublist a {
+  display: block;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: italic;
+  line-height: 24px;
+  letter-spacing: 0;
+  color: rgba(170, 170, 170, 1);
+  text-decoration: none;
+  border-radius: 0;
+  transition: background 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+}
+
+.programs-dropdown-sublist a:hover {
+  background: transparent;
+  color: #00d4ff;
 }
 
 @keyframes fadeIn {
@@ -361,74 +488,68 @@
     height: auto;
   }
 
-  .dropdown-menu {
-    position: static;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: none;
-    border-radius: 0;
-    box-shadow: none;
+  /* Desktop-only panel — mobile nav uses /programs link only */
+  .nav .dropdown-menu.programs-dropdown-menu {
+    display: none !important;
+    visibility: hidden;
+    pointer-events: none;
+    max-height: 0 !important;
+    overflow: hidden !important;
     margin: 0;
     padding: 0;
-    min-width: auto;
-    width: 100%;
-    animation: none;
-    display: block;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
   }
 
-  .nav-item-dropdown.active .dropdown-menu {
-    max-height: 1000px;
+  .programs-dropdown-inner {
+    max-height: none;
+    border-radius: 8px;
+    margin-top: 8px;
   }
 
-  .dropdown-menu li {
-    border-bottom: 1px solid rgba(250, 250, 250, 0.05);
+  .programs-dropdown-all {
+    min-height: auto;
+    padding: 20px 16px;
   }
 
-  .dropdown-menu a,
-  .dropdown-link-with-arrow {
-    color: rgba(250, 250, 250, 0.9);
-    padding: 14px 0;
+  .programs-dropdown-categories {
+    padding: 0 0 8px;
+  }
+
+  .programs-dropdown-category-toggle {
+    min-height: auto;
+    padding: 20px 16px;
+  }
+
+  .programs-dropdown-category-list {
+    padding: 0 16px 20px;
+    gap: 20px;
+  }
+
+  .programs-dropdown-subgroup {
+    gap: 16px;
+    max-width: 100%;
+  }
+
+  .programs-dropdown-sublist {
+    padding: 0 16px;
+    gap: 16px;
+  }
+
+  .programs-dropdown-category-list > li > a {
+    padding: 0;
     font-size: 15px;
+    line-height: 22px;
   }
 
-  .dropdown-link-with-arrow {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .nested-dropdown-menu {
-    position: static;
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: none;
-    border-radius: 0;
-    box-shadow: none;
-    margin: 0;
+  .programs-dropdown-sublist a {
     padding: 0;
-    min-width: auto;
-    width: 100%;
-    animation: none;
-    display: block;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-    margin-left: 16px;
+    font-size: 15px;
+    line-height: 22px;
   }
 
-  .dropdown-item-with-submenu.active .nested-dropdown-menu {
-    max-height: 1000px;
-  }
-
-  .nested-dropdown-menu li {
-    border-bottom: 1px solid rgba(250, 250, 250, 0.03);
-  }
-
-  .nested-dropdown-menu a {
-    color: rgba(250, 250, 250, 0.8);
-    padding: 12px 0;
-    font-size: 14px;
+  .programs-dropdown-subgroup-label {
+    font-size: 15px;
+    line-height: 22px;
+    padding: 0;
   }
 
   .dropdown-arrow,
@@ -506,14 +627,19 @@
     padding: 14px 0;
   }
 
-  .dropdown-menu a,
-  .dropdown-link-with-arrow {
+  .programs-dropdown-all {
     font-size: 14px;
-    padding: 12px 0;
   }
 
-  .nested-dropdown-menu a {
-    font-size: 13px;
-    padding: 10px 0;
+  .programs-dropdown-category-toggle {
+    font-size: 14px;
+    padding: 16px;
+  }
+
+  .programs-dropdown-category-list > li > a,
+  .programs-dropdown-sublist a,
+  .programs-dropdown-subgroup-label {
+    font-size: 14px;
+    line-height: 20px;
   }
 }

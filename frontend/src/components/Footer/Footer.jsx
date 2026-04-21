@@ -81,10 +81,10 @@ const PROGRAMS = [
   },
   {
     id: 'pgpbm',
-    name: 'Bandhan Career Bridge Program',
+    name: 'PGP - Banking Management',
     link: '/programs',
     links: [
-      { label: 'Assistant Manager', href: 'https://bandhanbankam.crack-ed.com/' },
+      { label: 'Assistant Manager', href: 'https://pgpam.crack-ed.com/' },
     ],
   },
   {
@@ -93,6 +93,22 @@ const PROGRAMS = [
     link: '/programs',
     links: [
       { label: 'Business Development Executive', href: 'https://pgcbm.crack-ed.com' },
+    ],
+  },
+  {
+    id: 'pgprb',
+    name: 'PGP - Retail Banking',
+    link: '/programs',
+    links: [
+      { label: 'Relationship Officer', href: 'https://pgprb.crack-ed.com' },
+    ],
+  },
+  {
+    id: 'bspso',
+    name: 'Banking Sales Program',
+    link: '/programs',
+    links: [
+      { label: 'Sales Officer', href: 'https://bspso.crack-ed.com' },
     ],
   },
   {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import lenskartCardLogo from '../../assets/lenskart_card_logo.png'
 // import piramalLogo from '../../assets/piramal.png'
 import piramalLogo from '../../assets/piramal_small.png'
@@ -8,10 +8,12 @@ import paytmLogo from '../../assets/paytm_small_logo.png'
 import poonawallaLogoSmallCard from '../../assets/poonawalla_logo_small_card.png'
 import avivaLogoSmallCard from '../../assets/aviva_logo_small_card.png'
 import finovaSmallLogo from '../../assets/finova_small_logo.png'
-import bandhanLogoSmall from '../../assets/bandhan_small_logo.png'
+import { trackMicrositeClick, markProgramsPageVisited } from '../../utils/analytics'
 import './ProgramsList.css'
 
 const ProgramsList = () => {
+  useEffect(() => { markProgramsPageVisited() }, [])
+
   const [activeTab, setActiveTab] = useState('Banking')
 
   const programs = {
@@ -57,7 +59,7 @@ const ProgramsList = () => {
         ]
       },
       {
-        program: 'Bandhan Career Bridge Program',
+        program: 'Postgraduate Program',
         role: 'Assistant Manager',
         details: [
           'Join as an Assistant Manager with a CTC of Rs 4 LPA + incentives',
@@ -70,6 +72,22 @@ const ProgramsList = () => {
         details: [
           'Join as a Business Development Executive with a CTC of Rs 2.5 LPA + incentives',
           '2-week program'
+        ]
+      },
+      {
+        program: 'Postgraduate Program',
+        role: 'Relationship Officer',
+        details: [
+          'Join as a Relationship Officer - Mortgage Field Sale with a CTC of upto Rs 3.1 LPA + incentives',
+          '3-week program'
+        ]
+      },
+      {
+        program: 'Banking Sales Program',
+        role: 'Sales Officer',
+        details: [
+          'Join as a Sales Officer with a CTC of Rs 2.5 LPA + incentives',
+          '2-month program'
         ]
       },
       {
@@ -168,8 +186,10 @@ const ProgramsList = () => {
     const program = item?.program
     if (category === 'Banking') {
       if (program === 'Postgraduate Program' && role === 'Relationship Manager') return 'https://pgprm.crack-ed.com'
-      if (program === 'Bandhan Career Bridge Program' && role === 'Assistant Manager') return 'https://bandhanbankam.crack-ed.com/'
+      if (program === 'Postgraduate Program' && role === 'Assistant Manager') return 'https://pgpam.crack-ed.com'
       if (program === 'Postgraduate Certification' && role === 'Business Development Executive') return 'https://pgcbm.crack-ed.com'
+      if (program === 'Postgraduate Program' && role === 'Relationship Officer') return 'https://pgprb.crack-ed.com'
+      if (program === 'Banking Sales Program' && role === 'Sales Officer') return 'https://bspso.crack-ed.com'
       if (program === 'Mahindra Finance Prarambh Program' && role === 'Business Executive') return 'https://mahindrafinancebe.crack-ed.com/'
       switch (role) {
         case 'Relationship Manager':
@@ -229,10 +249,10 @@ const ProgramsList = () => {
 
   const getIcon = (category, item) => {
     const program = item?.program
-    const useUdaanLogo = program === 'Udaan Program' || program === 'Postgraduate Program'
-    if (category === 'Banking' && program === 'Bandhan Career Bridge Program') {
-      return <img src={bandhanLogoSmall} alt="Bandhan Bank" className="program-logo-img program-logo-bandhan" />
-    }
+    const useUdaanLogo =
+      program === 'Udaan Program' ||
+      program === 'Postgraduate Program' ||
+      program === 'Banking Sales Program'
     if (category === 'Banking' && useUdaanLogo) {
       return <img src={udaanLogo} alt="Udaan" className="program-logo-img program-logo-udaan" />
     }
@@ -294,7 +314,7 @@ const ProgramsList = () => {
                 className="program-card"
                 target={link ? '_blank' : undefined}
                 rel={link ? 'noopener noreferrer' : undefined}
-                onClick={!link ? (e) => e.preventDefault() : undefined}
+                onClick={!link ? (e) => e.preventDefault() : () => trackMicrositeClick(`${item.program} - ${item.role}`)}
               >
                 <div className="program-card-top">
                   <div className="program-card-icon">{getIcon(activeTab, item)}</div>

@@ -187,12 +187,6 @@
   object-fit: contain;
 }
 
-.programs-list .program-card-icon .program-logo-bandhan {
-  width: 45px;
-  height: 45px;
-  object-fit: contain;
-}
-
 .programs-list .program-card-content {
   display: flex;
   flex-direction: column;

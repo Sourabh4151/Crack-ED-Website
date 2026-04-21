@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './EnquireSection.css'
 import { submitLeadToCRM } from '../../services/crmService'
+import { trackGenerateLead } from '../../utils/analytics'
 
 const STATES = [
   'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 'Goa', 'Gujarat', 'Haryana',
@@ -23,9 +24,11 @@ const PROGRAMS = [
   'Poonawalla FinPro Career Program - Sales Executive',
   'Poonawalla FinPro Career Program - Gold Assayer',
   'Finova VyaparaMitra Program - Relationship Officer',
-  'Bandhan Career Bridge Program - Assistant Manager',
-  'PGP - Relationship Management',
-  'PGC - Banking Management',
+  'PGP - Banking Management - Assistant Manager',
+  'PGP - Relationship Management - Relationship Manager',
+  'PGC - Banking Management - Business Development Executive',
+  'PGP - Retail Banking - Relationship Officer',
+  'Banking Sales Program - Sales Officer',
   'Mahindra Finance Prarambh Program - Business Executive',
 ]
 
@@ -72,6 +75,7 @@ const EnquireSection = () => {
     setSubmitSuccess(false)
     try {
       await submitLeadToCRM(formData)
+      trackGenerateLead()
       setSubmitSuccess(true)
       setFormData({ fullName: '', mobileNumber: '', emailId: '', state: '', program: '' })
     } catch (err) {
