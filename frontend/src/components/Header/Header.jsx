@@ -10,6 +10,14 @@ const PROGRAM_CATEGORIES = [
     label: 'Banking',
     items: [
       {
+        label: 'Postgraduate Program',
+        children: [
+          { label: 'Relationship Management', href: 'https://pgprm.crack-ed.com/' },
+          { label: 'Retail Banking', href: 'https://pgprb.crack-ed.com' },
+          { label: 'Banking Management', href: 'https://pgpam.crack-ed.com/' },
+        ],
+      },
+      {
         label: 'Udaan Program',
         children: [
           { label: 'Cashier / Teller', href: 'https://udaan.crack-ed.com/portal' },
@@ -18,11 +26,9 @@ const PROGRAM_CATEGORIES = [
           { label: 'Business Loan Associate', href: 'https://udaanbusiness.crack-ed.com' },
         ],
       },
-      { label: 'PGP - Relationship Management', href: 'https://pgprm.crack-ed.com/' },
-      { label: 'PGP - Retail Banking', href: 'https://pgprb.crack-ed.com' },
-      { label: 'PGP - Banking Management', href: 'https://pgpam.crack-ed.com/' },
       { label: 'PGC - Banking Management', href: 'https://pgcbm.crack-ed.com' },
       { label: 'Banking Sales Program', href: 'https://bspso.crack-ed.com' },
+      { label: 'Mahindra Finance Prarambh Program', href: 'https://mahindrafinancebe.crack-ed.com/' },
     ],
   },
   {
@@ -36,7 +42,6 @@ const PROGRAM_CATEGORIES = [
           { label: 'Retail Sales Associate', href: 'https://lenskartrsa.crack-ed.com/portal' },
         ],
       },
-      { label: 'Paytm Disha Program', href: 'https://paytm.crack-ed.com/portal' },
     ],
   },
   {
@@ -45,7 +50,7 @@ const PROGRAM_CATEGORIES = [
     items: [
       { label: 'Piramal ProEdge Program', href: 'https://piramal.crack-ed.com/portal' },
       { label: 'Finova VyaparaMitra Program', href: 'https://finovaro.crack-ed.com' },
-      { label: 'Mahindra Finance Prarambh Program', href: 'https://mahindrafinancebe.crack-ed.com/' },
+      { label: 'Paytm Disha Program', href: 'https://paytm.crack-ed.com/portal' },
       {
         label: 'Poonawalla FinPro Career Program',
         children: [

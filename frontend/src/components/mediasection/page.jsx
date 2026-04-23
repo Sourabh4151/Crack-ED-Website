@@ -18,6 +18,7 @@ import bharatLogo from "../../assets/bharat.svg";
 import livemintPhoto from "../../assets/livemint.png";
 import mintLogo from "../../assets/mint.svg";
 
+
 import logoBWDisrupt from "../../assets/idaqkNYWaP_1768564795277 1.png";
 
 const Media = () => {

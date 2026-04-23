@@ -8,6 +8,7 @@ import paytmLogo from '../../assets/paytm_small_logo.png'
 import poonawallaLogoSmallCard from '../../assets/poonawalla_logo_small_card.png'
 import avivaLogoSmallCard from '../../assets/aviva_logo_small_card.png'
 import finovaSmallLogo from '../../assets/finova_small_logo.png'
+import mahindraFinanceSmallLogo from '../../assets/mahindra_finance_small_logo_logo.png'
 import { trackMicrositeClick, markProgramsPageVisited } from '../../utils/analytics'
 import './ProgramsList.css'
 
@@ -255,6 +256,9 @@ const ProgramsList = () => {
       program === 'Banking Sales Program'
     if (category === 'Banking' && useUdaanLogo) {
       return <img src={udaanLogo} alt="Udaan" className="program-logo-img program-logo-udaan" />
+    }
+    if (category === 'Banking' && program === 'Mahindra Finance Prarambh Program') {
+      return <img src={mahindraFinanceSmallLogo} alt="Mahindra Finance" className="program-logo-img program-logo-mahindra" />
     }
     if (category === 'Banking') return <img src={udaanLogo} alt="Udaan" className="program-logo-img program-logo-udaan" />
     if (category === 'Retail') return <img src={lenskartCardLogo} alt="Lenskart" className="program-logo-img" />
