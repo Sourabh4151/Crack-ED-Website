@@ -38,7 +38,8 @@ const EnquireSection = () => {
     mobileNumber: '',
     emailId: '',
     state: '',
-    program: ''
+    program: '',
+    query: ''
   })
   const [errors, setErrors] = useState({})
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -77,7 +78,7 @@ const EnquireSection = () => {
       await submitLeadToCRM(formData)
       trackGenerateLead()
       setSubmitSuccess(true)
-      setFormData({ fullName: '', mobileNumber: '', emailId: '', state: '', program: '' })
+      setFormData({ fullName: '', mobileNumber: '', emailId: '', state: '', program: '', query: '' })
     } catch (err) {
       setSubmitError('Failed to submit. Please try again.')
     } finally {
@@ -161,6 +162,16 @@ const EnquireSection = () => {
                 <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
               {errors.program && <span className="enquire-section-field-error">{errors.program}</span>}
+            </div>
+            <div className="enquire-section-field enquire-section-field-full">
+              <textarea
+                name="query"
+                placeholder="Write your query here"
+                value={formData.query}
+                onChange={handleChange}
+                className="enquire-section-input enquire-section-textarea"
+                rows={4}
+              />
             </div>
           </div>
           {submitError && <div className="enquire-section-error">{submitError}</div>}

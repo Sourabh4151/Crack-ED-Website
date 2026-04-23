@@ -39,7 +39,8 @@ const EnquireModal = ({ isOpen, onClose }) => {
     mobileNumber: '',
     emailId: '',
     state: '',
-    program: ''
+    program: '',
+    query: ''
   })
 
   const [errors, setErrors] = useState({
@@ -244,7 +245,8 @@ const EnquireModal = ({ isOpen, onClose }) => {
         mobileNumber: '',
         emailId: '',
         state: '',
-        program: ''
+        program: '',
+        query: ''
       })
       setErrors({
         fullName: '',
@@ -278,7 +280,8 @@ const EnquireModal = ({ isOpen, onClose }) => {
         mobileNumber: '',
         emailId: '',
         state: '',
-        program: ''
+        program: '',
+        query: ''
       })
       setErrors({
         fullName: '',
@@ -407,7 +410,20 @@ const EnquireModal = ({ isOpen, onClose }) => {
               )}
             </div>
           </div>
-          
+
+          <div className="enquire-modal-form-row">
+            <div className="enquire-modal-form-field">
+              <textarea
+                name="query"
+                placeholder="Write your query here"
+                value={formData.query}
+                onChange={handleInputChange}
+                className="enquire-modal-input enquire-modal-textarea"
+                rows={4}
+              />
+            </div>
+          </div>
+
           {submitError && (
             <div className="enquire-modal-error">
               {submitError}
