@@ -29,6 +29,9 @@ from .serializers import (
 
 EXTRAEDGE_URL = 'https://publisher.extraaedge.com/api/Webhook/addPublisherLead'
 
+# Public blog JSON must not be cached by browsers/CDNs or new posts stay invisible until refresh.
+_BLOG_PUBLIC_CACHE_HEADERS = {'Cache-Control': 'no-store, max-age=0'}
+
 
 def _utm_three(utm_params):
     """Return (utm_source, utm_medium, utm_campaign) from utm_params dict; only these 3 fields."""
@@ -377,7 +380,7 @@ def blog_published_list(request):
     """Published marketing blogs for /resources merge."""
     qs = MarketingBlog.objects.filter(is_published=True).order_by('-updated_at')
     ser = MarketingBlogListSerializer(qs, many=True, context={'request': request})
-    return Response(ser.data)
+    return Response(ser.data, headers=_BLOG_PUBLIC_CACHE_HEADERS)
 
 
 @api_view(['GET'])
@@ -390,9 +393,9 @@ def blog_featured(request):
         .first()
     )
     if not obj:
-        return Response({'blog': None})
+        return Response({'blog': None}, headers=_BLOG_PUBLIC_CACHE_HEADERS)
     ser = MarketingBlogListSerializer(obj, context={'request': request})
-    return Response({'blog': ser.data})
+    return Response({'blog': ser.data}, headers=_BLOG_PUBLIC_CACHE_HEADERS)
 
 
 @api_view(['GET'])
@@ -406,9 +409,13 @@ def blog_public_detail(request, lookup):
     if post is None:
         post = qs.filter(slug=lookup).first()
     if not post:
-        return Response({'detail': 'Not found.'}, status=status.HTTP_404_NOT_FOUND)
+        return Response(
+            {'detail': 'Not found.'},
+            status=status.HTTP_404_NOT_FOUND,
+            headers=_BLOG_PUBLIC_CACHE_HEADERS,
+        )
     ser = MarketingBlogDetailSerializer(post, context={'request': request})
-    return Response(ser.data)
+    return Response(ser.data, headers=_BLOG_PUBLIC_CACHE_HEADERS)
 
 
 @api_view(['POST'])

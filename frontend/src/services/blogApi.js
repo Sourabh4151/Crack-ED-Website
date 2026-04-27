@@ -69,7 +69,7 @@ export async function fetchPublishedMarketingBlogs () {
   const base = getApiBase()
   if (!base) return []
   try {
-    const r = await fetch(`${base}/api/blogs/`)
+    const r = await fetch(`${base}/api/blogs/`, { cache: 'no-store' })
     if (!r.ok) return []
     return await r.json()
   } catch {
@@ -81,7 +81,7 @@ export async function fetchFeaturedMarketingBlog () {
   const base = getApiBase()
   if (!base) return null
   try {
-    const r = await fetch(`${base}/api/blogs/featured/`)
+    const r = await fetch(`${base}/api/blogs/featured/`, { cache: 'no-store' })
     if (!r.ok) return null
     const data = await r.json()
     if (!data.blog) return null
@@ -94,7 +94,9 @@ export async function fetchFeaturedMarketingBlog () {
 export async function fetchMarketingBlogDetail (lookup) {
   const base = getApiBase()
   if (!base) throw new Error('API not configured')
-  const r = await fetch(`${base}/api/blogs/detail/${encodeURIComponent(lookup)}/`)
+  const r = await fetch(`${base}/api/blogs/detail/${encodeURIComponent(lookup)}/`, {
+    cache: 'no-store',
+  })
   if (!r.ok) throw new Error('Not found')
   return r.json()
 }
