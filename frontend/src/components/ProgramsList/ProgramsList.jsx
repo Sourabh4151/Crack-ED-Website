@@ -8,6 +8,7 @@ import paytmLogo from '../../assets/paytm_small_logo.png'
 import poonawallaLogoSmallCard from '../../assets/poonawalla_logo_small_card.png'
 import avivaLogoSmallCard from '../../assets/aviva_logo_small_card.png'
 import finovaSmallLogo from '../../assets/finova_small_logo.png'
+import mahindraFinanceSmallLogo from '../../assets/mahindra_finance_small_logo_logo.png'
 import { trackMicrositeClick, markProgramsPageVisited } from '../../utils/analytics'
 import './ProgramsList.css'
 
@@ -72,6 +73,22 @@ const ProgramsList = () => {
         details: [
           'Join as a Business Development Executive with a CTC of Rs 2.5 LPA + incentives',
           '2-week program'
+        ]
+      },
+      {
+        program: 'Postgraduate Program',
+        role: 'Relationship Officer',
+        details: [
+          'Join as a Relationship Officer - Mortgage Field Sale with a CTC of upto Rs 3.1 LPA + incentives',
+          '3-week program'
+        ]
+      },
+      {
+        program: 'Banking Sales Program',
+        role: 'Sales Officer',
+        details: [
+          'Join as a Sales Officer with a CTC of Rs 2.5 LPA + incentives',
+          '2-month program'
         ]
       },
       {
@@ -172,6 +189,8 @@ const ProgramsList = () => {
       if (program === 'Postgraduate Program' && role === 'Relationship Manager') return 'https://pgprm.crack-ed.com'
       if (program === 'Postgraduate Program' && role === 'Assistant Manager') return 'https://pgpam.crack-ed.com'
       if (program === 'Postgraduate Certification' && role === 'Business Development Executive') return 'https://pgcbm.crack-ed.com'
+      if (program === 'Postgraduate Program' && role === 'Relationship Officer') return 'https://pgprb.crack-ed.com'
+      if (program === 'Banking Sales Program' && role === 'Sales Officer') return 'https://bspso.crack-ed.com'
       if (program === 'Mahindra Finance Prarambh Program' && role === 'Business Executive') return 'https://mahindrafinancebe.crack-ed.com/'
       switch (role) {
         case 'Relationship Manager':
@@ -231,9 +250,15 @@ const ProgramsList = () => {
 
   const getIcon = (category, item) => {
     const program = item?.program
-    const useUdaanLogo = program === 'Udaan Program' || program === 'Postgraduate Program'
+    const useUdaanLogo =
+      program === 'Udaan Program' ||
+      program === 'Postgraduate Program' ||
+      program === 'Banking Sales Program'
     if (category === 'Banking' && useUdaanLogo) {
       return <img src={udaanLogo} alt="Udaan" className="program-logo-img program-logo-udaan" />
+    }
+    if (category === 'Banking' && program === 'Mahindra Finance Prarambh Program') {
+      return <img src={mahindraFinanceSmallLogo} alt="Mahindra Finance" className="program-logo-img program-logo-mahindra" />
     }
     if (category === 'Banking') return <img src={udaanLogo} alt="Udaan" className="program-logo-img program-logo-udaan" />
     if (category === 'Retail') return <img src={lenskartCardLogo} alt="Lenskart" className="program-logo-img" />

@@ -3,23 +3,86 @@ import { Link, useLocation } from 'react-router-dom'
 import logoImage from '../../assets/crack-ed_logo.png'
 import './Header.css'
 
+/** Programs grouped for the header dropdown; Banking is expanded by default. */
+const PROGRAM_CATEGORIES = [
+  {
+    id: 'banking',
+    label: 'Banking',
+    items: [
+      {
+        label: 'Postgraduate Program',
+        children: [
+          { label: 'Relationship Management', href: 'https://pgprm.crack-ed.com/' },
+          { label: 'Retail Banking', href: 'https://pgprb.crack-ed.com' },
+          { label: 'Banking Management', href: 'https://pgpam.crack-ed.com/' },
+        ],
+      },
+      {
+        label: 'Udaan Program',
+        children: [
+          { label: 'Cashier / Teller', href: 'https://udaan.crack-ed.com/portal' },
+          { label: 'Virtual Relationship Manager', href: 'https://udaanvrm.crack-ed.com' },
+          { label: 'Relationship Manager', href: 'https://udaanrm.crack-ed.com' },
+          { label: 'Business Loan Associate', href: 'https://udaanbusiness.crack-ed.com' },
+        ],
+      },
+      { label: 'PGC - Banking Management', href: 'https://pgcbm.crack-ed.com' },
+      { label: 'Banking Sales Program', href: 'https://bspso.crack-ed.com' },
+      { label: 'Mahindra Finance Prarambh Program', href: 'https://mahindrafinancebe.crack-ed.com/' },
+    ],
+  },
+  {
+    id: 'retail',
+    label: 'Retail',
+    items: [
+      {
+        label: 'Lenskart Eyetech Program',
+        children: [
+          { label: 'Clinical Technician', href: 'https://lenskart.crack-ed.com/portal' },
+          { label: 'Retail Sales Associate', href: 'https://lenskartrsa.crack-ed.com/portal' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'nbfc',
+    label: 'NBFC',
+    items: [
+      { label: 'Piramal ProEdge Program', href: 'https://piramal.crack-ed.com/portal' },
+      { label: 'Finova VyaparaMitra Program', href: 'https://finovaro.crack-ed.com' },
+      { label: 'Paytm Disha Program', href: 'https://paytm.crack-ed.com/portal' },
+      {
+        label: 'Poonawalla FinPro Career Program',
+        children: [
+          { label: 'Gold Assayer', href: 'http://poonawallaga.crack-ed.com/' },
+          { label: 'Sales Executive', href: 'http://poonawallase.crack-ed.com/' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'insurance',
+    label: 'Insurance',
+    items: [
+      {
+        label: 'Aviva Nirmaan Program',
+        children: [
+          { label: 'Direct Sales Executive', href: 'https://avivads.crack-ed.com' },
+          { label: 'Agency Sales Executive', href: 'https://avivaas.crack-ed.com' },
+        ],
+      },
+    ],
+  },
+]
+
 const Header = () => {
   const location = useLocation()
   const [isProgramsOpen, setIsProgramsOpen] = useState(false)
-  const [isUdaanSubmenuOpen, setIsUdaanSubmenuOpen] = useState(false)
-  const [isLenskartSubmenuOpen, setIsLenskartSubmenuOpen] = useState(false)
-  const [isFinProSubmenuOpen, setIsFinProSubmenuOpen] = useState(false)
-  const [isAvivaSubmenuOpen, setIsAvivaSubmenuOpen] = useState(false)
+  const [expandedCategories, setExpandedCategories] = useState(['banking'])
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const closeTimeoutRef = useRef(null)
-  const udaanTimeoutRef = useRef(null)
-  const lenskartTimeoutRef = useRef(null)
-  const finproTimeoutRef = useRef(null)
-  const avivaTimeoutRef = useRef(null)
 
-  // On BID, Resources, and Careers the page uses an inner scroll container, so window.scrollY stays 0.
-  // Listen to the actual scroll container so the header gets the black background when scrolled.
   const scrollThreshold = 50
 
   const getScrollTarget = () => {
@@ -40,27 +103,11 @@ const Header = () => {
     if (!target) return window.scrollY
     return target.scrollTop
   }
-  
-  const clearAllTimeouts = () => {
+
+  const clearCloseTimeout = () => {
     if (closeTimeoutRef.current) {
       clearTimeout(closeTimeoutRef.current)
       closeTimeoutRef.current = null
-    }
-    if (udaanTimeoutRef.current) {
-      clearTimeout(udaanTimeoutRef.current)
-      udaanTimeoutRef.current = null
-    }
-    if (lenskartTimeoutRef.current) {
-      clearTimeout(lenskartTimeoutRef.current)
-      lenskartTimeoutRef.current = null
-    }
-    if (finproTimeoutRef.current) {
-      clearTimeout(finproTimeoutRef.current)
-      finproTimeoutRef.current = null
-    }
-    if (avivaTimeoutRef.current) {
-      clearTimeout(avivaTimeoutRef.current)
-      avivaTimeoutRef.current = null
     }
   }
 
@@ -73,24 +120,26 @@ const Header = () => {
       setIsScrolled(scrollPosition > scrollThreshold)
     }
 
-    // Set initial state in case the container is already scrolled (e.g. after navigation)
     handleScroll()
 
     target.addEventListener('scroll', handleScroll, { passive: true })
     return () => {
       target.removeEventListener('scroll', handleScroll)
-      clearAllTimeouts()
+      clearCloseTimeout()
     }
   }, [location.pathname])
 
-  // Close mobile menu on window resize to desktop
+  useEffect(() => {
+    if (isProgramsOpen) {
+      setExpandedCategories(['banking'])
+    }
+  }, [isProgramsOpen])
+
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 768 && isMobileMenuOpen) {
         setIsMobileMenuOpen(false)
         setIsProgramsOpen(false)
-        setIsUdaanSubmenuOpen(false)
-        setIsLenskartSubmenuOpen(false)
       }
     }
 
@@ -100,9 +149,6 @@ const Header = () => {
     }
   }, [isMobileMenuOpen])
 
-  // No body scroll lock - we use an overlay that unmounts when menu closes (avoids unlock bugs)
-
-  // Close mobile menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (isMobileMenuOpen && window.innerWidth <= 768) {
@@ -125,42 +171,66 @@ const Header = () => {
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen)
-    // Close all dropdowns when toggling mobile menu
     if (!isMobileMenuOpen) {
       setIsProgramsOpen(false)
-      setIsLenskartSubmenuOpen(false)
     }
   }
 
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false)
     setIsProgramsOpen(false)
-    setIsUdaanSubmenuOpen(false)
-    setIsLenskartSubmenuOpen(false)
   }
 
-  const toggleProgramsMobile = () => {
-    setIsProgramsOpen(!isProgramsOpen)
-    setIsUdaanSubmenuOpen(false)
-    setIsLenskartSubmenuOpen(false)
-    setIsFinProSubmenuOpen(false)
-    setIsAvivaSubmenuOpen(false)
+  const handleProgramsNavClick = (e) => {
+    /* Mobile: go straight to /programs — no in-nav dropdown */
+    if (typeof window !== 'undefined' && window.innerWidth <= 768) {
+      closeMobileMenu()
+      return
+    }
+    e.preventDefault()
+    clearCloseTimeout()
+    setIsProgramsOpen((open) => !open)
   }
 
-  const toggleUdaanSubmenuMobile = () => {
-    setIsUdaanSubmenuOpen(!isUdaanSubmenuOpen)
+  /** Accordion: only one category open; opening another closes Banking (and all others). */
+  const toggleProgramsCategory = (id) => {
+    setExpandedCategories((prev) => {
+      if (prev.includes(id)) {
+        return []
+      }
+      return [id]
+    })
   }
 
-  const toggleLenskartSubmenuMobile = () => {
-    setIsLenskartSubmenuOpen(!isLenskartSubmenuOpen)
-  }
- 
-  const toggleFinProSubmenuMobile = () => {
-    setIsFinProSubmenuOpen(!isFinProSubmenuOpen)
-  }
- 
-  const toggleAvivaSubmenuMobile = () => {
-    setIsAvivaSubmenuOpen(!isAvivaSubmenuOpen)
+  const renderProgramItem = (item, idx) => {
+    if (item.children) {
+      return (
+        <li key={`${item.label}-${idx}`} className="programs-dropdown-subgroup">
+          <span className="programs-dropdown-subgroup-label">{item.label}</span>
+          <ul className="programs-dropdown-sublist">
+            {item.children.map((child) => (
+              <li key={child.href}>
+                <a
+                  href={child.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={closeMobileMenu}
+                >
+                  {child.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </li>
+      )
+    }
+    return (
+      <li key={item.href}>
+        <a href={item.href} target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>
+          {item.label}
+        </a>
+      </li>
+    )
   }
 
   return (
@@ -169,8 +239,8 @@ const Header = () => {
         <Link to="/" className="logo" onClick={closeMobileMenu} aria-label="Go to home">
           <img src={logoImage} alt="CRACK-ED Logo" className="logo-icon" />
         </Link>
-        
-        <button 
+
+        <button
           className="hamburger-menu"
           onClick={toggleMobileMenu}
           aria-label="Toggle menu"
@@ -179,7 +249,7 @@ const Header = () => {
           <span className={`hamburger-line ${isMobileMenuOpen ? 'open' : ''}`}></span>
           <span className={`hamburger-line ${isMobileMenuOpen ? 'open' : ''}`}></span>
         </button>
-        
+
         <nav className={`nav ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
           <ul className="nav-list">
             <li className="nav-item">
@@ -187,11 +257,11 @@ const Header = () => {
                 About Us
               </Link>
             </li>
-            <li 
+            <li
               className={`nav-item nav-item-dropdown ${isProgramsOpen ? 'active' : ''}`}
               onMouseEnter={() => {
                 if (window.innerWidth > 768) {
-                  clearAllTimeouts()
+                  clearCloseTimeout()
                   setIsProgramsOpen(true)
                 }
               }}
@@ -199,29 +269,27 @@ const Header = () => {
                 if (window.innerWidth > 768) {
                   closeTimeoutRef.current = setTimeout(() => {
                     setIsProgramsOpen(false)
-                    setIsUdaanSubmenuOpen(false)
-                    setIsLenskartSubmenuOpen(false)
-                  }, 300)
+                  }, 280)
                 }
               }}
             >
-              <Link 
-                to="/programs" 
+              <Link
+                to="/programs"
                 className="nav-link"
-                onClick={closeMobileMenu}
-                title="Click to view all programs"
+                onClick={handleProgramsNavClick}
+                title="Programs — open menu on desktop; full list on mobile"
               >
                 Programs
-                <svg className="dropdown-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg className="dropdown-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
                   <path d="M4 6L8 10L12 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </Link>
               {isProgramsOpen && (
-                <ul 
-                  className="dropdown-menu"
+                <div
+                  className="dropdown-menu programs-dropdown-menu"
                   onMouseEnter={() => {
                     if (window.innerWidth > 768) {
-                      clearAllTimeouts()
+                      clearCloseTimeout()
                       setIsProgramsOpen(true)
                     }
                   }}
@@ -229,310 +297,56 @@ const Header = () => {
                     if (window.innerWidth > 768) {
                       closeTimeoutRef.current = setTimeout(() => {
                         setIsProgramsOpen(false)
-                        setIsUdaanSubmenuOpen(false)
-                        setIsLenskartSubmenuOpen(false)
-                      }, 300)
+                      }, 280)
                     }
                   }}
                 >
-                  <li><a href="https://piramal.crack-ed.com/portal" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Piramal ProEdge Program</a></li>
-                  <li><a href="https://finovaro.crack-ed.com" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Finova VyaparaMitra Program</a></li>
-                  <li><a href="https://pgprm.crack-ed.com/" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>PGP - Relationship Management
-                  </a></li>
-                  <li><a href="https://pgpam.crack-ed.com/" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>PGP - Banking Management</a></li>
-                  <li><a href="https://pgcbm.crack-ed.com" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>PGC - Banking Management</a></li>
-                  <li><a href="https://mahindrafinancebe.crack-ed.com/" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Mahindra Finance Prarambh Program</a></li>
-                  <li 
-                    className={`dropdown-item-with-submenu ${isUdaanSubmenuOpen ? 'active' : ''}`}
-                    onMouseEnter={() => {
-                      if (window.innerWidth > 768) {
-                        clearAllTimeouts()
-                        setIsUdaanSubmenuOpen(true)
-                        setIsLenskartSubmenuOpen(false)
-                        setIsProgramsOpen(true)
-                      }
-                    }}
-                    onMouseLeave={() => {
-                      if (window.innerWidth > 768) {
-                        udaanTimeoutRef.current = setTimeout(() => {
-                          setIsUdaanSubmenuOpen(false)
-                        }, 150)
-                      }
-                    }}
-                  >
-                    <a 
-                      href="#programs/udaan" 
-                      className="dropdown-link-with-arrow"
-                      onClick={(e) => {
-                        if (window.innerWidth <= 768) {
-                          e.preventDefault()
-                          toggleUdaanSubmenuMobile()
-                        }
+                  <div className="programs-dropdown-inner">
+                    <Link
+                      to="/programs"
+                      className="programs-dropdown-all"
+                      onClick={() => {
+                        closeMobileMenu()
+                        setIsProgramsOpen(false)
                       }}
                     >
-                      Udaan Program
-                      <svg 
-                        className="submenu-arrow" 
-                        width="16" 
-                        height="16" 
-                        viewBox="0 0 16 16" 
-                        fill="none" 
-                        xmlns="http://www.w3.org/2000/svg"
-                        onClick={(e) => {
-                          e.preventDefault()
-                          if (window.innerWidth <= 768) {
-                            toggleUdaanSubmenuMobile()
-                          } else {
-                            setIsUdaanSubmenuOpen(!isUdaanSubmenuOpen)
-                          }
-                        }}
-                      >
-                        <path d="M6 4L10 8L6 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                    </a>
-                    {isUdaanSubmenuOpen && (
-                      <ul 
-                        className="nested-dropdown-menu"
-                        onMouseEnter={() => {
-                          if (window.innerWidth > 768) {
-                            clearAllTimeouts()
-                            setIsUdaanSubmenuOpen(true)
-                            setIsProgramsOpen(true)
-                          }
-                        }}
-                        onMouseLeave={() => {
-                          if (window.innerWidth > 768) {
-                            udaanTimeoutRef.current = setTimeout(() => {
-                              setIsUdaanSubmenuOpen(false)
-                            }, 150)
-                          }
-                        }}
-                      >
-                        <li><a href="https://udaan.crack-ed.com/portal" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Cashier / Teller</a></li>
-                        <li><a href="https://udaanvrm.crack-ed.com" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Virtual Relationship Manager</a></li>
-                        <li><a href="https://udaanrm.crack-ed.com" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Relationship Manager</a></li>
-                        <li><a href="https://udaanbusiness.crack-ed.com" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Business Loan Associate</a></li>
-                      </ul>
-                    )}
-                  </li>
-                  <li><a href="https://paytm.crack-ed.com/portal" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Paytm Disha Program</a></li>
-                  <li 
-                    className={`dropdown-item-with-submenu ${isLenskartSubmenuOpen ? 'active' : ''}`}
-                    onMouseEnter={() => {
-                      if (window.innerWidth > 768) {
-                        clearAllTimeouts()
-                        setIsUdaanSubmenuOpen(false)
-                        setIsLenskartSubmenuOpen(true)
-                        setIsProgramsOpen(true)
-                      }
-                    }}
-                    onMouseLeave={() => {
-                      if (window.innerWidth > 768) {
-                        lenskartTimeoutRef.current = setTimeout(() => {
-                          setIsLenskartSubmenuOpen(false)
-                        }, 150)
-                      }
-                    }}
-                  >
-                    <a 
-                      href="#programs/lenskart-eyetech" 
-                      className="dropdown-link-with-arrow"
-                      onClick={(e) => {
-                        if (window.innerWidth <= 768) {
-                          e.preventDefault()
-                          toggleLenskartSubmenuMobile()
-                        }
-                      }}
-                    >
-                      Lenskart Eyetech Program
-                      <svg 
-                        className="submenu-arrow" 
-                        width="16" 
-                        height="16" 
-                        viewBox="0 0 16 16" 
-                        fill="none" 
-                        xmlns="http://www.w3.org/2000/svg"
-                        onClick={(e) => {
-                          e.preventDefault()
-                          if (window.innerWidth <= 768) {
-                            toggleLenskartSubmenuMobile()
-                          } else {
-                            setIsLenskartSubmenuOpen(!isLenskartSubmenuOpen)
-                          }
-                        }}
-                      >
-                        <path d="M6 4L10 8L6 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                    </a>
-                    {isLenskartSubmenuOpen && (
-                      <ul 
-                        className="nested-dropdown-menu"
-                        onMouseEnter={() => {
-                          if (window.innerWidth > 768) {
-                            clearAllTimeouts()
-                            setIsLenskartSubmenuOpen(true)
-                            setIsProgramsOpen(true)
-                          }
-                        }}
-                        onMouseLeave={() => {
-                          if (window.innerWidth > 768) {
-                            lenskartTimeoutRef.current = setTimeout(() => {
-                              setIsLenskartSubmenuOpen(false)
-                            }, 150)
-                          }
-                        }}
-                      >
-                        <li><a href="https://lenskart.crack-ed.com/portal" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Clinical Technician</a></li>
-                        <li><a href="https://lenskartrsa.crack-ed.com/portal" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Retail Sales Associate</a></li>
-                      </ul>
-                    )}
-                  </li>
-                  <li 
-                    className={`dropdown-item-with-submenu ${isFinProSubmenuOpen ? 'active' : ''}`}
-                    onMouseEnter={() => {
-                      if (window.innerWidth > 768) {
-                        clearAllTimeouts()
-                        setIsUdaanSubmenuOpen(false)
-                        setIsLenskartSubmenuOpen(false)
-                        setIsFinProSubmenuOpen(true)
-                        setIsProgramsOpen(true)
-                      }
-                    }}
-                    onMouseLeave={() => {
-                      if (window.innerWidth > 768) {
-                        finproTimeoutRef.current = setTimeout(() => {
-                          setIsFinProSubmenuOpen(false)
-                        }, 150)
-                      }
-                    }}
-                  >
-                    <a 
-                      href="#programs/finpro" 
-                      className="dropdown-link-with-arrow"
-                      onClick={(e) => {
-                        if (window.innerWidth <= 768) {
-                          e.preventDefault()
-                          toggleFinProSubmenuMobile()
-                        }
-                      }}
-                    >
-                      Poonawalla FinPro Career Program
-                      <svg 
-                        className="submenu-arrow" 
-                        width="16" 
-                        height="16" 
-                        viewBox="0 0 16 16" 
-                        fill="none" 
-                        xmlns="http://www.w3.org/2000/svg"
-                        onClick={(e) => {
-                          e.preventDefault()
-                          if (window.innerWidth <= 768) {
-                            toggleFinProSubmenuMobile()
-                          } else {
-                            setIsFinProSubmenuOpen(!isFinProSubmenuOpen)
-                          }
-                        }}
-                      >
-                        <path d="M6 4L10 8L6 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                    </a>
-                    {isFinProSubmenuOpen && (
-                      <ul 
-                        className="nested-dropdown-menu"
-                        onMouseEnter={() => {
-                          if (window.innerWidth > 768) {
-                            clearAllTimeouts()
-                            setIsFinProSubmenuOpen(true)
-                            setIsProgramsOpen(true)
-                          }
-                        }}
-                        onMouseLeave={() => {
-                          if (window.innerWidth > 768) {
-                            finproTimeoutRef.current = setTimeout(() => {
-                              setIsFinProSubmenuOpen(false)
-                            }, 150)
-                          }
-                        }}
-                      >
-                        <li><a href="http://poonawallaga.crack-ed.com/" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Gold Assayer</a></li>
-                        <li><a href="http://poonawallase.crack-ed.com/" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Sales Executive</a></li>
-                      </ul>
-                    )}
-                  </li>
-                  <li 
-                    className={`dropdown-item-with-submenu ${isAvivaSubmenuOpen ? 'active' : ''}`}
-                    onMouseEnter={() => {
-                      if (window.innerWidth > 768) {
-                        clearAllTimeouts()
-                        setIsUdaanSubmenuOpen(false)
-                        setIsLenskartSubmenuOpen(false)
-                        setIsFinProSubmenuOpen(false)
-                        setIsAvivaSubmenuOpen(true)
-                        setIsProgramsOpen(true)
-                      }
-                    }}
-                    onMouseLeave={() => {
-                      if (window.innerWidth > 768) {
-                        avivaTimeoutRef.current = setTimeout(() => {
-                          setIsAvivaSubmenuOpen(false)
-                        }, 150)
-                      }
-                    }}
-                  >
-                    <a 
-                      href="#programs/aviva" 
-                      className="dropdown-link-with-arrow"
-                      onClick={(e) => {
-                        if (window.innerWidth <= 768) {
-                          e.preventDefault()
-                          toggleAvivaSubmenuMobile()
-                        }
-                      }}
-                    >
-                      Aviva Nirmaan Program
-                      <svg 
-                        className="submenu-arrow" 
-                        width="16" 
-                        height="16" 
-                        viewBox="0 0 16 16" 
-                        fill="none" 
-                        xmlns="http://www.w3.org/2000/svg"
-                        onClick={(e) => {
-                          e.preventDefault()
-                          if (window.innerWidth <= 768) {
-                            toggleAvivaSubmenuMobile()
-                          } else {
-                            setIsAvivaSubmenuOpen(!isAvivaSubmenuOpen)
-                          }
-                        }}
-                      >
-                        <path d="M6 4L10 8L6 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                    </a>
-                    {isAvivaSubmenuOpen && (
-                      <ul 
-                        className="nested-dropdown-menu"
-                        onMouseEnter={() => {
-                          if (window.innerWidth > 768) {
-                            clearAllTimeouts()
-                            setIsAvivaSubmenuOpen(true)
-                            setIsProgramsOpen(true)
-                          }
-                        }}
-                        onMouseLeave={() => {
-                          if (window.innerWidth > 768) {
-                            avivaTimeoutRef.current = setTimeout(() => {
-                              setIsAvivaSubmenuOpen(false)
-                            }, 150)
-                          }
-                        }}
-                      >
-                        <li><a href="https://avivads.crack-ed.com" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Direct Sales Executive</a></li>
-                        <li><a href="https://avivaas.crack-ed.com" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Agency Sales Executive</a></li>
-                      </ul>
-                    )}
-                  </li>
-                </ul>
+                      All Programs
+                    </Link>
+                    <ul className="programs-dropdown-categories">
+                      {PROGRAM_CATEGORIES.map((cat) => {
+                        const isExpanded = expandedCategories.includes(cat.id)
+                        return (
+                          <li key={cat.id} className={`programs-dropdown-category ${isExpanded ? 'is-open' : ''}`}>
+                            <button
+                              type="button"
+                              className="programs-dropdown-category-toggle"
+                              aria-expanded={isExpanded}
+                              onClick={() => toggleProgramsCategory(cat.id)}
+                            >
+                              <span>{cat.label}</span>
+                              <svg
+                                className="programs-dropdown-chevron"
+                                width="16"
+                                height="16"
+                                viewBox="0 0 16 16"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden
+                              >
+                                <path d="M4 6L8 10L12 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                              </svg>
+                            </button>
+                            {isExpanded && (
+                              <ul className="programs-dropdown-category-list">
+                                {cat.items.map((item, i) => renderProgramItem(item, i))}
+                              </ul>
+                            )}
+                          </li>
+                        )
+                      })}
+                    </ul>
+                  </div>
+                </div>
               )}
             </li>
             <li className="nav-item">

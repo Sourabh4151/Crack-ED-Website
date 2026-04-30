@@ -39,7 +39,8 @@ const EnquireModal = ({ isOpen, onClose }) => {
     mobileNumber: '',
     emailId: '',
     state: '',
-    program: ''
+    program: '',
+    query: ''
   })
 
   const [errors, setErrors] = useState({
@@ -95,9 +96,11 @@ const EnquireModal = ({ isOpen, onClose }) => {
     'Poonawalla FinPro Career Program - Sales Executive',
     'Poonawalla FinPro Career Program - Gold Assayer',
     'Finova VyaparaMitra Program - Relationship Officer',
-    'PGP - Banking Management',
-    'PGP - Relationship Management',
-    'PGC - Banking Management',
+    'PGP - Banking Management - Assistant Manager',
+    'PGP - Relationship Management - Relationship Manager',
+    'PGC - Banking Management - Business Development Executive',
+    'PGP - Retail Banking - Relationship Officer',
+    'Banking Sales Program - Sales Officer',
     'Mahindra Finance Prarambh Program - Business Executive',
   ]
 
@@ -242,7 +245,8 @@ const EnquireModal = ({ isOpen, onClose }) => {
         mobileNumber: '',
         emailId: '',
         state: '',
-        program: ''
+        program: '',
+        query: ''
       })
       setErrors({
         fullName: '',
@@ -276,7 +280,8 @@ const EnquireModal = ({ isOpen, onClose }) => {
         mobileNumber: '',
         emailId: '',
         state: '',
-        program: ''
+        program: '',
+        query: ''
       })
       setErrors({
         fullName: '',
@@ -405,7 +410,20 @@ const EnquireModal = ({ isOpen, onClose }) => {
               )}
             </div>
           </div>
-          
+
+          <div className="enquire-modal-form-row">
+            <div className="enquire-modal-form-field">
+              <textarea
+                name="query"
+                placeholder="Write your query here"
+                value={formData.query}
+                onChange={handleInputChange}
+                className="enquire-modal-input enquire-modal-textarea"
+                rows={4}
+              />
+            </div>
+          </div>
+
           {submitError && (
             <div className="enquire-modal-error">
               {submitError}

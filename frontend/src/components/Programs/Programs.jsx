@@ -51,6 +51,10 @@ import mahindraFinanceHomeLogo from '../../assets/mahindra_finance_logo.png'
 import pgprmDesktopImage from '../../assets/RM_desktop.png'
 import pgpbmDesktopImage from '../../assets/bandhan_desktop.jpg'
 import pgcbmDesktopImage from '../../assets/desktop_PGC_bde.jpg'
+import retailBankingDesktopImage from '../../assets/retail_banking_desktop.png'
+import retailBankingMobileImage from '../../assets/retail_banking_mobile.png'
+import bankingSalesDesktopImage from '../../assets/banking_sales_desktop.png'
+import mobileSalesOfficerImage from '../../assets/mobile_sales_officer.png'
 import { trackMicrositeClick } from '../../utils/analytics'
 import './Programs.css'
 
@@ -81,6 +85,9 @@ const getProgramHomeLogo = (programLabel) => {
     case 'Mahindra Finance Prarambh Program': return { src: mahindraFinanceHomeLogo, alt: 'Mahindra Finance' }
     case 'Postgraduate Program in Relationship Management': return null
     case 'Postgraduate Program in Banking Management': return null
+    case 'Postgraduate Program Retail Banking': return null
+    case 'Banking Sales Program':
+    case 'Banking Sales Program - Sales Officer': return null
     case 'Udaan Program': return null
     default: return null
   }
@@ -115,84 +122,96 @@ const Programs = () => {
     },
     {
       id: 4,
+      logo: udaanCardLogo,
+      title: 'Postgraduate Program Retail Banking - Relationship Officer',
+      url: 'https://pgprb.crack-ed.com',
+    },
+    {
+      id: 5,
+      logo: udaanCardLogo,
+      title: 'Banking Sales Program - Sales Officer',
+      url: 'https://bspso.crack-ed.com',
+    },
+    {
+      id: 6,
       logo: mahindraFinanceSmallLogo,
       title: 'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)',
       url: 'https://mahindrafinancebe.crack-ed.com/',
     },
     {
-      id: 5,
+      id: 7,
       logo: lenskartCardLogo,
       title: 'Lenskart EyeTech Program - Clinical Technician',
       url: 'https://lenskart.crack-ed.com/portal',
     },
     {
-      id: 6,
+      id: 8,
       logo: lenskartCardLogo,
       title: 'Lenskart EyeTech Program - Retail Sales Associate',
       url: 'https://lenskartrsa.crack-ed.com/portal',
     },
     {
-      id: 7,
+      id: 9,
       logo: udaanCardLogo,
       title: 'Udaan Program - Cashier / Teller',
       url: 'https://udaan.crack-ed.com/portal',
     },
     {
-      id: 8,
+      id: 10,
       logo: udaanCardLogo,
       title: 'Udaan Program - Virtual Relationship Manager',
       url: 'https://udaanvrm.crack-ed.com',
     },
     {
-      id: 9,
+      id: 11,
       logo: udaanCardLogo,
       title: 'Udaan Program - Relationship Manager',
       url: 'https://udaanrm.crack-ed.com',
     },
     {
-      id: 10,
+      id: 12,
       logo: udaanCardLogo,
       title: 'Udaan Program - Business Loan Associate',
       url: 'https://udaanbusiness.crack-ed.com',
     },
     {
-      id: 11,
+      id: 13,
       logo: piramalCardLogo,
       title: 'Piramal ProEdge Program - Relationship Manager',
       url: 'https://piramal.crack-ed.com/portal',
     },
     {
-      id: 12,
+      id: 14,
       logo: paytmCardLogo,
       title: 'Paytm Disha Program - Field Sales Executive',
       url: 'https://paytm.crack-ed.com/portal',
     },
     {
-      id: 13,
+      id: 15,
       logo: avivaSmallLogo,
       title: 'Aviva Nirmaan Program - Direct Sales Executive',
       url: 'https://avivads.crack-ed.com',
     },
     {
-      id: 14,
+      id: 16,
       logo: avivaSmallLogo,
       title: 'Aviva Nirmaan Program - Agency Sales Executive',
       url: 'https://avivaas.crack-ed.com',
     },
     {
-      id: 15,
+      id: 17,
       logo: poonawallaSmallLogo,
       title: 'Poonawalla FinPro Career Program - Gold Assayer',
       url: 'http://poonawallaga.crack-ed.com/',
     },
     {
-      id: 16,
+      id: 18,
       logo: poonawallaSmallLogo,
       title: 'Poonawalla FinPro Career Program - Sales Executive',
       url: 'http://poonawallase.crack-ed.com/',
     },
     {
-      id: 17,
+      id: 19,
       logo: finovaSmallLogo,
       title: 'Finova VyaparaMitra Program - Relationship Officer',
       url: 'https://finovaro.crack-ed.com',
@@ -307,7 +326,7 @@ const Programs = () => {
       },
       'Postgraduate Program Relationship Management - Relationship Manager': {
         programLabel: 'Postgraduate Program in Relationship Management',
-        shortProgramLabel: 'PGP - Relationship Management',
+        shortProgramLabel: 'PGP - Relationship Management - Relationship Manager',
         logo: auCardLogo,
         details: 'Join as a Relationship Manager with a CTC of Rs 5.5 LPA + incentives',
         duration: '6-month program',
@@ -315,7 +334,7 @@ const Programs = () => {
       },
       'Postgraduate Program Banking Management - Assistant Manager': {
         programLabel: 'Postgraduate Program in Banking Management',
-        shortProgramLabel: 'PGP - Banking Management',
+        shortProgramLabel: 'PGP - Banking Management - Assistant Manager',
         logo: auCardLogo,
         details: 'Join as an Assistant Manager with a CTC of Rs 4 LPA + incentives',
         duration: '6-month program',
@@ -323,11 +342,28 @@ const Programs = () => {
       },
       'Postgraduate Certification Banking Management - Business Development Executive': {
         programLabel: 'Postgraduate Certification in Banking Management',
-        shortProgramLabel: 'PGC - Banking Management',
+        shortProgramLabel: 'PGC - Banking Management - BDE',
         logo: udaanCardLogo,
         details: 'Join as a Business Development Executive with a CTC of Rs 2.5 LPA + incentives',
         duration: '2-week program',
         image: pgcbmDesktopImage,
+      },
+      'Postgraduate Program Retail Banking - Relationship Officer': {
+        programLabel: 'Postgraduate Program - Retail Banking',
+        shortProgramLabel: 'PGP - Retail Banking - Relationship Officer',
+        logo: udaanCardLogo,
+        details: 'Join as a Relationship Officer - Mortgage Field Sale with a CTC of upto Rs 3.1 LPA + incentives',
+        duration: '3-week program',
+        image: retailBankingDesktopImage,
+        mobileImage: retailBankingMobileImage,
+      },
+      'Banking Sales Program - Sales Officer': {
+        programLabel: 'Banking Sales Program - Sales Officer',
+        logo: udaanCardLogo,
+        details: 'Join as a Sales Officer with a CTC of Rs 2.5 LPA + incentives',
+        duration: '2-month program',
+        image: bankingSalesDesktopImage,
+        mobileImage: mobileSalesOfficerImage,
       },
     }
 
@@ -341,7 +377,7 @@ const Programs = () => {
         details: prog.details,
         duration: prog.duration,
         image: prog.image,
-        mobileImage: prog.image,
+        mobileImage: prog.mobileImage ?? prog.image,
       }
     }
 
@@ -371,10 +407,11 @@ const Programs = () => {
 
   // Short label for small/mini program cards (PGP only)
   const getSmallCardTitle = (card) => {
-    if (card.title === 'Postgraduate Program Relationship Management - Relationship Manager') return 'PGP - Relationship Management'
-    if (card.title === 'Postgraduate Program Banking Management - Assistant Manager') return 'PGP - Banking Management'
-    if (card.title === 'Postgraduate Certification Banking Management - Business Development Executive') return 'PGC - Banking Management'
-    if (card.title === 'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)') return 'Mahindra Finance Prarambh'
+    if (card.title === 'Postgraduate Program Relationship Management - Relationship Manager') return 'PGP - Relationship Management - Relationship Manager'
+    if (card.title === 'Postgraduate Program Banking Management - Assistant Manager') return 'PGP - Banking Management - Assistant Manager'
+    if (card.title === 'Postgraduate Certification Banking Management - Business Development Executive') return 'PGC - Banking Management - BDE'
+    if (card.title === 'Postgraduate Program Retail Banking - Relationship Officer') return 'PGP - Retail Banking - Relationship Officer'
+    if (card.title === 'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)') return 'Mahindra Finance Prarambh - Business Executive'
     return card.title
   }
 
@@ -393,8 +430,10 @@ const Programs = () => {
       .replace('Poonawalla FinPro Career Program - ', '')
       .replace('Postgraduate Program Relationship Management - ', '')
       .replace('Postgraduate Program Banking Management - ', '')
+      .replace('Postgraduate Program Retail Banking - ', '')
       .replace('Postgraduate Certification Banking Management - ', '')
       .replace('Mahindra Finance Prarambh Program - ', '')
+      .replace('Banking Sales Program - ', '')
   }
 
   useEffect(() => {
@@ -601,6 +640,7 @@ const Programs = () => {
                         const programLabel = currentProgramDetails.programLabel || 'Lenskart Program'
                         const logoInfo = getProgramHomeLogo(programLabel)
                         if (!logoInfo) return null
+                        const isMahindra = logoInfo.alt === 'Mahindra Finance'
                         return (
                           <div className={`program-logo-above${logoInfo.alt === 'Mahindra Finance' ? ' program-logo-above--mahindra' : ''}`}>
                             <img src={logoInfo.src} alt={logoInfo.alt} />

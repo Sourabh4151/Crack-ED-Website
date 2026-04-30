@@ -96,6 +96,22 @@ const PROGRAMS = [
     ],
   },
   {
+    id: 'pgprb',
+    name: 'PGP - Retail Banking',
+    link: '/programs',
+    links: [
+      { label: 'Relationship Officer', href: 'https://pgprb.crack-ed.com' },
+    ],
+  },
+  {
+    id: 'bspso',
+    name: 'Banking Sales Program',
+    link: '/programs',
+    links: [
+      { label: 'Sales Officer', href: 'https://bspso.crack-ed.com' },
+    ],
+  },
+  {
     id: 'mahindra',
     name: 'Mahindra Finance Prarambh Program',
     link: '/programs',

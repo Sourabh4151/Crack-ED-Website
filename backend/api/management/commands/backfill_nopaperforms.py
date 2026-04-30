@@ -92,6 +92,7 @@ class Command(BaseCommand):
                     utm_source=lead.utm_source or '',
                     utm_medium=lead.utm_medium or '',
                     utm_campaign=lead.utm_campaign or '',
+                    remarks=(lead.remarks or '').strip()[:2000],
                 )
                 if do_send:
                     try:

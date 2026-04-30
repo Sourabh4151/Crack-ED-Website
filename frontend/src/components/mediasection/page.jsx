@@ -13,6 +13,11 @@ import loggo4 from "../../assets/logo444.png";
 import loggo5 from "../../assets/logo555.png";
 import img4 from "../../assets/bgimg444.png";
 import img5 from "../../assets/bgimg555.jpg";
+import bharatPhoto from "../../assets/bharat.png";
+import bharatLogo from "../../assets/bharat.svg";
+import livemintPhoto from "../../assets/livemint.png";
+import mintLogo from "../../assets/mint.svg";
+
 
 import logoBWDisrupt from "../../assets/idaqkNYWaP_1768564795277 1.png";
 
@@ -28,6 +33,20 @@ const Media = () => {
       desc: "Crack-ED was honoured as the Skill Empowerment Institution of the Year at the BW Emerging Business Awards (7th Edition) by BW Businessworld, recognising our commitment to empowering young minds across India with confidence, clarity, and job-ready skills through accessible, outcome-driven learning.",
       logoWidth: "290px",
       logoHeight: "37px",
+    },
+    {
+      image: bharatPhoto,
+      logo: bharatLogo,
+      desc: "Debojit Sen, founder of Crack-ED, received the Outstanding Achievement in Education Leadership 2026 award at the Bharat 2.0 Conclave in Mumbai. Presented by Dr. Kiran Bedi, the honor acknowledges his work in closing the gap between education and real-world employability in India.",
+      logoWidth: "239px",
+      logoHeight: "69px",
+    },
+    {
+      image: livemintPhoto,
+      logo: mintLogo,
+      desc: "Debojit Sen, Founder of Crack-ED, has been named in LiveMint 40 Under 40 India 2026, recognizing his efforts to align education with real career outcomes in India. Through Crack-ED, he continues to work on bridging the gap between academic learning and industry needs.",
+      logoWidth: "239px",
+      logoHeight: "69px",
     },
     {
       image: img2,

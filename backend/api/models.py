@@ -95,6 +95,10 @@ class Lead(models.Model):
     utm_source = models.CharField(max_length=500, blank=True)
     utm_medium = models.CharField(max_length=500, blank=True)
     utm_campaign = models.CharField(max_length=500, blank=True)
+    remarks = models.TextField(
+        blank=True,
+        help_text='Enquiry / query text from the form (also sent to CRM as cf_remarks).',
+    )
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

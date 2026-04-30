@@ -32,6 +32,8 @@ const PROGRAM_TO_CF_PROGRAM_MAP = {
   'Postgraduate Program Banking Management - Assistant Manager': 'Bandhan Bank - AM',
   'Postgraduate Certification Banking Management - Business Development Executive': 'IndusInd',
   'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)': 'Mahindra - BE',
+  'PGP - Retail Banking - Relationship Officer': 'Axis - RO',
+  'Banking Sales Program - Sales Officer': 'Banking Sales',
 }
 
 /** Base URL for our Django backend (set in .env as VITE_API_URL, or use proxy with '') */
@@ -156,6 +158,7 @@ export const submitLeadToCRM = async (formData) => {
 
   const sourcePage = typeof window !== 'undefined' ? (window.location.pathname || window.location.href || '') : ''
   const utmParams = getUtmParams()
+  const queryText = (formData?.query ?? '').toString().trim().slice(0, 2000)
   const payload = {
     fullName: fullName || undefined,
     firstName: firstName || '—',
@@ -167,6 +170,7 @@ export const submitLeadToCRM = async (formData) => {
     ...(cfProgram ? { cfProgram } : {}),
     state: formData?.state || '',
     sourcePage,
+    ...(queryText ? { query: queryText } : {}),
     ...(Object.keys(utmParams).length > 0 ? { utmParams } : {}),
   }
 

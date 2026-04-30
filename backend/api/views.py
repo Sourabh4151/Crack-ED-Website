@@ -28,6 +28,11 @@ from .serializers import (
     MarketingBlogAdminSerializer,
 )
 
+
+# Public blog JSON must not be cached by browsers/CDNs or new posts stay invisible until refresh.
+_BLOG_PUBLIC_CACHE_HEADERS = {'Cache-Control': 'no-store, max-age=0'}
+
+
 def get_nopaperforms_url():
     return (
         os.environ.get('NOPAPERFORMS_API_URL')
@@ -88,13 +93,14 @@ def prepare_nopaperforms_post(body):
 
 def build_nopaperforms_body(
     first_name, last_name, email, mobile, state='', city='', cf_program='', source_page='',
-    utm_source='', utm_medium='', utm_campaign='',
+    utm_source='', utm_medium='', utm_campaign='', remarks='',
 ):
     """
     JSON for NoPaperForms createOrUpdate: name, email, mobile, search_criteria;
     optional state, city; cf_program when set; source fixed to Website;
     cf_form_name from get_source_page_label(source_page);
-    UTM when set: cf_utm_id <- utm_source, medium <- utm_medium, campaign <- utm_campaign.
+    UTM when set: cf_utm_id <- utm_source, medium <- utm_medium, campaign <- utm_campaign;
+    optional cf_remarks from enquiry query / remarks text.
     """
     mobile_clean = re.sub(r'\D', '', str(mobile))[:15]
     first = (first_name or '').strip()
@@ -131,18 +137,23 @@ def build_nopaperforms_body(
     if uc:
         payload['campaign'] = uc
 
+    rem = (remarks or '').strip()[:2000]
+    if rem:
+        payload['cf_remarks'] = rem
+
     return payload
 
 
 def _forward_lead_to_nopaperforms(
     first_name, last_name, email, mobile, state='', city='', cf_program='', source_page='',
-    utm_source='', utm_medium='', utm_campaign='',
+    utm_source='', utm_medium='', utm_campaign='', remarks='',
 ):
     """Forward lead to NoPaperForms. Credentials from env. Does not raise; logs on failure."""
     body = build_nopaperforms_body(
         first_name, last_name, email, mobile,
         state=state, city=city, cf_program=cf_program, source_page=source_page,
         utm_source=utm_source, utm_medium=utm_medium, utm_campaign=utm_campaign,
+        remarks=remarks,
     )
     headers, payload = prepare_nopaperforms_post(body)
     if headers is None:
@@ -163,7 +174,7 @@ def _forward_lead_to_nopaperforms(
 
 def _forward_lead_to_nopaperforms_async(
     first_name, last_name, email, mobile, state='', city='', cf_program='', source_page='',
-    utm_source='', utm_medium='', utm_campaign='',
+    utm_source='', utm_medium='', utm_campaign='', remarks='',
 ):
     """Run CRM forward in a background thread so the API can return immediately."""
     thread = threading.Thread(
@@ -177,6 +188,7 @@ def _forward_lead_to_nopaperforms_async(
             'utm_source': utm_source or '',
             'utm_medium': utm_medium or '',
             'utm_campaign': utm_campaign or '',
+            'remarks': remarks or '',
         },
     )
     thread.daemon = True
@@ -264,10 +276,12 @@ def quiz_submit(request):
         (data.get('cfProgram') or data.get('cf_program') or '').strip()
         or (get_center_for_program(program) or '')
     )[:500]
+    quiz_remarks = (data.get('query') or data.get('remarks') or data.get('cfRemarks') or '').strip()[:2000]
     _forward_lead_to_nopaperforms_async(
         q_first, q_last, email, mobile,
         state='', city='', cf_program=cf_program, source_page=source_page or '',
         utm_source=utm_source, utm_medium=utm_medium, utm_campaign=utm_campaign,
+        remarks=quiz_remarks,
     )
     return Response({'success': True}, status=status.HTTP_201_CREATED)
 
@@ -316,6 +330,9 @@ def submit_lead(request):
     )[:500]
     center_val = cf_program or '0'
     utm_source, utm_medium, utm_campaign = _utm_three(utm_params)
+    lead_remarks = (
+        (data.get('query') or data.get('remarks') or data.get('cfRemarks') or '').strip()[:2000]
+    )
     Lead.objects.create(
         first_name=first_name,
         last_name=last_name,
@@ -329,12 +346,14 @@ def submit_lead(request):
         utm_source=utm_source,
         utm_medium=utm_medium,
         utm_campaign=utm_campaign,
+        remarks=lead_remarks,
     )
     print(f'[API] Lead saved: {first_name} {last_name} <{email}>')
     _forward_lead_to_nopaperforms_async(
         first_name, last_name, email, mobile,
         state=state, city=city, cf_program=cf_program, source_page=source_page or '',
         utm_source=utm_source, utm_medium=utm_medium, utm_campaign=utm_campaign,
+        remarks=lead_remarks,
     )
     return Response({'success': True}, status=status.HTTP_201_CREATED)
 
@@ -456,7 +475,7 @@ def blog_published_list(request):
     """Published marketing blogs for /resources merge."""
     qs = MarketingBlog.objects.filter(is_published=True).order_by('-updated_at')
     ser = MarketingBlogListSerializer(qs, many=True, context={'request': request})
-    return Response(ser.data)
+    return Response(ser.data, headers=_BLOG_PUBLIC_CACHE_HEADERS)
 
 
 @api_view(['GET'])
@@ -469,9 +488,9 @@ def blog_featured(request):
         .first()
     )
     if not obj:
-        return Response({'blog': None})
+        return Response({'blog': None}, headers=_BLOG_PUBLIC_CACHE_HEADERS)
     ser = MarketingBlogListSerializer(obj, context={'request': request})
-    return Response({'blog': ser.data})
+    return Response({'blog': ser.data}, headers=_BLOG_PUBLIC_CACHE_HEADERS)
 
 
 @api_view(['GET'])
@@ -485,9 +504,13 @@ def blog_public_detail(request, lookup):
     if post is None:
         post = qs.filter(slug=lookup).first()
     if not post:
-        return Response({'detail': 'Not found.'}, status=status.HTTP_404_NOT_FOUND)
+        return Response(
+            {'detail': 'Not found.'},
+            status=status.HTTP_404_NOT_FOUND,
+            headers=_BLOG_PUBLIC_CACHE_HEADERS,
+        )
     ser = MarketingBlogDetailSerializer(post, context={'request': request})
-    return Response(ser.data)
+    return Response(ser.data, headers=_BLOG_PUBLIC_CACHE_HEADERS)
 
 
 @api_view(['POST'])

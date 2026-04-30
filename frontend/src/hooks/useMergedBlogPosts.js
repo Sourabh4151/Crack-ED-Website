@@ -1,27 +1,32 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { BLOG_POSTS } from '../data/blogPosts'
 import { fetchPublishedMarketingBlogs, marketingBlogToCard } from '../services/blogApi'
 
+function buildStaticBlogCards () {
+  return BLOG_POSTS.filter((p) => !p.hideFromResources).map((p) => ({
+    id: p.id,
+    title: p.title,
+    date: p.date,
+    tags: p.tags || [],
+    image: p.image,
+    excerpt: typeof p.excerpt === 'string' && p.excerpt.trim() ? p.excerpt.trim() : undefined,
+    hideFromResources: false,
+    source: 'static',
+  }))
+}
+
 /**
  * API-published blogs first, then legacy static posts (excluding hideFromResources on static).
+ * Static cards render immediately so /resources is never empty while the API is slow.
  */
 export function useMergedBlogPosts () {
-  const [cards, setCards] = useState([])
+  const staticCards = useMemo(() => buildStaticBlogCards(), [])
+  const [cards, setCards] = useState(staticCards)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     let cancelled = false
     ;(async () => {
-      const staticCards = BLOG_POSTS.filter((p) => !p.hideFromResources).map((p) => ({
-        id: p.id,
-        title: p.title,
-        date: p.date,
-        tags: p.tags || [],
-        image: p.image,
-        excerpt: typeof p.excerpt === 'string' && p.excerpt.trim() ? p.excerpt.trim() : undefined,
-        hideFromResources: false,
-        source: 'static',
-      }))
       let apiCards = []
       try {
         const raw = await fetchPublishedMarketingBlogs()
@@ -39,7 +44,7 @@ export function useMergedBlogPosts () {
     return () => {
       cancelled = true
     }
-  }, [])
+  }, [staticCards])
 
   return { cards, loading }
 }

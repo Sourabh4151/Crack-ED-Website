@@ -26,8 +26,11 @@ const PROGRAM_FEES = {
   'Poonawalla FinPro Career Program - Gold Assayer': 134746,
   'Finova VyaparaMitra Program - Relationship Officer': 84746,
   'Postgraduate Program Relationship Management - Relationship Manager': 254238,
+  'Postgraduate Program Retail Banking - Relationship Officer': 33899,
   'Postgraduate Program Banking Management - Assistant Manager': 169492,
   'Postgraduate Certification Banking Management - Business Development Executive': 50848,
+  'Banking Sales Program - Sales Officer': 80000,
+  'Mahindra Finance Prarambh Program - Business Executive': 59322,
   'Udaan Program - Business Loan Associate': 80000,
 };
 
@@ -46,7 +49,10 @@ const PROGRAM_DETAILS = {
   'Poonawalla FinPro Career Program - Gold Assayer': { details: 'CTC of Rs 2.5 LPA + incentives', duration: '1.5-month program', link: 'http://poonawallaga.crack-ed.com/' },
   'Finova VyaparaMitra Program - Relationship Officer': { details: 'CTC of Rs 2.4 LPA + variable', duration: '3-month program', link: 'https://finovaro.crack-ed.com' },
   'Postgraduate Program Relationship Management - Relationship Manager': { details: 'CTC of Rs 5.5 LPA + incentives', duration: '6-month program', link: 'https://pgprm.crack-ed.com' },
+  'Postgraduate Program Retail Banking - Relationship Officer': { details: 'CTC of upto Rs 3.1 LPA + incentives', duration: '3-week program', link: 'https://pgprb.crack-ed.com' },
   'Postgraduate Program Banking Management - Assistant Manager': { details: 'CTC of Rs 4 LPA + incentives', duration: '6-month program', link: 'https://pgpam.crack-ed.com' },
+  'Banking Sales Program - Sales Officer': { details: 'CTC of Rs 2.5 LPA + incentives', duration: '2-month program', link: 'https://bspso.crack-ed.com' },
+  'Mahindra Finance Prarambh Program - Business Executive': { details: 'CTC of Rs 3.5 LPA + incentives', duration: '1-month online program', link: 'https://mahindrafinancebe.crack-ed.com/' },
   'Postgraduate Certification Banking Management - Business Development Executive': { details: 'CTC of Rs 2.5 LPA + incentives', duration: '2-week program', link: 'https://pgcbm.crack-ed.com' },
   'Udaan Program - Business Loan Associate': { details: 'CTC of upto Rs 2.8 LPA', duration: '3-week program', link: 'https://udaanbusiness.crack-ed.com' },
 };
@@ -57,12 +63,12 @@ const OPTION_TO_PROGRAMS = [
   {
     A: [
       'Aviva Nirmaan Program - Direct Sales Executive',
-      'Poonawalla FinPro Career Program - Sales Executive',
-      'Postgraduate Certification Banking Management - Business Development Executive',
+      'Banking Sales Program - Sales Officer',
+      'Mahindra Finance Prarambh Program - Business Executive',
     ],
     B: [
       'Postgraduate Program Relationship Management - Relationship Manager',
-      'Piramal ProEdge Program - Relationship Manager',
+      'Postgraduate Program Retail Banking - Relationship Officer',
       'Finova VyaparaMitra Program - Relationship Officer',
     ],
     C: [
@@ -80,13 +86,13 @@ const OPTION_TO_PROGRAMS = [
   {
     A: [
       'Aviva Nirmaan Program - Direct Sales Executive',
-      'Poonawalla FinPro Career Program - Sales Executive',
-      'Postgraduate Certification Banking Management - Business Development Executive',
+      'Banking Sales Program - Sales Officer',
+      'Mahindra Finance Prarambh Program - Business Executive',
     ],
     B: [
       'Postgraduate Program Banking Management - Assistant Manager',
+      'Postgraduate Program Retail Banking - Relationship Officer',
       'Piramal ProEdge Program - Relationship Manager',
-      'Finova VyaparaMitra Program - Relationship Officer',
     ],
     C: [
       'Udaan Program - Cashier / Teller',
@@ -103,13 +109,13 @@ const OPTION_TO_PROGRAMS = [
   {
     A: [
       'Aviva Nirmaan Program - Agency Sales Executive',
-      'Aviva Nirmaan Program - Direct Sales Executive',
-      'Poonawalla FinPro Career Program - Sales Executive',
+      'Banking Sales Program - Sales Officer',
+      'Mahindra Finance Prarambh Program - Business Executive',
     ],
     B: [
       'Postgraduate Program Banking Management - Assistant Manager',
       'Udaan Program - Relationship Manager',
-      'Finova VyaparaMitra Program - Relationship Officer',
+      'Postgraduate Program Retail Banking - Relationship Officer',
     ],
     C: [
       'Lenskart EyeTech Program - Retail Sales Associate',
@@ -126,12 +132,12 @@ const OPTION_TO_PROGRAMS = [
   {
     A: [
       'Aviva Nirmaan Program - Agency Sales Executive',
-      'Poonawalla FinPro Career Program - Sales Executive',
+      'Banking Sales Program - Sales Officer',
       'Postgraduate Certification Banking Management - Business Development Executive',
     ],
     B: [
       'Postgraduate Program Relationship Management - Relationship Manager',
-      'Piramal ProEdge Program - Relationship Manager',
+      'Postgraduate Program Retail Banking - Relationship Officer',
       'Finova VyaparaMitra Program - Relationship Officer',
     ],
     C: [
@@ -149,12 +155,12 @@ const OPTION_TO_PROGRAMS = [
   {
     A: [
       'Aviva Nirmaan Program - Direct Sales Executive',
-      'Poonawalla FinPro Career Program - Sales Executive',
+      'Banking Sales Program - Sales Officer',
       'Postgraduate Certification Banking Management - Business Development Executive',
     ],
     B: [
       'Postgraduate Program Relationship Management - Relationship Manager',
-      'Udaan Program - Business Loan Associate',
+      'Postgraduate Program Retail Banking - Relationship Officer',
       'Finova VyaparaMitra Program - Relationship Officer',
     ],
     C: [
@@ -172,13 +178,13 @@ const OPTION_TO_PROGRAMS = [
   {
     A: [
       'Aviva Nirmaan Program - Agency Sales Executive',
-      'Aviva Nirmaan Program - Direct Sales Executive',
-      'Poonawalla FinPro Career Program - Sales Executive',
+      'Banking Sales Program - Sales Officer',
+      'Mahindra Finance Prarambh Program - Business Executive',
     ],
     B: [
       'Postgraduate Program Banking Management - Assistant Manager',
       'Postgraduate Program Relationship Management - Relationship Manager',
-      'Finova VyaparaMitra Program - Relationship Officer',
+      'Postgraduate Program Retail Banking - Relationship Officer',
     ],
     C: [
       'Udaan Program - Cashier / Teller',
@@ -201,7 +207,7 @@ const OPTION_TO_PROGRAMS = [
     B: [
       'Postgraduate Program Banking Management - Assistant Manager',
       'Udaan Program - Relationship Manager',
-      'Piramal ProEdge Program - Relationship Manager',
+      'Postgraduate Program Retail Banking - Relationship Officer',
     ],
     C: [
       'Udaan Program - Virtual Relationship Manager',
@@ -210,20 +216,20 @@ const OPTION_TO_PROGRAMS = [
     ],
     D: [
       'Aviva Nirmaan Program - Direct Sales Executive',
-      'Aviva Nirmaan Program - Agency Sales Executive',
-      'Poonawalla FinPro Career Program - Sales Executive',
+      'Banking Sales Program - Sales Officer',
+      'Mahindra Finance Prarambh Program - Business Executive',
     ],
   },
   // Q8: What type of work gives you the most satisfaction?
   {
     A: [
       'Aviva Nirmaan Program - Direct Sales Executive',
-      'Poonawalla FinPro Career Program - Sales Executive',
+      'Banking Sales Program - Sales Officer',
       'Postgraduate Certification Banking Management - Business Development Executive',
     ],
     B: [
       'Postgraduate Program Relationship Management - Relationship Manager',
-      'Piramal ProEdge Program - Relationship Manager',
+      'Postgraduate Program Retail Banking - Relationship Officer',
       'Finova VyaparaMitra Program - Relationship Officer',
     ],
     C: [
@@ -240,9 +246,9 @@ const OPTION_TO_PROGRAMS = [
   // Q9: How comfortable are you with travelling or going out when required?
   {
     A: [
+      'Mahindra Finance Prarambh Program - Business Executive',
       'Aviva Nirmaan Program - Direct Sales Executive',
-      'Finova VyaparaMitra Program - Relationship Officer',
-      'Poonawalla FinPro Career Program - Sales Executive',
+      'Banking Sales Program - Sales Officer',
     ],
     B: [
       'Piramal ProEdge Program - Relationship Manager',
@@ -260,16 +266,16 @@ const OPTION_TO_PROGRAMS = [
       'Poonawalla FinPro Career Program - Gold Assayer',
     ],
   },
-  // Q10: WWhich work style feels most natural to you?
+  // Q10: Which work style feels most natural to you?
   {
     A: [
       'Aviva Nirmaan Program - Agency Sales Executive',
-      'Poonawalla FinPro Career Program - Sales Executive',
+      'Banking Sales Program - Sales Officer',
       'Postgraduate Certification Banking Management - Business Development Executive',
     ],
     B: [
       'Postgraduate Program Relationship Management - Relationship Manager',
-      'Udaan Program - Relationship Manager',
+      'Postgraduate Program Retail Banking - Relationship Officer',
       'Postgraduate Program Banking Management - Assistant Manager',
     ],
     C: [

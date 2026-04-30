@@ -134,9 +134,19 @@ class LeadAdminForm(forms.ModelForm):
 @admin.register(Lead)
 class LeadAdmin(admin.ModelAdmin):
     form = LeadAdminForm
-    list_display = ['id', 'first_name', 'last_name', 'email', 'mobile', 'program', 'state', 'utm_source', 'utm_medium', 'utm_campaign', 'source_page', 'created_at']
-    search_fields = ['first_name', 'last_name', 'email', 'program', 'state', 'source_page']
+    list_display = [
+        'id', 'first_name', 'last_name', 'email', 'mobile', 'program', 'state',
+        'remarks_short', 'utm_source', 'utm_medium', 'utm_campaign', 'source_page', 'created_at',
+    ]
+    search_fields = ['first_name', 'last_name', 'email', 'program', 'state', 'source_page', 'remarks']
     list_filter = [LeadCreatedAtFilter]
+
+    @admin.display(description='Remarks')
+    def remarks_short(self, obj):
+        r = (obj.remarks or '').strip()
+        if not r:
+            return '—'
+        return (r[:80] + '…') if len(r) > 80 else r
     change_form_template = 'admin/api/lead/change_form.html'
 
     def change_view(self, request, object_id, form_url='', extra_context=None):
