@@ -22,13 +22,13 @@ const Leadership = () => {
     { name: 'Debojit Sen', title: 'Founder & CEO', image: debojitSen, linkedin: 'https://www.linkedin.com/in/debojit-sen?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app' },
     { name: 'Ankit Mittal', title: 'Corporate & Strategy Head', image: ankitMittal, linkedin: 'https://www.linkedin.com/in/ankit-mittal-9a0401115?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app' },
     { name: 'Vipin Singh', title: 'CPTO', image: vipinSingh, linkedin: 'https://www.linkedin.com/in/pmvipin?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app' },
+    { name: 'Anand Pratap Singh', title: 'Data Analytics Head', image: anand, linkedin: 'https://www.linkedin.com/in/anand-pratap-singh-04b250105?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app' },
     { name: 'Bhavana Anand', title: 'Operations Head', image: bhavanaAnand, linkedin: 'https://www.linkedin.com/in/bhavanaanand?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app' },
     { name: 'Nabeel Akhtar', title: 'Sales Head - B2B', image: nabeelAkhtar, linkedin: 'https://www.linkedin.com/in/nabeel-akhtar?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app' },
     { name: 'Aman Rawat', title: 'Sales Head - B2C', image: amanRawat, linkedin: 'https://www.linkedin.com/in/aman-rawat-998783107?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app' },
     { name: 'Pawan Bhati', title: 'Head - Special Projects', image: pawanBhati, linkedin: 'https://www.linkedin.com/in/pawan-kumar-1525a52a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app' },
     { name: 'Panchali Moitra', title: 'Learning Design Head', image: panchaliMoitra, linkedin: 'https://www.linkedin.com/in/panchali-moitra-a6479a69?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app' },
     { name: 'Ashesh Raghav', title: 'COO', image: ashesh, linkedin: 'https://in.linkedin.com/in/asheshraghav' },
-    { name: 'Anand Pratap Singh', title: 'Data Analytics Head', image: anand, linkedin: 'https://www.linkedin.com/in/anand-pratap-singh-04b250105?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app' }
   ]
 
   return (
