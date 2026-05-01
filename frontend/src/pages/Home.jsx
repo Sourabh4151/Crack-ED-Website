@@ -15,7 +15,6 @@ import Analyse from '../components/analyse/page'
 import EnquireSection from '../components/EnquireSection/EnquireSection'
 import Partners from '../components/partners/page'
 import FloatingSteps from '../components/FloatingSteps/page'
-import BidPopup from '../components/BidPopup/BidPopup'
 
 
 const Home = () => {
@@ -35,7 +34,6 @@ const Home = () => {
       <Testimonial />
       <EnquireSection />
       <Footer />
-      <BidPopup />
       {/* <CareerForward /> */}
     </div>
   )
