@@ -59,6 +59,7 @@ PROGRAM_TO_CENTER = {
     'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)': 'Mahindra - BE',
     'PGP - Retail Banking - Relationship Officer': 'Axis - RO',
     'Banking Sales Program - Sales Officer': 'Banking Sales',
+    'Elevate Banking Program - Virtual Relationship Manager': 'Axis - VRM',
 }
 
 # For dropdown: (value, label) with empty option

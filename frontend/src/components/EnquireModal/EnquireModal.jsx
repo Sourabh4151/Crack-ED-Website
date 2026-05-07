@@ -102,6 +102,7 @@ const EnquireModal = ({ isOpen, onClose }) => {
     'PGP - Retail Banking - Relationship Officer',
     'Banking Sales Program - Sales Officer',
     'Mahindra Finance Prarambh Program - Business Executive',
+    'Elevate Banking Program - Virtual Relationship Manager',
   ]
 
   const validateFullName = (name) => {

@@ -20,38 +20,6 @@ const ProgramsList = () => {
   const programs = {
     Banking: [
       {
-        program: 'Udaan Program',
-        role: 'Cashier / Teller',
-        details: [
-          'Join as a Cashier / Teller with a CTC of upto Rs 3.5 LPA',
-          '2-month program'
-        ]
-      },
-      {
-        program: 'Udaan Program',
-        role: 'Virtual Relationship Manager',
-        details: [
-          'Join as a Virtual Relationship Manager with a CTC of upto Rs 2.8 LPA',
-          '4-week program'
-        ]
-      },
-      {
-        program: 'Udaan Program',
-        role: 'Relationship Manager',
-        details: [
-          'Join as a Relationship Manager with a CTC of upto Rs 6.5 LPA',
-          '3-week program'
-        ]
-      },
-      {
-        program: 'Udaan Program',
-        role: 'Business Loan Associate',
-        details: [
-          'Join as a Business Loan Associate with a CTC of upto Rs 2.8 LPA',
-          '3-week program'
-        ]
-      },
-      {
         program: 'Postgraduate Program',
         role: 'Relationship Manager',
         details: [
@@ -97,6 +65,46 @@ const ProgramsList = () => {
         details: [
           'Join as a Business Executive (Vehicle Loan - Field Sales) with a CTC of Rs 3.5 LPA + incentives',
           '1-month online program'
+        ]
+      },
+      {
+        program: 'Elevate Banking Program',
+        role: 'Virtual Relationship Manager',
+        details: [
+          'Join as a Virtual Relationship Manager and secure a CTC of upto Rs 2.4 LPA',
+          '4-week program'
+        ]
+      },
+      {
+        program: 'Udaan Program',
+        role: 'Cashier / Teller',
+        details: [
+          'Join as a Cashier / Teller with a CTC of upto Rs 3.5 LPA',
+          '2-month program'
+        ]
+      },
+      {
+        program: 'Udaan Program',
+        role: 'Virtual Relationship Manager',
+        details: [
+          'Join as a Virtual Relationship Manager with a CTC of upto Rs 2.8 LPA',
+          '4-week program'
+        ]
+      },
+      {
+        program: 'Udaan Program',
+        role: 'Relationship Manager',
+        details: [
+          'Join as a Relationship Manager with a CTC of upto Rs 6.5 LPA',
+          '3-week program'
+        ]
+      },
+      {
+        program: 'Udaan Program',
+        role: 'Business Loan Associate',
+        details: [
+          'Join as a Business Loan Associate with a CTC of upto Rs 2.8 LPA',
+          '3-week program'
         ]
       }
     ],
@@ -192,6 +200,7 @@ const ProgramsList = () => {
       if (program === 'Postgraduate Program' && role === 'Relationship Officer') return 'https://pgprb.crack-ed.com'
       if (program === 'Banking Sales Program' && role === 'Sales Officer') return 'https://bspso.crack-ed.com'
       if (program === 'Mahindra Finance Prarambh Program' && role === 'Business Executive') return 'https://mahindrafinancebe.crack-ed.com/'
+      if (program === 'Elevate Banking Program' && role === 'Virtual Relationship Manager') return 'https://elevatevrm.crack-ed.com/'
       switch (role) {
         case 'Relationship Manager':
           return 'https://udaanrm.crack-ed.com'

@@ -25,6 +25,7 @@ import businessLoanAssociateImage from '../../assets/business_loan_associate.jpg
 import relationshipManagerPiramalImage from '../../assets/relationship manager.jpg'
 import fieldSalesExecutiveImage from '../../assets/field sales executive_desktop.jpg'
 import udaanCardLogo from '../../assets/udaan_temporary_logo.png'
+import udaanLogo from '../../assets/udaan_temporary_logo.png'
 import piramalCardLogo from '../../assets/piramal_small.png'
 import paytmCardLogo from '../../assets/paytm_small_logo.png'
 import auHomeLogo from '../../assets/au_home_logo.png'
@@ -55,6 +56,7 @@ import retailBankingDesktopImage from '../../assets/retail_banking_desktop.png'
 import retailBankingMobileImage from '../../assets/retail_banking_mobile.png'
 import bankingSalesDesktopImage from '../../assets/banking_sales_desktop.png'
 import mobileSalesOfficerImage from '../../assets/mobile_sales_officer.png'
+import elevateVrmImage from '../../assets/elevate_vrm.png'
 import { trackMicrositeClick } from '../../utils/analytics'
 import './Programs.css'
 
@@ -137,6 +139,12 @@ const Programs = () => {
       logo: mahindraFinanceSmallLogo,
       title: 'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)',
       url: 'https://mahindrafinancebe.crack-ed.com/',
+    },
+    {
+      id: 20,
+      logo: udaanLogo,
+      title: 'Virtual Relationship Manager',
+      url: 'https://elevatevrm.crack-ed.com/',
     },
     {
       id: 7,
@@ -236,6 +244,7 @@ const Programs = () => {
       'Piramal ProEdge Program - Relationship Manager': relationshipManagerPiramalImage,
       'Paytm Disha Program - Field Sales Executive': fieldSalesExecutiveImage,
       'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)': mahindraProgramImage,
+      'Virtual Relationship Manager': elevateVrmImage,
     }
 
     // Udaan, Piramal, Paytm programs
@@ -253,6 +262,13 @@ const Programs = () => {
         details: 'Join as a Virtual Relationship Manager with a CTC of upto Rs 2.8 LPA',
         duration: '4-week program',
         image: virtualRelationshipManagerUdaanImage,
+      },
+      'Virtual Relationship Manager': {
+        programLabel: 'Elevate Banking Program',
+        logo: udaanLogo,
+        details: 'Join as a Virtual Relationship Manager and secure a CTC of upto Rs 2.4 LPA',
+        duration: '4-week program',
+        image: elevateVrmImage,
       },
       'Udaan Program - Relationship Manager': {
         programLabel: 'Udaan Program',
@@ -358,7 +374,7 @@ const Programs = () => {
         mobileImage: retailBankingMobileImage,
       },
       'Banking Sales Program - Sales Officer': {
-        programLabel: 'Banking Sales Program - Sales Officer',
+        programLabel: 'Banking Sales Program',
         logo: udaanCardLogo,
         details: 'Join as a Sales Officer with a CTC of Rs 2.5 LPA + incentives',
         duration: '2-month program',
@@ -412,6 +428,7 @@ const Programs = () => {
     if (card.title === 'Postgraduate Certification Banking Management - Business Development Executive') return 'PGC - Banking Management - BDE'
     if (card.title === 'Postgraduate Program Retail Banking - Relationship Officer') return 'PGP - Retail Banking - Relationship Officer'
     if (card.title === 'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)') return 'Mahindra Finance Prarambh - Business Executive'
+    if (card.title === 'Virtual Relationship Manager') return 'Elevate Banking Program - Virtual Relationship Manager'
     return card.title
   }
 

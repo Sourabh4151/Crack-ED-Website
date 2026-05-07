@@ -119,6 +119,14 @@ const PROGRAMS = [
       { label: 'Business Executive', href: 'https://mahindrafinancebe.crack-ed.com/' },
     ],
   },
+  {
+    id: 'elevate',
+    name: 'Elevate Banking Program',
+    link: '/programs',
+    links: [
+      { label: 'Virtual Relationship Manager', href: 'https://elevatevrm.crack-ed.com/' },
+    ],
+  },
 ]
 
 const Footer = () => {

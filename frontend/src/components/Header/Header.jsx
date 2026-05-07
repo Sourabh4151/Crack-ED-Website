@@ -29,6 +29,7 @@ const PROGRAM_CATEGORIES = [
       { label: 'PGC - Banking Management', href: 'https://pgcbm.crack-ed.com' },
       { label: 'Banking Sales Program', href: 'https://bspso.crack-ed.com' },
       { label: 'Mahindra Finance Prarambh Program', href: 'https://mahindrafinancebe.crack-ed.com/' },
+      { label: 'Elevate Banking Program', href: 'https://elevatevrm.crack-ed.com/' },
     ],
   },
   {
