@@ -342,7 +342,7 @@ const Programs = () => {
       },
       'Postgraduate Program Relationship Management - Relationship Manager': {
         programLabel: 'Postgraduate Program in Relationship Management',
-        shortProgramLabel: 'PGP - Relationship Management - Relationship Manager',
+        shortProgramLabel: 'PGP - Relationship Management',
         logo: auCardLogo,
         details: 'Join as a Relationship Manager with a CTC of Rs 5.5 LPA + incentives',
         duration: '6-month program',
@@ -350,7 +350,7 @@ const Programs = () => {
       },
       'Postgraduate Program Banking Management - Assistant Manager': {
         programLabel: 'Postgraduate Program in Banking Management',
-        shortProgramLabel: 'PGP - Banking Management - Assistant Manager',
+        shortProgramLabel: 'PGP - Banking Management',
         logo: auCardLogo,
         details: 'Join as an Assistant Manager with a CTC of Rs 4 LPA + incentives',
         duration: '6-month program',
@@ -358,7 +358,7 @@ const Programs = () => {
       },
       'Postgraduate Certification Banking Management - Business Development Executive': {
         programLabel: 'Postgraduate Certification in Banking Management',
-        shortProgramLabel: 'PGC - Banking Management - BDE',
+        shortProgramLabel: 'PGC - Banking Management',
         logo: udaanCardLogo,
         details: 'Join as a Business Development Executive with a CTC of Rs 2.5 LPA + incentives',
         duration: '2-week program',
@@ -366,7 +366,7 @@ const Programs = () => {
       },
       'Postgraduate Program Retail Banking - Relationship Officer': {
         programLabel: 'Postgraduate Program - Retail Banking',
-        shortProgramLabel: 'PGP - Retail Banking - Relationship Officer',
+        shortProgramLabel: 'PGP - Retail Banking',
         logo: udaanCardLogo,
         details: 'Join as a Relationship Officer - Mortgage Field Sale with a CTC of upto Rs 3.1 LPA + incentives',
         duration: '3-week program',
