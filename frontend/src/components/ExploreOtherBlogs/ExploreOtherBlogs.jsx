@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useMergedBlogPosts } from '../../hooks/useMergedBlogPosts'
+import { prefetchMarketingBlogCard } from '../../services/blogApi'
 import '../ResourcesFilter/ResourcesFilter.css'
 import './ExploreOtherBlogs.css'
 
@@ -22,6 +23,9 @@ const ExploreOtherBlogs = ({ currentPostId }) => {
               key={`${post.source || 'x'}-${post.id}`}
               to={`/resources/blog/${post.id}`}
               className="explore-other-blogs-card-link"
+              onMouseEnter={() => prefetchMarketingBlogCard(post)}
+              onFocus={() => prefetchMarketingBlogCard(post)}
+              onTouchStart={() => prefetchMarketingBlogCard(post)}
             >
               <article className="resources-filter-card">
                 <div className="resources-filter-card-image">

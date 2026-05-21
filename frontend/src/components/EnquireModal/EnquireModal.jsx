@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import './EnquireModal.css'
 import { submitLeadToCRM, isBackendUnreachable, BACKEND_DOWN_MESSAGE } from '../../services/crmService'
 import { trackGenerateLead } from '../../utils/analytics'
+import { INDIAN_STATES, getCitiesForState } from '../../lib/indianStateCities'
 
 const EnquireModal = ({ isOpen, onClose }) => {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -39,6 +40,7 @@ const EnquireModal = ({ isOpen, onClose }) => {
     mobileNumber: '',
     emailId: '',
     state: '',
+    city: '',
     program: '',
     query: ''
   })
@@ -48,39 +50,14 @@ const EnquireModal = ({ isOpen, onClose }) => {
     mobileNumber: '',
     emailId: '',
     state: '',
+    city: '',
     program: ''
   })
 
-  const states = [
-    'Andhra Pradesh',
-    'Arunachal Pradesh',
-    'Assam',
-    'Bihar',
-    'Chhattisgarh',
-    'Goa',
-    'Gujarat',
-    'Haryana',
-    'Himachal Pradesh',
-    'Jharkhand',
-    'Karnataka',
-    'Kerala',
-    'Madhya Pradesh',
-    'Maharashtra',
-    'Manipur',
-    'Meghalaya',
-    'Mizoram',
-    'Nagaland',
-    'Odisha',
-    'Punjab',
-    'Rajasthan',
-    'Sikkim',
-    'Tamil Nadu',
-    'Telangana',
-    'Tripura',
-    'Uttar Pradesh',
-    'Uttarakhand',
-    'West Bengal'
-  ]
+  const citiesForState = useMemo(
+    () => getCitiesForState(formData.state),
+    [formData.state]
+  )
 
   const programs = [
     'Udaan Program - Cashier / Teller',
@@ -149,6 +126,16 @@ const EnquireModal = ({ isOpen, onClose }) => {
     return ''
   }
 
+  const validateCity = (city, state) => {
+    if (!state) {
+      return ''
+    }
+    if (!city) {
+      return 'City is required'
+    }
+    return ''
+  }
+
   const validateProgram = (program) => {
     if (!program) {
       return 'Program selection is required'
@@ -170,10 +157,13 @@ const EnquireModal = ({ isOpen, onClose }) => {
       }
     }
 
-    setFormData(prev => ({
-      ...prev,
-      [name]: processedValue
-    }))
+    setFormData(prev => {
+      const next = { ...prev, [name]: processedValue }
+      if (name === 'state') {
+        next.city = ''
+      }
+      return next
+    })
 
     // Clear error for this field when user starts typing
     setErrors(prev => ({
@@ -199,6 +189,9 @@ const EnquireModal = ({ isOpen, onClose }) => {
       case 'state':
         error = validateState(value)
         break
+      case 'city':
+        error = validateCity(value, formData.state)
+        break
       case 'program':
         error = validateProgram(value)
         break
@@ -218,6 +211,7 @@ const EnquireModal = ({ isOpen, onClose }) => {
       mobileNumber: validateMobileNumber(formData.mobileNumber),
       emailId: validateEmail(formData.emailId),
       state: validateState(formData.state),
+      city: validateCity(formData.city, formData.state),
       program: validateProgram(formData.program)
     }
 
@@ -246,6 +240,7 @@ const EnquireModal = ({ isOpen, onClose }) => {
         mobileNumber: '',
         emailId: '',
         state: '',
+        city: '',
         program: '',
         query: ''
       })
@@ -254,6 +249,7 @@ const EnquireModal = ({ isOpen, onClose }) => {
         mobileNumber: '',
         emailId: '',
         state: '',
+        city: '',
         program: ''
       })
       setTimeout(() => {
@@ -281,6 +277,7 @@ const EnquireModal = ({ isOpen, onClose }) => {
         mobileNumber: '',
         emailId: '',
         state: '',
+        city: '',
         program: '',
         query: ''
       })
@@ -289,6 +286,7 @@ const EnquireModal = ({ isOpen, onClose }) => {
         mobileNumber: '',
         emailId: '',
         state: '',
+        city: '',
         program: ''
       })
       setSubmitError(null)
@@ -375,8 +373,8 @@ const EnquireModal = ({ isOpen, onClose }) => {
                 required
               >
                 <option value="">State</option>
-                {states.map((state, index) => (
-                  <option key={index} value={state}>{state}</option>
+                {INDIAN_STATES.map((state) => (
+                  <option key={state} value={state}>{state}</option>
                 ))}
               </select>
               <svg className="enquire-modal-select-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -387,8 +385,30 @@ const EnquireModal = ({ isOpen, onClose }) => {
               )}
             </div>
           </div>
-          
+
           <div className="enquire-modal-form-row">
+            <div className="enquire-modal-form-field enquire-modal-select-wrapper">
+              <select
+                name="city"
+                value={formData.city}
+                onChange={handleInputChange}
+                onBlur={handleBlur}
+                className={`enquire-modal-select ${errors.city ? 'enquire-modal-input-error' : ''}`}
+                required
+                disabled={!formData.state}
+              >
+                <option value="">{formData.state ? 'City' : 'Select state first'}</option>
+                {citiesForState.map((city) => (
+                  <option key={city} value={city}>{city}</option>
+                ))}
+              </select>
+              <svg className="enquire-modal-select-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 7.5L10 12.5L15 7.5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              {errors.city && (
+                <span className="enquire-modal-field-error">{errors.city}</span>
+              )}
+            </div>
             <div className="enquire-modal-form-field enquire-modal-select-wrapper">
               <select
                 name="program"

@@ -4,17 +4,102 @@ Register models in Django admin.
 import json
 import os
 from django import forms
-from django.contrib import admin
+from django.contrib import admin, messages
 from django.http import FileResponse, Http404
 from django.urls import path, reverse
 from django.utils.html import format_html
 from django.utils import timezone
 from .models import Example, QuizSubmission, Lead, JobApplication, JobListing, BIDEpisode, MarketingBlog, MarketingBlogUpload
 from .constants import PROGRAM_CHOICES, PROGRAM_TO_CENTER, get_center_for_program
+from .admin_exports import (
+    build_job_applications_csv_response,
+    build_job_listings_csv_response,
+    build_leads_csv_response,
+    build_quiz_csv_response,
+)
+
+EXPORT_CHANGE_LIST_TEMPLATE = 'admin/api/export_change_list.html'
+
+
+class AdminCsvExportMixin:
+    """Add Export to Excel button + selected-rows CSV action to a ModelAdmin."""
+
+    change_list_template = EXPORT_CHANGE_LIST_TEMPLATE
+    export_builder = None
+    export_url_name = None
+    export_filename_prefix = 'export'
+    export_empty_selection_message = (
+        'Select one or more rows to export, or use “Export to Excel” for the full filtered list.'
+    )
+
+    def _export_builder_fn(self):
+        """Module-level export funcs become bound methods on ModelAdmin; unwrap before call."""
+        builder = self.export_builder
+        if hasattr(builder, '__func__'):
+            return builder.__func__
+        return builder
+
+    def get_export_action(self):
+        prefix = self.export_filename_prefix
+        message = self.export_empty_selection_message
+
+        @admin.action(description='Download selected as CSV (Excel / Google Sheets)')
+        def export_selected_csv(modeladmin, request, queryset):
+            if not queryset.exists():
+                modeladmin.message_user(request, message, level=messages.WARNING)
+                return
+            return modeladmin._export_builder_fn()(
+                queryset, filename_prefix=f'{prefix}_selected'
+            )
+
+        return export_selected_csv
+
+    def get_actions(self, request):
+        actions = super().get_actions(request)
+        export_action = self.get_export_action()
+        actions[export_action.__name__] = (
+            export_action,
+            export_action.__name__,
+            export_action.short_description,
+        )
+        return actions
+
+    def get_urls(self):
+        urls = super().get_urls()
+        if not self.export_url_name:
+            return urls
+        custom = [
+            path(
+                'export/',
+                self.admin_site.admin_view(self.export_filtered_view),
+                name=self.export_url_name,
+            ),
+        ]
+        return custom + urls
+
+    def export_filtered_view(self, request):
+        changelist = self.get_changelist_instance(request)
+        queryset = changelist.get_queryset(request)
+        return self._export_builder_fn()(
+            queryset, filename_prefix=self.export_filename_prefix
+        )
+
+    def changelist_view(self, request, extra_context=None):
+        extra_context = extra_context or {}
+        if self.export_url_name:
+            query = request.GET.urlencode()
+            export_path = reverse(f'admin:{self.export_url_name}')
+            extra_context['export_url'] = (
+                f'{export_path}?{query}' if query else export_path
+            )
+        return super().changelist_view(request, extra_context=extra_context)
 
 
 @admin.register(JobListing)
-class JobListingAdmin(admin.ModelAdmin):
+class JobListingAdmin(AdminCsvExportMixin, admin.ModelAdmin):
+    export_builder = build_job_listings_csv_response
+    export_url_name = 'api_joblisting_export'
+    export_filename_prefix = 'job_listings'
     list_display = ['id', 'title', 'job_type', 'work_mode', 'positions', 'location', 'is_published', 'created_at']
     list_editable = ['is_published']
     list_filter = ['job_type', 'work_mode', 'is_published']
@@ -107,7 +192,13 @@ class LeadCreatedAtFilter(admin.SimpleListFilter):
 
 
 @admin.register(QuizSubmission)
-class QuizSubmissionAdmin(admin.ModelAdmin):
+class QuizSubmissionAdmin(AdminCsvExportMixin, admin.ModelAdmin):
+    export_builder = build_quiz_csv_response
+    export_url_name = 'api_quizsubmission_export'
+    export_filename_prefix = 'quiz_submissions'
+    export_empty_selection_message = (
+        'Select one or more quiz submissions to export, or use “Export to Excel” for the full filtered list.'
+    )
     list_display = ['id', 'name', 'email', 'mobile', 'program', 'utm_source', 'utm_medium', 'utm_campaign', 'source_page', 'created_at']
     search_fields = ['name', 'email', 'program', 'source_page']
     list_filter = [LeadCreatedAtFilter, QuizSubmissionInfluencerFilter]
@@ -132,13 +223,19 @@ class LeadAdminForm(forms.ModelForm):
 
 
 @admin.register(Lead)
-class LeadAdmin(admin.ModelAdmin):
+class LeadAdmin(AdminCsvExportMixin, admin.ModelAdmin):
     form = LeadAdminForm
+    export_builder = build_leads_csv_response
+    export_url_name = 'api_lead_export'
+    export_filename_prefix = 'leads'
+    export_empty_selection_message = (
+        'Select one or more leads to export, or use “Export to Excel” for the full filtered list.'
+    )
     list_display = [
-        'id', 'first_name', 'last_name', 'email', 'mobile', 'program', 'state',
+        'id', 'first_name', 'last_name', 'email', 'mobile', 'program', 'state', 'city',
         'remarks_short', 'utm_source', 'utm_medium', 'utm_campaign', 'source_page', 'created_at',
     ]
-    search_fields = ['first_name', 'last_name', 'email', 'program', 'state', 'source_page', 'remarks']
+    search_fields = ['first_name', 'last_name', 'email', 'program', 'state', 'city', 'source_page', 'remarks']
     list_filter = [LeadCreatedAtFilter]
 
     @admin.display(description='Remarks')
@@ -161,7 +258,13 @@ class LeadAdmin(admin.ModelAdmin):
 
 
 @admin.register(JobApplication)
-class JobApplicationAdmin(admin.ModelAdmin):
+class JobApplicationAdmin(AdminCsvExportMixin, admin.ModelAdmin):
+    export_builder = build_job_applications_csv_response
+    export_url_name = 'api_jobapplication_export'
+    export_filename_prefix = 'job_applications'
+    export_empty_selection_message = (
+        'Select one or more job applications to export, or use “Export to Excel” for the full filtered list.'
+    )
     list_display = ['id', 'full_name', 'email', 'mobile', 'job_id', 'job_title', 'resume_download', 'utm_source', 'utm_medium', 'utm_campaign', 'source_page', 'created_at']
     search_fields = ['full_name', 'email', 'job_id', 'job_title']
     list_filter = ['created_at']
@@ -169,7 +272,11 @@ class JobApplicationAdmin(admin.ModelAdmin):
     def get_urls(self):
         urls = super().get_urls()
         custom = [
-            path('<object_id>/download-resume/', self.admin_site.admin_view(self.download_resume_view), name='api_jobapplication_download_resume'),
+            path(
+                '<object_id>/download-resume/',
+                self.admin_site.admin_view(self.download_resume_view),
+                name='api_jobapplication_download_resume',
+            ),
         ]
         return custom + urls
 

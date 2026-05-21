@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { BLOG_POSTS } from '../data/blogPosts'
-import { fetchPublishedMarketingBlogs, marketingBlogToCard } from '../services/blogApi'
+import { fetchPublishedMarketingBlogs, marketingBlogToCard, prefetchMarketingBlogCard } from '../services/blogApi'
 
 function buildStaticBlogCards () {
   return BLOG_POSTS.filter((p) => !p.hideFromResources).map((p) => ({
@@ -45,6 +45,21 @@ export function useMergedBlogPosts () {
       cancelled = true
     }
   }, [staticCards])
+
+  useEffect(() => {
+    const apiCards = cards.filter((c) => c.source === 'api')
+    if (apiCards.length === 0) return
+    const slugs = apiCards.map((c) => c.id)
+    slugs.slice(0, 10).forEach((slug) => prefetchMarketingBlogCard({ source: 'api', id: slug }))
+    const rest = slugs.slice(10)
+    if (rest.length === 0) return
+    const run = () => rest.forEach((slug) => prefetchMarketingBlogCard({ source: 'api', id: slug }))
+    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+      window.requestIdleCallback(run, { timeout: 4000 })
+    } else {
+      setTimeout(run, 300)
+    }
+  }, [cards])
 
   return { cards, loading }
 }

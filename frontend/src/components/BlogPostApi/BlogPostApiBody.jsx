@@ -4,6 +4,32 @@ import { Node, DOMSerializer } from '@tiptap/pm/model'
 import DOMPurify from 'dompurify'
 import { getTiptapExtensions } from '../../lib/tiptapExtensions'
 
+function paragraphIsWhitespaceEmpty (node) {
+  if (!node || node.type !== 'paragraph') return false
+  const children = Array.isArray(node.content) ? node.content : []
+  if (children.length === 0) return true
+  const text = children
+    .map((child) => {
+      if (child.type === 'text') return child.text || ''
+      if (child.type === 'hardBreak') return '\n'
+      return '\u0000'
+    })
+    .join('')
+    .trim()
+  return text === '' && children.every((c) => c.type === 'text' || c.type === 'hardBreak')
+}
+
+/** Drop leading empty paragraphs so admin/editor newlines do not reserve a huge gap on the live blog. */
+function trimLeadingEmptyParagraphs (doc) {
+  if (!doc || doc.type !== 'doc' || !Array.isArray(doc.content)) return doc
+  let i = 0
+  while (i < doc.content.length && paragraphIsWhitespaceEmpty(doc.content[i])) {
+    i += 1
+  }
+  if (i === 0) return doc
+  return { ...doc, content: doc.content.slice(i) }
+}
+
 /**
  * Serialize Tiptap JSON to HTML using the real DOM (not @tiptap/html + zeed-dom),
  * which drops inline `style` on marks (font-family, color, etc.).
@@ -27,10 +53,11 @@ function marketingJsonToHtml (docJson, extensions) {
  */
 const BlogPostApiBody = ({ contentJson }) => {
   const html = useMemo(() => {
-    const doc =
+    const docRaw =
       contentJson && typeof contentJson === 'object' && contentJson.type === 'doc'
         ? contentJson
         : { type: 'doc', content: [{ type: 'paragraph' }] }
+    const doc = trimLeadingEmptyParagraphs(docRaw)
     try {
       const raw = marketingJsonToHtml(doc, getTiptapExtensions())
       return DOMPurify.sanitize(raw, {

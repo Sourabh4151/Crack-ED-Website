@@ -6,6 +6,7 @@ import {
   logoutBlogAdmin,
   fetchBlogAdminSession,
   fetchAdminBlogList,
+  prefetchMarketingBlogDetail,
 } from '../services/blogApi'
 import { getApiBase } from '../services/crmService'
 import './AdminBlogs.css'
@@ -175,7 +176,18 @@ const AdminBlogs = () => {
                   Edit
                 </Link>
                 {' · '}
-                <a className="admin-blogs-link" href={`/resources/blog/${row.slug}`} target="_blank" rel="noreferrer">
+                <a
+                  className="admin-blogs-link"
+                  href={`/resources/blog/${row.slug}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  onMouseEnter={() => {
+                    if (row.is_published && row.slug) prefetchMarketingBlogDetail(row.slug)
+                  }}
+                  onFocus={() => {
+                    if (row.is_published && row.slug) prefetchMarketingBlogDetail(row.slug)
+                  }}
+                >
                   View
                 </a>
               </td>

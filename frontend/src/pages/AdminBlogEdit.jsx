@@ -8,6 +8,8 @@ import {
   patchAdminBlogCover,
   initBlogAdminCsrf,
   fetchBlogAdminSession,
+  seedMarketingBlogDetailCache,
+  invalidateMarketingBlogDetailCache,
 } from '../services/blogApi'
 import { getApiBase } from '../services/crmService'
 import './AdminBlogs.css'
@@ -127,7 +129,15 @@ const AdminBlogEdit = () => {
         saved = await updateAdminBlog(id, payload)
       }
       if (coverFile && saved?.id) {
-        await patchAdminBlogCover(saved.id, coverFile)
+        saved = await patchAdminBlogCover(saved.id, coverFile)
+      }
+      const pubSlug = (saved?.slug || payload.slug || '').trim()
+      if (pubSlug) {
+        if (saved?.is_published) {
+          seedMarketingBlogDetailCache(pubSlug, saved)
+        } else {
+          invalidateMarketingBlogDetailCache(pubSlug)
+        }
       }
       navigate('/marketing/blogs')
     } catch (e) {

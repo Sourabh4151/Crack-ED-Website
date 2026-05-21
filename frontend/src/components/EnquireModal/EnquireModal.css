@@ -241,6 +241,11 @@
   padding: 10px;
 }
 
+.enquire-modal-select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .enquire-modal-select-arrow {
   position: absolute;
   right: 16px;

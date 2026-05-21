@@ -7,7 +7,7 @@ import Footer from '../components/Footer/Footer'
 import BlogPostApiBody from '../components/BlogPostApi/BlogPostApiBody'
 import { BLOG_POSTS } from '../data/blogPosts'
 import { getApiBase } from '../services/crmService'
-import { fetchMarketingBlogDetail } from '../services/blogApi'
+import { fetchMarketingBlogDetail, peekMarketingBlogDetailCache } from '../services/blogApi'
 import { applyBlogPostMeta, clearBlogPostMeta, staticSeoDescription, absolutizeMediaUrl } from '../lib/blogPostMeta'
 import './BlogPost.css'
 
@@ -63,8 +63,14 @@ function wrapIntroTerms (text) {
 const BlogPost = () => {
   const { id } = useParams()
   const staticPost = BLOG_POSTS.find((p) => p.id === id)
-  const [apiPost, setApiPost] = useState(null)
-  const [loadState, setLoadState] = useState(() => (staticPost ? 'ready' : 'loading'))
+  const [apiPost, setApiPost] = useState(() => {
+    if (BLOG_POSTS.find((p) => p.id === id)) return null
+    return peekMarketingBlogDetailCache(id) ?? null
+  })
+  const [loadState, setLoadState] = useState(() => {
+    if (BLOG_POSTS.find((p) => p.id === id)) return 'ready'
+    return peekMarketingBlogDetailCache(id) ? 'ready' : 'loading'
+  })
   const [tocExpanded, setTocExpanded] = useState(true)
   const [activeTocIndex, setActiveTocIndex] = useState(0)
   const scrollRef = useRef(null)
@@ -78,6 +84,12 @@ const BlogPost = () => {
   useEffect(() => {
     if (staticPost) {
       setApiPost(null)
+      setLoadState('ready')
+      return
+    }
+    const cached = peekMarketingBlogDetailCache(id)
+    if (cached) {
+      setApiPost(cached)
       setLoadState('ready')
       return
     }

@@ -6,7 +6,7 @@ import ResourcesFilter from '../components/ResourcesFilter/ResourcesFilter'
 import EnquireSection from '../components/EnquireSection/EnquireSection'
 import Footer from '../components/Footer/Footer'
 import { useMergedBlogPosts } from '../hooks/useMergedBlogPosts'
-import { fetchFeaturedMarketingBlog } from '../services/blogApi'
+import { fetchFeaturedMarketingBlog, prefetchMarketingBlogDetail } from '../services/blogApi'
 import './Resources.css'
 
 const Resources = () => {
@@ -16,6 +16,11 @@ const Resources = () => {
   useEffect(() => {
     fetchFeaturedMarketingBlog().then(setFeaturedFromApi)
   }, [])
+
+  useEffect(() => {
+    const slug = featuredFromApi?.slug
+    if (slug) prefetchMarketingBlogDetail(slug)
+  }, [featuredFromApi?.slug])
 
   return (
     <div className="resources-page">

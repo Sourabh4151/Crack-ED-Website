@@ -1,14 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import './EnquireSection.css'
 import { submitLeadToCRM } from '../../services/crmService'
 import { trackGenerateLead } from '../../utils/analytics'
-
-const STATES = [
-  'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 'Goa', 'Gujarat', 'Haryana',
-  'Himachal Pradesh', 'Jharkhand', 'Karnataka', 'Kerala', 'Madhya Pradesh', 'Maharashtra', 'Manipur',
-  'Meghalaya', 'Mizoram', 'Nagaland', 'Odisha', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Telangana',
-  'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal'
-]
+import { INDIAN_STATES, getCitiesForState } from '../../lib/indianStateCities'
 
 const PROGRAMS = [
   'Udaan Program - Cashier / Teller',
@@ -39,6 +33,7 @@ const EnquireSection = () => {
     mobileNumber: '',
     emailId: '',
     state: '',
+    city: '',
     program: '',
     query: ''
   })
@@ -46,6 +41,11 @@ const EnquireSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState(null)
   const [submitSuccess, setSubmitSuccess] = useState(false)
+
+  const citiesForState = useMemo(
+    () => getCitiesForState(formData.state),
+    [formData.state]
+  )
 
   const validate = () => {
     const e = {}
@@ -56,6 +56,7 @@ const EnquireSection = () => {
     if (!formData.emailId) e.emailId = 'Email is required'
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.emailId)) e.emailId = 'Please enter a valid email'
     if (!formData.state) e.state = 'State is required'
+    else if (!formData.city) e.city = 'City is required'
     if (!formData.program) e.program = 'Program selection is required'
     setErrors(e)
     return Object.keys(e).length === 0
@@ -65,7 +66,13 @@ const EnquireSection = () => {
     const { name, value } = e.target
     let v = value
     if (name === 'mobileNumber') v = value.replace(/\D/g, '').slice(0, 10)
-    setFormData((prev) => ({ ...prev, [name]: v }))
+    setFormData((prev) => {
+      const next = { ...prev, [name]: v }
+      if (name === 'state') {
+        next.city = ''
+      }
+      return next
+    })
     setErrors((prev) => ({ ...prev, [name]: '' }))
   }
 
@@ -79,7 +86,7 @@ const EnquireSection = () => {
       await submitLeadToCRM(formData)
       trackGenerateLead()
       setSubmitSuccess(true)
-      setFormData({ fullName: '', mobileNumber: '', emailId: '', state: '', program: '', query: '' })
+      setFormData({ fullName: '', mobileNumber: '', emailId: '', state: '', city: '', program: '', query: '' })
     } catch (err) {
       setSubmitError('Failed to submit. Please try again.')
     } finally {
@@ -138,7 +145,7 @@ const EnquireSection = () => {
                 className={`enquire-section-select ${errors.state ? 'enquire-section-input-error' : ''}`}
               >
                 <option value="">State</option>
-                {STATES.map((s) => (
+                {INDIAN_STATES.map((s) => (
                   <option key={s} value={s}>{s}</option>
                 ))}
               </select>
@@ -147,7 +154,25 @@ const EnquireSection = () => {
               </svg>
               {errors.state && <span className="enquire-section-field-error">{errors.state}</span>}
             </div>
-            <div className="enquire-section-field enquire-section-field-full enquire-section-select-wrap">
+            <div className="enquire-section-field enquire-section-select-wrap">
+              <select
+                name="city"
+                value={formData.city}
+                onChange={handleChange}
+                className={`enquire-section-select ${errors.city ? 'enquire-section-input-error' : ''}`}
+                disabled={!formData.state}
+              >
+                <option value="">{formData.state ? 'City' : 'Select state first'}</option>
+                {citiesForState.map((city) => (
+                  <option key={city} value={city}>{city}</option>
+                ))}
+              </select>
+              <svg className="enquire-section-select-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              {errors.city && <span className="enquire-section-field-error">{errors.city}</span>}
+            </div>
+            <div className="enquire-section-field enquire-section-select-wrap">
               <select
                 name="program"
                 value={formData.program}

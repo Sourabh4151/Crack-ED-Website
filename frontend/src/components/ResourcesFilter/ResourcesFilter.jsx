@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
+import { prefetchMarketingBlogCard } from '../../services/blogApi'
 import './ResourcesFilter.css'
 
 const CATEGORIES = [
@@ -75,6 +76,9 @@ const ResourcesFilter = ({ blogCards = [], activeCategory = 'all', onCategoryCha
                     <Link
                       to={`/resources/blog/${card.id}`}
                       className="resources-filter-card-read-more"
+                      onMouseEnter={() => prefetchMarketingBlogCard(card)}
+                      onFocus={() => prefetchMarketingBlogCard(card)}
+                      onTouchStart={() => prefetchMarketingBlogCard(card)}
                     >
                       Read More
                     </Link>

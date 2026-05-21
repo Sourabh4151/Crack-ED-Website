@@ -82,6 +82,7 @@ class Lead(models.Model):
     program = models.CharField(max_length=255)
     center = models.CharField(max_length=50, blank=True)
     state = models.CharField(max_length=100, blank=True)
+    city = models.CharField(max_length=200, blank=True)
     source_page = models.CharField(
         max_length=500,
         blank=True,

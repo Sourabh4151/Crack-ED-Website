@@ -39,6 +39,7 @@ const ResourcesBlogList = ({ featuredFromApi = null, blogs }) => {
             description={blog.description}
             link={blog.link}
             image={blog.image}
+            prefetchBlogSlug={featuredFromApi?.slug}
           />
         ))}
       </div>

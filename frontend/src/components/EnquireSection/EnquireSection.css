@@ -155,6 +155,11 @@
   color: rgba(250, 250, 250, 0.9);
 }
 
+.enquire-section-select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .enquire-section-select-arrow {
   position: absolute;
   right: 16px;

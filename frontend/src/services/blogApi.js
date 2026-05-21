@@ -3,6 +3,25 @@
  * Admin auth uses Django staff session + CSRF.
  */
 import { getApiBase } from './crmService'
+import {
+  fetchMarketingBlogDetailWithCache,
+  prefetchMarketingBlogDetail,
+  seedMarketingBlogDetailCache,
+  invalidateMarketingBlogDetailCache,
+  peekMarketingBlogDetailCache,
+} from './marketingBlogDetailCache'
+
+export {
+  prefetchMarketingBlogDetail,
+  seedMarketingBlogDetailCache,
+  invalidateMarketingBlogDetailCache,
+  peekMarketingBlogDetailCache,
+}
+
+/** Prefetch public JSON for API-backed cards only (avoids useless detail calls for static legacy ids). */
+export function prefetchMarketingBlogCard (card) {
+  if (card?.source === 'api' && card.id) prefetchMarketingBlogDetail(card.id)
+}
 
 function getCsrfTokenFromCookie () {
   if (typeof document === 'undefined') return ''
@@ -92,13 +111,7 @@ export async function fetchFeaturedMarketingBlog () {
 }
 
 export async function fetchMarketingBlogDetail (lookup) {
-  const base = getApiBase()
-  if (!base) throw new Error('API not configured')
-  const r = await fetch(`${base}/api/blogs/detail/${encodeURIComponent(lookup)}/`, {
-    cache: 'no-store',
-  })
-  if (!r.ok) throw new Error('Not found')
-  return r.json()
+  return fetchMarketingBlogDetailWithCache(lookup)
 }
 
 export async function fetchAdminBlogList () {

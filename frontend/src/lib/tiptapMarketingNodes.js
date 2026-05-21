@@ -77,10 +77,14 @@ export const MarketingVideo = Node.create({
     ]
   },
   renderHTML ({ node, HTMLAttributes }) {
+    const src = node.attrs.src && String(node.attrs.src).trim()
+    if (!src) {
+      return ['div', { 'data-marketing-video-missing': 'true', style: 'display:none' }]
+    }
     return [
       'video',
       mergeAttributes(HTMLAttributes, {
-        src: node.attrs.src,
+        src,
         controls: true,
         playsinline: 'true',
         'data-marketing-video': 'true',
@@ -120,13 +124,17 @@ export const MarketingYoutube = Node.create({
     ]
   },
   renderHTML ({ node }) {
+    const embedUrl = parseYoutubeEmbedUrl(node.attrs.src)
+    if (!embedUrl) {
+      return ['div', { 'data-marketing-youtube-missing': 'true', style: 'display:none' }]
+    }
     return [
       'div',
       { class: 'marketing-youtube-wrap', 'data-marketing-youtube': 'true' },
       [
         'iframe',
         {
-          src: node.attrs.src,
+          src: embedUrl,
           title: 'YouTube video',
           allowfullscreen: 'true',
           allow:

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, useLocation, useParams } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 //import TagManager from 'react-gtm-module'
 
@@ -51,6 +51,11 @@ import AdminBlogEdit from './pages/AdminBlogEdit'
 //  return null;
 //};
 
+function BlogPostRoute () {
+  const { id } = useParams()
+  return <BlogPost key={id} />
+}
+
 const AnalyticsTracker = () => {
   const location = useLocation();
 
@@ -95,7 +100,7 @@ function App() {
           <Route path="/careers/job/:id" element={<JobDetail />} />
           <Route path="/badhta-india-dekho" element={<BID />} />
           <Route path="/resources" element={<Resources />} />
-          <Route path="/resources/blog/:id" element={<BlogPost />} />
+          <Route path="/resources/blog/:id" element={<BlogPostRoute />} />
           <Route path="/influencer" element={<Influencer />} />
           <Route path="/refund-policy" element={<RefundPolicy />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />

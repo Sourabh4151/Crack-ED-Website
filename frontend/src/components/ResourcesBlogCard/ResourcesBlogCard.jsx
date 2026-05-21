@@ -1,16 +1,24 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import beginnerImage from '../../assets/beginner.jpg'
+import { prefetchMarketingBlogDetail } from '../../services/blogApi'
 import './ResourcesBlogCard.css'
 
-const ResourcesBlogCard = ({ title, date, description, link, image }) => {
+const ResourcesBlogCard = ({ title, date, description, link, image, prefetchBlogSlug }) => {
+  const prefetchHandlers = prefetchBlogSlug
+    ? {
+        onMouseEnter: () => prefetchMarketingBlogDetail(prefetchBlogSlug),
+        onFocus: () => prefetchMarketingBlogDetail(prefetchBlogSlug),
+        onTouchStart: () => prefetchMarketingBlogDetail(prefetchBlogSlug),
+      }
+    : {}
   const isExternal = link?.startsWith('http')
   const readMore = isExternal ? (
     <a href={link} className="resources-blog-card-read-more" target="_blank" rel="noopener noreferrer">
       Read More
     </a>
   ) : (
-    <Link to={link || '/resources/blog/1'} className="resources-blog-card-read-more">
+    <Link to={link || '/resources/blog/1'} className="resources-blog-card-read-more" {...prefetchHandlers}>
       Read More
     </Link>
   )

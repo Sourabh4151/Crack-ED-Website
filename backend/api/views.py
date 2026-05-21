@@ -341,6 +341,7 @@ def submit_lead(request):
         program=program,
         center=center_val or '0',
         state=state or '',
+        city=city or '',
         source_page=source_page or '',
         utm_params=utm_params,
         utm_source=utm_source,
