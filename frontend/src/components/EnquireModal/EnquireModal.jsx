@@ -3,8 +3,20 @@ import './EnquireModal.css'
 import { submitLeadToCRM, isBackendUnreachable, BACKEND_DOWN_MESSAGE } from '../../services/crmService'
 import { trackGenerateLead } from '../../utils/analytics'
 import { INDIAN_STATES, getCitiesForState } from '../../lib/indianStateCities'
+import { LEAD_PROGRAMS } from '../../data/leadPrograms'
+import CitySelect from '../CitySelect/CitySelect'
 
-const EnquireModal = ({ isOpen, onClose }) => {
+const TALK_TO_TEAM_COPY = {
+  title: 'Talk to Our Team',
+  subtitle:
+    'Get personalised guidance on programs, placements, and career paths from our counselling team.',
+  queryPlaceholder: "Tell us what you're looking for",
+  submitLabel: 'Request a Callback',
+  successMessage: 'Thank you! Our team will call you back shortly.',
+}
+
+const EnquireModal = ({ isOpen, onClose, variant = 'enquire' }) => {
+  const isTalkToTeam = variant === 'talk-to-team'
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState(null)
   const [submitSuccess, setSubmitSuccess] = useState(false)
@@ -58,29 +70,6 @@ const EnquireModal = ({ isOpen, onClose }) => {
     () => getCitiesForState(formData.state),
     [formData.state]
   )
-
-  const programs = [
-    'Udaan Program - Cashier / Teller',
-    'Udaan Program - Virtual Relationship Manager',
-    'Udaan Program - Relationship Manager',
-    'Udaan Program - Business Loan Associate',
-    'Lenskart EyeTech Program - Clinical Technician',
-    'Lenskart EyeTech Program - Retail Sales Associate',
-    'Piramal ProEdge Program - Relationship Manager',
-    'Paytm Disha Program - Field Sales Executive',
-    'Aviva Nirmaan Program - Agency Sales Executive',
-    'Aviva Nirmaan Program - Direct Sales Executive',
-    'Poonawalla FinPro Career Program - Sales Executive',
-    'Poonawalla FinPro Career Program - Gold Assayer',
-    'Finova VyaparaMitra Program - Relationship Officer',
-    'PGP - Banking Management - Assistant Manager',
-    'PGP - Relationship Management - Relationship Manager',
-    'PGC - Banking Management - Business Development Executive',
-    'PGP - Retail Banking - Relationship Officer',
-    'Banking Sales Program - Sales Officer',
-    'Mahindra Finance Prarambh Program - Business Executive',
-    'Elevate Banking Program - Virtual Relationship Manager',
-  ]
 
   const validateFullName = (name) => {
     if (!name.trim()) {
@@ -302,8 +291,14 @@ const EnquireModal = ({ isOpen, onClose }) => {
       <div className="enquire-modal-container">
         <div className="enquire-modal-header">
           <div className="enquire-modal-title-section">
-            <h2 className="enquire-modal-title">Enquire Now</h2>
-            <p className="enquire-modal-subtitle">Have questions? We're here to help.</p>
+            <h2 className="enquire-modal-title">
+              {isTalkToTeam ? TALK_TO_TEAM_COPY.title : 'Enquire Now'}
+            </h2>
+            <p className="enquire-modal-subtitle">
+              {isTalkToTeam
+                ? TALK_TO_TEAM_COPY.subtitle
+                : "Have questions? We're here to help."}
+            </p>
           </div>
           <button className="enquire-modal-close" onClick={handleClose} disabled={isSubmitting}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -318,7 +313,7 @@ const EnquireModal = ({ isOpen, onClose }) => {
               <input
                 type="text"
                 name="fullName"
-                placeholder="Full name"
+                placeholder={isTalkToTeam ? 'Full Name' : 'Full name'}
                 value={formData.fullName}
                 onChange={handleInputChange}
                 onBlur={handleBlur}
@@ -363,23 +358,25 @@ const EnquireModal = ({ isOpen, onClose }) => {
                 <span className="enquire-modal-field-error">{errors.emailId}</span>
               )}
             </div>
-            <div className="enquire-modal-form-field enquire-modal-select-wrapper">
-              <select
-                name="state"
-                value={formData.state}
-                onChange={handleInputChange}
-                onBlur={handleBlur}
-                className={`enquire-modal-select ${errors.state ? 'enquire-modal-input-error' : ''}`}
-                required
-              >
-                <option value="">State</option>
-                {INDIAN_STATES.map((state) => (
-                  <option key={state} value={state}>{state}</option>
-                ))}
-              </select>
-              <svg className="enquire-modal-select-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M5 7.5L10 12.5L15 7.5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
+            <div className="enquire-modal-form-field">
+              <div className="enquire-modal-select-control">
+                <select
+                  name="state"
+                  value={formData.state}
+                  onChange={handleInputChange}
+                  onBlur={handleBlur}
+                  className={`enquire-modal-select ${errors.state ? 'enquire-modal-input-error' : ''}`}
+                  required
+                >
+                  <option value="">State</option>
+                  {INDIAN_STATES.map((state) => (
+                    <option key={state} value={state}>{state}</option>
+                  ))}
+                </select>
+                <svg className="enquire-modal-select-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5 7.5L10 12.5L15 7.5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
               {errors.state && (
                 <span className="enquire-modal-field-error">{errors.state}</span>
               )}
@@ -387,45 +384,39 @@ const EnquireModal = ({ isOpen, onClose }) => {
           </div>
 
           <div className="enquire-modal-form-row">
-            <div className="enquire-modal-form-field enquire-modal-select-wrapper">
-              <select
-                name="city"
-                value={formData.city}
-                onChange={handleInputChange}
-                onBlur={handleBlur}
-                className={`enquire-modal-select ${errors.city ? 'enquire-modal-input-error' : ''}`}
-                required
-                disabled={!formData.state}
-              >
-                <option value="">{formData.state ? 'City' : 'Select state first'}</option>
-                {citiesForState.map((city) => (
-                  <option key={city} value={city}>{city}</option>
-                ))}
-              </select>
-              <svg className="enquire-modal-select-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M5 7.5L10 12.5L15 7.5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              {errors.city && (
-                <span className="enquire-modal-field-error">{errors.city}</span>
-              )}
-            </div>
-            <div className="enquire-modal-form-field enquire-modal-select-wrapper">
-              <select
-                name="program"
-                value={formData.program}
-                onChange={handleInputChange}
-                onBlur={handleBlur}
-                className={`enquire-modal-select ${errors.program ? 'enquire-modal-input-error' : ''}`}
-                required
-              >
-                <option value="">Select program</option>
-                {programs.map((program, index) => (
-                  <option key={index} value={program}>{program}</option>
-                ))}
-              </select>
-              <svg className="enquire-modal-select-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M5 7.5L10 12.5L15 7.5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
+            <CitySelect
+              value={formData.city}
+              onChange={handleInputChange}
+              onBlur={handleBlur}
+              state={formData.state}
+              cities={citiesForState}
+              selectClassName={`enquire-modal-select ${errors.city ? 'enquire-modal-input-error' : ''}`}
+              fieldClassName="enquire-modal-form-field"
+              controlClassName="enquire-modal-select-control"
+              arrowClassName="enquire-modal-select-arrow"
+              error={errors.city}
+              errorClassName="enquire-modal-field-error"
+              required
+            />
+            <div className="enquire-modal-form-field">
+              <div className="enquire-modal-select-control">
+                <select
+                  name="program"
+                  value={formData.program}
+                  onChange={handleInputChange}
+                  onBlur={handleBlur}
+                  className={`enquire-modal-select ${errors.program ? 'enquire-modal-input-error' : ''}`}
+                  required
+                >
+                  <option value="">Select program</option>
+                  {LEAD_PROGRAMS.map((program, index) => (
+                    <option key={index} value={program}>{program}</option>
+                  ))}
+                </select>
+                <svg className="enquire-modal-select-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5 7.5L10 12.5L15 7.5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
               {errors.program && (
                 <span className="enquire-modal-field-error">{errors.program}</span>
               )}
@@ -436,7 +427,11 @@ const EnquireModal = ({ isOpen, onClose }) => {
             <div className="enquire-modal-form-field">
               <textarea
                 name="query"
-                placeholder="Write your query here"
+                placeholder={
+                  isTalkToTeam
+                    ? TALK_TO_TEAM_COPY.queryPlaceholder
+                    : 'Write your query here'
+                }
                 value={formData.query}
                 onChange={handleInputChange}
                 className="enquire-modal-input enquire-modal-textarea"
@@ -453,7 +448,9 @@ const EnquireModal = ({ isOpen, onClose }) => {
           
           {submitSuccess && (
             <div className="enquire-modal-success">
-              Thank you! Your enquiry has been submitted successfully.
+              {isTalkToTeam
+                ? TALK_TO_TEAM_COPY.successMessage
+                : 'Thank you! Your enquiry has been submitted successfully.'}
             </div>
           )}
           
@@ -463,7 +460,11 @@ const EnquireModal = ({ isOpen, onClose }) => {
               className="enquire-modal-submit-button"
               disabled={isSubmitting}
             >
-              {isSubmitting ? 'Submitting...' : 'Submit'}
+              {isSubmitting
+                ? 'Submitting...'
+                : isTalkToTeam
+                  ? TALK_TO_TEAM_COPY.submitLabel
+                  : 'Submit'}
             </button>
           </div>
         </form>

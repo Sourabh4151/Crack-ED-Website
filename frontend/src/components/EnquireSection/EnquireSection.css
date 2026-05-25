@@ -138,8 +138,9 @@
   line-height: 1.4;
 }
 
-.enquire-section-select-wrap {
+.enquire-section-select-control {
   position: relative;
+  width: 100%;
 }
 
 .enquire-section-select {

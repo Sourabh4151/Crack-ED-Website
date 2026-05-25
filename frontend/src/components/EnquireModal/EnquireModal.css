@@ -223,8 +223,9 @@
   line-height: 1.4;
 }
 
-.enquire-modal-select-wrapper {
+.enquire-modal-select-control {
   position: relative;
+  width: 100%;
 }
 
 .enquire-modal-select {
@@ -253,6 +254,7 @@
   transform: translateY(-50%);
   pointer-events: none;
   opacity: 0.7;
+  color: #fff;
 }
 
 .enquire-modal-form-actions {

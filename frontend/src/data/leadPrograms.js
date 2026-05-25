@@ -1,0 +1,23 @@
+/** Program options for lead/enquiry forms (alphabetical). */
+export const LEAD_PROGRAMS = [
+  'Aviva Nirmaan Program - Agency Sales Executive',
+  'Aviva Nirmaan Program - Direct Sales Executive',
+  'Banking Sales Program - Sales Officer',
+  'Elevate Banking Program - Virtual Relationship Manager',
+  'Finova VyaparaMitra Program - Relationship Officer',
+  'Lenskart EyeTech Program - Clinical Technician',
+  'Lenskart EyeTech Program - Retail Sales Associate',
+  'Mahindra Finance Prarambh Program - Business Executive',
+  'Paytm Disha Program - Field Sales Executive',
+  'PGC - Banking Management - Business Development Executive',
+  'PGP - Banking Management - Assistant Manager',
+  'PGP - Relationship Management - Relationship Manager',
+  'PGP - Retail Banking - Relationship Officer',
+  'Piramal ProEdge Program - Relationship Manager',
+  'Poonawalla FinPro Career Program - Gold Assayer',
+  'Poonawalla FinPro Career Program - Sales Executive',
+  'Udaan Program - Business Loan Associate',
+  'Udaan Program - Cashier / Teller',
+  'Udaan Program - Relationship Manager',
+  'Udaan Program - Virtual Relationship Manager',
+]

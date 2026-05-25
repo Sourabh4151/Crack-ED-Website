@@ -92,6 +92,7 @@ const Header = () => {
     if (path === '/resources') return document.querySelector('.resources-scroll-wrapper')
     if (path.startsWith('/resources/blog/')) return document.querySelector('.blog-post-scroll')
     if (path === '/careers') return document.querySelector('.careers-scroll-wrapper')
+    if (path === '/contact-us') return document.querySelector('.contact-scroll-wrapper')
     if (path.startsWith('/careers/job/')) return document.querySelector('.job-detail-page')
     if (path === '/influencer') return document.querySelector('.influencer-page')
     if (path === '/refund-policy') return document.querySelector('.refund-page')
@@ -183,7 +184,7 @@ const Header = () => {
   }
 
   const handleProgramsNavClick = (e) => {
-    /* Mobile: go straight to /programs ó no in-nav dropdown */
+    /* Mobile: go straight to /programs ù no in-nav dropdown */
     if (typeof window !== 'undefined' && window.innerWidth <= 768) {
       closeMobileMenu()
       return
@@ -278,7 +279,7 @@ const Header = () => {
                 to="/programs"
                 className="nav-link"
                 onClick={handleProgramsNavClick}
-                title="Programs ó open menu on desktop; full list on mobile"
+                title="Programs ù open menu on desktop; full list on mobile"
               >
                 Programs
                 <svg className="dropdown-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
@@ -360,6 +361,15 @@ const Header = () => {
             </li>
             <li className="nav-item">
               <Link to="/careers" className="nav-link" onClick={closeMobileMenu}>Careers</Link>
+            </li>
+            <li className="nav-item">
+              <Link
+                to="/contact-us"
+                className={`nav-link ${location.pathname === '/contact-us' ? 'nav-link--active' : ''}`}
+                onClick={closeMobileMenu}
+              >
+                Contact Us
+              </Link>
             </li>
           </ul>
         </nav>

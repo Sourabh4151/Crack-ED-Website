@@ -50,6 +50,7 @@ function getPageType() {
   if (path === '/programs') return 'programs'
   if (path === '/about') return 'about'
   if (path === '/careers') return 'careers'
+  if (path === '/contact-us') return 'contact_us'
   if (path === '/influencer') return 'influencer'
   if (path === '/resources') return 'resources'
   if (path.startsWith('/resources/blog/')) return 'blog_post'

@@ -3,29 +3,8 @@ import './EnquireSection.css'
 import { submitLeadToCRM } from '../../services/crmService'
 import { trackGenerateLead } from '../../utils/analytics'
 import { INDIAN_STATES, getCitiesForState } from '../../lib/indianStateCities'
-
-const PROGRAMS = [
-  'Udaan Program - Cashier / Teller',
-  'Udaan Program - Virtual Relationship Manager',
-  'Udaan Program - Relationship Manager',
-  'Udaan Program - Business Loan Associate',
-  'Lenskart EyeTech Program - Clinical Technician',
-  'Lenskart EyeTech Program - Retail Sales Associate',
-  'Piramal ProEdge Program - Relationship Manager',
-  'Paytm Disha Program - Field Sales Executive',
-  'Aviva Nirmaan Program - Agency Sales Executive',
-  'Aviva Nirmaan Program - Direct Sales Executive',
-  'Poonawalla FinPro Career Program - Sales Executive',
-  'Poonawalla FinPro Career Program - Gold Assayer',
-  'Finova VyaparaMitra Program - Relationship Officer',
-  'PGP - Banking Management - Assistant Manager',
-  'PGP - Relationship Management - Relationship Manager',
-  'PGC - Banking Management - Business Development Executive',
-  'PGP - Retail Banking - Relationship Officer',
-  'Banking Sales Program - Sales Officer',
-  'Mahindra Finance Prarambh Program - Business Executive',
-  'Elevate Banking Program - Virtual Relationship Manager',
-]
+import CitySelect from '../CitySelect/CitySelect'
+import { LEAD_PROGRAMS } from '../../data/leadPrograms'
 
 const EnquireSection = () => {
   const [formData, setFormData] = useState({
@@ -137,56 +116,54 @@ const EnquireSection = () => {
               />
               {errors.emailId && <span className="enquire-section-field-error">{errors.emailId}</span>}
             </div>
-            <div className="enquire-section-field enquire-section-select-wrap">
-              <select
-                name="state"
-                value={formData.state}
-                onChange={handleChange}
-                className={`enquire-section-select ${errors.state ? 'enquire-section-input-error' : ''}`}
-              >
-                <option value="">State</option>
-                {INDIAN_STATES.map((s) => (
-                  <option key={s} value={s}>{s}</option>
-                ))}
-              </select>
-              <svg className="enquire-section-select-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
+            <div className="enquire-section-field">
+              <div className="enquire-section-select-control">
+                <select
+                  name="state"
+                  value={formData.state}
+                  onChange={handleChange}
+                  className={`enquire-section-select ${errors.state ? 'enquire-section-input-error' : ''}`}
+                >
+                  <option value="">State</option>
+                  {INDIAN_STATES.map((s) => (
+                    <option key={s} value={s}>{s}</option>
+                  ))}
+                </select>
+                <svg className="enquire-section-select-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
               {errors.state && <span className="enquire-section-field-error">{errors.state}</span>}
             </div>
-            <div className="enquire-section-field enquire-section-select-wrap">
-              <select
-                name="city"
-                value={formData.city}
-                onChange={handleChange}
-                className={`enquire-section-select ${errors.city ? 'enquire-section-input-error' : ''}`}
-                disabled={!formData.state}
-              >
-                <option value="">{formData.state ? 'City' : 'Select state first'}</option>
-                {citiesForState.map((city) => (
-                  <option key={city} value={city}>{city}</option>
-                ))}
-              </select>
-              <svg className="enquire-section-select-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              {errors.city && <span className="enquire-section-field-error">{errors.city}</span>}
-            </div>
-            <div className="enquire-section-field enquire-section-select-wrap">
-              <select
-                name="program"
-                value={formData.program}
-                onChange={handleChange}
-                className={`enquire-section-select ${errors.program ? 'enquire-section-input-error' : ''}`}
-              >
-                <option value="">Select program</option>
-                {PROGRAMS.map((p) => (
-                  <option key={p} value={p}>{p}</option>
-                ))}
-              </select>
-              <svg className="enquire-section-select-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
+            <CitySelect
+              value={formData.city}
+              onChange={handleChange}
+              state={formData.state}
+              cities={citiesForState}
+              selectClassName={`enquire-section-select ${errors.city ? 'enquire-section-input-error' : ''}`}
+              fieldClassName="enquire-section-field"
+              controlClassName="enquire-section-select-control"
+              arrowClassName="enquire-section-select-arrow"
+              error={errors.city}
+              errorClassName="enquire-section-field-error"
+            />
+            <div className="enquire-section-field">
+              <div className="enquire-section-select-control">
+                <select
+                  name="program"
+                  value={formData.program}
+                  onChange={handleChange}
+                  className={`enquire-section-select ${errors.program ? 'enquire-section-input-error' : ''}`}
+                >
+                  <option value="">Select program</option>
+                  {LEAD_PROGRAMS.map((p) => (
+                    <option key={p} value={p}>{p}</option>
+                  ))}
+                </select>
+                <svg className="enquire-section-select-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
               {errors.program && <span className="enquire-section-field-error">{errors.program}</span>}
             </div>
             <div className="enquire-section-field enquire-section-field-full">

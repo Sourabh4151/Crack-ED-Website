@@ -24,6 +24,7 @@ import Influencer from './pages/Influencer'
 import RefundPolicy from './pages/RefundPolicy'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import TermsConditions from './pages/TermsConditions'
+import ContactUs from './pages/ContactUs'
 import AdminBlogs from './pages/AdminBlogs'
 import AdminBlogEdit from './pages/AdminBlogEdit'
 
@@ -105,6 +106,7 @@ function App() {
           <Route path="/refund-policy" element={<RefundPolicy />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-conditions" element={<TermsConditions />} />
+          <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/marketing/blogs" element={<AdminBlogs />} />
           <Route path="/marketing/blogs/new" element={<AdminBlogEdit />} />
           <Route path="/marketing/blogs/edit/:id" element={<AdminBlogEdit />} />

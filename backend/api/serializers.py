@@ -46,6 +46,14 @@ class BIDEpisodeSerializer(serializers.ModelSerializer):
     def get_thumbnailUrl(self, obj):
         if not obj.thumbnail:
             return None
+        name = obj.thumbnail.name
+        if not name:
+            return None
+        try:
+            if not obj.thumbnail.storage.exists(name):
+                return None
+        except OSError:
+            return None
         request = self.context.get('request')
         if request:
             return request.build_absolute_uri(obj.thumbnail.url)

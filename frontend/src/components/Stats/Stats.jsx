@@ -1,15 +1,17 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import icon1 from '../../assets/icon1.png'
 import icon2 from '../../assets/icon2.png'
 import icon3 from '../../assets/icon3.png'
 import icon4 from '../../assets/icon4.png'
+import EnquireModal from '../EnquireModal/EnquireModal'
 import './Stats.css'
 
 gsap.registerPlugin(ScrollTrigger)
 
 const Stats = () => {
+  const [isTalkModalOpen, setIsTalkModalOpen] = useState(false)
   const statsGridRef = useRef(null)
 
   useEffect(() => {
@@ -84,7 +86,21 @@ const Stats = () => {
             </div>
           ))}
         </div>
+        <div className="stats-cta-wrap">
+          <button
+            type="button"
+            className="stats-cta-button"
+            onClick={() => setIsTalkModalOpen(true)}
+          >
+            Talk to Our Team
+          </button>
+        </div>
       </div>
+      <EnquireModal
+        isOpen={isTalkModalOpen}
+        onClose={() => setIsTalkModalOpen(false)}
+        variant="talk-to-team"
+      />
     </section>
   )
 }

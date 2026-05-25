@@ -1,0 +1,27 @@
+.city-select-control {
+  position: relative;
+  width: 100%;
+}
+
+.city-select-hover-hint {
+  display: none;
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(250, 250, 250, 0.6);
+  line-height: 27px;
+  z-index: 1;
+}
+
+.city-select-wrap--needs-state:hover .city-select-hover-hint {
+  display: block;
+}
+
+.city-select-wrap--needs-state:hover select:disabled {
+  color: transparent;
+}

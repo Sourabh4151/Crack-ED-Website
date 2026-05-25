@@ -14,6 +14,7 @@ SOURCE_PAGE_TO_LABEL = {
     '/refund-policy': 'Refund Policy',
     '/privacy-policy': 'Privacy Policy',
     '/terms-conditions': 'Terms & Conditions',
+    '/contact-us': 'Contact Us',
 }
 # Prefix matches (path starts with key -> label); checked after exact match
 SOURCE_PAGE_PREFIX_LABELS = [

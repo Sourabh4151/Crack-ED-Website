@@ -40,7 +40,7 @@ const BIDEpisodes = () => {
   // 1st by date → bigLeft, 2nd → rightTop, 3rd → rightBottom; fallback to static when missing
   const toCard = (ep) => ({
     url: ep.youtubeUrl,
-    image: ep.thumbnailUrl,
+    image: ep.thumbnailUrl || bigLeftFallback,
     imageAlt: `${ep.title} episode thumbnail`,
     title: ep.title,
     date: ep.date,
@@ -68,7 +68,14 @@ const BIDEpisodes = () => {
             className="bid-episode-card bid-episode-card--large"
           >
             <div className="bid-episode-thumbnail">
-              <img src={bigLeftEpisode.image} alt={bigLeftEpisode.imageAlt} />
+              <img
+                src={bigLeftEpisode.image}
+                alt={bigLeftEpisode.imageAlt}
+                onError={(e) => {
+                  e.currentTarget.onerror = null
+                  e.currentTarget.src = bigLeftFallback
+                }}
+              />
               <div className="bid-episode-thumbnail-overlay" />
               <div className="bid-episode-play">
                 <img src={playIcon} alt="" />
@@ -87,7 +94,14 @@ const BIDEpisodes = () => {
             className="bid-episode-card"
           >
             <div className="bid-episode-thumbnail">
-              <img src={rightTopCard.image} alt={rightTopCard.imageAlt} />
+              <img
+                src={rightTopCard.image}
+                alt={rightTopCard.imageAlt}
+                onError={(e) => {
+                  e.currentTarget.onerror = null
+                  e.currentTarget.src = bigLeftFallback
+                }}
+              />
               <div className="bid-episode-thumbnail-overlay" />
               <div className="bid-episode-play">
                 <img src={playIcon} alt="" />
@@ -106,7 +120,14 @@ const BIDEpisodes = () => {
             className="bid-episode-card"
           >
             <div className="bid-episode-thumbnail">
-              <img src={rightBottomCard.image} alt={rightBottomCard.imageAlt} />
+              <img
+                src={rightBottomCard.image}
+                alt={rightBottomCard.imageAlt}
+                onError={(e) => {
+                  e.currentTarget.onerror = null
+                  e.currentTarget.src = bigLeftFallback
+                }}
+              />
               <div className="bid-episode-thumbnail-overlay" />
               <div className="bid-episode-play">
                 <img src={playIcon} alt="" />

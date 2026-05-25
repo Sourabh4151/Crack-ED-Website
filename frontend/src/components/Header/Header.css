@@ -107,6 +107,10 @@
   color: #00d4ff;
 }
 
+.nav-link--active {
+  color: #00d4ff;
+}
+
 .dropdown-arrow {
   width: 16px;
   height: 16px;
