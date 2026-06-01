@@ -26,9 +26,9 @@ const centres = [
   {
     name: "Mumbai",
     details:
-      "5th Floor, B wing, community co working space, Ackruti Trade Centre",
+      "1st & 2nd Floor, Teloz Spaces, AJ House, Marol Maroshi Rd, Gamdevi, Marol, Andheri East, Mumbai, Maharashtra 400059",
     mapQuery:
-      "Ackruti Trade Centre, MIDC, Andheri East, Mumbai, Maharashtra, India",
+      "Teloz Spaces - AJ House Andheri East, Marol Maroshi Rd, Andheri East, Mumbai, Maharashtra 400059",
   },
 ];
 
