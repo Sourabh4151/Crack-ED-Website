@@ -60,7 +60,7 @@ const ProgramsList = () => {
         role: 'Sales Officer',
         details: [
           'Join as a Sales Officer with a CTC of Rs 2.5 LPA + incentives',
-          '2-month program'
+          '3-month program'
         ]
       },
       {
