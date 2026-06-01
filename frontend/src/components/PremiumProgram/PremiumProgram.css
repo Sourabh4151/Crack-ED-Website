@@ -42,7 +42,9 @@
 
 .premium-program-card {
   position: relative;
-  width: 1200px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
   height: 455px;
   border-radius: 16px;
   overflow: hidden;
@@ -198,10 +200,6 @@
     padding: 72px 60px;
   }
 
-  .premium-program-card {
-    width: 100%;
-    max-width: 1200px;
-  }
 }
 
 @media (max-width: 1024px) {
@@ -253,6 +251,18 @@
     gap: 8px;
     margin-top: auto; /* let image show above, content sits lower */
     width: 100%;
+    align-items: flex-start;
+  }
+
+  /* Match Programs mobile-program-card-label */
+  .premium-program-card-tag {
+    font-size: 12px;
+    padding: 4px 12px;
+    background: rgba(0, 0, 0, 0.4);
+    width: fit-content;
+    max-width: 100%;
+    align-self: flex-start;
+    box-sizing: border-box;
   }
 
   .premium-program-card-title {
