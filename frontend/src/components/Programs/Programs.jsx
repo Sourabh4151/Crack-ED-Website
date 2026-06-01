@@ -337,7 +337,7 @@ const Programs = () => {
         programLabel: 'Finova VyaparaMitra Program',
         logo: finovaCardLogo,
         details: 'Join as a Relationship Officer with a CTC of Rs 2.4 LPA + variable',
-        duration: '3-month program',
+        duration: '1-month program',
         image: finovaProgramImage,
       },
       'Postgraduate Program Relationship Management - Relationship Manager': {

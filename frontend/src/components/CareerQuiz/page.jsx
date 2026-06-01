@@ -47,7 +47,7 @@ const PROGRAM_DETAILS = {
   'Aviva Nirmaan Program - Agency Sales Executive': { details: 'CTC of Rs 3.5 LPA + variable', duration: '3-month program', link: 'https://avivaas.crack-ed.com' },
   'Poonawalla FinPro Career Program - Sales Executive': { details: 'CTC of upto Rs 2.76 LPA + incentives', duration: '3-week program', link: 'http://poonawallase.crack-ed.com/' },
   'Poonawalla FinPro Career Program - Gold Assayer': { details: 'CTC of Rs 2.5 LPA + incentives', duration: '1.5-month program', link: 'http://poonawallaga.crack-ed.com/' },
-  'Finova VyaparaMitra Program - Relationship Officer': { details: 'CTC of Rs 2.4 LPA + variable', duration: '3-month program', link: 'https://finovaro.crack-ed.com' },
+  'Finova VyaparaMitra Program - Relationship Officer': { details: 'CTC of Rs 2.4 LPA + variable', duration: '1-month program', link: 'https://finovaro.crack-ed.com' },
   'Postgraduate Program Relationship Management - Relationship Manager': { details: 'CTC of Rs 5.5 LPA + incentives', duration: '6-month program', link: 'https://pgprm.crack-ed.com' },
   'Postgraduate Program Retail Banking - Relationship Officer': { details: 'CTC of upto Rs 3.1 LPA + incentives', duration: '3-week program', link: 'https://pgprb.crack-ed.com' },
   'Postgraduate Program Banking Management - Assistant Manager': { details: 'CTC of Rs 4 LPA + incentives', duration: '6-month program', link: 'https://pgpam.crack-ed.com' },

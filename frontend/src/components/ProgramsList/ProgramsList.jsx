@@ -153,7 +153,7 @@ const ProgramsList = () => {
         role: 'Relationship Officer',
         details: [
           'Join as a Relationship Officer with a CTC of Rs 2.4 LPA + variable',
-          '3-month program'
+          '1-month program'
         ]
       },
       {
