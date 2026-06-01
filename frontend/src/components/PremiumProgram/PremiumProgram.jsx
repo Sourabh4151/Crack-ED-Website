@@ -1,8 +1,11 @@
 import React from 'react'
-// import premiumProgramImage from '../../assets/premium_program.jpg'
-import crackEdPremiumLogo from '../../assets/crack-ed_premium.png'
 import premiumProgramImage from '../../assets/relationship manager_desktop.jpg'
 import './PremiumProgram.css'
+
+const programHighlights = [
+  'Join as a Relationship Manager with a CTC of Rs 5.5 LPA + incentives',
+  '6-month program',
+]
 
 const PremiumProgram = () => {
   return (
@@ -24,11 +27,14 @@ const PremiumProgram = () => {
           <div className="premium-program-card-content">
             <div className="premium-program-card-tag">PGP - Relationship Management</div>
             <h3 className="premium-program-card-title">Relationship Manager</h3>
-            <div className="premium-program-sponsors">
-              <div className="sponsor-logo">
-                <img src={crackEdPremiumLogo} alt="CRACK-ED" />
-              </div>
-            </div>
+            <ul className="premium-program-highlights">
+              {programHighlights.map((highlight) => (
+                <li key={highlight} className="premium-program-highlight">
+                  <span className="premium-program-checkmark" aria-hidden="true" />
+                  <span className="premium-program-highlight-text">{highlight}</span>
+                </li>
+              ))}
+            </ul>
             <a 
               href="https://pgprm.crack-ed.com/" 
               target="_blank" 
