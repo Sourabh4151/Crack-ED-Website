@@ -42,7 +42,7 @@ PROGRAM_TO_CENTER = {
     'Udaan Program - Cashier / Teller': 'HDFC - Teller',
     'Udaan Program - Virtual Relationship Manager': 'HDFC - VRM',
     'Udaan Program - Relationship Manager': 'HDFC - RM',
-    'Udaan Program - Business Loan Associate': 'HDFC - Buisiness',
+    'Udaan Program - Business Loan Associate': 'HDFC - Business',
     'Piramal ProEdge Program - Relationship Manager': 'Piramal - RM',
     'Paytm Disha Program - Field Sales Executive': 'Paytm - FSE',
     'Aviva Nirmaan Program - Agency Sales Executive': 'Aviva - AS',
