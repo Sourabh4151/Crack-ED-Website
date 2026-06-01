@@ -12,10 +12,14 @@ import mahindraFinanceSmallLogo from '../../assets/mahindra_finance_small_logo_l
 import { trackMicrositeClick, markProgramsPageVisited } from '../../utils/analytics'
 import './ProgramsList.css'
 
+const PROGRAM_CATEGORIES = ['Banking', 'Retail', 'NBFC', 'Insurance']
+const PROGRAM_TABS = ['All', ...PROGRAM_CATEGORIES]
+
 const ProgramsList = () => {
   useEffect(() => { markProgramsPageVisited() }, [])
 
-  const [activeTab, setActiveTab] = useState('Banking')
+  const [activeTab, setActiveTab] = useState('All')
+  const [searchQuery, setSearchQuery] = useState('')
 
   const programs = {
     Banking: [
@@ -285,44 +289,81 @@ const ProgramsList = () => {
     return null
   }
 
+  const displayedPrograms =
+    activeTab === 'All'
+      ? PROGRAM_CATEGORIES.flatMap((category) =>
+          programs[category].map((item) => ({ ...item, category }))
+        )
+      : programs[activeTab].map((item) => ({ ...item, category: activeTab }))
+
+  const normalizedQuery = searchQuery.trim().toLowerCase()
+  const filteredPrograms = normalizedQuery
+    ? displayedPrograms.filter((item) => {
+        const searchable = [item.program, item.role, item.category, ...item.details]
+          .join(' ')
+          .toLowerCase()
+        return searchable.includes(normalizedQuery)
+      })
+    : displayedPrograms
+
   return (
     <section className="programs-list">
       <div className="programs-list-container">
         <button className="explore-other-programs">Explore Other Programs</button>
         
         <div className="programs-tabs">
-          <button
-            className={`program-tab ${activeTab === 'Banking' ? 'active' : ''}`}
-            onClick={() => setActiveTab('Banking')}
+          {PROGRAM_TABS.map((tab) => (
+            <button
+              key={tab}
+              className={`program-tab ${activeTab === tab ? 'active' : ''}`}
+              onClick={() => setActiveTab(tab)}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
+
+        <div className="programs-search">
+          <svg
+            className="programs-search-icon"
+            width="24"
+            height="24"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden
           >
-            Banking
-          </button>
-          <button
-            className={`program-tab ${activeTab === 'Retail' ? 'active' : ''}`}
-            onClick={() => setActiveTab('Retail')}
-          >
-            Retail
-          </button>
-          <button
-            className={`program-tab ${activeTab === 'NBFC' ? 'active' : ''}`}
-            onClick={() => setActiveTab('NBFC')}
-          >
-            NBFC
-          </button>
-        <button
-          className={`program-tab ${activeTab === 'Insurance' ? 'active' : ''}`}
-          onClick={() => setActiveTab('Insurance')}
-        >
-          Insurance
-        </button>
+            <path
+              d="M9 17C13.4183 17 17 13.4183 17 9C17 4.58172 13.4183 1 9 1C4.58172 1 1 4.58172 1 9C1 13.4183 4.58172 17 9 17Z"
+              stroke="rgba(250, 250, 250, 0.7)"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M19 19L14.65 14.65"
+              stroke="rgba(250, 250, 250, 0.7)"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          <input
+            type="search"
+            className="programs-search-input"
+            placeholder="Search Program"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            aria-label="Search programs"
+          />
         </div>
 
         <div className="programs-grid">
-          {programs[activeTab].map((item, index) => {
-            const link = getProgramLink(activeTab, item)
+          {filteredPrograms.map((item, index) => {
+            const link = getProgramLink(item.category, item)
             return (
               <a
-                key={index}
+                key={`${item.category}-${item.program}-${item.role}-${index}`}
                 href={link || '#'}
                 className="program-card"
                 target={link ? '_blank' : undefined}
@@ -330,7 +371,7 @@ const ProgramsList = () => {
                 onClick={!link ? (e) => e.preventDefault() : () => trackMicrositeClick(`${item.program} - ${item.role}`)}
               >
                 <div className="program-card-top">
-                  <div className="program-card-icon">{getIcon(activeTab, item)}</div>
+                  <div className="program-card-icon">{getIcon(item.category, item)}</div>
                   <div className="program-card-header">
                     <div className="program-card-name">{item.program}</div>
                     <div className="program-card-role">{item.role}</div>
