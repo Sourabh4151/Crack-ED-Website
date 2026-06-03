@@ -50,6 +50,8 @@ PROGRAM_TO_CENTER = {
     'Poonawalla FinPro Career Program - Sales Executive': 'Poonawalla - SE',
     'Poonawalla FinPro Career Program - Gold Assayer': 'Poonawalla - GA',
     'Finova VyaparaMitra Program - Relationship Officer': 'Finova - RO',
+    'Hero Housing Finance Pragati Program - Relationship Manager': 'Hero Finance - RM',
+    'Housing Finance Pragati Program - Relationship Manager': 'Hero Finance - RM',
     'PGP - Banking Management': 'Bandhan Bank - AM',
     'PGP - Banking Management - Assistant Manager': 'Bandhan Bank - AM',
     'PGP - Relationship Management': 'Relationship Manager',

@@ -9,6 +9,7 @@ import poonawallaLogoSmallCard from '../../assets/poonawalla_logo_small_card.png
 import avivaLogoSmallCard from '../../assets/aviva_logo_small_card.png'
 import finovaSmallLogo from '../../assets/finova_small_logo.png'
 import mahindraFinanceSmallLogo from '../../assets/mahindra_finance_small_logo_logo.png'
+import heroSmallLogo from '../../assets/hero_small_logo.png'
 import { trackMicrositeClick, markProgramsPageVisited } from '../../utils/analytics'
 import './ProgramsList.css'
 
@@ -132,6 +133,14 @@ const ProgramsList = () => {
     ],
     NBFC: [
       {
+        program: 'Hero Housing Finance Pragati Program',
+        role: 'Relationship Manager',
+        details: [
+          'Join as a Relationship Manager - Mortgage Sales and secure a CTC of Rs 2.75 LPA + incentives',
+          '1-month program'
+        ]
+      },
+      {
         program: 'Piramal ProEdge Program',
         role: 'Relationship Manager',
         details: [
@@ -231,6 +240,9 @@ const ProgramsList = () => {
     }
 
     if (category === 'NBFC') {
+      if (program === 'Hero Housing Finance Pragati Program' && role === 'Relationship Manager') {
+        return 'https://herofinancerm.crack-ed.com/'
+      }
       switch (role) {
         case 'Relationship Manager':
           return 'https://piramal.crack-ed.com/portal'
@@ -283,6 +295,9 @@ const ProgramsList = () => {
     }
     if (category === 'NBFC' && item?.program && item.program.startsWith('Finova VyaparaMitra Program')) {
       return <img src={finovaSmallLogo} alt="Finova" className="program-logo-img program-logo-finova" />
+    }
+    if (category === 'NBFC' && item?.program === 'Hero Housing Finance Pragati Program') {
+      return <img src={heroSmallLogo} alt="Hero Housing Finance" className="program-logo-img program-logo-hero" />
     }
     if (category === 'NBFC') return <img src={piramalLogo} alt="Piramal" className="program-logo-img program-logo-piramal" />
     if (category === 'Insurance') return <img src={avivaLogoSmallCard} alt="Aviva" className="program-logo-img program-logo-aviva" />

@@ -49,6 +49,7 @@ const PROGRAM_CATEGORIES = [
     id: 'nbfc',
     label: 'NBFC',
     items: [
+      { label: 'Hero Housing Finance Pragati Program', href: 'https://herofinancerm.crack-ed.com/' },
       { label: 'Piramal ProEdge Program', href: 'https://piramal.crack-ed.com/portal' },
       { label: 'Finova VyaparaMitra Program', href: 'https://finovaro.crack-ed.com' },
       { label: 'Paytm Disha Program', href: 'https://paytm.crack-ed.com/portal' },
@@ -184,7 +185,7 @@ const Header = () => {
   }
 
   const handleProgramsNavClick = (e) => {
-    /* Mobile: go straight to /programs ù no in-nav dropdown */
+    /* Mobile: go straight to /programs ? no in-nav dropdown */
     if (typeof window !== 'undefined' && window.innerWidth <= 768) {
       closeMobileMenu()
       return
@@ -279,7 +280,7 @@ const Header = () => {
                 to="/programs"
                 className="nav-link"
                 onClick={handleProgramsNavClick}
-                title="Programs ù open menu on desktop; full list on mobile"
+                title="Programs ? open menu on desktop; full list on mobile"
               >
                 Programs
                 <svg className="dropdown-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>

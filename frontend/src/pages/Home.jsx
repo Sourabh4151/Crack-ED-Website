@@ -15,11 +15,12 @@ import Analyse from '../components/analyse/page'
 import EnquireSection from '../components/EnquireSection/EnquireSection'
 import Partners from '../components/partners/page'
 import FloatingSteps from '../components/FloatingSteps/page'
-
+import HeroPopup from '../components/HeroPopup/HeroPopup'
 
 const Home = () => {
   return (
     <div className="home-page">
+      <HeroPopup />
       <Header />
       <Hero />   <Programs />
       <CareerForward />

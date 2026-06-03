@@ -245,6 +245,12 @@
   object-fit: contain;
 }
 
+.programs-list .program-card-icon .program-logo-hero {
+  width: 41px;
+  height: 41px;
+  object-fit: contain;
+}
+
 .programs-list .program-card-content {
   display: flex;
   flex-direction: column;

@@ -18,6 +18,14 @@ const PROGRAMS = [
     ],
   },
   {
+    id: 'hero-housing',
+    name: 'Hero Housing Finance Pragati Program',
+    link: '/programs',
+    links: [
+      { label: 'Relationship Manager', href: 'https://herofinancerm.crack-ed.com/' },
+    ],
+  },
+  {
     id: 'piramal',
     name: 'Piramal ProEdge Program',
     link: '/programs',

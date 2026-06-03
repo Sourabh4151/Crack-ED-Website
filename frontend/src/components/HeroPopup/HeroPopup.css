@@ -1,0 +1,247 @@
+.hero-popup-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 2000;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.hero-popup {
+  position: relative;
+  width: 100%;
+  max-width: 920px;
+  aspect-ratio: 920 / 514;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+}
+
+.hero-popup-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.hero-popup-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.82) 0%,
+    rgba(0, 0, 0, 0.55) 42%,
+    rgba(0, 0, 0, 0.2) 68%,
+    rgba(0, 0, 0, 0.05) 100%
+  );
+  pointer-events: none;
+}
+
+.hero-popup-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 3;
+  background: transparent;
+  border: none;
+  color: #fff;
+  width: 36px;
+  height: 36px;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.hero-popup-close:hover {
+  opacity: 0.85;
+}
+
+/* Frame 1337 — top 44px, left 55px, width 586px, vertical gap 40px */
+.hero-popup-content {
+  position: absolute;
+  top: 44px;
+  left: 55px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 586px;
+  max-width: calc(100% - 55px - 24px);
+  gap: 40px;
+  box-sizing: border-box;
+}
+
+.hero-popup-logo-wrap {
+  background: #fff;
+  border-radius: 6px;
+  padding: 10px 14px;
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.hero-popup-logo {
+  display: block;
+  height: 36px;
+  width: auto;
+  max-width: 200px;
+  object-fit: contain;
+}
+
+/* Frame 1336 — fill 586px, vertical gap 15px */
+.hero-popup-copy {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Heading — Montserrat 600, 32px, line-height 100% */
+.hero-popup-heading {
+  margin: 0;
+  width: 100%;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 100%;
+  letter-spacing: 0;
+  color: rgba(250, 250, 250, 1);
+}
+
+/* Description — Poppins 500, 16px, justified */
+.hero-popup-description {
+  margin: 0;
+  width: 100%;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0;
+  text-align: justify;
+  color: rgba(250, 250, 250, 0.8);
+}
+
+.hero-popup-features {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Bullets — Poppins 400, 16px, line-height 100% */
+.hero-popup-features li {
+  position: relative;
+  padding-left: 32px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 100%;
+  letter-spacing: 0;
+  color: rgba(250, 250, 250, 1);
+}
+
+.hero-popup-features li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #5b4fcf;
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='8' viewBox='0 0 10 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 4L3.5 6.5L9 1' stroke='%23FAFAFA' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 10px 8px;
+}
+
+.hero-popup-apply {
+  flex-shrink: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fafafa;
+  background: #5b4fcf;
+  border: none;
+  border-radius: 8px;
+  padding: 14px 32px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.hero-popup-apply:hover {
+  background: #4f43b8;
+}
+
+@media (max-width: 720px) {
+  .hero-popup-overlay {
+    padding: 16px;
+    align-items: center;
+  }
+
+  .hero-popup {
+    aspect-ratio: auto;
+    min-height: min(520px, 85vh);
+    max-height: 90vh;
+  }
+
+  .hero-popup-bg {
+    object-position: 65% center;
+  }
+
+  .hero-popup-shade {
+    background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.88) 0%,
+      rgba(0, 0, 0, 0.6) 50%,
+      rgba(0, 0, 0, 0.35) 100%
+    );
+  }
+
+  .hero-popup-content {
+    top: 28px;
+    left: 20px;
+    right: 20px;
+    bottom: auto;
+    width: auto;
+    max-width: none;
+    padding: 0;
+    gap: 24px;
+  }
+
+  .hero-popup-heading {
+    font-size: 24px;
+  }
+
+  .hero-popup-description {
+    font-size: 14px;
+    line-height: 1.4;
+    text-align: left;
+  }
+
+  .hero-popup-features li {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .hero-popup-logo {
+    height: 30px;
+  }
+
+  .hero-popup-apply {
+    width: 100%;
+    text-align: center;
+  }
+}
