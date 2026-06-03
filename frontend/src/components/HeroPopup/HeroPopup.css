@@ -65,10 +65,10 @@
   opacity: 0.85;
 }
 
-/* Frame 1337 — top 44px, left 55px, width 586px, vertical gap 40px */
+/* Frame 1337 — left 55px, width 586px, vertical gap 40px */
 .hero-popup-content {
   position: absolute;
-  top: 44px;
+  top: 88px;
   left: 55px;
   z-index: 2;
   display: flex;
@@ -76,23 +76,21 @@
   align-items: flex-start;
   width: 586px;
   max-width: calc(100% - 55px - 24px);
-  gap: 40px;
+  gap: 0;
   box-sizing: border-box;
 }
 
+/* Match .programs-section .program-logo-above img (Programs.jsx featured card) */
 .hero-popup-logo-wrap {
-  background: #fff;
-  border-radius: 6px;
-  padding: 10px 14px;
   display: inline-flex;
   flex-shrink: 0;
+  margin-bottom: 16px;
 }
 
 .hero-popup-logo {
   display: block;
-  height: 36px;
-  width: auto;
-  max-width: 200px;
+  width: 140px;
+  height: auto;
   object-fit: contain;
 }
 
@@ -102,6 +100,7 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
+  margin-bottom: 40px;
 }
 
 /* Heading — Montserrat 600, 32px, line-height 100% */
@@ -211,14 +210,22 @@
   }
 
   .hero-popup-content {
-    top: 28px;
+    top: 52px;
     left: 20px;
     right: 20px;
     bottom: auto;
     width: auto;
     max-width: none;
     padding: 0;
-    gap: 24px;
+    gap: 0;
+  }
+
+  .hero-popup-logo-wrap {
+    margin-bottom: 12px;
+  }
+
+  .hero-popup-copy {
+    margin-bottom: 24px;
   }
 
   .hero-popup-heading {
@@ -236,8 +243,10 @@
     line-height: 1.4;
   }
 
+  /* Match .mobile-program-card-logo img */
   .hero-popup-logo {
-    height: 30px;
+    width: auto;
+    height: 36px;
   }
 
   .hero-popup-apply {
