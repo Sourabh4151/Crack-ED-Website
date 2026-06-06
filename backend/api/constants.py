@@ -52,6 +52,8 @@ PROGRAM_TO_CENTER = {
     'Finova VyaparaMitra Program - Relationship Officer': 'Finova - RO',
     'Hero Housing Finance Pragati Program - Relationship Manager': 'Hero Finance - RM',
     'Housing Finance Pragati Program - Relationship Manager': 'Hero Finance - RM',
+    'Hero Housing Finance Pragati Program - Collection Officer': 'Hero Finance - CO',
+    'Housing Finance Pragati Program - Collection Officer': 'Hero Finance - CO',
     'PGP - Banking Management': 'Bandhan Bank - AM',
     'PGP - Banking Management - Assistant Manager': 'Bandhan Bank - AM',
     'PGP - Relationship Management': 'Relationship Manager',

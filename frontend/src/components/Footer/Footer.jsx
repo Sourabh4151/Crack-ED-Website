@@ -22,6 +22,7 @@ const PROGRAMS = [
     name: 'Hero Housing Finance Pragati Program',
     link: '/programs',
     links: [
+      { label: 'Collection Officer', href: 'https://herofinanceco.crack-ed.com/' },
       { label: 'Relationship Manager', href: 'https://herofinancerm.crack-ed.com/' },
     ],
   },

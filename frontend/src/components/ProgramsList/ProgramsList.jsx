@@ -141,6 +141,14 @@ const ProgramsList = () => {
         ]
       },
       {
+        program: 'Hero Housing Finance Pragati Program',
+        role: 'Collection Officer',
+        details: [
+          'Join as a Collection Officer and secure a CTC of Rs 5 LPA + incentives',
+          '1-month program'
+        ]
+      },
+      {
         program: 'Piramal ProEdge Program',
         role: 'Relationship Manager',
         details: [
@@ -242,6 +250,9 @@ const ProgramsList = () => {
     if (category === 'NBFC') {
       if (program === 'Hero Housing Finance Pragati Program' && role === 'Relationship Manager') {
         return 'https://herofinancerm.crack-ed.com/'
+      }
+      if (program === 'Hero Housing Finance Pragati Program' && role === 'Collection Officer') {
+        return 'https://herofinanceco.crack-ed.com/'
       }
       switch (role) {
         case 'Relationship Manager':

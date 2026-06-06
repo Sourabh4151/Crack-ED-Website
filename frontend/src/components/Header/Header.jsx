@@ -49,7 +49,13 @@ const PROGRAM_CATEGORIES = [
     id: 'nbfc',
     label: 'NBFC',
     items: [
-      { label: 'Hero Housing Finance Pragati Program', href: 'https://herofinancerm.crack-ed.com/' },
+      {
+        label: 'Hero Housing Finance Pragati Program',
+        children: [
+          { label: 'Collection Officer', href: 'https://herofinanceco.crack-ed.com/' },
+          { label: 'Relationship Manager', href: 'https://herofinancerm.crack-ed.com/' },
+        ],
+      },
       { label: 'Piramal ProEdge Program', href: 'https://piramal.crack-ed.com/portal' },
       { label: 'Finova VyaparaMitra Program', href: 'https://finovaro.crack-ed.com' },
       { label: 'Paytm Disha Program', href: 'https://paytm.crack-ed.com/portal' },

@@ -5,6 +5,7 @@ export const LEAD_PROGRAMS = [
   'Banking Sales Program - Sales Officer',
   'Elevate Banking Program - Virtual Relationship Manager',
   'Finova VyaparaMitra Program - Relationship Officer',
+  'Hero Housing Finance Pragati Program - Collection Officer',
   'Hero Housing Finance Pragati Program - Relationship Manager',
   'Lenskart EyeTech Program - Clinical Technician',
   'Lenskart EyeTech Program - Retail Sales Associate',
