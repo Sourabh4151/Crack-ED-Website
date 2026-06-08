@@ -23,6 +23,7 @@ const PROGRAMS = [
     link: '/programs',
     links: [
       { label: 'Collection Officer', href: 'https://herofinanceco.crack-ed.com/' },
+      { label: 'Credit and Operations Manager', href: 'https://herofinancecom.crack-ed.com/' },
       { label: 'Relationship Manager', href: 'https://herofinancerm.crack-ed.com/' },
     ],
   },

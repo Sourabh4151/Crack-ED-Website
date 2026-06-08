@@ -53,6 +53,7 @@ const PROGRAM_CATEGORIES = [
         label: 'Hero Housing Finance Pragati Program',
         children: [
           { label: 'Collection Officer', href: 'https://herofinanceco.crack-ed.com/' },
+          { label: 'Credit and Operations Manager', href: 'https://herofinancecom.crack-ed.com/' },
           { label: 'Relationship Manager', href: 'https://herofinancerm.crack-ed.com/' },
         ],
       },

@@ -59,6 +59,7 @@ import mobileSalesOfficerImage from '../../assets/mobile_sales_officer.png'
 import elevateVrmImage from '../../assets/elevate_vrm.png'
 import heroFinanceRmImage from '../../assets/hero_finance_rm.png'
 import heroCoImage from '../../assets/hero_co.png'
+import heroComImage from '../../assets/hero_com.png'
 import heroLogo from '../../assets/hero_logo.svg'
 import heroSmallLogo from '../../assets/hero_small_logo.png'
 import { trackMicrositeClick } from '../../utils/analytics'
@@ -123,120 +124,126 @@ const Programs = () => {
     },
     {
       id: 3,
+      logo: heroSmallLogo,
+      title: 'Housing Finance Pragati Program - Credit and Operations Manager',
+      url: 'https://herofinancecom.crack-ed.com/',
+    },
+    {
+      id: 4,
       logo: udaanCardLogo,
       title: 'Postgraduate Program Relationship Management - Relationship Manager',
       url: 'https://pgprm.crack-ed.com',
     },
     {
-      id: 4,
+      id: 5,
       logo: udaanCardLogo,
       title: 'Postgraduate Program Banking Management - Assistant Manager',
       url: 'https://pgpam.crack-ed.com',
     },
     {
-      id: 5,
+      id: 6,
       logo: udaanCardLogo,
       title: 'Postgraduate Certification Banking Management - Business Development Executive',
       url: 'https://pgcbm.crack-ed.com',
     },
     {
-      id: 6,
+      id: 7,
       logo: udaanCardLogo,
       title: 'Postgraduate Program Retail Banking - Relationship Officer',
       url: 'https://pgprb.crack-ed.com',
     },
     {
-      id: 7,
+      id: 8,
       logo: udaanCardLogo,
       title: 'Banking Sales Program - Sales Officer',
       url: 'https://bspso.crack-ed.com',
     },
     {
-      id: 8,
+      id: 9,
       logo: mahindraFinanceSmallLogo,
       title: 'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)',
       url: 'https://mahindrafinancebe.crack-ed.com/',
     },
     {
-      id: 9,
+      id: 10,
       logo: udaanLogo,
       title: 'Virtual Relationship Manager',
       url: 'https://elevatevrm.crack-ed.com/',
     },
     {
-      id: 10,
+      id: 11,
       logo: lenskartCardLogo,
       title: 'Lenskart EyeTech Program - Clinical Technician',
       url: 'https://lenskart.crack-ed.com/portal',
     },
     {
-      id: 11,
+      id: 12,
       logo: lenskartCardLogo,
       title: 'Lenskart EyeTech Program - Retail Sales Associate',
       url: 'https://lenskartrsa.crack-ed.com/portal',
     },
     {
-      id: 12,
+      id: 13,
       logo: udaanCardLogo,
       title: 'Udaan Program - Cashier / Teller',
       url: 'https://udaan.crack-ed.com/portal',
     },
     {
-      id: 13,
+      id: 14,
       logo: udaanCardLogo,
       title: 'Udaan Program - Virtual Relationship Manager',
       url: 'https://udaanvrm.crack-ed.com',
     },
     {
-      id: 14,
+      id: 15,
       logo: udaanCardLogo,
       title: 'Udaan Program - Relationship Manager',
       url: 'https://udaanrm.crack-ed.com',
     },
     {
-      id: 15,
+      id: 16,
       logo: udaanCardLogo,
       title: 'Udaan Program - Business Loan Associate',
       url: 'https://udaanbusiness.crack-ed.com',
     },
     {
-      id: 16,
+      id: 17,
       logo: piramalCardLogo,
       title: 'Piramal ProEdge Program - Relationship Manager',
       url: 'https://piramal.crack-ed.com/portal',
     },
     {
-      id: 17,
+      id: 18,
       logo: paytmCardLogo,
       title: 'Paytm Disha Program - Field Sales Executive',
       url: 'https://paytm.crack-ed.com/portal',
     },
     {
-      id: 18,
+      id: 19,
       logo: avivaSmallLogo,
       title: 'Aviva Nirmaan Program - Direct Sales Executive',
       url: 'https://avivads.crack-ed.com',
     },
     {
-      id: 19,
+      id: 20,
       logo: avivaSmallLogo,
       title: 'Aviva Nirmaan Program - Agency Sales Executive',
       url: 'https://avivaas.crack-ed.com',
     },
     {
-      id: 20,
+      id: 21,
       logo: poonawallaSmallLogo,
       title: 'Poonawalla FinPro Career Program - Gold Assayer',
       url: 'http://poonawallaga.crack-ed.com/',
     },
     {
-      id: 21,
+      id: 22,
       logo: poonawallaSmallLogo,
       title: 'Poonawalla FinPro Career Program - Sales Executive',
       url: 'http://poonawallase.crack-ed.com/',
     },
     {
-      id: 22,
+      id: 23,
       logo: finovaSmallLogo,
       title: 'Finova VyaparaMitra Program - Relationship Officer',
       url: 'https://finovaro.crack-ed.com',
@@ -264,6 +271,7 @@ const Programs = () => {
       'Virtual Relationship Manager': elevateVrmImage,
       'Housing Finance Pragati Program - Relationship Manager': heroFinanceRmImage,
       'Housing Finance Pragati Program - Collection Officer': heroCoImage,
+      'Housing Finance Pragati Program - Credit and Operations Manager': heroComImage,
     }
 
     // Udaan, Piramal, Paytm programs
@@ -281,6 +289,14 @@ const Programs = () => {
         details: 'Join as a Collection Officer and secure a CTC of Rs 5 LPA + incentives',
         duration: '1-month program',
         image: heroCoImage,
+      },
+      'Housing Finance Pragati Program - Credit and Operations Manager': {
+        programLabel: 'Housing Finance Pragati Program',
+        logo: heroLogo,
+        details: 'Join as a Credit and Operations Manager and secure a CTC of Rs 4 LPA + incentives',
+        duration: '1-month program',
+        image: heroComImage,
+        mobileBackgroundPosition: '20% center',
       },
       'Udaan Program - Cashier / Teller': {
         programLabel: 'Udaan Program',
@@ -427,6 +443,7 @@ const Programs = () => {
         duration: prog.duration,
         image: prog.image,
         mobileImage: prog.mobileImage ?? prog.image,
+        mobileBackgroundPosition: prog.mobileBackgroundPosition,
       }
     }
 
@@ -462,6 +479,7 @@ const Programs = () => {
     if (card.title === 'Postgraduate Program Retail Banking - Relationship Officer') return 'PGP - Retail Banking - Relationship Officer'
     if (card.title === 'Housing Finance Pragati Program - Relationship Manager') return 'Housing Finance Pragati - Relationship Manager'
     if (card.title === 'Housing Finance Pragati Program - Collection Officer') return 'Housing Finance Pragati - Collection Officer'
+    if (card.title === 'Housing Finance Pragati Program - Credit and Operations Manager') return 'Housing Finance Pragati - Credit and Operations Manager'
     if (card.title === 'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)') return 'Mahindra Finance Prarambh - Business Executive'
     if (card.title === 'Virtual Relationship Manager') return 'Elevate Banking Program - Virtual Relationship Manager'
     return card.title
@@ -602,7 +620,9 @@ const Programs = () => {
                 {programCards.map((card) => {
                   const details = getProgramDetailsForCard(card)
                   if (!details) return null
-                  const isMahindraProgram = details.programLabel === 'Mahindra Finance Prarambh Program'
+                  const mobileBackgroundPosition =
+                    details.mobileBackgroundPosition ??
+                    (details.programLabel === 'Mahindra Finance Prarambh Program' ? '30% center' : 'center')
                   return (
                     <a
                       key={card.id}
@@ -618,7 +638,7 @@ const Programs = () => {
                           style={{
                             backgroundImage: `url(${details.mobileImage || details.image})`,
                             backgroundSize: 'cover',
-                            backgroundPosition: isMahindraProgram ? '30% center' : 'center',
+                            backgroundPosition: mobileBackgroundPosition,
                             backgroundRepeat: 'no-repeat'
                           }}
                         >

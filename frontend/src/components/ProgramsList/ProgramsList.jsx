@@ -149,6 +149,14 @@ const ProgramsList = () => {
         ]
       },
       {
+        program: 'Hero Housing Finance Pragati Program',
+        role: 'Credit and Operations Manager',
+        details: [
+          'Join as a Credit and Operations Manager and secure a CTC of Rs 4 LPA + incentives',
+          '1-month program'
+        ]
+      },
+      {
         program: 'Piramal ProEdge Program',
         role: 'Relationship Manager',
         details: [
@@ -253,6 +261,9 @@ const ProgramsList = () => {
       }
       if (program === 'Hero Housing Finance Pragati Program' && role === 'Collection Officer') {
         return 'https://herofinanceco.crack-ed.com/'
+      }
+      if (program === 'Hero Housing Finance Pragati Program' && role === 'Credit and Operations Manager') {
+        return 'https://herofinancecom.crack-ed.com/'
       }
       switch (role) {
         case 'Relationship Manager':
