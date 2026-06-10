@@ -36,35 +36,6 @@ const PROGRAMS = [
     ],
   },
   {
-    id: 'udaan',
-    name: 'Udaan Program',
-    link: '/programs',
-    links: [
-      { label: 'Cashier / Teller', href: 'https://udaan.crack-ed.com/portal' },
-      { label: 'Virtual Relationship Manager', href: 'https://udaanvrm.crack-ed.com' },
-      { label: 'Relationship Manager', href: 'https://udaanrm.crack-ed.com' },
-      { label: 'Business Loan Associate', href: 'https://udaanbusiness.crack-ed.com' },
-    ],
-  },
-  {
-    id: 'paytm',
-    name: 'Paytm Disha Program',
-    link: '/programs',
-    links: [
-      { label: 'Field Sales Executive', href: 'https://paytm.crack-ed.com/portal' },
-    ],
-  },
-  
-  {
-    id: 'finpro',
-    name: 'Poonawalla FinPro Career Program',
-    link: '/programs',
-    links: [
-      { label: 'Gold Assayer', href: 'http://poonawallaga.crack-ed.com/' },
-      { label: 'Sales Executive', href: 'http://poonawallase.crack-ed.com/' },
-    ],
-  },
-  {
     id: 'finova',
     name: 'Finova VyaparaMitra Program',
     link: '/programs',
@@ -95,14 +66,6 @@ const PROGRAMS = [
     link: '/programs',
     links: [
       { label: 'Assistant Manager', href: 'https://pgpam.crack-ed.com/' },
-    ],
-  },
-  {
-    id: 'pgcbm',
-    name: 'PGC - Banking Management',
-    link: '/programs',
-    links: [
-      { label: 'Business Development Executive', href: 'https://pgcbm.crack-ed.com' },
     ],
   },
   {

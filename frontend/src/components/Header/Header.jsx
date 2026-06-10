@@ -17,32 +17,8 @@ const PROGRAM_CATEGORIES = [
           { label: 'Banking Management', href: 'https://pgpam.crack-ed.com/' },
         ],
       },
-      {
-        label: 'Udaan Program',
-        children: [
-          { label: 'Cashier / Teller', href: 'https://udaan.crack-ed.com/portal' },
-          { label: 'Virtual Relationship Manager', href: 'https://udaanvrm.crack-ed.com' },
-          { label: 'Relationship Manager', href: 'https://udaanrm.crack-ed.com' },
-          { label: 'Business Loan Associate', href: 'https://udaanbusiness.crack-ed.com' },
-        ],
-      },
-      { label: 'PGC - Banking Management', href: 'https://pgcbm.crack-ed.com' },
       { label: 'Banking Sales Program', href: 'https://bspso.crack-ed.com' },
-      { label: 'Mahindra Finance Prarambh Program', href: 'https://mahindrafinancebe.crack-ed.com/' },
       { label: 'Elevate Banking Program', href: 'https://elevatevrm.crack-ed.com/' },
-    ],
-  },
-  {
-    id: 'retail',
-    label: 'Retail',
-    items: [
-      {
-        label: 'Lenskart Eyetech Program',
-        children: [
-          { label: 'Clinical Technician', href: 'https://lenskart.crack-ed.com/portal' },
-          { label: 'Retail Sales Associate', href: 'https://lenskartrsa.crack-ed.com/portal' },
-        ],
-      },
     ],
   },
   {
@@ -59,14 +35,7 @@ const PROGRAM_CATEGORIES = [
       },
       { label: 'Piramal ProEdge Program', href: 'https://piramal.crack-ed.com/portal' },
       { label: 'Finova VyaparaMitra Program', href: 'https://finovaro.crack-ed.com' },
-      { label: 'Paytm Disha Program', href: 'https://paytm.crack-ed.com/portal' },
-      {
-        label: 'Poonawalla FinPro Career Program',
-        children: [
-          { label: 'Gold Assayer', href: 'http://poonawallaga.crack-ed.com/' },
-          { label: 'Sales Executive', href: 'http://poonawallase.crack-ed.com/' },
-        ],
-      },
+      { label: 'Mahindra Finance Prarambh Program', href: 'https://mahindrafinancebe.crack-ed.com/' },
     ],
   },
   {
@@ -78,6 +47,19 @@ const PROGRAM_CATEGORIES = [
         children: [
           { label: 'Direct Sales Executive', href: 'https://avivads.crack-ed.com' },
           { label: 'Agency Sales Executive', href: 'https://avivaas.crack-ed.com' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'retail',
+    label: 'Retail',
+    items: [
+      {
+        label: 'Lenskart Eyetech Program',
+        children: [
+          { label: 'Clinical Technician', href: 'https://lenskart.crack-ed.com/portal' },
+          { label: 'Retail Sales Associate', href: 'https://lenskartrsa.crack-ed.com/portal' },
         ],
       },
     ],

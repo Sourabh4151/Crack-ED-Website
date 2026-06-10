@@ -19,17 +19,11 @@ import csovImage from '../../assets/csov.jpg'
 import lenskartRetailSalesImage from '../../assets/lenskart - retail sales associate.jpg'
 import clinicalTechnicianImage from '../../assets/clinical technician.jpg'
 import cashierTellerImage from '../../assets/cashier _ teller.jpg'
-import virtualRelationshipManagerUdaanImage from '../../assets/virtual_relationship_manager_udaan.jpg'
-import relationshipManagerRetailAgricultureImage from '../../assets/relationship_manager_retail_agriculture.jpg'
-import businessLoanAssociateImage from '../../assets/business_loan_associate.jpg'
 import relationshipManagerPiramalImage from '../../assets/relationship manager.jpg'
-import fieldSalesExecutiveImage from '../../assets/field sales executive_desktop.jpg'
 import udaanCardLogo from '../../assets/udaan_temporary_logo.png'
 import udaanLogo from '../../assets/udaan_temporary_logo.png'
 import piramalCardLogo from '../../assets/piramal_small.png'
-import paytmCardLogo from '../../assets/paytm_small_logo.png'
 import auHomeLogo from '../../assets/au_home_logo.png'
-import paytmHomeLogo from '../../assets/paytm_home_logo.png'
 import lenskartHomeLogo from '../../assets/lenskart_home_logo.png'
 import piramalHomeLogo from '../../assets/piramal_home_logo.png'
 import img1 from '../../assets/au_logo.png'
@@ -39,10 +33,6 @@ import avivaDsImage from '../../assets/aviva_ds.png'
 import avivaAsImage from '../../assets/aviva_as.png'
 import avivaSmallLogo from '../../assets/aviva_logo_small_card.png'
 import avivaLogo from '../../assets/aviva_logo.png'
-import poonawalaGaImage from '../../assets/poonawala_ga.jpg'
-import poonawalaSaImage from '../../assets/poonawala_sa.png'
-import poonawallaSmallLogo from '../../assets/poonawalla_logo_small_card.png'
-import poonawallaLogo from '../../assets/poonawalla_logo.png'
 import finovaCardLogo from '../../assets/finova_logo.png'
 import finovaProgramImage from '../../assets/finova_program.jpg'
 import finovaSmallLogo from '../../assets/finova_small_logo.png'
@@ -51,7 +41,6 @@ import mahindraFinanceSmallLogo from '../../assets/mahindra_finance_small_logo_l
 import mahindraFinanceHomeLogo from '../../assets/mahindra_finance_logo.png'
 import pgprmDesktopImage from '../../assets/RM_desktop.png'
 import pgpbmDesktopImage from '../../assets/bandhan_desktop.jpg'
-import pgcbmDesktopImage from '../../assets/desktop_PGC_bde.jpg'
 import retailBankingDesktopImage from '../../assets/retail_banking_desktop.png'
 import retailBankingMobileImage from '../../assets/retail_banking_mobile.png'
 import bankingSalesDesktopImage from '../../assets/banking_sales_desktop.png'
@@ -82,12 +71,10 @@ const DetailsText = ({ text }) => {
 // Map program label to home logo (null = no logo)
 const getProgramHomeLogo = (programLabel) => {
   switch (programLabel) {
-    case 'Paytm Disha Program': return { src: paytmHomeLogo, alt: 'Paytm' }
     case 'Piramal ProEdge Program': return { src: piramalHomeLogo, alt: 'Piramal Finance' }
     case 'Lenskart Program': return { src: lenskartHomeLogo, alt: 'Lenskart' }
     case 'Lenskart EyeTech Program': return { src: lenskartHomeLogo, alt: 'Lenskart' }
     case 'Aviva Nirmaan Program': return { src: avivaLogo, alt: 'Aviva' }
-    case 'Poonawalla FinPro Career Program': return { src: poonawallaLogo, alt: 'Poonawalla Fincorp' }
     case 'Finova VyaparaMitra Program': return { src: finovaCardLogo, alt: 'Finova Capital' }
     case 'Mahindra Finance Prarambh Program': return { src: mahindraFinanceHomeLogo, alt: 'Mahindra Finance' }
     case 'Housing Finance Pragati Program': return { src: heroLogo, alt: 'Hero Housing Finance' }
@@ -96,7 +83,6 @@ const getProgramHomeLogo = (programLabel) => {
     case 'Postgraduate Program Retail Banking': return null
     case 'Banking Sales Program':
     case 'Banking Sales Program - Sales Officer': return null
-    case 'Udaan Program': return null
     default: return null
   }
 }
@@ -141,12 +127,6 @@ const Programs = () => {
       url: 'https://pgpam.crack-ed.com',
     },
     {
-      id: 6,
-      logo: udaanCardLogo,
-      title: 'Postgraduate Certification Banking Management - Business Development Executive',
-      url: 'https://pgcbm.crack-ed.com',
-    },
-    {
       id: 7,
       logo: udaanCardLogo,
       title: 'Postgraduate Program Retail Banking - Relationship Officer',
@@ -183,40 +163,10 @@ const Programs = () => {
       url: 'https://lenskartrsa.crack-ed.com/portal',
     },
     {
-      id: 13,
-      logo: udaanCardLogo,
-      title: 'Udaan Program - Cashier / Teller',
-      url: 'https://udaan.crack-ed.com/portal',
-    },
-    {
-      id: 14,
-      logo: udaanCardLogo,
-      title: 'Udaan Program - Virtual Relationship Manager',
-      url: 'https://udaanvrm.crack-ed.com',
-    },
-    {
-      id: 15,
-      logo: udaanCardLogo,
-      title: 'Udaan Program - Relationship Manager',
-      url: 'https://udaanrm.crack-ed.com',
-    },
-    {
-      id: 16,
-      logo: udaanCardLogo,
-      title: 'Udaan Program - Business Loan Associate',
-      url: 'https://udaanbusiness.crack-ed.com',
-    },
-    {
       id: 17,
       logo: piramalCardLogo,
       title: 'Piramal ProEdge Program - Relationship Manager',
       url: 'https://piramal.crack-ed.com/portal',
-    },
-    {
-      id: 18,
-      logo: paytmCardLogo,
-      title: 'Paytm Disha Program - Field Sales Executive',
-      url: 'https://paytm.crack-ed.com/portal',
     },
     {
       id: 19,
@@ -229,18 +179,6 @@ const Programs = () => {
       logo: avivaSmallLogo,
       title: 'Aviva Nirmaan Program - Agency Sales Executive',
       url: 'https://avivaas.crack-ed.com',
-    },
-    {
-      id: 21,
-      logo: poonawallaSmallLogo,
-      title: 'Poonawalla FinPro Career Program - Gold Assayer',
-      url: 'http://poonawallaga.crack-ed.com/',
-    },
-    {
-      id: 22,
-      logo: poonawallaSmallLogo,
-      title: 'Poonawalla FinPro Career Program - Sales Executive',
-      url: 'http://poonawallase.crack-ed.com/',
     },
     {
       id: 23,
@@ -261,12 +199,7 @@ const Programs = () => {
     const imageMap = {
       'Lenskart EyeTech Program - Clinical Technician': clinicalTechnicianImage,
       'Lenskart EyeTech Program - Retail Sales Associate': lenskartRetailSalesImage,
-      'Udaan Program - Cashier / Teller': cashierTellerImage,
-      'Udaan Program - Virtual Relationship Manager': virtualRelationshipManagerUdaanImage,
-      'Udaan Program - Relationship Manager': relationshipManagerRetailAgricultureImage,
-      'Udaan Program - Business Loan Associate': businessLoanAssociateImage,
       'Piramal ProEdge Program - Relationship Manager': relationshipManagerPiramalImage,
-      'Paytm Disha Program - Field Sales Executive': fieldSalesExecutiveImage,
       'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)': mahindraProgramImage,
       'Virtual Relationship Manager': elevateVrmImage,
       'Housing Finance Pragati Program - Relationship Manager': heroFinanceRmImage,
@@ -274,7 +207,6 @@ const Programs = () => {
       'Housing Finance Pragati Program - Credit and Operations Manager': heroComImage,
     }
 
-    // Udaan, Piramal, Paytm programs
     const newProgramsMap = {
       'Housing Finance Pragati Program - Relationship Manager': {
         programLabel: 'Housing Finance Pragati Program',
@@ -298,20 +230,6 @@ const Programs = () => {
         image: heroComImage,
         mobileBackgroundPosition: '20% center',
       },
-      'Udaan Program - Cashier / Teller': {
-        programLabel: 'Udaan Program',
-        logo: udaanCardLogo,
-        details: 'Join as a Cashier / Teller with a CTC of upto Rs 3.5 LPA',
-        duration: '2-month program',
-        image: cashierTellerImage,
-      },
-      'Udaan Program - Virtual Relationship Manager': {
-        programLabel: 'Udaan Program',
-        logo: udaanCardLogo,
-        details: 'Join as a Virtual Relationship Manager with a CTC of upto Rs 2.8 LPA',
-        duration: '4-week program',
-        image: virtualRelationshipManagerUdaanImage,
-      },
       'Virtual Relationship Manager': {
         programLabel: 'Elevate Banking Program',
         logo: udaanLogo,
@@ -319,33 +237,12 @@ const Programs = () => {
         duration: '4-week program',
         image: elevateVrmImage,
       },
-      'Udaan Program - Relationship Manager': {
-        programLabel: 'Udaan Program',
-        logo: udaanCardLogo,
-        details: 'Join as a Relationship Manager with a CTC of upto Rs 6.5 LPA',
-        duration: '3-week program',
-        image: relationshipManagerRetailAgricultureImage,
-      },
-      'Udaan Program - Business Loan Associate': {
-        programLabel: 'Udaan Program',
-        logo: udaanCardLogo,
-        details: 'Join as a Business Loan Associate with a CTC of upto Rs 2.8 LPA',
-        duration: '3-week program',
-        image: businessLoanAssociateImage,
-      },
       'Piramal ProEdge Program - Relationship Manager': {
         programLabel: 'Piramal ProEdge Program',
         logo: piramalCardLogo,
         details: 'Join as a Relationship Manager with a CTC of Rs 2.74 LPA + variable',
         duration: '13-week program',
         image: relationshipManagerPiramalImage,
-      },
-      'Paytm Disha Program - Field Sales Executive': {
-        programLabel: 'Paytm Disha Program',
-        logo: paytmCardLogo,
-        details: 'Join as a Field Sales Executive with a CTC of Rs 2.5 LPA + incentives',
-        duration: '2-week program (virtual)',
-        image: fieldSalesExecutiveImage,
       },
       'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)': {
         programLabel: 'Mahindra Finance Prarambh Program',
@@ -367,20 +264,6 @@ const Programs = () => {
         details: 'Join as a Front Line Sales Executive - Agency Sales with a CTC of Rs 3.5 LPA + variable',
         duration: '3-month program',
         image: avivaAsImage,
-      },
-      'Poonawalla FinPro Career Program - Gold Assayer': {
-        programLabel: 'Poonawalla FinPro Career Program',
-        logo: poonawalaGaImage,
-        details: 'Join as a Gold Assayer with a CTC of Rs 2.5 LPA + incentives',
-        duration: '1.5-month program',
-        image: poonawalaGaImage,
-      },
-      'Poonawalla FinPro Career Program - Sales Executive': {
-        programLabel: 'Poonawalla FinPro Career Program',
-        logo: poonawalaSaImage,
-        details: 'Join as a Sales Executive with a CTC of upto Rs 2.76 LPA + incentives',
-        duration: '3-week program',
-        image: poonawalaSaImage,
       },
       'Finova VyaparaMitra Program - Relationship Officer': {
         programLabel: 'Finova VyaparaMitra Program',
@@ -404,14 +287,6 @@ const Programs = () => {
         details: 'Join as an Assistant Manager with a CTC of Rs 4 LPA + incentives',
         duration: '6-month program',
         image: pgpbmDesktopImage,
-      },
-      'Postgraduate Certification Banking Management - Business Development Executive': {
-        programLabel: 'Postgraduate Certification in Banking Management',
-        shortProgramLabel: 'PGC - Banking Management',
-        logo: udaanCardLogo,
-        details: 'Join as a Business Development Executive with a CTC of Rs 2.5 LPA + incentives',
-        duration: '2-week program',
-        image: pgcbmDesktopImage,
       },
       'Postgraduate Program Retail Banking - Relationship Officer': {
         programLabel: 'Postgraduate Program - Retail Banking',
@@ -475,7 +350,6 @@ const Programs = () => {
   const getSmallCardTitle = (card) => {
     if (card.title === 'Postgraduate Program Relationship Management - Relationship Manager') return 'PGP - Relationship Management - Relationship Manager'
     if (card.title === 'Postgraduate Program Banking Management - Assistant Manager') return 'PGP - Banking Management - Assistant Manager'
-    if (card.title === 'Postgraduate Certification Banking Management - Business Development Executive') return 'PGC - Banking Management - BDE'
     if (card.title === 'Postgraduate Program Retail Banking - Relationship Officer') return 'PGP - Retail Banking - Relationship Officer'
     if (card.title === 'Housing Finance Pragati Program - Relationship Manager') return 'Housing Finance Pragati - Relationship Manager'
     if (card.title === 'Housing Finance Pragati Program - Collection Officer') return 'Housing Finance Pragati - Collection Officer'
@@ -492,16 +366,12 @@ const Programs = () => {
     }
     return title
       .replace('Lenskart EyeTech Program - ', '')
-      .replace('Udaan Program - ', '')
       .replace('Piramal ProEdge Program - ', '')
-      .replace('Paytm Disha Program - ', '')
       .replace('Aviva Nirmaan Program - ', '')
       .replace('Finova VyaparaMitra Program - ', '')
-      .replace('Poonawalla FinPro Career Program - ', '')
       .replace('Postgraduate Program Relationship Management - ', '')
       .replace('Postgraduate Program Banking Management - ', '')
       .replace('Postgraduate Program Retail Banking - ', '')
-      .replace('Postgraduate Certification Banking Management - ', '')
       .replace('Mahindra Finance Prarambh Program - ', '')
       .replace('Housing Finance Pragati Program - ', '')
       .replace('Banking Sales Program - ', '')
@@ -646,11 +516,10 @@ const Programs = () => {
                             {(() => {
                               const logoInfo = getProgramHomeLogo(details.programLabel || 'Lenskart Program')
                               if (!logoInfo) return null
-                              const isPaytm = logoInfo.alt === 'Paytm'
                               const isAviva = logoInfo.alt === 'Aviva'
                               const isMahindra = logoInfo.alt === 'Mahindra Finance'
                               return (
-                                <div className={`mobile-program-card-logo${isPaytm ? ' mobile-program-card-logo--paytm' : ''}${isAviva ? ' mobile-program-card-logo--aviva' : ''}${isMahindra ? ' mobile-program-card-logo--mahindra' : ''}`}>
+                                <div className={`mobile-program-card-logo${isAviva ? ' mobile-program-card-logo--aviva' : ''}${isMahindra ? ' mobile-program-card-logo--mahindra' : ''}`}>
                                   <img src={logoInfo.src} alt={logoInfo.alt} />
                                 </div>
                               )

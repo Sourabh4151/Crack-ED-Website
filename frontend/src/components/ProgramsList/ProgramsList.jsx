@@ -4,8 +4,6 @@ import lenskartCardLogo from '../../assets/lenskart_card_logo.png'
 import piramalLogo from '../../assets/piramal_small.png'
 
 import udaanLogo from '../../assets/udaan_temporary_logo.png'
-import paytmLogo from '../../assets/paytm_small_logo.png'
-import poonawallaLogoSmallCard from '../../assets/poonawalla_logo_small_card.png'
 import avivaLogoSmallCard from '../../assets/aviva_logo_small_card.png'
 import finovaSmallLogo from '../../assets/finova_small_logo.png'
 import mahindraFinanceSmallLogo from '../../assets/mahindra_finance_small_logo_logo.png'
@@ -13,7 +11,7 @@ import heroSmallLogo from '../../assets/hero_small_logo.png'
 import { trackMicrositeClick, markProgramsPageVisited } from '../../utils/analytics'
 import './ProgramsList.css'
 
-const PROGRAM_CATEGORIES = ['Banking', 'Retail', 'NBFC', 'Insurance']
+const PROGRAM_CATEGORIES = ['Banking', 'NBFC', 'Insurance', 'Retail']
 const PROGRAM_TABS = ['All', ...PROGRAM_CATEGORIES]
 
 const ProgramsList = () => {
@@ -41,14 +39,6 @@ const ProgramsList = () => {
         ]
       },
       {
-        program: 'Postgraduate Certification',
-        role: 'Business Development Executive',
-        details: [
-          'Join as a Business Development Executive with a CTC of Rs 2.5 LPA + incentives',
-          '2-week program'
-        ]
-      },
-      {
         program: 'Postgraduate Program',
         role: 'Relationship Officer',
         details: [
@@ -65,51 +55,11 @@ const ProgramsList = () => {
         ]
       },
       {
-        program: 'Mahindra Finance Prarambh Program',
-        role: 'Business Executive',
-        details: [
-          'Join as a Business Executive (Vehicle Loan - Field Sales) with a CTC of Rs 3.5 LPA + incentives',
-          '1-month online program'
-        ]
-      },
-      {
         program: 'Elevate Banking Program',
         role: 'Virtual Relationship Manager',
         details: [
           'Join as a Virtual Relationship Manager and secure a CTC of upto Rs 2.4 LPA',
           '4-week program'
-        ]
-      },
-      {
-        program: 'Udaan Program',
-        role: 'Cashier / Teller',
-        details: [
-          'Join as a Cashier / Teller with a CTC of upto Rs 3.5 LPA',
-          '2-month program'
-        ]
-      },
-      {
-        program: 'Udaan Program',
-        role: 'Virtual Relationship Manager',
-        details: [
-          'Join as a Virtual Relationship Manager with a CTC of upto Rs 2.8 LPA',
-          '4-week program'
-        ]
-      },
-      {
-        program: 'Udaan Program',
-        role: 'Relationship Manager',
-        details: [
-          'Join as a Relationship Manager with a CTC of upto Rs 6.5 LPA',
-          '3-week program'
-        ]
-      },
-      {
-        program: 'Udaan Program',
-        role: 'Business Loan Associate',
-        details: [
-          'Join as a Business Loan Associate with a CTC of upto Rs 2.8 LPA',
-          '3-week program'
         ]
       }
     ],
@@ -165,15 +115,6 @@ const ProgramsList = () => {
         ]
       },
       {
-        program: 'Paytm Disha Program',
-        role: 'Field Sales Executive',
-        details: [
-          'Join as a Field Sales Executive with a CTC of Rs 2.5 LPA + incentives',
-          '2-week program (virtual)'
-        ]
-      }
-      ,
-      {
         program: 'Finova VyaparaMitra Program',
         role: 'Relationship Officer',
         details: [
@@ -182,19 +123,11 @@ const ProgramsList = () => {
         ]
       },
       {
-        program: 'Poonawalla FinPro Career Program',
-        role: 'Gold Assayer',
+        program: 'Mahindra Finance Prarambh Program',
+        role: 'Business Executive',
         details: [
-          'Join as a Gold Assayer with a CTC of Rs 2.5 LPA + incentives',
-          '1.5-month program'
-        ]
-      },
-      {
-        program: 'Poonawalla FinPro Career Program',
-        role: 'Sales Executive',
-        details: [
-          'Join as a Sales Executive with a CTC of upto Rs 2.76 LPA + incentives',
-          '3-week program'
+          'Join as a Business Executive (Vehicle Loan - Field Sales) with a CTC of Rs 3.5 LPA + incentives',
+          '1-month online program'
         ]
       }
     ]
@@ -225,23 +158,10 @@ const ProgramsList = () => {
     if (category === 'Banking') {
       if (program === 'Postgraduate Program' && role === 'Relationship Manager') return 'https://pgprm.crack-ed.com'
       if (program === 'Postgraduate Program' && role === 'Assistant Manager') return 'https://pgpam.crack-ed.com'
-      if (program === 'Postgraduate Certification' && role === 'Business Development Executive') return 'https://pgcbm.crack-ed.com'
       if (program === 'Postgraduate Program' && role === 'Relationship Officer') return 'https://pgprb.crack-ed.com'
       if (program === 'Banking Sales Program' && role === 'Sales Officer') return 'https://bspso.crack-ed.com'
-      if (program === 'Mahindra Finance Prarambh Program' && role === 'Business Executive') return 'https://mahindrafinancebe.crack-ed.com/'
       if (program === 'Elevate Banking Program' && role === 'Virtual Relationship Manager') return 'https://elevatevrm.crack-ed.com/'
-      switch (role) {
-        case 'Relationship Manager':
-          return 'https://udaanrm.crack-ed.com'
-        case 'Cashier / Teller':
-          return 'https://udaan.crack-ed.com/portal'
-        case 'Virtual Relationship Manager':
-          return 'https://udaanvrm.crack-ed.com'
-        case 'Business Loan Associate':
-          return 'https://udaanbusiness.crack-ed.com'
-        default:
-          return null
-      }
+      return null
     }
 
     if (category === 'Retail') {
@@ -265,17 +185,14 @@ const ProgramsList = () => {
       if (program === 'Hero Housing Finance Pragati Program' && role === 'Credit and Operations Manager') {
         return 'https://herofinancecom.crack-ed.com/'
       }
+      if (program === 'Mahindra Finance Prarambh Program' && role === 'Business Executive') {
+        return 'https://mahindrafinancebe.crack-ed.com/'
+      }
       switch (role) {
         case 'Relationship Manager':
           return 'https://piramal.crack-ed.com/portal'
         case 'Relationship Officer':
           return 'https://finovaro.crack-ed.com'
-        case 'Field Sales Executive':
-          return 'https://paytm.crack-ed.com/portal'
-        case 'Gold Assayer':
-          return 'http://poonawallaga.crack-ed.com/'
-        case 'Sales Executive':
-          return 'http://poonawallase.crack-ed.com/'
         default:
           return null
       }
@@ -298,28 +215,22 @@ const ProgramsList = () => {
   const getIcon = (category, item) => {
     const program = item?.program
     const useUdaanLogo =
-      program === 'Udaan Program' ||
       program === 'Postgraduate Program' ||
-      program === 'Banking Sales Program'
+      program === 'Banking Sales Program' ||
+      program === 'Elevate Banking Program'
     if (category === 'Banking' && useUdaanLogo) {
       return <img src={udaanLogo} alt="Udaan" className="program-logo-img program-logo-udaan" />
     }
-    if (category === 'Banking' && program === 'Mahindra Finance Prarambh Program') {
-      return <img src={mahindraFinanceSmallLogo} alt="Mahindra Finance" className="program-logo-img program-logo-mahindra" />
-    }
     if (category === 'Banking') return <img src={udaanLogo} alt="Udaan" className="program-logo-img program-logo-udaan" />
     if (category === 'Retail') return <img src={lenskartCardLogo} alt="Lenskart" className="program-logo-img" />
-    if (category === 'NBFC' && item?.program === 'Paytm Disha Program') {
-      return <img src={paytmLogo} alt="Paytm" className="program-logo-img program-logo-paytm" />
-    }
-    if (category === 'NBFC' && item?.program && item.program.startsWith('Poonawalla FinPro Career Program')) {
-      return <img src={poonawallaLogoSmallCard} alt="Poonawalla" className="program-logo-img program-logo-poonawalla" />
-    }
     if (category === 'NBFC' && item?.program && item.program.startsWith('Finova VyaparaMitra Program')) {
       return <img src={finovaSmallLogo} alt="Finova" className="program-logo-img program-logo-finova" />
     }
     if (category === 'NBFC' && item?.program === 'Hero Housing Finance Pragati Program') {
       return <img src={heroSmallLogo} alt="Hero Housing Finance" className="program-logo-img program-logo-hero" />
+    }
+    if (category === 'NBFC' && program === 'Mahindra Finance Prarambh Program') {
+      return <img src={mahindraFinanceSmallLogo} alt="Mahindra Finance" className="program-logo-img program-logo-mahindra" />
     }
     if (category === 'NBFC') return <img src={piramalLogo} alt="Piramal" className="program-logo-img program-logo-piramal" />
     if (category === 'Insurance') return <img src={avivaLogoSmallCard} alt="Aviva" className="program-logo-img program-logo-aviva" />
