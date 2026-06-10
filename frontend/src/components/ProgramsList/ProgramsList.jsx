@@ -25,6 +25,7 @@ const ProgramsList = () => {
       {
         program: 'Postgraduate Program',
         role: 'Relationship Manager',
+        isPremium: true,
         details: [
           'Join as a Relationship Manager with a CTC of Rs 5.5 LPA + incentives',
           '6-month program'
@@ -33,6 +34,7 @@ const ProgramsList = () => {
       {
         program: 'Postgraduate Program',
         role: 'Assistant Manager',
+        isPremium: true,
         details: [
           'Join as an Assistant Manager with a CTC of Rs 4 LPA + incentives',
           '6-month program'
@@ -336,7 +338,10 @@ const ProgramsList = () => {
                   </div>
                 </div>
                 <div className="program-card-content">
-                  <div className={`program-card-details${isClosed ? ' program-card-details--closed' : ''}`}>
+                  <div className={`program-card-details${isClosed ? ' program-card-details--closed' : ''}${item.isPremium ? ' program-card-details--premium' : ''}`}>
+                    {item.isPremium && (
+                      <span className="program-premium-badge">Premium Program</span>
+                    )}
                     {isClosed && (
                       <span className="program-admission-closed">Admission Closed</span>
                     )}

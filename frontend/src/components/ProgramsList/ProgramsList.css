@@ -268,6 +268,27 @@
   gap: 16px;
 }
 
+.programs-list .program-premium-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  width: fit-content;
+  padding: 10px 20px;
+  border-radius: 100px;
+  background: rgba(26, 158, 183, 1);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 100%;
+  letter-spacing: 0;
+  color: rgba(13, 13, 13, 1);
+}
+
+.programs-list .program-card-details--premium {
+  gap: 16px;
+}
+
 .programs-list .program-admission-closed {
   display: inline-flex;
   align-items: center;

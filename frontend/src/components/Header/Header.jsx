@@ -10,15 +10,20 @@ const PROGRAM_CATEGORIES = [
     label: 'Banking',
     items: [
       {
-        label: 'Postgraduate Program',
+        label: 'Premium Programs',
         children: [
-          { label: 'Relationship Management', href: 'https://pgprm.crack-ed.com/' },
-          { label: 'Retail Banking', href: 'https://pgprb.crack-ed.com' },
-          { label: 'Banking Management', href: 'https://pgpam.crack-ed.com/' },
+          { label: 'PGP - Relationship Management', href: 'https://pgprm.crack-ed.com/' },
+          { label: 'PGP - Banking Management', href: 'https://pgpam.crack-ed.com/' },
         ],
       },
-      { label: 'Banking Sales Program', href: 'https://bspso.crack-ed.com' },
-      { label: 'Elevate Banking Program', href: 'https://elevatevrm.crack-ed.com/' },
+      {
+        label: 'Core Programs',
+        children: [
+          { label: 'PGP - Retail Banking', href: 'https://pgprb.crack-ed.com' },
+          { label: 'Elevate Banking Program', href: 'https://elevatevrm.crack-ed.com/' },
+          { label: 'Banking Sales Program', href: 'https://bspso.crack-ed.com' },
+        ],
+      },
     ],
   },
   {
