@@ -121,12 +121,12 @@
   flex-shrink: 0;
 }
 
-/* Chevron follows React open state only — avoids mismatch when hover gap loses pointer */
+/* Chevron follows React open state only ï¿½ avoids mismatch when hover gap loses pointer */
 .nav-item-dropdown.active .dropdown-arrow {
   transform: rotate(180deg);
 }
 
-/* Programs dropdown — 348px panel, 8px radius; expanded list: 24px padding + 24px gap, links 16/24 */
+/* Programs dropdown ï¿½ 348px panel, 8px radius; expanded list: 24px padding + 24px gap, links 16/24 */
 .dropdown-menu.programs-dropdown-menu {
   position: absolute;
   top: 100%;
@@ -136,7 +136,7 @@
   width: min(348px, calc(100vw - 48px));
   min-width: min(348px, calc(100vw - 48px));
   max-width: min(348px, calc(100vw - 48px));
-  max-height: min(85vh, 720px);
+  max-height: min(85vh, 770px);
   list-style: none;
   background: transparent;
   animation: fadeIn 0.3s ease;
@@ -492,7 +492,7 @@
     height: auto;
   }
 
-  /* Desktop-only panel — mobile nav uses /programs link only */
+  /* Desktop-only panel ï¿½ mobile nav uses /programs link only */
   .nav .dropdown-menu.programs-dropdown-menu {
     display: none !important;
     visibility: hidden;
