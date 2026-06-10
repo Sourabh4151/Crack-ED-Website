@@ -269,9 +269,9 @@ const Header = () => {
                 to="/programs"
                 className="nav-link"
                 onClick={handleProgramsNavClick}
-                title="Programs ? open menu on desktop; full list on mobile"
+                title="ALL Programs — open menu on desktop; full list on mobile"
               >
-                Programs
+                All Programs
                 <svg className="dropdown-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
                   <path d="M4 6L8 10L12 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
@@ -302,7 +302,7 @@ const Header = () => {
                         setIsProgramsOpen(false)
                       }}
                     >
-                      All Programs
+                      Explore All Programs
                     </Link>
                     <ul className="programs-dropdown-categories">
                       {PROGRAM_CATEGORIES.map((cat) => {
