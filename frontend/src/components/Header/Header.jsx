@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import logoImage from '../../assets/crack-ed_logo.png'
 import './Header.css'
 
-/** Programs grouped for the header dropdown; Banking is expanded by default. */
+/** Programs grouped for the header dropdown; all categories closed by default. */
 const PROGRAM_CATEGORIES = [
   {
     id: 'banking',
@@ -87,7 +87,7 @@ const PROGRAM_CATEGORIES = [
 const Header = () => {
   const location = useLocation()
   const [isProgramsOpen, setIsProgramsOpen] = useState(false)
-  const [expandedCategories, setExpandedCategories] = useState(['banking'])
+  const [expandedCategories, setExpandedCategories] = useState([])
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const closeTimeoutRef = useRef(null)
@@ -141,7 +141,7 @@ const Header = () => {
 
   useEffect(() => {
     if (isProgramsOpen) {
-      setExpandedCategories(['banking'])
+      setExpandedCategories([])
     }
   }, [isProgramsOpen])
 
@@ -202,7 +202,7 @@ const Header = () => {
     setIsProgramsOpen((open) => !open)
   }
 
-  /** Accordion: only one category open; opening another closes Banking (and all others). */
+  /** Accordion: only one category open at a time. */
   const toggleProgramsCategory = (id) => {
     setExpandedCategories((prev) => {
       if (prev.includes(id)) {
