@@ -9,15 +9,6 @@ import './Footer.css'
 
 const PROGRAMS = [
   {
-    id: 'lenskart',
-    name: 'Lenskart Eyetech Program',
-    link: '/programs',
-    links: [
-      { label: 'Clinical Technician', href: 'https://lenskart.crack-ed.com/portal' },
-      { label: 'Retail Sales Associate', href: 'https://lenskartrsa.crack-ed.com/portal' },
-    ],
-  },
-  {
     id: 'hero-housing',
     name: 'Hero Housing Finance Pragati Program',
     link: '/programs',
@@ -25,31 +16,6 @@ const PROGRAMS = [
       { label: 'Collection Officer', href: 'https://herofinanceco.crack-ed.com/' },
       { label: 'Credit and Operations Manager', href: 'https://herofinancecom.crack-ed.com/' },
       { label: 'Relationship Manager', href: 'https://herofinancerm.crack-ed.com/' },
-    ],
-  },
-  {
-    id: 'piramal',
-    name: 'Piramal ProEdge Program',
-    link: '/programs',
-    links: [
-      { label: 'Relationship Manager', href: 'https://piramal.crack-ed.com/portal' },
-    ],
-  },
-  {
-    id: 'finova',
-    name: 'Finova VyaparaMitra Program',
-    link: '/programs',
-    links: [
-      { label: 'Relationship Officer', href: 'https://finovaro.crack-ed.com' },
-    ],
-  },
-  {
-    id: 'aviva',
-    name: 'Aviva Nirmaan Program',
-    link: '/programs',
-    links: [
-      { label: 'Direct Sales Executive', href: 'https://avivads.crack-ed.com' },
-      { label: 'Agency Sales Executive', href: 'https://avivaas.crack-ed.com' },
     ],
   },
   {
@@ -77,6 +43,14 @@ const PROGRAMS = [
     ],
   },
   {
+    id: 'elevate',
+    name: 'Elevate Banking Program',
+    link: '/programs',
+    links: [
+      { label: 'Virtual Relationship Manager', href: 'https://elevatevrm.crack-ed.com/' },
+    ],
+  },
+  {
     id: 'bspso',
     name: 'Banking Sales Program',
     link: '/programs',
@@ -93,17 +67,43 @@ const PROGRAMS = [
     ],
   },
   {
-    id: 'elevate',
-    name: 'Elevate Banking Program',
+    id: 'finova',
+    name: 'Finova VyaparaMitra Program',
     link: '/programs',
     links: [
-      { label: 'Virtual Relationship Manager', href: 'https://elevatevrm.crack-ed.com/' },
+      { label: 'Relationship Officer', href: 'https://finovaro.crack-ed.com' },
+    ],
+  },
+  {
+    id: 'piramal',
+    name: 'Piramal ProEdge Program',
+    link: '/programs',
+    links: [
+      { label: 'Relationship Manager', href: 'https://piramal.crack-ed.com/portal' },
+    ],
+  },
+  {
+    id: 'aviva',
+    name: 'Aviva Nirmaan Program',
+    link: '/programs',
+    links: [
+      { label: 'Direct Sales Executive', href: 'https://avivads.crack-ed.com' },
+      { label: 'Agency Sales Executive', href: 'https://avivaas.crack-ed.com' },
+    ],
+  },
+  {
+    id: 'lenskart',
+    name: 'Lenskart Eyetech Program',
+    link: '/programs',
+    links: [
+      { label: 'Clinical Technician', href: 'https://lenskart.crack-ed.com/portal' },
+      { label: 'Retail Sales Associate', href: 'https://lenskartrsa.crack-ed.com/portal' },
     ],
   },
 ]
 
 const Footer = () => {
-  const [openProgram, setOpenProgram] = useState('lenskart')
+  const [openProgram, setOpenProgram] = useState('hero-housing')
 
   const toggleProgram = (id) => {
     setOpenProgram((prev) => (prev === id ? null : id))

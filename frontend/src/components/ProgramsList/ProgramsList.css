@@ -264,10 +264,6 @@
   overflow: visible;
 }
 
-.programs-list .program-card-details--closed {
-  gap: 16px;
-}
-
 .programs-list .program-premium-badge {
   display: inline-flex;
   align-items: center;
@@ -285,8 +281,14 @@
   color: rgba(13, 13, 13, 1);
 }
 
-.programs-list .program-card-details--premium {
-  gap: 16px;
+.programs-list .program-card-details--premium,
+.programs-list .program-card-details--closed {
+  gap: 10px;
+}
+
+.programs-list .program-card-details--premium .program-premium-badge,
+.programs-list .program-card-details--closed .program-admission-closed {
+  margin-bottom: 14px;
 }
 
 .programs-list .program-admission-closed {

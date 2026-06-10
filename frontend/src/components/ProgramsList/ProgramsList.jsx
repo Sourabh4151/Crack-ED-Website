@@ -49,19 +49,19 @@ const ProgramsList = () => {
         ]
       },
       {
-        program: 'Banking Sales Program',
-        role: 'Sales Officer',
-        details: [
-          'Join as a Sales Officer with a CTC of Rs 2.5 LPA + incentives',
-          '3-month program'
-        ]
-      },
-      {
         program: 'Elevate Banking Program',
         role: 'Virtual Relationship Manager',
         details: [
           'Join as a Virtual Relationship Manager and secure a CTC of upto Rs 2.4 LPA',
           '4-week program'
+        ]
+      },
+      {
+        program: 'Banking Sales Program',
+        role: 'Sales Officer',
+        details: [
+          'Join as a Sales Officer with a CTC of Rs 2.5 LPA + incentives',
+          '3-month program'
         ]
       }
     ],
@@ -88,14 +88,6 @@ const ProgramsList = () => {
     NBFC: [
       {
         program: 'Hero Housing Finance Pragati Program',
-        role: 'Relationship Manager',
-        details: [
-          'Join as a Relationship Manager - Mortgage Sales and secure a CTC of Rs 2.75 LPA + incentives',
-          '1-month program'
-        ]
-      },
-      {
-        program: 'Hero Housing Finance Pragati Program',
         role: 'Collection Officer',
         details: [
           'Join as a Collection Officer and secure a CTC of Rs 5 LPA + incentives',
@@ -111,11 +103,19 @@ const ProgramsList = () => {
         ]
       },
       {
-        program: 'Piramal ProEdge Program',
+        program: 'Hero Housing Finance Pragati Program',
         role: 'Relationship Manager',
         details: [
-          'Join as a Relationship Manager with a CTC of Rs 2.74 LPA + variable',
-          '13-week program'
+          'Join as a Relationship Manager - Mortgage Sales and secure a CTC of Rs 2.75 LPA + incentives',
+          '1-month program'
+        ]
+      },
+      {
+        program: 'Mahindra Finance Prarambh Program',
+        role: 'Business Executive',
+        details: [
+          'Join as a Business Executive (Vehicle Loan - Field Sales) with a CTC of Rs 3.5 LPA + incentives',
+          '1-month online program'
         ]
       },
       {
@@ -127,11 +127,11 @@ const ProgramsList = () => {
         ]
       },
       {
-        program: 'Mahindra Finance Prarambh Program',
-        role: 'Business Executive',
+        program: 'Piramal ProEdge Program',
+        role: 'Relationship Manager',
         details: [
-          'Join as a Business Executive (Vehicle Loan - Field Sales) with a CTC of Rs 3.5 LPA + incentives',
-          '1-month online program'
+          'Join as a Relationship Manager with a CTC of Rs 2.74 LPA + variable',
+          '13-week program'
         ]
       }
     ]
@@ -241,11 +241,19 @@ const ProgramsList = () => {
     return null
   }
 
+  const withCategory = (category, items) => items.map((item) => ({ ...item, category }))
+
+  const getAllProgramsInOrder = () => [
+    ...withCategory('NBFC', programs.NBFC.slice(0, 3)),
+    ...withCategory('Banking', programs.Banking),
+    ...withCategory('NBFC', programs.NBFC.slice(3)),
+    ...withCategory('Insurance', programs.Insurance),
+    ...withCategory('Retail', programs.Retail),
+  ]
+
   const displayedPrograms =
     activeTab === 'All'
-      ? PROGRAM_CATEGORIES.flatMap((category) =>
-          programs[category].map((item) => ({ ...item, category }))
-        )
+      ? getAllProgramsInOrder()
       : programs[activeTab].map((item) => ({ ...item, category: activeTab }))
 
   const normalizedQuery = searchQuery.trim().toLowerCase()
