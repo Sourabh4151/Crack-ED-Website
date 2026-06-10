@@ -264,6 +264,31 @@
   overflow: visible;
 }
 
+.programs-list .program-card-details--closed {
+  gap: 16px;
+}
+
+.programs-list .program-admission-closed {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  width: fit-content;
+  padding: 10px 20px;
+  border-radius: 100px;
+  background: rgba(239, 65, 35, 0.1);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 100%;
+  letter-spacing: 0;
+  color: rgba(241, 64, 34, 1);
+}
+
+.programs-list .program-card--closed {
+  cursor: default;
+}
+
 .programs-list .program-card-header {
   display: flex;
   flex-direction: column;

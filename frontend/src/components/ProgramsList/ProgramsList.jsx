@@ -67,6 +67,7 @@ const ProgramsList = () => {
       {
         program: 'Lenskart EyeTech Program',
         role: 'Clinical Technician',
+        admissionClosed: true,
         details: [
           'Join as a Clinical Technician with a CTC of Rs 2.64 LPA',
           '6-month program'
@@ -75,6 +76,7 @@ const ProgramsList = () => {
       {
         program: 'Lenskart EyeTech Program',
         role: 'Retail Sales Associate',
+        admissionClosed: true,
         details: [
           'Join as a Retail Sales Associate with a CTC of Rs 3.5 LPA',
           '5-week program'
@@ -308,15 +310,23 @@ const ProgramsList = () => {
 
         <div className="programs-grid">
           {filteredPrograms.map((item, index) => {
-            const link = getProgramLink(item.category, item)
+            const isClosed = Boolean(item.admissionClosed)
+            const link = isClosed ? null : getProgramLink(item.category, item)
+            const CardTag = isClosed ? 'div' : 'a'
             return (
-              <a
+              <CardTag
                 key={`${item.category}-${item.program}-${item.role}-${index}`}
-                href={link || '#'}
-                className="program-card"
-                target={link ? '_blank' : undefined}
-                rel={link ? 'noopener noreferrer' : undefined}
-                onClick={!link ? (e) => e.preventDefault() : () => trackMicrositeClick(`${item.program} - ${item.role}`)}
+                href={!isClosed ? (link || '#') : undefined}
+                className={`program-card${isClosed ? ' program-card--closed' : ''}`}
+                target={!isClosed && link ? '_blank' : undefined}
+                rel={!isClosed && link ? 'noopener noreferrer' : undefined}
+                onClick={
+                  isClosed
+                    ? undefined
+                    : !link
+                      ? (e) => e.preventDefault()
+                      : () => trackMicrositeClick(`${item.program} - ${item.role}`)
+                }
               >
                 <div className="program-card-top">
                   <div className="program-card-icon">{getIcon(item.category, item)}</div>
@@ -326,7 +336,10 @@ const ProgramsList = () => {
                   </div>
                 </div>
                 <div className="program-card-content">
-                  <div className="program-card-details">
+                  <div className={`program-card-details${isClosed ? ' program-card-details--closed' : ''}`}>
+                    {isClosed && (
+                      <span className="program-admission-closed">Admission Closed</span>
+                    )}
                     {item.details.map((detail, idx) => (
                       <div key={idx} className="program-detail-item">
                         <span className="checkmark"></span>
@@ -346,7 +359,7 @@ const ProgramsList = () => {
                     </span>
                   </span>
                 </div>
-              </a>
+              </CardTag>
             )
           })}
         </div>
