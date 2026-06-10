@@ -127,10 +127,16 @@ const Programs = () => {
       url: 'https://pgpam.crack-ed.com',
     },
     {
-      id: 7,
+      id: 6,
       logo: udaanCardLogo,
       title: 'Postgraduate Program Retail Banking - Relationship Officer',
       url: 'https://pgprb.crack-ed.com',
+    },
+    {
+      id: 7,
+      logo: udaanLogo,
+      title: 'Virtual Relationship Manager',
+      url: 'https://elevatevrm.crack-ed.com/',
     },
     {
       id: 8,
@@ -146,45 +152,27 @@ const Programs = () => {
     },
     {
       id: 10,
-      logo: udaanLogo,
-      title: 'Virtual Relationship Manager',
-      url: 'https://elevatevrm.crack-ed.com/',
+      logo: finovaSmallLogo,
+      title: 'Finova VyaparaMitra Program - Relationship Officer',
+      url: 'https://finovaro.crack-ed.com',
     },
     {
       id: 11,
-      logo: lenskartCardLogo,
-      title: 'Lenskart EyeTech Program - Clinical Technician',
-      url: 'https://lenskart.crack-ed.com/portal',
-    },
-    {
-      id: 12,
-      logo: lenskartCardLogo,
-      title: 'Lenskart EyeTech Program - Retail Sales Associate',
-      url: 'https://lenskartrsa.crack-ed.com/portal',
-    },
-    {
-      id: 17,
       logo: piramalCardLogo,
       title: 'Piramal ProEdge Program - Relationship Manager',
       url: 'https://piramal.crack-ed.com/portal',
     },
     {
-      id: 19,
+      id: 12,
       logo: avivaSmallLogo,
       title: 'Aviva Nirmaan Program - Direct Sales Executive',
       url: 'https://avivads.crack-ed.com',
     },
     {
-      id: 20,
+      id: 13,
       logo: avivaSmallLogo,
       title: 'Aviva Nirmaan Program - Agency Sales Executive',
       url: 'https://avivaas.crack-ed.com',
-    },
-    {
-      id: 23,
-      logo: finovaSmallLogo,
-      title: 'Finova VyaparaMitra Program - Relationship Officer',
-      url: 'https://finovaro.crack-ed.com',
     },
   ]
 
