@@ -30,6 +30,13 @@ const centres = [
     mapQuery:
       "Teloz Spaces - AJ House Andheri East, Marol Maroshi Rd, Andheri East, Mumbai, Maharashtra 400059",
   },
+  {
+    name: "Bangalore",
+    details:
+      "Brigade Tech Park, Tower B 1st Floor, Pattandur Agrahara, Next to Park Square Mall, Whitefield, Bengaluru 560066",
+    mapQuery:
+      "Brigade Tech Park Tower B, Pattandur Agrahara, Whitefield, Bengaluru 560066",
+  },
 ];
 
 const Centres = () => {
