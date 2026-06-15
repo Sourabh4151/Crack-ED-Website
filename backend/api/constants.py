@@ -2,6 +2,9 @@
 Program and center mapping (aligned with frontend crmService).
 Used for admin dropdown and auto-fill of center.
 """
+
+# Fixed NoPaperForms cf_batch_name for all website lead submissions
+CF_BATCH_NAME = 'Select Batch Name'
 # Source page path -> short label for CRM attribution (e.g. /badhta-india-dekho -> BID)
 SOURCE_PAGE_TO_LABEL = {
     '/': 'Home',

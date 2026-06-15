@@ -5,6 +5,7 @@ import {
   getApiBase,
   getUtmParams,
   getCfProgramByProgram,
+  CF_BATCH_NAME,
   isBackendUnreachable,
   BACKEND_DOWN_MESSAGE,
 } from '../../services/crmService';
@@ -439,6 +440,7 @@ const CareerQuiz = ({ showOnlyTopProgram = false }) => {
       selections,
       bestFit: perfectFit,
       ...(cfProgram ? { cfProgram } : {}),
+      cfBatchName: CF_BATCH_NAME,
       sourcePage,
       ...(Object.keys(utmParams).length > 0 ? { utmParams } : {}),
     };

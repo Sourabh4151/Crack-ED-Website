@@ -46,6 +46,9 @@ const PROGRAM_TO_CF_PROGRAM_MAP = {
   'Elevate Banking Program - Virtual Relationship Manager': 'Axis - VRM',
 }
 
+/** Fixed NoPaperForms cf_batch_name for all website lead submissions */
+export const CF_BATCH_NAME = 'Select Batch Name'
+
 /** Base URL for our Django backend (set in .env as VITE_API_URL, or use proxy with '') */
 export const getApiBase = () => (typeof import.meta !== 'undefined' && import.meta.env?.VITE_API_URL) || ''
 
@@ -178,6 +181,7 @@ export const submitLeadToCRM = async (formData) => {
     program,
     center,
     ...(cfProgram ? { cfProgram } : {}),
+    cfBatchName: CF_BATCH_NAME,
     state: formData?.state || '',
     city: formData?.city || '',
     sourcePage,
@@ -233,6 +237,7 @@ export const submitQuizLeadToCRM = async (formData) => {
     program: formData.program,
     center,
     ...(cfProgram ? { cfProgram } : {}),
+    cfBatchName: CF_BATCH_NAME,
     state: formData.state || '',
     sourcePage,
     ...(Object.keys(utmParams).length > 0 ? { utmParams } : {}),
@@ -270,6 +275,7 @@ export const submitQuizLeadToCRMDirect = async (formData) => {
     program: formData.program,
     bestFit: formData.program,
     ...(cfProgram ? { cfProgram } : {}),
+    cfBatchName: CF_BATCH_NAME,
     sourcePage,
     ...(Object.keys(utmParams).length > 0 ? { utmParams } : {}),
   }

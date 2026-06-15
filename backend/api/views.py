@@ -17,7 +17,7 @@ from rest_framework.decorators import api_view, authentication_classes, permissi
 from rest_framework.permissions import AllowAny, BasePermission
 from rest_framework.response import Response
 
-from .constants import get_center_for_program, get_source_page_label
+from .constants import CF_BATCH_NAME, get_center_for_program, get_source_page_label
 from .models import Example, QuizSubmission, Lead, JobApplication, JobListing, BIDEpisode, MarketingBlog, MarketingBlogUpload
 from .serializers import (
     ExampleSerializer,
@@ -99,6 +99,7 @@ def build_nopaperforms_body(
     JSON for NoPaperForms createOrUpdate: name, email, mobile, search_criteria;
     optional state, city; cf_program when set; source fixed to Website;
     cf_form_name from get_source_page_label(source_page);
+    cf_batch_name fixed to CF_BATCH_NAME;
     UTM when set: cf_utm_id <- utm_source, medium <- utm_medium, campaign <- utm_campaign;
     optional cf_remarks from enquiry query / remarks text.
     """
@@ -126,6 +127,7 @@ def build_nopaperforms_body(
     form_name = get_source_page_label(source_page or '').strip()[:500]
     if form_name:
         payload['cf_form_name'] = form_name
+    payload['cf_batch_name'] = CF_BATCH_NAME
 
     us = (utm_source or '').strip()[:500]
     if us:
