@@ -18,6 +18,7 @@ from rest_framework.permissions import AllowAny, BasePermission
 from rest_framework.response import Response
 
 from .constants import CF_BATCH_NAME, get_center_for_program, get_source_page_label
+from .meritto_log import post_nopaperforms_with_log
 from .models import Example, QuizSubmission, Lead, JobApplication, JobListing, BIDEpisode, MarketingBlog, MarketingBlogUpload
 from .serializers import (
     ExampleSerializer,
@@ -148,7 +149,7 @@ def build_nopaperforms_body(
 
 def _forward_lead_to_nopaperforms(
     first_name, last_name, email, mobile, state='', city='', cf_program='', source_page='',
-    utm_source='', utm_medium='', utm_campaign='', remarks='',
+    utm_source='', utm_medium='', utm_campaign='', remarks='', source_type='submit_lead',
 ):
     """Forward lead to NoPaperForms. Credentials from env. Does not raise; logs on failure."""
     body = build_nopaperforms_body(
@@ -157,26 +158,26 @@ def _forward_lead_to_nopaperforms(
         utm_source=utm_source, utm_medium=utm_medium, utm_campaign=utm_campaign,
         remarks=remarks,
     )
-    headers, payload = prepare_nopaperforms_post(body)
-    if headers is None:
-        print(
-            '[API] NoPaperForms: NOPAPERFORMS_ACCESS_KEY / NOPAPERFORMS_SECRET_KEY not set; skipping CRM forward'
-        )
+    r = post_nopaperforms_with_log(
+        body,
+        source_type=source_type,
+        contact_email=email,
+        contact_mobile=mobile,
+        get_url=get_nopaperforms_url,
+        prepare_post=prepare_nopaperforms_post,
+    )
+    if r is None:
         return
-    try:
-        r = requests.post(get_nopaperforms_url(), json=payload, headers=headers, timeout=15)
-        if r.ok:
-            log_name = f"{first_name} {(last_name or '').strip()}".strip() or first_name or '—'
-            print(f'[API] Lead forwarded to NoPaperForms: {log_name}')
-        else:
-            print(f'[API] NoPaperForms returned {r.status_code}: {r.text[:200]}')
-    except Exception as e:
-        print(f'[API] NoPaperForms forward error: {e}')
+    if r.ok:
+        log_name = f"{first_name} {(last_name or '').strip()}".strip() or first_name or '—'
+        print(f'[API] Lead forwarded to NoPaperForms: {log_name}')
+    else:
+        print(f'[API] NoPaperForms returned {r.status_code}: {r.text[:200]}')
 
 
 def _forward_lead_to_nopaperforms_async(
     first_name, last_name, email, mobile, state='', city='', cf_program='', source_page='',
-    utm_source='', utm_medium='', utm_campaign='', remarks='',
+    utm_source='', utm_medium='', utm_campaign='', remarks='', source_type='submit_lead',
 ):
     """Run CRM forward in a background thread so the API can return immediately."""
     thread = threading.Thread(
@@ -191,6 +192,7 @@ def _forward_lead_to_nopaperforms_async(
             'utm_medium': utm_medium or '',
             'utm_campaign': utm_campaign or '',
             'remarks': remarks or '',
+            'source_type': source_type or 'submit_lead',
         },
     )
     thread.daemon = True
@@ -284,6 +286,7 @@ def quiz_submit(request):
         state='', city='', cf_program=cf_program, source_page=source_page or '',
         utm_source=utm_source, utm_medium=utm_medium, utm_campaign=utm_campaign,
         remarks=quiz_remarks,
+        source_type='quiz_submit',
     )
     return Response({'success': True}, status=status.HTTP_201_CREATED)
 
@@ -357,6 +360,7 @@ def submit_lead(request):
         state=state, city=city, cf_program=cf_program, source_page=source_page or '',
         utm_source=utm_source, utm_medium=utm_medium, utm_campaign=utm_campaign,
         remarks=lead_remarks,
+        source_type='submit_lead',
     )
     return Response({'success': True}, status=status.HTTP_201_CREATED)
 

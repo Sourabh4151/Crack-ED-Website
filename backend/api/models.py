@@ -268,3 +268,37 @@ class MarketingBlogUpload(models.Model):
 
     def __str__(self):
         return self.file.name
+
+
+class MerittoOutboundAPILog(models.Model):
+    """Outbound Meritto / NoPaperForms API call (request + response) for debugging."""
+
+    class SourceType(models.TextChoices):
+        SUBMIT_LEAD = 'submit_lead', 'Submit lead'
+        QUIZ_SUBMIT = 'quiz_submit', 'Quiz submit'
+        BACKFILL = 'backfill', 'Backfill'
+
+    source_type = models.CharField(max_length=32, choices=SourceType.choices, blank=True)
+    contact_email = models.EmailField(blank=True)
+    contact_mobile = models.CharField(max_length=20, blank=True)
+    endpoint_url = models.URLField(max_length=500)
+    http_method = models.CharField(max_length=10, default='POST')
+    request_headers = models.JSONField(default=dict, blank=True, help_text='Sanitized (secrets redacted).')
+    request_body = models.JSONField(default=dict, blank=True, help_text='Sanitized (secrets redacted).')
+    response_status_code = models.PositiveIntegerField(null=True, blank=True)
+    response_headers = models.JSONField(default=dict, blank=True)
+    response_body = models.TextField(blank=True)
+    success = models.BooleanField(default=False)
+    error_message = models.TextField(blank=True)
+    duration_ms = models.PositiveIntegerField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = 'Meritto outbound API log'
+        verbose_name_plural = 'Meritto outbound API logs'
+
+    def __str__(self):
+        status = self.response_status_code if self.response_status_code is not None else '—'
+        email = self.contact_email or self.contact_mobile or 'unknown'
+        return f'{email} — HTTP {status} ({self.created_at:%Y-%m-%d %H:%M})'

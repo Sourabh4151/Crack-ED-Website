@@ -13,11 +13,11 @@ duplicates unless NoPaperForms deduplicates by mobile — confirm with them befo
 """
 import time
 
-import requests
 from django.core.management.base import BaseCommand
 
 from api.constants import get_center_for_program
 from api.models import Lead, QuizSubmission
+from api.meritto_log import post_nopaperforms_with_log
 from api.views import build_nopaperforms_body, get_nopaperforms_url, prepare_nopaperforms_post
 
 
@@ -95,20 +95,25 @@ class Command(BaseCommand):
                     remarks=(lead.remarks or '').strip()[:2000],
                 )
                 if do_send:
-                    try:
-                        h, payload = prepare_nopaperforms_post(body)
-                        r = requests.post(url, json=payload, headers=h, timeout=15)
-                        if r.ok:
-                            total_sent += 1
-                            self.stdout.write(f'  OK Lead id={lead.id} {lead.email}')
-                        else:
-                            self.stdout.write(
-                                self.style.WARNING(
-                                    f'  HTTP {r.status_code} Lead id={lead.id} {r.text[:100]}'
-                                )
+                    r = post_nopaperforms_with_log(
+                        body,
+                        source_type='backfill',
+                        contact_email=lead.email,
+                        contact_mobile=lead.mobile,
+                        get_url=get_nopaperforms_url,
+                        prepare_post=prepare_nopaperforms_post,
+                    )
+                    if r and r.ok:
+                        total_sent += 1
+                        self.stdout.write(f'  OK Lead id={lead.id} {lead.email}')
+                    elif r:
+                        self.stdout.write(
+                            self.style.WARNING(
+                                f'  HTTP {r.status_code} Lead id={lead.id} {r.text[:100]}'
                             )
-                    except Exception as e:
-                        self.stdout.write(self.style.ERROR(f'  Error Lead id={lead.id}: {e}'))
+                        )
+                    else:
+                        self.stdout.write(self.style.ERROR(f'  Error Lead id={lead.id}: see Meritto outbound API logs'))
                     time.sleep(0.2)
                 else:
                     total_sent += 1
@@ -139,20 +144,25 @@ class Command(BaseCommand):
                     utm_campaign=quiz.utm_campaign or '',
                 )
                 if do_send:
-                    try:
-                        h, payload = prepare_nopaperforms_post(body)
-                        r = requests.post(url, json=payload, headers=h, timeout=15)
-                        if r.ok:
-                            total_sent += 1
-                            self.stdout.write(f'  OK Quiz id={quiz.id} {quiz.email}')
-                        else:
-                            self.stdout.write(
-                                self.style.WARNING(
-                                    f'  HTTP {r.status_code} Quiz id={quiz.id} {r.text[:100]}'
-                                )
+                    r = post_nopaperforms_with_log(
+                        body,
+                        source_type='backfill',
+                        contact_email=quiz.email,
+                        contact_mobile=quiz.mobile,
+                        get_url=get_nopaperforms_url,
+                        prepare_post=prepare_nopaperforms_post,
+                    )
+                    if r and r.ok:
+                        total_sent += 1
+                        self.stdout.write(f'  OK Quiz id={quiz.id} {quiz.email}')
+                    elif r:
+                        self.stdout.write(
+                            self.style.WARNING(
+                                f'  HTTP {r.status_code} Quiz id={quiz.id} {r.text[:100]}'
                             )
-                    except Exception as e:
-                        self.stdout.write(self.style.ERROR(f'  Error Quiz id={quiz.id}: {e}'))
+                        )
+                    else:
+                        self.stdout.write(self.style.ERROR(f'  Error Quiz id={quiz.id}: see Meritto outbound API logs'))
                     time.sleep(0.2)
                 else:
                     total_sent += 1

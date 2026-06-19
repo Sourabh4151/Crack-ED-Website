@@ -9,7 +9,8 @@ from django.http import FileResponse, Http404
 from django.urls import path, reverse
 from django.utils.html import format_html
 from django.utils import timezone
-from .models import Example, QuizSubmission, Lead, JobApplication, JobListing, BIDEpisode, MarketingBlog, MarketingBlogUpload
+from .models import Example, QuizSubmission, Lead, JobApplication, JobListing, BIDEpisode, MarketingBlog, MarketingBlogUpload, MerittoOutboundAPILog
+from .meritto_log import format_json_for_admin
 from .constants import PROGRAM_CHOICES, PROGRAM_TO_CENTER, get_center_for_program
 from .admin_exports import (
     build_job_applications_csv_response,
@@ -339,3 +340,68 @@ class BIDEpisodeAdmin(admin.ModelAdmin):
     @admin.display(description='Thumbnail', boolean=True)
     def has_thumbnail(self, obj):
         return bool(obj.thumbnail)
+
+
+@admin.register(MerittoOutboundAPILog)
+class MerittoOutboundAPILogAdmin(admin.ModelAdmin):
+    list_display = [
+        'id', 'created_at', 'success', 'response_status_code', 'source_type',
+        'contact_email', 'contact_mobile', 'duration_ms',
+    ]
+    list_filter = ['success', 'source_type', 'response_status_code', 'created_at']
+    search_fields = ['contact_email', 'contact_mobile', 'response_body', 'error_message', 'endpoint_url']
+    date_hierarchy = 'created_at'
+    readonly_fields = [
+        'source_type', 'contact_email', 'contact_mobile', 'endpoint_url', 'http_method',
+        'request_headers_display', 'request_body_display', 'response_status_code',
+        'response_headers_display', 'response_body_display', 'success', 'error_message',
+        'duration_ms', 'created_at',
+    ]
+    fieldsets = (
+        ('Summary', {
+            'fields': (
+                'created_at', 'success', 'source_type', 'contact_email', 'contact_mobile',
+                'endpoint_url', 'http_method', 'response_status_code', 'duration_ms', 'error_message',
+            ),
+        }),
+        ('Request', {
+            'fields': ('request_headers_display', 'request_body_display'),
+        }),
+        ('Response', {
+            'fields': ('response_headers_display', 'response_body_display'),
+        }),
+    )
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    @admin.display(description='Request headers')
+    def request_headers_display(self, obj):
+        return format_html(
+            '<pre style="max-height:320px;overflow:auto;white-space:pre-wrap;">{}</pre>',
+            format_json_for_admin(obj.request_headers),
+        )
+
+    @admin.display(description='Request body')
+    def request_body_display(self, obj):
+        return format_html(
+            '<pre style="max-height:480px;overflow:auto;white-space:pre-wrap;">{}</pre>',
+            format_json_for_admin(obj.request_body),
+        )
+
+    @admin.display(description='Response headers')
+    def response_headers_display(self, obj):
+        return format_html(
+            '<pre style="max-height:320px;overflow:auto;white-space:pre-wrap;">{}</pre>',
+            format_json_for_admin(obj.response_headers),
+        )
+
+    @admin.display(description='Response body')
+    def response_body_display(self, obj):
+        return format_html(
+            '<pre style="max-height:480px;overflow:auto;white-space:pre-wrap;">{}</pre>',
+            format_json_for_admin(obj.response_body),
+        )
