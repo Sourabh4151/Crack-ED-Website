@@ -19,6 +19,14 @@ const PROGRAMS = [
     ],
   },
   {
+    id: 'rupyy',
+    name: 'Rupyy AutoEdge Program',
+    link: '/programs',
+    links: [
+      { label: 'Business Manager', href: 'https://rupyybm.crack-ed.com/' },
+    ],
+  },
+  {
     id: 'pgprm',
     name: 'PGP - Relationship Management',
     link: '/programs',

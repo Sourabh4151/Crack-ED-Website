@@ -38,6 +38,7 @@ const PROGRAM_CATEGORIES = [
           { label: 'Relationship Manager', href: 'https://herofinancerm.crack-ed.com/' },
         ],
       },
+      { label: 'Rupyy AutoEdge Program', href: 'https://rupyybm.crack-ed.com/' },
       { label: 'Piramal ProEdge Program', href: 'https://piramal.crack-ed.com/portal' },
       { label: 'Finova VyaparaMitra Program', href: 'https://finovaro.crack-ed.com' },
       { label: 'Mahindra Finance Prarambh Program', href: 'https://mahindrafinancebe.crack-ed.com/' },

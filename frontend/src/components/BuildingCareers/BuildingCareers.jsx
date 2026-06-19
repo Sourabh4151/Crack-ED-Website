@@ -39,7 +39,7 @@ const BuildingCareers = () => {
             We are here to close the gap between what education offers and what the professional world demands. When you bring your passion, we will bring the tools and support you need to take that next step forward.
           </p>
         </div>
-        <Link to="/programs" className="building-careers-cta">
+        <Link to="/programs#programs-list" className="building-careers-cta">
           Explore Programs
         </Link>
       </div>

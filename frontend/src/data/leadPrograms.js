@@ -15,4 +15,5 @@ export const LEAD_PROGRAMS = [
   'PGP - Relationship Management - Relationship Manager',
   'PGP - Retail Banking - Relationship Officer',
   'Piramal ProEdge Program - Relationship Manager',
+  'Rupyy AutoEdge Program - Business Manager',
 ]

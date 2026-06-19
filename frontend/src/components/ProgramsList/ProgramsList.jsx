@@ -8,6 +8,7 @@ import avivaLogoSmallCard from '../../assets/aviva_logo_small_card.png'
 import finovaSmallLogo from '../../assets/finova_small_logo.png'
 import mahindraFinanceSmallLogo from '../../assets/mahindra_finance_small_logo_logo.png'
 import heroSmallLogo from '../../assets/hero_small_logo.png'
+import rupyySmallLogo from '../../assets/rupyy_small_logo.png'
 import { trackMicrositeClick, markProgramsPageVisited } from '../../utils/analytics'
 import './ProgramsList.css'
 
@@ -111,6 +112,14 @@ const ProgramsList = () => {
         ]
       },
       {
+        program: 'Rupyy AutoEdge Program',
+        role: 'Business Manager',
+        details: [
+          'Join as a Business Manager – Used Car Finance and secure a CTC of Rs 3 LPA + incentives',
+          '1-month program'
+        ]
+      },
+      {
         program: 'Mahindra Finance Prarambh Program',
         role: 'Business Executive',
         details: [
@@ -189,6 +198,9 @@ const ProgramsList = () => {
       if (program === 'Hero Housing Finance Pragati Program' && role === 'Credit and Operations Manager') {
         return 'https://herofinancecom.crack-ed.com/'
       }
+      if (program === 'Rupyy AutoEdge Program' && role === 'Business Manager') {
+        return 'https://rupyybm.crack-ed.com/'
+      }
       if (program === 'Mahindra Finance Prarambh Program' && role === 'Business Executive') {
         return 'https://mahindrafinancebe.crack-ed.com/'
       }
@@ -233,6 +245,9 @@ const ProgramsList = () => {
     if (category === 'NBFC' && item?.program === 'Hero Housing Finance Pragati Program') {
       return <img src={heroSmallLogo} alt="Hero Housing Finance" className="program-logo-img program-logo-hero" />
     }
+    if (category === 'NBFC' && item?.program === 'Rupyy AutoEdge Program') {
+      return <img src={rupyySmallLogo} alt="Rupyy" className="program-logo-img program-logo-rupyy" />
+    }
     if (category === 'NBFC' && program === 'Mahindra Finance Prarambh Program') {
       return <img src={mahindraFinanceSmallLogo} alt="Mahindra Finance" className="program-logo-img program-logo-mahindra" />
     }
@@ -244,9 +259,9 @@ const ProgramsList = () => {
   const withCategory = (category, items) => items.map((item) => ({ ...item, category }))
 
   const getAllProgramsInOrder = () => [
-    ...withCategory('NBFC', programs.NBFC.slice(0, 3)),
+    ...withCategory('NBFC', programs.NBFC.slice(0, 4)),
     ...withCategory('Banking', programs.Banking),
-    ...withCategory('NBFC', programs.NBFC.slice(3)),
+    ...withCategory('NBFC', programs.NBFC.slice(4)),
     ...withCategory('Insurance', programs.Insurance),
     ...withCategory('Retail', programs.Retail),
   ]
@@ -267,7 +282,7 @@ const ProgramsList = () => {
     : displayedPrograms
 
   return (
-    <section className="programs-list">
+    <section id="programs-list" className="programs-list">
       <div className="programs-list-container">
         <button className="explore-other-programs">Explore Other Programs</button>
         

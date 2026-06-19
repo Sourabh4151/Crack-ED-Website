@@ -2,6 +2,7 @@
   width: 100%;
   background: #000000;
   padding: 40px 120px;
+  scroll-margin-top: 100px;
 }
 
 .programs-list-container {
@@ -246,6 +247,12 @@
 }
 
 .programs-list .program-card-icon .program-logo-hero {
+  width: 41px;
+  height: 41px;
+  object-fit: contain;
+}
+
+.programs-list .program-card-icon .program-logo-rupyy {
   width: 41px;
   height: 41px;
   object-fit: contain;

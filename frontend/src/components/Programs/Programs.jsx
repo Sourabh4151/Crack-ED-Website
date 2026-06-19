@@ -49,6 +49,9 @@ import elevateVrmImage from '../../assets/elevate_vrm.png'
 import heroFinanceRmImage from '../../assets/hero_finance_rm.png'
 import heroCoImage from '../../assets/hero_co.png'
 import heroComImage from '../../assets/hero_com.png'
+import rupyyProgramImage from '../../assets/rupyy.png'
+import rupyyLogo from '../../assets/logo_rupyy.svg'
+import rupyySmallLogo from '../../assets/rupyy_small_logo.png'
 import heroLogo from '../../assets/hero_logo.svg'
 import heroSmallLogo from '../../assets/hero_small_logo.png'
 import { trackMicrositeClick } from '../../utils/analytics'
@@ -78,6 +81,7 @@ const getProgramHomeLogo = (programLabel) => {
     case 'Finova VyaparaMitra Program': return { src: finovaCardLogo, alt: 'Finova Capital' }
     case 'Mahindra Finance Prarambh Program': return { src: mahindraFinanceHomeLogo, alt: 'Mahindra Finance' }
     case 'Housing Finance Pragati Program': return { src: heroLogo, alt: 'Hero Housing Finance' }
+    case 'Rupyy AutoEdge Program': return { src: rupyyLogo, alt: 'Rupyy' }
     case 'Postgraduate Program in Relationship Management': return null
     case 'Postgraduate Program in Banking Management': return null
     case 'Postgraduate Program Retail Banking': return null
@@ -116,60 +120,66 @@ const Programs = () => {
     },
     {
       id: 4,
+      logo: rupyySmallLogo,
+      title: 'Rupyy AutoEdge Program - Business Manager',
+      url: 'https://rupyybm.crack-ed.com/',
+    },
+    {
+      id: 5,
       logo: udaanCardLogo,
       title: 'Postgraduate Program Relationship Management - Relationship Manager',
       url: 'https://pgprm.crack-ed.com',
     },
     {
-      id: 5,
+      id: 6,
       logo: udaanCardLogo,
       title: 'Postgraduate Program Banking Management - Assistant Manager',
       url: 'https://pgpam.crack-ed.com',
     },
     {
-      id: 6,
+      id: 7,
       logo: udaanCardLogo,
       title: 'Postgraduate Program Retail Banking - Relationship Officer',
       url: 'https://pgprb.crack-ed.com',
     },
     {
-      id: 7,
+      id: 8,
       logo: udaanLogo,
       title: 'Virtual Relationship Manager',
       url: 'https://elevatevrm.crack-ed.com/',
     },
     {
-      id: 8,
+      id: 9,
       logo: udaanCardLogo,
       title: 'Banking Sales Program - Sales Officer',
       url: 'https://bspso.crack-ed.com',
     },
     {
-      id: 9,
+      id: 10,
       logo: mahindraFinanceSmallLogo,
       title: 'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)',
       url: 'https://mahindrafinancebe.crack-ed.com/',
     },
     {
-      id: 10,
+      id: 11,
       logo: finovaSmallLogo,
       title: 'Finova VyaparaMitra Program - Relationship Officer',
       url: 'https://finovaro.crack-ed.com',
     },
     {
-      id: 11,
+      id: 12,
       logo: piramalCardLogo,
       title: 'Piramal ProEdge Program - Relationship Manager',
       url: 'https://piramal.crack-ed.com/portal',
     },
     {
-      id: 12,
+      id: 13,
       logo: avivaSmallLogo,
       title: 'Aviva Nirmaan Program - Direct Sales Executive',
       url: 'https://avivads.crack-ed.com',
     },
     {
-      id: 13,
+      id: 14,
       logo: avivaSmallLogo,
       title: 'Aviva Nirmaan Program - Agency Sales Executive',
       url: 'https://avivaas.crack-ed.com',
@@ -193,6 +203,7 @@ const Programs = () => {
       'Housing Finance Pragati Program - Relationship Manager': heroFinanceRmImage,
       'Housing Finance Pragati Program - Collection Officer': heroCoImage,
       'Housing Finance Pragati Program - Credit and Operations Manager': heroComImage,
+      'Rupyy AutoEdge Program - Business Manager': rupyyProgramImage,
     }
 
     const newProgramsMap = {
@@ -217,6 +228,13 @@ const Programs = () => {
         duration: '1-month program',
         image: heroComImage,
         mobileBackgroundPosition: '20% center',
+      },
+      'Rupyy AutoEdge Program - Business Manager': {
+        programLabel: 'Rupyy AutoEdge Program',
+        logo: rupyyLogo,
+        details: 'Join as a Business Manager – Used Car Finance and secure a CTC of Rs 3 LPA + incentives',
+        duration: '1-month program',
+        image: rupyyProgramImage,
       },
       'Virtual Relationship Manager': {
         programLabel: 'Elevate Banking Program',
@@ -342,6 +360,7 @@ const Programs = () => {
     if (card.title === 'Housing Finance Pragati Program - Relationship Manager') return 'Housing Finance Pragati - Relationship Manager'
     if (card.title === 'Housing Finance Pragati Program - Collection Officer') return 'Housing Finance Pragati - Collection Officer'
     if (card.title === 'Housing Finance Pragati Program - Credit and Operations Manager') return 'Housing Finance Pragati - Credit and Operations Manager'
+    if (card.title === 'Rupyy AutoEdge Program - Business Manager') return 'Rupyy AutoEdge - Business Manager'
     if (card.title === 'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)') return 'Mahindra Finance Prarambh - Business Executive'
     if (card.title === 'Virtual Relationship Manager') return 'Elevate Banking Program - Virtual Relationship Manager'
     return card.title
@@ -362,6 +381,7 @@ const Programs = () => {
       .replace('Postgraduate Program Retail Banking - ', '')
       .replace('Mahindra Finance Prarambh Program - ', '')
       .replace('Housing Finance Pragati Program - ', '')
+      .replace('Rupyy AutoEdge Program - ', '')
       .replace('Banking Sales Program - ', '')
   }
 

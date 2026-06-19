@@ -8,9 +8,9 @@ const ProgramsHero = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const handleExploreClick = () => {
-    const premiumProgramSection = document.getElementById('premium-program')
-    if (premiumProgramSection) {
-      premiumProgramSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    const programsListSection = document.getElementById('programs-list')
+    if (programsListSection) {
+      programsListSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
   }
 
