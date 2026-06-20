@@ -5,6 +5,7 @@ import instagramIcon from '../../assets/instagram_footer.png'
 import linkedinIcon from '../../assets/linkedin_footer.png'
 import facebookIcon from '../../assets/facebook_footer.png'
 import youtubeIcon from '../../assets/youtube_footer.png'
+import { appendUtmToUrl } from '../../services/crmService'
 import './Footer.css'
 
 const PROGRAMS = [
@@ -185,7 +186,7 @@ const Footer = () => {
                         <ul className="footer-links footer-job-links">
                           {program.links.map((item) => (
                             <li key={item.href}>
-                              <a href={item.href} target="_blank" rel="noopener noreferrer">
+                              <a href={appendUtmToUrl(item.href)} target="_blank" rel="noopener noreferrer">
                                 {item.label}
                               </a>
                             </li>

@@ -131,6 +131,34 @@ export const buildSearchWithUtm = (currentSearch, storedUtm) => {
 }
 
 /**
+ * Append stored/current UTM params to an external URL (e.g. program microsites).
+ * Does not overwrite UTM params already present on the destination URL.
+ * @param {string} url
+ * @returns {string}
+ */
+export const appendUtmToUrl = (url) => {
+  if (!url || typeof url !== 'string') return url
+  const utm = getUtmParams()
+  if (Object.keys(utm).length === 0) return url
+  try {
+    const parsed = new URL(url)
+    for (const [key, value] of Object.entries(utm)) {
+      if (
+        UTM_PARAM_NAMES.includes(key) &&
+        value != null &&
+        String(value).trim() !== '' &&
+        !parsed.searchParams.has(key)
+      ) {
+        parsed.searchParams.set(key, String(value).trim().slice(0, 500))
+      }
+    }
+    return parsed.toString()
+  } catch (_) {
+    return url
+  }
+}
+
+/**
  * Split full name into first and last name
  */
 const splitName = (fullName) => {

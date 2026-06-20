@@ -55,6 +55,7 @@ import rupyySmallLogo from '../../assets/rupyy_small_logo.png'
 import heroLogo from '../../assets/hero_logo.svg'
 import heroSmallLogo from '../../assets/hero_small_logo.png'
 import { trackMicrositeClick } from '../../utils/analytics'
+import { appendUtmToUrl } from '../../services/crmService'
 import './Programs.css'
 
 // Keep "LPA + PLP" on one line to prevent awkward wrapping
@@ -504,7 +505,7 @@ const Programs = () => {
                   return (
                     <a
                       key={card.id}
-                      href={card.url}
+                      href={appendUtmToUrl(card.url)}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="mobile-program-card-link"
@@ -608,7 +609,7 @@ const Programs = () => {
                           <li><DetailsText text={currentProgramDetails.details} /></li>
                           <li>{currentProgramDetails.duration}</li>
                         </ul>
-                        <a href={programCards[featuredCardIndex]?.url || '#'} target="_blank" rel="noopener noreferrer" onClick={() => trackMicrositeClick(programCards[featuredCardIndex]?.title)}>
+                        <a href={appendUtmToUrl(programCards[featuredCardIndex]?.url || '#')} target="_blank" rel="noopener noreferrer" onClick={() => trackMicrositeClick(programCards[featuredCardIndex]?.title)}>
                           <button className="learn-more-button">Learn More</button>
                         </a>
                       </div>
@@ -634,7 +635,7 @@ const Programs = () => {
                   {programCards.map((card, index) => (
                     <a
                       key={card.id}
-                      href={card.url}
+                      href={appendUtmToUrl(card.url)}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="program-mini-card-link"
@@ -653,7 +654,7 @@ const Programs = () => {
                   {programCards.length > 0 && (
                     <a
                       key={`${programCards[0].id}-duplicate`}
-                      href={programCards[0].url}
+                      href={appendUtmToUrl(programCards[0].url)}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="program-mini-card-link"

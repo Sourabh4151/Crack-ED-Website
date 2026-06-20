@@ -3,6 +3,7 @@ import './HeroPopup.css'
 import heroPopupBg from '../../assets/hero_pop_up.png'
 import heroLogo from '../../assets/hero_logo.svg'
 import { trackMicrositeClick } from '../../utils/analytics'
+import { appendUtmToUrl } from '../../services/crmService'
 
 const APPLY_URL = 'https://herofinancerm.crack-ed.com/'
 const STORAGE_KEY = 'hero_popup_seen_v1'
@@ -45,7 +46,7 @@ const HeroPopup = () => {
 
   const handleApply = () => {
     trackMicrositeClick('Hero Housing Finance Pragati Program - Relationship Manager')
-    window.open(APPLY_URL, '_blank', 'noopener,noreferrer')
+    window.open(appendUtmToUrl(APPLY_URL), '_blank', 'noopener,noreferrer')
     handleClose()
   }
 

@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import {
   getApiBase,
   getUtmParams,
+  appendUtmToUrl,
   getCfProgramByProgram,
   CF_BATCH_NAME,
   isBackendUnreachable,
@@ -488,7 +489,7 @@ const CareerQuiz = ({ showOnlyTopProgram = false }) => {
               <li><span className="check">✔</span> {perfectFitDetails.duration}</li>
             </ul>
             <div style={{ display: "inline-block" }}>
-              <a style={{ textDecoration: "none" }} href={perfectFitDetails.link} target="_blank" rel="noopener noreferrer" onClick={() => trackMicrositeClick(perfectFit)}>
+              <a style={{ textDecoration: "none" }} href={appendUtmToUrl(perfectFitDetails.link)} target="_blank" rel="noopener noreferrer" onClick={() => trackMicrositeClick(perfectFit)}>
                 <button className="hero-cta-button">Explore Program</button>
               </a>
             </div>
@@ -506,7 +507,7 @@ const CareerQuiz = ({ showOnlyTopProgram = false }) => {
                   <div key={i} className="alt-card">
                     <h3>{progName} - {d}</h3>
                     <div style={{ display: "inline-block" }}>
-                      <a href={link} target="_blank" rel="noopener noreferrer" onClick={() => trackMicrositeClick(progName)}>
+                      <a href={appendUtmToUrl(link)} target="_blank" rel="noopener noreferrer" onClick={() => trackMicrositeClick(progName)}>
                         <button className="secondary-btn-outline">Explore Program</button>
                       </a>
                     </div>

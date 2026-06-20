@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import logoImage from '../../assets/crack-ed_logo.png'
+import { appendUtmToUrl } from '../../services/crmService'
 import './Header.css'
 
 /** Programs grouped for the header dropdown; all categories closed by default. */
@@ -209,7 +210,7 @@ const Header = () => {
             {item.children.map((child) => (
               <li key={child.href}>
                 <a
-                  href={child.href}
+                  href={appendUtmToUrl(child.href)}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={closeMobileMenu}
@@ -224,7 +225,7 @@ const Header = () => {
     }
     return (
       <li key={item.href}>
-        <a href={item.href} target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>
+        <a href={appendUtmToUrl(item.href)} target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>
           {item.label}
         </a>
       </li>

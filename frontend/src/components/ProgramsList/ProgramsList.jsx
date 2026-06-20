@@ -10,6 +10,7 @@ import mahindraFinanceSmallLogo from '../../assets/mahindra_finance_small_logo_l
 import heroSmallLogo from '../../assets/hero_small_logo.png'
 import rupyySmallLogo from '../../assets/rupyy_small_logo.png'
 import { trackMicrositeClick, markProgramsPageVisited } from '../../utils/analytics'
+import { appendUtmToUrl } from '../../services/crmService'
 import './ProgramsList.css'
 
 const PROGRAM_CATEGORIES = ['Banking', 'NBFC', 'Insurance', 'Retail']
@@ -341,7 +342,7 @@ const ProgramsList = () => {
             return (
               <CardTag
                 key={`${item.category}-${item.program}-${item.role}-${index}`}
-                href={!isClosed ? (link || '#') : undefined}
+                href={!isClosed ? appendUtmToUrl(link || '#') : undefined}
                 className={`program-card${isClosed ? ' program-card--closed' : ''}`}
                 target={!isClosed && link ? '_blank' : undefined}
                 rel={!isClosed && link ? 'noopener noreferrer' : undefined}

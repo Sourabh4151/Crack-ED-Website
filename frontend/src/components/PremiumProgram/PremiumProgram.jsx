@@ -1,5 +1,6 @@
 import React from 'react'
 import premiumProgramImage from '../../assets/relationship manager_desktop.jpg'
+import { appendUtmToUrl } from '../../services/crmService'
 import './PremiumProgram.css'
 
 const programHighlights = [
@@ -36,7 +37,7 @@ const PremiumProgram = () => {
               ))}
             </ul>
             <a 
-              href="https://pgprm.crack-ed.com/" 
+              href={appendUtmToUrl("https://pgprm.crack-ed.com/")} 
               target="_blank" 
               rel="noopener noreferrer"
               className="premium-program-learn-more"
