@@ -98,8 +98,8 @@ def build_nopaperforms_body(
 ):
     """
     JSON for NoPaperForms createOrUpdate: name, email, mobile, search_criteria;
-    optional state, city; cf_program when set; source fixed to Website;
-    cf_form_name from get_source_page_label(source_page);
+    optional state, city; cf_program when set;
+    source fixed to Website; cf_form_name from get_source_page_label(source_page);
     cf_batch_name fixed to CF_BATCH_NAME;
     UTM when set: cf_utm_id <- utm_source, medium <- utm_medium, campaign <- utm_campaign;
     optional cf_remarks from enquiry query / remarks text.

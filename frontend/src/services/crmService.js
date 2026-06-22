@@ -40,6 +40,7 @@ const PROGRAM_TO_CF_PROGRAM_MAP = {
   // Full titles (career quiz & site) — same IDs as shorthand above
   'Postgraduate Program Relationship Management - Relationship Manager': 'Relationship Manager',
   'Postgraduate Program Banking Management - Assistant Manager': 'Bandhan Bank - AM',
+  'Postgraduate Program Retail Banking - Relationship Officer': 'Axis - RO',
   'Postgraduate Certification Banking Management - Business Development Executive': 'IndusInd',
   'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)': 'Mahindra - BE',
   'PGP - Retail Banking - Relationship Officer': 'Axis - RO',
