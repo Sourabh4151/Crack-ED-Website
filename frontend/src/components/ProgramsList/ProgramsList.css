@@ -315,10 +315,6 @@
   color: rgba(241, 64, 34, 1);
 }
 
-.programs-list .program-card--closed {
-  cursor: default;
-}
-
 .programs-list .program-card-header {
   display: flex;
   flex-direction: column;

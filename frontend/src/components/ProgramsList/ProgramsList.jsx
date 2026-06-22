@@ -131,6 +131,7 @@ const ProgramsList = () => {
       {
         program: 'Finova VyaparaMitra Program',
         role: 'Relationship Officer',
+        admissionClosed: true,
         details: [
           'Join as a Relationship Officer with a CTC of Rs 2.4 LPA + variable',
           '1-month program'
@@ -337,21 +338,18 @@ const ProgramsList = () => {
         <div className="programs-grid">
           {filteredPrograms.map((item, index) => {
             const isClosed = Boolean(item.admissionClosed)
-            const link = isClosed ? null : getProgramLink(item.category, item)
-            const CardTag = isClosed ? 'div' : 'a'
+            const link = getProgramLink(item.category, item)
             return (
-              <CardTag
+              <a
                 key={`${item.category}-${item.program}-${item.role}-${index}`}
-                href={!isClosed ? appendUtmToUrl(link || '#') : undefined}
-                className={`program-card${isClosed ? ' program-card--closed' : ''}`}
-                target={!isClosed && link ? '_blank' : undefined}
-                rel={!isClosed && link ? 'noopener noreferrer' : undefined}
+                href={appendUtmToUrl(link || '#')}
+                className="program-card"
+                target={link ? '_blank' : undefined}
+                rel={link ? 'noopener noreferrer' : undefined}
                 onClick={
-                  isClosed
-                    ? undefined
-                    : !link
-                      ? (e) => e.preventDefault()
-                      : () => trackMicrositeClick(`${item.program} - ${item.role}`)
+                  !link
+                    ? (e) => e.preventDefault()
+                    : () => trackMicrositeClick(`${item.program} - ${item.role}`)
                 }
               >
                 <div className="program-card-top">
@@ -388,7 +386,7 @@ const ProgramsList = () => {
                     </span>
                   </span>
                 </div>
-              </CardTag>
+              </a>
             )
           })}
         </div>
