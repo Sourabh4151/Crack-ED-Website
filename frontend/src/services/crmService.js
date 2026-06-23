@@ -30,6 +30,7 @@ const PROGRAM_TO_CF_PROGRAM_MAP = {
   'Hero Housing Finance Pragati Program - Credit and Operations Manager': 'Hero Finance - COM',
   'Housing Finance Pragati Program - Credit and Operations Manager': 'Hero Finance - COM',
   'Rupyy AutoEdge Program - Business Manager': 'Rupyy-BM',
+  'Prime Starters Program - Sales Officer': 'Sales Officer - DST',
   'PGP - Banking Management': 'Bandhan Bank - AM',
   'PGP - Banking Management - Assistant Manager': 'Bandhan Bank - AM',
   'PGP - Relationship Management': 'Relationship Manager',

@@ -52,6 +52,9 @@ import heroComImage from '../../assets/hero_com.png'
 import rupyyProgramImage from '../../assets/rupyy.png'
 import rupyyLogo from '../../assets/logo_rupyy.svg'
 import rupyySmallLogo from '../../assets/rupyy_small_logo.png'
+import kotakLogo from '../../assets/kotak_logo.svg'
+import kotakSmallLogo from '../../assets/kotak_small_logo.png'
+import kotakProgramImage from '../../assets/Kotak_program.png'
 import heroLogo from '../../assets/hero_logo.svg'
 import heroSmallLogo from '../../assets/hero_small_logo.png'
 import { trackMicrositeClick } from '../../utils/analytics'
@@ -83,6 +86,7 @@ const getProgramHomeLogo = (programLabel) => {
     case 'Mahindra Finance Prarambh Program': return { src: mahindraFinanceHomeLogo, alt: 'Mahindra Finance' }
     case 'Housing Finance Pragati Program': return { src: heroLogo, alt: 'Hero Housing Finance' }
     case 'Rupyy AutoEdge Program': return { src: rupyyLogo, alt: 'Rupyy' }
+    case 'Prime Starters Program': return { src: kotakLogo, alt: 'Kotak Mahindra Prime' }
     case 'Postgraduate Program in Relationship Management': return null
     case 'Postgraduate Program in Banking Management': return null
     case 'Postgraduate Program Retail Banking': return null
@@ -127,60 +131,66 @@ const Programs = () => {
     },
     {
       id: 5,
+      logo: kotakSmallLogo,
+      title: 'Prime Starters Program - Sales Officer',
+      url: 'https://kotakmahindraso.crack-ed.com/',
+    },
+    {
+      id: 6,
       logo: udaanCardLogo,
       title: 'Postgraduate Program Relationship Management - Relationship Manager',
       url: 'https://pgprm.crack-ed.com',
     },
     {
-      id: 6,
+      id: 7,
       logo: udaanCardLogo,
       title: 'Postgraduate Program Banking Management - Assistant Manager',
       url: 'https://pgpam.crack-ed.com',
     },
     {
-      id: 7,
+      id: 8,
       logo: udaanCardLogo,
       title: 'Postgraduate Program Retail Banking - Relationship Officer',
       url: 'https://pgprb.crack-ed.com',
     },
     {
-      id: 8,
+      id: 9,
       logo: udaanLogo,
       title: 'Virtual Relationship Manager',
       url: 'https://elevatevrm.crack-ed.com/',
     },
     {
-      id: 9,
+      id: 10,
       logo: udaanCardLogo,
       title: 'Banking Sales Program - Sales Officer',
       url: 'https://bspso.crack-ed.com',
     },
     {
-      id: 10,
+      id: 11,
       logo: mahindraFinanceSmallLogo,
       title: 'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)',
       url: 'https://mahindrafinancebe.crack-ed.com/',
     },
     {
-      id: 11,
+      id: 12,
       logo: finovaSmallLogo,
       title: 'Finova VyaparaMitra Program - Relationship Officer',
       url: 'https://finovaro.crack-ed.com',
     },
     {
-      id: 12,
+      id: 13,
       logo: piramalCardLogo,
       title: 'Piramal ProEdge Program - Relationship Manager',
       url: 'https://piramal.crack-ed.com/portal',
     },
     {
-      id: 13,
+      id: 14,
       logo: avivaSmallLogo,
       title: 'Aviva Nirmaan Program - Direct Sales Executive',
       url: 'https://avivads.crack-ed.com',
     },
     {
-      id: 14,
+      id: 15,
       logo: avivaSmallLogo,
       title: 'Aviva Nirmaan Program - Agency Sales Executive',
       url: 'https://avivaas.crack-ed.com',
@@ -205,6 +215,7 @@ const Programs = () => {
       'Housing Finance Pragati Program - Collection Officer': heroCoImage,
       'Housing Finance Pragati Program - Credit and Operations Manager': heroComImage,
       'Rupyy AutoEdge Program - Business Manager': rupyyProgramImage,
+      'Prime Starters Program - Sales Officer': kotakProgramImage,
     }
 
     const newProgramsMap = {
@@ -236,6 +247,13 @@ const Programs = () => {
         details: 'Join as a Business Manager – Used Car Finance and secure a CTC of Rs 3 LPA + incentives',
         duration: '1-month program',
         image: rupyyProgramImage,
+      },
+      'Prime Starters Program - Sales Officer': {
+        programLabel: 'Prime Starters Program',
+        logo: kotakLogo,
+        details: 'Join as a Sales Officer at Kotak Mahindra Prime Loans and secure a CTC of Rs 2.75 LPA + incentives',
+        duration: '1-month program',
+        image: kotakProgramImage,
       },
       'Virtual Relationship Manager': {
         programLabel: 'Elevate Banking Program',
@@ -362,6 +380,7 @@ const Programs = () => {
     if (card.title === 'Housing Finance Pragati Program - Collection Officer') return 'Housing Finance Pragati - Collection Officer'
     if (card.title === 'Housing Finance Pragati Program - Credit and Operations Manager') return 'Housing Finance Pragati - Credit and Operations Manager'
     if (card.title === 'Rupyy AutoEdge Program - Business Manager') return 'Rupyy AutoEdge - Business Manager'
+    if (card.title === 'Prime Starters Program - Sales Officer') return 'Prime Starters - Sales Officer'
     if (card.title === 'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)') return 'Mahindra Finance Prarambh - Business Executive'
     if (card.title === 'Virtual Relationship Manager') return 'Elevate Banking Program - Virtual Relationship Manager'
     return card.title
@@ -383,6 +402,7 @@ const Programs = () => {
       .replace('Mahindra Finance Prarambh Program - ', '')
       .replace('Housing Finance Pragati Program - ', '')
       .replace('Rupyy AutoEdge Program - ', '')
+      .replace('Prime Starters Program - ', '')
       .replace('Banking Sales Program - ', '')
   }
 

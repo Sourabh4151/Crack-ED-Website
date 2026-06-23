@@ -9,6 +9,7 @@ import finovaSmallLogo from '../../assets/finova_small_logo.png'
 import mahindraFinanceSmallLogo from '../../assets/mahindra_finance_small_logo_logo.png'
 import heroSmallLogo from '../../assets/hero_small_logo.png'
 import rupyySmallLogo from '../../assets/rupyy_small_logo.png'
+import kotakSmallLogo from '../../assets/kotak_small_logo.png'
 import { trackMicrositeClick, markProgramsPageVisited } from '../../utils/analytics'
 import { appendUtmToUrl } from '../../services/crmService'
 import './ProgramsList.css'
@@ -121,6 +122,14 @@ const ProgramsList = () => {
         ]
       },
       {
+        program: 'Prime Starters Program',
+        role: 'Sales Officer',
+        details: [
+          'Join as a Sales Officer at Kotak Mahindra Prime Loans and secure a CTC of Rs 2.75 LPA + incentives',
+          '1-month program'
+        ]
+      },
+      {
         program: 'Mahindra Finance Prarambh Program',
         role: 'Business Executive',
         details: [
@@ -203,6 +212,9 @@ const ProgramsList = () => {
       if (program === 'Rupyy AutoEdge Program' && role === 'Business Manager') {
         return 'https://rupyybm.crack-ed.com/'
       }
+      if (program === 'Prime Starters Program' && role === 'Sales Officer') {
+        return 'https://kotakmahindraso.crack-ed.com/'
+      }
       if (program === 'Mahindra Finance Prarambh Program' && role === 'Business Executive') {
         return 'https://mahindrafinancebe.crack-ed.com/'
       }
@@ -250,6 +262,9 @@ const ProgramsList = () => {
     if (category === 'NBFC' && item?.program === 'Rupyy AutoEdge Program') {
       return <img src={rupyySmallLogo} alt="Rupyy" className="program-logo-img program-logo-rupyy" />
     }
+    if (category === 'NBFC' && item?.program === 'Prime Starters Program') {
+      return <img src={kotakSmallLogo} alt="Kotak Mahindra Prime" className="program-logo-img program-logo-kotak" />
+    }
     if (category === 'NBFC' && program === 'Mahindra Finance Prarambh Program') {
       return <img src={mahindraFinanceSmallLogo} alt="Mahindra Finance" className="program-logo-img program-logo-mahindra" />
     }
@@ -260,18 +275,25 @@ const ProgramsList = () => {
 
   const withCategory = (category, items) => items.map((item) => ({ ...item, category }))
 
+  const sortClosedToEnd = (items) => [
+    ...items.filter((item) => !item.admissionClosed),
+    ...items.filter((item) => item.admissionClosed),
+  ]
+
   const getAllProgramsInOrder = () => [
-    ...withCategory('NBFC', programs.NBFC.slice(0, 4)),
+    ...withCategory('NBFC', programs.NBFC.slice(0, 5)),
     ...withCategory('Banking', programs.Banking),
-    ...withCategory('NBFC', programs.NBFC.slice(4)),
+    ...withCategory('NBFC', programs.NBFC.slice(5)),
     ...withCategory('Insurance', programs.Insurance),
     ...withCategory('Retail', programs.Retail),
   ]
 
   const displayedPrograms =
     activeTab === 'All'
-      ? getAllProgramsInOrder()
-      : programs[activeTab].map((item) => ({ ...item, category: activeTab }))
+      ? sortClosedToEnd(getAllProgramsInOrder())
+      : activeTab === 'NBFC'
+        ? sortClosedToEnd(programs.NBFC.map((item) => ({ ...item, category: activeTab })))
+        : programs[activeTab].map((item) => ({ ...item, category: activeTab }))
 
   const normalizedQuery = searchQuery.trim().toLowerCase()
   const filteredPrograms = normalizedQuery

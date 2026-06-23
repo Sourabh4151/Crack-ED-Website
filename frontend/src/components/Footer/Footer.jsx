@@ -28,6 +28,14 @@ const PROGRAMS = [
     ],
   },
   {
+    id: 'kotak',
+    name: 'Prime Starters Program',
+    link: '/programs',
+    links: [
+      { label: 'Sales Officer', href: 'https://kotakmahindraso.crack-ed.com/' },
+    ],
+  },
+  {
     id: 'pgprm',
     name: 'PGP - Relationship Management',
     link: '/programs',
