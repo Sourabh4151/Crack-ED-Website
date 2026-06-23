@@ -27,13 +27,18 @@ const PROGRAM_FEES = {
   'Poonawalla FinPro Career Program - Sales Executive': 50000,
   'Poonawalla FinPro Career Program - Gold Assayer': 134746,
   'Finova VyaparaMitra Program - Relationship Officer': 84746,
-  'Postgraduate Program Relationship Management - Relationship Manager': 254238,
-  'Postgraduate Program Retail Banking - Relationship Officer': 33899,
-  'Postgraduate Program Banking Management - Assistant Manager': 169492,
+  'Postgraduate Program Relationship Management - Relationship Manager': 360000,
+  'Postgraduate Program Retail Banking - Relationship Officer': 40000,
+  'Postgraduate Program Banking Management - Assistant Manager': 200000,
   'Postgraduate Certification Banking Management - Business Development Executive': 50848,
-  'Banking Sales Program - Sales Officer': 80000,
-  'Mahindra Finance Prarambh Program - Business Executive': 59322,
+  'Banking Sales Program - Sales Officer': 60000,
+  'Mahindra Finance Prarambh Program - Business Executive': 70000,
   'Udaan Program - Business Loan Associate': 80000,
+  'Elevate Banking Program - Virtual Relationship Manager': 40000,
+  'Hero Housing Finance Pragati Program - Relationship Manager': 100000,
+  'Hero Housing Finance Pragati Program - Collection Officer': 225000,
+  'Hero Housing Finance Pragati Program - Credit and Operations Manager': 200000,
+  'Rupyy AutoEdge Program - Business Manager': 100000,
 };
 
 // Program details for display (title, details, duration, link)
@@ -57,34 +62,85 @@ const PROGRAM_DETAILS = {
   'Mahindra Finance Prarambh Program - Business Executive': { details: 'CTC of Rs 3.5 LPA + incentives', duration: '1-month online program', link: 'https://mahindrafinancebe.crack-ed.com/' },
   'Postgraduate Certification Banking Management - Business Development Executive': { details: 'CTC of Rs 2.5 LPA + incentives', duration: '2-week program', link: 'https://pgcbm.crack-ed.com' },
   'Udaan Program - Business Loan Associate': { details: 'CTC of upto Rs 2.8 LPA', duration: '3-week program', link: 'https://udaanbusiness.crack-ed.com' },
+  'Elevate Banking Program - Virtual Relationship Manager': { details: 'CTC of upto Rs 2.4 LPA', duration: '4-week program', link: 'https://elevatevrm.crack-ed.com/' },
+  'Hero Housing Finance Pragati Program - Relationship Manager': { details: 'CTC of Rs 2.75 LPA + incentives', duration: '1-month program', link: 'https://herofinancerm.crack-ed.com/' },
+  'Hero Housing Finance Pragati Program - Collection Officer': { details: 'CTC of Rs 5 LPA + incentives', duration: '1-month program', link: 'https://herofinanceco.crack-ed.com/' },
+  'Hero Housing Finance Pragati Program - Credit and Operations Manager': { details: 'CTC of Rs 4 LPA + incentives', duration: '1-month program', link: 'https://herofinancecom.crack-ed.com/' },
+  'Rupyy AutoEdge Program - Business Manager': { details: 'CTC of Rs 3 LPA + incentives', duration: '1-month program', link: 'https://rupyybm.crack-ed.com/' },
 };
 
 // For each question: option (A/B/C/D) -> [program1, program2, program3] — each gets +1 count when selected
 const OPTION_TO_PROGRAMS = [
-  // Q1: How do you generally feel about interacting with people?
+  // Q1: How do you usually feel about meeting new people?
   {
     A: [
-      'Aviva Nirmaan Program - Direct Sales Executive',
       'Banking Sales Program - Sales Officer',
+      'Aviva Nirmaan Program - Direct Sales Executive',
       'Mahindra Finance Prarambh Program - Business Executive',
     ],
     B: [
       'Postgraduate Program Relationship Management - Relationship Manager',
-      'Postgraduate Program Retail Banking - Relationship Officer',
-      'Finova VyaparaMitra Program - Relationship Officer',
+      'Piramal ProEdge Program - Relationship Manager',
+      'Elevate Banking Program - Virtual Relationship Manager',
     ],
     C: [
-      'Lenskart EyeTech Program - Retail Sales Associate',
-      'Udaan Program - Virtual Relationship Manager',
-      'Udaan Program - Relationship Manager',
+      'Hero Housing Finance Pragati Program - Credit and Operations Manager',
+      'Postgraduate Program Banking Management - Assistant Manager',
+      'Hero Housing Finance Pragati Program - Collection Officer',
     ],
     D: [
-      'Lenskart EyeTech Program - Clinical Technician',
-      'Poonawalla FinPro Career Program - Gold Assayer',
-      'Udaan Program - Cashier / Teller',
+      'Hero Housing Finance Pragati Program - Relationship Manager',
+      'Rupyy AutoEdge Program - Business Manager',
+      'Postgraduate Program Retail Banking - Relationship Officer',
     ],
   },
-  // Q2: Which type of daily routine appeals to you the most?
+  // Q2: What kind of work environment appeals to you most?
+  {
+    A: [
+      'Banking Sales Program - Sales Officer',
+      'Mahindra Finance Prarambh Program - Business Executive',
+      'Hero Housing Finance Pragati Program - Relationship Manager',
+    ],
+    B: [
+      'Rupyy AutoEdge Program - Business Manager',
+      'Postgraduate Program Retail Banking - Relationship Officer',
+      'Piramal ProEdge Program - Relationship Manager',
+    ],
+    C: [
+      'Hero Housing Finance Pragati Program - Credit and Operations Manager',
+      'Postgraduate Program Banking Management - Assistant Manager',
+      'Hero Housing Finance Pragati Program - Collection Officer',
+    ],
+    D: [
+      'Elevate Banking Program - Virtual Relationship Manager',
+      'Postgraduate Program Relationship Management - Relationship Manager',
+      'Aviva Nirmaan Program - Agency Sales Executive',
+    ],
+  },
+  // Q3: Which statement describes you best?
+  {
+    A: [
+      'Aviva Nirmaan Program - Direct Sales Executive',
+      'Banking Sales Program - Sales Officer',
+      'Aviva Nirmaan Program - Agency Sales Executive',
+    ],
+    B: [
+      'Piramal ProEdge Program - Relationship Manager',
+      'Postgraduate Program Relationship Management - Relationship Manager',
+      'Hero Housing Finance Pragati Program - Relationship Manager',
+    ],
+    C: [
+      'Hero Housing Finance Pragati Program - Credit and Operations Manager',
+      'Postgraduate Program Banking Management - Assistant Manager',
+      'Postgraduate Program Retail Banking - Relationship Officer',
+    ],
+    D: [
+      'Hero Housing Finance Pragati Program - Collection Officer',
+      'Elevate Banking Program - Virtual Relationship Manager',
+      'Rupyy AutoEdge Program - Business Manager',
+    ],
+  },
+  // Q4: How do you react when faced with challenging targets?
   {
     A: [
       'Aviva Nirmaan Program - Direct Sales Executive',
@@ -92,22 +148,45 @@ const OPTION_TO_PROGRAMS = [
       'Mahindra Finance Prarambh Program - Business Executive',
     ],
     B: [
-      'Postgraduate Program Banking Management - Assistant Manager',
-      'Postgraduate Program Retail Banking - Relationship Officer',
+      'Hero Housing Finance Pragati Program - Relationship Manager',
       'Piramal ProEdge Program - Relationship Manager',
+      'Postgraduate Program Relationship Management - Relationship Manager',
     ],
     C: [
-      'Udaan Program - Cashier / Teller',
-      'Udaan Program - Business Loan Associate',
-      'Udaan Program - Relationship Manager',
+      'Postgraduate Program Banking Management - Assistant Manager',
+      'Hero Housing Finance Pragati Program - Credit and Operations Manager',
+      'Postgraduate Program Retail Banking - Relationship Officer',
     ],
     D: [
-      'Lenskart EyeTech Program - Clinical Technician',
-      'Poonawalla FinPro Career Program - Gold Assayer',
-      'Udaan Program - Virtual Relationship Manager',
+      'Hero Housing Finance Pragati Program - Collection Officer',
+      'Rupyy AutoEdge Program - Business Manager',
+      'Elevate Banking Program - Virtual Relationship Manager',
     ],
   },
-  // Q3: How do you usually respond to responsibility and pressure?
+  // Q5: What gives you the greatest satisfaction?
+  {
+    A: [
+      'Banking Sales Program - Sales Officer',
+      'Aviva Nirmaan Program - Direct Sales Executive',
+      'Mahindra Finance Prarambh Program - Business Executive',
+    ],
+    B: [
+      'Piramal ProEdge Program - Relationship Manager',
+      'Postgraduate Program Relationship Management - Relationship Manager',
+      'Hero Housing Finance Pragati Program - Relationship Manager',
+    ],
+    C: [
+      'Hero Housing Finance Pragati Program - Credit and Operations Manager',
+      'Postgraduate Program Banking Management - Assistant Manager',
+      'Elevate Banking Program - Virtual Relationship Manager',
+    ],
+    D: [
+      'Hero Housing Finance Pragati Program - Collection Officer',
+      'Rupyy AutoEdge Program - Business Manager',
+      'Postgraduate Program Retail Banking - Relationship Officer',
+    ],
+  },
+  // Q6: Which work style suits you best?
   {
     A: [
       'Aviva Nirmaan Program - Agency Sales Executive',
@@ -115,245 +194,176 @@ const OPTION_TO_PROGRAMS = [
       'Mahindra Finance Prarambh Program - Business Executive',
     ],
     B: [
-      'Postgraduate Program Banking Management - Assistant Manager',
-      'Udaan Program - Relationship Manager',
-      'Postgraduate Program Retail Banking - Relationship Officer',
+      'Postgraduate Program Relationship Management - Relationship Manager',
+      'Piramal ProEdge Program - Relationship Manager',
+      'Hero Housing Finance Pragati Program - Relationship Manager',
     ],
     C: [
-      'Lenskart EyeTech Program - Retail Sales Associate',
-      'Udaan Program - Virtual Relationship Manager',
-      'Piramal ProEdge Program - Relationship Manager',
+      'Postgraduate Program Banking Management - Assistant Manager',
+      'Postgraduate Program Retail Banking - Relationship Officer',
+      'Elevate Banking Program - Virtual Relationship Manager',
     ],
     D: [
-      'Poonawalla FinPro Career Program - Gold Assayer',
-      'Udaan Program - Cashier / Teller',
-      'Lenskart EyeTech Program - Clinical Technician',
+      'Hero Housing Finance Pragati Program - Credit and Operations Manager',
+      'Hero Housing Finance Pragati Program - Collection Officer',
+      'Rupyy AutoEdge Program - Business Manager',
     ],
   },
-  // Q4: Which description fits you best?
+  // Q7: How comfortable are you with travelling regularly for work?
   {
     A: [
-      'Aviva Nirmaan Program - Agency Sales Executive',
       'Banking Sales Program - Sales Officer',
-      'Postgraduate Certification Banking Management - Business Development Executive',
+      'Mahindra Finance Prarambh Program - Business Executive',
+      'Hero Housing Finance Pragati Program - Relationship Manager',
     ],
     B: [
-      'Postgraduate Program Relationship Management - Relationship Manager',
+      'Rupyy AutoEdge Program - Business Manager',
       'Postgraduate Program Retail Banking - Relationship Officer',
-      'Finova VyaparaMitra Program - Relationship Officer',
+      'Aviva Nirmaan Program - Direct Sales Executive',
     ],
     C: [
-      'Udaan Program - Cashier / Teller',
-      'Poonawalla FinPro Career Program - Gold Assayer',
-      'Udaan Program - Business Loan Associate',
-    ],
-    D: [
-      'Lenskart EyeTech Program - Retail Sales Associate',
-      'Udaan Program - Virtual Relationship Manager',
+      'Hero Housing Finance Pragati Program - Collection Officer',
+      'Piramal ProEdge Program - Relationship Manager',
       'Postgraduate Program Banking Management - Assistant Manager',
     ],
+    D: [
+      'Elevate Banking Program - Virtual Relationship Manager',
+      'Hero Housing Finance Pragati Program - Credit and Operations Manager',
+      'Postgraduate Program Relationship Management - Relationship Manager',
+    ],
   },
-  // Q5: What do you enjoy doing more?
+  // Q8: What type of success motivates you most?
   {
     A: [
       'Aviva Nirmaan Program - Direct Sales Executive',
-      'Banking Sales Program - Sales Officer',
-      'Postgraduate Certification Banking Management - Business Development Executive',
-    ],
-    B: [
-      'Postgraduate Program Relationship Management - Relationship Manager',
-      'Postgraduate Program Retail Banking - Relationship Officer',
-      'Finova VyaparaMitra Program - Relationship Officer',
-    ],
-    C: [
-      'Poonawalla FinPro Career Program - Gold Assayer',
-      'Lenskart EyeTech Program - Clinical Technician',
-      'Udaan Program - Cashier / Teller',
-    ],
-    D: [
-      'Lenskart EyeTech Program - Retail Sales Associate',
-      'Udaan Program - Virtual Relationship Manager',
-      'Piramal ProEdge Program - Relationship Manager',
-    ],
-  },
-  // Q6: How do you prefer to work most of the time?
-  {
-    A: [
-      'Aviva Nirmaan Program - Agency Sales Executive',
       'Banking Sales Program - Sales Officer',
       'Mahindra Finance Prarambh Program - Business Executive',
     ],
     B: [
-      'Postgraduate Program Banking Management - Assistant Manager',
-      'Postgraduate Program Relationship Management - Relationship Manager',
-      'Postgraduate Program Retail Banking - Relationship Officer',
-    ],
-    C: [
-      'Udaan Program - Cashier / Teller',
-      'Udaan Program - Business Loan Associate',
-      'Udaan Program - Relationship Manager',
-    ],
-    D: [
-      'Udaan Program - Virtual Relationship Manager',
-      'Lenskart EyeTech Program - Retail Sales Associate',
       'Piramal ProEdge Program - Relationship Manager',
-    ],
-  },
-  // Q7: How do you feel about handling important records or sensitive details?
-  {
-    A: [
-      'Poonawalla FinPro Career Program - Gold Assayer',
-      'Udaan Program - Cashier / Teller',
-      'Udaan Program - Business Loan Associate',
-    ],
-    B: [
-      'Postgraduate Program Banking Management - Assistant Manager',
-      'Udaan Program - Relationship Manager',
-      'Postgraduate Program Retail Banking - Relationship Officer',
-    ],
-    C: [
-      'Udaan Program - Virtual Relationship Manager',
-      'Lenskart EyeTech Program - Retail Sales Associate',
-      'Finova VyaparaMitra Program - Relationship Officer',
-    ],
-    D: [
-      'Aviva Nirmaan Program - Direct Sales Executive',
-      'Banking Sales Program - Sales Officer',
-      'Mahindra Finance Prarambh Program - Business Executive',
-    ],
-  },
-  // Q8: What type of work gives you the most satisfaction?
-  {
-    A: [
-      'Aviva Nirmaan Program - Direct Sales Executive',
-      'Banking Sales Program - Sales Officer',
-      'Postgraduate Certification Banking Management - Business Development Executive',
-    ],
-    B: [
+      'Hero Housing Finance Pragati Program - Relationship Manager',
       'Postgraduate Program Relationship Management - Relationship Manager',
-      'Postgraduate Program Retail Banking - Relationship Officer',
-      'Finova VyaparaMitra Program - Relationship Officer',
     ],
     C: [
-      'Udaan Program - Business Loan Associate',
-      'Udaan Program - Cashier / Teller',
-      'Udaan Program - Relationship Manager',
-    ],
-    D: [
-      'Lenskart EyeTech Program - Clinical Technician',
-      'Poonawalla FinPro Career Program - Gold Assayer',
-      'Udaan Program - Virtual Relationship Manager',
-    ],
-  },
-  // Q9: How comfortable are you with travelling or going out when required?
-  {
-    A: [
-      'Mahindra Finance Prarambh Program - Business Executive',
-      'Aviva Nirmaan Program - Direct Sales Executive',
-      'Banking Sales Program - Sales Officer',
-    ],
-    B: [
-      'Piramal ProEdge Program - Relationship Manager',
-      'Udaan Program - Relationship Manager',
+      'Hero Housing Finance Pragati Program - Credit and Operations Manager',
       'Postgraduate Program Banking Management - Assistant Manager',
-    ],
-    C: [
-      'Lenskart EyeTech Program - Retail Sales Associate',
-      'Udaan Program - Cashier / Teller',
-      'Udaan Program - Business Loan Associate',
+      'Elevate Banking Program - Virtual Relationship Manager',
     ],
     D: [
-      'Udaan Program - Virtual Relationship Manager',
-      'Lenskart EyeTech Program - Clinical Technician',
-      'Poonawalla FinPro Career Program - Gold Assayer',
+      'Hero Housing Finance Pragati Program - Collection Officer',
+      'Rupyy AutoEdge Program - Business Manager',
+      'Postgraduate Program Retail Banking - Relationship Officer',
     ],
   },
-  // Q10: Which work style feels most natural to you?
+  // Q9: Which activity sounds most interesting?
   {
     A: [
+      'Banking Sales Program - Sales Officer',
       'Aviva Nirmaan Program - Agency Sales Executive',
-      'Banking Sales Program - Sales Officer',
-      'Postgraduate Certification Banking Management - Business Development Executive',
+      'Mahindra Finance Prarambh Program - Business Executive',
     ],
     B: [
+      'Hero Housing Finance Pragati Program - Relationship Manager',
+      'Piramal ProEdge Program - Relationship Manager',
       'Postgraduate Program Relationship Management - Relationship Manager',
-      'Postgraduate Program Retail Banking - Relationship Officer',
-      'Postgraduate Program Banking Management - Assistant Manager',
     ],
     C: [
-      'Udaan Program - Cashier / Teller',
-      'Udaan Program - Business Loan Associate',
-      'Piramal ProEdge Program - Relationship Manager',
+      'Hero Housing Finance Pragati Program - Credit and Operations Manager',
+      'Postgraduate Program Banking Management - Assistant Manager',
+      'Elevate Banking Program - Virtual Relationship Manager',
     ],
     D: [
-      'Lenskart EyeTech Program - Clinical Technician',
-      'Poonawalla FinPro Career Program - Gold Assayer',
-      'Udaan Program - Virtual Relationship Manager',
+      'Hero Housing Finance Pragati Program - Collection Officer',
+      'Rupyy AutoEdge Program - Business Manager',
+      'Postgraduate Program Retail Banking - Relationship Officer',
+    ],
+  },
+  // Q10: Which statement best reflects your career preference?
+  {
+    A: [
+      'Aviva Nirmaan Program - Direct Sales Executive',
+      'Banking Sales Program - Sales Officer',
+      'Mahindra Finance Prarambh Program - Business Executive',
+    ],
+    B: [
+      'Hero Housing Finance Pragati Program - Relationship Manager',
+      'Piramal ProEdge Program - Relationship Manager',
+      'Postgraduate Program Relationship Management - Relationship Manager',
+    ],
+    C: [
+      'Postgraduate Program Banking Management - Assistant Manager',
+      'Hero Housing Finance Pragati Program - Credit and Operations Manager',
+      'Elevate Banking Program - Virtual Relationship Manager',
+    ],
+    D: [
+      'Hero Housing Finance Pragati Program - Collection Officer',
+      'Rupyy AutoEdge Program - Business Manager',
+      'Postgraduate Program Retail Banking - Relationship Officer',
     ],
   },
 ];
 
 const CareerQuiz = ({ showOnlyTopProgram = false }) => {
   const questions = [
-    { id: 1, question: "How do you generally feel about interacting with people?", options: [
-      { text: "I enjoy meeting and talking to many people", mapping: "A" },
-      { text: "I like interaction when there is a clear purpose", mapping: "B" },
-      { text: "I am comfortable but prefer limited interaction", mapping: "C" },
-      { text: "I prefer calm, one-to-one interaction", mapping: "D" },
+    { id: 1, question: "How do you usually feel about meeting new people?", options: [
+      { text: "I enjoy meeting new people and starting conversations", mapping: "A" },
+      { text: "I like building meaningful relationships over time", mapping: "B" },
+      { text: "I interact when necessary and prefer structure", mapping: "C" },
+      { text: "I prefer focused conversations with a specific purpose", mapping: "D" },
     ]},
-    { id: 2, question: "Which type of daily routine appeals to you the most?", options: [
-      { text: "Being active and moving around most of the day", mapping: "A" },
-      { text: "A balance of movement and structured work", mapping: "B" },
-      { text: "Mostly indoor work with organised tasks", mapping: "C" },
-      { text: "Fixed location with steady, predictable tasks", mapping: "D" },
+    { id: 2, question: "What kind of work environment appeals to you most?", options: [
+      { text: "Being out in the market and meeting customers", mapping: "A" },
+      { text: "A mix of customer interaction and planning", mapping: "B" },
+      { text: "A structured office environment", mapping: "C" },
+      { text: "A desk-based role involving communication", mapping: "D" },
     ]},
-    { id: 3, question: "How do you usually respond to responsibility and pressure?", options: [
-      { text: "I enjoy challenges and pushing my limits", mapping: "A" },
-      { text: "I can manage responsibility with some guidance", mapping: "B" },
-      { text: "I prefer moderate and manageable responsibility", mapping: "C" },
-      { text: "I focus more on accuracy than pressure", mapping: "D" },
+    { id: 3, question: "Which statement describes you best?", options: [
+      { text: "I enjoy persuading people and influencing decisions", mapping: "A" },
+      { text: "I enjoy understanding people's needs", mapping: "B" },
+      { text: "I enjoy organizing and managing tasks", mapping: "C" },
+      { text: "I enjoy solving problems patiently", mapping: "D" },
     ]},
-    { id: 4, question: "Which description fits you best?", options: [
-      { text: "Energetic and confident", mapping: "A" },
-      { text: "Patient and understanding", mapping: "B" },
-      { text: "Detail-oriented and organised", mapping: "C" },
-      { text: "Friendly and service-focused", mapping: "D" },
+    { id: 4, question: "How do you react when faced with challenging targets?", options: [
+      { text: "I feel motivated and competitive", mapping: "A" },
+      { text: "I enjoy balancing targets with customer relationships", mapping: "B" },
+      { text: "I focus on planning and execution", mapping: "C" },
+      { text: "I stay persistent until the issue is resolved", mapping: "D" },
     ]},
-    { id: 5, question: "What do you enjoy doing more?", options: [
-      { text: "Explaining things and influencing decisions", mapping: "A" },
-      { text: "Helping people make important choices", mapping: "B" },
-      { text: "Handling work that requires accuracy", mapping: "C" },
-      { text: "Supporting people and making them feel comfortable", mapping: "D" },
+    { id: 5, question: "What gives you the greatest satisfaction?", options: [
+      { text: "Winning new opportunities", mapping: "A" },
+      { text: "Building long-term trust", mapping: "B" },
+      { text: "Completing work accurately", mapping: "C" },
+      { text: "Resolving difficult situations", mapping: "D" },
     ]},
-    { id: 6, question: "How do you prefer to work most of the time?", options: [
-      { text: "Independently and actively", mapping: "A" },
-      { text: "With people and shared responsibility", mapping: "B" },
-      { text: "With systems, rules, and processes", mapping: "C" },
-      { text: "In a calm, customer-focused environment", mapping: "D" },
-    ]},
-    { id: 7, question: "How do you feel about handling important records or sensitive details?", options: [
-      { text: "I am very careful and attentive", mapping: "A" },
-      { text: "I am comfortable with proper checks and rules", mapping: "B" },
-      { text: "I prefer light responsibility", mapping: "C" },
-      { text: "I prefer not to handle such tasks", mapping: "D" },
-    ]},
-    { id: 8, question: "What type of work gives you the most satisfaction?", options: [
-      { text: "Seeing results from effort and action", mapping: "A" },
-      { text: "Building trust and long-term connections", mapping: "B" },
-      { text: "Completing tasks correctly and on time", mapping: "C" },
-      { text: "Using specialised skills with precision", mapping: "D" },
-    ]},
-    { id: 9, question: "How comfortable are you with travelling or going out for work when needed?", options: [
-      { text: "Very comfortable, I enjoy it", mapping: "A" },
-      { text: "Comfortable if there is a clear reason", mapping: "B" },
-      { text: "I prefer staying in one place", mapping: "C" },
-      { text: "I prefer indoor, focused work", mapping: "D" },
-    ]},
-    { id: 10, question: "Which work style feels most natural to you?", options: [
+    { id: 6, question: "Which work style suits you best?", options: [
       { text: "Fast-paced and energetic", mapping: "A" },
-      { text: "Relationship-driven and people-oriented", mapping: "B" },
-      { text: "Structured and process-driven", mapping: "C" },
-      { text: "Calm, focused, and detail-oriented", mapping: "D" },
+      { text: "Relationship-focused", mapping: "B" },
+      { text: "Process-focused", mapping: "C" },
+      { text: "Analytical and detail-oriented", mapping: "D" },
+    ]},
+    { id: 7, question: "How comfortable are you with travelling regularly for work?", options: [
+      { text: "Very comfortable", mapping: "A" },
+      { text: "Comfortable occasionally", mapping: "B" },
+      { text: "Only if required", mapping: "C" },
+      { text: "Prefer minimal travel", mapping: "D" },
+    ]},
+    { id: 8, question: "What type of success motivates you most?", options: [
+      { text: "Incentives and performance rewards", mapping: "A" },
+      { text: "Customer appreciation and trust", mapping: "B" },
+      { text: "Operational excellence", mapping: "C" },
+      { text: "Solving challenging situations", mapping: "D" },
+    ]},
+    { id: 9, question: "Which activity sounds most interesting?", options: [
+      { text: "Acquiring new customers", mapping: "A" },
+      { text: "Managing customer portfolios", mapping: "B" },
+      { text: "Reviewing documents and processes", mapping: "C" },
+      { text: "Negotiating solutions to problems", mapping: "D" },
+    ]},
+    { id: 10, question: "Which statement best reflects your career preference?", options: [
+      { text: "I want a career with high earning potential through performance", mapping: "A" },
+      { text: "I want a career built around customer relationships", mapping: "B" },
+      { text: "I want a stable career with responsibility and structure", mapping: "C" },
+      { text: "I want a role where I solve challenges and create impact", mapping: "D" },
     ]},
   ];
 
