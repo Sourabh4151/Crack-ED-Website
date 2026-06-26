@@ -19,6 +19,7 @@ from rest_framework.response import Response
 
 from .constants import CF_BATCH_NAME, get_center_for_program, get_source_page_label
 from .meritto_log import post_nopaperforms_with_log
+from .utm_resolve import vendor_info_for_utm
 from .models import Example, QuizSubmission, Lead, JobApplication, JobListing, BIDEpisode, MarketingBlog, MarketingBlogUpload
 from .serializers import (
     ExampleSerializer,
@@ -94,12 +95,13 @@ def prepare_nopaperforms_post(body):
 
 def build_nopaperforms_body(
     first_name, last_name, email, mobile, state='', city='', cf_program='', source_page='',
-    utm_source='', utm_medium='', utm_campaign='', remarks='',
+    utm_source='', utm_medium='', utm_campaign='', remarks='', vendor_info=None,
 ):
     """
     JSON for NoPaperForms createOrUpdate: name, email, mobile, search_criteria;
     optional state, city; cf_program when set;
-    source fixed to Website; cf_form_name from get_source_page_label(source_page);
+    source fixed to Website (or Vendor when vendor_info is set from Partner UTM resolve);
+    cf_form_name from get_source_page_label(source_page);
     cf_batch_name fixed to CF_BATCH_NAME;
     UTM when set: cf_utm_id <- utm_source, medium <- utm_medium, campaign <- utm_campaign;
     optional cf_remarks from enquiry query / remarks text.
@@ -144,19 +146,33 @@ def build_nopaperforms_body(
     if rem:
         payload['cf_remarks'] = rem
 
+    if isinstance(vendor_info, dict) and vendor_info:
+        payload['source'] = 'Vendor'
+        vn = (vendor_info.get('cf_vendor_name') or '').strip()[:500]
+        if vn:
+            payload['cf_vendor_name'] = vn
+        vp = (vendor_info.get('cf_vendor_pan') or '').strip()[:500]
+        if vp:
+            payload['cf_vendor_pan'] = vp
+        cv = (vendor_info.get('cf_counselor_name_vendor') or '').strip()[:500]
+        if cv:
+            payload['cf_counselor_name_vendor'] = cv
+
     return payload
 
 
 def _forward_lead_to_nopaperforms(
     first_name, last_name, email, mobile, state='', city='', cf_program='', source_page='',
-    utm_source='', utm_medium='', utm_campaign='', remarks='', source_type='submit_lead',
+    utm_source='', utm_medium='', utm_campaign='', utm_params=None, remarks='',
+    source_type='submit_lead',
 ):
     """Forward lead to NoPaperForms. Credentials from env. Does not raise; logs on failure."""
+    vendor_info = vendor_info_for_utm(utm_params, utm_source, utm_medium, utm_campaign)
     body = build_nopaperforms_body(
         first_name, last_name, email, mobile,
         state=state, city=city, cf_program=cf_program, source_page=source_page,
         utm_source=utm_source, utm_medium=utm_medium, utm_campaign=utm_campaign,
-        remarks=remarks,
+        remarks=remarks, vendor_info=vendor_info,
     )
     r = post_nopaperforms_with_log(
         body,
@@ -177,7 +193,8 @@ def _forward_lead_to_nopaperforms(
 
 def _forward_lead_to_nopaperforms_async(
     first_name, last_name, email, mobile, state='', city='', cf_program='', source_page='',
-    utm_source='', utm_medium='', utm_campaign='', remarks='', source_type='submit_lead',
+    utm_source='', utm_medium='', utm_campaign='', utm_params=None, remarks='',
+    source_type='submit_lead',
 ):
     """Run CRM forward in a background thread so the API can return immediately."""
     thread = threading.Thread(
@@ -191,6 +208,7 @@ def _forward_lead_to_nopaperforms_async(
             'utm_source': utm_source or '',
             'utm_medium': utm_medium or '',
             'utm_campaign': utm_campaign or '',
+            'utm_params': utm_params if isinstance(utm_params, dict) else {},
             'remarks': remarks or '',
             'source_type': source_type or 'submit_lead',
         },
@@ -285,6 +303,7 @@ def quiz_submit(request):
         q_first, q_last, email, mobile,
         state='', city='', cf_program=cf_program, source_page=source_page or '',
         utm_source=utm_source, utm_medium=utm_medium, utm_campaign=utm_campaign,
+        utm_params=utm_params,
         remarks=quiz_remarks,
         source_type='quiz_submit',
     )
@@ -359,6 +378,7 @@ def submit_lead(request):
         first_name, last_name, email, mobile,
         state=state, city=city, cf_program=cf_program, source_page=source_page or '',
         utm_source=utm_source, utm_medium=utm_medium, utm_campaign=utm_campaign,
+        utm_params=utm_params,
         remarks=lead_remarks,
         source_type='submit_lead',
     )
