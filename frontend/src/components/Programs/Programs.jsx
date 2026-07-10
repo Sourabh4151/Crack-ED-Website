@@ -326,7 +326,7 @@ const Programs = () => {
         programLabel: 'Banking Sales Program',
         logo: udaanCardLogo,
         details: 'Join as a Sales Officer with a CTC of Rs 2.5 LPA + incentives',
-        duration: '3-month program',
+        duration: '1-month program',
         image: bankingSalesDesktopImage,
         mobileImage: mobileSalesOfficerImage,
       },
