@@ -151,7 +151,7 @@ const ProgramsList = () => {
         role: 'Relationship Manager',
         details: [
           'Join as a Relationship Manager with a CTC of Rs 2.74 LPA + variable',
-          '13-week program'
+          '3.5-month program'
         ]
       }
     ]

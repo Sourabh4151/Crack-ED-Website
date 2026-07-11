@@ -266,7 +266,7 @@ const Programs = () => {
         programLabel: 'Piramal ProEdge Program',
         logo: piramalCardLogo,
         details: 'Join as a Relationship Manager with a CTC of Rs 2.74 LPA + variable',
-        duration: '13-week program',
+        duration: '3.5-month program',
         image: relationshipManagerPiramalImage,
       },
       'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)': {
