@@ -1,0 +1,30 @@
+{% load i18n %}
+<details data-filter-title="{{ title }}" open>
+  <summary>
+    {% blocktranslate with filter_title=title %} By {{ filter_title }} {% endblocktranslate %}
+  </summary>
+  <ul>
+  {% for choice in choices %}
+    <li{% if choice.selected %} class="selected"{% endif %}>
+      <a href="{{ choice.query_string|iriencode }}">{{ choice.display }}</a>
+    </li>
+  {% endfor %}
+  </ul>
+  <form method="get" style="padding: 8px 10px 12px; margin: 0;">
+    {% for key, value in spec.request.GET.items %}
+      {% if key != spec.parameter_name and key != spec.from_parameter and key != spec.to_parameter %}
+        <input type="hidden" name="{{ key }}" value="{{ value }}">
+      {% endif %}
+    {% endfor %}
+    <p style="margin: 0 0 6px; font-weight: 600;">{% translate "Custom range" %}</p>
+    <p style="margin: 0 0 6px;">
+      <label for="id_{{ spec.from_parameter }}" style="display:block; margin-bottom:2px;">{% translate "From" %}</label>
+      <input type="date" id="id_{{ spec.from_parameter }}" name="{{ spec.from_parameter }}" value="{{ spec.date_from }}" style="width:100%; box-sizing:border-box;">
+    </p>
+    <p style="margin: 0 0 8px;">
+      <label for="id_{{ spec.to_parameter }}" style="display:block; margin-bottom:2px;">{% translate "To" %}</label>
+      <input type="date" id="id_{{ spec.to_parameter }}" name="{{ spec.to_parameter }}" value="{{ spec.date_to }}" style="width:100%; box-sizing:border-box;">
+    </p>
+    <button type="submit" class="button" style="width:100%;">{% translate "Apply" %}</button>
+  </form>
+</details>

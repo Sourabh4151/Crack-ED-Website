@@ -3,6 +3,7 @@ Register models in Django admin.
 """
 import json
 import os
+from datetime import date
 from django import forms
 from django.contrib import admin, messages
 from django.http import FileResponse, Http404
@@ -142,6 +143,30 @@ class QuizSubmissionInfluencerFilter(admin.SimpleListFilter):
 class LeadCreatedAtFilter(admin.SimpleListFilter):
     title = 'Created at'
     parameter_name = 'created_at_range'
+    from_parameter = 'created_at_from'
+    to_parameter = 'created_at_to'
+    template = 'admin/api/filters/created_at_filter.html'
+
+    def __init__(self, request, params, model, model_admin):
+        self.date_from = self._pop_param(params, self.from_parameter)
+        self.date_to = self._pop_param(params, self.to_parameter)
+        super().__init__(request, params, model, model_admin)
+        if self.date_from:
+            self.used_parameters[self.from_parameter] = self.date_from
+        if self.date_to:
+            self.used_parameters[self.to_parameter] = self.date_to
+
+    @staticmethod
+    def _pop_param(params, name):
+        if name not in params:
+            return ''
+        value = params.pop(name)
+        if isinstance(value, (list, tuple)):
+            value = value[-1] if value else ''
+        return (value or '').strip()
+
+    def expected_parameters(self):
+        return [self.parameter_name, self.from_parameter, self.to_parameter]
 
     def lookups(self, request, model_admin):
         return [
@@ -153,7 +178,34 @@ class LeadCreatedAtFilter(admin.SimpleListFilter):
             ('last_2_months', 'Last 2 months'),
         ]
 
+    def choices(self, changelist):
+        remove = [self.parameter_name, self.from_parameter, self.to_parameter]
+        yield {
+            'selected': self.value() is None and not self.date_from and not self.date_to,
+            'query_string': changelist.get_query_string(remove=remove),
+            'display': 'All',
+        }
+        for lookup, title in self.lookup_choices:
+            yield {
+                'selected': self.value() == str(lookup) and not self.date_from and not self.date_to,
+                'query_string': changelist.get_query_string(
+                    {self.parameter_name: lookup},
+                    [self.from_parameter, self.to_parameter],
+                ),
+                'display': title,
+            }
+
     def queryset(self, request, queryset):
+        # Custom from/to range takes precedence over preset links.
+        from_date = self._parse_date(self.date_from)
+        to_date = self._parse_date(self.date_to)
+        if from_date or to_date:
+            if from_date:
+                queryset = queryset.filter(created_at__date__gte=from_date)
+            if to_date:
+                queryset = queryset.filter(created_at__date__lte=to_date)
+            return queryset
+
         value = self.value()
         if not value:
             return queryset
@@ -190,6 +242,15 @@ class LeadCreatedAtFilter(admin.SimpleListFilter):
 
         end_date = this_month_start               # up to start of current month
         return queryset.filter(created_at__date__gte=start_date, created_at__date__lt=end_date)
+
+    @staticmethod
+    def _parse_date(value):
+        if not value:
+            return None
+        try:
+            return date.fromisoformat(value)
+        except (TypeError, ValueError):
+            return None
 
 
 @admin.register(QuizSubmission)
