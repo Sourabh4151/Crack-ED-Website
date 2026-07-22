@@ -72,13 +72,15 @@ const HeroPopup = () => {
           ×
         </button>
         <div className="hero-popup-content">
-          <h2 id="hero-popup-heading" className="hero-popup-heading">
-            House of Founders Fellowship
-          </h2>
-          <p className="hero-popup-description">
-            Designed for entrepreneurs ready to build stronger businesses, make better decisions,
-            and unlock their next stage of growth.
-          </p>
+          <div className="hero-popup-intro">
+            <h2 id="hero-popup-heading" className="hero-popup-heading">
+              House of Founders Fellowship
+            </h2>
+            <p className="hero-popup-description">
+              Designed for entrepreneurs ready to build stronger businesses, make better decisions,
+              and unlock their next stage of growth.
+            </p>
+          </div>
           <ul className="hero-popup-features">
             {FEATURES.map((feature) => (
               <li key={feature}>
