@@ -7,6 +7,13 @@ import './Header.css'
 /** Programs grouped for the header dropdown; all categories closed by default. */
 const PROGRAM_CATEGORIES = [
   {
+    id: 'entrepreneurship',
+    label: 'Entrepreneurship',
+    items: [
+      { label: 'House of Founders Fellowship', href: 'https://house-of-founders.crack-ed.com/' },
+    ],
+  },
+  {
     id: 'banking',
     label: 'Banking',
     items: [
@@ -40,7 +47,6 @@ const PROGRAM_CATEGORIES = [
         ],
       },
       { label: 'Rupyy AutoEdge Program', href: 'https://rupyybm.crack-ed.com/' },
-      { label: 'Prime Starters Program', href: 'https://kotakmahindraso.crack-ed.com/' },
       { label: 'Piramal ProEdge Program', href: 'https://piramal.crack-ed.com/portal' },
       { label: 'Finova VyaparaMitra Program', href: 'https://finovaro.crack-ed.com' },
       { label: 'Mahindra Finance Prarambh Program', href: 'https://mahindrafinancebe.crack-ed.com/' },

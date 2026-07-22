@@ -9,12 +9,11 @@ import finovaSmallLogo from '../../assets/finova_small_logo.png'
 import mahindraFinanceSmallLogo from '../../assets/mahindra_finance_small_logo_logo.png'
 import heroSmallLogo from '../../assets/hero_small_logo.png'
 import rupyySmallLogo from '../../assets/rupyy_small_logo.png'
-import kotakSmallLogo from '../../assets/kotak_small_logo.png'
 import { trackMicrositeClick, markProgramsPageVisited } from '../../utils/analytics'
 import { appendUtmToUrl } from '../../services/crmService'
 import './ProgramsList.css'
 
-const PROGRAM_CATEGORIES = ['Banking', 'NBFC', 'Insurance', 'Retail']
+const PROGRAM_CATEGORIES = ['Entrepreneurship', 'Banking', 'NBFC', 'Insurance', 'Retail']
 const PROGRAM_TABS = ['All', ...PROGRAM_CATEGORIES]
 
 const ProgramsList = () => {
@@ -24,6 +23,16 @@ const ProgramsList = () => {
   const [searchQuery, setSearchQuery] = useState('')
 
   const programs = {
+    Entrepreneurship: [
+      {
+        program: 'Entrepreneurship & Venture Creation',
+        role: 'House of Founders Fellowship',
+        details: [
+          '6-Month Hybrid Fellowship designed for aspiring and existing entrepreneurs.',
+          'Investor-ready by graduation, with a chance to pitch your venture to investors.*'
+        ]
+      }
+    ],
     Banking: [
       {
         program: 'Postgraduate Program',
@@ -122,14 +131,6 @@ const ProgramsList = () => {
         ]
       },
       {
-        program: 'Prime Starters Program',
-        role: 'Sales Officer',
-        details: [
-          'Join as a Sales Officer at Kotak Mahindra Prime Loans and secure a CTC of Rs 2.75 LPA + incentives',
-          '1-month program'
-        ]
-      },
-      {
         program: 'Mahindra Finance Prarambh Program',
         role: 'Business Executive',
         details: [
@@ -179,6 +180,10 @@ const ProgramsList = () => {
   const getProgramLink = (category, item) => {
     const role = item?.role
     const program = item?.program
+    if (category === 'Entrepreneurship') {
+      if (role === 'House of Founders Fellowship') return 'https://house-of-founders.crack-ed.com/'
+      return null
+    }
     if (category === 'Banking') {
       if (program === 'Postgraduate Program' && role === 'Relationship Manager') return 'https://pgprm.crack-ed.com'
       if (program === 'Postgraduate Program' && role === 'Assistant Manager') return 'https://pgpam.crack-ed.com'
@@ -211,9 +216,6 @@ const ProgramsList = () => {
       }
       if (program === 'Rupyy AutoEdge Program' && role === 'Business Manager') {
         return 'https://rupyybm.crack-ed.com/'
-      }
-      if (program === 'Prime Starters Program' && role === 'Sales Officer') {
-        return 'https://kotakmahindraso.crack-ed.com/'
       }
       if (program === 'Mahindra Finance Prarambh Program' && role === 'Business Executive') {
         return 'https://mahindrafinancebe.crack-ed.com/'
@@ -248,6 +250,9 @@ const ProgramsList = () => {
       program === 'Postgraduate Program' ||
       program === 'Banking Sales Program' ||
       program === 'Elevate Banking Program'
+    if (category === 'Entrepreneurship') {
+      return <img src={udaanLogo} alt="Udaan" className="program-logo-img program-logo-udaan" />
+    }
     if (category === 'Banking' && useUdaanLogo) {
       return <img src={udaanLogo} alt="Udaan" className="program-logo-img program-logo-udaan" />
     }
@@ -261,9 +266,6 @@ const ProgramsList = () => {
     }
     if (category === 'NBFC' && item?.program === 'Rupyy AutoEdge Program') {
       return <img src={rupyySmallLogo} alt="Rupyy" className="program-logo-img program-logo-rupyy" />
-    }
-    if (category === 'NBFC' && item?.program === 'Prime Starters Program') {
-      return <img src={kotakSmallLogo} alt="Kotak Mahindra Prime" className="program-logo-img program-logo-kotak" />
     }
     if (category === 'NBFC' && program === 'Mahindra Finance Prarambh Program') {
       return <img src={mahindraFinanceSmallLogo} alt="Mahindra Finance" className="program-logo-img program-logo-mahindra" />
@@ -281,6 +283,7 @@ const ProgramsList = () => {
   ]
 
   const getAllProgramsInOrder = () => [
+    ...withCategory('Entrepreneurship', programs.Entrepreneurship),
     ...withCategory('NBFC', programs.NBFC.slice(0, 5)),
     ...withCategory('Banking', programs.Banking),
     ...withCategory('NBFC', programs.NBFC.slice(5)),

@@ -10,6 +10,14 @@ import './Footer.css'
 
 const PROGRAMS = [
   {
+    id: 'house-of-founders',
+    name: 'House of Founders Fellowship',
+    link: '/programs',
+    links: [
+      { label: 'Entrepreneurship & Venture Creation', href: 'https://house-of-founders.crack-ed.com/' },
+    ],
+  },
+  {
     id: 'hero-housing',
     name: 'Hero Housing Finance Pragati Program',
     link: '/programs',
@@ -25,14 +33,6 @@ const PROGRAMS = [
     link: '/programs',
     links: [
       { label: 'Business Manager', href: 'https://rupyybm.crack-ed.com/' },
-    ],
-  },
-  {
-    id: 'kotak',
-    name: 'Prime Starters Program',
-    link: '/programs',
-    links: [
-      { label: 'Sales Officer', href: 'https://kotakmahindraso.crack-ed.com/' },
     ],
   },
   {
@@ -120,7 +120,7 @@ const PROGRAMS = [
 ]
 
 const Footer = () => {
-  const [openProgram, setOpenProgram] = useState('hero-housing')
+  const [openProgram, setOpenProgram] = useState('house-of-founders')
 
   const toggleProgram = (id) => {
     setOpenProgram((prev) => (prev === id ? null : id))
