@@ -4,7 +4,7 @@ import lenskartCardLogo from '../../assets/lenskart_card_logo.png'
 import piramalLogo from '../../assets/piramal_small.png'
 
 import udaanLogo from '../../assets/udaan_temporary_logo.png'
-import bandhanBankLogo from '../../assets/bandhan_bank_logo.svg'
+import bandhanBankLogo from '../../assets/animation_bandhan_logo.svg'
 import avivaLogoSmallCard from '../../assets/aviva_logo_small_card.png'
 import finovaSmallLogo from '../../assets/finova_small_logo.png'
 import mahindraFinanceSmallLogo from '../../assets/mahindra_finance_small_logo_logo.png'
@@ -49,7 +49,7 @@ const ProgramsList = () => {
         role: 'Assistant Manager',
         isPremium: true,
         details: [
-          'Join as an Assistant Manager with a CTC of Rs 4 LPA + incentives',
+          'Join as an Assistant Manager with a CTC of Rs 4 LPA',
           '6-month program'
         ]
       },
