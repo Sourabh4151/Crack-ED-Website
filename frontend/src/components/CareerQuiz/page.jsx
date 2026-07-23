@@ -29,7 +29,7 @@ const PROGRAM_FEES = {
   'Finova VyaparaMitra Program - Relationship Officer': 84746,
   'Postgraduate Program Relationship Management - Relationship Manager': 360000,
   'Postgraduate Program Retail Banking - Relationship Officer': 40000,
-  'Postgraduate Program Banking Management - Assistant Manager': 200000,
+  'Bandhan Bank Aspiring Bank Champions Programme - Assistant Manager': 200000,
   'Postgraduate Certification Banking Management - Business Development Executive': 50848,
   'Banking Sales Program - Sales Officer': 60000,
   'Mahindra Finance Prarambh Program - Business Executive': 70000,
@@ -57,7 +57,7 @@ const PROGRAM_DETAILS = {
   'Finova VyaparaMitra Program - Relationship Officer': { details: 'CTC of Rs 2.4 LPA + variable', duration: '1-month program', link: 'https://finovaro.crack-ed.com' },
   'Postgraduate Program Relationship Management - Relationship Manager': { details: 'CTC of Rs 5.5 LPA + incentives', duration: '6-month program', link: 'https://pgprm.crack-ed.com' },
   'Postgraduate Program Retail Banking - Relationship Officer': { details: 'CTC of upto Rs 3.1 LPA + incentives', duration: '3-week program', link: 'https://pgprb.crack-ed.com' },
-  'Postgraduate Program Banking Management - Assistant Manager': { details: 'CTC of Rs 4 LPA + incentives', duration: '6-month program', link: 'https://pgpam.crack-ed.com' },
+  'Bandhan Bank Aspiring Bank Champions Programme - Assistant Manager': { details: 'CTC of Rs 4 LPA + incentives', duration: '6-month program', link: 'https://bandhanbankassistantmanager.crack-ed.com/' },
   'Banking Sales Program - Sales Officer': { details: 'CTC of Rs 2.5 LPA + incentives', duration: '3-month program', link: 'https://bspso.crack-ed.com' },
   'Mahindra Finance Prarambh Program - Business Executive': { details: 'CTC of Rs 3.5 LPA + incentives', duration: '1-month online program', link: 'https://mahindrafinancebe.crack-ed.com/' },
   'Postgraduate Certification Banking Management - Business Development Executive': { details: 'CTC of Rs 2.5 LPA + incentives', duration: '2-week program', link: 'https://pgcbm.crack-ed.com' },
@@ -85,7 +85,7 @@ const OPTION_TO_PROGRAMS = [
     ],
     C: [
       'Hero Housing Finance Pragati Program - Credit and Operations Manager',
-      'Postgraduate Program Banking Management - Assistant Manager',
+      'Bandhan Bank Aspiring Bank Champions Programme - Assistant Manager',
       'Hero Housing Finance Pragati Program - Collection Officer',
     ],
     D: [
@@ -108,7 +108,7 @@ const OPTION_TO_PROGRAMS = [
     ],
     C: [
       'Hero Housing Finance Pragati Program - Credit and Operations Manager',
-      'Postgraduate Program Banking Management - Assistant Manager',
+      'Bandhan Bank Aspiring Bank Champions Programme - Assistant Manager',
       'Hero Housing Finance Pragati Program - Collection Officer',
     ],
     D: [
@@ -131,7 +131,7 @@ const OPTION_TO_PROGRAMS = [
     ],
     C: [
       'Hero Housing Finance Pragati Program - Credit and Operations Manager',
-      'Postgraduate Program Banking Management - Assistant Manager',
+      'Bandhan Bank Aspiring Bank Champions Programme - Assistant Manager',
       'Postgraduate Program Retail Banking - Relationship Officer',
     ],
     D: [
@@ -153,7 +153,7 @@ const OPTION_TO_PROGRAMS = [
       'Postgraduate Program Relationship Management - Relationship Manager',
     ],
     C: [
-      'Postgraduate Program Banking Management - Assistant Manager',
+      'Bandhan Bank Aspiring Bank Champions Programme - Assistant Manager',
       'Hero Housing Finance Pragati Program - Credit and Operations Manager',
       'Postgraduate Program Retail Banking - Relationship Officer',
     ],
@@ -177,7 +177,7 @@ const OPTION_TO_PROGRAMS = [
     ],
     C: [
       'Hero Housing Finance Pragati Program - Credit and Operations Manager',
-      'Postgraduate Program Banking Management - Assistant Manager',
+      'Bandhan Bank Aspiring Bank Champions Programme - Assistant Manager',
       'Elevate Banking Program - Virtual Relationship Manager',
     ],
     D: [
@@ -199,7 +199,7 @@ const OPTION_TO_PROGRAMS = [
       'Hero Housing Finance Pragati Program - Relationship Manager',
     ],
     C: [
-      'Postgraduate Program Banking Management - Assistant Manager',
+      'Bandhan Bank Aspiring Bank Champions Programme - Assistant Manager',
       'Postgraduate Program Retail Banking - Relationship Officer',
       'Elevate Banking Program - Virtual Relationship Manager',
     ],
@@ -224,7 +224,7 @@ const OPTION_TO_PROGRAMS = [
     C: [
       'Hero Housing Finance Pragati Program - Collection Officer',
       'Piramal ProEdge Program - Relationship Manager',
-      'Postgraduate Program Banking Management - Assistant Manager',
+      'Bandhan Bank Aspiring Bank Champions Programme - Assistant Manager',
     ],
     D: [
       'Elevate Banking Program - Virtual Relationship Manager',
@@ -246,7 +246,7 @@ const OPTION_TO_PROGRAMS = [
     ],
     C: [
       'Hero Housing Finance Pragati Program - Credit and Operations Manager',
-      'Postgraduate Program Banking Management - Assistant Manager',
+      'Bandhan Bank Aspiring Bank Champions Programme - Assistant Manager',
       'Elevate Banking Program - Virtual Relationship Manager',
     ],
     D: [
@@ -269,7 +269,7 @@ const OPTION_TO_PROGRAMS = [
     ],
     C: [
       'Hero Housing Finance Pragati Program - Credit and Operations Manager',
-      'Postgraduate Program Banking Management - Assistant Manager',
+      'Bandhan Bank Aspiring Bank Champions Programme - Assistant Manager',
       'Elevate Banking Program - Virtual Relationship Manager',
     ],
     D: [
@@ -291,7 +291,7 @@ const OPTION_TO_PROGRAMS = [
       'Postgraduate Program Relationship Management - Relationship Manager',
     ],
     C: [
-      'Postgraduate Program Banking Management - Assistant Manager',
+      'Bandhan Bank Aspiring Bank Champions Programme - Assistant Manager',
       'Hero Housing Finance Pragati Program - Credit and Operations Manager',
       'Elevate Banking Program - Virtual Relationship Manager',
     ],

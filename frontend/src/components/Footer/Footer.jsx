@@ -44,11 +44,11 @@ const PROGRAMS = [
     ],
   },
   {
-    id: 'pgpbm',
-    name: 'PGP - Banking Management',
+    id: 'bandhan-am',
+    name: 'Bandhan Bank Aspiring Bank Champions Programme',
     link: '/programs',
     links: [
-      { label: 'Assistant Manager', href: 'https://pgpam.crack-ed.com/' },
+      { label: 'Assistant Manager', href: 'https://bandhanbankassistantmanager.crack-ed.com/' },
     ],
   },
   {

@@ -2,6 +2,7 @@
 export const LEAD_PROGRAMS = [
   'Aviva Nirmaan Program - Agency Sales Executive',
   'Aviva Nirmaan Program - Direct Sales Executive',
+  'Bandhan Bank Aspiring Bank Champions Programme - Assistant Manager',
   'Banking Sales Program - Sales Officer',
   'Elevate Banking Program - Virtual Relationship Manager',
   'Hero Housing Finance Pragati Program - Collection Officer',
@@ -9,7 +10,6 @@ export const LEAD_PROGRAMS = [
   'Hero Housing Finance Pragati Program - Relationship Manager',
   'House of Founder Fellowship',
   'Mahindra Finance Prarambh Program - Business Executive',
-  'PGP - Banking Management - Assistant Manager',
   'PGP - Relationship Management - Relationship Manager',
   'PGP - Retail Banking - Relationship Officer',
   'Piramal ProEdge Program - Relationship Manager',

@@ -40,7 +40,7 @@ import mahindraProgramImage from '../../assets/desk.jpeg'
 import mahindraFinanceSmallLogo from '../../assets/mahindra_finance_small_logo_logo.png'
 import mahindraFinanceHomeLogo from '../../assets/mahindra_finance_logo.png'
 import pgprmDesktopImage from '../../assets/RM_desktop.png'
-import pgpbmDesktopImage from '../../assets/bandhan_desktop.jpg'
+import pgpbmDesktopImage from '../../assets/desktop.jpg'
 import retailBankingDesktopImage from '../../assets/retail_banking_desktop.png'
 import retailBankingMobileImage from '../../assets/retail_banking_mobile.png'
 import bankingSalesDesktopImage from '../../assets/banking_sales_desktop.png'
@@ -55,6 +55,7 @@ import rupyySmallLogo from '../../assets/rupyy_small_logo.png'
 import heroLogo from '../../assets/hero_logo.svg'
 import heroSmallLogo from '../../assets/hero_small_logo.png'
 import houseOfFoundersImage from '../../assets/Enter.png'
+import bandhanBankLogo from '../../assets/bandhan_bank_logo.svg'
 import { trackMicrositeClick } from '../../utils/analytics'
 import { appendUtmToUrl } from '../../services/crmService'
 import './Programs.css'
@@ -84,6 +85,7 @@ const getProgramHomeLogo = (programLabel) => {
     case 'Mahindra Finance Prarambh Program': return { src: mahindraFinanceHomeLogo, alt: 'Mahindra Finance' }
     case 'Housing Finance Pragati Program': return { src: heroLogo, alt: 'Hero Housing Finance' }
     case 'Rupyy AutoEdge Program': return { src: rupyyLogo, alt: 'Rupyy' }
+    case 'Bandhan Bank Aspiring Bank Champions Programme': return { src: bandhanBankLogo, alt: 'Bandhan Bank' }
     case 'Postgraduate Program in Relationship Management': return null
     case 'Postgraduate Program in Banking Management': return null
     case 'Postgraduate Program Retail Banking': return null
@@ -143,8 +145,8 @@ const Programs = () => {
     {
       id: 7,
       logo: udaanCardLogo,
-      title: 'Postgraduate Program Banking Management - Assistant Manager',
-      url: 'https://pgpam.crack-ed.com',
+      title: 'Bandhan Bank Aspiring Bank Champions Programme - Assistant Manager',
+      url: 'https://bandhanbankassistantmanager.crack-ed.com/',
     },
     {
       id: 8,
@@ -303,11 +305,11 @@ const Programs = () => {
         duration: '6-month program',
         image: pgprmDesktopImage,
       },
-      'Postgraduate Program Banking Management - Assistant Manager': {
-        programLabel: 'Postgraduate Program in Banking Management',
-        shortProgramLabel: 'PGP - Banking Management',
-        logo: auCardLogo,
-        details: 'Join as an Assistant Manager with a CTC of Rs 4 LPA + incentives',
+      'Bandhan Bank Aspiring Bank Champions Programme - Assistant Manager': {
+        programLabel: 'Bandhan Bank Aspiring Bank Champions Programme',
+        shortProgramLabel: 'Bandhan Bank Aspiring Bank Champions Programme',
+        logo: bandhanBankLogo,
+        details: 'Join as an Assistant Manager with a CTC of Rs 4 LPA',
         duration: '6-month program',
         image: pgpbmDesktopImage,
       },
@@ -372,7 +374,7 @@ const Programs = () => {
   // Short label for small/mini program cards (PGP only)
   const getSmallCardTitle = (card) => {
     if (card.title === 'Postgraduate Program Relationship Management - Relationship Manager') return 'PGP - Relationship Management - Relationship Manager'
-    if (card.title === 'Postgraduate Program Banking Management - Assistant Manager') return 'PGP - Banking Management - Assistant Manager'
+    if (card.title === 'Bandhan Bank Aspiring Bank Champions Programme - Assistant Manager') return 'Bandhan Bank Aspiring Bank Champions - Assistant Manager'
     if (card.title === 'Postgraduate Program Retail Banking - Relationship Officer') return 'PGP - Retail Banking - Relationship Officer'
     if (card.title === 'Housing Finance Pragati Program - Relationship Manager') return 'Housing Finance Pragati - Relationship Manager'
     if (card.title === 'Housing Finance Pragati Program - Collection Officer') return 'Housing Finance Pragati - Collection Officer'
@@ -394,7 +396,7 @@ const Programs = () => {
       .replace('Aviva Nirmaan Program - ', '')
       .replace('Finova VyaparaMitra Program - ', '')
       .replace('Postgraduate Program Relationship Management - ', '')
-      .replace('Postgraduate Program Banking Management - ', '')
+      .replace('Bandhan Bank Aspiring Bank Champions Programme - ', '')
       .replace('Postgraduate Program Retail Banking - ', '')
       .replace('Mahindra Finance Prarambh Program - ', '')
       .replace('Housing Finance Pragati Program - ', '')
@@ -543,8 +545,9 @@ const Programs = () => {
                               if (!logoInfo) return null
                               const isAviva = logoInfo.alt === 'Aviva'
                               const isMahindra = logoInfo.alt === 'Mahindra Finance'
+                              const isBandhan = logoInfo.alt === 'Bandhan Bank'
                               return (
-                                <div className={`mobile-program-card-logo${isAviva ? ' mobile-program-card-logo--aviva' : ''}${isMahindra ? ' mobile-program-card-logo--mahindra' : ''}`}>
+                                <div className={`mobile-program-card-logo${isAviva ? ' mobile-program-card-logo--aviva' : ''}${isMahindra ? ' mobile-program-card-logo--mahindra' : ''}${isBandhan ? ' mobile-program-card-logo--bandhan' : ''}`}>
                                   <img src={logoInfo.src} alt={logoInfo.alt} />
                                 </div>
                               )
@@ -608,8 +611,9 @@ const Programs = () => {
                         const logoInfo = getProgramHomeLogo(programLabel)
                         if (!logoInfo) return null
                         const isMahindra = logoInfo.alt === 'Mahindra Finance'
+                        const isBandhan = logoInfo.alt === 'Bandhan Bank'
                         return (
-                          <div className={`program-logo-above${logoInfo.alt === 'Mahindra Finance' ? ' program-logo-above--mahindra' : ''}`}>
+                          <div className={`program-logo-above${isMahindra ? ' program-logo-above--mahindra' : ''}${isBandhan ? ' program-logo-above--bandhan' : ''}`}>
                             <img src={logoInfo.src} alt={logoInfo.alt} />
                           </div>
                         )

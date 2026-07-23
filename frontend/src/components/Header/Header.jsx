@@ -21,7 +21,7 @@ const PROGRAM_CATEGORIES = [
         label: 'Premium Programs',
         children: [
           { label: 'PGP - Relationship Management', href: 'https://pgprm.crack-ed.com/' },
-          { label: 'PGP - Banking Management', href: 'https://pgpam.crack-ed.com/' },
+          { label: 'Bandhan Bank Aspiring Bank Champions Programme', href: 'https://bandhanbankassistantmanager.crack-ed.com/' },
         ],
       },
       {

@@ -64,6 +64,8 @@ PROGRAM_TO_CENTER = {
     'Rupyy AutoEdge Program - Business Manager': 'Rupyy-BM',
     'PGP - Banking Management': 'Bandhan Bank - AM',
     'PGP - Banking Management - Assistant Manager': 'Bandhan Bank - AM',
+    'Bandhan Bank Aspiring Bank Champions Programme': 'Bandhan Bank - AM',
+    'Bandhan Bank Aspiring Bank Champions Programme - Assistant Manager': 'Bandhan Bank - AM',
     'PGP - Relationship Management': 'Relationship Manager',
     'PGP - Relationship Management - Relationship Manager': 'Relationship Manager',
     'PGC - Banking Management': 'IndusInd',

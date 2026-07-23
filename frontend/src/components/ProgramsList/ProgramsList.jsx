@@ -4,6 +4,7 @@ import lenskartCardLogo from '../../assets/lenskart_card_logo.png'
 import piramalLogo from '../../assets/piramal_small.png'
 
 import udaanLogo from '../../assets/udaan_temporary_logo.png'
+import bandhanBankLogo from '../../assets/bandhan_bank_logo.svg'
 import avivaLogoSmallCard from '../../assets/aviva_logo_small_card.png'
 import finovaSmallLogo from '../../assets/finova_small_logo.png'
 import mahindraFinanceSmallLogo from '../../assets/mahindra_finance_small_logo_logo.png'
@@ -44,7 +45,7 @@ const ProgramsList = () => {
         ]
       },
       {
-        program: 'Postgraduate Program',
+        program: 'Bandhan Bank Aspiring Bank Champions Programme',
         role: 'Assistant Manager',
         isPremium: true,
         details: [
@@ -186,7 +187,9 @@ const ProgramsList = () => {
     }
     if (category === 'Banking') {
       if (program === 'Postgraduate Program' && role === 'Relationship Manager') return 'https://pgprm.crack-ed.com'
-      if (program === 'Postgraduate Program' && role === 'Assistant Manager') return 'https://pgpam.crack-ed.com'
+      if (program === 'Bandhan Bank Aspiring Bank Champions Programme' && role === 'Assistant Manager') {
+        return 'https://bandhanbankassistantmanager.crack-ed.com/'
+      }
       if (program === 'Postgraduate Program' && role === 'Relationship Officer') return 'https://pgprb.crack-ed.com'
       if (program === 'Banking Sales Program' && role === 'Sales Officer') return 'https://bspso.crack-ed.com'
       if (program === 'Elevate Banking Program' && role === 'Virtual Relationship Manager') return 'https://elevatevrm.crack-ed.com/'
@@ -252,6 +255,9 @@ const ProgramsList = () => {
       program === 'Elevate Banking Program'
     if (category === 'Entrepreneurship') {
       return <img src={udaanLogo} alt="Udaan" className="program-logo-img program-logo-udaan" />
+    }
+    if (category === 'Banking' && program === 'Bandhan Bank Aspiring Bank Champions Programme') {
+      return <img src={bandhanBankLogo} alt="Bandhan Bank" className="program-logo-img program-logo-bandhan" />
     }
     if (category === 'Banking' && useUdaanLogo) {
       return <img src={udaanLogo} alt="Udaan" className="program-logo-img program-logo-udaan" />
