@@ -56,6 +56,7 @@ import heroLogo from '../../assets/hero_logo.svg'
 import heroSmallLogo from '../../assets/hero_small_logo.png'
 import houseOfFoundersImage from '../../assets/Enter.png'
 import bandhanBankLogo from '../../assets/bandhan_bank_logo.svg'
+import bandhanMiniLogo from '../../assets/animation_bandhan_logo.svg'
 import { trackMicrositeClick } from '../../utils/analytics'
 import { appendUtmToUrl } from '../../services/crmService'
 import './Programs.css'
@@ -144,7 +145,7 @@ const Programs = () => {
     },
     {
       id: 7,
-      logo: udaanCardLogo,
+      logo: bandhanMiniLogo,
       title: 'Bandhan Bank Aspiring Bank Champions Programme - Assistant Manager',
       url: 'https://bandhanbankassistantmanager.crack-ed.com/',
     },
