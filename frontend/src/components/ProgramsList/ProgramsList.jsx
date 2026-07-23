@@ -317,7 +317,7 @@ const ProgramsList = () => {
   return (
     <section id="programs-list" className="programs-list">
       <div className="programs-list-container">
-        <button className="explore-other-programs">Explore Other Programs</button>
+        <div className="explore-other-programs">Explore Other Programs</div>
         
         <div className="programs-tabs">
           {PROGRAM_TABS.map((tab) => (
