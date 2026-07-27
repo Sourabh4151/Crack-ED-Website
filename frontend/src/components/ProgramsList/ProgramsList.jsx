@@ -76,6 +76,14 @@ const ProgramsList = () => {
           'Join as a Sales Officer with a CTC of Rs 2.5 LPA + incentives',
           '1-month program'
         ]
+      },
+      {
+        program: 'Samriddhi Program',
+        role: 'Field Executive',
+        details: [
+          'Join as a Field Executive and secure a CTC of upto Rs 2.22 LPA + incentives',
+          '1-week program'
+        ]
       }
     ],
     Retail: [
@@ -192,6 +200,7 @@ const ProgramsList = () => {
       }
       if (program === 'Postgraduate Program' && role === 'Relationship Officer') return 'https://pgprb.crack-ed.com'
       if (program === 'Banking Sales Program' && role === 'Sales Officer') return 'https://bspso.crack-ed.com'
+      if (program === 'Samriddhi Program' && role === 'Field Executive') return 'https://axisquessfse.crack-ed.com/'
       if (program === 'Elevate Banking Program' && role === 'Virtual Relationship Manager') return 'https://elevatevrm.crack-ed.com/'
       return null
     }
@@ -252,6 +261,7 @@ const ProgramsList = () => {
     const useUdaanLogo =
       program === 'Postgraduate Program' ||
       program === 'Banking Sales Program' ||
+      program === 'Samriddhi Program' ||
       program === 'Elevate Banking Program'
     if (category === 'Entrepreneurship') {
       return <img src={udaanLogo} alt="Udaan" className="program-logo-img program-logo-udaan" />

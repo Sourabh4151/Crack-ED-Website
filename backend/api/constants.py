@@ -79,6 +79,7 @@ PROGRAM_TO_CENTER = {
     'PGP - Retail Banking - Relationship Officer': 'Axis - RO',
     'Banking Sales Program - Sales Officer': 'Banking Sales',
     'Elevate Banking Program - Virtual Relationship Manager': 'Axis - VRM',
+    'Samriddhi Program - Field Executive': 'Axis-MRL',
 }
 
 # For dropdown: (value, label) with empty option

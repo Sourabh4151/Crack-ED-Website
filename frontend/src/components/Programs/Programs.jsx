@@ -45,6 +45,7 @@ import retailBankingDesktopImage from '../../assets/retail_banking_desktop.png'
 import retailBankingMobileImage from '../../assets/retail_banking_mobile.png'
 import bankingSalesDesktopImage from '../../assets/banking_sales_desktop.png'
 import mobileSalesOfficerImage from '../../assets/mobile_sales_officer.png'
+import quessProgramImage from '../../assets/quess.png'
 import elevateVrmImage from '../../assets/elevate_vrm.png'
 import heroFinanceRmImage from '../../assets/hero_finance_rm.png'
 import heroCoImage from '../../assets/hero_co.png'
@@ -92,6 +93,7 @@ const getProgramHomeLogo = (programLabel) => {
     case 'Postgraduate Program Retail Banking': return null
     case 'Banking Sales Program':
     case 'Banking Sales Program - Sales Officer': return null
+    case 'Samriddhi Program': return null
     case 'Entrepreneurship & Venture Creation': return null
     default: return null
   }
@@ -169,30 +171,36 @@ const Programs = () => {
     },
     {
       id: 11,
+      logo: udaanCardLogo,
+      title: 'Samriddhi Program - Field Executive',
+      url: 'https://axisquessfse.crack-ed.com/',
+    },
+    {
+      id: 12,
       logo: mahindraFinanceSmallLogo,
       title: 'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)',
       url: 'https://mahindrafinancebe.crack-ed.com/',
     },
     {
-      id: 12,
+      id: 13,
       logo: finovaSmallLogo,
       title: 'Finova VyaparaMitra Program - Relationship Officer',
       url: 'https://finovaro.crack-ed.com',
     },
     {
-      id: 13,
+      id: 14,
       logo: piramalCardLogo,
       title: 'Piramal ProEdge Program - Relationship Manager',
       url: 'https://piramal.crack-ed.com/portal',
     },
     {
-      id: 14,
+      id: 15,
       logo: avivaSmallLogo,
       title: 'Aviva Nirmaan Program - Direct Sales Executive',
       url: 'https://avivads.crack-ed.com',
     },
     {
-      id: 15,
+      id: 16,
       logo: avivaSmallLogo,
       title: 'Aviva Nirmaan Program - Agency Sales Executive',
       url: 'https://avivaas.crack-ed.com',
@@ -331,6 +339,13 @@ const Programs = () => {
         image: bankingSalesDesktopImage,
         mobileImage: mobileSalesOfficerImage,
       },
+      'Samriddhi Program - Field Executive': {
+        programLabel: 'Samriddhi Program',
+        logo: udaanCardLogo,
+        details: 'Join as a Field Executive and secure a CTC of upto Rs 2.22 LPA + incentives',
+        duration: '1-week program',
+        image: quessProgramImage,
+      },
     }
 
     if (newProgramsMap[card.title]) {
@@ -403,6 +418,7 @@ const Programs = () => {
       .replace('Housing Finance Pragati Program - ', '')
       .replace('Rupyy AutoEdge Program - ', '')
       .replace('Banking Sales Program - ', '')
+      .replace('Samriddhi Program - ', '')
   }
 
   useEffect(() => {

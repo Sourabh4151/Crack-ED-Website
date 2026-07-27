@@ -30,6 +30,7 @@ const PROGRAM_CATEGORIES = [
           { label: 'PGP - Retail Banking', href: 'https://pgprb.crack-ed.com' },
           { label: 'Elevate Banking Program', href: 'https://elevatevrm.crack-ed.com/' },
           { label: 'Banking Sales Program', href: 'https://bspso.crack-ed.com' },
+          { label: 'Samriddhi Program', href: 'https://axisquessfse.crack-ed.com/' },
         ],
       },
     ],

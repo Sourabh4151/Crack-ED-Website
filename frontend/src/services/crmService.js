@@ -50,6 +50,7 @@ const PROGRAM_TO_CF_PROGRAM_MAP = {
   'PGP - Retail Banking - Relationship Officer': 'Axis - RO',
   'Banking Sales Program - Sales Officer': 'Banking Sales',
   'Elevate Banking Program - Virtual Relationship Manager': 'Axis - VRM',
+  'Samriddhi Program - Field Executive': 'Axis-MRL',
 }
 
 /** Fixed NoPaperForms cf_batch_name for all website lead submissions */

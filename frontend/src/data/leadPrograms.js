@@ -14,4 +14,5 @@ export const LEAD_PROGRAMS = [
   'PGP - Retail Banking - Relationship Officer',
   'Piramal ProEdge Program - Relationship Manager',
   'Rupyy AutoEdge Program - Business Manager',
+  'Samriddhi Program - Field Executive',
 ]

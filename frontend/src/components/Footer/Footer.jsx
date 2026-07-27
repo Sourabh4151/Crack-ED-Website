@@ -76,6 +76,14 @@ const PROGRAMS = [
     ],
   },
   {
+    id: 'samriddhi',
+    name: 'Samriddhi Program',
+    link: '/programs',
+    links: [
+      { label: 'Field Executive', href: 'https://axisquessfse.crack-ed.com/' },
+    ],
+  },
+  {
     id: 'mahindra',
     name: 'Mahindra Finance Prarambh Program',
     link: '/programs',
