@@ -39,6 +39,9 @@ import finovaSmallLogo from '../../assets/finova_small_logo.png'
 import mahindraProgramImage from '../../assets/desk.jpeg'
 import mahindraFinanceSmallLogo from '../../assets/mahindra_finance_small_logo_logo.png'
 import mahindraFinanceHomeLogo from '../../assets/mahindra_finance_logo.png'
+import kotakLogo from '../../assets/kotak_logo.svg'
+import kotakSmallLogo from '../../assets/kotak_small_logo.png'
+import kotakProgramImage from '../../assets/Kotak_program.png'
 import pgprmDesktopImage from '../../assets/RM_desktop.png'
 import pgpbmDesktopImage from '../../assets/desktop.jpg'
 import retailBankingDesktopImage from '../../assets/retail_banking_desktop.png'
@@ -85,6 +88,7 @@ const getProgramHomeLogo = (programLabel) => {
     case 'Aviva Nirmaan Program': return { src: avivaLogo, alt: 'Aviva' }
     case 'Finova VyaparaMitra Program': return { src: finovaCardLogo, alt: 'Finova Capital' }
     case 'Mahindra Finance Prarambh Program': return { src: mahindraFinanceHomeLogo, alt: 'Mahindra Finance' }
+    case 'Talent Accelerator Program': return { src: kotakLogo, alt: 'Kotak Prime' }
     case 'Housing Finance Pragati Program': return { src: heroLogo, alt: 'Hero Housing Finance' }
     case 'Rupyy AutoEdge Program': return { src: rupyyLogo, alt: 'Rupyy' }
     case 'Bandhan Bank Aspiring Bank Champions Programme': return { src: bandhanBankLogo, alt: 'Bandhan Bank' }
@@ -183,24 +187,30 @@ const Programs = () => {
     },
     {
       id: 13,
+      logo: kotakSmallLogo,
+      title: 'Talent Accelerator Program - Sales Executive',
+      url: 'https://kotakmahindraso.crack-ed.com/',
+    },
+    {
+      id: 14,
       logo: finovaSmallLogo,
       title: 'Finova VyaparaMitra Program - Relationship Officer',
       url: 'https://finovaro.crack-ed.com',
     },
     {
-      id: 14,
+      id: 15,
       logo: piramalCardLogo,
       title: 'Piramal ProEdge Program - Relationship Manager',
       url: 'https://piramal.crack-ed.com/portal',
     },
     {
-      id: 15,
+      id: 16,
       logo: avivaSmallLogo,
       title: 'Aviva Nirmaan Program - Direct Sales Executive',
       url: 'https://avivads.crack-ed.com',
     },
     {
-      id: 16,
+      id: 17,
       logo: avivaSmallLogo,
       title: 'Aviva Nirmaan Program - Agency Sales Executive',
       url: 'https://avivaas.crack-ed.com',
@@ -220,6 +230,7 @@ const Programs = () => {
       'Lenskart EyeTech Program - Retail Sales Associate': lenskartRetailSalesImage,
       'Piramal ProEdge Program - Relationship Manager': relationshipManagerPiramalImage,
       'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)': mahindraProgramImage,
+      'Talent Accelerator Program - Sales Executive': kotakProgramImage,
       'Virtual Relationship Manager': elevateVrmImage,
       'Housing Finance Pragati Program - Relationship Manager': heroFinanceRmImage,
       'Housing Finance Pragati Program - Collection Officer': heroCoImage,
@@ -284,6 +295,13 @@ const Programs = () => {
         details: 'Join as a Business Executive (Vehicle Loan - Field Sales) with a CTC of Rs 3.5 LPA + incentives',
         duration: '1-month online program',
         image: mahindraProgramImage,
+      },
+      'Talent Accelerator Program - Sales Executive': {
+        programLabel: 'Talent Accelerator Program',
+        logo: kotakLogo,
+        details: 'Join as a Sales Executive at Kotak Prime and secure a CTC of Rs 2.75 LPA + incentives',
+        duration: '1-month program',
+        image: kotakProgramImage,
       },
       'Aviva Nirmaan Program - Direct Sales Executive': {
         programLabel: 'Aviva Nirmaan Program',
@@ -397,6 +415,7 @@ const Programs = () => {
     if (card.title === 'Housing Finance Pragati Program - Credit and Operations Manager') return 'Housing Finance Pragati - Credit and Operations Manager'
     if (card.title === 'Rupyy AutoEdge Program - Business Manager') return 'Rupyy AutoEdge - Business Manager'
     if (card.title === 'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)') return 'Mahindra Finance Prarambh - Business Executive'
+    if (card.title === 'Talent Accelerator Program - Sales Executive') return 'Talent Accelerator Program - Sales Executive'
     if (card.title === 'Virtual Relationship Manager') return 'Elevate Banking Program - Virtual Relationship Manager'
     return card.title
   }
@@ -415,6 +434,7 @@ const Programs = () => {
       .replace('Bandhan Bank Aspiring Bank Champions Programme - ', '')
       .replace('Postgraduate Program Retail Banking - ', '')
       .replace('Mahindra Finance Prarambh Program - ', '')
+      .replace('Talent Accelerator Program - ', '')
       .replace('Housing Finance Pragati Program - ', '')
       .replace('Rupyy AutoEdge Program - ', '')
       .replace('Banking Sales Program - ', '')

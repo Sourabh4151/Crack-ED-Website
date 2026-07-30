@@ -16,6 +16,7 @@ import poonawallaLogo from '../../assets/poonawalla_greyscacle_logo.png'
 import avivaLogo from '../../assets/aviva_greyscale.png'
 import bandhanLogo from '../../assets/bandhan_greyscale.png'
 import mahindraLogo from '../../assets/mahindra_finance_greyscale.png'
+import kotakLogoGreyscale from '../../assets/kotak_greyscale.png'
 import heroLogoGreyscale from '../../assets/greyscale_hero.png'
 import rupyyLogo from '../../assets/rupyy_greyscale_logo.png'
 import './LogoCarousel.css'
@@ -37,6 +38,7 @@ const LogoCarousel = () => {
     { name: 'Aviva', image: avivaLogo, noFilter: true },
     { name: 'Bandhan Bank', image: bandhanLogo, noFilter: true },
     { name: 'Mahindra Finance', image: mahindraLogo, noFilter: true },
+    { name: 'Kotak Mahindra Prime', image: kotakLogoGreyscale, noFilter: true },
     { name: 'Rupyy', image: rupyyLogo, noFilter: true },
   ]
 

@@ -8,6 +8,7 @@ import bandhanBankLogo from '../../assets/animation_bandhan_logo.svg'
 import avivaLogoSmallCard from '../../assets/aviva_logo_small_card.png'
 import finovaSmallLogo from '../../assets/finova_small_logo.png'
 import mahindraFinanceSmallLogo from '../../assets/mahindra_finance_small_logo_logo.png'
+import kotakSmallLogo from '../../assets/kotak_small_logo.png'
 import heroSmallLogo from '../../assets/hero_small_logo.png'
 import rupyySmallLogo from '../../assets/rupyy_small_logo.png'
 import { trackMicrositeClick, markProgramsPageVisited } from '../../utils/analytics'
@@ -148,6 +149,14 @@ const ProgramsList = () => {
         ]
       },
       {
+        program: 'Talent Accelerator Program',
+        role: 'Sales Executive',
+        details: [
+          'Join as a Sales Executive at Kotak Prime and secure a CTC of Rs 2.75 LPA + incentives',
+          '1-month program'
+        ]
+      },
+      {
         program: 'Finova VyaparaMitra Program',
         role: 'Relationship Officer',
         admissionClosed: true,
@@ -232,6 +241,9 @@ const ProgramsList = () => {
       if (program === 'Mahindra Finance Prarambh Program' && role === 'Business Executive') {
         return 'https://mahindrafinancebe.crack-ed.com/'
       }
+      if (program === 'Talent Accelerator Program' && role === 'Sales Executive') {
+        return 'https://kotakmahindraso.crack-ed.com/'
+      }
       switch (role) {
         case 'Relationship Manager':
           return 'https://piramal.crack-ed.com/portal'
@@ -285,6 +297,9 @@ const ProgramsList = () => {
     }
     if (category === 'NBFC' && program === 'Mahindra Finance Prarambh Program') {
       return <img src={mahindraFinanceSmallLogo} alt="Mahindra Finance" className="program-logo-img program-logo-mahindra" />
+    }
+    if (category === 'NBFC' && program === 'Talent Accelerator Program') {
+      return <img src={kotakSmallLogo} alt="Kotak Prime" className="program-logo-img program-logo-kotak" />
     }
     if (category === 'NBFC') return <img src={piramalLogo} alt="Piramal" className="program-logo-img program-logo-piramal" />
     if (category === 'Insurance') return <img src={avivaLogoSmallCard} alt="Aviva" className="program-logo-img program-logo-aviva" />

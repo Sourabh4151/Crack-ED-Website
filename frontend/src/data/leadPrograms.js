@@ -15,4 +15,5 @@ export const LEAD_PROGRAMS = [
   'Piramal ProEdge Program - Relationship Manager',
   'Rupyy AutoEdge Program - Business Manager',
   'Samriddhi Program - Field Executive',
+  'Talent Accelerator Program - Sales Executive',
 ]

@@ -76,6 +76,7 @@ PROGRAM_TO_CENTER = {
     'Postgraduate Program Retail Banking - Relationship Officer': 'Axis - RO',
     'Postgraduate Certification Banking Management - Business Development Executive': 'IndusInd',
     'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)': 'Mahindra - BE',
+    'Talent Accelerator Program - Sales Executive': 'KMPL-SO-DST',
     'PGP - Retail Banking - Relationship Officer': 'Axis - RO',
     'Banking Sales Program - Sales Officer': 'Banking Sales',
     'Elevate Banking Program - Virtual Relationship Manager': 'Axis - VRM',

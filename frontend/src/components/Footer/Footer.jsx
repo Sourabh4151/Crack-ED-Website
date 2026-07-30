@@ -92,6 +92,14 @@ const PROGRAMS = [
     ],
   },
   {
+    id: 'kotak',
+    name: 'Talent Accelerator Program',
+    link: '/programs',
+    links: [
+      { label: 'Sales Executive', href: 'https://kotakmahindraso.crack-ed.com/' },
+    ],
+  },
+  {
     id: 'finova',
     name: 'Finova VyaparaMitra Program',
     link: '/programs',
