@@ -1,6 +1,5 @@
 import React from 'react'
 import debojitSen from '../../assets/debojit_about_us2.jpeg'
-import ashesh from '../../assets/ashesh.png'
 import anand from '../../assets/anand.jpeg'
 import vipinSingh from '../../assets/vipin_singh.jpeg'
 import ankitMittal from '../../assets/ankit_mittal.jpg'
@@ -28,7 +27,6 @@ const Leadership = () => {
     { name: 'Aman Rawat', title: 'Sales Head - B2C', image: amanRawat, linkedin: 'https://www.linkedin.com/in/aman-rawat-998783107?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app' },
     { name: 'Pawan Bhati', title: 'Head - Special Projects', image: pawanBhati, linkedin: 'https://www.linkedin.com/in/pawan-kumar-1525a52a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app' },
     { name: 'Panchali Moitra', title: 'Learning Design Head', image: panchaliMoitra, linkedin: 'https://www.linkedin.com/in/panchali-moitra-a6479a69?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app' },
-    { name: 'Ashesh Raghav', title: 'COO', image: ashesh, linkedin: 'https://in.linkedin.com/in/asheshraghav' },
   ]
 
   return (
