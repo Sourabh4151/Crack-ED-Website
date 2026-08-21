@@ -65,7 +65,6 @@ import RohitKhatanaCASA from '../../assets/RohitKhatana_CASA.jpeg'
 import RohitashMBL from '../../assets/Rohitash_MBL.jpeg'
 import KuldeepMBL from '../../assets/Kuldeep_MBL.jpeg'
 import IlaKumariGL from '../../assets/IlaKumari_GL.jpeg'
-import BalaYadavGL from '../../assets/BalaYadav_GL.jpeg'
 import AbhijeetCASA from '../../assets/Abhijeet_CASA.jpeg'
 import './Testimonial.css'
 
@@ -198,13 +197,6 @@ const Testimonial = () => {
     },
     {
       id: 17,
-      image: BalaYadavGL,
-      name: "Bala Yadav",
-      title: "Relationship Officer, AU Small Finance Bank",
-      description: "The support from my trainers at Crack-ED meant a lot. I learned banking, communication, and confidence, and I'll always remember this journey fondly."
-    },
-    {
-      id: 18,
       image: RohitashMBL,
       name: "Rohitash",
       title: "Sales Officer, AU Small Finance Bank",
