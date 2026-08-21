@@ -170,7 +170,7 @@ const ProgramsList = () => {
         program: 'Piramal ProEdge Program',
         role: 'Relationship Manager',
         details: [
-          'Join as a Relationship Manager with a CTC of Rs 2.74 LPA + variable',
+          'Join as a Relationship Manager with a CTC of Rs 2.74 LPA + Variable upto 3 LPA',
           '3.5-month program'
         ]
       }

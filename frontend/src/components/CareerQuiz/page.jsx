@@ -43,13 +43,13 @@ const PROGRAM_FEES = {
 
 // Program details for display (title, details, duration, link)
 const PROGRAM_DETAILS = {
-  'Udaan Program - Cashier / Teller': { details: 'CTC of upto Rs 3.5 LPA', duration: '2-month program', link: 'https://udaan.crack-ed.com/portal' },
+  'Udaan Program - Cashier / Teller': { details: 'CTC of upto Rs 3.5 LPA', duration: '2-month program', link: 'https://udaan.crack-ed.com/' },
   'Udaan Program - Virtual Relationship Manager': { details: 'CTC of upto Rs 2.8 LPA', duration: '4-week program', link: 'https://udaanvrm.crack-ed.com' },
   'Udaan Program - Relationship Manager': { details: 'CTC of upto Rs 6.5 LPA', duration: '3-week program', link: 'https://udaanrm.crack-ed.com' },
-  'Lenskart EyeTech Program - Clinical Technician': { details: 'CTC of Rs 2.64 LPA', duration: '6-month program', link: 'https://lenskart.crack-ed.com/portal' },
-  'Lenskart EyeTech Program - Retail Sales Associate': { details: 'CTC of Rs 3 LPA + incentives', duration: '9-weeks program', link: 'https://lenskartrsa.crack-ed.com/portal' },
-  'Piramal ProEdge Program - Relationship Manager': { details: 'CTC of Rs 2.74 LPA + variable', duration: '13-weeks program', link: 'https://piramal.crack-ed.com/portal' },
-  'Paytm Disha Program - Field Sales Executive': { details: 'CTC of Rs 2.5 LPA + incentives', duration: '2-week program (virtual)', link: 'https://paytm.crack-ed.com/portal' },
+  'Lenskart EyeTech Program - Clinical Technician': { details: 'CTC of Rs 2.64 LPA', duration: '6-month program', link: 'https://lenskart.crack-ed.com/' },
+  'Lenskart EyeTech Program - Retail Sales Associate': { details: 'CTC of Rs 3 LPA + incentives', duration: '9-weeks program', link: 'https://lenskartrsa.crack-ed.com/' },
+  'Piramal ProEdge Program - Relationship Manager': { details: 'CTC of Rs 2.74 LPA + Variable upto 3 LPA', duration: '3.5-month program', link: 'https://piramal.crack-ed.com/' },
+  'Paytm Disha Program - Field Sales Executive': { details: 'CTC of Rs 2.5 LPA + incentives', duration: '2-week program (virtual)', link: 'https://paytm.crack-ed.com/' },
   'Aviva Nirmaan Program - Direct Sales Executive': { details: 'CTC of Rs 3.5 LPA + variable', duration: '3-month program', link: 'https://avivads.crack-ed.com' },
   'Aviva Nirmaan Program - Agency Sales Executive': { details: 'CTC of Rs 3.5 LPA + variable', duration: '3-month program', link: 'https://avivaas.crack-ed.com' },
   'Poonawalla FinPro Career Program - Sales Executive': { details: 'CTC of upto Rs 2.76 LPA + incentives', duration: '3-week program', link: 'http://poonawallase.crack-ed.com/' },

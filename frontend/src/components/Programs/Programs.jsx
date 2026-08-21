@@ -285,7 +285,7 @@ const Programs = () => {
       'Piramal ProEdge Program - Relationship Manager': {
         programLabel: 'Piramal ProEdge Program',
         logo: piramalCardLogo,
-        details: 'Join as a Relationship Manager with a CTC of Rs 2.74 LPA + variable',
+        details: 'Join as a Relationship Manager with a CTC of Rs 2.74 LPA + Variable upto 3 LPA',
         duration: '3.5-month program',
         image: relationshipManagerPiramalImage,
       },
