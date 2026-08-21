@@ -336,7 +336,7 @@ const Programs = () => {
         programLabel: 'Bandhan Bank Aspiring Bank Champions Programme',
         shortProgramLabel: 'Bandhan Bank Aspiring Bank Champions Programme',
         logo: bandhanBankLogo,
-        details: 'Join as an Assistant Manager with a CTC of 4 LPA* + Incentives',
+        details: 'Join as an Assistant Manager with a CTC of 4 LPA* + Variables',
         duration: '6-month program',
         image: pgpbmDesktopImage,
       },
