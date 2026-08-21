@@ -6,3 +6,14 @@ backend/.env
 frontend/.env
 .env
 .env.local
+
+# Build output
+frontend/dist/
+frontend/dist-2/
+frontend/dist-3/
+
+# Runtime logs
+backend/nohup.out
+
+# Local backup files
+*.bak
