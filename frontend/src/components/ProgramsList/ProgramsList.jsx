@@ -52,7 +52,8 @@ const ProgramsList = () => {
         details: [
           'Join as an Assistant Manager with a CTC of 4 LPA*',
           '6-month program'
-        ]
+        ],
+        disclaimer: '*Variable Pay for all eligible employees will be paid over and above their Annual Fixed Pay. This is however subject to performance of the Bank, Department, and Individual*'
       },
       {
         program: 'Postgraduate Program',
@@ -429,6 +430,9 @@ const ProgramsList = () => {
                         <span className="detail-text">{detail}</span>
                       </div>
                     ))}
+                    {item.disclaimer && (
+                      <p className="program-disclaimer">{item.disclaimer}</p>
+                    )}
                   </div>
                 </div>
                 <div className="program-card-footer">

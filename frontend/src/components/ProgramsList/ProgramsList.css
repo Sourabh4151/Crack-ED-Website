@@ -438,6 +438,16 @@
   word-break: break-word;
 }
 
+.programs-list .program-disclaimer {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: 0%;
+  color: #FAFAFA;
+  margin: 4px 0 0;
+}
+
 .programs-list .program-card-footer {
   display: flex;
   align-items: center;
