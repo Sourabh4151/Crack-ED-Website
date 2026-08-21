@@ -338,6 +338,7 @@ const Programs = () => {
         logo: bandhanBankLogo,
         details: 'Join as an Assistant Manager with a CTC of 4 LPA*',
         duration: '6-month program',
+        disclaimer: '*Variable Pay for all eligible employees will be paid over and above their Annual Fixed Pay. This is however subject to performance of the Bank, Department, and Individual*',
         image: pgpbmDesktopImage,
       },
       'Postgraduate Program Retail Banking - Relationship Officer': {
@@ -375,6 +376,7 @@ const Programs = () => {
         title: card.title,
         details: prog.details,
         duration: prog.duration,
+        disclaimer: prog.disclaimer,
         image: prog.image,
         mobileImage: prog.mobileImage ?? prog.image,
         mobileBackgroundPosition: prog.mobileBackgroundPosition,
@@ -600,6 +602,9 @@ const Programs = () => {
                                 <img src={checkinbg} alt="check" className="mobile-program-check" />
                                 <span>{details.duration}</span>
                               </div>
+                              {details.disclaimer && (
+                                <p className="mobile-program-disclaimer">{details.disclaimer}</p>
+                              )}
                             </div>
                           </div>
                         </div>
@@ -666,6 +671,9 @@ const Programs = () => {
                           <li><DetailsText text={currentProgramDetails.details} /></li>
                           <li>{currentProgramDetails.duration}</li>
                         </ul>
+                        {currentProgramDetails.disclaimer && (
+                          <p className="program-disclaimer">{currentProgramDetails.disclaimer}</p>
+                        )}
                         <a href={appendUtmToUrl(programCards[featuredCardIndex]?.url || '#')} target="_blank" rel="noopener noreferrer" onClick={() => trackMicrositeClick(programCards[featuredCardIndex]?.title)}>
                           <button className="learn-more-button">Learn More</button>
                         </a>
