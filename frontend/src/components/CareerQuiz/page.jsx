@@ -57,7 +57,7 @@ const PROGRAM_DETAILS = {
   'Finova VyaparaMitra Program - Relationship Officer': { details: 'CTC of Rs 2.4 LPA + variable', duration: '1-month program', link: 'https://finovaro.crack-ed.com' },
   'Postgraduate Program Relationship Management - Relationship Manager': { details: 'CTC of Rs 5.5 LPA + incentives', duration: '6-month program', link: 'https://pgprm.crack-ed.com' },
   'Postgraduate Program Retail Banking - Relationship Officer': { details: 'CTC of upto Rs 3.1 LPA + incentives', duration: '3-week program', link: 'https://pgprb.crack-ed.com' },
-  'Bandhan Bank Aspiring Bank Champions Programme - Assistant Manager': { details: 'CTC of Rs 4 LPA + incentives', duration: '6-month program', link: 'https://bandhanbankassistantmanager.crack-ed.com/' },
+  'Bandhan Bank Aspiring Bank Champions Programme - Assistant Manager': { details: 'CTC of 4 LPA* + Incentives', duration: '6-month program', link: 'https://bandhanbankassistantmanager.crack-ed.com/' },
   'Banking Sales Program - Sales Officer': { details: 'CTC of Rs 2.75 LPA', duration: '3-week program', link: 'https://bspso.crack-ed.com' },
   'Mahindra Finance Prarambh Program - Business Executive': { details: 'CTC of Rs 3.5 LPA + incentives', duration: '1-month online program', link: 'https://mahindrafinancebe.crack-ed.com/' },
   'Postgraduate Certification Banking Management - Business Development Executive': { details: 'CTC of Rs 2.5 LPA + incentives', duration: '2-week program', link: 'https://pgcbm.crack-ed.com' },

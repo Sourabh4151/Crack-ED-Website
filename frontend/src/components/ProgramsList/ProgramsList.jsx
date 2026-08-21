@@ -50,7 +50,7 @@ const ProgramsList = () => {
         role: 'Assistant Manager',
         isPremium: true,
         details: [
-          'Join as an Assistant Manager with a CTC of Rs 4 LPA',
+          'Join as an Assistant Manager with a CTC of 4 LPA* + Incentives',
           '6-month program'
         ]
       },
