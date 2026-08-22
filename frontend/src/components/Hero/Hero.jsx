@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import heroImage from '../../assets/hero_section_image.png'
 import LogoCarousel from '../LogoCarousel/LogoCarousel'
 import EnquireModal from '../EnquireModal/EnquireModal'
 import './Hero.css'
@@ -20,7 +19,7 @@ const Hero = () => {
       <div className="hero-overlay"></div>
       <div className="hero-background">
         <img
-          src={heroImage}
+          src="/hero_section_image.webp"
           alt="Professional workspace"
           className="hero-bg-image"
           loading="eager"
