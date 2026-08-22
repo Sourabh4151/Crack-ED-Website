@@ -31,6 +31,8 @@ const Media = () => {
       image: img1,
       logo: loggo1,
       desc: "Crack-ED was honoured as the Skill Empowerment Institution of the Year at the BW Emerging Business Awards (7th Edition) by BW Businessworld, recognising our commitment to empowering young minds across India with confidence, clarity, and job-ready skills through accessible, outcome-driven learning.",
+      logoAlt: 'BW Businessworld',
+      imageAlt: 'BW Emerging Business Awards recognition',
       logoWidth: "290px",
       logoHeight: "37px",
     },
@@ -38,6 +40,8 @@ const Media = () => {
       image: bharatPhoto,
       logo: bharatLogo,
       desc: "Debojit Sen, founder of Crack-ED, received the Outstanding Achievement in Education Leadership 2026 award at the Bharat 2.0 Conclave in Mumbai. Presented by Dr. Kiran Bedi, the honor acknowledges his work in closing the gap between education and real-world employability in India.",
+      logoAlt: 'Bharat 2.0 Conclave',
+      imageAlt: 'Outstanding Achievement in Education Leadership award',
       logoWidth: "239px",
       logoHeight: "69px",
     },
@@ -45,6 +49,8 @@ const Media = () => {
       image: livemintPhoto,
       logo: mintLogo,
       desc: "Debojit Sen, Founder of Crack-ED, has been named in LiveMint 40 Under 40 India 2026, recognizing his efforts to align education with real career outcomes in India. Through Crack-ED, he continues to work on bridging the gap between academic learning and industry needs.",
+      logoAlt: 'LiveMint',
+      imageAlt: 'LiveMint 40 Under 40 India recognition',
       logoWidth: "239px",
       logoHeight: "69px",
     },
@@ -52,6 +58,8 @@ const Media = () => {
       image: img2,
       logo: logoHT,
       desc: "Crack-ED was featured in the Hindustan Times (Gurgaon Edition) for its work in building employability among young learners across India, highlighting our mission to make high-quality skills training and career pathways accessible to youth from tier-2 and tier-3 cities.",
+      logoAlt: 'Hindustan Times',
+      imageAlt: 'Hindustan Times feature on Crack-ED',
       logoWidth: "310px",
       logoHeight: "40px",
     },
@@ -59,6 +67,8 @@ const Media = () => {
       image: img3,
       logo: loggo3,
       desc: "Debojit Sen, founder of Crack-ED, was recognised in the BW Disrupt 40 Under 40 for reimagining what success can look like for young India, building Crack-ED to create access, exposure, and real career pathways for those who often don’t get the chance to dream differently.",
+      logoAlt: 'BW Disrupt',
+      imageAlt: 'BW Disrupt 40 Under 40 recognition',
       logoWidth: "139px",
       logoHeight: "64px",
     },
@@ -66,6 +76,8 @@ const Media = () => {
       image: img4,
       logo: loggo4,
       desc: "Crack-ED has been featured as a teaching case published by Ivey Publishing and the Harvard Business Review, and is used by leading business schools globally as an academic reference for strategy and entrepreneurship.",
+      logoAlt: 'Ivey Publishing',
+      imageAlt: 'Ivey Publishing and Harvard Business Review teaching case',
       logoWidth: "139px",
       logoHeight: "64px",
     },
@@ -73,6 +85,8 @@ const Media = () => {
       image: img5,
       logo: loggo5,
       desc: "Featured in The Times of India, Crack-ED is recognized as a credible leader in upskilling Indian youth and bridging employability gaps among graduates, highlighting our growing impact in India’s workforce readiness ecosystem.",
+      logoAlt: 'The Times of India',
+      imageAlt: 'Times of India feature on Crack-ED',
       logoWidth: "139px",
       logoHeight: "64px",
     },
@@ -126,7 +140,7 @@ const Media = () => {
                   <div className="sec11111">
                     <img
                       src={slide.image}
-                      alt="Recognition"
+                      alt={slide.imageAlt || 'Media recognition'}
                       className="slide-image"
                     />
                   </div>
@@ -134,7 +148,7 @@ const Media = () => {
                     <div className="content-wrapper">
                       <img
                         src={slide.logo}
-                        alt="Publisher Logo"
+                        alt={slide.logoAlt || ''}
                         style={{ width: slide.logoWidth, height: slide.logoHeight }}
                         className="publisher-logo"
                       />
@@ -156,7 +170,7 @@ const Media = () => {
                 <img
                   ref={imageRef}
                   src={slides[currentIndex].image}
-                  alt="Recognition"
+                  alt={slides[currentIndex].imageAlt || 'Media recognition'}
                   className="slide-image"
                 />
               </div>
@@ -166,7 +180,7 @@ const Media = () => {
                 <div ref={contentRef} className="content-wrapper">
                   <img
                     src={slides[currentIndex].logo}
-                    alt="Publisher Logo"
+                    alt={slides[currentIndex].logoAlt || ''}
                     style={{ width: slides[currentIndex].logoWidth, height: slides[currentIndex].logoHeight }}
                     className="publisher-logo"
                   />

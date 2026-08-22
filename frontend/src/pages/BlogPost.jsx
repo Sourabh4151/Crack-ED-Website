@@ -8,8 +8,10 @@ import BlogPostApiBody from '../components/BlogPostApi/BlogPostApiBody'
 import { BLOG_POSTS } from '../data/blogPosts'
 import { getApiBase } from '../services/crmService'
 import { fetchMarketingBlogDetail, peekMarketingBlogDetailCache } from '../services/blogApi'
-import { applyBlogPostMeta, clearBlogPostMeta, staticSeoDescription, absolutizeMediaUrl } from '../lib/blogPostMeta'
+import { staticSeoDescription, absolutizeMediaUrl } from '../lib/blogPostMeta'
 import './BlogPost.css'
+import SEO from '../components/SEO/SEO'
+import { PAGE_SEO, SITE_NAME, DEFAULT_LOGO, canonicalFor } from '../seo/site'
 
 const INTRO_TERMS = ['Property Evaluation (Tech Underwriting)', 'Credit Underwriting', 'Legal Underwriting', '(Tech Underwriting)', 'Tech Underwriting']
 
@@ -162,38 +164,22 @@ const BlogPost = () => {
     return () => observer.disconnect()
   }, [id, staticPost?.toc?.length])
 
-  useEffect(() => {
-    if (loadState === 'loading') {
-      return undefined
-    }
-    if (!staticPost && loadState === 'notfound') {
-      clearBlogPostMeta()
-      return undefined
-    }
-    if (apiPost && !staticPost) {
-      const pageTitle = (apiPost.meta_title || '').trim() || `${apiPost.title} | CRACK-ED`
-      const description = (apiPost.meta_description || apiPost.excerpt || '').trim() || apiPost.title
-      applyBlogPostMeta({
-        pageTitle,
-        description,
-        imageUrl: absolutizeMediaUrl(apiPost.cover_image_url || ''),
-      })
-      return () => clearBlogPostMeta()
-    }
-    if (staticPost) {
-      applyBlogPostMeta({
-        pageTitle: `${staticPost.title} | CRACK-ED`,
-        description: staticSeoDescription(staticPost),
-        imageUrl: absolutizeMediaUrl(typeof staticPost.image === 'string' ? staticPost.image : ''),
-      })
-      return () => clearBlogPostMeta()
-    }
-    return undefined
-  }, [id, loadState, staticPost, apiPost])
+  const blogPath = `/resources/blog/${id}`
+  const blogBreadcrumbs = (label) => [
+    { name: 'Home', path: '/' },
+    { name: 'Resources', path: '/resources' },
+    { name: label, path: blogPath },
+  ]
 
   if (!staticPost && loadState === 'loading') {
     return (
       <div className="blog-post-page">
+        <SEO
+          title="Loading… | CRACK-ED"
+          description={PAGE_SEO.resources.description}
+          path={blogPath}
+          breadcrumbs={blogBreadcrumbs('Blog')}
+        />
         <Header />
         <div className="blog-post-scroll blog-post-loading">
           <p className="blog-post-loading-text">Loading…</p>
@@ -204,8 +190,37 @@ const BlogPost = () => {
   }
 
   if (apiPost && !staticPost) {
+    const apiTitle = (apiPost.meta_title || '').trim() || `${apiPost.title} | CRACK-ED`
+    const apiDescription = (apiPost.meta_description || apiPost.excerpt || '').trim() || apiPost.title
+    const apiImage = absolutizeMediaUrl(apiPost.cover_image_url || '')
+    const apiUrl = canonicalFor(blogPath)
     return (
       <div className="blog-post-page">
+        <SEO
+          title={apiTitle}
+          description={apiDescription}
+          path={blogPath}
+          ogType="article"
+          ogImage={apiImage}
+          breadcrumbs={blogBreadcrumbs(apiPost.title)}
+          jsonLd={{
+            '@context': 'https://schema.org',
+            '@type': 'Article',
+            headline: apiPost.title,
+            description: apiDescription,
+            url: apiUrl,
+            mainEntityOfPage: apiUrl,
+            image: apiImage || undefined,
+            author: apiPost.author
+              ? { '@type': 'Person', name: apiPost.author }
+              : { '@type': 'Organization', name: SITE_NAME },
+            publisher: {
+              '@type': 'Organization',
+              name: SITE_NAME,
+              logo: { '@type': 'ImageObject', url: DEFAULT_LOGO },
+            },
+          }}
+        />
         <Header />
         <div className="blog-post-scroll" ref={scrollRef}>
           <article className="blog-post">
@@ -294,6 +309,13 @@ const BlogPost = () => {
   if (!staticPost && loadState === 'notfound') {
     return (
       <div className="blog-post-page">
+        <SEO
+          title={PAGE_SEO.blogNotFound.title}
+          description={PAGE_SEO.blogNotFound.description}
+          path={blogPath}
+          robots="noindex, follow"
+          breadcrumbs={blogBreadcrumbs('Blog')}
+        />
         <Header />
         <div className="blog-post-scroll">
           <div className="blog-post-not-found">
@@ -312,9 +334,38 @@ const BlogPost = () => {
   }
 
   const post = staticPost
+  const staticTitle = `${post.title} | CRACK-ED`
+  const staticDescription = staticSeoDescription(post)
+  const staticImage = absolutizeMediaUrl(typeof post.image === 'string' ? post.image : '')
+  const staticUrl = canonicalFor(blogPath)
 
   return (
     <div className="blog-post-page">
+      <SEO
+        title={staticTitle}
+        description={staticDescription}
+        path={blogPath}
+        ogType="article"
+        ogImage={staticImage}
+        breadcrumbs={blogBreadcrumbs(post.title)}
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'Article',
+          headline: post.title,
+          description: staticDescription,
+          url: staticUrl,
+          mainEntityOfPage: staticUrl,
+          image: staticImage || undefined,
+          author: post.author
+            ? { '@type': 'Person', name: post.author }
+            : { '@type': 'Organization', name: SITE_NAME },
+          publisher: {
+            '@type': 'Organization',
+            name: SITE_NAME,
+            logo: { '@type': 'ImageObject', url: DEFAULT_LOGO },
+          },
+        }}
+      />
       <Header />
       <div className="blog-post-scroll" ref={scrollRef}>
         <article className="blog-post">
@@ -351,7 +402,7 @@ const BlogPost = () => {
                       <div className="blog-post-video-wrap">
                         <iframe
                           src={embedSrc}
-                          title="YouTube video"
+                          title={`${post.title} video`}
                           frameBorder="0"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                           allowFullScreen

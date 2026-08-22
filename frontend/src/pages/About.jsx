@@ -8,10 +8,21 @@ import Leadership from '../components/Leadership/Leadership'
 import EnquireSection from '../components/EnquireSection/EnquireSection'
 import Footer from '../components/Footer/Footer'
 import './About.css'
+import SEO from '../components/SEO/SEO'
+import { PAGE_SEO } from '../seo/site'
 
 const About = () => {
   return (
     <div className="about-page">
+      <SEO
+        title={PAGE_SEO.about.title}
+        description={PAGE_SEO.about.description}
+        path={PAGE_SEO.about.path}
+        breadcrumbs={[
+          { name: 'Home', path: '/' },
+          { name: 'About Us', path: '/about' },
+        ]}
+      />
       <Header />
       <AboutHero />
       <BuildingCareers />

@@ -29,10 +29,10 @@ const ExploreOtherBlogs = ({ currentPostId }) => {
             >
               <article className="resources-filter-card">
                 <div className="resources-filter-card-image">
-                  <img src={post.image} alt="" />
+                  <img src={post.image} alt={post.title || ''} />
                 </div>
                 <div className="resources-filter-card-content">
-                  <h2 className="resources-filter-card-title">{post.title}</h2>
+                  <h3 className="resources-filter-card-title">{post.title}</h3>
                   <time className="resources-filter-card-date">{post.date}</time>
                   <div className="resources-filter-card-tags">
                     {post.tags?.map((tag) => (

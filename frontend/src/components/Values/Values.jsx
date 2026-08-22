@@ -44,7 +44,7 @@ const Values = () => {
     <section className="values-section">
       <div className="values-container">
         <div className="values-header">
-          <div className="values-badge">Values That Define Us</div>
+          <h2 className="values-badge">Values That Define Us</h2>
           <p className="values-intro">
             Our values shape how we work, grow, and succeed together. They guide our decisions, our culture, and the way we show up every day.
           </p>

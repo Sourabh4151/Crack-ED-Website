@@ -572,7 +572,7 @@ const Programs = () => {
                         <div className="mobile-program-card-image">
                           <img
                             src={details.mobileImage || details.image}
-                            alt=""
+                            alt={getDisplayTitle(details.title) || details.programLabel || ''}
                             loading="lazy"
                             decoding="async"
                             style={{
@@ -599,11 +599,11 @@ const Programs = () => {
                             <h3 className="mobile-program-card-title">{getDisplayTitle(details.title)}</h3>
                             <div className="mobile-program-card-details">
                               <div className="mobile-program-card-detail">
-                                <img src={checkinbg} alt="check" className="mobile-program-check" />
+                                <img src={checkinbg} alt="" className="mobile-program-check" />
                                 <span><DetailsText text={details.details} /></span>
                               </div>
                               <div className="mobile-program-card-detail">
-                                <img src={checkinbg} alt="check" className="mobile-program-check" />
+                                <img src={checkinbg} alt="" className="mobile-program-check" />
                                 <span>{details.duration}</span>
                               </div>
                               {details.disclaimer && (
@@ -686,7 +686,7 @@ const Programs = () => {
                   </div>
 
                   <div className="program-card-image">
-                    <img src={currentProgramDetails.image} alt="Program Store" className="program-store-image" />
+                    <img src={currentProgramDetails.image} alt={currentProgramDetails.programLabel || currentProgramDetails.title || ''} className="program-store-image" />
                   </div>
                 </div>
               )}

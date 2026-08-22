@@ -56,7 +56,7 @@ const ResourcesFilter = ({ blogCards = [], activeCategory = 'all', onCategoryCha
             {filteredCards.map((card) => (
               <article key={`${card.source || 'x'}-${card.id}`} className="resources-filter-card">
                 <div className="resources-filter-card-image">
-                  <img src={card.image} alt="" />
+                  <img src={card.image} alt={card.title || ''} />
                 </div>
                 <div className="resources-filter-card-content">
                   <h2 className="resources-filter-card-title">{card.title}</h2>
@@ -76,6 +76,7 @@ const ResourcesFilter = ({ blogCards = [], activeCategory = 'all', onCategoryCha
                     <Link
                       to={`/resources/blog/${card.id}`}
                       className="resources-filter-card-read-more"
+                      aria-label={`Read ${card.title}`}
                       onMouseEnter={() => prefetchMarketingBlogCard(card)}
                       onFocus={() => prefetchMarketingBlogCard(card)}
                       onTouchStart={() => prefetchMarketingBlogCard(card)}

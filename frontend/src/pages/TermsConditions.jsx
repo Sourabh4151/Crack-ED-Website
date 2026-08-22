@@ -2,10 +2,21 @@ import React from 'react'
 import Header from '../components/Header/Header'
 import Footer from '../components/Footer/Footer'
 import './TermsConditions.css'
+import SEO from '../components/SEO/SEO'
+import { PAGE_SEO } from '../seo/site'
 
 const TermsConditions = () => {
   return (
     <div className="terms-page">
+      <SEO
+        title={PAGE_SEO.terms.title}
+        description={PAGE_SEO.terms.description}
+        path={PAGE_SEO.terms.path}
+        breadcrumbs={[
+          { name: 'Home', path: '/' },
+          { name: 'Terms & Conditions', path: '/terms-conditions' },
+        ]}
+      />
       <Header />
       <main className="terms-main">
         <section className="terms-card">

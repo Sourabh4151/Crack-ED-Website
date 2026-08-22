@@ -8,6 +8,8 @@ import Footer from '../components/Footer/Footer'
 import { useMergedBlogPosts } from '../hooks/useMergedBlogPosts'
 import { fetchFeaturedMarketingBlog, prefetchMarketingBlogDetail } from '../services/blogApi'
 import './Resources.css'
+import SEO from '../components/SEO/SEO'
+import { PAGE_SEO } from '../seo/site'
 
 const Resources = () => {
   const { cards } = useMergedBlogPosts()
@@ -24,6 +26,15 @@ const Resources = () => {
 
   return (
     <div className="resources-page">
+      <SEO
+        title={PAGE_SEO.resources.title}
+        description={PAGE_SEO.resources.description}
+        path={PAGE_SEO.resources.path}
+        breadcrumbs={[
+          { name: 'Home', path: '/' },
+          { name: 'Resources', path: '/resources' },
+        ]}
+      />
       <Header />
       <div className="resources-scroll-wrapper">
         <ResourcesHero />

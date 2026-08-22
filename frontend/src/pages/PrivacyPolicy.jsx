@@ -2,10 +2,21 @@ import React from 'react'
 import Header from '../components/Header/Header'
 import Footer from '../components/Footer/Footer'
 import './PrivacyPolicy.css'
+import SEO from '../components/SEO/SEO'
+import { PAGE_SEO } from '../seo/site'
 
 const PrivacyPolicy = () => {
   return (
     <div className="privacy-page">
+      <SEO
+        title={PAGE_SEO.privacy.title}
+        description={PAGE_SEO.privacy.description}
+        path={PAGE_SEO.privacy.path}
+        breadcrumbs={[
+          { name: 'Home', path: '/' },
+          { name: 'Privacy Policy', path: '/privacy-policy' },
+        ]}
+      />
       <Header />
       <main className="privacy-main">
         <section className="privacy-card">

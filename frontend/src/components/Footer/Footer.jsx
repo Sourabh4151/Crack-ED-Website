@@ -157,7 +157,7 @@ const Footer = () => {
           <div className="footer-sections-group">
             {/* Quick Links Section */}
             <div className="footer-column footer-quick-links">
-              <h3 className="footer-heading">QUICK LINKS</h3>
+              <h2 className="footer-heading">QUICK LINKS</h2>
               <ul className="footer-links">
                 <li><Link to="/">Home</Link></li>
                 <li><Link to="/about">About Us</Link></li>
@@ -171,7 +171,7 @@ const Footer = () => {
 
             {/* Job-Linked Programs Section */}
             <div className="footer-column footer-programs-column">
-              <h3 className="footer-heading">JOB-LINKED PROGRAMS</h3>
+              <h2 className="footer-heading">JOB-LINKED PROGRAMS</h2>
               <div className="footer-program-dropdowns">
                 {PROGRAMS.map((program) => {
                   const isOpen = openProgram === program.id
@@ -226,7 +226,7 @@ const Footer = () => {
             {/* Contact Us and Follow Us Section */}
             <div className="footer-column footer-contact-column">
               <div className="footer-contact">
-                <h3 className="footer-heading">CONTACT US</h3>
+                <h2 className="footer-heading">CONTACT US</h2>
                 <div className="contact-info">
                   <div className="contact-item">
                     <svg className="contact-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -243,7 +243,7 @@ const Footer = () => {
                 </div>
               </div>
               <div className="footer-social">
-                <h3 className="footer-heading">FOLLOW US</h3>
+                <h2 className="footer-heading">FOLLOW US</h2>
                 <div className="social-icons">
                   <a href="https://www.instagram.com/crack_ed_now/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="social-icon">
                     <img src={instagramIcon} alt="Instagram" />

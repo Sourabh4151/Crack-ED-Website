@@ -5,6 +5,8 @@ import ProgramsHero from '../components/ProgramsHero/ProgramsHero'
 import ProgramsList from '../components/ProgramsList/ProgramsList'
 import Footer from '../components/Footer/Footer'
 import './Programs.css'
+import SEO from '../components/SEO/SEO'
+import { PAGE_SEO } from '../seo/site'
 
 const Programs = () => {
   const location = useLocation()
@@ -20,6 +22,15 @@ const Programs = () => {
 
   return (
     <div className="programs-page">
+      <SEO
+        title={PAGE_SEO.programs.title}
+        description={PAGE_SEO.programs.description}
+        path={PAGE_SEO.programs.path}
+        breadcrumbs={[
+          { name: 'Home', path: '/' },
+          { name: 'All Programs', path: '/programs' },
+        ]}
+      />
       <Header />
       <ProgramsHero />
       <ProgramsList />

@@ -98,7 +98,7 @@ const CareerForward = () => {
     <section ref={sectionRef} className="career-forward-section11">
       <div className="sticky-wrapperCareerForward">
 
-        <h2 ref={textRef} className="career-forward-text" style={{ fontSize: '150px', lineHeight: '140px' }}>
+        <h2 ref={textRef} className="career-forward-text" style={{ fontSize: '150px', lineHeight: '140px' }} aria-hidden="true">
           <span className="text-line">Ready To Move</span>
           <span className="text-line">Your Career</span>
           <span className="text-line">Forward?</span>

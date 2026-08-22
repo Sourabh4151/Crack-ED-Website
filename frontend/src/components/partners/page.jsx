@@ -37,6 +37,7 @@ const Partners = () => {
       ownerName: "Manoj Tibrewal",
       ownerDesiganation: "Group Head - Human Resources, Adminstration, & Infrastructure",
       logoWidth: "111px",
+      logoAlt: "AU Small Finance Bank",
     },
     {
       image: img2,
@@ -46,6 +47,7 @@ const Partners = () => {
       ownerName: "Archana Vadala",
       ownerDesiganation: "Global Head of Talent & Inclusion",
       logoWidth: "176px",
+      logoAlt: "Lenskart",
     },
     {
       image: img3,
@@ -55,6 +57,7 @@ const Partners = () => {
       ownerName: "Keyur Shah",
       ownerDesiganation: "Senior Vice President - Head Talent Acquisition & Campus Relations",
       logoWidth: "134px",
+      logoAlt: "Partner logo",
     },
     {
       image: img4,
@@ -65,6 +68,7 @@ const Partners = () => {
       ownerName: "Amit Jain",
       ownerDesiganation: "CEO, GFTP",
       logoWidth: "236px",
+      logoAlt: "Piramal",
     },
   ];
 
@@ -158,7 +162,7 @@ const Partners = () => {
               <div ref={contentRef} className="content-wrapper123">
                 <img
                   src={slides[currentIndex].logo}
-                  alt="Logo"
+                  alt={slides[currentIndex].logoAlt || ''}
                   style={{ width: slides[currentIndex].logoWidth, marginBottom: '8px' }}
                   className="publisher-logo"
                 />

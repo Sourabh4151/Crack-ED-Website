@@ -4,6 +4,13 @@ import Header from '../components/Header/Header'
 import Footer from '../components/Footer/Footer'
 import { getApiBase, getUtmParams, isBackendUnreachable, BACKEND_DOWN_MESSAGE } from '../services/crmService'
 import './JobDetail.css'
+import SEO from '../components/SEO/SEO'
+import { PAGE_SEO } from '../seo/site'
+
+const JOB_BREADCRUMBS_BASE = [
+  { name: 'Home', path: '/' },
+  { name: 'Careers', path: '/careers' },
+]
 
 const JobDetail = () => {
   const { id } = useParams()
@@ -200,6 +207,12 @@ const JobDetail = () => {
   if (jobLoading) {
     return (
       <div className="job-detail-page">
+        <SEO
+          title={PAGE_SEO.jobFallback.title}
+          description={PAGE_SEO.jobFallback.description}
+          path={`/careers/job/${id}`}
+          breadcrumbs={[...JOB_BREADCRUMBS_BASE, { name: 'Job Opening', path: `/careers/job/${id}` }]}
+        />
         <Header />
         <section className="job-detail-section">
           <div className="job-detail-container" style={{ padding: '2rem', textAlign: 'center' }}>
@@ -213,6 +226,13 @@ const JobDetail = () => {
   if (jobError || !job) {
     return (
       <div className="job-detail-page">
+        <SEO
+          title="Job Not Found | CRACK-ED"
+          description={PAGE_SEO.jobFallback.description}
+          path={`/careers/job/${id}`}
+          robots="noindex, follow"
+          breadcrumbs={[...JOB_BREADCRUMBS_BASE, { name: 'Job Opening', path: `/careers/job/${id}` }]}
+        />
         <Header />
         <section className="job-detail-section">
           <div className="job-detail-container" style={{ padding: '2rem', textAlign: 'center' }}>
@@ -232,6 +252,12 @@ const JobDetail = () => {
 
   return (
     <div className="job-detail-page">
+      <SEO
+        title={`${job.title} | Careers | CRACK-ED`}
+        description={(description.roleOverview || description.aboutUs || PAGE_SEO.jobFallback.description).replace(/\s+/g, ' ').trim().slice(0, 160)}
+        path={`/careers/job/${id}`}
+        breadcrumbs={[...JOB_BREADCRUMBS_BASE, { name: job.title, path: `/careers/job/${id}` }]}
+      />
       <Header />
       <section className="job-detail-section">
         <div className="job-detail-container">

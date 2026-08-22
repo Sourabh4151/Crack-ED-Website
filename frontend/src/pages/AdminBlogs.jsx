@@ -10,6 +10,8 @@ import {
 } from '../services/blogApi'
 import { getApiBase } from '../services/crmService'
 import './AdminBlogs.css'
+import SEO from '../components/SEO/SEO'
+import { PAGE_SEO } from '../seo/site'
 
 const AdminBlogs = () => {
   const navigate = useNavigate()
@@ -93,6 +95,13 @@ const AdminBlogs = () => {
 
   return (
     <div className="admin-blog-viewport">
+      <SEO
+        title={PAGE_SEO.adminBlogs.title}
+        description={PAGE_SEO.adminBlogs.description}
+        path={PAGE_SEO.adminBlogs.path}
+        robots={PAGE_SEO.adminBlogs.robots}
+        includeOrganization={false}
+      />
       <div className="admin-blogs-page">
       <header className="admin-blogs-header">
         <h1>Marketing — Blogs</h1>

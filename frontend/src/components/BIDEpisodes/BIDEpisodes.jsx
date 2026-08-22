@@ -58,7 +58,7 @@ const BIDEpisodes = () => {
   return (
     <section className="bid-episodes">
       <div className="bid-episodes-inner">
-        <p className="bid-episodes-header-cta">Listen To Our Latest Episodes</p>
+        <h2 className="bid-episodes-header-cta">Listen To Our Latest Episodes</h2>
 
         <div className="bid-episodes-grid">
           <a

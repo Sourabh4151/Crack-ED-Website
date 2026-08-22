@@ -2,10 +2,21 @@ import React from 'react'
 import Header from '../components/Header/Header'
 import Footer from '../components/Footer/Footer'
 import './RefundPolicy.css'
+import SEO from '../components/SEO/SEO'
+import { PAGE_SEO } from '../seo/site'
 
 const RefundPolicy = () => {
   return (
     <div className="refund-page">
+      <SEO
+        title={PAGE_SEO.refund.title}
+        description={PAGE_SEO.refund.description}
+        path={PAGE_SEO.refund.path}
+        breadcrumbs={[
+          { name: 'Home', path: '/' },
+          { name: 'Refund Policy', path: '/refund-policy' },
+        ]}
+      />
       <Header />
       <main className="refund-main">
         <section className="refund-card">

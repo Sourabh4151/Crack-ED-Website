@@ -14,11 +14,11 @@ const ResourcesBlogCard = ({ title, date, description, link, image, prefetchBlog
     : {}
   const isExternal = link?.startsWith('http')
   const readMore = isExternal ? (
-    <a href={link} className="resources-blog-card-read-more" target="_blank" rel="noopener noreferrer">
+    <a href={link} className="resources-blog-card-read-more" target="_blank" rel="noopener noreferrer" aria-label={title ? `Read ${title}` : 'Read more'}>
       Read More
     </a>
   ) : (
-    <Link to={link || '/resources/blog/1'} className="resources-blog-card-read-more" {...prefetchHandlers}>
+    <Link to={link || '/resources/blog/1'} className="resources-blog-card-read-more" aria-label={title ? `Read ${title}` : 'Read more'} {...prefetchHandlers}>
       Read More
     </Link>
   )
@@ -26,7 +26,7 @@ const ResourcesBlogCard = ({ title, date, description, link, image, prefetchBlog
   return (
     <article className="resources-blog-card">
       <div className="resources-blog-card-image">
-        <img src={image || beginnerImage} alt="" />
+        <img src={image || beginnerImage} alt={title || ''} />
       </div>
       <div className="resources-blog-card-content">
         <h2 className="resources-blog-card-title">{title}</h2>

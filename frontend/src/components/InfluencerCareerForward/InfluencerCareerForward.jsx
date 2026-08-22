@@ -10,10 +10,10 @@ const InfluencerCareerForward = () => {
       <div className="inf-cf-sticky-wrapper">
         <div className="inf-cf-container inf-cf-container-visible">
           <div className="inf-cf-content">
-            <h2 className="inf-cf-heading">
+            <h1 className="inf-cf-heading">
               2,400+ careers <br /> <span style={{ whiteSpace: 'nowrap' }}>transformed. Yours</span>
               <br /> could be next.
-            </h2>
+            </h1>
             <p className="inf-cf-paragraph">
             Crack-ED doesn't just teach. We place you in real work environments through job-linked programs and on-job training with leading corporates. Take our career quiz to find the program that's right for you.
             </p>

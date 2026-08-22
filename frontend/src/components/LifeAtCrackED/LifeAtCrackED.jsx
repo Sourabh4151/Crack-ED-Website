@@ -26,7 +26,7 @@ const LifeAtCrackED = () => {
     <section className="life-at-cracked-section">
       <div className="life-at-cracked-container">
         <div className="life-at-cracked-content">
-          <div className="life-at-cracked-badge">Life At Crack-ED</div>
+          <h2 className="life-at-cracked-badge">Life At Crack-ED</h2>
           <p className="life-at-cracked-text">
             At Crack-ED, work feels less like a 9-to-5 and more like a journey of curiosity and growth. We're a bunch of dreamers who believe learning should never be boring and neither should work. Here, ideas flow freely, innovation is celebrated, and every voice matters. Whether it's brainstorming over chai, solving problems, or celebrating wins (big or small), we make sure there's energy, fun, and purpose in everything we do. If you're someone who loves learning, experimenting, and making an impact you'll feel right at home at Crack-ED.
           </p>

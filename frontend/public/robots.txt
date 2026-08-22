@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Disallow: /marketing/
+
+Sitemap: https://crack-ed.com/sitemap.xml

@@ -13,6 +13,8 @@ import {
 } from '../services/blogApi'
 import { getApiBase } from '../services/crmService'
 import './AdminBlogs.css'
+import SEO from '../components/SEO/SEO'
+import { PAGE_SEO } from '../seo/site'
 
 const emptyDoc = () => ({ type: 'doc', content: [{ type: 'paragraph' }] })
 
@@ -147,9 +149,20 @@ const AdminBlogEdit = () => {
     }
   }
 
+  const adminSeo = (
+    <SEO
+      title={isNew ? 'New Blog | CRACK-ED' : `Edit Blog | CRACK-ED`}
+      description={PAGE_SEO.adminBlogEdit.description}
+      path={isNew ? '/marketing/blogs/new' : `/marketing/blogs/edit/${id}`}
+      robots={PAGE_SEO.adminBlogEdit.robots}
+      includeOrganization={false}
+    />
+  )
+
   if (loading) {
     return (
       <div className="admin-blog-viewport">
+        {adminSeo}
         <div className="admin-blogs-page">
           <p className="admin-blogs-muted">Loading…</p>
         </div>
@@ -160,6 +173,7 @@ const AdminBlogEdit = () => {
   if (!sessionReady) {
     return (
       <div className="admin-blog-viewport">
+        {adminSeo}
         <div className="admin-blogs-page">
           <p className="admin-blogs-muted">Loading…</p>
         </div>
@@ -169,6 +183,7 @@ const AdminBlogEdit = () => {
 
   return (
     <div className="admin-blog-viewport">
+      {adminSeo}
       <div className="admin-blogs-page admin-blog-edit">
       <p>
         <Link className="admin-blogs-link" to="/marketing/blogs">

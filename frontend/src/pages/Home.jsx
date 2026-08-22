@@ -15,10 +15,18 @@ import Analyse from '../components/analyse/page'
 import EnquireSection from '../components/EnquireSection/EnquireSection'
 import Partners from '../components/partners/page'
 import FloatingSteps from '../components/FloatingSteps/page'
+import SEO from '../components/SEO/SEO'
+import { PAGE_SEO } from '../seo/site'
 
 const Home = () => {
   return (
     <div className="home-page">
+      <SEO
+        title={PAGE_SEO.home.title}
+        description={PAGE_SEO.home.description}
+        path={PAGE_SEO.home.path}
+        includeWebsite
+      />
       <Header />
       <Hero />   <Programs />
       <CareerForward />
