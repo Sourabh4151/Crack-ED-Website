@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Header from '../components/Header/Header'
 import Hero from '../components/Hero/Hero'
 import Programs from '../components/Programs/Programs'
@@ -18,7 +20,23 @@ import FloatingSteps from '../components/FloatingSteps/page'
 import SEO from '../components/SEO/SEO'
 import { PAGE_SEO } from '../seo/site'
 
+gsap.registerPlugin(ScrollTrigger)
+
 const DESKTOP_MQ = '(min-width: 769px)'
+const CALIBRATE_PIN_SELECTORS = '.analyse, .career-forward-sectionWhychooseus'
+
+const unpinCalibrateSections = () => {
+  const nodes = document.querySelectorAll(CALIBRATE_PIN_SELECTORS)
+  if (!nodes.length) return
+  ScrollTrigger.getAll().forEach((st) => {
+    for (const node of nodes) {
+      if (st.trigger === node) {
+        st.kill()
+        break
+      }
+    }
+  })
+}
 
 const Home = () => {
   const [isDesktop, setIsDesktop] = useState(
@@ -27,10 +45,12 @@ const Home = () => {
 
   useEffect(() => {
     const mq = window.matchMedia(DESKTOP_MQ)
-    const sync = () => setIsDesktop(mq.matches)
-    sync()
-    mq.addEventListener('change', sync)
-    return () => mq.removeEventListener('change', sync)
+    const onBreakpoint = () => {
+      unpinCalibrateSections()
+      setIsDesktop(mq.matches)
+    }
+    mq.addEventListener('change', onBreakpoint)
+    return () => mq.removeEventListener('change', onBreakpoint)
   }, [])
 
   return (

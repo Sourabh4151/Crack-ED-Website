@@ -16,26 +16,55 @@ const Whychooseus = () => {
 
     let cancelled = false
     let ctx = null
+    const mq = window.matchMedia('(max-width: 768px)')
 
-    const initAnimation = () => {
-      if (cancelled || ctx) return
-
-      gsap.registerPlugin(ScrollTrigger)
-
+    const teardown = () => {
+      if (ctx) {
+        ctx.revert()
+        ctx = null
+      }
       ScrollTrigger.getAll().forEach((st) => {
         if (st.trigger === root) st.kill()
       })
+    }
+
+    const initAnimation = () => {
+      if (cancelled) return
+
+      teardown()
+
+      gsap.registerPlugin(ScrollTrigger)
 
       const chars = revealRef.current?.querySelectorAll('.char')
       if (!chars?.length) return
 
-      const isMobile = window.matchMedia('(max-width: 768px)').matches
+      const isMobile = mq.matches
+
+      if (isMobile) {
+        ScrollTrigger.config({ ignoreMobileResize: true })
+      }
 
       ctx = gsap.context(() => {
         gsap.set(chars, {
           opacity: 0.15,
           color: "#fafafa"
         })
+
+        if (isMobile) {
+          const pinHeight = `${Math.round(window.innerHeight)}px`
+          const wrap = root.querySelector('.sticky-wrapper')
+          gsap.set(root, {
+            height: pinHeight,
+            minHeight: pinHeight,
+            maxHeight: pinHeight
+          })
+          if (wrap) {
+            gsap.set(wrap, {
+              height: pinHeight,
+              transform: `translateY(${Math.round(window.innerHeight * 0.08)}px)`
+            })
+          }
+        }
 
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -44,9 +73,9 @@ const Whychooseus = () => {
             end: "+=1000",
             scrub: true,
             pin: true,
-            pinType: isMobile ? 'transform' : 'fixed',
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
+            pinType: 'fixed',
+            anticipatePin: isMobile ? 0 : 1,
+            invalidateOnRefresh: !isMobile,
           }
         })
         tl.to(textRef.current, {
@@ -68,12 +97,13 @@ const Whychooseus = () => {
       }, root)
 
       if (cancelled && ctx) {
-        ctx.revert()
-        ctx = null
+        teardown()
         return
       }
 
-      ScrollTrigger.refresh()
+      if (!isMobile) {
+        ScrollTrigger.refresh()
+      }
     }
 
     const observer = new IntersectionObserver(
@@ -87,10 +117,24 @@ const Whychooseus = () => {
     )
     observer.observe(root)
 
+    const onBreakpoint = () => {
+      teardown()
+      gsap.set(root, {
+        clearProps: 'height,minHeight,maxHeight,position,top,left,right,bottom,width,maxWidth,zIndex,margin,padding,transform,inset'
+      })
+      const wrap = root.querySelector('.sticky-wrapper')
+      if (wrap) {
+        gsap.set(wrap, { clearProps: 'height,transform' })
+      }
+      observer.observe(root)
+    }
+    mq.addEventListener('change', onBreakpoint)
+
     return () => {
       cancelled = true
       observer.disconnect()
-      if (ctx) ctx.revert()
+      mq.removeEventListener('change', onBreakpoint)
+      teardown()
     }
   }, [])
 
