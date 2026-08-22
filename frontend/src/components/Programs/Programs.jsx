@@ -597,7 +597,7 @@ const Programs = () => {
                               )
                             })()}
                             <div className="mobile-program-card-label">{details.shortProgramLabel ?? details.programLabel}</div>
-                            <h3 className="mobile-program-card-title">{getDisplayTitle(details.title)}</h3>
+                            <div className="mobile-program-card-title">{getDisplayTitle(details.title)}</div>
                             <div className="mobile-program-card-details">
                               <div className="mobile-program-card-detail">
                                 <img src={checkinbg} alt="" className="mobile-program-check" />
@@ -669,9 +669,9 @@ const Programs = () => {
                         {currentProgramDetails.programLabel || 'Lenskart Program'}
                       </div>
                       <div className="program-details">
-                        <h3 className="program-card-title">
+                        <div className="program-card-title">
                           {getDisplayTitle(currentProgramDetails.title)}
-                        </h3>
+                        </div>
                         <ul className="program-info-list">
                           <li><DetailsText text={currentProgramDetails.details} /></li>
                           <li>{currentProgramDetails.duration}</li>
