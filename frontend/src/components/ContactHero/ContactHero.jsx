@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react'
-import contactHeroImage from '../../assets/Contact.png'
+import contactHeroImage from '../../assets/Contact.webp'
 import contactTickIcon from '../../assets/contact_tick.svg'
 import { submitLeadToCRM, isBackendUnreachable, BACKEND_DOWN_MESSAGE } from '../../services/crmService'
 import { trackGenerateLead } from '../../utils/analytics'
