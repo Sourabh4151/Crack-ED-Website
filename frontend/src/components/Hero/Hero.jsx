@@ -19,9 +19,15 @@ const Hero = () => {
     <section className="hero">
       <div className="hero-overlay"></div>
       <div className="hero-background">
-        <img src={heroImage} alt="Professional workspace" className="hero-bg-image" />
+        <img
+          src={heroImage}
+          alt="Professional workspace"
+          className="hero-bg-image"
+          loading="eager"
+          fetchPriority="high"
+        />
       </div>
-      
+
       <div className="hero-content">
         <div className="hero-container">
           <div className="hero-text-section">
@@ -39,7 +45,7 @@ const Hero = () => {
                 Apply. Learn with our ABC model. Get hired.
               </p>
             </div>
-            <button 
+            <button
               className="hero-cta-button"
               onClick={handleEnquireClick}
             >
