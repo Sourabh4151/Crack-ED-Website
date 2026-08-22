@@ -125,7 +125,12 @@ const Header = () => {
 
     const handleScroll = () => {
       const scrollPosition = getScrollPosition(scrollTarget)
-      setIsScrolled(scrollPosition > scrollThreshold)
+      const nextScrolled = scrollPosition > scrollThreshold
+
+setIsScrolled(prev => {
+  if (prev === nextScrolled) return prev
+  return nextScrolled
+})
     }
 
     handleScroll()

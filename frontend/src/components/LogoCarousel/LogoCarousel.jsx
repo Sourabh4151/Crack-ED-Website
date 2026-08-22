@@ -4,14 +4,12 @@ import paytmLogoGreyscale from '../../assets/paytm_greyscale_new.png'
 import piramalLogoGreyscale from '../../assets/piramal_greyscale_new.png'
 import testbookLogo from '../../assets/testbook.png'
 import LAPDP3Qlogos from '../../assets/finova_greyscale_new.png'
-// import InsuranceDekho from '../../assets/InsuranceDekho_greyscale_new.png'
-import InsuranceDekho from "../../assets/insurancedekho_greyscale_new.png";
+import InsuranceDekho from "../../assets/insurancedekho_greyscale_new.png"
 import auLogoGreyscale from '../../assets/au_logo_greyscale.png'
 import greenfinchLogo from '../../assets/greenfinch_greyscale_new.png'
 import nivabupaLogo from '../../assets/nivabupa_greyscale_new.png'
 import skfinanceLogo from '../../assets/skfinance_greyscale_new.png'
 import adityabirlaLogo from '../../assets/adityabirla_greyscale.png'
-import bgimg from "../../assets/bgimage.png"
 import poonawallaLogo from '../../assets/poonawalla_greyscacle_logo.png'
 import avivaLogo from '../../assets/aviva_greyscale.png'
 import bandhanLogo from '../../assets/bandhan_greyscale.png'
@@ -45,22 +43,23 @@ const LogoCarousel = () => {
   const duplicatedLogos = [...logos, ...logos]
 
   return (
-    <div style={{position:"relative"}}>
-       <div className="logo-carousel-container" >
-      <div className="logo-carousel-track">
-        {duplicatedLogos.map((logo, index) => (
-          <div key={index} className="logo-carousel-item">
-            <img 
-              src={logo.image} 
-              alt={logo.name} 
-              className={`logo-image ${logo.noFilter ? 'logo-image-no-filter' : ''} ${logo.name === 'Paytm' ? 'logo-paytm' : ''}`}
-            />
-          </div>
-        ))}
+    <div style={{ position: 'relative' }}>
+      <div className="logo-carousel-container">
+        <div className="logo-carousel-track">
+          {duplicatedLogos.map((logo, index) => (
+            <div key={index} className="logo-carousel-item">
+              <img
+                src={logo.image}
+                alt={logo.name}
+                loading={index < 6 ? 'eager' : 'lazy'}
+                decoding="async"
+                className={`logo-image ${logo.noFilter ? 'logo-image-no-filter' : ''} ${logo.name === 'Paytm' ? 'logo-paytm' : ''}`}
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
-    </div>
-   
   )
 }
 
