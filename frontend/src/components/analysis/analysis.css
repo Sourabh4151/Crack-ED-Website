@@ -54,8 +54,14 @@ body {
 }
 @media (min-width: 769px) {
   .career-forward-sectionWhychooseus {
-    display: flex !important;
+    display: block;
   }
+}
+
+/* GSAP copies the trigger's display onto the pin-spacer. Flex on the spacer
+   recenters the section after unpin so CALIBRATE scrolls through a second time. */
+div.pin-spacer:has(> .career-forward-sectionWhychooseus) {
+  display: block !important;
 }
 
 @media (min-width: 769px) {

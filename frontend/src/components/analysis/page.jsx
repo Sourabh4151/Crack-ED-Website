@@ -41,51 +41,99 @@ const Card = ({ img, title, desc }) => {
 const Analysis = () => {
   const sectionRef = useRef(null)
 useEffect(() => {
-  const ctx = gsap.context(() => {
-    gsap.set(".slide-1", { zIndex: 3, yPercent: 0, pointerEvents: "auto", });
-    gsap.set(".slide-2", { zIndex: 4, yPercent: 100, autoAlpha: 1, pointerEvents: "auto", });
-    gsap.set(".slide-3", { zIndex: 5, yPercent: 100, autoAlpha: 1, pointerEvents: "auto", });
+  const root = sectionRef.current
+  if (!root) return
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top top",
-        end: "+=2000", 
-        scrub: 1,  
-        pin: true,     
-        anticipatePin: 1,
+  let cancelled = false
+  let ctx = null
+
+  const initAnimation = () => {
+    if (cancelled || ctx) return
+    if (!window.matchMedia('(min-width: 769px)').matches) return
+    if (window.getComputedStyle(root).display === 'none') return
+
+    gsap.registerPlugin(ScrollTrigger)
+
+    ScrollTrigger.getAll().forEach((st) => {
+      if (st.trigger === root) st.kill()
+    })
+
+    const slide1 = root.querySelector('.slide-layer.slide-1')
+    const slide2 = root.querySelector('.slide-layer.slide-2')
+    const slide3 = root.querySelector('.slide-layer.slide-3')
+    if (!slide1 || !slide2 || !slide3) return
+
+    ctx = gsap.context(() => {
+      gsap.set(slide1, { zIndex: 3, yPercent: 0, pointerEvents: "auto", });
+      gsap.set(slide2, { zIndex: 4, yPercent: 100, autoAlpha: 1, pointerEvents: "auto", });
+      gsap.set(slide3, { zIndex: 5, yPercent: 100, autoAlpha: 1, pointerEvents: "auto", });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: root,
+          start: "top top",
+          end: "+=2000",
+          scrub: 1,
+          pin: true,
+          pinType: 'fixed',
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        }
+      });
+      tl.to(slide2, {
+        yPercent: 0,
+        ease: "none",
+        duration: 1,
+         pointerEvents: "auto",
+      })
+      .to(slide1, {
+        yPercent: -20,
+        autoAlpha: 0,
+        duration: 1,
+         pointerEvents: "auto",
+        ease: "none"
+      }, "<")
+      tl.to(slide3, {
+        yPercent: 0,
+        duration: 1,
+         pointerEvents: "auto",
+        ease: "none",
+      })
+      .to(slide2, {
+        yPercent: -20,
+        autoAlpha: 0,
+        duration: 1,
+         pointerEvents: "auto",
+        ease: "none"
+      }, "<");
+
+    }, root)
+
+    if (cancelled && ctx) {
+      ctx.revert()
+      ctx = null
+      return
+    }
+
+    ScrollTrigger.refresh()
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      if (entries[0].isIntersecting) {
+        observer.disconnect()
+        initAnimation()
       }
-    });
-    tl.to(".slide-2", {
-      yPercent: 0,
-      ease: "none",
-      duration: 1,
-       pointerEvents: "auto",
-    })
-    .to(".slide-1", { 
-      yPercent: -20, 
-      autoAlpha: 0, 
-      duration: 1,
-       pointerEvents: "auto",
-      ease: "none" 
-    }, "<") 
-    tl.to(".slide-3", {
-      yPercent: 0,
-      duration: 1,
-       pointerEvents: "auto",
-      ease: "none",
-    })
-    .to(".slide-2", { 
-      yPercent: -20, 
-      autoAlpha: 0, 
-      duration: 1,
-       pointerEvents: "auto",
-      ease: "none" 
-    }, "<");
+    },
+    { rootMargin: '800px 0px' }
+  )
+  observer.observe(root)
 
-  }, sectionRef);
-
-  return () => ctx.revert();
+  return () => {
+    cancelled = true
+    observer.disconnect()
+    if (ctx) ctx.revert()
+  }
 }, []);
 
 

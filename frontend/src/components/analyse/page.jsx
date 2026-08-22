@@ -24,38 +24,83 @@ const Analyse = () => {
     const sectionRef = useRef(null);
 
     useEffect(() => {
-        const ctx = gsap.context(() => {
-            // Target the actual classes: slide-1, slide-2, slide-3
-            const slides = gsap.utils.toArray('.slide');
-            
-            // Initial state: slide 1 is visible, others are below the screen
-            gsap.set(".slide-2, .slide-3", { yPercent: 100 });
+        const root = sectionRef.current;
+        if (!root) return;
 
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: "top top",
-                    end: "+=3000", // Length of scroll
-                    scrub: 1,
-                    pin: true,
-                    anticipatePin: 1,
-                }
+        let cancelled = false;
+        let ctx = null;
+
+        const initAnimation = () => {
+            if (cancelled || ctx) return;
+            if (!window.matchMedia('(max-width: 768px)').matches) return;
+            if (window.getComputedStyle(root).display === 'none') return;
+
+            gsap.registerPlugin(ScrollTrigger);
+
+            ScrollTrigger.getAll().forEach((st) => {
+                if (st.trigger === root) st.kill();
             });
 
-            // Slide 2 comes up
-            tl.to(".slide-2", { yPercent: 0, ease: "none" })
-              .to(".slide-1", { scale: 0.9, opacity: 0.5, ease: "none" }, "<")
+            const slide1 = root.querySelector('.slide.slide-1');
+            const slide2 = root.querySelector('.slide.slide-2');
+            const slide3 = root.querySelector('.slide.slide-3');
+            if (!slide1 || !slide2 || !slide3) return;
 
-            // Small pause
-            tl.to({}, { duration: 0.2 });
+            ctx = gsap.context(() => {
+                // Initial state: slide 1 is visible, others are below the screen
+                gsap.set([slide2, slide3], { yPercent: 100 });
 
-            // Slide 3 comes up
-            tl.to(".slide-3", { yPercent: 0, ease: "none" })
-              .to(".slide-2", { scale: 0.9, opacity: 0.5, ease: "none" }, "<");
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: root,
+                        start: "top top",
+                        end: "+=3000", // Length of scroll
+                        scrub: 1,
+                        pin: true,
+                        pinType: 'fixed',
+                        anticipatePin: 1,
+                        invalidateOnRefresh: true,
+                    }
+                });
 
-        }, sectionRef);
+                // Slide 2 comes up
+                tl.to(slide2, { yPercent: 0, ease: "none" })
+                  .to(slide1, { scale: 0.9, opacity: 0.5, ease: "none" }, "<")
 
-        return () => ctx.revert();
+                // Small pause
+                tl.to({}, { duration: 0.2 });
+
+                // Slide 3 comes up
+                tl.to(slide3, { yPercent: 0, ease: "none" })
+                  .to(slide2, { scale: 0.9, opacity: 0.5, ease: "none" }, "<");
+
+            }, root);
+
+            if (cancelled && ctx) {
+                ctx.revert();
+                ctx = null;
+                return;
+            }
+
+            ScrollTrigger.refresh();
+        };
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries[0].isIntersecting) {
+                    observer.disconnect();
+                    initAnimation();
+                }
+            },
+            { rootMargin: '800px 0px' }
+        );
+        observer.observe(root);
+
+        return () => {
+            cancelled = true;
+            observer.disconnect();
+            if (ctx) ctx.revert();
+        };
     }, []);
 
     return (

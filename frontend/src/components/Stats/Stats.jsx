@@ -18,22 +18,64 @@ const Stats = () => {
     const grid = statsGridRef.current
     if (!grid) return
 
-    ScrollTrigger.config({ ignoreMobileResize: true })
+    let cancelled = false
+    let ctx = null
 
-    const ctx = gsap.context(() => {
+    const createTriggers = () => {
+      if (cancelled || ctx) return
+
       const cards = grid.querySelectorAll('.stat-card')
+      if (!cards.length) return
+
+      gsap.registerPlugin(ScrollTrigger)
+      ScrollTrigger.config({ ignoreMobileResize: true })
+
       cards.forEach((card) => {
-        ScrollTrigger.create({
-          trigger: card,
-          start: 'top top+=100',
-          end: 'bottom top',
-          toggleClass: { targets: card, className: 'stat-card--at-top' },
-          // markers: true
+        ScrollTrigger.getAll().forEach((st) => {
+          if (st.trigger === card) st.kill()
         })
       })
-    }, grid)
 
-    return () => ctx.revert()
+      ctx = gsap.context(() => {
+        cards.forEach((card) => {
+          ScrollTrigger.create({
+            trigger: card,
+            start: 'top top+=100',
+            end: 'bottom top',
+            toggleClass: { targets: card, className: 'stat-card--at-top' },
+            invalidateOnRefresh: true,
+            // markers: true
+          })
+        })
+      }, grid)
+
+      if (cancelled) {
+        ctx.revert()
+        ctx = null
+        return
+      }
+
+      ScrollTrigger.refresh()
+    }
+
+    // Create after pins above (Why Choose Us / CALIBRATE) have been built,
+    // otherwise start/end are measured too early and the class never toggles.
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          observer.disconnect()
+          createTriggers()
+        }
+      },
+      { rootMargin: '200px 0px' }
+    )
+    observer.observe(grid)
+
+    return () => {
+      cancelled = true
+      observer.disconnect()
+      if (ctx) ctx.revert()
+    }
   }, [])
 
   const stats = [

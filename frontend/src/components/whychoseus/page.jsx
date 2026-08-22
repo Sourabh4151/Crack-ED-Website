@@ -11,42 +11,87 @@ const Whychooseus = () => {
   const contentRef = useRef(null)
   const revealRef = useRef(null)
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      const chars = revealRef.current.querySelectorAll(".char")
+    const root = sectionRef.current
+    if (!root) return
 
-      gsap.set(chars, {
-        opacity: 0.15,
-        color: "#fafafa"
+    let cancelled = false
+    let ctx = null
+
+    const initAnimation = () => {
+      if (cancelled || ctx) return
+
+      gsap.registerPlugin(ScrollTrigger)
+
+      ScrollTrigger.getAll().forEach((st) => {
+        if (st.trigger === root) st.kill()
       })
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          end: "+=1000",
-          scrub: true,
-          pin: true,
-        }
-      })
-      tl.to(textRef.current, {
-        opacity: 0.15,
-        scale: 1,
-        ease: "none",
-        duration: 1
-      })
-      tl.to(
-        chars,
-        {
-          opacity: 1,
-          stagger: 0.035,
+      const chars = revealRef.current?.querySelectorAll('.char')
+      if (!chars?.length) return
+
+      const isMobile = window.matchMedia('(max-width: 768px)').matches
+
+      ctx = gsap.context(() => {
+        gsap.set(chars, {
+          opacity: 0.15,
+          color: "#fafafa"
+        })
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: root,
+            start: "top top",
+            end: "+=1000",
+            scrub: true,
+            pin: true,
+            pinType: isMobile ? 'transform' : 'fixed',
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+          }
+        })
+        tl.to(textRef.current, {
+          opacity: 0.15,
+          scale: 1,
           ease: "none",
-          duration: 4
-        },
-        0
-      )
-    })
+          duration: 1
+        })
+        tl.to(
+          chars,
+          {
+            opacity: 1,
+            stagger: 0.035,
+            ease: "none",
+            duration: 4
+          },
+          0
+        )
+      }, root)
 
-    return () => ctx.revert()
+      if (cancelled && ctx) {
+        ctx.revert()
+        ctx = null
+        return
+      }
+
+      ScrollTrigger.refresh()
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          observer.disconnect()
+          initAnimation()
+        }
+      },
+      { rootMargin: '800px 0px' }
+    )
+    observer.observe(root)
+
+    return () => {
+      cancelled = true
+      observer.disconnect()
+      if (ctx) ctx.revert()
+    }
   }, [])
 
   const paragraph = "Getting a job is tough. Keeping it is tougher. Our Job-Linked courses, powered by the ABC Framework of Job Readiness, prepare you for both."

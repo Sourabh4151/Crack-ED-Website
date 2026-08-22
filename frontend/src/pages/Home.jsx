@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../components/Header/Header'
 import Hero from '../components/Hero/Hero'
 import Programs from '../components/Programs/Programs'
@@ -18,7 +18,21 @@ import FloatingSteps from '../components/FloatingSteps/page'
 import SEO from '../components/SEO/SEO'
 import { PAGE_SEO } from '../seo/site'
 
+const DESKTOP_MQ = '(min-width: 769px)'
+
 const Home = () => {
+  const [isDesktop, setIsDesktop] = useState(
+    () => window.matchMedia(DESKTOP_MQ).matches
+  )
+
+  useEffect(() => {
+    const mq = window.matchMedia(DESKTOP_MQ)
+    const sync = () => setIsDesktop(mq.matches)
+    sync()
+    mq.addEventListener('change', sync)
+    return () => mq.removeEventListener('change', sync)
+  }, [])
+
   return (
     <div className="home-page">
       <SEO
@@ -32,8 +46,7 @@ const Home = () => {
       <CareerForward />
       <Whychooseus />
       <FloatingSteps />
-      <Analysis />
-      <Analyse />
+      {isDesktop ? <Analysis /> : <Analyse />}
       <Stats />
       <Centres />
       <Media />
