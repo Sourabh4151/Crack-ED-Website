@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { lazy, Suspense, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, useLocation, useParams } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 //import TagManager from 'react-gtm-module'
@@ -12,21 +12,21 @@ import ScrollToTop from './components/ScrollToTop/ScrollToTop'
 import PreserveUtmParams from './components/PreserveUtmParams/PreserveUtmParams'
 
 // Pages
-import Home from './pages/Home'
-import Programs from './pages/Programs'
-import Careers from './pages/Careers'
-import JobDetail from './pages/JobDetail'
-import About from './pages/About'
-import BID from './pages/BID'
-import Resources from './pages/Resources'
-import BlogPost from './pages/BlogPost'
-import Influencer from './pages/Influencer'
-import RefundPolicy from './pages/RefundPolicy'
-import PrivacyPolicy from './pages/PrivacyPolicy'
-import TermsConditions from './pages/TermsConditions'
-import ContactUs from './pages/ContactUs'
-import AdminBlogs from './pages/AdminBlogs'
-import AdminBlogEdit from './pages/AdminBlogEdit'
+const Home = lazy(() => import('./pages/Home'))
+const Programs = lazy(() => import('./pages/Programs'))
+const Careers = lazy(() => import('./pages/Careers'))
+const JobDetail = lazy(() => import('./pages/JobDetail'))
+const About = lazy(() => import('./pages/About'))
+const BID = lazy(() => import('./pages/BID'))
+const Resources = lazy(() => import('./pages/Resources'))
+const BlogPost = lazy(() => import('./pages/BlogPost'))
+const Influencer = lazy(() => import('./pages/Influencer'))
+const RefundPolicy = lazy(() => import('./pages/RefundPolicy'))
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'))
+const TermsConditions = lazy(() => import('./pages/TermsConditions'))
+const ContactUs = lazy(() => import('./pages/ContactUs'))
+const AdminBlogs = lazy(() => import('./pages/AdminBlogs'))
+const AdminBlogEdit = lazy(() => import('./pages/AdminBlogEdit'))
 
 // 1. Initialize GTM with your Container ID
 // Replace the old GTM-K4Z3BMQ with your new GT ID
@@ -93,6 +93,7 @@ function App() {
           theme="dark"
         />
 
+        <Suspense fallback={null}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -111,6 +112,7 @@ function App() {
           <Route path="/marketing/blogs/new" element={<AdminBlogEdit />} />
           <Route path="/marketing/blogs/edit/:id" element={<AdminBlogEdit />} />
         </Routes>
+        </Suspense>
       </div>
     </Router>
   )
