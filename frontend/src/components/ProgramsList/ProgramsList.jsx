@@ -83,7 +83,7 @@ const ProgramsList = () => {
         program: 'Samriddhi Program',
         role: 'Field Executive',
         details: [
-          'Join as a Field Executive and secure a CTC of upto Rs 2.22 LPA + incentives',
+          'Join as a Field Executive and secure a CTC of upto Rs 2.46 LPA + Incentives',
           '1-week program'
         ]
       }

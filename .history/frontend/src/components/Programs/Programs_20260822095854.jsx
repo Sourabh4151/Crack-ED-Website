@@ -361,7 +361,7 @@ const Programs = () => {
       'Samriddhi Program - Field Executive': {
         programLabel: 'Samriddhi Program',
         logo: udaanCardLogo,
-        details: 'Join as a Field Executive and secure a CTC of upto Rs 2.46 LPA + Incentives',
+        details: 'Join as a Field Executive and secure a CTC of upto 2.46 LPA + Incentives',
         duration: '1-week program',
         image: quessProgramImage,
       },
