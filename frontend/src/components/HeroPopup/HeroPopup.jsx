@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './HeroPopup.css'
-import houseOfFoundersBg from '../../assets/Enter.png'
+import houseOfFoundersBg from '../../assets/Enter.webp'
 import tickPopup from '../../assets/tick_popup.svg'
 import { trackMicrositeClick } from '../../utils/analytics'
 import { appendUtmToUrl } from '../../services/crmService'

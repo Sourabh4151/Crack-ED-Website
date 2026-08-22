@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import lenskartStoreImage from '../../assets/lenskart_store.png'
-import auBankImage from '../../assets/au_bank.png'
+import auBankImage from '../../assets/au_bank.webp'
 import lenskartLogo from '../../assets/lenskart.png'
 import lenskartCardLogo from '../../assets/lenskart_card_logo.png'
 import auCardLogo from '../../assets/au_card_logo.png'
@@ -58,7 +58,7 @@ import rupyyLogo from '../../assets/logo_rupyy.svg'
 import rupyySmallLogo from '../../assets/rupyy_small_logo.png'
 import heroLogo from '../../assets/hero_logo.svg'
 import heroSmallLogo from '../../assets/hero_small_logo.png'
-import houseOfFoundersImage from '../../assets/Enter.png'
+import houseOfFoundersImage from '../../assets/Enter.webp'
 import bandhanBankLogo from '../../assets/bandhan_bank_logo.svg'
 import bandhanMiniLogo from '../../assets/animation_bandhan_logo.svg'
 import { trackMicrositeClick } from '../../utils/analytics'
@@ -271,7 +271,7 @@ const Programs = () => {
       'Rupyy AutoEdge Program - Business Manager': {
         programLabel: 'Rupyy AutoEdge Program',
         logo: rupyyLogo,
-        details: 'Join as a Business Manager – Used Car Finance and secure a CTC of Rs 3 LPA + incentives',
+        details: 'Join as a Business Manager â€“ Used Car Finance and secure a CTC of Rs 3 LPA + incentives',
         duration: '1-month program',
         image: rupyyProgramImage,
       },
