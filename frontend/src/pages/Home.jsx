@@ -62,17 +62,19 @@ const Home = () => {
         includeWebsite
       />
       <Header />
-      <Hero />   <Programs />
-      <CareerForward />
-      <Whychooseus />
-      <FloatingSteps />
-      {isDesktop ? <Analysis /> : <Analyse />}
-      <Stats />
-      <Centres />
-      <Media />
-      <Partners />
-      <Testimonial />
-      <EnquireSection />
+      <main>
+        <Hero />   <Programs />
+        <CareerForward />
+        <Whychooseus />
+        <FloatingSteps />
+        {isDesktop ? <Analysis /> : <Analyse />}
+        <Stats />
+        <Centres />
+        <Media />
+        <Partners />
+        <Testimonial />
+        <EnquireSection />
+      </main>
       <Footer />
       {/* <CareerForward /> */}
     </div>
