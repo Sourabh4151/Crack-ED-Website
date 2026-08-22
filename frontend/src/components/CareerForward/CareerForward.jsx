@@ -1,11 +1,8 @@
 
 import React, { useEffect, useRef, useState } from 'react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import './CareerForward.css'
 import CareerQuiz from '../CareerQuiz/page'
 
-gsap.registerPlugin(ScrollTrigger)
 
 const CareerForward = () => {
   const sectionRef = useRef(null)
@@ -14,58 +11,88 @@ const CareerForward = () => {
   const [showQuiz, setShowQuiz] = useState(false)
 
   useEffect(() => {
+    const section = sectionRef.current
 
-    ScrollTrigger.config({ ignoreMobileResize: true });
+    if (!section) return
 
-    const text = textRef.current
-    const content = contentRef.current
+    let cancelled = false
+    let ctx = null
 
-    // Use GSAP Context for better cleanup in React
-    let ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          end: "+=600",
-          scrub: 1.5,
-          pin: true,
-          anticipatePin: 1,
+    const initAnimation = async () => {
+      const { gsap } = await import('gsap')
+      const { ScrollTrigger } = await import('gsap/ScrollTrigger')
 
-          invalidateOnRefresh: false,
+      if (cancelled) return
 
-          // pinType: window.innerWidth < 768 ? "fixed" : "transform"
-          pinType: "fixed"
-        }
-      })
+      gsap.registerPlugin(ScrollTrigger)
 
+      ScrollTrigger.config({ ignoreMobileResize: true })
 
-      tl.to(text, {
-        fontSize: window.innerWidth < 768 ? "60px" : "110px",
-        lineHeight: window.innerWidth < 768 ? "60px" : "105px",
-        duration: 2,
-        ease: "none"
-      })
-        .to(text, {
-          fontSize: window.innerWidth < 768 ? "40px" : "75px",
-          lineHeight: window.innerWidth < 768 ? "45px" : "72px",
+      const text = textRef.current
+      const content = contentRef.current
+
+      ctx = gsap.context(() => {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top top',
+            end: '+=600',
+            scrub: 1.5,
+            pin: true,
+            anticipatePin: 1,
+            invalidateOnRefresh: false,
+            pinType: 'fixed'
+          }
+        })
+
+        tl.to(text, {
+          fontSize: window.innerWidth < 768 ? '60px' : '110px',
+          lineHeight: window.innerWidth < 768 ? '60px' : '105px',
           duration: 2,
-          ease: "none"
+          ease: 'none'
         })
-        .to(text, {
-          opacity: 0,
-          filter: "blur(15px)",
-          duration: 1
-        })
-        .to(content, {
-          opacity: 1,
-          pointerEvents: "auto",
-          duration: 1
-        }, "-=0.5")
+          .to(text, {
+            fontSize: window.innerWidth < 768 ? '40px' : '75px',
+            lineHeight: window.innerWidth < 768 ? '45px' : '72px',
+            duration: 2,
+            ease: 'none'
+          })
+          .to(text, {
+            opacity: 0,
+            filter: 'blur(15px)',
+            duration: 1
+          })
+          .to(content, {
+            opacity: 1,
+            pointerEvents: 'auto',
+            duration: 1
+          }, '-=0.5')
+      }, sectionRef)
+    }
 
-    }, sectionRef);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          observer.disconnect()
+          initAnimation()
+        }
+      },
+      {
+        rootMargin: '800px 0px'
+      }
+    )
 
-    return () => ctx.revert();
-  }, []);
+    observer.observe(section)
+
+    return () => {
+      cancelled = true
+      observer.disconnect()
+
+      if (ctx) {
+        ctx.revert()
+      }
+    }
+  }, [])
 
   return (
     <section ref={sectionRef} className="career-forward-section11">
