@@ -89,6 +89,7 @@ const EnquireSection = () => {
                 placeholder="Full Name"
                 value={formData.fullName}
                 onChange={handleChange}
+                aria-label="Full Name"
                 className={`enquire-section-input ${errors.fullName ? 'enquire-section-input-error' : ''}`}
               />
               {errors.fullName && <span className="enquire-section-field-error">{errors.fullName}</span>}
@@ -101,6 +102,7 @@ const EnquireSection = () => {
                 value={formData.mobileNumber}
                 onChange={handleChange}
                 maxLength={10}
+                aria-label="Mobile number"
                 className={`enquire-section-input ${errors.mobileNumber ? 'enquire-section-input-error' : ''}`}
               />
               {errors.mobileNumber && <span className="enquire-section-field-error">{errors.mobileNumber}</span>}
@@ -112,6 +114,7 @@ const EnquireSection = () => {
                 placeholder="Email ID"
                 value={formData.emailId}
                 onChange={handleChange}
+                aria-label="Email ID"
                 className={`enquire-section-input ${errors.emailId ? 'enquire-section-input-error' : ''}`}
               />
               {errors.emailId && <span className="enquire-section-field-error">{errors.emailId}</span>}
@@ -122,6 +125,7 @@ const EnquireSection = () => {
                   name="state"
                   value={formData.state}
                   onChange={handleChange}
+                  aria-label="Select state"
                   className={`enquire-section-select ${errors.state ? 'enquire-section-input-error' : ''}`}
                 >
                   <option value="">State</option>
@@ -153,6 +157,7 @@ const EnquireSection = () => {
                   name="program"
                   value={formData.program}
                   onChange={handleChange}
+                  aria-label="Select program"
                   className={`enquire-section-select ${errors.program ? 'enquire-section-input-error' : ''}`}
                 >
                   <option value="">Select program</option>
@@ -172,6 +177,7 @@ const EnquireSection = () => {
                 placeholder="Write your query here"
                 value={formData.query}
                 onChange={handleChange}
+                aria-label="Write your query here"
                 className="enquire-section-input enquire-section-textarea"
                 rows={4}
               />

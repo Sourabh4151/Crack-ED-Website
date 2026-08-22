@@ -300,8 +300,8 @@ const EnquireModal = ({ isOpen, onClose, variant = 'enquire' }) => {
                 : "Have questions? We're here to help."}
             </p>
           </div>
-          <button className="enquire-modal-close" onClick={handleClose} disabled={isSubmitting}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <button type="button" className="enquire-modal-close" onClick={handleClose} disabled={isSubmitting} aria-label="Close">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <path d="M18 6L6 18M6 6L18 18" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </button>
@@ -318,6 +318,7 @@ const EnquireModal = ({ isOpen, onClose, variant = 'enquire' }) => {
                 onChange={handleInputChange}
                 onBlur={handleBlur}
                 className={`enquire-modal-input ${errors.fullName ? 'enquire-modal-input-error' : ''}`}
+                aria-label={isTalkToTeam ? 'Full Name' : 'Full name'}
                 required
               />
               {errors.fullName && (
@@ -334,6 +335,7 @@ const EnquireModal = ({ isOpen, onClose, variant = 'enquire' }) => {
                 onBlur={handleBlur}
                 maxLength="10"
                 className={`enquire-modal-input ${errors.mobileNumber ? 'enquire-modal-input-error' : ''}`}
+                aria-label="Mobile number"
                 required
               />
               {errors.mobileNumber && (
@@ -352,6 +354,7 @@ const EnquireModal = ({ isOpen, onClose, variant = 'enquire' }) => {
                 onChange={handleInputChange}
                 onBlur={handleBlur}
                 className={`enquire-modal-input ${errors.emailId ? 'enquire-modal-input-error' : ''}`}
+                aria-label="Email ID"
                 required
               />
               {errors.emailId && (
@@ -366,6 +369,7 @@ const EnquireModal = ({ isOpen, onClose, variant = 'enquire' }) => {
                   onChange={handleInputChange}
                   onBlur={handleBlur}
                   className={`enquire-modal-select ${errors.state ? 'enquire-modal-input-error' : ''}`}
+                  aria-label="Select state"
                   required
                 >
                   <option value="">State</option>
@@ -373,7 +377,7 @@ const EnquireModal = ({ isOpen, onClose, variant = 'enquire' }) => {
                     <option key={state} value={state}>{state}</option>
                   ))}
                 </select>
-                <svg className="enquire-modal-select-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg className="enquire-modal-select-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path d="M5 7.5L10 12.5L15 7.5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
@@ -406,6 +410,7 @@ const EnquireModal = ({ isOpen, onClose, variant = 'enquire' }) => {
                   onChange={handleInputChange}
                   onBlur={handleBlur}
                   className={`enquire-modal-select ${errors.program ? 'enquire-modal-input-error' : ''}`}
+                  aria-label="Select program"
                   required
                 >
                   <option value="">Select program</option>
@@ -413,7 +418,7 @@ const EnquireModal = ({ isOpen, onClose, variant = 'enquire' }) => {
                     <option key={index} value={program}>{program}</option>
                   ))}
                 </select>
-                <svg className="enquire-modal-select-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg className="enquire-modal-select-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path d="M5 7.5L10 12.5L15 7.5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
@@ -434,6 +439,11 @@ const EnquireModal = ({ isOpen, onClose, variant = 'enquire' }) => {
                 }
                 value={formData.query}
                 onChange={handleInputChange}
+                aria-label={
+                  isTalkToTeam
+                    ? TALK_TO_TEAM_COPY.queryPlaceholder
+                    : 'Write your query here'
+                }
                 className="enquire-modal-input enquire-modal-textarea"
                 rows={4}
               />

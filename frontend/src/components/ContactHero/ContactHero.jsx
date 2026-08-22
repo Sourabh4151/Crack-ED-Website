@@ -131,6 +131,7 @@ const ContactHero = () => {
                       placeholder="Full Name"
                       value={formData.fullName}
                       onChange={handleChange}
+                      aria-label="Full Name"
                       className={`contact-hero-input ${errors.fullName ? 'contact-hero-input-error' : ''}`}
                     />
                     {errors.fullName && <span className="contact-hero-field-error">{errors.fullName}</span>}
@@ -143,6 +144,7 @@ const ContactHero = () => {
                       value={formData.mobileNumber}
                       onChange={handleChange}
                       maxLength={10}
+                      aria-label="Mobile number"
                       className={`contact-hero-input ${errors.mobileNumber ? 'contact-hero-input-error' : ''}`}
                     />
                     {errors.mobileNumber && <span className="contact-hero-field-error">{errors.mobileNumber}</span>}
@@ -157,6 +159,7 @@ const ContactHero = () => {
                       placeholder="Email ID"
                       value={formData.emailId}
                       onChange={handleChange}
+                      aria-label="Email ID"
                       className={`contact-hero-input ${errors.emailId ? 'contact-hero-input-error' : ''}`}
                     />
                     {errors.emailId && <span className="contact-hero-field-error">{errors.emailId}</span>}
@@ -167,6 +170,7 @@ const ContactHero = () => {
                         name="state"
                         value={formData.state}
                         onChange={handleChange}
+                        aria-label="Select state"
                         className={`contact-hero-select ${errors.state ? 'contact-hero-input-error' : ''}`}
                       >
                         <option value="">State</option>
@@ -201,6 +205,7 @@ const ContactHero = () => {
                         name="program"
                         value={formData.program}
                         onChange={handleChange}
+                        aria-label="Select program"
                         className={`contact-hero-select ${errors.program ? 'contact-hero-input-error' : ''}`}
                       >
                         <option value="">Select program</option>
@@ -222,6 +227,7 @@ const ContactHero = () => {
                     placeholder="Tell us what you're looking for"
                     value={formData.query}
                     onChange={handleChange}
+                    aria-label="Tell us what you're looking for"
                     className="contact-hero-input contact-hero-textarea"
                     rows={4}
                   />

@@ -566,6 +566,7 @@ const Programs = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="mobile-program-card-link"
+                      aria-label={`Learn more about ${card.title}`}
                       onClick={() => trackMicrositeClick(card.title)}
                     >
                       <div className="mobile-program-card">
@@ -624,7 +625,7 @@ const Programs = () => {
             </div>
           </div>
           <div className="btnadjustment">
-            <Link to="/programs" className="view-all-button1">
+            <Link to="/programs" className="view-all-button1" aria-label="View all programs">
               View All
               <span className="material-symbols-outlined">
                 north_east
@@ -678,7 +679,13 @@ const Programs = () => {
                         {currentProgramDetails.disclaimer && (
                           <p className="program-disclaimer">{currentProgramDetails.disclaimer}</p>
                         )}
-                        <a href={appendUtmToUrl(programCards[featuredCardIndex]?.url || '#')} target="_blank" rel="noopener noreferrer" onClick={() => trackMicrositeClick(programCards[featuredCardIndex]?.title)}>
+                        <a
+                          href={appendUtmToUrl(programCards[featuredCardIndex]?.url || '#')}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`Learn more about ${programCards[featuredCardIndex]?.title || currentProgramDetails.programLabel}`}
+                          onClick={() => trackMicrositeClick(programCards[featuredCardIndex]?.title)}
+                        >
                           <button className="learn-more-button">Learn More</button>
                         </a>
                       </div>
@@ -742,15 +749,15 @@ const Programs = () => {
               </div>
               <div className="program-cards-navigation">
                 <div className="navigation-controls">
-                  <button className="card-nav-arrow" onClick={prevCard}>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <button type="button" className="card-nav-arrow" onClick={prevCard} aria-label="Previous program">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                       <line x1="19" y1="12" x2="5" y2="12"></line>
                       <polyline points="12 19 5 12 12 5"></polyline>
                     </svg>
                   </button>
                   <span className="card-nav-indicator">{currentCardIndex + 1} / {Math.max(1, programCards.length)}</span>
-                  <button className="card-nav-arrow" onClick={nextCard}>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <button type="button" className="card-nav-arrow" onClick={nextCard} aria-label="Next program">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                       <line x1="5" y1="12" x2="19" y2="12"></line>
                       <polyline points="12 5 19 12 12 19"></polyline>
                     </svg>
