@@ -569,15 +569,19 @@ const Programs = () => {
                       onClick={() => trackMicrositeClick(card.title)}
                     >
                       <div className="mobile-program-card">
-                        <div
-                          className="mobile-program-card-image"
-                          style={{
-                            backgroundImage: `url(${details.mobileImage || details.image})`,
-                            backgroundSize: 'cover',
-                            backgroundPosition: mobileBackgroundPosition,
-                            backgroundRepeat: 'no-repeat'
-                          }}
-                        >
+                        <div className="mobile-program-card-image">
+                          <img
+                            src={details.mobileImage || details.image}
+                            alt=""
+                            loading="lazy"
+                            decoding="async"
+                            style={{
+                              width: '100%',
+                              height: '100%',
+                              objectFit: 'cover',
+                              objectPosition: mobileBackgroundPosition
+                            }}
+                          />
                           <div className="mobile-program-card-content">
                             {(() => {
                               const logoInfo = getProgramHomeLogo(details.programLabel || 'Lenskart Program')
