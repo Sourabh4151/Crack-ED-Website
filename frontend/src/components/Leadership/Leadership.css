@@ -1,7 +1,7 @@
 .leadership-section {
   width: 100%;
   background: rgba(0, 0, 0, 1);
-  padding: 120px;
+  padding: 72px 120px 120px;
   position: relative;
 }
 
@@ -222,7 +222,7 @@
 
 @media (max-width: 1440px) {
   .leadership-section {
-    padding: 100px 60px;
+    padding: 56px 60px 100px;
   }
 }
 
@@ -239,7 +239,7 @@
 
 @media (max-width: 1024px) {
   .leadership-section {
-    padding: 80px 40px;
+    padding: 48px 40px 80px;
   }
 
   .leadership-container {
@@ -273,7 +273,7 @@
 
 @media (max-width: 768px) {
   .leadership-section {
-    padding: 60px 24px;
+    padding: 40px 24px 60px;
   }
 
   .leadership-container {
@@ -328,7 +328,7 @@
 
 @media (max-width: 480px) {
   .leadership-section {
-    padding: 40px 20px;
+    padding: 32px 20px 40px;
   }
 
   .leadership-container {

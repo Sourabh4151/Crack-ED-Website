@@ -74,43 +74,51 @@
   pointer-events: auto;
   cursor: pointer;
   position: absolute;
-  top: auto;
-  left: auto;
-  right: 16px;
-  bottom: 16px;
-  transform: none;
-  z-index: 12;
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: #fff;
-  width: 50px;
-  height: 50px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0;
-  min-width: 50px;
-  min-height: 50px;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+  color: #f5f5f5;
+  background: rgba(22, 22, 22, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
-.testimonial-card:hover .testimonial-nav-arrow,
-.testimonial-card:focus-within .testimonial-nav-arrow {
-  opacity: 1;
-  visibility: visible;
+.testimonial-nav-arrow-prev {
+  left: 12px;
+}
+
+.testimonial-nav-arrow-next {
+  right: 12px;
 }
 
 .testimonial-nav-arrow:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: #fff;
+  background: rgba(40, 40, 40, 0.96);
+  border-color: rgba(255, 255, 255, 0.32);
 }
 
 .testimonial-nav-arrow svg {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
+}
+
+.testimonial-nav-arrow-prev svg {
+  margin-right: 2px;
+}
+
+.testimonial-nav-arrow-next svg {
+  margin-left: 2px;
 }
 
 .testimonial-card {
@@ -274,15 +282,23 @@
   }
 
   .testimonial-nav-arrow {
-    width: 42px;
-    height: 42px;
-    min-width: 42px;
-    min-height: 42px;
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+  }
+
+  .testimonial-nav-arrow-prev {
+    left: 8px;
+  }
+
+  .testimonial-nav-arrow-next {
+    right: 8px;
   }
 
   .testimonial-nav-arrow svg {
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
   }
 
   .testimonial-image-container {

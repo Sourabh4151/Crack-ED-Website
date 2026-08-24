@@ -1,7 +1,7 @@
 .building-careers {
   width: 100%;
   background: rgba(0, 0, 0, 1);
-  padding: 135px 120px;
+  padding: 80px 120px 48px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -109,7 +109,7 @@
 
 @media (max-width: 1024px) {
   .building-careers {
-    padding: 80px 60px;
+    padding: 64px 60px 32px;
   }
 
   .building-careers-inner {
@@ -129,7 +129,7 @@
 
 @media (max-width: 768px) {
   .building-careers {
-    padding: 60px 24px;
+    padding: 48px 24px 24px;
     gap: 0;
   }
 
@@ -192,7 +192,7 @@
 
 @media (max-width: 480px) {
   .building-careers {
-    padding: 48px 16px;
+    padding: 40px 16px 16px;
   }
 
   .building-careers-inner {

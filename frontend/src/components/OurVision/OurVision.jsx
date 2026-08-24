@@ -23,10 +23,9 @@ const OurVision = () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: 'top top',
-          end: '+=1000',
+          start: 'top 78%',
+          end: 'bottom 28%',
           scrub: true,
-          pin: true,
         }
       })
 

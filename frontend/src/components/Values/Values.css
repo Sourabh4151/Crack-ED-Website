@@ -1,7 +1,7 @@
 .values-section {
   width: 100%;
   background: rgba(0, 0, 0, 1);
-  padding: 100px 120px;
+  padding: 48px 120px 100px;
   position: relative;
 }
 
@@ -151,7 +151,7 @@
 
 @media (max-width: 1440px) {
   .values-section {
-    padding: 100px 60px;
+    padding: 48px 60px 100px;
   }
 
   .values-container {
@@ -185,7 +185,7 @@
 
 @media (max-width: 1024px) {
   .values-section {
-    padding: 80px 40px;
+    padding: 40px 40px 80px;
   }
 
   .values-container {
@@ -206,7 +206,7 @@
 
 @media (max-width: 768px) {
   .values-section {
-    padding: 60px 24px;
+    padding: 32px 24px 60px;
   }
 
   .values-container {
@@ -309,7 +309,7 @@
 
 @media (max-width: 480px) {
   .values-section {
-    padding: 40px 20px;
+    padding: 24px 20px 40px;
   }
 
   .values-container {

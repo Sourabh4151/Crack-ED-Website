@@ -4,7 +4,7 @@ import PoojaMehta from '../../assets/Pooja Mehta.jpeg'
 import ShreyaVerma from '../../assets/Shreya_Verma.webp'
 import KashyapGoswami from '../../assets/Kashyap_Goswami.webp'
 import Vishwendra from '../../assets/Vishwendra.jpg'
-import Lokesh from '../../assets/Lokesh.webp'
+import Lokesh from '../../assets/Lokesh-h4THR9Fp.jpg.jpeg'
 import Krishankant from '../../assets/Krishankant.webp'
 import MayankKaushal from '../../assets/Mayank_Kaushal.webp'
 import AmanChauraisa from '../../assets/Aman_Chauraisa.webp'
@@ -163,7 +163,7 @@ const Testimonial = () => {
       title: "Senior Business Development Associate, Testbook",
       description: "The classroom sessions, practical learning, and constant guidance at Crack-ED helped me build the confidence. Getting placed as a Senior Business Development Officer at Textbook feels like a milestone I once only hoped for."
     },
-  ]
+  ].reverse()
 
   const testimonialsToShow = isMobile ? testimonials : [...testimonials, ...testimonials]
 
@@ -214,6 +214,11 @@ const Testimonial = () => {
     offsetRef.current += direction * step
     applyTransform(true)
   }, [applyTransform, getLoopWidth, getStep])
+
+  const handlePrev = (event) => {
+    event.stopPropagation()
+    goBy(-1)
+  }
 
   const handleNext = (event) => {
     event.stopPropagation()
@@ -316,18 +321,20 @@ const Testimonial = () => {
                     <p className="testimonial-title">{testimonial.title}</p>
                     <p className="testimonial-description">{testimonial.description}</p>
                   </div>
-                  {!isMobile && (
-                    <button type="button" className="testimonial-nav-arrow" onClick={handleNext} aria-label="Next testimonial">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
-                      </svg>
-                    </button>
-                  )}
                 </div>
               </div>
             ))}
           </div>
+          <button type="button" className="testimonial-nav-arrow testimonial-nav-arrow-prev" onClick={handlePrev} aria-label="Previous testimonial">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          <button type="button" className="testimonial-nav-arrow testimonial-nav-arrow-next" onClick={handleNext} aria-label="Next testimonial">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
         </div>
       </div>
     </section>
