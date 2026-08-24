@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import AntimaMishra from '../../assets/Antima Mishra.png'
 import PoojaMehta from '../../assets/Pooja Mehta.jpeg'
 import ShreyaVerma from '../../assets/Shreya_Verma.webp'
@@ -21,18 +21,13 @@ import AbhijeetCASA from '../../assets/Abhijeet_CASA.jpeg'
 import './Testimonial.css'
 
 const Testimonial = () => {
-  const [isMobile, setIsMobile] = useState(false)
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768)
-    }
-    
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
+  const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth <= 768)
+  const trackRef = useRef(null)
+  const offsetRef = useRef(0)
+  const pausedRef = useRef(false)
+  const rafRef = useRef(null)
+  const lastTimeRef = useRef(0)
+  const loopingRef = useRef(false)
 
   const testimonials = [
     {
@@ -172,14 +167,146 @@ const Testimonial = () => {
 
   const testimonialsToShow = isMobile ? testimonials : [...testimonials, ...testimonials]
 
+  const getStep = useCallback(() => {
+    const track = trackRef.current
+    if (!track?.children?.[0]) return 320
+    const first = track.children[0]
+    const second = track.children[1]
+    if (!second) return first.getBoundingClientRect().width
+    return second.offsetLeft - first.offsetLeft
+  }, [])
+
+  const getLoopWidth = useCallback(() => getStep() * testimonials.length, [getStep, testimonials.length])
+
+  const applyTransform = useCallback((withTransition = false) => {
+    const track = trackRef.current
+    if (!track) return
+    track.style.transition = withTransition ? 'transform 0.45s ease' : 'none'
+    track.style.transform = `translateX(-${offsetRef.current}px)`
+  }, [])
+
+  const wrapOffset = useCallback(() => {
+    const loopWidth = getLoopWidth()
+    if (loopWidth <= 0) return
+    while (offsetRef.current >= loopWidth) offsetRef.current -= loopWidth
+    while (offsetRef.current < 0) offsetRef.current += loopWidth
+  }, [getLoopWidth])
+
+  const goBy = useCallback((direction) => {
+    const step = getStep()
+    const loopWidth = getLoopWidth()
+    if (step <= 0 || loopWidth <= 0) return
+
+    if (direction < 0 && offsetRef.current < step) {
+      loopingRef.current = true
+      offsetRef.current += loopWidth
+      applyTransform(false)
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          offsetRef.current -= step
+          loopingRef.current = false
+          applyTransform(true)
+        })
+      })
+      return
+    }
+
+    offsetRef.current += direction * step
+    applyTransform(true)
+  }, [applyTransform, getLoopWidth, getStep])
+
+  const handleNext = (event) => {
+    event.stopPropagation()
+    goBy(1)
+  }
+
+  const handleTransitionEnd = (event) => {
+    if (event.target !== trackRef.current) return
+    if (loopingRef.current) return
+    const loopWidth = getLoopWidth()
+    if (loopWidth <= 0) return
+    if (offsetRef.current >= loopWidth || offsetRef.current < 0) {
+      wrapOffset()
+      applyTransform(false)
+    }
+  }
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768)
+    }
+
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  useEffect(() => {
+    if (isMobile) {
+      offsetRef.current = 0
+      if (trackRef.current) {
+        trackRef.current.style.transition = 'none'
+        trackRef.current.style.transform = ''
+      }
+      return undefined
+    }
+
+    const durationMs = 30000
+    lastTimeRef.current = performance.now()
+
+    const tick = (now) => {
+      const loopWidth = getLoopWidth()
+      if (!pausedRef.current && loopWidth > 0) {
+        const dt = now - lastTimeRef.current
+        offsetRef.current += (loopWidth / durationMs) * dt
+        wrapOffset()
+        applyTransform(false)
+      }
+      lastTimeRef.current = now
+      rafRef.current = requestAnimationFrame(tick)
+    }
+
+    rafRef.current = requestAnimationFrame(tick)
+
+    const handleResize = () => {
+      const step = getStep()
+      if (step <= 0) return
+      offsetRef.current = Math.round(offsetRef.current / step) * step
+      wrapOffset()
+      applyTransform(false)
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current)
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [applyTransform, getLoopWidth, getStep, isMobile, wrapOffset])
+
   return (
     <section className="testimonial-section">
       <div className="testimonial-container">
         <div className="testimonial-header">
    
         </div>
-        <div className="testimonial-cards-wrapper">
-          <div className="testimonial-cards">
+        <div
+          className="testimonial-cards-wrapper"
+          onMouseEnter={() => { pausedRef.current = true }}
+          onMouseLeave={() => { pausedRef.current = false }}
+          onFocus={() => { pausedRef.current = true }}
+          onBlur={(event) => {
+            if (!event.currentTarget.contains(event.relatedTarget)) {
+              pausedRef.current = false
+            }
+          }}
+        >
+          <div
+            className="testimonial-cards"
+            ref={trackRef}
+            onTransitionEnd={handleTransitionEnd}
+          >
             {testimonialsToShow.map((testimonial, index) => (
               <div key={`${testimonial.id}-${index}`} className="testimonial-card">
                 <div className="testimonial-image-container">
@@ -189,6 +316,14 @@ const Testimonial = () => {
                     <p className="testimonial-title">{testimonial.title}</p>
                     <p className="testimonial-description">{testimonial.description}</p>
                   </div>
+                  {!isMobile && (
+                    <button type="button" className="testimonial-nav-arrow" onClick={handleNext} aria-label="Next testimonial">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                      </svg>
+                    </button>
+                  )}
                 </div>
               </div>
             ))}
