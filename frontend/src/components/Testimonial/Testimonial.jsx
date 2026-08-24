@@ -1,54 +1,6 @@
-// import React, { useState, useEffect } from 'react'
-// import './Testimonial.css'
-
-// const Testimonial = () => {
-//   const [isMobile, setIsMobile] = useState(false)
-
-//   useEffect(() => {
-//     const checkMobile = () => {
-//       setIsMobile(window.innerWidth <= 768)
-//     }
-    
-//     checkMobile()
-//     window.addEventListener('resize', checkMobile)
-    
-//     return () => window.removeEventListener('resize', checkMobile)
-//   }, [])
-
-//   const testimonials = []
-
-//   const testimonialsToShow = isMobile ? testimonials : [...testimonials, ...testimonials]
-
-//   return (
-//     <section className="testimonial-section">
-//       <div className="testimonial-container">
-//         <div className="testimonial-header">
-   
-//         </div>
-//         <div className="testimonial-cards-wrapper">
-//           <div className="testimonial-cards">
-//             {testimonialsToShow.map((testimonial, index) => (
-//               <div key={`${testimonial.id}-${index}`} className="testimonial-card">
-//                 <div className="testimonial-image-container">
-//                   <img src={testimonial.image} alt={testimonial.name} className="testimonial-image" />
-//                   <div className="testimonial-content">
-//                     <h3 className="testimonial-name">{testimonial.name}</h3>
-//                     <p className="testimonial-title">{testimonial.title}</p>
-//                     <p className="testimonial-description">{testimonial.description}</p>
-//                   </div>
-//                 </div>
-//               </div>
-//             ))}
-//           </div>
-//         </div>
-//       </div>
-//     </section>
-//   )
-// }
-
-// export default Testimonial
-
 import React, { useState, useEffect } from 'react'
+import AntimaMishra from '../../assets/Antima Mishra.png'
+import PoojaMehta from '../../assets/Pooja Mehta.jpeg'
 import ShreyaVerma from '../../assets/Shreya_Verma.webp'
 import KashyapGoswami from '../../assets/Kashyap_Goswami.webp'
 import Vishwendra from '../../assets/Vishwendra.jpg'
@@ -201,6 +153,20 @@ const Testimonial = () => {
       name: "Rohitash",
       title: "Sales Officer, AU Small Finance Bank",
       description: "Crack-ED transformed me from someone with no banking knowledge or confidence into someone who can introduce myself and speak comfortably with anyone."
+    },
+    {
+      id: 18,
+      image: AntimaMishra,
+      name: "Antima Mishra",
+      title: "Senior Business Development Associate, Testbook",
+      description: "Before Crack-ED, I knew I wanted to grow in a professional career, but I wasn't sure where to start. The training helped me sharpen my communication, understand sales and business development, and become more confident with every interview."
+    },
+    {
+      id: 19,
+      image: PoojaMehta,
+      name: "Pooja Mehta",
+      title: "Senior Business Development Associate, Testbook",
+      description: "The classroom sessions, practical learning, and constant guidance at Crack-ED helped me build the confidence. Getting placed as a Senior Business Development Officer at Textbook feels like a milestone I once only hoped for."
     },
   ]
 
