@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import logo from '../../assets/crack-ed_logo.png'
+import logo from '../../assets/crack-ed_logo.webp'
 import instagramIcon from '../../assets/instagram_footer.png'
 import linkedinIcon from '../../assets/linkedin_footer.png'
 import facebookIcon from '../../assets/facebook_footer.png'

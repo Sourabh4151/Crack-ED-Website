@@ -5,21 +5,17 @@ import "./page.css";
 import img2 from "../../assets/hindustanbg.webp";
 import img1 from "../../assets/Frame 365.webp";
 import img3 from "../../assets/Frame 365 (2).webp";
-import logoBW from "../../assets/idvrZDd6SZ_logos 1.png";
-import logoHT from "../../assets/hindustan times 1.png";
-import loggo3 from "../../assets/loggo3.png";
-import loggo1 from "../../assets/loggo1.png";
-import loggo4 from "../../assets/logo444.png";
-import loggo5 from "../../assets/logo555.png";
+import logoHT from "../../assets/hindustan times 1.webp";
+import loggo3 from "../../assets/loggo3.webp";
+import loggo1 from "../../assets/loggo1.webp";
+import loggo4 from "../../assets/logo444.webp";
+import loggo5 from "../../assets/logo555.webp";
 import img4 from "../../assets/bgimg444.webp";
 import img5 from "../../assets/bgimg555.webp";
 import bharatPhoto from "../../assets/bharat.webp";
 import bharatLogo from "../../assets/bharat.svg";
 import livemintPhoto from "../../assets/livemint.webp";
 import mintLogo from "../../assets/mint.svg";
-
-
-import logoBWDisrupt from "../../assets/idaqkNYWaP_1768564795277 1.png";
 
 const Media = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -153,6 +149,8 @@ const Media = () => {
                         alt={slide.logoAlt || ''}
                         style={{ width: slide.logoWidth, height: slide.logoHeight }}
                         className="publisher-logo"
+                        loading="lazy"
+                        decoding="async"
                       />
                       <p className="mediadesc">{slide.desc}</p>
                     </div>
@@ -187,6 +185,8 @@ const Media = () => {
                     alt={slides[currentIndex].logoAlt || ''}
                     style={{ width: slides[currentIndex].logoWidth, height: slides[currentIndex].logoHeight }}
                     className="publisher-logo"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <p className="mediadesc">{slides[currentIndex].desc}</p>
                 </div>

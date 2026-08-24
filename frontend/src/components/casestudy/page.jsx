@@ -6,7 +6,7 @@ import img1 from "../../assets/Frame 3652.png";
 import img2 from "../../assets/Frame 3652.png";
 import img3 from "../../assets/Frame 3652.png";
 import logoBW from "../../assets/idvrZDd6SZ_logos 1.png";
-import logoHT from "../../assets/hindustan times 1.png";
+import logoHT from "../../assets/hindustan times 1.webp";
 import logoBWDisrupt from "../../assets/idaqkNYWaP_1768564795277 1.png";
 
 const CaseStudy = () => {
