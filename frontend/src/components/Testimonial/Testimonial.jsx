@@ -154,6 +154,7 @@ const Testimonial = () => {
       image: AntimaMishra,
       name: "Antima Mishra",
       title: "Senior Business Development Associate, Testbook",
+      compactTitle: true,
       description: "Before Crack-ED, I knew I wanted to grow in a professional career, but I wasn't sure where to start. The training helped me sharpen my communication, understand sales and business development, and become more confident with every interview."
     },
     {
@@ -161,6 +162,7 @@ const Testimonial = () => {
       image: PoojaMehta,
       name: "Pooja Mehta",
       title: "Senior Business Development Associate, Testbook",
+      compactTitle: true,
       description: "The classroom sessions, practical learning, and constant guidance at Crack-ED helped me build the confidence. Getting placed as a Senior Business Development Officer at Textbook feels like a milestone I once only hoped for."
     },
   ].reverse()
@@ -318,7 +320,7 @@ const Testimonial = () => {
                   <img src={testimonial.image} alt={testimonial.name} className="testimonial-image" />
                   <div className="testimonial-content">
                     <h3 className="testimonial-name">{testimonial.name}</h3>
-                    <p className="testimonial-title">{testimonial.title}</p>
+                    <p className={`testimonial-title${testimonial.compactTitle ? ' testimonial-title-compact' : ''}`}>{testimonial.title}</p>
                     <p className="testimonial-description">{testimonial.description}</p>
                   </div>
                 </div>
