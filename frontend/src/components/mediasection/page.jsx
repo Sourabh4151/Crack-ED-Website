@@ -2,20 +2,20 @@ import React, { useState, useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import "./page.css";
 
-import img2 from "../../assets/hindustanbg.png";
-import img1 from "../../assets/Frame 365.png";
-import img3 from "../../assets/Frame 365 (2).png";
+import img2 from "../../assets/hindustanbg.webp";
+import img1 from "../../assets/Frame 365.webp";
+import img3 from "../../assets/Frame 365 (2).webp";
 import logoBW from "../../assets/idvrZDd6SZ_logos 1.png";
 import logoHT from "../../assets/hindustan times 1.png";
 import loggo3 from "../../assets/loggo3.png";
 import loggo1 from "../../assets/loggo1.png";
 import loggo4 from "../../assets/logo444.png";
 import loggo5 from "../../assets/logo555.png";
-import img4 from "../../assets/bgimg444.png";
-import img5 from "../../assets/bgimg555.jpg";
-import bharatPhoto from "../../assets/bharat.png";
+import img4 from "../../assets/bgimg444.webp";
+import img5 from "../../assets/bgimg555.webp";
+import bharatPhoto from "../../assets/bharat.webp";
 import bharatLogo from "../../assets/bharat.svg";
-import livemintPhoto from "../../assets/livemint.png";
+import livemintPhoto from "../../assets/livemint.webp";
 import mintLogo from "../../assets/mint.svg";
 
 
@@ -142,6 +142,8 @@ const Media = () => {
                       src={slide.image}
                       alt={slide.imageAlt || 'Media recognition'}
                       className="slide-image"
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
                   <div className="sec2">
@@ -172,6 +174,8 @@ const Media = () => {
                   src={slides[currentIndex].image}
                   alt={slides[currentIndex].imageAlt || 'Media recognition'}
                   className="slide-image"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
 
