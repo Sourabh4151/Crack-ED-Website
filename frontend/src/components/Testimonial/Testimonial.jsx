@@ -12,12 +12,12 @@ import PavanTyagi from '../../assets/Pavan_Tyagi.webp'
 import Prakash from '../../assets/Prakash.webp'
 import RahulChaudhary from '../../assets/Rahul_Chaudhary.webp'
 import Ajay from '../../assets/Ajay.webp'
-import ShubhamMBL from '../../assets/Shubham_MBL.jpeg'
-import RohitKhatanaCASA from '../../assets/RohitKhatana_CASA.jpeg'
-import RohitashMBL from '../../assets/Rohitash_MBL.jpeg'
-import KuldeepMBL from '../../assets/Kuldeep_MBL.jpeg'
-import IlaKumariGL from '../../assets/IlaKumari_GL.jpeg'
-import AbhijeetCASA from '../../assets/Abhijeet_CASA.jpeg'
+import Shubham from '../../assets/Shubham.png'
+import Rohit from '../../assets/Rohit.png'
+import Rohitash from '../../assets/Rohitash.png'
+import Kuldeep from '../../assets/Kuldeep.png'
+import IlaKumari from '../../assets/Ila Kumari .jpeg'
+import Abhijeet from '../../assets/Abhijeet.jpeg'
 import './Testimonial.css'
 
 const Testimonial = () => {
@@ -109,42 +109,42 @@ const Testimonial = () => {
     },
     {
       id: 12,
-      image: KuldeepMBL,
+      image: Kuldeep,
       name: "Kuldeep Agnihotri",
       title: "Sales Officer, AU Small Finance Bank",
       description: "Learning with Crack-ED's AU Bank Microbusiness Loan course gave me clarity on customer needs, boosted my confidence, and made me more professional in my work."
     },
     {
       id: 13,
-      image: ShubhamMBL,
+      image: Shubham,
       name: "Shubham Kumar",
       title: "Sales Officer, AU Small Finance Bank",
       description: "I started at Crack-ED with little knowledge, but their support and training helped me learn banking and grow into a more confident person."
     },
     {
       id: 14,
-      image: RohitKhatanaCASA,
+      image: Rohit,
       name: "Rohit Khatana",
       title: "Bank Officer, AU Small Finance Bank",
       description: "This program helped me learn core banking, develop customer-handling skills, and prepared me with the right mindset for a banking career."
     },
     {
       id: 15,
-      image: AbhijeetCASA,
+      image: Abhijeet,
       name: "Abhijeet",
       title: "Bank Officer, AU Small Finance Bank",
       description: "Crack-ED truly strengthened my banking preparation. The teachers share real experience, clear doubts patiently, and their guidance gave me confidence for my career."
     },
     {
       id: 16,
-      image: IlaKumariGL,
+      image: IlaKumari,
       name: "Ila Kumari",
       title: "Relationship Officer, AU Small Finance Bank",
       description: "I joined Crack-ED with low confidence, but within a month I improved my grooming, communication, and personality. I'm truly happy to be here."
     },
     {
       id: 17,
-      image: RohitashMBL,
+      image: Rohitash,
       name: "Rohitash",
       title: "Sales Officer, AU Small Finance Bank",
       description: "Crack-ED transformed me from someone with no banking knowledge or confidence into someone who can introduce myself and speak comfortably with anyone."
