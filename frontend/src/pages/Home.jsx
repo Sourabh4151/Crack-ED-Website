@@ -63,12 +63,12 @@ const Home = () => {
       <Header />
       <main>
         <Hero />   <Programs />
-        <CareerForward />
         <Whychooseus />
         <FloatingSteps />
         {isDesktop ? <Analysis /> : <Analyse />}
         <Stats />
         <Testimonial />
+        <CareerForward />
         <Media />
         <Partners />
         <EnquireSection />
