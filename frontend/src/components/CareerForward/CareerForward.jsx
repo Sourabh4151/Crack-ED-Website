@@ -35,12 +35,12 @@ const CareerForward = () => {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top top',
+            start: () => `top ${window.innerWidth < 768 ? 80 : 70}px`,
             end: '+=600',
             scrub: 1.5,
             pin: true,
             anticipatePin: 1,
-            invalidateOnRefresh: false,
+            invalidateOnRefresh: true,
             pinType: 'fixed'
           }
         })
@@ -95,7 +95,7 @@ const CareerForward = () => {
   }, [])
 
   return (
-    <section ref={sectionRef} className="career-forward-section11">
+    <section ref={sectionRef} className={`career-forward-section11${showQuiz ? ' quiz-open' : ''}`}>
       <div className="sticky-wrapperCareerForward">
 
         <h2 ref={textRef} className="career-forward-text" style={{ fontSize: '150px', lineHeight: '140px' }} aria-hidden="true">

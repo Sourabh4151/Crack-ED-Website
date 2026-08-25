@@ -582,7 +582,7 @@ const CareerQuiz = ({ showOnlyTopProgram = false }) => {
             className={`quiz-option-button ${selections[step] === opt.mapping ? 'selected' : ''}`}
             onClick={() => handleSelectOption(opt.mapping)}
           >
-            {opt.text}
+            <span className="quiz-option-label">{opt.text}</span>
           </button>
         ))}
       </div>

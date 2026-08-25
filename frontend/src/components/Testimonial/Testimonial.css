@@ -1,7 +1,7 @@
 .testimonial-section {
   width: 100%;
   background: #000000;
-  padding: 40px 0 120px 0;
+  padding: 40px 0 16px 0;
   position: relative;
 }
 
@@ -60,6 +60,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+  margin-top: 52px;
 }
 
 .testimonial-cta-button {
@@ -375,12 +376,16 @@
 
 @media (max-width: 768px) {
   .testimonial-section {
-    padding: 30px 0 60px 0;
+    padding: 30px 0 16px 0;
   }
 
   .testimonial-container {
     padding: 0 24px;
     gap: 32px;
+  }
+
+  .testimonial-cta-wrap {
+    margin-top: 28px;
   }
 
   .testimonial-cta-button {
@@ -476,12 +481,16 @@
 
 @media (max-width: 480px) {
   .testimonial-section {
-    padding: 25px 0 50px 0;
+    padding: 25px 0 16px 0;
   }
 
   .testimonial-container {
     padding: 0 20px;
     gap: 28px;
+  }
+
+  .testimonial-cta-wrap {
+    margin-top: 20px;
   }
 
   .testimonial-cta-button {
