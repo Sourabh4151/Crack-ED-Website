@@ -5,6 +5,7 @@ import BuildingCareers from '../components/BuildingCareers/BuildingCareers'
 import OurVision from '../components/OurVision/OurVision'
 import Values from '../components/Values/Values'
 import Leadership from '../components/Leadership/Leadership'
+import Centres from '../components/Centres/page'
 import EnquireSection from '../components/EnquireSection/EnquireSection'
 import Footer from '../components/Footer/Footer'
 import './About.css'
@@ -29,6 +30,7 @@ const About = () => {
       <OurVision />
       <Values />
       <Leadership />
+      <Centres />
       <EnquireSection />
       <Footer />
     </div>
