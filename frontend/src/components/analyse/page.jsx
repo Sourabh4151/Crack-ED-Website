@@ -68,7 +68,7 @@ const Analyse = () => {
                   .to(slide1, { scale: 0.9, opacity: 0.5, ease: "none" }, "<")
 
                 // Small pause
-                tl.to({}, { duration: 0.2 });
+                tl.to(slide2, { duration: 0.2 });
 
                 // Slide 3 comes up
                 tl.to(slide3, { yPercent: 0, ease: "none" })

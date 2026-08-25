@@ -23,7 +23,7 @@ const Hero = () => {
           alt="Professional workspace"
           className="hero-bg-image"
           loading="eager"
-          fetchPriority="high"
+          fetchpriority="high"
         />
       </div>
 

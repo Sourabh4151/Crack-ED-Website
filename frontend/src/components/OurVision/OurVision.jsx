@@ -13,7 +13,8 @@ const OurVision = () => {
   useEffect(() => {
     const ctx = gsap.context(() => {
       const chars = revealRef.current?.querySelectorAll('.char')
-      if (!chars?.length) return
+      const trigger = sectionRef.current
+      if (!chars?.length || !trigger) return
 
       gsap.set(chars, {
         opacity: 0.15,
@@ -22,7 +23,7 @@ const OurVision = () => {
 
       const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: sectionRef.current,
+          trigger,
           start: 'top 78%',
           end: 'bottom 28%',
           scrub: true,

@@ -76,14 +76,18 @@ const Partners = () => {
   const handlePrev = () => setCurrentIndex((prev) => (prev - 1 + slides.length) % slides.length);
 
   useEffect(() => {
-    // Kill existing animations
-    gsap.killTweensOf([progressRef.current, mainSectionRef.current, contentRef.current]);
+    const progress = progressRef.current
+    const mainSection = mainSectionRef.current
+    const content = contentRef.current
+    const targets = [progress, mainSection, content].filter(Boolean)
+    if (targets.length) gsap.killTweensOf(targets)
+    if (!progress || !mainSection || !content) return
 
     const tl = gsap.timeline();
 
     // 1. Progress Bar (Timer)
     tl.fromTo(
-      progressRef.current,
+      progress,
       { scaleX: 0 },
       { 
         scaleX: 1, 
@@ -95,7 +99,7 @@ const Partners = () => {
 
     // 2. Background Fade
     tl.fromTo(
-      mainSectionRef.current,
+      mainSection,
       { opacity: 0 },
       { opacity: 1, duration: 1 },
       0
@@ -103,7 +107,7 @@ const Partners = () => {
 
     // 3. TEXT CONTENT MOVING LEFT TO RIGHT
     tl.fromTo(
-      contentRef.current,
+      content,
       { 
         opacity: 0, 
         x: -100 // Starts 100 pixels to the left

@@ -30,6 +30,7 @@ const CareerForward = () => {
 
       const text = textRef.current
       const content = contentRef.current
+      if (!text || !content) return
 
       ctx = gsap.context(() => {
         const tl = gsap.timeline({

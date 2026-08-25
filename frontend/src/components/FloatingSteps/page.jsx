@@ -8,6 +8,8 @@ gsap.registerPlugin(ScrollTrigger);
 const FloatingSteps = () => {
   const ref = useRef(null);
 useEffect(() => {
+  if (!ref.current) return
+
   const ctx = gsap.context(() => {
     const isMobile = window.matchMedia("(max-width: 768px)").matches;
 

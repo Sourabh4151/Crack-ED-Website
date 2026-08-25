@@ -8,7 +8,6 @@ gsap.registerPlugin(ScrollTrigger)
 const Whychooseus = () => {
   const sectionRef = useRef(null)
   const textRef = useRef(null)
-  const contentRef = useRef(null)
   const revealRef = useRef(null)
   useEffect(() => {
     const root = sectionRef.current
@@ -66,6 +65,7 @@ const Whychooseus = () => {
           }
         }
 
+        const heading = textRef.current
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: root,
@@ -78,12 +78,14 @@ const Whychooseus = () => {
             invalidateOnRefresh: !isMobile,
           }
         })
-        tl.to(textRef.current, {
-          opacity: 0.15,
-          scale: 1,
-          ease: "none",
-          duration: 1
-        })
+        if (heading) {
+          tl.to(heading, {
+            opacity: 0.15,
+            scale: 1,
+            ease: "none",
+            duration: 1
+          })
+        }
         tl.to(
           chars,
           {
@@ -146,7 +148,7 @@ const Whychooseus = () => {
       <div className="sticky-wrapper">
 
         <h2
-
+          ref={textRef}
           className="career-forward-text1">
           <span className="text-line">Why Choose Us</span>
         </h2>

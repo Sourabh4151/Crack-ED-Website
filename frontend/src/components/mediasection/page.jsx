@@ -88,24 +88,32 @@ const Media = () => {
     },
   ];
 
-  // GSAP Animation logic
+  // GSAP Animation logic (desktop slider only)
   useEffect(() => {
+    const image = imageRef.current
+    const content = contentRef.current
+    if (!image || !content) return
+    const slider = image.closest('.desktop-slider')
+    if (slider && window.getComputedStyle(slider).display === 'none') return
+
     const tl = gsap.timeline();
 
     // Reset and Animate Image
     tl.fromTo(
-      imageRef.current,
+      image,
       { opacity: 0, x: -20 },
       { opacity: 1, x: 0, duration: 0.6, ease: "power2.out" }
     );
 
     // Animate Text Content (Logo + Paragraph)
     tl.fromTo(
-      contentRef.current,
+      content,
       { opacity: 0, y: 20 },
       { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
       "-=0.4" // Start slightly before image finishes
     );
+
+    return () => tl.kill();
   }, [currentIndex]);
 
   const handleNext = () => {
