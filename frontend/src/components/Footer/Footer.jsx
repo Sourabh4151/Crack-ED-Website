@@ -162,7 +162,7 @@ const Footer = () => {
                 <li><Link to="/">Home</Link></li>
                 <li><Link to="/about">About Us</Link></li>
                 <li><Link to="/programs">All Programs</Link></li>
-                <li><Link to="/resources">Blog</Link></li>
+                <li><Link to="/resources">Blogs</Link></li>
                 <li><Link to="/badhta-india-dekho">BID Podcast</Link></li>
                 <li><Link to="/careers">Careers</Link></li>
                 <li><Link to="/contact-us">Contact Us</Link></li>

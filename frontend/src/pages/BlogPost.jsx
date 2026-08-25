@@ -167,7 +167,7 @@ const BlogPost = () => {
   const blogPath = `/resources/blog/${id}`
   const blogBreadcrumbs = (label) => [
     { name: 'Home', path: '/' },
-    { name: 'Blog', path: '/resources' },
+    { name: 'Blogs', path: '/resources' },
     { name: label, path: blogPath },
   ]
 

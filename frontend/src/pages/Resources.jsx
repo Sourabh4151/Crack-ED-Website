@@ -32,7 +32,7 @@ const Resources = () => {
         path={PAGE_SEO.resources.path}
         breadcrumbs={[
           { name: 'Home', path: '/' },
-          { name: 'Blog', path: '/resources' },
+          { name: 'Blogs', path: '/resources' },
         ]}
       />
       <Header />

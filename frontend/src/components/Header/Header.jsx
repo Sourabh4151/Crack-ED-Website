@@ -363,7 +363,7 @@ setIsScrolled(prev => {
               )}
             </li>
             <li className="nav-item">
-              <Link to="/resources" className="nav-link" onClick={closeMobileMenu}>Blog</Link>
+              <Link to="/resources" className="nav-link" onClick={closeMobileMenu}>Blogs</Link>
             </li>
             <li className="nav-item">
               <Link to="/badhta-india-dekho" className="nav-link" onClick={closeMobileMenu}>

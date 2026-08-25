@@ -91,7 +91,7 @@ export const PAGE_SEO = {
     path: '/contact-us',
   },
   resources: {
-    title: 'Blog | CRACK-ED',
+    title: 'Blogs | CRACK-ED',
     description:
       "Career tips, interview guidance, and stories from Crack-ED. Whether you're starting out or leveling up, find insights that move you closer to your goals.",
     path: '/resources',

@@ -12,7 +12,7 @@ SOURCE_PAGE_TO_LABEL = {
     '/programs': 'Programs',
     '/careers': 'Careers',
     '/badhta-india-dekho': 'BID',
-    '/resources': 'Blog',
+    '/resources': 'Blogs',
     '/influencer': 'Influencer',
     '/refund-policy': 'Refund Policy',
     '/privacy-policy': 'Privacy Policy',

@@ -8,7 +8,7 @@ CRACK-ED helps learners upskill and get hired through job-linked programs.
 - [About Us](https://crack-ed.com/about)
 - [All Programs](https://crack-ed.com/programs)
 - [Careers](https://crack-ed.com/careers)
-- [Blog](https://crack-ed.com/resources)
+- [Blogs](https://crack-ed.com/resources)
 - [Badhta India Dekho](https://crack-ed.com/badhta-india-dekho)
 - [Contact Us](https://crack-ed.com/contact-us)
 - [Refund Policy](https://crack-ed.com/refund-policy)
