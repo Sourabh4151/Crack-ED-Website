@@ -32,18 +32,31 @@ const CareerForward = () => {
       const content = contentRef.current
       if (!text || !content) return
 
+      const isMobile = window.innerWidth < 768
+
       ctx = gsap.context(() => {
+        if (isMobile) {
+          gsap.set(text, { fontSize: '56px', lineHeight: '60px' })
+        }
+
         const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: () => `top ${window.innerWidth < 768 ? 80 : 70}px`,
-            end: '+=600',
-            scrub: 1.5,
-            pin: true,
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
-            pinType: 'fixed'
-          }
+          scrollTrigger: isMobile
+            ? {
+                trigger: sectionRef.current,
+                start: 'top 80%',
+                end: 'top 30%',
+                scrub: 0.6
+              }
+            : {
+                trigger: sectionRef.current,
+                start: 'top 70px',
+                end: '+=600',
+                scrub: 1.5,
+                pin: true,
+                anticipatePin: 1,
+                invalidateOnRefresh: true,
+                pinType: 'fixed'
+              }
         })
 
         tl.to(text, {

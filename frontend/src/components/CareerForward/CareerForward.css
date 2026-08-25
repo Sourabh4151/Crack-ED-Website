@@ -534,30 +534,40 @@
 
 @media (max-width: 768px) {
 .career-forward-text {
+  display: flex;
   width: 100% !important;
+  top: 50%;
+  transform: translateY(-50%);
+  overflow: hidden;
+}
+
+.career-forward-text .text-line {
+  white-space: normal;
 }
 
   section.career-forward-section11 {
-    --cf-header: 80px;
-    height: calc(100dvh - var(--cf-header)) !important;
-    max-height: calc(100dvh - var(--cf-header)) !important;
+    height: auto !important;
+    max-height: none !important;
     min-height: 0 !important;
     overflow: hidden !important;
   }
 
   .sticky-wrapperCareerForward {
-    height: 100%;
+    height: auto;
+    min-height: 0;
     overflow: hidden;
-    align-items: stretch;
-    padding: 12px 16px 16px;
+    align-items: flex-start;
+    padding: 16px 16px 24px;
   }
 
   .variant5-container123 {
     padding: 0;
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: auto;
     min-height: 0;
+    opacity: 0;
+    pointer-events: none;
   }
 
   .variant5-content {
@@ -571,7 +581,7 @@
   }
 
   .variant5-right-section {
-    flex: 1 1 auto;
+    flex: none;
     min-height: 0;
     height: auto;
     max-height: none;
@@ -579,13 +589,17 @@
     align-items: stretch;
   }
 
+  .variant5-glow {
+    display: none;
+  }
+
   .quiz-fade-in {
     padding: 12px !important;
     border: 1px solid #FAFAFA33 !important;
-    height: 100%;
-    max-height: 100%;
+    height: auto;
+    max-height: none;
     min-height: 0;
-    overflow: hidden;
+    overflow: visible;
   }
 
   .progress-section {
@@ -593,8 +607,8 @@
   }
 
   .question-text {
-    font-size: 18px;
-    margin-bottom: 12px;
+    font-size: 16px;
+    margin-bottom: 10px;
   }
 
 .alt-card h3{
@@ -614,14 +628,14 @@
   }
 
   .quiz-option-button {
-    padding: 12px !important;
+    padding: 10px !important;
     font-size: 14px !important;
     font-weight: 500 !important;
-    margin-bottom: 0 !important;
-    flex: 1 1 0;
-    display: flex;
-    align-items: center;
-    min-height: 0;
+    margin-bottom: 8px !important;
+    flex: none;
+    display: block;
+    min-height: auto;
+    height: auto;
   }
 
   .career-forward-section {
@@ -632,11 +646,12 @@
 
   .variant5-paragraph {
     font-size: 14px;
-    margin-bottom: 10px;
+    line-height: 22px;
+    margin-bottom: 16px;
   }
 
   .variant5-heading {
-    font-size: 30px;
+    font-size: 26px;
     margin-bottom: 10px;
     width: 100%;
     max-width: 100% !important;
@@ -645,19 +660,17 @@
   .quiz-container {
     padding: 8px !important;
     max-width: 100% !important;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+    height: auto;
+    display: block;
+    overflow: visible;
   }
 
   .options-stack {
-    flex: 1 1 0%;
+    flex: none;
     min-height: 0;
-    overflow: hidden;
-    display: grid;
-    grid-template-rows: repeat(4, minmax(0, 1fr));
-    gap: 8px;
+    overflow: visible;
+    display: block;
+    gap: 0;
   }
 
   .navigation-footer {
