@@ -18,6 +18,10 @@
   margin: 0px auto;
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 @media screen and (min-width: 769px) {
@@ -27,13 +31,17 @@
 }
 
  .career-forward-text1 {
-  position: absolute;
+  position: relative;
   font-size: clamp(40px, 10vw, 150px);
   font-weight: 700;
   text-align: center;
   width: 100%;
   z-index: 1;
-  top: 10%;
+  top: auto;
+  line-height: 1.2;
+  overflow: visible;
+  margin: 0;
+  padding-bottom: 0.16em;
   font-family: "Montserrat", sans-serif;
 background: linear-gradient(180deg, rgba(255, 255, 255, 0.88) 0%, rgba(255, 255, 255, 0.7) 100%);
 
@@ -44,12 +52,28 @@ background: linear-gradient(180deg, rgba(255, 255, 255, 0.88) 0%, rgba(255, 255,
   color: transparent; 
   pointer-events: none; 
 }
+
+.career-forward-text1 .text-line {
+  display: block;
+  overflow: visible;
+  line-height: inherit;
+  padding-bottom: 0;
+}
+
+@media screen and (min-width: 769px) {
+  .career-forward-text1 {
+    margin-bottom: 0;
+  }
+}
+
 .typing-text {
   font-family: 'Poppins', sans-serif;
   font-size: 40px;
   padding: 0px 120px;
   line-height: 1.3;
+  position: relative;
   z-index: 2;
+  margin: 0;
   text-align: justify;
   text-justify: inter-word;
   text-align-last: justify;
@@ -106,7 +130,7 @@ background: linear-gradient(180deg, rgba(255, 255, 255, 0.88) 0%, rgba(255, 255,
     box-sizing: border-box;
     font-size: clamp(32px, 9vw, 56px);
     text-align: center;
-    margin: 0 0 28px;
+    margin: 0 0 8px;
   }
 
   .variant5-container1 {
