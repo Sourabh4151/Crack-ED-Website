@@ -113,6 +113,7 @@ div.pin-spacer:has(> .career-forward-sectionWhychooseus) {
   margin-top: 0;
   vertical-align: top;
   z-index: 1;
+  pointer-events: auto;
 }
 
 .premium-card:hover {
@@ -166,7 +167,22 @@ background: linear-gradient(180deg, rgba(255, 255, 255, 0.88) 0%, rgba(255, 255,
   background-clip: text;
   -webkit-text-fill-color: transparent;
   z-index: 1;
+  pointer-events: none;
   /* font-size: clamp(20px, 4vw, 245px); */
   font-size: clamp(64px, 12vw, 200px);
 
+}
+
+/* Sit the CTA just under CALIBRATE. Do not change ghost-text position. */
+.slide-layer.slide-3 .talk-to-team-cta {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(65% + 20px);
+  bottom: auto;
+  z-index: 20;
+  padding: 0 20px;
+  margin: 0;
+  background: transparent;
+  pointer-events: auto;
 }

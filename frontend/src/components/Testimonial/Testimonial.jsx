@@ -18,11 +18,9 @@ import Rohitash from '../../assets/Rohitash.webp'
 import Kuldeep from '../../assets/Kuldeep.webp'
 import IlaKumari from '../../assets/Ila Kumari .jpeg'
 import Abhijeet from '../../assets/Abhijeet.jpeg'
-import EnquireModal from '../EnquireModal/EnquireModal'
 import './Testimonial.css'
 
 const Testimonial = () => {
-  const [isTalkModalOpen, setIsTalkModalOpen] = useState(false)
   const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth <= 768)
   const trackRef = useRef(null)
   const offsetRef = useRef(0)
@@ -313,7 +311,8 @@ const Testimonial = () => {
     <section className="testimonial-section">
       <div className="testimonial-container">
         <div className="testimonial-header">
-   
+          <div className="testimonial-badge">Success Stories</div>
+          <h2 className="testimonial-heading">From Aspirations to Achievements.</h2>
         </div>
         <div
           className="testimonial-cards-wrapper"
@@ -355,21 +354,7 @@ const Testimonial = () => {
             </svg>
           </button>
         </div>
-        <div className="testimonial-cta-wrap">
-          <button
-            type="button"
-            className="testimonial-cta-button"
-            onClick={() => setIsTalkModalOpen(true)}
-          >
-            Talk to Our Team
-          </button>
-        </div>
       </div>
-      <EnquireModal
-        isOpen={isTalkModalOpen}
-        onClose={() => setIsTalkModalOpen(false)}
-        variant="talk-to-team"
-      />
     </section>
   )
 }

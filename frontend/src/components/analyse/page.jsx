@@ -2,6 +2,7 @@ import React, { useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './page.css';
+import TalkToTeamCta from '../TalkToTeamCta/TalkToTeamCta';
 
 import img1 from '../../assets/img1.png'; import img2 from '../../assets/img2.svg'; import img3 from '../../assets/img3.png';
 import img4 from '../../assets/img4.png'; import img5 from '../../assets/img5.png'; import img6 from '../../assets/img6.png';
@@ -151,6 +152,7 @@ const Analyse = () => {
                         <Card img={img7} title="Apprenticeship" desc="Regular check-ins with candidates during OJT" />
                         <Card img={img8} title="Benchmarking" desc="Structured inputs from reporting managers" />
                         <Card img={img9} title="Commissioning" desc="Transitioning candidates into full-time roles" />
+                        <TalkToTeamCta />
                     </div>
                 </div>
 

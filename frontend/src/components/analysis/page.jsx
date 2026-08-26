@@ -2,7 +2,7 @@ import React, { useLayoutEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import './analysis.css'
-
+import TalkToTeamCta from '../TalkToTeamCta/TalkToTeamCta'
 
 import img1 from '../../assets/img1.png'; import img2 from '../../assets/img2.svg'; import img3 from '../../assets/img3.png';
 import img4 from '../../assets/img4.png'; import img5 from '../../assets/img5.png'; import img6 from '../../assets/img6.png';
@@ -189,6 +189,7 @@ useLayoutEffect(() => {
             <Card img={img9} title="Commissioning" desc="Transitioning candidates into full-time roles with a clear growth roadmap" />
           </div>
           <h2 className="ghost-text" style={{ fontSize: '150px' }}>CALIBRATE</h2>
+          <TalkToTeamCta />
         </div>
 
       </div>

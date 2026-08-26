@@ -1,7 +1,7 @@
 .testimonial-section {
   width: 100%;
   background: #000000;
-  padding: 40px 0 16px 0;
+  padding: 60px 0 16px 0;
   position: relative;
 }
 
@@ -11,15 +11,18 @@
   padding: 0 120px;
   display: flex;
   flex-direction: column;
-  gap: 60px;
+  gap: 0;
 }
 
 .testimonial-header {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 24px;
-  width: fit-content;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 50px;
 }
 
 .testimonial-badge {
@@ -50,51 +53,9 @@
   font-style: normal;
   line-height: 27px;
   letter-spacing: 0%;
-  text-align: left;
+  text-align: center;
   color: #FAFAFA;
   margin: 0;
-}
-
-.testimonial-cta-wrap {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin-top: 52px;
-}
-
-.testimonial-cta-button {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 100%;
-  letter-spacing: 0%;
-  border: none;
-  padding: 14px 40px;
-  border-radius: 10px;
-  cursor: pointer;
-  width: fit-content;
-  height: fit-content;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  position: relative;
-  overflow: hidden;
-  background-size: 200% 100%;
-  background-image: linear-gradient(90deg, #1A9EB7 0%, #1A9EB7 40%, #62CBE4 50%, #FCCE0C 65%, #FCCE0C 100%);
-  background-position: 0% 0;
-  color: #1E1E1E;
-  transition: background-position 2000ms linear 1ms, box-shadow 2000ms linear 1ms;
-}
-
-.testimonial-cta-button:hover {
-  background-position: 100% 0;
-  box-shadow: 0 5px 50px 0 rgba(127, 127, 127, 0.3);
-}
-
-.testimonial-cta-button:active {
-  background-position: 100% 0;
 }
 
 .testimonial-cards-wrapper {
@@ -376,26 +337,18 @@
 
 @media (max-width: 768px) {
   .testimonial-section {
-    padding: 30px 0 16px 0;
+    padding: 40px 0 16px 0;
   }
 
   .testimonial-container {
     padding: 0 24px;
-    gap: 32px;
-  }
-
-  .testimonial-cta-wrap {
-    margin-top: 28px;
-  }
-
-  .testimonial-cta-button {
-    padding: 14px 36px;
-    font-size: 14px;
+    gap: 0;
   }
 
   .testimonial-header {
-    gap: 16px;
+    gap: 10px;
     width: 100%;
+    margin-bottom: 20px;
   }
 
   .testimonial-badge {
@@ -481,25 +434,17 @@
 
 @media (max-width: 480px) {
   .testimonial-section {
-    padding: 25px 0 16px 0;
+    padding: 32px 0 16px 0;
   }
 
   .testimonial-container {
     padding: 0 20px;
-    gap: 28px;
-  }
-
-  .testimonial-cta-wrap {
-    margin-top: 20px;
-  }
-
-  .testimonial-cta-button {
-    padding: 12px 28px;
-    font-size: 13px;
+    gap: 0;
   }
 
   .testimonial-header {
-    gap: 14px;
+    gap: 8px;
+    margin-bottom: 16px;
   }
 
   .testimonial-badge {

@@ -42,7 +42,6 @@ const Stats = () => {
             end: 'bottom top',
             toggleClass: { targets: card, className: 'stat-card--at-top' },
             invalidateOnRefresh: true,
-            // markers: true
           })
         })
       }, grid)
@@ -56,14 +55,31 @@ const Stats = () => {
       ScrollTrigger.refresh()
     }
 
+    const pinsReady = () =>
+      !!document.querySelector(
+        '.pin-spacer, .career-forward-sectionWhychooseus, .analyse'
+      )
+
     // Create after pins above (Why Choose Us / CALIBRATE) have been built,
     // otherwise start/end are measured too early and the class never toggles.
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting) {
-          observer.disconnect()
-          createTriggers()
+        if (!entries[0].isIntersecting) return
+        observer.disconnect()
+
+        const deadline = Date.now() + 2500
+        const waitForPins = () => {
+          if (cancelled) return
+          if (pinsReady() || Date.now() > deadline) {
+            createTriggers()
+            // Pin spacers can land one frame later than the section itself.
+            requestAnimationFrame(() => ScrollTrigger.refresh())
+            setTimeout(() => { if (!cancelled) ScrollTrigger.refresh() }, 200)
+            return
+          }
+          requestAnimationFrame(waitForPins)
         }
+        waitForPins()
       },
       { rootMargin: '200px 0px' }
     )

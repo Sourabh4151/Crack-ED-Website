@@ -130,7 +130,7 @@ const Partners = () => {
         <div style={{display:"flex",justifyContent:"center",flexDirection:"column",alignItems:"center",width:"100%"}}>
     
                  <div className="testimonial-badge">Testimonials</div>
-          <h2 className="testimonial-heading" style={{marginTop:"20px"}}>Hear from our partners and learners.</h2>
+          <h2 className="testimonial-heading" style={{marginTop:"20px"}}>What partners say about working with us</h2>
         </div>
 
         <div className="slider-wrapper">
