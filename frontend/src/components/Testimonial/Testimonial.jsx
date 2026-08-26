@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
-import AntimaMishra from '../../assets/Antima Mishra.png'
+import AntimaMishra from '../../assets/Antima Mishra.webp'
 import PoojaMehta from '../../assets/Pooja Mehta.jpeg'
 import ShreyaVerma from '../../assets/Shreya_Verma.webp'
 import KashyapGoswami from '../../assets/Kashyap_Goswami.webp'
@@ -12,10 +12,10 @@ import PavanTyagi from '../../assets/Pavan_Tyagi.webp'
 import Prakash from '../../assets/Prakash.webp'
 import RahulChaudhary from '../../assets/Rahul_Chaudhary.webp'
 import Ajay from '../../assets/Ajay.webp'
-import Shubham from '../../assets/Shubham.png'
-import Rohit from '../../assets/Rohit.png'
-import Rohitash from '../../assets/Rohitash.png'
-import Kuldeep from '../../assets/Kuldeep.png'
+import Shubham from '../../assets/Shubham.webp'
+import Rohit from '../../assets/Rohit.webp'
+import Rohitash from '../../assets/Rohitash.webp'
+import Kuldeep from '../../assets/Kuldeep.webp'
 import IlaKumari from '../../assets/Ila Kumari .jpeg'
 import Abhijeet from '../../assets/Abhijeet.jpeg'
 import EnquireModal from '../EnquireModal/EnquireModal'
@@ -30,6 +30,8 @@ const Testimonial = () => {
   const rafRef = useRef(null)
   const lastTimeRef = useRef(0)
   const loopingRef = useRef(false)
+
+  const inViewRef = useRef(true)
 
   const testimonials = [
     {
@@ -266,7 +268,7 @@ const Testimonial = () => {
 
     const tick = (now) => {
       const loopWidth = getLoopWidth()
-      if (!pausedRef.current && loopWidth > 0) {
+      if (!pausedRef.current && inViewRef.current && loopWidth > 0) {
         const dt = now - lastTimeRef.current
         offsetRef.current += (loopWidth / durationMs) * dt
         wrapOffset()
@@ -288,9 +290,22 @@ const Testimonial = () => {
 
     window.addEventListener('resize', handleResize)
 
+    const wrapper = trackRef.current?.closest('.testimonial-cards-wrapper')
+    let io
+    if (wrapper && typeof IntersectionObserver !== 'undefined') {
+      io = new IntersectionObserver(
+        ([entry]) => {
+          inViewRef.current = entry.isIntersecting
+        },
+        { rootMargin: '100px 0px', threshold: 0 }
+      )
+      io.observe(wrapper)
+    }
+
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current)
       window.removeEventListener('resize', handleResize)
+      if (io) io.disconnect()
     }
   }, [applyTransform, getLoopWidth, getStep, isMobile, wrapOffset])
 
@@ -319,7 +334,7 @@ const Testimonial = () => {
             {testimonialsToShow.map((testimonial, index) => (
               <div key={`${testimonial.id}-${index}`} className="testimonial-card">
                 <div className="testimonial-image-container">
-                  <img src={testimonial.image} alt={testimonial.name} className="testimonial-image" />
+                  <img src={testimonial.image} alt={testimonial.name} className="testimonial-image" loading="lazy" decoding="async" />
                   <div className="testimonial-content">
                     <h3 className="testimonial-name">{testimonial.name}</h3>
                     <p className={`testimonial-title${testimonial.compactTitle ? ' testimonial-title-compact' : ''}`}>{testimonial.title}</p>

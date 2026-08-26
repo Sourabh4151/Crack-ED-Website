@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './page.css';
@@ -9,6 +9,14 @@ import img7 from '../../assets/img7.png'; import img8 from '../../assets/img8.pn
 
 
 gsap.registerPlugin(ScrollTrigger);
+
+const releasePin = (el) => {
+    if (!el) return;
+    const parent = el.parentNode;
+    if (parent && parent.classList && parent.classList.contains('pin-spacer')) {
+        parent.replaceWith(el);
+    }
+};
 
 const Card = ({ img, title, desc }) => (
     <div style={{ margin: "20px 30px", display: "flex", alignItems: "start", gap: "24px" }}>
@@ -23,7 +31,7 @@ const Card = ({ img, title, desc }) => (
 const Analyse = () => {
     const sectionRef = useRef(null);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const root = sectionRef.current;
         if (!root) return;
 
@@ -99,7 +107,16 @@ const Analyse = () => {
         return () => {
             cancelled = true;
             observer.disconnect();
-            if (ctx) ctx.revert();
+            try {
+                if (ctx) ctx.revert();
+            } catch (_) { /* pin unwrap can throw if the node was already moved */ }
+            ctx = null;
+            ScrollTrigger.getAll().forEach((st) => {
+                if (st.trigger === root) {
+                    try { st.kill(); } catch (_) {}
+                }
+            });
+            releasePin(root);
         };
     }, []);
 

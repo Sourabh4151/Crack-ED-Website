@@ -1,7 +1,12 @@
-import React, { useState } from 'react'
+import React, { lazy, Suspense, useState } from 'react'
 import LogoCarousel from '../LogoCarousel/LogoCarousel'
-import EnquireModal from '../EnquireModal/EnquireModal'
 import './Hero.css'
+
+const EnquireModal = lazy(() => import('../EnquireModal/EnquireModal'))
+
+const preloadEnquireModal = () => {
+  import('../EnquireModal/EnquireModal')
+}
 
 const Hero = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -22,6 +27,8 @@ const Hero = () => {
           src="/hero_section_image.webp"
           alt="Professional workspace"
           className="hero-bg-image"
+          width="1376"
+          height="768"
           loading="eager"
           fetchpriority="high"
         />
@@ -47,6 +54,8 @@ const Hero = () => {
             <button
               className="hero-cta-button"
               onClick={handleEnquireClick}
+              onMouseEnter={preloadEnquireModal}
+              onFocus={preloadEnquireModal}
             >
               Enquire Now
             </button>
@@ -56,7 +65,11 @@ const Hero = () => {
           <LogoCarousel />
         </div>
       </div>
-      <EnquireModal isOpen={isModalOpen} onClose={handleCloseModal} />
+      {isModalOpen && (
+        <Suspense fallback={null}>
+          <EnquireModal isOpen={isModalOpen} onClose={handleCloseModal} />
+        </Suspense>
+      )}
     </section>
   )
 }

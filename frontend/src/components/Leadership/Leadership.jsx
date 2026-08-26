@@ -1,8 +1,8 @@
 import React from 'react'
-import debojitSen from '../../assets/debojit_about_us2.jpeg'
+import debojitSen from '../../assets/debojit_about_us2.webp'
 import anand from '../../assets/anand.jpeg'
 import vipinSingh from '../../assets/vipin_singh.jpeg'
-import ankitMittal from '../../assets/ankit_mittal.jpg'
+import ankitMittal from '../../assets/ankit_mittal.webp'
 import bhavanaAnand from '../../assets/bhavana_anand.jpg'
 import nabeelAkhtar from '../../assets/nabeel_akhtar.jpg'
 import amanRawat from '../../assets/aman_rawat.jpg'
@@ -40,7 +40,7 @@ const Leadership = () => {
           {leaders.map((leader) => (
             <div key={leader.name} className={`leadership-card ${leader.name.replace(/\s+/g, '-').toLowerCase()}`}>
               <div className="leadership-card-image-wrap">
-                <img src={leader.image} alt={leader.name} className="leadership-card-image" />
+                <img src={leader.image} alt={leader.name} className="leadership-card-image" loading="lazy" decoding="async" />
                 {/* Black strip overlays bottom of image – image shows through (transparent to strip) */}
                 <div className="leadership-card-text-frame">
                   <div className="leadership-card-details">

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import founderImage from '../../assets/founder.jpg'
+import founderImage from '../../assets/founder.webp'
 import './BIDHost.css'
 
 const BIDHost = () => {
@@ -39,6 +39,8 @@ const BIDHost = () => {
               src={founderImage}
               alt="Debojit Sen, Founder & CEO of Crack-ED"
               className="bid-host-image"
+              loading="lazy"
+              decoding="async"
             />
           </div>
 

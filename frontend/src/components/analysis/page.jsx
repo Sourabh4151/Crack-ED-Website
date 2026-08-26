@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useLayoutEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import './analysis.css'
@@ -9,6 +9,14 @@ import img4 from '../../assets/img4.png'; import img5 from '../../assets/img5.pn
 import img7 from '../../assets/img7.png'; import img8 from '../../assets/img8.png'; import img9 from '../../assets/img9.png';
 
 gsap.registerPlugin(ScrollTrigger)
+
+const releasePin = (el) => {
+  if (!el) return
+  const parent = el.parentNode
+  if (parent && parent.classList && parent.classList.contains('pin-spacer')) {
+    parent.replaceWith(el)
+  }
+}
 
 const Card = ({ img, title, desc }) => {
   const [hover, setHover] = useState(false);
@@ -40,7 +48,7 @@ const Card = ({ img, title, desc }) => {
 
 const Analysis = () => {
   const sectionRef = useRef(null)
-useEffect(() => {
+useLayoutEffect(() => {
   const root = sectionRef.current
   if (!root) return
 
@@ -132,7 +140,16 @@ useEffect(() => {
   return () => {
     cancelled = true
     observer.disconnect()
-    if (ctx) ctx.revert()
+    try {
+      if (ctx) ctx.revert()
+    } catch (_) { /* pin unwrap can throw if the node was already moved */ }
+    ctx = null
+    ScrollTrigger.getAll().forEach((st) => {
+      if (st.trigger === root) {
+        try { st.kill() } catch (_) {}
+      }
+    })
+    releasePin(root)
   }
 }, []);
 

@@ -51,8 +51,9 @@ const LogoCarousel = () => {
               <img
                 src={logo.image}
                 alt={logo.name}
-                loading={index < 6 ? 'eager' : 'lazy'}
+                loading={index < 3 ? 'eager' : 'lazy'}
                 decoding="async"
+                fetchPriority="low"
                 className={`logo-image ${logo.noFilter ? 'logo-image-no-filter' : ''} ${logo.name === 'Paytm' ? 'logo-paytm' : ''}`}
               />
             </div>

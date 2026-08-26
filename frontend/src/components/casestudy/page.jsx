@@ -8,6 +8,7 @@ import img3 from "../../assets/Frame 3652.png";
 import logoBW from "../../assets/idvrZDd6SZ_logos 1.png";
 import logoHT from "../../assets/hindustan times 1.webp";
 import logoBWDisrupt from "../../assets/idaqkNYWaP_1768564795277 1.png";
+import NorthEastIcon from "../icons/NorthEastIcon";
 
 const CaseStudy = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -71,9 +72,7 @@ const CaseStudy = () => {
           <div>
             <button className="view-all-button1">
               View All
-              <span class="material-symbols-outlined">
-                north_east
-              </span>
+              <NorthEastIcon className="north-east-icon" />
             </button>
           </div>
 

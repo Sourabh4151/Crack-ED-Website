@@ -1,11 +1,11 @@
 import React from 'react'
 import firstImage from '../../assets/first.png'
-import secondImage from '../../assets/2nd.png'
-import thirdImage from '../../assets/3rd.png'
-import fourthImage from '../../assets/4th.png'
-import fifthImage from '../../assets/5th.png'
-import sixthImage from '../../assets/6th.png'
-import seventhImage from '../../assets/7th.png'
+import secondImage from '../../assets/2nd.webp'
+import thirdImage from '../../assets/3rd.webp'
+import fourthImage from '../../assets/4th.webp'
+import fifthImage from '../../assets/5th.webp'
+import sixthImage from '../../assets/6th.webp'
+import seventhImage from '../../assets/7th.webp'
 import './LifeAtCrackED.css'
 
 const LifeAtCrackED = () => {
@@ -39,6 +39,8 @@ const LifeAtCrackED = () => {
                   src={item.image} 
                   alt={item.name} 
                   className="life-at-cracked-image"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             ))}

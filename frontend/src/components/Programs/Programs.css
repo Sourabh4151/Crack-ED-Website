@@ -201,8 +201,16 @@ image.png.programs-section .program-details a,
   height: 100%;
   background: #1A9EB7;
   border-radius: 2px;
-  transition: width 0.05s linear;
   width: 0%;
+}
+
+.progress-bar--run {
+  animation: programs-progress 8s linear forwards;
+}
+
+@keyframes programs-progress {
+  from { width: 0%; }
+  to { width: 100%; }
 }
 
 .navigation-controls {
@@ -326,12 +334,14 @@ image.png.programs-section .program-details a,
   border-color: #FFFFFF;
 }
 
-.view-all-button .material-symbols-outlined {
+.view-all-button .material-symbols-outlined,
+.view-all-button .north-east-icon {
   transition: transform 0.3s ease, color 0.3s ease;
   color: #FAFAFA;
 }
 
-.view-all-button:hover .material-symbols-outlined {
+.view-all-button:hover .material-symbols-outlined,
+.view-all-button:hover .north-east-icon {
   color: #000000;
   transform: rotate(45deg);
 }
@@ -705,9 +715,11 @@ image.png.programs-section .program-details a,
   text-decoration: none;
 }
 
-.view-all-button1 .material-symbols-outlined {
+.view-all-button1 .material-symbols-outlined,
+.view-all-button1 .north-east-icon {
   transition: transform 0.3s ease;
   display: inline-block;
+  flex-shrink: 0;
 }
 
 .view-all-arrow {
@@ -724,7 +736,8 @@ image.png.programs-section .program-details a,
 
 }
 
-.view-all-button1:hover .material-symbols-outlined {
+.view-all-button1:hover .material-symbols-outlined,
+.view-all-button1:hover .north-east-icon {
   transform: rotate(45deg);
 }
 
@@ -1252,8 +1265,11 @@ image.png.programs-section .program-details a,
     border: none;
   }
 
-  .mobile-program-learn-more .material-symbols-outlined {
+  .mobile-program-learn-more .material-symbols-outlined,
+  .mobile-program-learn-more .north-east-icon {
     font-size: 18px;
+    width: 18px;
+    height: 18px;
     transform: rotate(45deg);
   }
 }

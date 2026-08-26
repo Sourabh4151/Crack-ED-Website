@@ -63,6 +63,7 @@ import bandhanBankLogo from '../../assets/bandhan_bank_logo.svg'
 import bandhanMiniLogo from '../../assets/animation_bandhan_logo.svg'
 import { trackMicrositeClick } from '../../utils/analytics'
 import { appendUtmToUrl } from '../../services/crmService'
+import NorthEastIcon from '../icons/NorthEastIcon'
 import './Programs.css'
 
 // Keep "LPA + PLP" on one line to prevent awkward wrapping
@@ -105,10 +106,11 @@ const getProgramHomeLogo = (programLabel) => {
 
 const Programs = () => {
   const [currentCardIndex, setCurrentCardIndex] = useState(0)
-  const [progress, setProgress] = useState(0)
+  const [isDesktopPrograms, setIsDesktopPrograms] = useState(
+    () => window.matchMedia('(min-width: 769px)').matches
+  )
   const carouselRef = useRef(null)
   const cardRefs = useRef([])
-  const progressIntervalRef = useRef(null)
   const autoAdvanceTimeoutRef = useRef(null)
 
   const programCards = [
@@ -460,81 +462,46 @@ const Programs = () => {
   }, [currentCardIndex, featuredCardIndex])
 
   const resetAutoAdvance = () => {
-    // Clear existing timers
-    if (progressIntervalRef.current) {
-      clearInterval(progressIntervalRef.current)
-      progressIntervalRef.current = null
-    }
     if (autoAdvanceTimeoutRef.current) {
       clearTimeout(autoAdvanceTimeoutRef.current)
       autoAdvanceTimeoutRef.current = null
     }
 
-    // Reset progress
-    setProgress(0)
-
-    // Start new auto-advance cycle (8 seconds)
-    const duration = 8000 // 8 seconds
-    const interval = 50 // Update every 50ms for smooth animation
-    const steps = duration / interval
-    const increment = 100 / steps
-
-    progressIntervalRef.current = setInterval(() => {
-      setProgress((prev) => {
-        const next = prev + increment
-        if (next >= 100) {
-          clearInterval(progressIntervalRef.current)
-          progressIntervalRef.current = null
-          return 100
-        }
-        return next
-      })
-    }, interval)
-
-    // Auto-advance after duration
     autoAdvanceTimeoutRef.current = setTimeout(() => {
       setCurrentCardIndex((prev) => (prev + 1) % programCards.length)
-    }, duration)
+    }, 8000)
   }
 
   const nextCard = () => {
-    // Clear auto-advance when user manually clicks
-    if (progressIntervalRef.current) {
-      clearInterval(progressIntervalRef.current)
-      progressIntervalRef.current = null
-    }
     if (autoAdvanceTimeoutRef.current) {
       clearTimeout(autoAdvanceTimeoutRef.current)
       autoAdvanceTimeoutRef.current = null
     }
-    setProgress(0)
 
     setCurrentCardIndex((prev) => (prev + 1) % programCards.length)
   }
 
   const prevCard = () => {
-    // Clear auto-advance when user manually clicks
-    if (progressIntervalRef.current) {
-      clearInterval(progressIntervalRef.current)
-      progressIntervalRef.current = null
-    }
     if (autoAdvanceTimeoutRef.current) {
       clearTimeout(autoAdvanceTimeoutRef.current)
       autoAdvanceTimeoutRef.current = null
     }
-    setProgress(0)
 
     setCurrentCardIndex((prev) => (prev - 1 + programCards.length) % programCards.length)
   }
+
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 769px)')
+    const onChange = () => setIsDesktopPrograms(mq.matches)
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
 
   // Initialize auto-advance on mount and when currentCardIndex changes
   useEffect(() => {
     resetAutoAdvance()
 
     return () => {
-      if (progressIntervalRef.current) {
-        clearInterval(progressIntervalRef.current)
-      }
       if (autoAdvanceTimeoutRef.current) {
         clearTimeout(autoAdvanceTimeoutRef.current)
       }
@@ -615,7 +582,7 @@ const Programs = () => {
                         </div>
                         <span className="mobile-program-learn-more">
                           Learn More
-                          <span className="material-symbols-outlined">north_east</span>
+                          <NorthEastIcon className="north-east-icon" />
                         </span>
                       </div>
                     </a>
@@ -627,24 +594,26 @@ const Programs = () => {
           <div className="btnadjustment">
             <Link to="/programs" className="view-all-button1" aria-label="View all programs">
               View All
-              <span className="material-symbols-outlined">
-                north_east
-              </span>
+              <NorthEastIcon className="north-east-icon" />
             </Link>
           </div>
         </div>
 
         <div
           className="programs-background-container"
-          style={{
-            backgroundImage: `url(${currentProgramDetails?.image || lenskartStoreImage})`,
-            backgroundPosition: 'center 60%'
-          }}
+          style={
+            isDesktopPrograms
+              ? {
+                  backgroundImage: `url(${currentProgramDetails?.image || lenskartStoreImage})`,
+                  backgroundPosition: 'center 60%',
+                }
+              : undefined
+          }
         >
           <div className="progress-bar-container-top">
             <div
-              className="progress-bar"
-              style={{ width: `${progress}%` }}
+              key={currentCardIndex}
+              className="progress-bar progress-bar--run"
             ></div>
           </div>
           <div className="programs-content-wrapper">

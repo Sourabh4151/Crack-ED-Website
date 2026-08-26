@@ -21,14 +21,14 @@ const EnquireModal = ({ isOpen, onClose, variant = 'enquire' }) => {
   const [submitError, setSubmitError] = useState(null)
   const [submitSuccess, setSubmitSuccess] = useState(false)
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = 'unset'
-    }
-    
+    if (!isOpen) return undefined
+
+    const { body } = document
+    const previousOverflow = body.style.overflow
+    body.style.overflow = 'hidden'
+
     return () => {
-      document.body.style.overflow = 'unset'
+      body.style.overflow = previousOverflow
     }
   }, [isOpen])
 

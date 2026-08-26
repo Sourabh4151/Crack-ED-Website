@@ -2,5 +2,11 @@
   width: 100%;
   min-height: 100vh;
   position: relative;
-  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+.home-below-fold-placeholder {
+  min-height: 100vh;
+  width: 100%;
+  pointer-events: none;
 }

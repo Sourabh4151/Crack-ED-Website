@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useLayoutEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import './whychoose.css'
@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger)
 const Whychooseus = () => {
   const sectionRef = useRef(null)
   const revealRef = useRef(null)
-  useEffect(() => {
+  useLayoutEffect(() => {
     const root = sectionRef.current
     if (!root) return
 
@@ -16,14 +16,25 @@ const Whychooseus = () => {
     let ctx = null
     const mq = window.matchMedia('(max-width: 768px)')
 
-    const teardown = () => {
-      if (ctx) {
-        ctx.revert()
-        ctx = null
+    const releasePin = (el) => {
+      if (!el) return
+      const parent = el.parentNode
+      if (parent && parent.classList && parent.classList.contains('pin-spacer')) {
+        parent.replaceWith(el)
       }
+    }
+
+    const teardown = () => {
+      try {
+        if (ctx) ctx.revert()
+      } catch (_) { /* pin unwrap can throw if the node was already moved */ }
+      ctx = null
       ScrollTrigger.getAll().forEach((st) => {
-        if (st.trigger === root) st.kill()
+        if (st.trigger === root) {
+          try { st.kill() } catch (_) {}
+        }
       })
+      releasePin(root)
     }
 
     const initAnimation = () => {

@@ -1,5 +1,5 @@
 
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useLayoutEffect, useRef, useState } from 'react'
 import './CareerForward.css'
 import CareerQuiz from '../CareerQuiz/page'
 
@@ -10,7 +10,7 @@ const CareerForward = () => {
   const contentRef = useRef(null)
   const [showQuiz, setShowQuiz] = useState(false)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const section = sectionRef.current
 
     if (!section) return
@@ -102,8 +102,12 @@ const CareerForward = () => {
       cancelled = true
       observer.disconnect()
 
-      if (ctx) {
-        ctx.revert()
+      try {
+        if (ctx) ctx.revert()
+      } catch (_) { /* pin unwrap can throw if the node was already moved */ }
+      const parent = section.parentNode
+      if (parent && parent.classList && parent.classList.contains('pin-spacer')) {
+        parent.replaceWith(section)
       }
     }
   }, [])

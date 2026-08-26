@@ -10,9 +10,10 @@ import './App.css'
 // Components
 import ScrollToTop from './components/ScrollToTop/ScrollToTop'
 import PreserveUtmParams from './components/PreserveUtmParams/PreserveUtmParams'
+import Home from './pages/Home'
 
 // Pages
-const Home = lazy(() => import('./pages/Home'))
+
 const Programs = lazy(() => import('./pages/Programs'))
 const Careers = lazy(() => import('./pages/Careers'))
 const JobDetail = lazy(() => import('./pages/JobDetail'))
