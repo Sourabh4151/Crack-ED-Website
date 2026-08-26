@@ -53,7 +53,7 @@ const LogoCarousel = () => {
                 alt={logo.name}
                 loading={index < 3 ? 'eager' : 'lazy'}
                 decoding="async"
-                fetchPriority="low"
+                fetchpriority="low"
                 className={`logo-image ${logo.noFilter ? 'logo-image-no-filter' : ''} ${logo.name === 'Paytm' ? 'logo-paytm' : ''}`}
               />
             </div>
