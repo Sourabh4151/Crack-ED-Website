@@ -890,17 +890,18 @@ image.png.programs-section .program-details a,
     color: rgba(250, 250, 250, 1);
     background: transparent;
     border: 0.5px solid rgba(250, 250, 250, 1);
-    padding: 12px 24px;
+    padding: 12px 28px;
     border-radius: 10px;
-    width: 223px;
-    height: 56px;
-    min-height: 56px;
+    width: fit-content;
+    height: fit-content;
+    min-height: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
     margin-top: 16px;
     box-sizing: border-box;
+    box-shadow: 2px 2px 8px 0 rgba(250, 250, 250, 0.6);
   }
 
   .programs-background-container {
@@ -1245,31 +1246,42 @@ image.png.programs-section .program-details a,
     margin-top: 2px;
   }
 
-  .mobile-program-learn-more {
+  .mobile-program-card-footer {
     flex-shrink: 0;
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    font-weight: 500;
-    font-style: normal;
-    line-height: 100%;
-    letter-spacing: 0%;
-    color: rgba(250, 250, 250, 1);
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
     width: 100%;
-    padding: 22px 24px;
+    padding: 16px 24px;
     background: rgba(17, 17, 17, 1);
-    border-radius: 0 0 16px 16px;
-    border: none;
+    box-sizing: border-box;
   }
 
-  .mobile-program-learn-more .material-symbols-outlined,
-  .mobile-program-learn-more .north-east-icon {
-    font-size: 18px;
-    width: 18px;
-    height: 18px;
-    transform: rotate(45deg);
+  .mobile-program-learn-more {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    font-style: normal;
+    line-height: 21px;
+    letter-spacing: 0%;
+    color: #1E1E1E;
+    background: #FAFAFA;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: fit-content;
+    height: fit-content;
+    padding: 12px 28px;
+    border-radius: 50px;
+    border: none;
+    box-sizing: border-box;
+  }
+
+  .mobile-program-learn-more-arrow {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
   }
 }

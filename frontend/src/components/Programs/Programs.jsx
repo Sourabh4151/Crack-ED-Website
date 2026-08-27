@@ -580,10 +580,29 @@ const Programs = () => {
                             </div>
                           </div>
                         </div>
-                        <span className="mobile-program-learn-more">
-                          Learn More
-                          <NorthEastIcon className="north-east-icon" />
-                        </span>
+                        <div className="mobile-program-card-footer">
+                          <span className="mobile-program-learn-more">
+                            Learn More
+                            <svg
+                              className="mobile-program-learn-more-arrow"
+                              width="16"
+                              height="16"
+                              viewBox="0 0 16 16"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                              aria-hidden="true"
+                              focusable="false"
+                            >
+                              <path
+                                d="M2.5 8H13.5M13.5 8L9 3.5M13.5 8L9 12.5"
+                                stroke="currentColor"
+                                strokeWidth="1.5"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                            </svg>
+                          </span>
+                        </div>
                       </div>
                     </a>
                   )
@@ -592,8 +611,12 @@ const Programs = () => {
             </div>
           </div>
           <div className="btnadjustment">
-            <Link to="/programs" className="view-all-button1" aria-label="View all programs">
-              View All
+            <Link
+              to="/programs"
+              className="view-all-button1"
+              aria-label={isDesktopPrograms ? 'View all programs' : 'Explore all programs'}
+            >
+              {isDesktopPrograms ? 'View All' : 'Explore all Programs'}
               <NorthEastIcon className="north-east-icon" />
             </Link>
           </div>
