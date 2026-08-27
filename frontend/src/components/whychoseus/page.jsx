@@ -59,29 +59,13 @@ const Whychooseus = () => {
           color: "#fafafa"
         })
 
-        if (isMobile) {
-          const pinHeight = `${Math.round(window.innerHeight)}px`
-          const wrap = root.querySelector('.sticky-wrapper')
-          gsap.set(root, {
-            height: pinHeight,
-            minHeight: pinHeight,
-            maxHeight: pinHeight
-          })
-          if (wrap) {
-            gsap.set(wrap, {
-              height: pinHeight,
-              transform: `translateY(${Math.round(window.innerHeight * 0.08)}px)`
-            })
-          }
-        }
-
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: root,
-            start: "top top",
-            end: "+=1000",
+            start: isMobile ? "top 80%" : "top top",
+            end: isMobile ? "bottom 40%" : "+=1000",
             scrub: true,
-            pin: true,
+            pin: !isMobile,
             pinType: 'fixed',
             anticipatePin: isMobile ? 0 : 1,
             invalidateOnRefresh: !isMobile,
