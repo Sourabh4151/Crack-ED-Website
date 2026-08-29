@@ -39,7 +39,7 @@ const ProgramsList = () => {
       {
         program: 'Postgraduate Program',
         role: 'Relationship Manager',
-        isPremium: true,
+        admissionClosed: true,
         details: [
           'Join as a Relationship Manager with a CTC of Rs 5.5 LPA + incentives',
           '6-month program'
@@ -58,6 +58,7 @@ const ProgramsList = () => {
       {
         program: 'Postgraduate Program',
         role: 'Relationship Officer',
+        admissionClosed: true,
         details: [
           'Join as a Relationship Officer - Mortgage Field Sale with a CTC of upto Rs 3.1 LPA + incentives',
           '3-week program'
@@ -66,6 +67,7 @@ const ProgramsList = () => {
       {
         program: 'Elevate Banking Program',
         role: 'Virtual Relationship Manager',
+        admissionClosed: true,
         details: [
           'Join as a Virtual Relationship Manager and secure a CTC of upto Rs 2.4 LPA',
           '4-week program'
@@ -112,6 +114,7 @@ const ProgramsList = () => {
       {
         program: 'Hero Housing Finance Pragati Program',
         role: 'Collection Officer',
+        admissionClosed: true,
         details: [
           'Join as a Collection Officer and secure a CTC of Rs 5 LPA + incentives',
           '1-month program'
@@ -326,9 +329,7 @@ const ProgramsList = () => {
   const displayedPrograms =
     activeTab === 'All'
       ? sortClosedToEnd(getAllProgramsInOrder())
-      : activeTab === 'NBFC'
-        ? sortClosedToEnd(programs.NBFC.map((item) => ({ ...item, category: activeTab })))
-        : programs[activeTab].map((item) => ({ ...item, category: activeTab }))
+      : sortClosedToEnd(programs[activeTab].map((item) => ({ ...item, category: activeTab })))
 
   const normalizedQuery = searchQuery.trim().toLowerCase()
   const filteredPrograms = normalizedQuery
