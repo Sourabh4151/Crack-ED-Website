@@ -4,7 +4,6 @@ import lenskartStoreImage from '../../assets/lenskart_store.webp'
 import auBankImage from '../../assets/au_bank.webp'
 import lenskartLogo from '../../assets/lenskart.png'
 import lenskartCardLogo from '../../assets/lenskart_card_logo.png'
-import auCardLogo from '../../assets/au_card_logo.png'
 import relationshipManagerImage from '../../assets/relationship manager_desktop.jpg'
 import relationshipManagerMobileImage from '../../assets/relationship manager_mobile.jpg'
 import goldLoanImage from '../../assets/gold loan.jpg'
@@ -21,7 +20,6 @@ import clinicalTechnicianImage from '../../assets/clinical technician.jpg'
 import cashierTellerImage from '../../assets/cashier _ teller.jpg'
 import relationshipManagerPiramalImage from '../../assets/relationship manager.jpg'
 import udaanCardLogo from '../../assets/udaan_temporary_logo.png'
-import udaanLogo from '../../assets/udaan_temporary_logo.png'
 import piramalCardLogo from '../../assets/piramal_small.png'
 import auHomeLogo from '../../assets/au_home_logo.png'
 import lenskartHomeLogo from '../../assets/lenskart_home_logo.png'
@@ -33,25 +31,17 @@ import avivaDsImage from '../../assets/aviva_ds.webp'
 import avivaAsImage from '../../assets/aviva_as.webp'
 import avivaSmallLogo from '../../assets/aviva_logo_small_card.png'
 import avivaLogo from '../../assets/aviva_logo.png'
-import finovaCardLogo from '../../assets/finova_logo.png'
-import finovaProgramImage from '../../assets/finova_program.jpg'
-import finovaSmallLogo from '../../assets/finova_small_logo.png'
 import mahindraProgramImage from '../../assets/desk.jpeg'
 import mahindraFinanceSmallLogo from '../../assets/mahindra_finance_small_logo_logo.png'
 import mahindraFinanceHomeLogo from '../../assets/mahindra_finance_logo.png'
 import kotakLogo from '../../assets/kotak_logo.svg'
 import kotakSmallLogo from '../../assets/kotak_small_logo.png'
 import kotakProgramImage from '../../assets/Kotak_program.webp'
-import pgprmDesktopImage from '../../assets/RM_desktop.webp'
 import pgpbmDesktopImage from '../../assets/desktop.jpg'
-import retailBankingDesktopImage from '../../assets/retail_banking_desktop.webp'
-import retailBankingMobileImage from '../../assets/retail_banking_mobile.png'
 import bankingSalesDesktopImage from '../../assets/banking_sales_desktop.webp'
 import mobileSalesOfficerImage from '../../assets/mobile_sales_officer.png'
 import quessProgramImage from '../../assets/quess.webp'
-import elevateVrmImage from '../../assets/elevate_vrm.webp'
 import heroFinanceRmImage from '../../assets/hero_finance_rm.webp'
-import heroCoImage from '../../assets/hero_co.webp'
 import heroComImage from '../../assets/hero_com.webp'
 import rupyyProgramImage from '../../assets/rupyy.webp'
 import rupyyLogo from '../../assets/logo_rupyy.svg'
@@ -87,15 +77,12 @@ const getProgramHomeLogo = (programLabel) => {
     case 'Lenskart Program': return { src: lenskartHomeLogo, alt: 'Lenskart' }
     case 'Lenskart EyeTech Program': return { src: lenskartHomeLogo, alt: 'Lenskart' }
     case 'Aviva Nirmaan Program': return { src: avivaLogo, alt: 'Aviva' }
-    case 'Finova VyaparaMitra Program': return { src: finovaCardLogo, alt: 'Finova Capital' }
     case 'Mahindra Finance Prarambh Program': return { src: mahindraFinanceHomeLogo, alt: 'Mahindra Finance' }
     case 'Talent Accelerator Program': return { src: kotakLogo, alt: 'Kotak Prime' }
     case 'Housing Finance Pragati Program': return { src: heroLogo, alt: 'Hero Housing Finance' }
     case 'Rupyy AutoEdge Program': return { src: rupyyLogo, alt: 'Rupyy' }
     case 'Bandhan Bank Aspiring Bank Champions Programme': return { src: bandhanBankLogo, alt: 'Bandhan Bank' }
-    case 'Postgraduate Program in Relationship Management': return null
     case 'Postgraduate Program in Banking Management': return null
-    case 'Postgraduate Program Retail Banking': return null
     case 'Banking Sales Program':
     case 'Banking Sales Program - Sales Officer': return null
     case 'Samriddhi Program': return null
@@ -129,90 +116,59 @@ const Programs = () => {
     {
       id: 3,
       logo: heroSmallLogo,
-      title: 'Housing Finance Pragati Program - Collection Officer',
-      url: 'https://herofinanceco.crack-ed.com/',
-    },
-    {
-      id: 4,
-      logo: heroSmallLogo,
       title: 'Housing Finance Pragati Program - Credit and Operations Manager',
       url: 'https://herofinancecom.crack-ed.com/',
     },
     {
-      id: 5,
+      id: 4,
       logo: rupyySmallLogo,
       title: 'Rupyy AutoEdge Program - Business Manager',
       url: 'https://rupyybm.crack-ed.com/',
     },
-
     {
-      id: 6,
-      logo: udaanCardLogo,
-      title: 'Postgraduate Program Relationship Management - Relationship Manager',
-      url: 'https://pgprm.crack-ed.com',
-    },
-    {
-      id: 7,
+      id: 5,
       logo: bandhanMiniLogo,
       title: 'Bandhan Bank Aspiring Bank Champions Programme - Assistant Manager',
       url: 'https://bandhanbankassistantmanager.crack-ed.com/',
     },
     {
-      id: 8,
-      logo: udaanCardLogo,
-      title: 'Postgraduate Program Retail Banking - Relationship Officer',
-      url: 'https://pgprb.crack-ed.com',
-    },
-    {
-      id: 9,
-      logo: udaanLogo,
-      title: 'Virtual Relationship Manager',
-      url: 'https://elevatevrm.crack-ed.com/',
-    },
-    {
-      id: 10,
+      id: 6,
       logo: udaanCardLogo,
       title: 'Banking Sales Program - Sales Officer',
       url: 'https://bspso.crack-ed.com',
     },
     {
-      id: 11,
+      id: 7,
       logo: udaanCardLogo,
       title: 'Samriddhi Program - Field Executive',
       url: 'https://axisquessfse.crack-ed.com/',
     },
     {
-      id: 12,
+      id: 8,
       logo: mahindraFinanceSmallLogo,
       title: 'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)',
       url: 'https://mahindrafinancebe.crack-ed.com/',
     },
     {
-      id: 13,
+      id: 9,
       logo: kotakSmallLogo,
       title: 'Talent Accelerator Program - Sales Executive',
       url: 'https://kotakmahindraso.crack-ed.com/',
     },
     {
-      id: 14,
-      logo: finovaSmallLogo,
-      title: 'Finova VyaparaMitra Program - Relationship Officer',
-      url: 'https://finovaro.crack-ed.com',
-    },
-    {
-      id: 15,
+      id: 10,
       logo: piramalCardLogo,
       title: 'Piramal ProEdge Program - Relationship Manager',
       url: 'https://piramal.crack-ed.com/portal',
     },
     {
-      id: 16,
+      id: 11,
       logo: avivaSmallLogo,
       title: 'Aviva Nirmaan Program - Direct Sales Executive',
       url: 'https://avivads.crack-ed.com',
     },
     {
-      id: 17,
+      id: 12,
       logo: avivaSmallLogo,
       title: 'Aviva Nirmaan Program - Agency Sales Executive',
       url: 'https://avivaas.crack-ed.com',
@@ -233,9 +189,7 @@ const Programs = () => {
       'Piramal ProEdge Program - Relationship Manager': relationshipManagerPiramalImage,
       'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)': mahindraProgramImage,
       'Talent Accelerator Program - Sales Executive': kotakProgramImage,
-      'Virtual Relationship Manager': elevateVrmImage,
       'Housing Finance Pragati Program - Relationship Manager': heroFinanceRmImage,
-      'Housing Finance Pragati Program - Collection Officer': heroCoImage,
       'Housing Finance Pragati Program - Credit and Operations Manager': heroComImage,
       'Rupyy AutoEdge Program - Business Manager': rupyyProgramImage,
     }
@@ -255,13 +209,6 @@ const Programs = () => {
         duration: '1-month program',
         image: heroFinanceRmImage,
       },
-      'Housing Finance Pragati Program - Collection Officer': {
-        programLabel: 'Housing Finance Pragati Program',
-        logo: heroLogo,
-        details: 'Join as a Collection Officer and secure a CTC of Rs 5 LPA + incentives',
-        duration: '1-month program',
-        image: heroCoImage,
-      },
       'Housing Finance Pragati Program - Credit and Operations Manager': {
         programLabel: 'Housing Finance Pragati Program',
         logo: heroLogo,
@@ -276,13 +223,6 @@ const Programs = () => {
         details: 'Join as a Business Manager â€“ Used Car Finance and secure a CTC of Rs 3 LPA + incentives',
         duration: '1-month program',
         image: rupyyProgramImage,
-      },
-      'Virtual Relationship Manager': {
-        programLabel: 'Elevate Banking Program',
-        logo: udaanLogo,
-        details: 'Join as a Virtual Relationship Manager and secure a CTC of upto Rs 2.4 LPA',
-        duration: '4-week program',
-        image: elevateVrmImage,
       },
       'Piramal ProEdge Program - Relationship Manager': {
         programLabel: 'Piramal ProEdge Program',
@@ -319,21 +259,6 @@ const Programs = () => {
         duration: '3-month program',
         image: avivaAsImage,
       },
-      'Finova VyaparaMitra Program - Relationship Officer': {
-        programLabel: 'Finova VyaparaMitra Program',
-        logo: finovaCardLogo,
-        details: 'Join as a Relationship Officer with a CTC of Rs 2.4 LPA + variable',
-        duration: '1-month program',
-        image: finovaProgramImage,
-      },
-      'Postgraduate Program Relationship Management - Relationship Manager': {
-        programLabel: 'Postgraduate Program in Relationship Management',
-        shortProgramLabel: 'PGP - Relationship Management',
-        logo: auCardLogo,
-        details: 'Join as a Relationship Manager with a CTC of Rs 5.5 LPA + incentives',
-        duration: '6-month program',
-        image: pgprmDesktopImage,
-      },
       'Bandhan Bank Aspiring Bank Champions Programme - Assistant Manager': {
         programLabel: 'Bandhan Bank Aspiring Bank Champions Programme',
         shortProgramLabel: 'Bandhan Bank Aspiring Bank Champions Programme',
@@ -342,15 +267,6 @@ const Programs = () => {
         duration: '6-month program',
         disclaimer: '*Variable Pay for all eligible employees will be paid over and above their Annual Fixed Pay. This is however subject to performance of the Bank, Department, and Individual*',
         image: pgpbmDesktopImage,
-      },
-      'Postgraduate Program Retail Banking - Relationship Officer': {
-        programLabel: 'Postgraduate Program - Retail Banking',
-        shortProgramLabel: 'PGP - Retail Banking',
-        logo: udaanCardLogo,
-        details: 'Join as a Relationship Officer - Mortgage Field Sale with a CTC of upto Rs 3.1 LPA + incentives',
-        duration: '3-week program',
-        image: retailBankingDesktopImage,
-        mobileImage: retailBankingMobileImage,
       },
       'Banking Sales Program - Sales Officer': {
         programLabel: 'Banking Sales Program',
@@ -411,16 +327,12 @@ const Programs = () => {
 
   // Short label for small/mini program cards (PGP only)
   const getSmallCardTitle = (card) => {
-    if (card.title === 'Postgraduate Program Relationship Management - Relationship Manager') return 'PGP - Relationship Management - Relationship Manager'
     if (card.title === 'Bandhan Bank Aspiring Bank Champions Programme - Assistant Manager') return 'Bandhan Bank Aspiring Bank Champions - Assistant Manager'
-    if (card.title === 'Postgraduate Program Retail Banking - Relationship Officer') return 'PGP - Retail Banking - Relationship Officer'
     if (card.title === 'Housing Finance Pragati Program - Relationship Manager') return 'Housing Finance Pragati - Relationship Manager'
-    if (card.title === 'Housing Finance Pragati Program - Collection Officer') return 'Housing Finance Pragati - Collection Officer'
     if (card.title === 'Housing Finance Pragati Program - Credit and Operations Manager') return 'Housing Finance Pragati - Credit and Operations Manager'
     if (card.title === 'Rupyy AutoEdge Program - Business Manager') return 'Rupyy AutoEdge - Business Manager'
     if (card.title === 'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)') return 'Mahindra Finance Prarambh - Business Executive'
     if (card.title === 'Talent Accelerator Program - Sales Executive') return 'Talent Accelerator Program - Sales Executive'
-    if (card.title === 'Virtual Relationship Manager') return 'Elevate Banking Program - Virtual Relationship Manager'
     return card.title
   }
 
@@ -433,10 +345,7 @@ const Programs = () => {
       .replace('Lenskart EyeTech Program - ', '')
       .replace('Piramal ProEdge Program - ', '')
       .replace('Aviva Nirmaan Program - ', '')
-      .replace('Finova VyaparaMitra Program - ', '')
-      .replace('Postgraduate Program Relationship Management - ', '')
       .replace('Bandhan Bank Aspiring Bank Champions Programme - ', '')
-      .replace('Postgraduate Program Retail Banking - ', '')
       .replace('Mahindra Finance Prarambh Program - ', '')
       .replace('Talent Accelerator Program - ', '')
       .replace('Housing Finance Pragati Program - ', '')
