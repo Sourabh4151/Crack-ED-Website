@@ -3,7 +3,7 @@ import debojitSen from '../../assets/debojit_about_us2.webp'
 import anand from '../../assets/anand.jpeg'
 import vipinSingh from '../../assets/vipin_singh.jpeg'
 import ankitMittal from '../../assets/ankit_mittal.webp'
-import bhavanaAnand from '../../assets/bhavana_anand.jpg'
+import vivekChopra from '../../assets/Vivek Chopra.png'
 import nabeelAkhtar from '../../assets/nabeel_akhtar.jpg'
 import amanRawat from '../../assets/aman_rawat.jpg'
 import pawanBhati from '../../assets/pawan_bhati.jpeg'
@@ -22,7 +22,7 @@ const Leadership = () => {
     { name: 'Ankit Mittal', title: 'Corporate & Strategy Head', image: ankitMittal, linkedin: 'https://www.linkedin.com/in/ankit-mittal-9a0401115?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app' },
     { name: 'Vipin Singh', title: 'CPTO', image: vipinSingh, linkedin: 'https://www.linkedin.com/in/pmvipin?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app' },
     { name: 'Anand Pratap Singh', title: 'Data Analytics Head', image: anand, linkedin: 'https://www.linkedin.com/in/anand-pratap-singh-04b250105?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app' },
-    { name: 'Bhavana Anand', title: 'Operations Head', image: bhavanaAnand, linkedin: 'https://www.linkedin.com/in/bhavanaanand?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app' },
+    { name: 'Vivek Chopra', title: 'Operations Head', image: vivekChopra, linkedin: 'https://www.linkedin.com/in/vivek-chopra-60541a17' },
     { name: 'Nabeel Akhtar', title: 'Sales Head - B2B', image: nabeelAkhtar, linkedin: 'https://www.linkedin.com/in/nabeel-akhtar?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app' },
     { name: 'Aman Rawat', title: 'Sales Head - B2C', image: amanRawat, linkedin: 'https://www.linkedin.com/in/aman-rawat-998783107?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app' },
     { name: 'Pawan Bhati', title: 'Head - Special Projects', image: pawanBhati, linkedin: 'https://www.linkedin.com/in/pawan-kumar-1525a52a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app' },
