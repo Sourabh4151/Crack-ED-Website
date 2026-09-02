@@ -35,6 +35,8 @@ Django REST API with PostgreSQL database.
 
 - **Health:** `GET /api/health/`
 - **Examples (CRUD):** `GET/POST/PUT/PATCH/DELETE /api/examples/`
+- **Quiz config (public):** `GET /api/quiz/config/`
+- **Quiz / blogs marketing admin:** `/marketing/quiz` and `/marketing/blogs` on the frontend (staff session)
 - **Admin:** http://127.0.0.1:8000/admin/
 
 ## Database (PostgreSQL required)

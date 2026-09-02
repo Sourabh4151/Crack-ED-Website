@@ -105,6 +105,9 @@ const AdminBlogs = () => {
       <div className="admin-blogs-page">
       <header className="admin-blogs-header">
         <h1>Marketing — Blogs</h1>
+        <p className="admin-blogs-sub">
+          Also manage the <Link className="admin-blogs-link" to="/marketing/quiz">career quiz</Link>.
+        </p>
       </header>
 
       {!base && (

@@ -2,7 +2,7 @@
 API serializers for REST responses.
 """
 from rest_framework import serializers
-from .models import Example, JobListing, BIDEpisode, MarketingBlog
+from .models import Example, JobListing, BIDEpisode, MarketingBlog, QuizProgram, QuizQuestion, QuizOption
 
 
 class ExampleSerializer(serializers.ModelSerializer):
@@ -121,3 +121,123 @@ class MarketingBlogAdminSerializer(serializers.ModelSerializer):
 
     def get_cover_image_url(self, obj):
         return _absolute_media_url(self.context.get('request'), obj.cover_image)
+
+
+class QuizProgramSerializer(serializers.ModelSerializer):
+    """Public + admin program catalog for career quiz results."""
+
+    class Meta:
+        model = QuizProgram
+        fields = [
+            'id', 'name', 'details', 'duration', 'link', 'fee',
+            'is_active', 'is_fallback', 'sort_order',
+            'created_at', 'updated_at',
+        ]
+        read_only_fields = ['id', 'created_at', 'updated_at']
+
+
+class QuizOptionAdminSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = QuizOption
+        fields = ['id', 'mapping', 'text', 'program_1', 'program_2', 'program_3']
+        extra_kwargs = {
+            'program_1': {'allow_null': True, 'required': False},
+            'program_2': {'allow_null': True, 'required': False},
+            'program_3': {'allow_null': True, 'required': False},
+        }
+
+
+class QuizQuestionAdminSerializer(serializers.ModelSerializer):
+    """Nested options for marketing quiz editor."""
+    options = QuizOptionAdminSerializer(many=True, required=False)
+
+    class Meta:
+        model = QuizQuestion
+        fields = [
+            'id', 'order', 'question', 'is_published', 'options',
+            'created_at', 'updated_at',
+        ]
+        read_only_fields = ['id', 'created_at', 'updated_at']
+
+    def create(self, validated_data):
+        options_data = validated_data.pop('options', [])
+        question = QuizQuestion.objects.create(**validated_data)
+        self._replace_options(question, options_data)
+        return question
+
+    def update(self, instance, validated_data):
+        options_data = validated_data.pop('options', None)
+        for key, value in validated_data.items():
+            setattr(instance, key, value)
+        instance.save()
+        if options_data is not None:
+            self._replace_options(instance, options_data)
+        return instance
+
+    def _replace_options(self, question, options_data):
+        keep_mappings = set()
+        for row in options_data:
+            mapping = row.get('mapping')
+            if mapping not in ('A', 'B', 'C', 'D'):
+                continue
+            keep_mappings.add(mapping)
+            QuizOption.objects.update_or_create(
+                question=question,
+                mapping=mapping,
+                defaults={
+                    'text': row.get('text') or '',
+                    'program_1': row.get('program_1'),
+                    'program_2': row.get('program_2'),
+                    'program_3': row.get('program_3'),
+                },
+            )
+        question.options.exclude(mapping__in=keep_mappings).delete()
+
+
+def serialize_quiz_public_config():
+    """Shape consumed by CareerQuiz: questions + program details keyed by name."""
+    questions_qs = (
+        QuizQuestion.objects.filter(is_published=True)
+        .prefetch_related(
+            'options__program_1',
+            'options__program_2',
+            'options__program_3',
+        )
+        .order_by('order')
+    )
+    questions = []
+    for q in questions_qs:
+        options = []
+        for opt in q.options.all():
+            programs = []
+            for prog in (opt.program_1, opt.program_2, opt.program_3):
+                if prog and prog.name:
+                    programs.append(prog.name)
+            options.append({
+                'mapping': opt.mapping,
+                'text': opt.text,
+                'programs': programs,
+            })
+        questions.append({
+            'id': q.id,
+            'order': q.order,
+            'question': q.question,
+            'options': options,
+        })
+
+    programs = {}
+    fallback = ''
+    for prog in QuizProgram.objects.all().order_by('sort_order', 'name'):
+        programs[prog.name] = {
+            'details': prog.details or '',
+            'duration': prog.duration or '',
+            'link': prog.link or '#',
+            'fee': prog.fee or 0,
+        }
+        if prog.is_fallback:
+            fallback = prog.name
+    return {
+        'questions': questions,
+        'programs': programs,
+        'fallbackProgram': fallback,
+    }

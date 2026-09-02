@@ -62,6 +62,15 @@ Open: **`/marketing/blogs`**
 3. Optional: **Featured banner on /resources** (only one recommended)
 4. Optional: **Cover image** (uploads after save via `PATCH`)
 
+### 4. Career quiz
+
+Open: **`/marketing/quiz`** (same staff login as blogs).
+
+- **Questions:** edit wording, A–D answers, and which programs each answer scores
+- **Programs:** CTC line, duration, microsite link, fee (used to break score ties)
+
+Django admin also has **Quiz questions** and **Quiz programs** (same data as BID-style content). After saving, the live quiz on the homepage loads from `GET /api/quiz/config/`.
+
 ## API (reference)
 
 | Method | Path | Auth |

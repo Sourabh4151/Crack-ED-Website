@@ -270,6 +270,129 @@ class MarketingBlogUpload(models.Model):
         return self.file.name
 
 
+class QuizProgram(models.Model):
+    """
+    Program shown in career-quiz results and used for option scoring.
+    Managed from Django admin and /marketing/quiz (same staff session as blogs).
+    """
+    name = models.CharField(
+        max_length=255,
+        unique=True,
+        help_text='Must match CRM / lead program name (e.g. Aviva Nirmaan Program - Direct Sales Executive)',
+    )
+    details = models.CharField(
+        max_length=500,
+        blank=True,
+        help_text='Result card line, e.g. CTC of upto Rs 3.5 LPA',
+    )
+    duration = models.CharField(
+        max_length=200,
+        blank=True,
+        help_text='Result card line, e.g. 2-month program',
+    )
+    link = models.CharField(
+        max_length=500,
+        blank=True,
+        help_text='Microsite URL opened from Explore Program',
+    )
+    fee = models.PositiveIntegerField(
+        default=0,
+        help_text='Tie-break when two programs have the same quiz score (higher fee wins)',
+    )
+    is_active = models.BooleanField(
+        default=True,
+        help_text='Uncheck to hide from marketing dropdowns (existing mappings stay)',
+    )
+    is_fallback = models.BooleanField(
+        default=False,
+        help_text='Used when the quiz cannot pick a winner. Only one program should be checked.',
+    )
+    sort_order = models.PositiveIntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['sort_order', 'name']
+        verbose_name = 'Quiz program'
+        verbose_name_plural = 'Quiz programs'
+
+    def __str__(self):
+        return self.name
+
+
+class QuizQuestion(models.Model):
+    """One career-quiz question. Options are QuizOption rows."""
+    order = models.PositiveIntegerField(
+        unique=True,
+        help_text='Display order (1 = first question). Must be unique.',
+    )
+    question = models.TextField()
+    is_published = models.BooleanField(
+        default=True,
+        help_text='Uncheck to hide this question from the live quiz',
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['order']
+        verbose_name = 'Quiz question'
+        verbose_name_plural = 'Quiz questions'
+
+    def __str__(self):
+        q = (self.question or '').strip()
+        preview = q[:60] + ('…' if len(q) > 60 else '')
+        return f'Q{self.order}. {preview}'
+
+
+class QuizOption(models.Model):
+    """One answer choice (A–D) for a quiz question, with up to 3 scored programs."""
+    MAPPING_CHOICES = (
+        ('A', 'A'),
+        ('B', 'B'),
+        ('C', 'C'),
+        ('D', 'D'),
+    )
+    question = models.ForeignKey(
+        QuizQuestion,
+        on_delete=models.CASCADE,
+        related_name='options',
+    )
+    mapping = models.CharField(max_length=1, choices=MAPPING_CHOICES)
+    text = models.CharField(max_length=500)
+    program_1 = models.ForeignKey(
+        QuizProgram,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='mapped_as_first',
+        help_text='First program that receives +1 when this option is selected',
+    )
+    program_2 = models.ForeignKey(
+        QuizProgram,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='mapped_as_second',
+    )
+    program_3 = models.ForeignKey(
+        QuizProgram,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='mapped_as_third',
+    )
+
+    class Meta:
+        ordering = ['mapping']
+        unique_together = [('question', 'mapping')]
+        verbose_name = 'Quiz option'
+        verbose_name_plural = 'Quiz options'
+
+    def __str__(self):
+        return f'{self.mapping}: {self.text[:50]}'
+
+
 class MerittoOutboundAPILog(models.Model):
     """Outbound Meritto / NoPaperForms API call (request + response) for debugging."""
 

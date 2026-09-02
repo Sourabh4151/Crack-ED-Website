@@ -9,7 +9,7 @@ import threading
 
 import requests
 from django.contrib.auth import authenticate, login, logout
-from django.db.models import Q
+from django.db.models import Q, Prefetch
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
 from rest_framework import viewsets, status
@@ -20,7 +20,10 @@ from rest_framework.response import Response
 from .constants import CF_BATCH_NAME, get_center_for_program, get_source_page_label
 from .meritto_log import post_nopaperforms_with_log
 from .utm_resolve import vendor_info_for_utm
-from .models import Example, QuizSubmission, Lead, JobApplication, JobListing, BIDEpisode, MarketingBlog, MarketingBlogUpload
+from .models import (
+    Example, QuizSubmission, Lead, JobApplication, JobListing, BIDEpisode,
+    MarketingBlog, MarketingBlogUpload, QuizProgram, QuizQuestion, QuizOption,
+)
 from .serializers import (
     ExampleSerializer,
     JobListingSerializer,
@@ -28,6 +31,9 @@ from .serializers import (
     MarketingBlogListSerializer,
     MarketingBlogDetailSerializer,
     MarketingBlogAdminSerializer,
+    QuizProgramSerializer,
+    QuizQuestionAdminSerializer,
+    serialize_quiz_public_config,
 )
 
 
@@ -254,6 +260,13 @@ def job_detail(request, pk):
         return Response({'error': 'Not found'}, status=status.HTTP_404_NOT_FOUND)
     serializer = JobListingSerializer(job)
     return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def quiz_public_config(request):
+    """Published quiz questions + program catalog for the career quiz UI."""
+    return Response(serialize_quiz_public_config(), headers=_BLOG_PUBLIC_CACHE_HEADERS)
 
 
 @csrf_exempt
@@ -563,3 +576,34 @@ class MarketingBlogAdminViewSet(viewsets.ModelViewSet):
         ctx = super().get_serializer_context()
         ctx['request'] = self.request
         return ctx
+
+
+class QuizProgramAdminViewSet(viewsets.ModelViewSet):
+    """CRUD quiz result programs for marketing staff."""
+    queryset = QuizProgram.objects.all().order_by('sort_order', 'name')
+    serializer_class = QuizProgramSerializer
+    permission_classes = [IsMarketingStaff]
+    pagination_class = None
+
+    def perform_update(self, serializer):
+        instance = serializer.save()
+        if instance.is_fallback:
+            QuizProgram.objects.exclude(pk=instance.pk).filter(is_fallback=True).update(is_fallback=False)
+
+    def perform_create(self, serializer):
+        instance = serializer.save()
+        if instance.is_fallback:
+            QuizProgram.objects.exclude(pk=instance.pk).filter(is_fallback=True).update(is_fallback=False)
+
+
+class QuizQuestionAdminViewSet(viewsets.ModelViewSet):
+    """CRUD quiz questions with nested options for marketing staff."""
+    queryset = QuizQuestion.objects.all().prefetch_related(
+        Prefetch(
+            'options',
+            queryset=QuizOption.objects.select_related('program_1', 'program_2', 'program_3').order_by('mapping'),
+        )
+    ).order_by('order')
+    serializer_class = QuizQuestionAdminSerializer
+    permission_classes = [IsMarketingStaff]
+    pagination_class = None

@@ -145,4 +145,30 @@ export const PAGE_SEO = {
     description: 'Internal marketing blog editor for Crack-ED.',
     robots: 'noindex, nofollow',
   },
+  adminQuiz: {
+    title: 'Marketing Quiz | CRACK-ED',
+    description: 'Internal marketing administration for the Crack-ED career quiz.',
+    path: '/marketing/quiz',
+    robots: 'noindex, nofollow',
+  },
+  adminQuizQuestionNew: {
+    title: 'New Quiz Question | CRACK-ED',
+    description: 'Create a career quiz question.',
+    robots: 'noindex, nofollow',
+  },
+  adminQuizQuestionEdit: {
+    title: 'Edit Quiz Question | CRACK-ED',
+    description: 'Edit a career quiz question and program scoring.',
+    robots: 'noindex, nofollow',
+  },
+  adminQuizProgramNew: {
+    title: 'New Quiz Program | CRACK-ED',
+    description: 'Create a career quiz result program.',
+    robots: 'noindex, nofollow',
+  },
+  adminQuizProgramEdit: {
+    title: 'Edit Quiz Program | CRACK-ED',
+    description: 'Edit a career quiz result program.',
+    robots: 'noindex, nofollow',
+  },
 }

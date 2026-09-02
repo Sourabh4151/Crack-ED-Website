@@ -28,6 +28,9 @@ const TermsConditions = lazy(() => import('./pages/TermsConditions'))
 const ContactUs = lazy(() => import('./pages/ContactUs'))
 const AdminBlogs = lazy(() => import('./pages/AdminBlogs'))
 const AdminBlogEdit = lazy(() => import('./pages/AdminBlogEdit'))
+const AdminQuiz = lazy(() => import('./pages/AdminQuiz'))
+const AdminQuizQuestionEdit = lazy(() => import('./pages/AdminQuizQuestionEdit'))
+const AdminQuizProgramEdit = lazy(() => import('./pages/AdminQuizProgramEdit'))
 
 // 1. Initialize GTM with your Container ID
 // Replace the old GTM-K4Z3BMQ with your new GT ID
@@ -112,6 +115,11 @@ function App() {
           <Route path="/marketing/blogs" element={<AdminBlogs />} />
           <Route path="/marketing/blogs/new" element={<AdminBlogEdit />} />
           <Route path="/marketing/blogs/edit/:id" element={<AdminBlogEdit />} />
+          <Route path="/marketing/quiz" element={<AdminQuiz />} />
+          <Route path="/marketing/quiz/questions/new" element={<AdminQuizQuestionEdit />} />
+          <Route path="/marketing/quiz/questions/edit/:id" element={<AdminQuizQuestionEdit />} />
+          <Route path="/marketing/quiz/programs/new" element={<AdminQuizProgramEdit />} />
+          <Route path="/marketing/quiz/programs/edit/:id" element={<AdminQuizProgramEdit />} />
         </Routes>
         </Suspense>
       </div>

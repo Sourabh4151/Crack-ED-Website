@@ -181,3 +181,59 @@
   font-size: 18px;
   margin: 24px 0 12px;
 }
+
+.admin-quiz-tabs {
+  display: flex;
+  gap: 12px;
+  margin: 8px 0 20px;
+}
+
+.admin-quiz-option-card {
+  border: 1px solid rgba(250, 250, 250, 0.15);
+  border-radius: 12px;
+  padding: 16px;
+  margin: 0 0 16px;
+  background: rgba(250, 250, 250, 0.03);
+}
+
+.admin-quiz-option-card label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(250, 250, 250, 0.85);
+  margin-top: 12px;
+}
+
+.admin-quiz-option-card input,
+.admin-quiz-option-card select {
+  font-family: inherit;
+  font-weight: 400;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(250, 250, 250, 0.2);
+  background: #111;
+  color: #fafafa;
+}
+
+.admin-quiz-option-title {
+  margin: 0;
+  font-size: 16px;
+}
+
+.admin-quiz-program-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.admin-blog-edit-grid select {
+  font-family: inherit;
+  font-weight: 400;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(250, 250, 250, 0.2);
+  background: #111;
+  color: #fafafa;
+}

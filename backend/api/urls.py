@@ -9,6 +9,8 @@ from . import views
 router = DefaultRouter()
 router.register(r'examples', views.ExampleViewSet, basename='example')
 router.register(r'blogs/admin', views.MarketingBlogAdminViewSet, basename='marketing-blog-admin')
+router.register(r'quiz/admin/programs', views.QuizProgramAdminViewSet, basename='quiz-program-admin')
+router.register(r'quiz/admin/questions', views.QuizQuestionAdminViewSet, basename='quiz-question-admin')
 
 urlpatterns = [
     path('blogs/auth/csrf/', views.blog_admin_csrf),
@@ -24,6 +26,7 @@ urlpatterns = [
     path('jobs/', views.job_list),
     path('jobs/<int:pk>/', views.job_detail),
     path('bid-episode-featured/', views.bid_featured_episode),
+    path('quiz/config/', views.quiz_public_config),
     path('quiz/submit/', views.quiz_submit),
     path('submit-lead/', views.submit_lead),
     path('job-apply/', views.job_apply),

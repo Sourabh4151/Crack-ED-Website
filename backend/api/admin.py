@@ -10,7 +10,11 @@ from django.http import FileResponse, Http404
 from django.urls import path, reverse
 from django.utils.html import format_html
 from django.utils import timezone
-from .models import Example, QuizSubmission, Lead, JobApplication, JobListing, BIDEpisode, MarketingBlog, MarketingBlogUpload, MerittoOutboundAPILog
+from .models import (
+    Example, QuizSubmission, Lead, JobApplication, JobListing, BIDEpisode,
+    MarketingBlog, MarketingBlogUpload, MerittoOutboundAPILog,
+    QuizProgram, QuizQuestion, QuizOption,
+)
 from .meritto_log import format_json_for_admin
 from .constants import PROGRAM_CHOICES, PROGRAM_TO_CENTER, get_center_for_program
 from .admin_exports import (
@@ -382,6 +386,50 @@ class MarketingBlogAdmin(admin.ModelAdmin):
 @admin.register(MarketingBlogUpload)
 class MarketingBlogUploadAdmin(admin.ModelAdmin):
     list_display = ['id', 'file', 'created_at']
+
+
+@admin.register(QuizProgram)
+class QuizProgramAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name', 'fee', 'is_active', 'is_fallback', 'sort_order', 'updated_at']
+    list_filter = ['is_active', 'is_fallback']
+    search_fields = ['name', 'details', 'duration']
+    list_editable = ['is_active', 'is_fallback', 'sort_order']
+    fieldsets = (
+        (None, {'fields': ('name', 'details', 'duration', 'link', 'fee')}),
+        ('Visibility', {'fields': ('is_active', 'is_fallback', 'sort_order')}),
+    )
+
+    def save_model(self, request, obj, form, change):
+        super().save_model(request, obj, form, change)
+        if obj.is_fallback:
+            QuizProgram.objects.exclude(pk=obj.pk).filter(is_fallback=True).update(is_fallback=False)
+
+
+class QuizOptionInline(admin.TabularInline):
+    model = QuizOption
+    extra = 4
+    max_num = 4
+    autocomplete_fields = ['program_1', 'program_2', 'program_3']
+    fields = ['mapping', 'text', 'program_1', 'program_2', 'program_3']
+
+
+@admin.register(QuizQuestion)
+class QuizQuestionAdmin(admin.ModelAdmin):
+    list_display = ['id', 'order', 'question_short', 'is_published', 'option_count', 'updated_at']
+    list_filter = ['is_published']
+    search_fields = ['question']
+    list_editable = ['is_published']
+    inlines = [QuizOptionInline]
+    ordering = ['order']
+
+    @admin.display(description='Question')
+    def question_short(self, obj):
+        q = (obj.question or '').strip()
+        return q[:70] + ('…' if len(q) > 70 else '')
+
+    @admin.display(description='Options')
+    def option_count(self, obj):
+        return obj.options.count()
 
 
 @admin.register(BIDEpisode)
