@@ -191,17 +191,12 @@
   }
 }
 
-/* Shorter laptop viewports: keep headline above the logo strip */
-@media (min-width: 1025px) and (max-height: 740px) {
+/* Desktop: sit the CTA closer to the logo strip as the hero fills the viewport */
+@media (min-width: 1025px) {
   .hero-text-section {
-    top: 150px;
+    top: auto;
+    bottom: 200px;
     height: auto;
-  }
-}
-
-@media (min-width: 1025px) and (max-height: 640px) {
-  .hero-text-section {
-    top: 120px;
   }
 }
 
