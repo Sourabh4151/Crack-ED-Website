@@ -18,6 +18,14 @@ const PROGRAMS = [
     ],
   },
   {
+    id: 'kotak-gold',
+    name: 'Kotak Gold Excellence Program',
+    link: '/programs',
+    links: [
+      { label: 'Gold Loan Relationship Officer', href: 'https://kotakmahindraro.crack-ed.com/' },
+    ],
+  },
+  {
     id: 'hero-housing',
     name: 'Hero Housing Finance Pragati Program',
     link: '/programs',

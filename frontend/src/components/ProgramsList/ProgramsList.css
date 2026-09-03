@@ -266,6 +266,12 @@
   object-fit: contain;
 }
 
+.programs-list .program-card-icon .program-logo-kotak-bank {
+  width: 41px;
+  height: 42px;
+  object-fit: contain;
+}
+
 .programs-list .program-card-content {
   display: flex;
   flex-direction: column;

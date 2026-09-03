@@ -9,6 +9,7 @@ import avivaLogoSmallCard from '../../assets/aviva_logo_small_card.png'
 import finovaSmallLogo from '../../assets/finova_small_logo.png'
 import mahindraFinanceSmallLogo from '../../assets/mahindra_finance_small_logo_logo.png'
 import kotakSmallLogo from '../../assets/kotak_small_logo.png'
+import kotakSmallBankLogo from '../../assets/kotak_small_bank.svg'
 import heroSmallLogo from '../../assets/hero_small_logo.png'
 import rupyySmallLogo from '../../assets/rupyy_small_logo.png'
 import { trackMicrositeClick, markProgramsPageVisited } from '../../utils/analytics'
@@ -36,6 +37,14 @@ const ProgramsList = () => {
       }
     ],
     Banking: [
+      {
+        program: 'Kotak Gold Excellence Program',
+        role: 'Gold Loan Relationship Officer',
+        details: [
+          'Join as an Associate (2-years Fixed Term Contract)* with a CTC of ₹3 LPA (Fixed) + Performance Linked Pay*',
+          '1-month program'
+        ]
+      },
       {
         program: 'Postgraduate Program',
         role: 'Relationship Manager',
@@ -207,6 +216,9 @@ const ProgramsList = () => {
       return null
     }
     if (category === 'Banking') {
+      if (program === 'Kotak Gold Excellence Program' && role === 'Gold Loan Relationship Officer') {
+        return 'https://kotakmahindraro.crack-ed.com/'
+      }
       if (program === 'Postgraduate Program' && role === 'Relationship Manager') return 'https://pgprm.crack-ed.com'
       if (program === 'Bandhan Bank Aspiring Bank Champions Programme' && role === 'Assistant Manager') {
         return 'https://bandhanbankassistantmanager.crack-ed.com/'
@@ -282,6 +294,9 @@ const ProgramsList = () => {
     if (category === 'Entrepreneurship') {
       return <img src={udaanLogo} alt="Udaan" className="program-logo-img program-logo-udaan" />
     }
+    if (category === 'Banking' && program === 'Kotak Gold Excellence Program') {
+      return <img src={kotakSmallBankLogo} alt="Kotak Bank" className="program-logo-img program-logo-kotak-bank" />
+    }
     if (category === 'Banking' && program === 'Bandhan Bank Aspiring Bank Champions Programme') {
       return <img src={bandhanBankLogo} alt="Bandhan Bank" className="program-logo-img program-logo-bandhan" />
     }
@@ -319,8 +334,9 @@ const ProgramsList = () => {
 
   const getAllProgramsInOrder = () => [
     ...withCategory('Entrepreneurship', programs.Entrepreneurship),
+    ...withCategory('Banking', programs.Banking.filter((item) => item.program === 'Kotak Gold Excellence Program')),
     ...withCategory('NBFC', programs.NBFC.slice(0, 5)),
-    ...withCategory('Banking', programs.Banking),
+    ...withCategory('Banking', programs.Banking.filter((item) => item.program !== 'Kotak Gold Excellence Program')),
     ...withCategory('NBFC', programs.NBFC.slice(5)),
     ...withCategory('Insurance', programs.Insurance),
     ...withCategory('Retail', programs.Retail),

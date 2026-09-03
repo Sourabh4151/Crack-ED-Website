@@ -7,6 +7,7 @@ export const LEAD_PROGRAMS = [
   'Hero Housing Finance Pragati Program - Credit and Operations Manager',
   'Hero Housing Finance Pragati Program - Relationship Manager',
   'House of Founder Fellowship',
+  'Kotak Gold Excellence Program - Gold Loan Relationship Officer',
   'Mahindra Finance Prarambh Program - Business Executive',
   'Piramal ProEdge Program - Relationship Manager',
   'Rupyy AutoEdge Program - Business Manager',

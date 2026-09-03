@@ -27,6 +27,7 @@ const PROGRAM_CATEGORIES = [
       {
         label: 'Core Programs',
         children: [
+          { label: 'Kotak Gold Excellence Program', href: 'https://kotakmahindraro.crack-ed.com/' },
           { label: 'PGP - Retail Banking', href: 'https://pgprb.crack-ed.com' },
           { label: 'Elevate Banking Program', href: 'https://elevatevrm.crack-ed.com/' },
           { label: 'Banking Sales Program', href: 'https://bspso.crack-ed.com' },

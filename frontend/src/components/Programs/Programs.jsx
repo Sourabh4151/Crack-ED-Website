@@ -37,6 +37,9 @@ import mahindraFinanceHomeLogo from '../../assets/mahindra_finance_logo.png'
 import kotakLogo from '../../assets/kotak_logo.svg'
 import kotakSmallLogo from '../../assets/kotak_small_logo.png'
 import kotakProgramImage from '../../assets/Kotak_program.webp'
+import kotakBankLogo from '../../assets/Kotak_bank.svg'
+import kotakSmallBankLogo from '../../assets/kotak_small_bank.svg'
+import kotakGoldImage from '../../assets/kotak_gold.png'
 import pgpbmDesktopImage from '../../assets/desktop.jpg'
 import bankingSalesDesktopImage from '../../assets/banking_sales_desktop.webp'
 import mobileSalesOfficerImage from '../../assets/mobile_sales_officer.png'
@@ -78,6 +81,7 @@ const getProgramHomeLogo = (programLabel) => {
     case 'Lenskart EyeTech Program': return { src: lenskartHomeLogo, alt: 'Lenskart' }
     case 'Aviva Nirmaan Program': return { src: avivaLogo, alt: 'Aviva' }
     case 'Mahindra Finance Prarambh Program': return { src: mahindraFinanceHomeLogo, alt: 'Mahindra Finance' }
+    case 'Kotak Gold Excellence Program': return { src: kotakBankLogo, alt: 'Kotak Bank' }
     case 'Talent Accelerator Program': return { src: kotakLogo, alt: 'Kotak Prime' }
     case 'Housing Finance Pragati Program': return { src: heroLogo, alt: 'Hero Housing Finance' }
     case 'Rupyy AutoEdge Program': return { src: rupyyLogo, alt: 'Rupyy' }
@@ -109,66 +113,72 @@ const Programs = () => {
     },
     {
       id: 2,
+      logo: kotakSmallBankLogo,
+      title: 'Kotak Gold Excellence Program - Gold Loan Relationship Officer',
+      url: 'https://kotakmahindraro.crack-ed.com/',
+    },
+    {
+      id: 3,
       logo: heroSmallLogo,
       title: 'Housing Finance Pragati Program - Relationship Manager',
       url: 'https://herofinancerm.crack-ed.com/',
     },
     {
-      id: 3,
+      id: 4,
       logo: heroSmallLogo,
       title: 'Housing Finance Pragati Program - Credit and Operations Manager',
       url: 'https://herofinancecom.crack-ed.com/',
     },
     {
-      id: 4,
+      id: 5,
       logo: rupyySmallLogo,
       title: 'Rupyy AutoEdge Program - Business Manager',
       url: 'https://rupyybm.crack-ed.com/',
     },
     {
-      id: 5,
+      id: 6,
       logo: bandhanMiniLogo,
       title: 'Bandhan Bank Aspiring Bank Champions Programme - Assistant Manager',
       url: 'https://bandhanbankassistantmanager.crack-ed.com/',
     },
     {
-      id: 6,
+      id: 7,
       logo: udaanCardLogo,
       title: 'Banking Sales Program - Sales Officer',
       url: 'https://bspso.crack-ed.com',
     },
     {
-      id: 7,
+      id: 8,
       logo: udaanCardLogo,
       title: 'Samriddhi Program - Field Executive',
       url: 'https://axisquessfse.crack-ed.com/',
     },
     {
-      id: 8,
+      id: 9,
       logo: mahindraFinanceSmallLogo,
       title: 'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)',
       url: 'https://mahindrafinancebe.crack-ed.com/',
     },
     {
-      id: 9,
+      id: 10,
       logo: kotakSmallLogo,
       title: 'Talent Accelerator Program - Sales Executive',
       url: 'https://kotakmahindraso.crack-ed.com/',
     },
     {
-      id: 10,
+      id: 11,
       logo: piramalCardLogo,
       title: 'Piramal ProEdge Program - Relationship Manager',
       url: 'https://piramal.crack-ed.com/portal',
     },
     {
-      id: 11,
+      id: 12,
       logo: avivaSmallLogo,
       title: 'Aviva Nirmaan Program - Direct Sales Executive',
       url: 'https://avivads.crack-ed.com',
     },
     {
-      id: 12,
+      id: 13,
       logo: avivaSmallLogo,
       title: 'Aviva Nirmaan Program - Agency Sales Executive',
       url: 'https://avivaas.crack-ed.com',
@@ -188,6 +198,7 @@ const Programs = () => {
       'Lenskart EyeTech Program - Retail Sales Associate': lenskartRetailSalesImage,
       'Piramal ProEdge Program - Relationship Manager': relationshipManagerPiramalImage,
       'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)': mahindraProgramImage,
+      'Kotak Gold Excellence Program - Gold Loan Relationship Officer': kotakGoldImage,
       'Talent Accelerator Program - Sales Executive': kotakProgramImage,
       'Housing Finance Pragati Program - Relationship Manager': heroFinanceRmImage,
       'Housing Finance Pragati Program - Credit and Operations Manager': heroComImage,
@@ -201,6 +212,13 @@ const Programs = () => {
         details: '6-Month Hybrid Fellowship designed for aspiring and existing entrepreneurs.',
         duration: 'Investor-ready by graduation, with a chance to pitch your venture to investors.*',
         image: houseOfFoundersImage,
+      },
+      'Kotak Gold Excellence Program - Gold Loan Relationship Officer': {
+        programLabel: 'Kotak Gold Excellence Program',
+        logo: kotakBankLogo,
+        details: 'Join as an Associate (2-years Fixed Term Contract)* with a CTC of ₹3 LPA (Fixed) + Performance Linked Pay*',
+        duration: '1-month program',
+        image: kotakGoldImage,
       },
       'Housing Finance Pragati Program - Relationship Manager': {
         programLabel: 'Housing Finance Pragati Program',
@@ -333,6 +351,7 @@ const Programs = () => {
     if (card.title === 'Rupyy AutoEdge Program - Business Manager') return 'Rupyy AutoEdge - Business Manager'
     if (card.title === 'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)') return 'Mahindra Finance Prarambh - Business Executive'
     if (card.title === 'Talent Accelerator Program - Sales Executive') return 'Talent Accelerator Program - Sales Executive'
+    if (card.title === 'Kotak Gold Excellence Program - Gold Loan Relationship Officer') return 'Kotak Gold Excellence - Gold Loan Relationship Officer'
     return card.title
   }
 
@@ -348,6 +367,7 @@ const Programs = () => {
       .replace('Bandhan Bank Aspiring Bank Champions Programme - ', '')
       .replace('Mahindra Finance Prarambh Program - ', '')
       .replace('Talent Accelerator Program - ', '')
+      .replace('Kotak Gold Excellence Program - ', '')
       .replace('Housing Finance Pragati Program - ', '')
       .replace('Rupyy AutoEdge Program - ', '')
       .replace('Banking Sales Program - ', '')
@@ -466,8 +486,9 @@ const Programs = () => {
                               const isAviva = logoInfo.alt === 'Aviva'
                               const isMahindra = logoInfo.alt === 'Mahindra Finance'
                               const isBandhan = logoInfo.alt === 'Bandhan Bank'
+                              const isKotakBank = logoInfo.alt === 'Kotak Bank'
                               return (
-                                <div className={`mobile-program-card-logo${isAviva ? ' mobile-program-card-logo--aviva' : ''}${isMahindra ? ' mobile-program-card-logo--mahindra' : ''}${isBandhan ? ' mobile-program-card-logo--bandhan' : ''}`}>
+                                <div className={`mobile-program-card-logo${isAviva ? ' mobile-program-card-logo--aviva' : ''}${isMahindra ? ' mobile-program-card-logo--mahindra' : ''}${isBandhan ? ' mobile-program-card-logo--bandhan' : ''}${isKotakBank ? ' mobile-program-card-logo--kotak-bank' : ''}`}>
                                   <img src={logoInfo.src} alt={logoInfo.alt} />
                                 </div>
                               )
@@ -560,8 +581,9 @@ const Programs = () => {
                         if (!logoInfo) return null
                         const isMahindra = logoInfo.alt === 'Mahindra Finance'
                         const isBandhan = logoInfo.alt === 'Bandhan Bank'
+                        const isKotakBank = logoInfo.alt === 'Kotak Bank'
                         return (
-                          <div className={`program-logo-above${isMahindra ? ' program-logo-above--mahindra' : ''}${isBandhan ? ' program-logo-above--bandhan' : ''}`}>
+                          <div className={`program-logo-above${isMahindra ? ' program-logo-above--mahindra' : ''}${isBandhan ? ' program-logo-above--bandhan' : ''}${isKotakBank ? ' program-logo-above--kotak-bank' : ''}`}>
                             <img src={logoInfo.src} alt={logoInfo.alt} />
                           </div>
                         )

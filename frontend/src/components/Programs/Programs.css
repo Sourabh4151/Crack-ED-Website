@@ -399,6 +399,11 @@ image.png.programs-section .program-details a,
   max-width: min(220px, 55vw);
 }
 
+.program-logo-above--kotak-bank img {
+  width: 180px;
+  max-width: min(180px, 55vw);
+}
+
 /* Mobile banner - logo above content without pushing it down */
 .program-banner-with-logo {
   position: relative;
@@ -1156,6 +1161,13 @@ image.png.programs-section .program-details a,
     object-fit: contain;
   }
 
+  .mobile-program-card-logo--kotak-bank img {
+    height: 28px;
+    max-width: 160px;
+    width: auto;
+    object-fit: contain;
+  }
+
   /* Pull Mahindra logo closer to the program label on mobile */
   .mobile-program-card-logo.mobile-program-card-logo--mahindra {
     margin-bottom: 0;
@@ -1168,6 +1180,11 @@ image.png.programs-section .program-details a,
 
   .program-logo-above--bandhan img {
     width: 160px;
+    max-width: 55vw;
+  }
+
+  .program-logo-above--kotak-bank img {
+    width: 140px;
     max-width: 55vw;
   }
 
