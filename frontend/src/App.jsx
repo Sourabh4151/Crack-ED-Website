@@ -10,6 +10,7 @@ import './App.css'
 // Components
 import ScrollToTop from './components/ScrollToTop/ScrollToTop'
 import PreserveUtmParams from './components/PreserveUtmParams/PreserveUtmParams'
+import StickyPhoneIcon from './components/StickyPhoneIcon/StickyPhoneIcon'
 import Home from './pages/Home'
 
 // Pages
@@ -96,6 +97,7 @@ function App() {
           pauseOnHover
           theme="dark"
         />
+        <StickyPhoneIcon />
 
         <Suspense fallback={null}>
         <Routes>
