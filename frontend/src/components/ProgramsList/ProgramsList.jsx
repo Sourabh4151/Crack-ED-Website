@@ -148,6 +148,7 @@ const ProgramsList = () => {
       {
         program: 'Rupyy AutoEdge Program',
         role: 'Business Manager',
+        admissionClosed: true,
         details: [
           'Join as a Business Manager – Used Car Finance and secure a CTC of Rs 3 LPA + incentives',
           '1-month program'
@@ -164,6 +165,7 @@ const ProgramsList = () => {
       {
         program: 'Talent Accelerator Program',
         role: 'Sales Executive',
+        admissionClosed: true,
         details: [
           'Join as a Sales Executive at Kotak Prime and secure a CTC of Rs 2.75 LPA + incentives',
           '1-month program'

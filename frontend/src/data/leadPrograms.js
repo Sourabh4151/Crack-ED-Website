@@ -10,7 +10,5 @@ export const LEAD_PROGRAMS = [
   'Kotak Gold Excellence Program - Gold Loan Relationship Officer',
   'Mahindra Finance Prarambh Program - Business Executive',
   'Piramal ProEdge Program - Relationship Manager',
-  'Rupyy AutoEdge Program - Business Manager',
   'Samriddhi Program - Field Executive',
-  'Talent Accelerator Program - Sales Executive',
 ]
