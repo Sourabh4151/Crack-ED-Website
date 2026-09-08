@@ -53,6 +53,7 @@ const PROGRAM_TO_CF_PROGRAM_MAP = {
   'Kotak Gold Excellence': 'Kotak Gold Excellence',
   'PGP - Retail Banking - Relationship Officer': 'Axis - RO',
   'Banking Sales Program - Sales Officer': 'Banking Sales',
+  'Banking Sales Program - Business Development Executive': 'IndusInd',
   'Elevate Banking Program - Virtual Relationship Manager': 'Axis - VRM',
   'Samriddhi Program - Field Executive': 'Axis-MRL',
 }

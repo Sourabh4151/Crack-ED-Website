@@ -84,10 +84,10 @@ const ProgramsList = () => {
       },
       {
         program: 'Banking Sales Program',
-        role: 'Sales Officer',
+        role: 'Business Development Executive',
         details: [
-          'Join as a Sales Officer with a CTC of Rs 2.75 LPA',
-          '3-week program'
+          'Join as a Business Development Executive with a CTC of ₹2.75 to ₹3.25 LPA',
+          '15 days program'
         ]
       },
       {
@@ -226,7 +226,7 @@ const ProgramsList = () => {
         return 'https://bandhanbankassistantmanager.crack-ed.com/'
       }
       if (program === 'Postgraduate Program' && role === 'Relationship Officer') return 'https://pgprb.crack-ed.com'
-      if (program === 'Banking Sales Program' && role === 'Sales Officer') return 'https://bspso.crack-ed.com'
+      if (program === 'Banking Sales Program' && role === 'Business Development Executive') return 'https://bspso.crack-ed.com'
       if (program === 'Samriddhi Program' && role === 'Field Executive') return 'https://axisquessfse.crack-ed.com/'
       if (program === 'Elevate Banking Program' && role === 'Virtual Relationship Manager') return 'https://elevatevrm.crack-ed.com/'
       return null

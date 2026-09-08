@@ -80,7 +80,7 @@ const PROGRAMS = [
     name: 'Banking Sales Program',
     link: '/programs',
     links: [
-      { label: 'Sales Officer', href: 'https://bspso.crack-ed.com' },
+      { label: 'Business Development Executive', href: 'https://bspso.crack-ed.com' },
     ],
   },
   {

@@ -80,7 +80,7 @@ const getProgramHomeLogo = (programLabel) => {
     case 'Bandhan Bank Aspiring Bank Champions Programme': return { src: bandhanBankLogo, alt: 'Bandhan Bank' }
     case 'Postgraduate Program in Banking Management': return null
     case 'Banking Sales Program':
-    case 'Banking Sales Program - Sales Officer': return null
+    case 'Banking Sales Program - Business Development Executive': return null
     case 'Samriddhi Program': return null
     case 'Entrepreneurship & Venture Creation': return null
     default: return null
@@ -130,7 +130,7 @@ const Programs = () => {
     {
       id: 6,
       logo: udaanCardLogo,
-      title: 'Banking Sales Program - Sales Officer',
+      title: 'Banking Sales Program - Business Development Executive',
       url: 'https://bspso.crack-ed.com',
     },
     {
@@ -250,11 +250,11 @@ const Programs = () => {
         disclaimer: '*Variable Pay for all eligible employees will be paid over and above their Annual Fixed Pay. This is however subject to performance of the Bank, Department, and Individual*',
         image: pgpbmDesktopImage,
       },
-      'Banking Sales Program - Sales Officer': {
+      'Banking Sales Program - Business Development Executive': {
         programLabel: 'Banking Sales Program',
         logo: udaanCardLogo,
-        details: 'Join as a Sales Officer with a CTC of Rs 2.75 LPA',
-        duration: '3-week program',
+        details: 'Join as a Business Development Executive with a CTC of ₹2.75 to ₹3.25 LPA',
+        duration: '15 days program',
         image: bankingSalesDesktopImage,
         mobileImage: mobileSalesOfficerImage,
       },
@@ -310,6 +310,7 @@ const Programs = () => {
   // Short label for small/mini program cards (PGP only)
   const getSmallCardTitle = (card) => {
     if (card.title === 'Bandhan Bank Aspiring Bank Champions Programme - Assistant Manager') return 'Bandhan Bank Aspiring Bank Champions - Assistant Manager'
+    if (card.title === 'Banking Sales Program - Business Development Executive') return 'Banking Sales - Business Development Executive'
     if (card.title === 'Housing Finance Pragati Program - Relationship Manager') return 'Housing Finance Pragati - Relationship Manager'
     if (card.title === 'Housing Finance Pragati Program - Credit and Operations Manager') return 'Housing Finance Pragati - Credit and Operations Manager'
     if (card.title === 'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)') return 'Mahindra Finance Prarambh - Business Executive'
