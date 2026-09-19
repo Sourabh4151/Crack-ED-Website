@@ -224,7 +224,7 @@ const CareerQuiz = ({ showOnlyTopProgram = false }) => {
       <div className="quiz-container">
         <div className="badge-outline">Your Results Are Ready</div>
         <h2 className="form-main-heading">You're almost there! View your results now</h2>
-        <div className="form-card-box">
+        <div className="form-card-box" data-clarity-mask="true">
           <div className="form-field">
             <label>Name</label>
             <input type="text" placeholder="Enter name" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />

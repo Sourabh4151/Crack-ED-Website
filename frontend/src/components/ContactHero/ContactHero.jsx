@@ -121,7 +121,7 @@ const ContactHero = () => {
 
           <div className="contact-hero-form-card">
             <h2 className="contact-hero-form-title">Talk to Our Team</h2>
-            <form className="contact-hero-form" onSubmit={handleSubmit} noValidate>
+            <form className="contact-hero-form" onSubmit={handleSubmit} noValidate data-clarity-mask="true">
               <div className="contact-hero-form-fields">
                 <div className="contact-hero-form-row">
                   <div className="contact-hero-field">

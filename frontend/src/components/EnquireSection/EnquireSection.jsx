@@ -80,7 +80,7 @@ const EnquireSection = () => {
         <p className="enquire-section-subtitle">
           Join thousands of learners building better futures with our expert-designed programs!
         </p>
-        <form className="enquire-section-form" onSubmit={handleSubmit}>
+        <form className="enquire-section-form" onSubmit={handleSubmit} data-clarity-mask="true">
           <div className="enquire-section-form-grid">
             <div className="enquire-section-field">
               <input

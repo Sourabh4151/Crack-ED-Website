@@ -307,7 +307,7 @@ const EnquireModal = ({ isOpen, onClose, variant = 'enquire' }) => {
           </button>
         </div>
         
-        <form className="enquire-modal-form" onSubmit={handleSubmit}>
+        <form className="enquire-modal-form" onSubmit={handleSubmit} data-clarity-mask="true">
           <div className="enquire-modal-form-row">
             <div className="enquire-modal-form-field">
               <input

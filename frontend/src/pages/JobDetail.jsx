@@ -322,7 +322,7 @@ const JobDetail = () => {
               </div>
 
               <div id="apply-form-section" className="job-detail-apply-form-section">
-                <form onSubmit={handleSubmit} className="job-detail-apply-form" noValidate>
+                <form onSubmit={handleSubmit} className="job-detail-apply-form" noValidate data-clarity-mask="true">
                   <h2 className="job-detail-apply-form-title">Apply For This Role</h2>
                   <div className="job-detail-form-separator"></div>
                   <div className="job-detail-form-field">

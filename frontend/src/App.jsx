@@ -10,6 +10,7 @@ import './App.css'
 // Components
 import ScrollToTop from './components/ScrollToTop/ScrollToTop'
 import PreserveUtmParams from './components/PreserveUtmParams/PreserveUtmParams'
+import ClarityTracker from './components/ClarityTracker/ClarityTracker'
 import StickyPhoneIcon from './components/StickyPhoneIcon/StickyPhoneIcon'
 import Home from './pages/Home'
 
@@ -83,6 +84,7 @@ function App() {
     <Router>
       {/* AnalyticsTracker must be inside Router to use useLocation() */}
       <AnalyticsTracker />
+      <ClarityTracker />
       <ScrollToTop />
       <PreserveUtmParams />
 
