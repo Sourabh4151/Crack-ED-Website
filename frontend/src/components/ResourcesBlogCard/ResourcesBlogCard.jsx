@@ -26,7 +26,7 @@ const ResourcesBlogCard = ({ title, date, description, link, image, prefetchBlog
   return (
     <article className="resources-blog-card">
       <div className="resources-blog-card-image">
-        <img src={image || beginnerImage} alt={title || ''} />
+        <img src={image || beginnerImage} alt={title || ''} width="400" height="240" loading="lazy" decoding="async" />
       </div>
       <div className="resources-blog-card-content">
         <h2 className="resources-blog-card-title">{title}</h2>

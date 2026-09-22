@@ -29,7 +29,7 @@ const ExploreOtherBlogs = ({ currentPostId }) => {
             >
               <article className="resources-filter-card">
                 <div className="resources-filter-card-image">
-                  <img src={post.image} alt={post.title || ''} />
+                  <img src={post.image} alt={post.title || ''} width="400" height="240" loading="lazy" decoding="async" />
                 </div>
                 <div className="resources-filter-card-content">
                   <h3 className="resources-filter-card-title">{post.title}</h3>

@@ -50,7 +50,7 @@ const BIDIntro = () => {
               rel="noreferrer"
               aria-label="Follow on LinkedIn"
             >
-              <img src={linkedinIcon} alt="" className="bid-intro-social-icon" />
+              <img src={linkedinIcon} alt="" className="bid-intro-social-icon" width="24" height="24" loading="lazy" decoding="async" />
             </a>
             <a
               href="https://www.instagram.com/badhtaindiadekho/"
@@ -58,7 +58,7 @@ const BIDIntro = () => {
               rel="noreferrer"
               aria-label="Follow on Instagram"
             >
-              <img src={instagramIcon} alt="" className="bid-intro-social-icon" />
+              <img src={instagramIcon} alt="" className="bid-intro-social-icon" width="24" height="24" loading="lazy" decoding="async" />
             </a>
           </div>
         </div>

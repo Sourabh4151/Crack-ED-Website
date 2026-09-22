@@ -21,7 +21,7 @@ const releasePin = (el) => {
 
 const Card = ({ img, title, desc }) => (
     <div style={{ margin: "20px 30px", display: "flex", alignItems: "start", gap: "24px" }}>
-        <img src={img} style={{ width: "50px", height: "50px" }} alt="" />
+        <img src={img} width="50" height="50" alt="" loading="lazy" decoding="async" style={{ width: "50px", height: "50px" }} />
         <div>
             <div style={{ color: '#fafafa', fontSize: "18px", fontWeight: "500", fontFamily: "Poppins", marginBottom: "5px" }}>{title}</div>
             <div style={{ color: "#FAFAFAB2", fontSize: "14px" }}>{desc}</div>
@@ -42,7 +42,6 @@ const Analyse = () => {
         const initAnimation = () => {
             if (cancelled || ctx) return;
             if (!window.matchMedia('(max-width: 768px)').matches) return;
-            if (window.getComputedStyle(root).display === 'none') return;
 
             gsap.registerPlugin(ScrollTrigger);
 

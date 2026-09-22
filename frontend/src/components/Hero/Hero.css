@@ -40,6 +40,10 @@
   object-position: center;
 }
 
+.logo-carousel-placeholder {
+  height: 100px;
+}
+
 @media (max-width: 768px) {
   .hero-background {
     display: flex;
@@ -277,6 +281,10 @@
     z-index: 10;
   }
 
+  .logo-carousel-placeholder {
+    height: 80px;
+  }
+
   .hero-text-section {
     position: absolute;
     top: 223px;
@@ -341,6 +349,10 @@
 }
 
 @media (max-width: 480px) {
+  .logo-carousel-placeholder {
+    height: 70px;
+  }
+
   .hero {
     height: 657px;
     min-height: 657px;

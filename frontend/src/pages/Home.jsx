@@ -1,11 +1,12 @@
 import React, { lazy, Suspense, useEffect, useState } from 'react'
 import Header from '../components/Header/Header'
 import Hero from '../components/Hero/Hero'
-import Programs from '../components/Programs/Programs'
+import LazySection from '../components/LazySection/LazySection'
 import './Home.css'
 import SEO from '../components/SEO/SEO'
 import { PAGE_SEO } from '../seo/site'
 
+const Programs = lazy(() => import('../components/Programs/Programs'))
 const Whychooseus = lazy(() => import('../components/whychoseus/page'))
 const FloatingSteps = lazy(() => import('../components/FloatingSteps/page'))
 const Analysis = lazy(() => import('../components/analysis/page'))
@@ -75,38 +76,62 @@ const Home = () => {
       <Header />
       <main>
         <Hero />
-        <Programs />
-        <Suspense fallback={<div className="home-below-fold-placeholder" aria-hidden="true" />}>
-          <Whychooseus />
-        </Suspense>
-        <Suspense fallback={null}>
-          <FloatingSteps />
-        </Suspense>
-        <Suspense fallback={null}>
-          {isDesktop ? <Analysis /> : <Analyse />}
-        </Suspense>
-        <Suspense fallback={null}>
-          <Stats />
-        </Suspense>
-        <Suspense fallback={null}>
-          <Testimonial />
-        </Suspense>
-        <Suspense fallback={null}>
-          <CareerForward />
-        </Suspense>
-        <Suspense fallback={null}>
-          <Media />
-        </Suspense>
-        <Suspense fallback={null}>
-          <Partners />
-        </Suspense>
-        <Suspense fallback={null}>
-          <EnquireSection />
-        </Suspense>
+        <LazySection minHeight="80vh" rootMargin="200px 0px" idleTimeout={1800}>
+          <Suspense fallback={<div className="home-below-fold-placeholder" aria-hidden="true" />}>
+            <Programs />
+          </Suspense>
+        </LazySection>
+        <LazySection minHeight="100vh" rootMargin="400px 0px">
+          <Suspense fallback={<div className="home-below-fold-placeholder" aria-hidden="true" />}>
+            <Whychooseus />
+          </Suspense>
+        </LazySection>
+        <LazySection rootMargin="400px 0px">
+          <Suspense fallback={null}>
+            <FloatingSteps />
+          </Suspense>
+        </LazySection>
+        <LazySection minHeight="80vh" rootMargin="400px 0px">
+          <Suspense fallback={null}>
+            {isDesktop ? <Analysis /> : <Analyse />}
+          </Suspense>
+        </LazySection>
+        <LazySection rootMargin="400px 0px">
+          <Suspense fallback={null}>
+            <Stats />
+          </Suspense>
+        </LazySection>
+        <LazySection minHeight="480px" rootMargin="400px 0px">
+          <Suspense fallback={null}>
+            <Testimonial />
+          </Suspense>
+        </LazySection>
+        <LazySection rootMargin="400px 0px">
+          <Suspense fallback={null}>
+            <CareerForward />
+          </Suspense>
+        </LazySection>
+        <LazySection rootMargin="400px 0px">
+          <Suspense fallback={null}>
+            <Media />
+          </Suspense>
+        </LazySection>
+        <LazySection rootMargin="400px 0px">
+          <Suspense fallback={null}>
+            <Partners />
+          </Suspense>
+        </LazySection>
+        <LazySection rootMargin="400px 0px">
+          <Suspense fallback={null}>
+            <EnquireSection />
+          </Suspense>
+        </LazySection>
       </main>
-      <Suspense fallback={null}>
-        <Footer />
-      </Suspense>
+      <LazySection rootMargin="600px 0px">
+        <Suspense fallback={null}>
+          <Footer />
+        </Suspense>
+      </LazySection>
     </div>
   )
 }

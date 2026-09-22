@@ -134,7 +134,7 @@ const Stats = () => {
           {stats.map((stat) => (
             <div key={stat.id} className="stat-card">
               <div className="stat-icon">
-                <img src={stat.icon} alt="" />
+                <img src={stat.icon} alt="" width="48" height="48" loading="lazy" decoding="async" />
               </div>
               <h3 className="stat-value">{stat.value}</h3>
               <p className="stat-description">{stat.description}</p>

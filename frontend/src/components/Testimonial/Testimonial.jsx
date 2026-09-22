@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
 import AntimaMishra from '../../assets/Antima Mishra.webp'
-import PoojaMehta from '../../assets/Pooja Mehta.jpeg'
+import PoojaMehta from '../../assets/Pooja Mehta.webp'
 import ShreyaVerma from '../../assets/Shreya_Verma.webp'
 import KashyapGoswami from '../../assets/Kashyap_Goswami.webp'
-import Vishwendra from '../../assets/Vishwendra.jpg'
-import Lokesh from '../../assets/Lokesh-h4THR9Fp.jpg.jpeg'
+import Vishwendra from '../../assets/Vishwendra.webp'
+import Lokesh from '../../assets/Lokesh-h4THR9Fp.webp'
 import Krishankant from '../../assets/Krishankant.webp'
 import MayankKaushal from '../../assets/Mayank_Kaushal.webp'
 import AmanChauraisa from '../../assets/Aman_Chauraisa.webp'
@@ -16,8 +16,8 @@ import Shubham from '../../assets/Shubham.webp'
 import Rohit from '../../assets/Rohit.webp'
 import Rohitash from '../../assets/Rohitash.webp'
 import Kuldeep from '../../assets/Kuldeep.webp'
-import IlaKumari from '../../assets/Ila Kumari .jpeg'
-import Abhijeet from '../../assets/Abhijeet.jpeg'
+import IlaKumari from '../../assets/Ila Kumari .webp'
+import Abhijeet from '../../assets/Abhijeet.webp'
 import './Testimonial.css'
 
 const Testimonial = () => {
@@ -30,6 +30,7 @@ const Testimonial = () => {
   const loopingRef = useRef(false)
 
   const inViewRef = useRef(true)
+  const stepCacheRef = useRef(0)
 
   const testimonials = [
     {
@@ -171,14 +172,20 @@ const Testimonial = () => {
 
   const testimonialsToShow = isMobile ? testimonials : [...testimonials, ...testimonials]
 
-  const getStep = useCallback(() => {
+  const measureStep = useCallback(() => {
     const track = trackRef.current
     if (!track?.children?.[0]) return 320
     const first = track.children[0]
     const second = track.children[1]
-    if (!second) return first.getBoundingClientRect().width
-    return second.offsetLeft - first.offsetLeft
+    const step = second ? second.offsetLeft - first.offsetLeft : first.offsetWidth
+    stepCacheRef.current = step || 320
+    return stepCacheRef.current
   }, [])
+
+  const getStep = useCallback(() => {
+    if (stepCacheRef.current > 0) return stepCacheRef.current
+    return measureStep()
+  }, [measureStep])
 
   const getLoopWidth = useCallback(() => getStep() * testimonials.length, [getStep, testimonials.length])
 
@@ -263,6 +270,7 @@ const Testimonial = () => {
 
     const durationMs = 30000
     lastTimeRef.current = performance.now()
+    measureStep()
 
     const tick = (now) => {
       const loopWidth = getLoopWidth()
@@ -276,10 +284,24 @@ const Testimonial = () => {
       rafRef.current = requestAnimationFrame(tick)
     }
 
-    rafRef.current = requestAnimationFrame(tick)
+    const startLoop = () => {
+      if (rafRef.current) return
+      lastTimeRef.current = performance.now()
+      rafRef.current = requestAnimationFrame(tick)
+    }
+
+    const stopLoop = () => {
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current)
+        rafRef.current = null
+      }
+    }
+
+    if (inViewRef.current) startLoop()
 
     const handleResize = () => {
-      const step = getStep()
+      stepCacheRef.current = 0
+      const step = measureStep()
       if (step <= 0) return
       offsetRef.current = Math.round(offsetRef.current / step) * step
       wrapOffset()
@@ -294,6 +316,8 @@ const Testimonial = () => {
       io = new IntersectionObserver(
         ([entry]) => {
           inViewRef.current = entry.isIntersecting
+          if (entry.isIntersecting) startLoop()
+          else stopLoop()
         },
         { rootMargin: '100px 0px', threshold: 0 }
       )
@@ -301,11 +325,11 @@ const Testimonial = () => {
     }
 
     return () => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current)
+      stopLoop()
       window.removeEventListener('resize', handleResize)
       if (io) io.disconnect()
     }
-  }, [applyTransform, getLoopWidth, getStep, isMobile, wrapOffset])
+  }, [applyTransform, getLoopWidth, isMobile, measureStep, wrapOffset])
 
   return (
     <section className="testimonial-section">
@@ -333,7 +357,7 @@ const Testimonial = () => {
             {testimonialsToShow.map((testimonial, index) => (
               <div key={`${testimonial.id}-${index}`} className="testimonial-card">
                 <div className="testimonial-image-container">
-                  <img src={testimonial.image} alt={testimonial.name} className="testimonial-image" loading="lazy" decoding="async" />
+                  <img src={testimonial.image} alt={testimonial.name} className="testimonial-image" width="300" height="400" loading="lazy" decoding="async" />
                   <div className="testimonial-content">
                     <h3 className="testimonial-name">{testimonial.name}</h3>
                     <p className={`testimonial-title${testimonial.compactTitle ? ' testimonial-title-compact' : ''}`}>{testimonial.title}</p>

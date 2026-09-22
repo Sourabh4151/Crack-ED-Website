@@ -1,52 +1,35 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import lenskartStoreImage from '../../assets/lenskart_store.webp'
-import auBankImage from '../../assets/au_bank.webp'
 import lenskartLogo from '../../assets/lenskart.png'
-import lenskartCardLogo from '../../assets/lenskart_card_logo.png'
-import relationshipManagerImage from '../../assets/relationship manager_desktop.jpg'
-import relationshipManagerMobileImage from '../../assets/relationship manager_mobile.jpg'
-import goldLoanImage from '../../assets/gold loan.jpg'
-import casaImage from '../../assets/bank officer.jpg'
-import mblImage from '../../assets/sales officer_desktop.jpg'
-import transactionOfficerImage from '../../assets/transaction officer.jpg'
-import deputyCentreManagerImage from '../../assets/deputy centre manager.jpg'
-import csoImage from '../../assets/cso.jpg'
-import lateRecoveryOfficerImage from '../../assets/late recovery officer.jpg'
-import moneyOfficerImage from '../../assets/money officer.jpg'
-import csovImage from '../../assets/csov.jpg'
+import relationshipManagerPiramalImage from '../../assets/relationship manager.jpg'
 import lenskartRetailSalesImage from '../../assets/lenskart - retail sales associate.jpg'
 import clinicalTechnicianImage from '../../assets/clinical technician.jpg'
-import cashierTellerImage from '../../assets/cashier _ teller.jpg'
-import relationshipManagerPiramalImage from '../../assets/relationship manager.jpg'
 import udaanCardLogo from '../../assets/udaan_temporary_logo.png'
 import piramalCardLogo from '../../assets/piramal_small.png'
-import auHomeLogo from '../../assets/au_home_logo.png'
 import lenskartHomeLogo from '../../assets/lenskart_home_logo.png'
 import piramalHomeLogo from '../../assets/piramal_home_logo.png'
-import img1 from '../../assets/au_logo.png'
-import img2 from '../../assets/immmggg2.jpg'
 import checkinbg from '../../assets/checkinbg.png'
 import avivaDsImage from '../../assets/aviva_ds.webp'
 import avivaAsImage from '../../assets/aviva_as.webp'
 import avivaSmallLogo from '../../assets/aviva_logo_small_card.png'
 import avivaLogo from '../../assets/aviva_logo.png'
-import mahindraProgramImage from '../../assets/desk.jpeg'
+import mahindraProgramImage from '../../assets/desk.webp'
 import mahindraFinanceSmallLogo from '../../assets/mahindra_finance_small_logo_logo.png'
 import mahindraFinanceHomeLogo from '../../assets/mahindra_finance_logo.png'
 import kotakBankLogo from '../../assets/Kotak_bank.svg'
 import kotakSmallBankLogo from '../../assets/kotak_small_bank.svg'
-import kotakGoldImage from '../../assets/kotak_gold.png'
+import kotakGoldImage from '../../assets/kotak_gold.webp'
 import pgpbmDesktopImage from '../../assets/desktop.jpg'
 import bankingSalesDesktopImage from '../../assets/banking_sales_desktop.webp'
-import mobileSalesOfficerImage from '../../assets/mobile_sales_officer.png'
+import mobileSalesOfficerImage from '../../assets/mobile_sales_officer.webp'
 import quessProgramImage from '../../assets/quess.webp'
 import heroFinanceRmImage from '../../assets/hero_finance_rm.webp'
 import heroComImage from '../../assets/hero_com.webp'
 import heroLogo from '../../assets/hero_logo.svg'
 import heroSmallLogo from '../../assets/hero_small_logo.png'
 import houseOfFoundersImage from '../../assets/Enter.webp'
-import bandhanBankLogo from '../../assets/bandhan_bank_logo.svg'
+import bandhanBankLogo from '../../assets/bandhan_bank_logo.webp'
 import bandhanMiniLogo from '../../assets/animation_bandhan_logo.svg'
 import { trackMicrositeClick } from '../../utils/analytics'
 import { appendUtmToUrl } from '../../services/crmService'
@@ -336,20 +319,18 @@ const Programs = () => {
   }
 
   useEffect(() => {
-    if (carouselRef.current) {
-      const cardWidth = 180 // card width
-      const gap = 14 // gap between cards
-      const cardSpacing = cardWidth + gap
+    if (!isDesktopPrograms || !carouselRef.current) return
+    const cardWidth = 180 // card width
+    const gap = 14 // gap between cards
+    const cardSpacing = cardWidth + gap
 
-      // Carousel shows the NEXT two cards after the featured one (main display)
-      // When main shows Relationship Manager (index 0), carousel shows Bank Officer & Relationship Officer (indices 1, 2)
-      const carouselStartIndex = (featuredCardIndex + 1) % programCards.length
-      const translateX = -(carouselStartIndex * cardSpacing)
+    // Carousel shows the NEXT two cards after the featured one (main display)
+    const carouselStartIndex = (featuredCardIndex + 1) % programCards.length
+    const translateX = -(carouselStartIndex * cardSpacing)
 
-      carouselRef.current.style.transform = `translateX(${translateX}px)`
-      carouselRef.current.style.transition = 'transform 0.3s ease'
-    }
-  }, [currentCardIndex, featuredCardIndex])
+    carouselRef.current.style.transform = `translateX(${translateX}px)`
+    carouselRef.current.style.transition = 'transform 0.3s ease'
+  }, [currentCardIndex, featuredCardIndex, isDesktopPrograms, programCards.length])
 
   const resetAutoAdvance = () => {
     if (autoAdvanceTimeoutRef.current) {
@@ -387,8 +368,16 @@ const Programs = () => {
     return () => mq.removeEventListener('change', onChange)
   }, [])
 
-  // Initialize auto-advance on mount and when currentCardIndex changes
+  // Initialize auto-advance on desktop only
   useEffect(() => {
+    if (!isDesktopPrograms) {
+      if (autoAdvanceTimeoutRef.current) {
+        clearTimeout(autoAdvanceTimeoutRef.current)
+        autoAdvanceTimeoutRef.current = null
+      }
+      return undefined
+    }
+
     resetAutoAdvance()
 
     return () => {
@@ -397,7 +386,7 @@ const Programs = () => {
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentCardIndex])
+  }, [currentCardIndex, isDesktopPrograms])
 
   return (
     <section className="programs-section">
@@ -407,6 +396,7 @@ const Programs = () => {
             <div className="programs-badge">100% Job-Ready Programs</div>
             <p className="programs-subtitle">Built for real roles. Backed by real employers.</p>
           </div>
+          {!isDesktopPrograms && (
           <div className="mobilesection">
             <div className="mobile-program-cards-wrapper">
               <div className="mobile-program-cards">
@@ -431,6 +421,8 @@ const Programs = () => {
                           <img
                             src={details.mobileImage || details.image}
                             alt={getDisplayTitle(details.title) || details.programLabel || ''}
+                            width="304"
+                            height="478"
                             loading="lazy"
                             decoding="async"
                             style={{
@@ -450,7 +442,7 @@ const Programs = () => {
                               const isKotakBank = logoInfo.alt === 'Kotak Bank'
                               return (
                                 <div className={`mobile-program-card-logo${isAviva ? ' mobile-program-card-logo--aviva' : ''}${isMahindra ? ' mobile-program-card-logo--mahindra' : ''}${isBandhan ? ' mobile-program-card-logo--bandhan' : ''}${isKotakBank ? ' mobile-program-card-logo--kotak-bank' : ''}`}>
-                                  <img src={logoInfo.src} alt={logoInfo.alt} />
+                                  <img src={logoInfo.src} alt={logoInfo.alt} width="160" height="28" loading="lazy" decoding="async" />
                                 </div>
                               )
                             })()}
@@ -458,11 +450,11 @@ const Programs = () => {
                             <div className="mobile-program-card-title">{getDisplayTitle(details.title)}</div>
                             <div className="mobile-program-card-details">
                               <div className="mobile-program-card-detail">
-                                <img src={checkinbg} alt="" className="mobile-program-check" />
+                                <img src={checkinbg} alt="" className="mobile-program-check" width="16" height="16" loading="lazy" decoding="async" />
                                 <span><DetailsText text={details.details} /></span>
                               </div>
                               <div className="mobile-program-card-detail">
-                                <img src={checkinbg} alt="" className="mobile-program-check" />
+                                <img src={checkinbg} alt="" className="mobile-program-check" width="16" height="16" loading="lazy" decoding="async" />
                                 <span>{details.duration}</span>
                               </div>
                               {details.disclaimer && (
@@ -501,6 +493,7 @@ const Programs = () => {
               </div>
             </div>
           </div>
+          )}
           <div className="btnadjustment">
             <Link
               to="/programs"
@@ -513,16 +506,13 @@ const Programs = () => {
           </div>
         </div>
 
+        {isDesktopPrograms && (
         <div
           className="programs-background-container"
-          style={
-            isDesktopPrograms
-              ? {
-                  backgroundImage: `url(${currentProgramDetails?.image || lenskartStoreImage})`,
-                  backgroundPosition: 'center 60%',
-                }
-              : undefined
-          }
+          style={{
+            backgroundImage: `url(${currentProgramDetails?.image || lenskartStoreImage})`,
+            backgroundPosition: 'center 60%',
+          }}
         >
           <div className="progress-bar-container-top">
             <div
@@ -545,7 +535,7 @@ const Programs = () => {
                         const isKotakBank = logoInfo.alt === 'Kotak Bank'
                         return (
                           <div className={`program-logo-above${isMahindra ? ' program-logo-above--mahindra' : ''}${isBandhan ? ' program-logo-above--bandhan' : ''}${isKotakBank ? ' program-logo-above--kotak-bank' : ''}`}>
-                            <img src={logoInfo.src} alt={logoInfo.alt} />
+                            <img src={logoInfo.src} alt={logoInfo.alt} width="180" height="40" decoding="async" />
                           </div>
                         )
                       })()}
@@ -595,7 +585,7 @@ const Programs = () => {
                   </div>
 
                   <div className="program-card-image">
-                    <img src={currentProgramDetails.image} alt={currentProgramDetails.programLabel || currentProgramDetails.title || ''} className="program-store-image" />
+                    <img src={currentProgramDetails.image} alt={currentProgramDetails.programLabel || currentProgramDetails.title || ''} className="program-store-image" width="800" height="500" decoding="async" />
                   </div>
                 </div>
               )}
@@ -622,7 +612,7 @@ const Programs = () => {
                     >
                       <div className="program-mini-card">
                         <div className="program-mini-card-logo-wrap">
-                          <img src={card.logo} alt={card.title} className="program-mini-card-logo" />
+                          <img src={card.logo} alt={card.title} className="program-mini-card-logo" width="40" height="40" loading="lazy" decoding="async" />
                         </div>
                         <p className="program-mini-card-title">{getSmallCardTitle(card)}</p>
                       </div>
@@ -641,7 +631,7 @@ const Programs = () => {
                     >
                       <div className="program-mini-card">
                         <div className="program-mini-card-logo-wrap">
-                          <img src={programCards[0].logo} alt={programCards[0].title} className="program-mini-card-logo" />
+                          <img src={programCards[0].logo} alt={programCards[0].title} className="program-mini-card-logo" width="40" height="40" loading="lazy" decoding="async" />
                         </div>
                         <p className="program-mini-card-title">{getSmallCardTitle(programCards[0])}</p>
                       </div>
@@ -669,6 +659,7 @@ const Programs = () => {
             </div>
           </div>
         </div>
+        )}
       </div>
     </section>
   )

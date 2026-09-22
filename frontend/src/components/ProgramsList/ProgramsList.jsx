@@ -294,36 +294,36 @@ const ProgramsList = () => {
       program === 'Samriddhi Program' ||
       program === 'Elevate Banking Program'
     if (category === 'Entrepreneurship') {
-      return <img src={udaanLogo} alt="Udaan" className="program-logo-img program-logo-udaan" />
+      return <img src={udaanLogo} alt="Udaan" width="80" height="40" loading="lazy" decoding="async" className="program-logo-img program-logo-udaan" />
     }
     if (category === 'Banking' && program === 'Kotak Gold Excellence Program') {
-      return <img src={kotakSmallBankLogo} alt="Kotak Bank" className="program-logo-img program-logo-kotak-bank" />
+      return <img src={kotakSmallBankLogo} alt="Kotak Bank" width="80" height="40" loading="lazy" decoding="async" className="program-logo-img program-logo-kotak-bank" />
     }
     if (category === 'Banking' && program === 'Bandhan Bank Aspiring Bank Champions Programme') {
-      return <img src={bandhanBankLogo} alt="Bandhan Bank" className="program-logo-img program-logo-bandhan" />
+      return <img src={bandhanBankLogo} alt="Bandhan Bank" width="80" height="40" loading="lazy" decoding="async" className="program-logo-img program-logo-bandhan" />
     }
     if (category === 'Banking' && useUdaanLogo) {
-      return <img src={udaanLogo} alt="Udaan" className="program-logo-img program-logo-udaan" />
+      return <img src={udaanLogo} alt="Udaan" width="80" height="40" loading="lazy" decoding="async" className="program-logo-img program-logo-udaan" />
     }
-    if (category === 'Banking') return <img src={udaanLogo} alt="Udaan" className="program-logo-img program-logo-udaan" />
-    if (category === 'Retail') return <img src={lenskartCardLogo} alt="Lenskart" className="program-logo-img" />
+    if (category === 'Banking') return <img src={udaanLogo} alt="Udaan" width="80" height="40" loading="lazy" decoding="async" className="program-logo-img program-logo-udaan" />
+    if (category === 'Retail') return <img src={lenskartCardLogo} alt="Lenskart" width="80" height="40" loading="lazy" decoding="async" className="program-logo-img" />
     if (category === 'NBFC' && item?.program && item.program.startsWith('Finova VyaparaMitra Program')) {
-      return <img src={finovaSmallLogo} alt="Finova" className="program-logo-img program-logo-finova" />
+      return <img src={finovaSmallLogo} alt="Finova" width="80" height="40" loading="lazy" decoding="async" className="program-logo-img program-logo-finova" />
     }
     if (category === 'NBFC' && item?.program === 'Hero Housing Finance Pragati Program') {
-      return <img src={heroSmallLogo} alt="Hero Housing Finance" className="program-logo-img program-logo-hero" />
+      return <img src={heroSmallLogo} alt="Hero Housing Finance" width="80" height="40" loading="lazy" decoding="async" className="program-logo-img program-logo-hero" />
     }
     if (category === 'NBFC' && item?.program === 'Rupyy AutoEdge Program') {
-      return <img src={rupyySmallLogo} alt="Rupyy" className="program-logo-img program-logo-rupyy" />
+      return <img src={rupyySmallLogo} alt="Rupyy" width="80" height="40" loading="lazy" decoding="async" className="program-logo-img program-logo-rupyy" />
     }
     if (category === 'NBFC' && program === 'Mahindra Finance Prarambh Program') {
-      return <img src={mahindraFinanceSmallLogo} alt="Mahindra Finance" className="program-logo-img program-logo-mahindra" />
+      return <img src={mahindraFinanceSmallLogo} alt="Mahindra Finance" width="80" height="40" loading="lazy" decoding="async" className="program-logo-img program-logo-mahindra" />
     }
     if (category === 'NBFC' && program === 'Talent Accelerator Program') {
-      return <img src={kotakSmallLogo} alt="Kotak Prime" className="program-logo-img program-logo-kotak" />
+      return <img src={kotakSmallLogo} alt="Kotak Prime" width="80" height="40" loading="lazy" decoding="async" className="program-logo-img program-logo-kotak" />
     }
-    if (category === 'NBFC') return <img src={piramalLogo} alt="Piramal" className="program-logo-img program-logo-piramal" />
-    if (category === 'Insurance') return <img src={avivaLogoSmallCard} alt="Aviva" className="program-logo-img program-logo-aviva" />
+    if (category === 'NBFC') return <img src={piramalLogo} alt="Piramal" width="80" height="40" loading="lazy" decoding="async" className="program-logo-img program-logo-piramal" />
+    if (category === 'Insurance') return <img src={avivaLogoSmallCard} alt="Aviva" width="80" height="40" loading="lazy" decoding="async" className="program-logo-img program-logo-aviva" />
     return null
   }
 

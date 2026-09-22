@@ -71,6 +71,10 @@ const BIDEpisodes = () => {
               <img
                 src={bigLeftEpisode.image}
                 alt={bigLeftEpisode.imageAlt}
+                width="640"
+                height="360"
+                loading="lazy"
+                decoding="async"
                 onError={(e) => {
                   e.currentTarget.onerror = null
                   e.currentTarget.src = bigLeftFallback
@@ -78,7 +82,7 @@ const BIDEpisodes = () => {
               />
               <div className="bid-episode-thumbnail-overlay" />
               <div className="bid-episode-play">
-                <img src={playIcon} alt="" />
+                <img src={playIcon} alt="" width="48" height="48" />
               </div>
               <div className="bid-episode-meta bid-episode-meta--large">
                 <h3 className="bid-episode-title bid-episode-title--large">{bigLeftEpisode.title}</h3>
@@ -97,6 +101,10 @@ const BIDEpisodes = () => {
               <img
                 src={rightTopCard.image}
                 alt={rightTopCard.imageAlt}
+                width="400"
+                height="225"
+                loading="lazy"
+                decoding="async"
                 onError={(e) => {
                   e.currentTarget.onerror = null
                   e.currentTarget.src = bigLeftFallback
@@ -104,7 +112,7 @@ const BIDEpisodes = () => {
               />
               <div className="bid-episode-thumbnail-overlay" />
               <div className="bid-episode-play">
-                <img src={playIcon} alt="" />
+                <img src={playIcon} alt="" width="48" height="48" />
               </div>
               <div className="bid-episode-meta">
                 <h3 className="bid-episode-title">{rightTopCard.title}</h3>
@@ -123,6 +131,10 @@ const BIDEpisodes = () => {
               <img
                 src={rightBottomCard.image}
                 alt={rightBottomCard.imageAlt}
+                width="400"
+                height="225"
+                loading="lazy"
+                decoding="async"
                 onError={(e) => {
                   e.currentTarget.onerror = null
                   e.currentTarget.src = bigLeftFallback
@@ -130,7 +142,7 @@ const BIDEpisodes = () => {
               />
               <div className="bid-episode-thumbnail-overlay" />
               <div className="bid-episode-play">
-                <img src={playIcon} alt="" />
+                <img src={playIcon} alt="" width="48" height="48" />
               </div>
               <div className="bid-episode-meta">
                 <h3 className="bid-episode-title">{rightBottomCard.title}</h3>

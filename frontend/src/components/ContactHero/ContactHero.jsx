@@ -92,14 +92,14 @@ const ContactHero = () => {
     <section className="contact-hero">
       <div className="contact-hero-overlay contact-hero-overlay--desktop" aria-hidden="true" />
       <div className="contact-hero-background contact-hero-background--desktop" aria-hidden="true">
-        <img src={contactHeroImage} alt="" className="contact-hero-bg-image" />
+        <img src={contactHeroImage} alt="" className="contact-hero-bg-image" width="1440" height="900" decoding="async" />
       </div>
 
       <div className="contact-hero-content">
         <div className="contact-hero-grid">
           <div className="contact-hero-copy">
             <div className="contact-hero-copy-media" aria-hidden="true">
-              <img src={contactHeroImage} alt="" className="contact-hero-copy-bg-image" />
+              <img src={contactHeroImage} alt="" className="contact-hero-copy-bg-image" width="720" height="900" decoding="async" />
               <div className="contact-hero-copy-overlay" />
             </div>
             <div className="contact-hero-copy-inner">
@@ -111,7 +111,7 @@ const ContactHero = () => {
               <ul className="contact-hero-benefits">
                 {BENEFITS.map((item) => (
                   <li key={item} className="contact-hero-benefit">
-                    <img src={contactTickIcon} alt="" className="contact-hero-benefit-icon" aria-hidden="true" />
+                    <img src={contactTickIcon} alt="" className="contact-hero-benefit-icon" width="20" height="20" aria-hidden="true" />
                     <span>{item}</span>
                   </li>
                 ))}

@@ -39,6 +39,8 @@ const BIDHost = () => {
               src={founderImage}
               alt="Debojit Sen, Founder & CEO of Crack-ED"
               className="bid-host-image"
+              width="480"
+              height="560"
               loading="lazy"
               decoding="async"
             />

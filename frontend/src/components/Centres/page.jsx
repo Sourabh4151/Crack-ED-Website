@@ -63,7 +63,7 @@ const Centres = () => {
             aria-expanded={mobileSelectOpen}
             aria-haspopup="listbox"
           >
-            <img src={frame343Icon} alt="" className="centres-mobile-pin" />
+            <img src={frame343Icon} alt="" className="centres-mobile-pin" width="16" height="16" />
             <span className="centres-mobile-select-label">
               {activeCentre.name}
             </span>
@@ -122,7 +122,7 @@ const Centres = () => {
                 onClick={() => setActiveIndex(index)}
               >
                 <span className="centres-item-icon">
-                  <img src={markerIcon} alt="" className="centres-item-svg" />
+                  <img src={markerIcon} alt="" className="centres-item-svg" width="16" height="16" />
                   <span className="centres-item-index">{index + 1}</span>
                 </span>
                 <span className="centres-item-label">{centre.name}</span>

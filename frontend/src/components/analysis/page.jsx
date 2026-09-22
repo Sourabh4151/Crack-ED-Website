@@ -36,7 +36,7 @@ const Card = ({ img, title, desc }) => {
      
         <>
           <div className="icon-box">
-            <img src={img} style={{ width: "50px", height: "50px" }} alt="" />
+            <img src={img} width="50" height="50" alt="" loading="lazy" decoding="async" />
           </div>
           <div className="card-title">{title}</div>
         </>
@@ -58,7 +58,6 @@ useLayoutEffect(() => {
   const initAnimation = () => {
     if (cancelled || ctx) return
     if (!window.matchMedia('(min-width: 769px)').matches) return
-    if (window.getComputedStyle(root).display === 'none') return
 
     gsap.registerPlugin(ScrollTrigger)
 

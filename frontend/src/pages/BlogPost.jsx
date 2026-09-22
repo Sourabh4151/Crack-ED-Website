@@ -434,7 +434,7 @@ const BlogPost = () => {
                 </div>
                 {!post.hideBodyImage && !(post.id === '6' && !post.bodyImage) && (
                   <div className="blog-post-image-wrap">
-                    <img src={post.bodyImage || post.image} alt="" className="blog-post-image" />
+                    <img src={post.bodyImage || post.image} alt="" className="blog-post-image" width="800" height="450" loading="lazy" decoding="async" />
                   </div>
                 )}
                 {post.contentAfterImage ? (
@@ -478,7 +478,7 @@ const BlogPost = () => {
                 )}
                 {post.bodyImage2 && (
                   <div className={`blog-post-image-wrap${post.id === '5' ? ' blog-post-image-wrap--constrained' : ''}`}>
-                    <img src={post.bodyImage2} alt="Career paths in banking" className="blog-post-image" />
+                    <img src={post.bodyImage2} alt="Career paths in banking" className="blog-post-image" width="800" height="450" loading="lazy" decoding="async" />
                   </div>
                 )}
                 {post.contentAfterImage2 && (() => {
@@ -545,7 +545,7 @@ const BlogPost = () => {
                 })()}
                 {post.bodyImage3 && (
                   <div className={`blog-post-image-wrap${post.id === '5' ? ' blog-post-image-wrap--constrained' : ''}`}>
-                    <img src={post.bodyImage3} alt="Real world case study" className="blog-post-image" />
+                    <img src={post.bodyImage3} alt="Real world case study" className="blog-post-image" width="800" height="450" loading="lazy" decoding="async" />
                   </div>
                 )}
                 {post.contentAfterImage3 && (
@@ -559,7 +559,7 @@ const BlogPost = () => {
                 )}
                 {post.bodyImage4 && (
                   <div className="blog-post-image-wrap">
-                    <img src={post.bodyImage4} alt="Best job placement success" className="blog-post-image" />
+                    <img src={post.bodyImage4} alt="Best job placement success" className="blog-post-image" width="800" height="450" loading="lazy" decoding="async" />
                   </div>
                 )}
                 {post.contentAfterImage4 && (
@@ -595,7 +595,7 @@ const BlogPost = () => {
                 )}
                 {post.bodyImage5 && (
                   <div className="blog-post-image-wrap">
-                    <img src={post.bodyImage5} alt="" className="blog-post-image" />
+                    <img src={post.bodyImage5} alt="" className="blog-post-image" width="800" height="450" loading="lazy" decoding="async" />
                   </div>
                 )}
                 {post.contentAfterImage5 && (
@@ -649,7 +649,7 @@ const BlogPost = () => {
                 )}
                 {post.bodyImage6 && (
                   <div className="blog-post-image-wrap">
-                    <img src={post.bodyImage6} alt="" className="blog-post-image" />
+                    <img src={post.bodyImage6} alt="" className="blog-post-image" width="800" height="450" loading="lazy" decoding="async" />
                   </div>
                 )}
                 {post.contentAfterImage7 && (
@@ -689,7 +689,7 @@ const BlogPost = () => {
                 )}
                 {post.bodyImage8 && (
                   <div className="blog-post-image-wrap">
-                    <img src={post.bodyImage8} alt="" className="blog-post-image" />
+                    <img src={post.bodyImage8} alt="" className="blog-post-image" width="800" height="450" loading="lazy" decoding="async" />
                   </div>
                 )}
                 {post.contentAfterImage9 && (

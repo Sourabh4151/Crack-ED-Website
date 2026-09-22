@@ -21,17 +21,29 @@ function getClarityProjectId() {
   return RAW_PROJECT_ID
 }
 
+function startClarity(projectId) {
+  if (initialized || typeof window === 'undefined') return
+  Clarity.init(projectId)
+  initialized = true
+  trackClarityPage(window.location.pathname)
+}
+
 /**
  * Load Microsoft Clarity once when a valid Project ID is configured.
  * Does not send user identifiers or other personal data.
+ * Scheduled after idle so the hero/LCP path is not competing with Clarity.
  */
 export function initClarity() {
   if (initialized || typeof window === 'undefined') return
   const projectId = getClarityProjectId()
   if (!projectId) return
 
-  Clarity.init(projectId)
-  initialized = true
+  const start = () => startClarity(projectId)
+  if (typeof window.requestIdleCallback === 'function') {
+    window.requestIdleCallback(start, { timeout: 4000 })
+  } else {
+    window.setTimeout(start, 2000)
+  }
 }
 
 /**

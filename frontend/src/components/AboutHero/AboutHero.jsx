@@ -18,7 +18,7 @@ const AboutHero = () => {
     <section className="about-hero">
       <div className="about-hero-overlay"></div>
       <div className="about-hero-background">
-        <img src={aboutHeroImage} alt="Crack-ED team" className="about-hero-bg-image" />
+        <img src={aboutHeroImage} alt="Crack-ED team" className="about-hero-bg-image" width="1440" height="800" fetchpriority="high" decoding="async" />
       </div>
 
       <div className="about-hero-content">

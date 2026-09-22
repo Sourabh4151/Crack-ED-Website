@@ -1,20 +1,13 @@
-import React, { lazy, Suspense, useEffect } from 'react'
+import React, { lazy, Suspense, useEffect, useState } from 'react'
 import { BrowserRouter as Router, Routes, Route, useLocation, useParams } from 'react-router-dom'
-import { ToastContainer } from 'react-toastify'
-//import TagManager from 'react-gtm-module'
 
-// Styling
-import 'react-toastify/dist/ReactToastify.css'
 import './App.css'
 
-// Components
 import ScrollToTop from './components/ScrollToTop/ScrollToTop'
 import PreserveUtmParams from './components/PreserveUtmParams/PreserveUtmParams'
 import ClarityTracker from './components/ClarityTracker/ClarityTracker'
 import StickyPhoneIcon from './components/StickyPhoneIcon/StickyPhoneIcon'
 import Home from './pages/Home'
-
-// Pages
 
 const Programs = lazy(() => import('./pages/Programs'))
 const Careers = lazy(() => import('./pages/Careers'))
@@ -34,29 +27,50 @@ const AdminQuiz = lazy(() => import('./pages/AdminQuiz'))
 const AdminQuizQuestionEdit = lazy(() => import('./pages/AdminQuizQuestionEdit'))
 const AdminQuizProgramEdit = lazy(() => import('./pages/AdminQuizProgramEdit'))
 
-// 1. Initialize GTM with your Container ID
-// Replace the old GTM-K4Z3BMQ with your new GT ID
-//const tagManagerArgs = {
-//  gtmId: 'GT-T9WGNWGH'
-//}
-//TagManager.initialize(tagManagerArgs)
+const ToastContainer = lazy(() =>
+  import('react-toastify').then(async (mod) => {
+    await import('react-toastify/dist/ReactToastify.css')
+    return { default: mod.ToastContainer }
+  })
+)
 
-// 2. Analytics Component to track Page Views
-// This ensures GA4 sees the URL change even if the page doesn't hard-reload
-//const AnalyticsTracker = () => {
-//  const location = useLocation();
-//
-//  useEffect(() => {
-//    window.dataLayer = window.dataLayer || [];
-//    window.dataLayer.push({
-//      event: 'pageview',
-//      page_path: location.pathname + location.search,
-//      page_title: document.title
-//    });
-//  }, [location]);
-//
-//  return null;
-//};
+function DeferredToastContainer() {
+  const [ready, setReady] = useState(false)
+
+  useEffect(() => {
+    const enable = () => setReady(true)
+    let idleId
+    let timeoutId
+    if (typeof window.requestIdleCallback === 'function') {
+      idleId = window.requestIdleCallback(enable, { timeout: 2500 })
+    } else {
+      timeoutId = window.setTimeout(enable, 2500)
+    }
+    return () => {
+      if (idleId != null && typeof window.cancelIdleCallback === 'function') {
+        window.cancelIdleCallback(idleId)
+      }
+      if (timeoutId != null) window.clearTimeout(timeoutId)
+    }
+  }, [])
+
+  if (!ready) return null
+
+  return (
+    <Suspense fallback={null}>
+      <ToastContainer
+        position="top-right"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
+    </Suspense>
+  )
+}
 
 function BlogPostRoute () {
   const { id } = useParams()
@@ -89,16 +103,7 @@ function App() {
       <PreserveUtmParams />
 
       <div className="App">
-        <ToastContainer
-          position="top-right"
-          autoClose={4000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          draggable
-          pauseOnHover
-          theme="dark"
-        />
+        <DeferredToastContainer />
         <StickyPhoneIcon />
 
         <Suspense fallback={null}>

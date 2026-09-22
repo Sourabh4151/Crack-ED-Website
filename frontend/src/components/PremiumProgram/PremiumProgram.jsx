@@ -22,6 +22,10 @@ const PremiumProgram = () => {
               src={premiumProgramImage} 
               alt="Premium program professional" 
               className="premium-program-image"
+              width="1360"
+              height="768"
+              loading="lazy"
+              decoding="async"
             />
             <div className="premium-program-card-overlay"></div>
           </div>

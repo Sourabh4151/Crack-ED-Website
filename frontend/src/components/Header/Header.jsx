@@ -150,16 +150,17 @@ setIsScrolled(prev => {
   }, [isProgramsOpen])
 
   useEffect(() => {
+    const mq = window.matchMedia('(min-width: 769px)')
     const handleResize = () => {
-      if (window.innerWidth > 768 && isMobileMenuOpen) {
+      if (mq.matches && isMobileMenuOpen) {
         setIsMobileMenuOpen(false)
         setIsProgramsOpen(false)
       }
     }
 
-    window.addEventListener('resize', handleResize)
+    mq.addEventListener('change', handleResize)
     return () => {
-      window.removeEventListener('resize', handleResize)
+      mq.removeEventListener('change', handleResize)
     }
   }, [isMobileMenuOpen])
 
@@ -251,7 +252,7 @@ setIsScrolled(prev => {
     <header className={`header ${isScrolled ? 'scrolled' : ''} ${isMobileMenuOpen ? 'mobile-menu-open' : ''}`}>
       <div className="header-container">
         <Link to="/" className="logo" onClick={closeMobileMenu} aria-label="Go to home">
-          <img src={logoImage} alt="CRACK-ED Logo" className="logo-icon" />
+          <img src={logoImage} alt="CRACK-ED Logo" className="logo-icon" width="180" height="51" decoding="async" />
         </Link>
 
         <button

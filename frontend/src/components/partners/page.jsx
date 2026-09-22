@@ -167,6 +167,8 @@ const Partners = () => {
                 <img
                   src={slides[currentIndex].logo}
                   alt={slides[currentIndex].logoAlt || ''}
+                  width={parseInt(slides[currentIndex].logoWidth, 10) || 160}
+                  height="40"
                   style={{ width: slides[currentIndex].logoWidth, marginBottom: '8px' }}
                   className="publisher-logo"
                   loading="lazy"

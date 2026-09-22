@@ -22,7 +22,7 @@ const ProgramsHero = () => {
     <section className="programs-hero">
       <div className="programs-hero-overlay"></div>
       <div className="programs-hero-background">
-        <img src={programsHeroImage} alt="Professional learning environment" className="programs-hero-bg-image" />
+        <img src={programsHeroImage} alt="Professional learning environment" className="programs-hero-bg-image" width="1440" height="800" fetchpriority="high" decoding="async" />
       </div>
       
       <div className="programs-hero-content">

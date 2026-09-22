@@ -1,8 +1,8 @@
-import React, { lazy, Suspense, useState } from 'react'
-import LogoCarousel from '../LogoCarousel/LogoCarousel'
+import React, { lazy, Suspense, useEffect, useState } from 'react'
 import './Hero.css'
 
 const EnquireModal = lazy(() => import('../EnquireModal/EnquireModal'))
+const LogoCarousel = lazy(() => import('../LogoCarousel/LogoCarousel'))
 
 const preloadEnquireModal = () => {
   import('../EnquireModal/EnquireModal')
@@ -10,6 +10,28 @@ const preloadEnquireModal = () => {
 
 const Hero = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
+
+  useEffect(() => {
+    const boot = document.getElementById('hero-lcp')
+    if (!boot) return undefined
+
+    const hideBoot = () => {
+      boot.style.visibility = 'hidden'
+    }
+
+    const img = document.querySelector('.hero-bg-image')
+    if (img?.complete) {
+      hideBoot()
+    } else {
+      img?.addEventListener('load', hideBoot, { once: true })
+    }
+    const fallback = window.setTimeout(hideBoot, 2500)
+    return () => {
+      img?.removeEventListener('load', hideBoot)
+      window.clearTimeout(fallback)
+      boot.remove()
+    }
+  }, [])
 
   const handleEnquireClick = () => {
     setIsModalOpen(true)
@@ -31,6 +53,7 @@ const Hero = () => {
           height="768"
           loading="eager"
           fetchpriority="high"
+          decoding="sync"
         />
       </div>
 
@@ -62,7 +85,9 @@ const Hero = () => {
           </div>
         </div>
         <div className="hero-logo-wrap">
-          <LogoCarousel />
+          <Suspense fallback={<div className="logo-carousel-placeholder" aria-hidden="true" />}>
+            <LogoCarousel />
+          </Suspense>
         </div>
       </div>
       {isModalOpen && (

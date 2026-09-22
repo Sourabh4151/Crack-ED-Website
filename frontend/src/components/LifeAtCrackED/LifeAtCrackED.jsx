@@ -39,6 +39,8 @@ const LifeAtCrackED = () => {
                   src={item.image} 
                   alt={item.name} 
                   className="life-at-cracked-image"
+                  width="320"
+                  height="400"
                   loading="lazy"
                   decoding="async"
                 />

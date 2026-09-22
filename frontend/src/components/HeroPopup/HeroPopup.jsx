@@ -61,7 +61,7 @@ const HeroPopup = () => {
   return (
     <div className="hero-popup-overlay" role="dialog" aria-modal="true" aria-labelledby="hero-popup-heading">
       <div className="hero-popup">
-        <img src={houseOfFoundersBg} alt="" className="hero-popup-bg" aria-hidden />
+        <img src={houseOfFoundersBg} alt="" className="hero-popup-bg" width="800" height="600" decoding="async" aria-hidden />
         <div className="hero-popup-shade" aria-hidden />
         <button
           type="button"
@@ -84,7 +84,7 @@ const HeroPopup = () => {
           <ul className="hero-popup-features">
             {FEATURES.map((feature) => (
               <li key={feature}>
-                <img src={tickPopup} alt="" className="hero-popup-tick" aria-hidden />
+                <img src={tickPopup} alt="" className="hero-popup-tick" width="20" height="20" aria-hidden />
                 <span>{feature}</span>
               </li>
             ))}

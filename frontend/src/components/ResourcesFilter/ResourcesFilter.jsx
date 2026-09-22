@@ -56,7 +56,7 @@ const ResourcesFilter = ({ blogCards = [], activeCategory = 'all', onCategoryCha
             {filteredCards.map((card) => (
               <article key={`${card.source || 'x'}-${card.id}`} className="resources-filter-card">
                 <div className="resources-filter-card-image">
-                  <img src={card.image} alt={card.title || ''} />
+                  <img src={card.image} alt={card.title || ''} width="400" height="240" loading="lazy" decoding="async" />
                 </div>
                 <div className="resources-filter-card-content">
                   <h2 className="resources-filter-card-title">{card.title}</h2>

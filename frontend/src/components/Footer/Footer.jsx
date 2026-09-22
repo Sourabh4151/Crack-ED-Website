@@ -157,7 +157,7 @@ const Footer = () => {
           {/* Brand Section */}
           <div className="footer-brand">
             <Link to="/">
-              <img src={logo} alt="CRACK-ED" className="footer-logo" />
+              <img src={logo} alt="CRACK-ED" className="footer-logo" width="183" height="43" loading="lazy" decoding="async" />
             </Link>
           </div>
 
@@ -254,16 +254,16 @@ const Footer = () => {
                 <h2 className="footer-heading">FOLLOW US</h2>
                 <div className="social-icons">
                   <a href="https://www.instagram.com/crack_ed_now/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="social-icon">
-                    <img src={instagramIcon} alt="Instagram" />
+                    <img src={instagramIcon} alt="Instagram" width="36" height="36" loading="lazy" decoding="async" />
                   </a>
                   <a href="https://www.linkedin.com/company/crack-ed/posts/?feedView=all" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="social-icon">
-                    <img src={linkedinIcon} alt="LinkedIn" />
+                    <img src={linkedinIcon} alt="LinkedIn" width="36" height="36" loading="lazy" decoding="async" />
                   </a>
                   <a href="https://www.facebook.com/people/Crack-ED-Bridging-the-Skill-Gap/100083683071884/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="social-icon">
-                    <img src={facebookIcon} alt="Facebook" />
+                    <img src={facebookIcon} alt="Facebook" width="36" height="36" loading="lazy" decoding="async" />
                   </a>
                   <a href="https://www.youtube.com/@CrackEDit" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="social-icon">
-                    <img src={youtubeIcon} alt="YouTube" />
+                    <img src={youtubeIcon} alt="YouTube" width="36" height="36" loading="lazy" decoding="async" />
                   </a>
                 </div>
               </div>

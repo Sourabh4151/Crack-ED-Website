@@ -56,7 +56,7 @@ const BidPopup = () => {
     <div className="bid-popup-overlay" role="dialog" aria-modal="true">
       <div className="bid-popup">
         <div className="bid-popup-media">
-          <img src={bidImg} alt="Watch Episode" className="bid-popup-image" />
+          <img src={bidImg} alt="Watch Episode" className="bid-popup-image" width="480" height="270" decoding="async" />
           <button
             className="bid-popup-close"
             aria-label="Close pop up"

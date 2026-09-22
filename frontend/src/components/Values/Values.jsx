@@ -53,7 +53,7 @@ const Values = () => {
           {values.slice(0, 3).map((value) => (
             <div key={value.id} className="value-card">
               <div className="value-icon">
-                <img src={value.icon} alt={value.title} />
+                <img src={value.icon} alt={value.title} width="48" height="48" loading="lazy" decoding="async" />
               </div>
               <div className="value-content">
                 <h3 className="value-title">{value.title}</h3>
@@ -65,7 +65,7 @@ const Values = () => {
             {values.slice(3).map((value) => (
               <div key={value.id} className="value-card">
                 <div className="value-icon">
-                  <img src={value.icon} alt={value.title} />
+                  <img src={value.icon} alt={value.title} width="48" height="48" loading="lazy" decoding="async" />
                 </div>
                 <div className="value-content">
                   <h3 className="value-title">{value.title}</h3>

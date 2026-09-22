@@ -40,7 +40,7 @@ const Leadership = () => {
           {leaders.map((leader) => (
             <div key={leader.name} className={`leadership-card ${leader.name.replace(/\s+/g, '-').toLowerCase()}`}>
               <div className="leadership-card-image-wrap">
-                <img src={leader.image} alt={leader.name} className="leadership-card-image" loading="lazy" decoding="async" />
+                <img src={leader.image} alt={leader.name} className="leadership-card-image" width="400" height="500" loading="lazy" decoding="async" />
                 {/* Black strip overlays bottom of image – image shows through (transparent to strip) */}
                 <div className="leadership-card-text-frame">
                   <div className="leadership-card-details">

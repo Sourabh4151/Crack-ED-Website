@@ -2,7 +2,6 @@ import React from 'react'
 import lenskartLogo from '../../assets/lenskart_greyscale_new.png'
 import paytmLogoGreyscale from '../../assets/paytm_greyscale_new.png'
 import piramalLogoGreyscale from '../../assets/piramal_greyscale_new.png'
-import testbookLogo from '../../assets/testbook.png'
 import LAPDP3Qlogos from '../../assets/finova_greyscale_new.png'
 import InsuranceDekho from "../../assets/insurancedekho_greyscale_new.png"
 import auLogoGreyscale from '../../assets/au_logo_greyscale.png'
@@ -51,6 +50,8 @@ const LogoCarousel = () => {
               <img
                 src={logo.image}
                 alt={logo.name}
+                width="150"
+                height="60"
                 loading={index < 3 ? 'eager' : 'lazy'}
                 decoding="async"
                 fetchpriority="low"

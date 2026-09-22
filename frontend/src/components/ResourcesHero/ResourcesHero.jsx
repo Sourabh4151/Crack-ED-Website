@@ -14,7 +14,7 @@ const ResourcesHero = () => {
     <section className="resources-hero">
       <div className="resources-hero-overlay"></div>
       <div className="resources-hero-background">
-        <img src={resourcesHeroImage} alt="Professional learning environment" className="resources-hero-bg-image" />
+        <img src={resourcesHeroImage} alt="Professional learning environment" className="resources-hero-bg-image" width="1440" height="800" fetchpriority="high" decoding="async" />
       </div>
       
       <div className="resources-hero-content">

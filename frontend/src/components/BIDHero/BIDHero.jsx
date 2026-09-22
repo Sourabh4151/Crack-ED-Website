@@ -9,7 +9,7 @@ const BIDHero = () => {
 
       <div className="bid-hero-content">
         <div className="bid-hero-inner">
-          <img src={bidLogo} alt="Badhta India Dekho logo" className="bid-hero-logo" />
+          <img src={bidLogo} alt="Badhta India Dekho logo" className="bid-hero-logo" width="220" height="80" decoding="async" />
 
           <div className="bid-hero-text">
             <h1 className="bid-hero-title">BADHTA INDIA DEKHO</h1>

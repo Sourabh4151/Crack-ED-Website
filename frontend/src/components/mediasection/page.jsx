@@ -94,7 +94,7 @@ const Media = () => {
     const content = contentRef.current
     if (!image || !content) return
     const slider = image.closest('.desktop-slider')
-    if (slider && window.getComputedStyle(slider).display === 'none') return
+    if (slider && !window.matchMedia('(min-width: 769px)').matches) return
 
     const tl = gsap.timeline();
 
@@ -146,6 +146,8 @@ const Media = () => {
                       src={slide.image}
                       alt={slide.imageAlt || 'Media recognition'}
                       className="slide-image"
+                      width="640"
+                      height="400"
                       loading="lazy"
                       decoding="async"
                     />
@@ -180,6 +182,8 @@ const Media = () => {
                   src={slides[currentIndex].image}
                   alt={slides[currentIndex].imageAlt || 'Media recognition'}
                   className="slide-image"
+                  width="640"
+                  height="400"
                   loading="lazy"
                   decoding="async"
                 />
