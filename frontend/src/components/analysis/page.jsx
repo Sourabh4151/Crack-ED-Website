@@ -1,14 +1,10 @@
-import React, { useLayoutEffect, useRef, useState } from 'react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import React, { useEffect, useRef, useState } from 'react'
 import './analysis.css'
 import TalkToTeamCta from '../TalkToTeamCta/TalkToTeamCta'
 
 import img1 from '../../assets/img1.png'; import img2 from '../../assets/img2.svg'; import img3 from '../../assets/img3.png';
 import img4 from '../../assets/img4.png'; import img5 from '../../assets/img5.png'; import img6 from '../../assets/img6.png';
 import img7 from '../../assets/img7.png'; import img8 from '../../assets/img8.png'; import img9 from '../../assets/img9.png';
-
-gsap.registerPlugin(ScrollTrigger)
 
 const releasePin = (el) => {
   if (!el) return
@@ -48,17 +44,24 @@ const Card = ({ img, title, desc }) => {
 
 const Analysis = () => {
   const sectionRef = useRef(null)
-useLayoutEffect(() => {
+useEffect(() => {
   const root = sectionRef.current
   if (!root) return
 
   let cancelled = false
   let ctx = null
+  let gsap = null
+  let ScrollTrigger = null
 
-  const initAnimation = () => {
+  const initAnimation = async () => {
     if (cancelled || ctx) return
     if (!window.matchMedia('(min-width: 769px)').matches) return
 
+    const gsapMod = await import('gsap')
+    const stMod = await import('gsap/ScrollTrigger')
+    if (cancelled || ctx) return
+    gsap = gsapMod.gsap
+    ScrollTrigger = stMod.ScrollTrigger
     gsap.registerPlugin(ScrollTrigger)
 
     ScrollTrigger.getAll().forEach((st) => {
@@ -122,7 +125,9 @@ useLayoutEffect(() => {
       return
     }
 
-    ScrollTrigger.refresh()
+    requestAnimationFrame(() => {
+      if (!cancelled) ScrollTrigger.refresh()
+    })
   }
 
   const observer = new IntersectionObserver(
@@ -132,7 +137,7 @@ useLayoutEffect(() => {
         initAnimation()
       }
     },
-    { rootMargin: '800px 0px' }
+    { rootMargin: '200px 0px' }
   )
   observer.observe(root)
 
@@ -143,7 +148,7 @@ useLayoutEffect(() => {
       if (ctx) ctx.revert()
     } catch (_) { /* pin unwrap can throw if the node was already moved */ }
     ctx = null
-    ScrollTrigger.getAll().forEach((st) => {
+    ScrollTrigger?.getAll().forEach((st) => {
       if (st.trigger === root) {
         try { st.kill() } catch (_) {}
       }

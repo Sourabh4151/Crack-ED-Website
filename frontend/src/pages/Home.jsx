@@ -76,7 +76,7 @@ const Home = () => {
       <Header />
       <main>
         <Hero />
-        <LazySection minHeight="80vh" rootMargin="200px 0px" idleTimeout={1800}>
+        <LazySection minHeight="80vh" rootMargin="0px 0px">
           <Suspense fallback={<div className="home-below-fold-placeholder" aria-hidden="true" />}>
             <Programs />
           </Suspense>

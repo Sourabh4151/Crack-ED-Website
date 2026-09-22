@@ -56,24 +56,55 @@
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700;800&family=Poppins:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700;800&family=Poppins:wght@400;500&display=swap"></noscript>
     <style>
-      html, body { background: #000; margin: 0; }
-      #hero-lcp {
+      html, body { background: #000; margin: 0; overflow-x: clip; }
+      #hero-lcp-clip {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
+        max-width: 100%;
         height: 100svh;
-        object-fit: cover;
-        object-position: center;
+        overflow: hidden;
         z-index: 0;
         pointer-events: none;
       }
+      #hero-lcp {
+        position: absolute;
+        display: block;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        pointer-events: none;
+      }
+      #hero-lcp-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(0, 0, 0, 0.7) 0%,
+          rgba(0, 0, 0, 0.5) 50%,
+          rgba(0, 0, 0, 0.6) 100%
+        );
+        pointer-events: none;
+      }
       @media (max-width: 768px) {
-        #hero-lcp {
+        #hero-lcp-clip {
           height: 657px;
+        }
+        #hero-lcp {
           object-position: 78% center;
           width: 120%;
+          height: 100%;
           margin-left: -10%;
+        }
+        #hero-lcp-overlay {
+          background: rgba(0, 0, 0, 0.8);
         }
       }
       @media (max-width: 480px) {
@@ -85,21 +116,24 @@
     </style>
   </head>
   <body>
-    <img
-      id="hero-lcp"
-      src="/hero_section_image.webp"
-      alt=""
-      width="1376"
-      height="768"
-      fetchpriority="high"
-      decoding="sync"
-    />
+    <div id="hero-lcp-clip">
+      <img
+        id="hero-lcp"
+        src="/hero_section_image.webp"
+        alt="Professional workspace"
+        width="1376"
+        height="768"
+        fetchpriority="high"
+        decoding="sync"
+      />
+      <div id="hero-lcp-overlay" aria-hidden="true"></div>
+    </div>
     <script>
       (function () {
         var p = location.pathname;
         if (p !== '/' && p !== '' && p !== '/index.html') {
-          var el = document.getElementById('hero-lcp');
-          if (el) el.remove();
+          var clip = document.getElementById('hero-lcp-clip');
+          if (clip) clip.remove();
         }
       })();
     </script>

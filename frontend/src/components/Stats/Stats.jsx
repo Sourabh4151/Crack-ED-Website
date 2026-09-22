@@ -1,13 +1,9 @@
 import React, { useEffect, useRef } from 'react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import icon1 from '../../assets/icon1.png'
 import icon2 from '../../assets/icon2.png'
 import icon3 from '../../assets/icon3.png'
 import icon4 from '../../assets/icon4.png'
 import './Stats.css'
-
-gsap.registerPlugin(ScrollTrigger)
 
 const Stats = () => {
   const statsGridRef = useRef(null)
@@ -18,9 +14,11 @@ const Stats = () => {
 
     let cancelled = false
     let ctx = null
+    let gsap = null
+    let ScrollTrigger = null
 
     const createTriggers = () => {
-      if (cancelled || ctx) return
+      if (cancelled || ctx || !gsap || !ScrollTrigger) return
 
       const cards = grid.querySelectorAll('.stat-card')
       if (!cards.length) return
@@ -68,12 +66,16 @@ const Stats = () => {
         observer.disconnect()
 
         const deadline = Date.now() + 2500
-        const waitForPins = () => {
+        const waitForPins = async () => {
           if (cancelled) return
           if (pinsReady() || Date.now() > deadline) {
+            const gsapMod = await import('gsap')
+            const stMod = await import('gsap/ScrollTrigger')
+            if (cancelled) return
+            gsap = gsapMod.gsap
+            ScrollTrigger = stMod.ScrollTrigger
             createTriggers()
-            // Pin spacers can land one frame later than the section itself.
-            requestAnimationFrame(() => ScrollTrigger.refresh())
+            requestAnimationFrame(() => { if (!cancelled) ScrollTrigger.refresh() })
             setTimeout(() => { if (!cancelled) ScrollTrigger.refresh() }, 200)
             return
           }

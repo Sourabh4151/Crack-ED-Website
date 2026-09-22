@@ -1,19 +1,17 @@
-import React, { useLayoutEffect, useRef } from 'react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import React, { useEffect, useRef } from 'react'
 import './whychoose.css'
-
-gsap.registerPlugin(ScrollTrigger)
 
 const Whychooseus = () => {
   const sectionRef = useRef(null)
   const revealRef = useRef(null)
-  useLayoutEffect(() => {
+  useEffect(() => {
     const root = sectionRef.current
     if (!root) return
 
     let cancelled = false
     let ctx = null
+    let gsap = null
+    let ScrollTrigger = null
     const mq = window.matchMedia('(max-width: 768px)')
 
     const releasePin = (el) => {
@@ -29,7 +27,7 @@ const Whychooseus = () => {
         if (ctx) ctx.revert()
       } catch (_) { /* pin unwrap can throw if the node was already moved */ }
       ctx = null
-      ScrollTrigger.getAll().forEach((st) => {
+      ScrollTrigger?.getAll().forEach((st) => {
         if (st.trigger === root) {
           try { st.kill() } catch (_) {}
         }
@@ -37,12 +35,19 @@ const Whychooseus = () => {
       releasePin(root)
     }
 
-    const initAnimation = () => {
+    const initAnimation = async () => {
       if (cancelled) return
 
-      teardown()
+      if (!gsap || !ScrollTrigger) {
+        const gsapMod = await import('gsap')
+        const stMod = await import('gsap/ScrollTrigger')
+        if (cancelled) return
+        gsap = gsapMod.gsap
+        ScrollTrigger = stMod.ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger)
+      }
 
-      gsap.registerPlugin(ScrollTrigger)
+      teardown()
 
       const chars = revealRef.current?.querySelectorAll('.char')
       if (!chars?.length) return
@@ -88,7 +93,9 @@ const Whychooseus = () => {
       }
 
       if (!isMobile) {
-        ScrollTrigger.refresh()
+        requestAnimationFrame(() => {
+          if (!cancelled) ScrollTrigger.refresh()
+        })
       }
     }
 
@@ -99,18 +106,18 @@ const Whychooseus = () => {
           initAnimation()
         }
       },
-      { rootMargin: '800px 0px' }
+      { rootMargin: '200px 0px' }
     )
     observer.observe(root)
 
     const onBreakpoint = () => {
       teardown()
-      gsap.set(root, {
+      gsap?.set(root, {
         clearProps: 'height,minHeight,maxHeight,position,top,left,right,bottom,width,maxWidth,zIndex,margin,padding,transform,inset'
       })
       const wrap = root.querySelector('.sticky-wrapper')
       if (wrap) {
-        gsap.set(wrap, { clearProps: 'height,transform' })
+        gsap?.set(wrap, { clearProps: 'height,transform' })
       }
       observer.observe(root)
     }

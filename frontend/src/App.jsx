@@ -39,18 +39,11 @@ function DeferredToastContainer() {
 
   useEffect(() => {
     const enable = () => setReady(true)
-    let idleId
-    let timeoutId
-    if (typeof window.requestIdleCallback === 'function') {
-      idleId = window.requestIdleCallback(enable, { timeout: 2500 })
-    } else {
-      timeoutId = window.setTimeout(enable, 2500)
-    }
+    window.addEventListener('pointerdown', enable, { once: true, passive: true })
+    window.addEventListener('keydown', enable, { once: true })
     return () => {
-      if (idleId != null && typeof window.cancelIdleCallback === 'function') {
-        window.cancelIdleCallback(idleId)
-      }
-      if (timeoutId != null) window.clearTimeout(timeoutId)
+      window.removeEventListener('pointerdown', enable)
+      window.removeEventListener('keydown', enable)
     }
   }, [])
 

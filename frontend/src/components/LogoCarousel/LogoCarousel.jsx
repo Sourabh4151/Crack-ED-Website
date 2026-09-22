@@ -42,7 +42,7 @@ const LogoCarousel = () => {
   const duplicatedLogos = [...logos, ...logos]
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div className="logo-carousel-root">
       <div className="logo-carousel-container">
         <div className="logo-carousel-track">
           {duplicatedLogos.map((logo, index) => (

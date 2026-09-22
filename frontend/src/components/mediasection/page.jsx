@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import { gsap } from "gsap";
 import "./page.css";
 
 import img2 from "../../assets/hindustanbg.webp";
@@ -96,24 +95,35 @@ const Media = () => {
     const slider = image.closest('.desktop-slider')
     if (slider && !window.matchMedia('(min-width: 769px)').matches) return
 
-    const tl = gsap.timeline();
+    let cancelled = false
+    let tl
 
-    // Reset and Animate Image
-    tl.fromTo(
-      image,
-      { opacity: 0, x: -20 },
-      { opacity: 1, x: 0, duration: 0.6, ease: "power2.out" }
-    );
+    const start = async () => {
+      const { gsap } = await import("gsap");
+      if (cancelled) return
 
-    // Animate Text Content (Logo + Paragraph)
-    tl.fromTo(
-      content,
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
-      "-=0.4" // Start slightly before image finishes
-    );
+      tl = gsap.timeline();
 
-    return () => tl.kill();
+      tl.fromTo(
+        image,
+        { opacity: 0, x: -20 },
+        { opacity: 1, x: 0, duration: 0.6, ease: "power2.out" }
+      );
+
+      tl.fromTo(
+        content,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
+        "-=0.4"
+      );
+    }
+
+    start()
+
+    return () => {
+      cancelled = true
+      tl?.kill()
+    }
   }, [currentIndex]);
 
   const handleNext = () => {

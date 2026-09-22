@@ -7,12 +7,19 @@
 html {
   overflow-x: clip;
   overflow-y: auto;
-  scrollbar-gutter: stable;
+  max-width: 100%;
+}
+
+@media (min-width: 1025px) {
+  html {
+    scrollbar-gutter: stable;
+  }
 }
 
 body {
   overflow-x: clip;
-  overflow-y: visible;
+  overflow-y: auto;
+  max-width: 100%;
 }
 
 body {
@@ -25,7 +32,10 @@ body {
 }
 
 #root {
+  position: relative;
+  z-index: 1;
   width: 100%;
+  max-width: 100%;
   min-height: 100vh;
   overflow-x: clip;
   overflow-y: visible;

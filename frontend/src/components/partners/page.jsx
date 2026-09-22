@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import { gsap } from "gsap";
 import "./page.css";
 
 import img1 from "../../assets/ef7bcc6e680026c28232839c9205a4830a2925b8 (1).jpg";
@@ -80,48 +79,58 @@ const Partners = () => {
     const mainSection = mainSectionRef.current
     const content = contentRef.current
     const targets = [progress, mainSection, content].filter(Boolean)
-    if (targets.length) gsap.killTweensOf(targets)
     if (!progress || !mainSection || !content) return
 
-    const tl = gsap.timeline();
+    let cancelled = false
+    let tl
 
-    // 1. Progress Bar (Timer)
-    tl.fromTo(
-      progress,
-      { scaleX: 0 },
-      { 
-        scaleX: 1, 
-        duration: 5, 
-        ease: "none", 
-        onComplete: handleNext 
-      }
-    );
+    const start = async () => {
+      const { gsap } = await import("gsap");
+      if (cancelled) return
+      if (targets.length) gsap.killTweensOf(targets)
 
-    // 2. Background Fade
-    tl.fromTo(
-      mainSection,
-      { opacity: 0 },
-      { opacity: 1, duration: 1 },
-      0
-    );
+      tl = gsap.timeline();
 
-    // 3. TEXT CONTENT MOVING LEFT TO RIGHT
-    tl.fromTo(
-      content,
-      { 
-        opacity: 0, 
-        x: -100 // Starts 100 pixels to the left
-      },
-      { 
-        opacity: 1, 
-        x: 0,   // Moves to its original position
-        duration: 1, 
-        ease: "power3.out" 
-      },
-      0.2 // Starts shortly after background
-    );
+      tl.fromTo(
+        progress,
+        { scaleX: 0 },
+        { 
+          scaleX: 1, 
+          duration: 5, 
+          ease: "none", 
+          onComplete: handleNext 
+        }
+      );
 
-    return () => tl.kill();
+      tl.fromTo(
+        mainSection,
+        { opacity: 0 },
+        { opacity: 1, duration: 1 },
+        0
+      );
+
+      tl.fromTo(
+        content,
+        { 
+          opacity: 0, 
+          x: -100
+        },
+        { 
+          opacity: 1, 
+          x: 0,
+          duration: 1, 
+          ease: "power3.out" 
+        },
+        0.2
+      );
+    }
+
+    start()
+
+    return () => {
+      cancelled = true
+      tl?.kill()
+    }
   }, [currentIndex]);
 
   return (

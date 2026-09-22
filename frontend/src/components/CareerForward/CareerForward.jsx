@@ -1,5 +1,5 @@
 
-import React, { useLayoutEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './CareerForward.css'
 import CareerQuiz from '../CareerQuiz/page'
 
@@ -10,7 +10,7 @@ const CareerForward = () => {
   const contentRef = useRef(null)
   const [showQuiz, setShowQuiz] = useState(false)
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const section = sectionRef.current
 
     if (!section) return

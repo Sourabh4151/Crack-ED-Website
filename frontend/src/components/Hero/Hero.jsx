@@ -10,26 +10,42 @@ const preloadEnquireModal = () => {
 
 const Hero = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [showCarousel, setShowCarousel] = useState(false)
+  const [hasBootHero] = useState(() => typeof document !== 'undefined' && !!document.getElementById('hero-lcp'))
 
   useEffect(() => {
-    const boot = document.getElementById('hero-lcp')
-    if (!boot) return undefined
-
-    const hideBoot = () => {
-      boot.style.visibility = 'hidden'
-    }
-
-    const img = document.querySelector('.hero-bg-image')
-    if (img?.complete) {
-      hideBoot()
-    } else {
-      img?.addEventListener('load', hideBoot, { once: true })
-    }
-    const fallback = window.setTimeout(hideBoot, 2500)
     return () => {
-      img?.removeEventListener('load', hideBoot)
-      window.clearTimeout(fallback)
-      boot.remove()
+      const path = window.location.pathname
+      if (path === '/' || path === '') return
+      document.getElementById('hero-lcp-clip')?.remove()
+    }
+  }, [])
+
+  useEffect(() => {
+    let idleId
+    let timeoutId
+    let raf1
+    let raf2
+
+    const show = () => setShowCarousel(true)
+
+    raf1 = window.requestAnimationFrame(() => {
+      raf2 = window.requestAnimationFrame(() => {
+        if (typeof window.requestIdleCallback === 'function') {
+          idleId = window.requestIdleCallback(show, { timeout: 800 })
+        } else {
+          timeoutId = window.setTimeout(show, 0)
+        }
+      })
+    })
+
+    return () => {
+      if (raf1) window.cancelAnimationFrame(raf1)
+      if (raf2) window.cancelAnimationFrame(raf2)
+      if (idleId != null && typeof window.cancelIdleCallback === 'function') {
+        window.cancelIdleCallback(idleId)
+      }
+      if (timeoutId != null) window.clearTimeout(timeoutId)
     }
   }, [])
 
@@ -43,18 +59,20 @@ const Hero = () => {
 
   return (
     <section className="hero">
-      <div className="hero-overlay"></div>
+      {!hasBootHero && <div className="hero-overlay"></div>}
       <div className="hero-background">
-        <img
-          src="/hero_section_image.webp"
-          alt="Professional workspace"
-          className="hero-bg-image"
-          width="1376"
-          height="768"
-          loading="eager"
-          fetchpriority="high"
-          decoding="sync"
-        />
+        {!hasBootHero && (
+          <img
+            src="/hero_section_image.webp"
+            alt="Professional workspace"
+            className="hero-bg-image"
+            width="1376"
+            height="768"
+            loading="eager"
+            fetchpriority="high"
+            decoding="sync"
+          />
+        )}
       </div>
 
       <div className="hero-content">
@@ -85,9 +103,13 @@ const Hero = () => {
           </div>
         </div>
         <div className="hero-logo-wrap">
-          <Suspense fallback={<div className="logo-carousel-placeholder" aria-hidden="true" />}>
-            <LogoCarousel />
-          </Suspense>
+          {showCarousel ? (
+            <Suspense fallback={<div className="logo-carousel-placeholder" aria-hidden="true" />}>
+              <LogoCarousel />
+            </Suspense>
+          ) : (
+            <div className="logo-carousel-placeholder" aria-hidden="true" />
+          )}
         </div>
       </div>
       {isModalOpen && (
