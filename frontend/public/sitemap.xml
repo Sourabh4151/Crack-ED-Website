@@ -21,6 +21,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://crack-ed.com/testimonials</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://crack-ed.com/contact-us</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

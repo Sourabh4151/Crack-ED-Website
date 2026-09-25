@@ -93,7 +93,7 @@ export const PAGE_SEO = {
   testimonials: {
     title: 'Testimonials | CRACK-ED',
     description:
-      'Read LinkedIn posts and Google reviews from people who trained with Crack-ED and started their careers.',
+      'Not our words. Their experience. See what Crack-ED learners and alumni say about their journey on LinkedIn, and read the Google reviews they left.',
     path: '/testimonials',
   },
   resources: {

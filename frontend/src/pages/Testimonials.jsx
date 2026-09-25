@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Header from '../components/Header/Header'
 import Footer from '../components/Footer/Footer'
 import SEO from '../components/SEO/SEO'
-import { PAGE_SEO } from '../seo/site'
+import { PAGE_SEO, SITE_NAME, canonicalFor } from '../seo/site'
 import { fetchPublishedTestimonials } from '../services/testimonialApi'
 import './Testimonials.css'
 
@@ -131,6 +131,43 @@ function GoogleCard ({ item }) {
   )
 }
 
+function testimonialsJsonLd (reviews) {
+  const url = canonicalFor(PAGE_SEO.testimonials.path)
+  const reviewItems = reviews
+    .filter((item) => item.name && item.body)
+    .map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      item: {
+        '@type': 'Review',
+        author: { '@type': 'Person', name: item.name },
+        reviewBody: item.body,
+        reviewRating: {
+          '@type': 'Rating',
+          ratingValue: String(item.rating || 5),
+          bestRating: '5',
+        },
+        url: item.source_url || url,
+        itemReviewed: {
+          '@type': 'EducationalOrganization',
+          name: SITE_NAME,
+          url: canonicalFor('/'),
+        },
+      },
+    }))
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: PAGE_SEO.testimonials.title,
+    description: PAGE_SEO.testimonials.description,
+    url,
+    mainEntity: reviewItems.length
+      ? { '@type': 'ItemList', itemListElement: reviewItems }
+      : undefined,
+  }
+}
+
 const Testimonials = () => {
   const [items, setItems] = useState([])
   const [loading, setLoading] = useState(true)
@@ -162,6 +199,7 @@ const Testimonials = () => {
           { name: 'Home', path: '/' },
           { name: 'Testimonials', path: '/testimonials' },
         ]}
+        jsonLd={testimonialsJsonLd(google)}
       />
       <Header />
       <main>
