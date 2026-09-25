@@ -425,3 +425,85 @@ class MerittoOutboundAPILog(models.Model):
         status = self.response_status_code if self.response_status_code is not None else '—'
         email = self.contact_email or self.contact_mobile or 'unknown'
         return f'{email} — HTTP {status} ({self.created_at:%Y-%m-%d %H:%M})'
+
+
+def testimonial_image_path(instance, filename):
+    """Testimonial photos under testimonials/YYYY-MM-DD/."""
+    import uuid
+    from django.utils import timezone
+    date_str = timezone.now().strftime('%Y-%m-%d')
+    safe_name = (filename or 'image').replace(' ', '_')
+    unique = uuid.uuid4().hex[:8]
+    return f'testimonials/{date_str}/{unique}_{safe_name}'
+
+
+class SiteTestimonial(models.Model):
+    """
+    Public reviews shown on /testimonials.
+    LinkedIn-style posts and Google-style star reviews, managed like marketing blogs.
+    """
+    class Kind(models.TextChoices):
+        LINKEDIN = 'linkedin', 'LinkedIn post'
+        GOOGLE = 'google', 'Google review'
+
+    kind = models.CharField(max_length=20, choices=Kind.choices, default=Kind.LINKEDIN)
+    name = models.CharField(
+        max_length=200,
+        blank=True,
+        help_text='Shown on Google reviews. Leave blank for a LinkedIn embed.',
+    )
+    headline = models.CharField(
+        max_length=300,
+        blank=True,
+        help_text='Role line under the name, e.g. Digital Marketer | Programmatic Advertising',
+    )
+    body = models.TextField(blank=True, help_text='Review text. Leave blank for a LinkedIn embed.')
+    rating = models.PositiveSmallIntegerField(
+        default=5,
+        help_text='Star rating for Google reviews (1–5)',
+    )
+    time_label = models.CharField(
+        max_length=80,
+        blank=True,
+        help_text='LinkedIn time line, e.g. 1y • Edited',
+    )
+    connection_label = models.CharField(
+        max_length=20,
+        blank=True,
+        default='3rd',
+        help_text='LinkedIn connection degree, e.g. 3rd',
+    )
+    hashtags = models.CharField(
+        max_length=400,
+        blank=True,
+        help_text='Space-separated tags, e.g. #NewBeginnings #Gratitude',
+    )
+    source_url = models.URLField(
+        max_length=500,
+        blank=True,
+        help_text='LinkedIn post URL (embedded on the page) or Google review URL',
+    )
+    profile_image = models.ImageField(
+        upload_to=testimonial_image_path,
+        blank=True,
+        null=True,
+        help_text='Avatar. If empty, the first letter of the name is shown.',
+    )
+    post_image = models.ImageField(
+        upload_to=testimonial_image_path,
+        blank=True,
+        null=True,
+        help_text='Optional photo inside a LinkedIn-style post',
+    )
+    is_published = models.BooleanField(default=False)
+    sort_order = models.PositiveIntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['sort_order', '-created_at']
+        verbose_name = 'Testimonial'
+        verbose_name_plural = 'Testimonials'
+
+    def __str__(self):
+        return f'{self.get_kind_display()}: {self.name}'

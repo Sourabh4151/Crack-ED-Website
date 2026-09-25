@@ -9,6 +9,7 @@ from . import views
 router = DefaultRouter()
 router.register(r'examples', views.ExampleViewSet, basename='example')
 router.register(r'blogs/admin', views.MarketingBlogAdminViewSet, basename='marketing-blog-admin')
+router.register(r'testimonials/admin', views.SiteTestimonialAdminViewSet, basename='testimonial-admin')
 router.register(r'quiz/admin/programs', views.QuizProgramAdminViewSet, basename='quiz-program-admin')
 router.register(r'quiz/admin/questions', views.QuizQuestionAdminViewSet, basename='quiz-question-admin')
 
@@ -21,6 +22,7 @@ urlpatterns = [
     path('blogs/featured/', views.blog_featured),
     path('blogs/detail/<str:lookup>/', views.blog_public_detail),
     path('blogs/upload/', views.blog_upload_image),
+    path('testimonials/', views.testimonial_published_list),
     path('', include(router.urls)),
     path('health/', views.health),
     path('jobs/', views.job_list),

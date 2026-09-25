@@ -26,6 +26,9 @@ const AdminBlogEdit = lazy(() => import('./pages/AdminBlogEdit'))
 const AdminQuiz = lazy(() => import('./pages/AdminQuiz'))
 const AdminQuizQuestionEdit = lazy(() => import('./pages/AdminQuizQuestionEdit'))
 const AdminQuizProgramEdit = lazy(() => import('./pages/AdminQuizProgramEdit'))
+const Testimonials = lazy(() => import('./pages/Testimonials'))
+const AdminTestimonials = lazy(() => import('./pages/AdminTestimonials'))
+const AdminTestimonialEdit = lazy(() => import('./pages/AdminTestimonialEdit'))
 
 const ToastContainer = lazy(() =>
   import('react-toastify').then(async (mod) => {
@@ -114,6 +117,7 @@ function App() {
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-conditions" element={<TermsConditions />} />
           <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/testimonials" element={<Testimonials />} />
           <Route path="/marketing/blogs" element={<AdminBlogs />} />
           <Route path="/marketing/blogs/new" element={<AdminBlogEdit />} />
           <Route path="/marketing/blogs/edit/:id" element={<AdminBlogEdit />} />
@@ -122,6 +126,9 @@ function App() {
           <Route path="/marketing/quiz/questions/edit/:id" element={<AdminQuizQuestionEdit />} />
           <Route path="/marketing/quiz/programs/new" element={<AdminQuizProgramEdit />} />
           <Route path="/marketing/quiz/programs/edit/:id" element={<AdminQuizProgramEdit />} />
+          <Route path="/marketing/testimonials" element={<AdminTestimonials />} />
+          <Route path="/marketing/testimonials/new" element={<AdminTestimonialEdit />} />
+          <Route path="/marketing/testimonials/edit/:id" element={<AdminTestimonialEdit />} />
         </Routes>
         </Suspense>
       </div>

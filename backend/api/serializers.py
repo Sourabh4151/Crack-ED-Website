@@ -2,7 +2,7 @@
 API serializers for REST responses.
 """
 from rest_framework import serializers
-from .models import Example, JobListing, BIDEpisode, MarketingBlog, QuizProgram, QuizQuestion, QuizOption
+from .models import Example, JobListing, BIDEpisode, MarketingBlog, QuizProgram, QuizQuestion, QuizOption, SiteTestimonial
 
 
 class ExampleSerializer(serializers.ModelSerializer):
@@ -121,6 +121,38 @@ class MarketingBlogAdminSerializer(serializers.ModelSerializer):
 
     def get_cover_image_url(self, obj):
         return _absolute_media_url(self.context.get('request'), obj.cover_image)
+
+
+class SiteTestimonialSerializer(serializers.ModelSerializer):
+    """Public and marketing-admin fields for LinkedIn and Google reviews."""
+    profile_image_url = serializers.SerializerMethodField()
+    post_image_url = serializers.SerializerMethodField()
+
+    class Meta:
+        model = SiteTestimonial
+        fields = [
+            'id', 'kind', 'name', 'headline', 'body', 'rating',
+            'time_label', 'connection_label', 'hashtags', 'source_url',
+            'profile_image', 'profile_image_url', 'post_image', 'post_image_url',
+            'is_published', 'sort_order', 'created_at', 'updated_at',
+        ]
+        read_only_fields = ['id', 'created_at', 'updated_at', 'profile_image_url', 'post_image_url']
+        extra_kwargs = {
+            'profile_image': {'required': False, 'allow_null': True},
+            'post_image': {'required': False, 'allow_null': True},
+        }
+
+    def get_profile_image_url(self, obj):
+        return _absolute_media_url(self.context.get('request'), obj.profile_image)
+
+    def get_post_image_url(self, obj):
+        return _absolute_media_url(self.context.get('request'), obj.post_image)
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data.pop('profile_image', None)
+        data.pop('post_image', None)
+        return data
 
 
 class QuizProgramSerializer(serializers.ModelSerializer):

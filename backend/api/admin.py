@@ -12,7 +12,7 @@ from django.utils.html import format_html
 from django.utils import timezone
 from .models import (
     Example, QuizSubmission, Lead, JobApplication, JobListing, BIDEpisode,
-    MarketingBlog, MarketingBlogUpload, MerittoOutboundAPILog,
+    MarketingBlog, MarketingBlogUpload, MerittoOutboundAPILog, SiteTestimonial,
     QuizProgram, QuizQuestion, QuizOption,
 )
 from .meritto_log import format_json_for_admin
@@ -381,6 +381,29 @@ class MarketingBlogAdmin(admin.ModelAdmin):
     list_filter = ['is_published', 'featured_on_resources', 'hide_from_resources']
     search_fields = ['slug', 'title', 'excerpt']
     prepopulated_fields = {'slug': ('title',)}
+
+
+@admin.register(SiteTestimonial)
+class SiteTestimonialAdmin(admin.ModelAdmin):
+    list_display = ['id', 'kind', 'name', 'is_published', 'sort_order', 'updated_at']
+    list_filter = ['kind', 'is_published']
+    search_fields = ['name', 'headline', 'body']
+    list_editable = ['is_published', 'sort_order']
+    fieldsets = (
+        (None, {
+            'fields': ('kind', 'is_published', 'sort_order'),
+            'description': (
+                'LinkedIn: paste only the post URL. Google does not load a review from a link. '
+                'For a Google review, enter the reviewer name, star rating, and the full review text.'
+            ),
+        }),
+        ('LinkedIn post', {
+            'fields': ('source_url',),
+        }),
+        ('Google review', {
+            'fields': ('name', 'rating', 'body', 'profile_image'),
+        }),
+    )
 
 
 @admin.register(MarketingBlogUpload)

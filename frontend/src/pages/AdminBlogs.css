@@ -105,6 +105,9 @@
   background: transparent;
   color: #fafafa;
   cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
 }
 
 .admin-blogs-btn:disabled {

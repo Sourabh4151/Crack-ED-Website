@@ -90,6 +90,12 @@ export const PAGE_SEO = {
       'Have questions about programs, admissions, placements, or careers? Contact the Crack-ED team and take the first step toward your career.',
     path: '/contact-us',
   },
+  testimonials: {
+    title: 'Testimonials | CRACK-ED',
+    description:
+      'Read LinkedIn posts and Google reviews from people who trained with Crack-ED and started their careers.',
+    path: '/testimonials',
+  },
   resources: {
     title: 'Blogs | CRACK-ED',
     description:
@@ -133,6 +139,17 @@ export const PAGE_SEO = {
   blogNotFound: {
     title: 'Blog Post Not Found | CRACK-ED',
     description: 'This blog post is unavailable. Browse other career resources from Crack-ED.',
+  },
+  adminTestimonials: {
+    title: 'Marketing Testimonials | CRACK-ED',
+    description: 'Internal marketing administration for Crack-ED testimonials.',
+    path: '/marketing/testimonials',
+    robots: 'noindex, nofollow',
+  },
+  adminTestimonialEdit: {
+    title: 'Edit Testimonial | CRACK-ED',
+    description: 'Internal marketing editor for Crack-ED testimonials.',
+    robots: 'noindex, nofollow',
   },
   adminBlogs: {
     title: 'Marketing Blogs | CRACK-ED',

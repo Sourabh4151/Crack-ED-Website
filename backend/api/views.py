@@ -23,6 +23,7 @@ from .utm_resolve import vendor_info_for_utm
 from .models import (
     Example, QuizSubmission, Lead, JobApplication, JobListing, BIDEpisode,
     MarketingBlog, MarketingBlogUpload, QuizProgram, QuizQuestion, QuizOption,
+    SiteTestimonial,
 )
 from .serializers import (
     ExampleSerializer,
@@ -34,6 +35,7 @@ from .serializers import (
     QuizProgramSerializer,
     QuizQuestionAdminSerializer,
     serialize_quiz_public_config,
+    SiteTestimonialSerializer,
 )
 
 
@@ -569,6 +571,28 @@ class MarketingBlogAdminViewSet(viewsets.ModelViewSet):
     """List/create/update/delete all marketing blogs (staff session required)."""
     queryset = MarketingBlog.objects.all().order_by('-updated_at')
     serializer_class = MarketingBlogAdminSerializer
+    permission_classes = [IsMarketingStaff]
+    pagination_class = None
+
+    def get_serializer_context(self):
+        ctx = super().get_serializer_context()
+        ctx['request'] = self.request
+        return ctx
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def testimonial_published_list(request):
+    """Published testimonials for /testimonials."""
+    qs = SiteTestimonial.objects.filter(is_published=True).order_by('sort_order', '-created_at')
+    ser = SiteTestimonialSerializer(qs, many=True, context={'request': request})
+    return Response(ser.data, headers=_BLOG_PUBLIC_CACHE_HEADERS)
+
+
+class SiteTestimonialAdminViewSet(viewsets.ModelViewSet):
+    """List/create/update/delete testimonials (same staff session as blogs)."""
+    queryset = SiteTestimonial.objects.all().order_by('sort_order', '-updated_at')
+    serializer_class = SiteTestimonialSerializer
     permission_classes = [IsMarketingStaff]
     pagination_class = None
 

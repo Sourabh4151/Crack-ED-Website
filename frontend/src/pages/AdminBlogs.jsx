@@ -106,7 +106,8 @@ const AdminBlogs = () => {
       <header className="admin-blogs-header">
         <h1>Marketing — Blogs</h1>
         <p className="admin-blogs-sub">
-          Also manage the <Link className="admin-blogs-link" to="/marketing/quiz">career quiz</Link>.
+          Also manage the <Link className="admin-blogs-link" to="/marketing/quiz">career quiz</Link>
+          {' '}and <Link className="admin-blogs-link" to="/marketing/testimonials">testimonials</Link>.
         </p>
       </header>
 

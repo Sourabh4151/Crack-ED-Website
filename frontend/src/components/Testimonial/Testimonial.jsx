@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
+import { Link } from 'react-router-dom'
 import AntimaMishra from '../../assets/Antima Mishra.webp'
 import PoojaMehta from '../../assets/Pooja Mehta.webp'
 import ShreyaVerma from '../../assets/Shreya_Verma.webp'
@@ -377,6 +378,9 @@ const Testimonial = () => {
               <polyline points="9 18 15 12 9 6"></polyline>
             </svg>
           </button>
+        </div>
+        <div className="testimonial-view-all">
+          <Link to="/testimonials" className="testimonial-view-all-btn">View All Testimonials</Link>
         </div>
       </div>
     </section>
