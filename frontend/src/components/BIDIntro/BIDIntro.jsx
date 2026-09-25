@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import linkedinIcon from '../../assets/linkedin.png'
 import instagramIcon from '../../assets/instagram.png'
+import youtubeIcon from '../../assets/youtube.png'
 import './BIDIntro.css'
 
 const BIDIntro = () => {
@@ -59,6 +60,14 @@ const BIDIntro = () => {
               aria-label="Follow on Instagram"
             >
               <img src={instagramIcon} alt="" className="bid-intro-social-icon" width="24" height="24" loading="lazy" decoding="async" />
+            </a>
+            <a
+              href="https://www.youtube.com/@BadhtaIndiaDekho"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Follow on YouTube"
+            >
+              <img src={youtubeIcon} alt="" className="bid-intro-social-icon" width="24" height="24" loading="lazy" decoding="async" />
             </a>
           </div>
         </div>
