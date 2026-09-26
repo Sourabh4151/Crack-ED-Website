@@ -141,9 +141,10 @@ const ProgramsList = () => {
         program: 'Hero Housing Finance Pragati Program',
         role: 'Relationship Manager',
         details: [
-          'Join as a Relationship Manager - Mortgage Sales and secure a CTC of Rs 2.75 LPA + incentives',
+          'Join as a Relationship Manager - Mortgage Sales and secure a CTC of ₹3.6 LPA* + incentives',
           '1-month program'
-        ]
+        ],
+        disclaimer: '*₹2.75 Fixed Salary + ₹ 85,000 average incentives'
       },
       {
         program: 'Rupyy AutoEdge Program',

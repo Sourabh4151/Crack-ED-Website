@@ -51,7 +51,7 @@ const PROGRAM_DETAILS = {
   'Postgraduate Certification Banking Management - Business Development Executive': { details: 'CTC of Rs 2.5 LPA + incentives', duration: '2-week program', link: 'https://pgcbm.crack-ed.com' },
   'Udaan Program - Business Loan Associate': { details: 'CTC of upto Rs 2.8 LPA', duration: '3-week program', link: 'https://udaanbusiness.crack-ed.com' },
   'Elevate Banking Program - Virtual Relationship Manager': { details: 'CTC of upto Rs 2.4 LPA', duration: '4-week program', link: 'https://elevatevrm.crack-ed.com/' },
-  'Hero Housing Finance Pragati Program - Relationship Manager': { details: 'CTC of Rs 2.75 LPA + incentives', duration: '1-month program', link: 'https://herofinancerm.crack-ed.com/' },
+  'Hero Housing Finance Pragati Program - Relationship Manager': { details: 'CTC of ₹3.6 LPA* + incentives', duration: '1-month program', link: 'https://herofinancerm.crack-ed.com/' },
   'Hero Housing Finance Pragati Program - Collection Officer': { details: 'CTC of Rs 5 LPA + incentives', duration: '1-month program', link: 'https://herofinanceco.crack-ed.com/' },
   'Hero Housing Finance Pragati Program - Credit and Operations Manager': { details: 'CTC of Rs 4 LPA + incentives', duration: '1-month program', link: 'https://herofinancecom.crack-ed.com/' },
   'Rupyy AutoEdge Program - Business Manager': { details: 'CTC of Rs 3 LPA + incentives', duration: '1-month program', link: 'https://rupyybm.crack-ed.com/' },
