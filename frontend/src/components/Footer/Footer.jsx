@@ -141,6 +141,14 @@ const PROGRAMS = [
       { label: 'Retail Sales Associate', href: 'https://lenskartrsa.crack-ed.com/portal' },
     ],
   },
+  {
+    id: 'edtech',
+    name: 'EdTech Launchpad Program',
+    link: '/programs',
+    links: [
+      { label: 'Academic Counsellor', href: 'https://edtechse.crack-ed.com/' },
+    ],
+  },
 ]
 
 const Footer = () => {

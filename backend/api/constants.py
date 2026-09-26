@@ -85,6 +85,8 @@ PROGRAM_TO_CENTER = {
     'Banking Sales Program - Business Development Executive': 'IndusInd',
     'Elevate Banking Program - Virtual Relationship Manager': 'Axis - VRM',
     'Samriddhi Program - Field Executive': 'Axis-MRL',
+    'EdTech Launchpad Program': 'EdTech Launchpad Program',
+    'EdTech Launchpad Program - Academic Counsellor': 'EdTech Launchpad Program',
 }
 
 # For dropdown: (value, label) with empty option

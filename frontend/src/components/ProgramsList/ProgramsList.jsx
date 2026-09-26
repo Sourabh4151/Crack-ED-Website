@@ -12,11 +12,12 @@ import kotakSmallLogo from '../../assets/kotak_small_logo.png'
 import kotakSmallBankLogo from '../../assets/kotak_small_bank.svg'
 import heroSmallLogo from '../../assets/hero_small_logo.png'
 import rupyySmallLogo from '../../assets/rupyy_small_logo.png'
+import vedantuSmallLogo from '../../assets/Vedantu_small_logo.svg'
 import { trackMicrositeClick, markProgramsPageVisited } from '../../utils/analytics'
 import { appendUtmToUrl } from '../../services/crmService'
 import './ProgramsList.css'
 
-const PROGRAM_CATEGORIES = ['Entrepreneurship', 'Banking', 'NBFC', 'Insurance', 'Retail']
+const PROGRAM_CATEGORIES = ['Entrepreneurship', 'Banking', 'NBFC', 'Insurance', 'Retail', 'EdTech']
 const PROGRAM_TABS = ['All', ...PROGRAM_CATEGORIES]
 
 const ProgramsList = () => {
@@ -208,6 +209,16 @@ const ProgramsList = () => {
           '3-month program'
         ]
       }
+    ],
+    EdTech: [
+      {
+        program: 'EdTech Launchpad Program',
+        role: 'Academic Counsellor',
+        details: [
+          'Join as an Academic Counsellor with a CTC of ₹4 LPA + Incentives',
+          '4-months program'
+        ]
+      }
     ]
   }
 
@@ -284,6 +295,13 @@ const ProgramsList = () => {
       }
     }
 
+    if (category === 'EdTech') {
+      if (program === 'EdTech Launchpad Program' && role === 'Academic Counsellor') {
+        return 'https://edtechse.crack-ed.com/'
+      }
+      return null
+    }
+
     return null
   }
 
@@ -325,6 +343,7 @@ const ProgramsList = () => {
     }
     if (category === 'NBFC') return <img src={piramalLogo} alt="Piramal" width="80" height="40" loading="lazy" decoding="async" className="program-logo-img program-logo-piramal" />
     if (category === 'Insurance') return <img src={avivaLogoSmallCard} alt="Aviva" width="80" height="40" loading="lazy" decoding="async" className="program-logo-img program-logo-aviva" />
+    if (category === 'EdTech') return <img src={vedantuSmallLogo} alt="Vedantu" width="48" height="48" loading="lazy" decoding="async" className="program-logo-img program-logo-vedantu" />
     return null
   }
 
@@ -337,6 +356,7 @@ const ProgramsList = () => {
 
   const getAllProgramsInOrder = () => [
     ...withCategory('Entrepreneurship', programs.Entrepreneurship),
+    ...withCategory('EdTech', programs.EdTech),
     ...withCategory('Banking', programs.Banking.filter((item) => item.program === 'Kotak Gold Excellence Program')),
     ...withCategory('NBFC', programs.NBFC.slice(0, 5)),
     ...withCategory('Banking', programs.Banking.filter((item) => item.program !== 'Kotak Gold Excellence Program')),

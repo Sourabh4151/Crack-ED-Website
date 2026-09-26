@@ -16,6 +16,7 @@ import mahindraLogo from '../../assets/mahindra_finance_greyscale.png'
 import kotakLogoGreyscale from '../../assets/kotak_greyscale.png'
 import heroLogoGreyscale from '../../assets/greyscale_hero.png'
 import rupyyLogo from '../../assets/rupyy_greyscale_logo.png'
+import vedantuLogoCarousel from '../../assets/Vedantu_logo_carousel.svg'
 import './LogoCarousel.css'
 
 const LogoCarousel = () => {
@@ -26,6 +27,7 @@ const LogoCarousel = () => {
     { name: 'Piramal Finance', image: piramalLogoGreyscale, noFilter: true },
     { name: 'Hero Housing Finance', image: heroLogoGreyscale, noFilter: true },
     { name: 'Testbook', image: LAPDP3Qlogos },
+    { name: 'Vedantu', image: vedantuLogoCarousel, noFilter: true },
     { name: 'InsuranceDekho', image: InsuranceDekho },
     { name: 'Greenfinch Global Consulting', image: greenfinchLogo, noFilter: true },
     { name: 'Niva Bupa Health Insurance', image: nivabupaLogo, noFilter: true },

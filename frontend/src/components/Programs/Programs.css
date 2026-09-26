@@ -404,6 +404,12 @@ image.png.programs-section .program-details a,
   max-width: min(180px, 55vw);
 }
 
+.programs-section .program-logo-above--vedantu img {
+  width: 131px;
+  height: 44px;
+  object-fit: contain;
+}
+
 /* Mobile banner - logo above content without pushing it down */
 .program-banner-with-logo {
   position: relative;
@@ -1168,6 +1174,13 @@ image.png.programs-section .program-details a,
     object-fit: contain;
   }
 
+  .mobile-program-card-logo--vedantu img {
+    height: 36px;
+    width: auto;
+    max-width: 131px;
+    object-fit: contain;
+  }
+
   /* Pull Mahindra logo closer to the program label on mobile */
   .mobile-program-card-logo.mobile-program-card-logo--mahindra {
     margin-bottom: 0;
@@ -1186,6 +1199,12 @@ image.png.programs-section .program-details a,
   .program-logo-above--kotak-bank img {
     width: 140px;
     max-width: 55vw;
+  }
+
+  .programs-section .program-logo-above--vedantu img {
+    width: 110px;
+    height: auto;
+    max-height: 44px;
   }
 
   /* Mahindra Finance logo larger on small viewports where panel still shows */

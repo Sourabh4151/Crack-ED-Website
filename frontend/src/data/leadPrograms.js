@@ -4,6 +4,7 @@ export const LEAD_PROGRAMS = [
   'Aviva Nirmaan Program - Direct Sales Executive',
   'Bandhan Bank Aspiring Bank Champions Programme - Assistant Manager',
   'Banking Sales Program - Business Development Executive',
+  'EdTech Launchpad Program - Academic Counsellor',
   'Hero Housing Finance Pragati Program - Credit and Operations Manager',
   'Hero Housing Finance Pragati Program - Relationship Manager',
   'House of Founder Fellowship',

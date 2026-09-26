@@ -81,6 +81,18 @@ const PROGRAM_CATEGORIES = [
       },
     ],
   },
+  {
+    id: 'edtech',
+    label: 'EdTech',
+    items: [
+      {
+        label: 'EdTech Launchpad Program',
+        children: [
+          { label: 'Academic Counsellor', href: 'https://edtechse.crack-ed.com/' },
+        ],
+      },
+    ],
+  },
 ]
 
 const Header = () => {

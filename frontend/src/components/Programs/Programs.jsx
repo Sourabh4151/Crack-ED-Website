@@ -31,6 +31,9 @@ import heroSmallLogo from '../../assets/hero_small_logo.png'
 import houseOfFoundersImage from '../../assets/Enter.webp'
 import bandhanBankLogo from '../../assets/bandhan_bank_logo.webp'
 import bandhanMiniLogo from '../../assets/animation_bandhan_logo.svg'
+import edtechLargeImage from '../../assets/Edtech_larg.png'
+import vedantuSmallLogo from '../../assets/Vedantu_small_logo.svg'
+import vedantuHomeLogo from '../../assets/vedantu-logo 1.svg'
 import { trackMicrositeClick } from '../../utils/analytics'
 import { appendUtmToUrl } from '../../services/crmService'
 import NorthEastIcon from '../icons/NorthEastIcon'
@@ -61,6 +64,7 @@ const getProgramHomeLogo = (programLabel) => {
     case 'Kotak Gold Excellence Program': return { src: kotakBankLogo, alt: 'Kotak Bank' }
     case 'Housing Finance Pragati Program': return { src: heroLogo, alt: 'Hero Housing Finance' }
     case 'Bandhan Bank Aspiring Bank Champions Programme': return { src: bandhanBankLogo, alt: 'Bandhan Bank' }
+    case 'EdTech Launchpad Program': return { src: vedantuHomeLogo, alt: 'Vedantu' }
     case 'Postgraduate Program in Banking Management': return null
     case 'Banking Sales Program':
     case 'Banking Sales Program - Business Development Executive': return null
@@ -88,60 +92,66 @@ const Programs = () => {
     },
     {
       id: 2,
+      logo: vedantuSmallLogo,
+      title: 'EdTech Launchpad Program',
+      url: 'https://edtechse.crack-ed.com/',
+    },
+    {
+      id: 3,
       logo: kotakSmallBankLogo,
       title: 'Kotak Gold Excellence Program - Gold Loan Relationship Officer',
       url: 'https://kotakmahindraro.crack-ed.com/',
     },
     {
-      id: 3,
+      id: 4,
       logo: heroSmallLogo,
       title: 'Housing Finance Pragati Program - Relationship Manager',
       url: 'https://herofinancerm.crack-ed.com/',
     },
     {
-      id: 4,
+      id: 5,
       logo: heroSmallLogo,
       title: 'Housing Finance Pragati Program - Credit and Operations Manager',
       url: 'https://herofinancecom.crack-ed.com/',
     },
     {
-      id: 5,
+      id: 6,
       logo: bandhanMiniLogo,
       title: 'Bandhan Bank Aspiring Bank Champions Programme - Assistant Manager',
       url: 'https://bandhanbankassistantmanager.crack-ed.com/',
     },
     {
-      id: 6,
+      id: 7,
       logo: udaanCardLogo,
       title: 'Banking Sales Program - Business Development Executive',
       url: 'https://bspso.crack-ed.com',
     },
     {
-      id: 7,
+      id: 8,
       logo: udaanCardLogo,
       title: 'Samriddhi Program - Field Executive',
       url: 'https://axisquessfse.crack-ed.com/',
     },
     {
-      id: 8,
+      id: 9,
       logo: mahindraFinanceSmallLogo,
       title: 'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)',
       url: 'https://mahindrafinancebe.crack-ed.com/',
     },
     {
-      id: 9,
+      id: 10,
       logo: piramalCardLogo,
       title: 'Piramal ProEdge Program - Relationship Manager',
       url: 'https://piramal.crack-ed.com/portal',
     },
     {
-      id: 10,
+      id: 11,
       logo: avivaSmallLogo,
       title: 'Aviva Nirmaan Program - Direct Sales Executive',
       url: 'https://avivads.crack-ed.com',
     },
     {
-      id: 11,
+      id: 12,
       logo: avivaSmallLogo,
       title: 'Aviva Nirmaan Program - Agency Sales Executive',
       url: 'https://avivaas.crack-ed.com',
@@ -167,6 +177,14 @@ const Programs = () => {
     }
 
     const newProgramsMap = {
+      'EdTech Launchpad Program': {
+        programLabel: 'EdTech Launchpad Program',
+        roleTitle: 'Academic Counsellor',
+        logo: vedantuSmallLogo,
+        details: 'Join as an Academic Counsellor with a CTC of ₹4 LPA + Incentives',
+        duration: '4-months program',
+        image: edtechLargeImage,
+      },
       'House of Founders Fellowship': {
         programLabel: 'Entrepreneurship & Venture Creation',
         logo: null,
@@ -257,7 +275,7 @@ const Programs = () => {
         logo: prog.logo,
         programLabel: prog.programLabel,
         shortProgramLabel: prog.shortProgramLabel,
-        title: card.title,
+        title: prog.roleTitle ?? card.title,
         details: prog.details,
         duration: prog.duration,
         disclaimer: prog.disclaimer,
@@ -293,6 +311,7 @@ const Programs = () => {
 
   // Short label for small/mini program cards (PGP only)
   const getSmallCardTitle = (card) => {
+    if (card.title === 'EdTech Launchpad Program') return 'EdTech Launchpad - Academic Counsellor'
     if (card.title === 'Bandhan Bank Aspiring Bank Champions Programme - Assistant Manager') return 'Bandhan Bank Aspiring Bank Champions - Assistant Manager'
     if (card.title === 'Banking Sales Program - Business Development Executive') return 'Banking Sales - Business Development Executive'
     if (card.title === 'Housing Finance Pragati Program - Relationship Manager') return 'Housing Finance Pragati - Relationship Manager'
@@ -441,8 +460,9 @@ const Programs = () => {
                               const isMahindra = logoInfo.alt === 'Mahindra Finance'
                               const isBandhan = logoInfo.alt === 'Bandhan Bank'
                               const isKotakBank = logoInfo.alt === 'Kotak Bank'
+                              const isVedantu = logoInfo.alt === 'Vedantu'
                               return (
-                                <div className={`mobile-program-card-logo${isAviva ? ' mobile-program-card-logo--aviva' : ''}${isMahindra ? ' mobile-program-card-logo--mahindra' : ''}${isBandhan ? ' mobile-program-card-logo--bandhan' : ''}${isKotakBank ? ' mobile-program-card-logo--kotak-bank' : ''}`}>
+                                <div className={`mobile-program-card-logo${isAviva ? ' mobile-program-card-logo--aviva' : ''}${isMahindra ? ' mobile-program-card-logo--mahindra' : ''}${isBandhan ? ' mobile-program-card-logo--bandhan' : ''}${isKotakBank ? ' mobile-program-card-logo--kotak-bank' : ''}${isVedantu ? ' mobile-program-card-logo--vedantu' : ''}`}>
                                   <img src={logoInfo.src} alt={logoInfo.alt} width="160" height="28" loading="lazy" decoding="async" />
                                 </div>
                               )
@@ -534,8 +554,9 @@ const Programs = () => {
                         const isMahindra = logoInfo.alt === 'Mahindra Finance'
                         const isBandhan = logoInfo.alt === 'Bandhan Bank'
                         const isKotakBank = logoInfo.alt === 'Kotak Bank'
+                        const isVedantu = logoInfo.alt === 'Vedantu'
                         return (
-                          <div className={`program-logo-above${isMahindra ? ' program-logo-above--mahindra' : ''}${isBandhan ? ' program-logo-above--bandhan' : ''}${isKotakBank ? ' program-logo-above--kotak-bank' : ''}`}>
+                          <div className={`program-logo-above${isMahindra ? ' program-logo-above--mahindra' : ''}${isBandhan ? ' program-logo-above--bandhan' : ''}${isKotakBank ? ' program-logo-above--kotak-bank' : ''}${isVedantu ? ' program-logo-above--vedantu' : ''}`}>
                             <img src={logoInfo.src} alt={logoInfo.alt} width="180" height="40" decoding="async" />
                           </div>
                         )

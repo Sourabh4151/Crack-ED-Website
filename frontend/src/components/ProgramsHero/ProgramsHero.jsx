@@ -46,6 +46,8 @@ const ProgramsHero = () => {
             </button>
           </div>
         </div>
+      </div>
+      <div className="programs-hero-logo-wrap">
         <LogoCarousel />
       </div>
       <EnquireModal isOpen={isModalOpen} onClose={handleCloseModal} />

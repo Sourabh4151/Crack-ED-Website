@@ -56,6 +56,8 @@ const PROGRAM_TO_CF_PROGRAM_MAP = {
   'Banking Sales Program - Business Development Executive': 'IndusInd',
   'Elevate Banking Program - Virtual Relationship Manager': 'Axis - VRM',
   'Samriddhi Program - Field Executive': 'Axis-MRL',
+  'EdTech Launchpad Program': 'EdTech Launchpad Program',
+  'EdTech Launchpad Program - Academic Counsellor': 'EdTech Launchpad Program',
 }
 
 /** Fixed NoPaperForms cf_batch_name for all website lead submissions */

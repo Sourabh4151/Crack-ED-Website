@@ -73,6 +73,22 @@
   justify-content: center;
 }
 
+.programs-hero-logo-wrap {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  height: 100px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.programs-hero-logo-wrap > * {
+  position: relative;
+  height: 100%;
+}
+
 .programs-hero-container {
   max-width: 1440px;
   width: 100%;
@@ -197,7 +213,7 @@
 @media (max-width: 768px) {
   .programs-hero {
     height: auto;
-    min-height: 550px;
+    min-height: 620px;
     padding-top: 160px; /* move overall content further down on mobile */
   }
 
@@ -251,11 +267,15 @@
     margin: 0 auto;
     width: fit-content;
   }
+
+  .programs-hero-logo-wrap {
+    height: 80px;
+  }
 }
 
 @media (max-width: 480px) {
   .programs-hero {
-    min-height: 500px;
+    min-height: 560px;
     padding-top: 120px; /* move content further down on very small screens */
   }
 
@@ -293,5 +313,9 @@
     font-size: 13px;
     width: 100%;
     max-width: 200px;
+  }
+
+  .programs-hero-logo-wrap {
+    height: 70px;
   }
 }

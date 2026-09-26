@@ -272,6 +272,12 @@
   object-fit: contain;
 }
 
+.programs-list .program-card-icon .program-logo-vedantu {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
 .programs-list .program-card-content {
   display: flex;
   flex-direction: column;
