@@ -77,7 +77,11 @@
   border-radius: 16px;
   box-shadow: none;
   overflow: hidden;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  height: 320px;
+  box-sizing: border-box;
+  padding-bottom: 18px;
   color: inherit;
   text-decoration: none;
   cursor: pointer;
@@ -200,8 +204,31 @@ a.testimonials-g-card:hover {
   height: 18px;
 }
 
-.testimonials-g-card {
-  padding-bottom: 18px;
+.testimonials-g-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(250, 250, 250, 0.28) transparent;
+  padding-right: 8px;
+}
+
+.testimonials-g-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.testimonials-g-body::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 4px 0;
+}
+
+.testimonials-g-body::-webkit-scrollbar-thumb {
+  background: rgba(250, 250, 250, 0.22);
+  border-radius: 100px;
+}
+
+.testimonials-g-body::-webkit-scrollbar-thumb:hover {
+  background: #1a9eb7;
 }
 
 .testimonials-g-name {
