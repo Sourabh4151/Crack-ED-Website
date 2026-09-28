@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import logoImage from '../../assets/crack-ed_logo.webp'
+import logoImage from '../../assets/crack-ed_new_logo.svg'
 import { appendUtmToUrl } from '../../services/crmService'
 import './Header.css'
 
