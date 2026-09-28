@@ -62,6 +62,16 @@ function Avatar ({ item }) {
   )
 }
 
+function linkedInPublishedAt (postUrl) {
+  const match = String(postUrl || '').match(/(?:activity|ugcPost|share|urn:li:(?:activity|share|ugcPost))[:-](\d{8,})/)
+  if (!match) return 0
+  try {
+    return Number(BigInt(match[1]) >> 22n)
+  } catch {
+    return 0
+  }
+}
+
 function linkedInEmbedSrc (postUrl) {
   const raw = (postUrl || '').trim()
   if (!raw) return ''
@@ -186,7 +196,14 @@ const Testimonials = () => {
     }
   }, [])
 
-  const linkedin = items.filter((item) => item.kind === 'linkedin')
+  const linkedin = items
+    .filter((item) => item.kind === 'linkedin')
+    .slice()
+    .sort((a, b) => {
+      const byDate = linkedInPublishedAt(b.source_url) - linkedInPublishedAt(a.source_url)
+      if (byDate) return byDate
+      return new Date(b.created_at || 0) - new Date(a.created_at || 0)
+    })
   const google = items.filter((item) => item.kind === 'google')
 
   return (
