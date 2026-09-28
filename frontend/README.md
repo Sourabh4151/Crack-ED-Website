@@ -52,7 +52,7 @@ WEBSITE_CRACK-ED/
 
 ### Header Component
 - Fixed navigation bar with logo
-- Menu items: About Us, Programs (with dropdown), Resources, Badhta India Dekho, Careers
+- Menu items: About Us, All Programs (with dropdown), Blogs, BID Podcast, Work With Us (Channel Partner and Job Postings), Contact Us
 - Responsive design with hover effects
 
 ### Hero Component

@@ -181,7 +181,12 @@ const Footer = () => {
                 <li><Link to="/resources">Blogs</Link></li>
                 <li><Link to="/testimonials">Testimonials</Link></li>
                 <li><Link to="/badhta-india-dekho">BID Podcast</Link></li>
-                <li><Link to="/careers">Careers</Link></li>
+                <li>
+                  <a href={appendUtmToUrl('https://ncppartner.crack-ed.com/')} target="_blank" rel="noopener noreferrer">
+                    Channel Partner
+                  </a>
+                </li>
+                <li><Link to="/careers">Job Postings</Link></li>
                 <li><Link to="/contact-us">Contact Us</Link></li>
               </ul>
             </div>

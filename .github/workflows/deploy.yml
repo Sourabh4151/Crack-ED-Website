@@ -71,7 +71,16 @@ jobs:
             sudo systemctl restart crack-ed-backend
 
             echo "Waiting for backend..."
-            sleep 5
+
+            for i in {1..30}; do
+                if sudo systemctl is-active --quiet crack-ed-backend && ss -lnt | grep -q ':9001'; then
+                    echo "Backend is running and port 9001 is available."
+                    break
+                fi
+
+                echo "Backend not ready yet... attempt $i/30"
+                sleep 2
+            done
 
             echo "Checking backend service..."
             sudo systemctl is-active --quiet crack-ed-backend

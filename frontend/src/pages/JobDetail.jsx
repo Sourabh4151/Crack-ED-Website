@@ -9,7 +9,7 @@ import { PAGE_SEO } from '../seo/site'
 
 const JOB_BREADCRUMBS_BASE = [
   { name: 'Home', path: '/' },
-  { name: 'Careers', path: '/careers' },
+  { name: 'Job Postings', path: '/careers' },
 ]
 
 const JobDetail = () => {
@@ -253,7 +253,7 @@ const JobDetail = () => {
   return (
     <div className="job-detail-page">
       <SEO
-        title={`${job.title} | Careers | CRACK-ED`}
+        title={`${job.title} | Job Postings | CRACK-ED`}
         description={(description.roleOverview || description.aboutUs || PAGE_SEO.jobFallback.description).replace(/\s+/g, ' ').trim().slice(0, 160)}
         path={`/careers/job/${id}`}
         breadcrumbs={[...JOB_BREADCRUMBS_BASE, { name: job.title, path: `/careers/job/${id}` }]}

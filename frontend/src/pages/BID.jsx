@@ -19,7 +19,7 @@ const BID = () => {
         path={PAGE_SEO.bid.path}
         breadcrumbs={[
           { name: 'Home', path: '/' },
-          { name: 'Badhta India Dekho', path: '/badhta-india-dekho' },
+          { name: 'BID Podcast', path: '/badhta-india-dekho' },
         ]}
       />
       <Header />

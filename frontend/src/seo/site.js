@@ -79,7 +79,7 @@ export const PAGE_SEO = {
     path: '/programs',
   },
   careers: {
-    title: 'Careers | CRACK-ED',
+    title: 'Job Postings | CRACK-ED',
     description:
       "Join Crack-ED and help change how the world learns. Explore open roles and bring your ideas to a team shaping tomorrow's future.",
     path: '/careers',
@@ -103,9 +103,9 @@ export const PAGE_SEO = {
     path: '/resources',
   },
   bid: {
-    title: 'Badhta India Dekho | CRACK-ED',
+    title: 'BID Podcast | CRACK-ED',
     description:
-      "Badhta India Dekho is a Crack-ED and CarDekho Group podcast on the grit and growth of Bharat's entrepreneurs. Watch the latest episodes.",
+      "BID Podcast is a Crack-ED and CarDekho Group podcast on the grit and growth of Bharat's entrepreneurs. Watch the latest episodes.",
     path: '/badhta-india-dekho',
   },
   influencer: {

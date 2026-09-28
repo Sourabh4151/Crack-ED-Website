@@ -95,13 +95,19 @@ const PROGRAM_CATEGORIES = [
   },
 ]
 
+const CHANNEL_PARTNER_URL = 'https://ncppartner.crack-ed.com/'
+
 const Header = () => {
   const location = useLocation()
   const [isProgramsOpen, setIsProgramsOpen] = useState(false)
+  const [isWorkOpen, setIsWorkOpen] = useState(false)
   const [expandedCategories, setExpandedCategories] = useState([])
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const closeTimeoutRef = useRef(null)
+  const workCloseTimeoutRef = useRef(null)
+  const isWorkActive = location.pathname === '/careers' || location.pathname.startsWith('/careers/')
+  const isBidActive = location.pathname === '/badhta-india-dekho'
 
   const scrollThreshold = 50
 
@@ -132,6 +138,13 @@ const Header = () => {
     }
   }
 
+  const clearWorkCloseTimeout = () => {
+    if (workCloseTimeoutRef.current) {
+      clearTimeout(workCloseTimeoutRef.current)
+      workCloseTimeoutRef.current = null
+    }
+  }
+
   useEffect(() => {
     const scrollTarget = getScrollTarget()
     const target = scrollTarget || window
@@ -152,6 +165,7 @@ setIsScrolled(prev => {
     return () => {
       target.removeEventListener('scroll', handleScroll)
       clearCloseTimeout()
+      clearWorkCloseTimeout()
     }
   }, [location.pathname])
 
@@ -167,6 +181,7 @@ setIsScrolled(prev => {
       if (mq.matches && isMobileMenuOpen) {
         setIsMobileMenuOpen(false)
         setIsProgramsOpen(false)
+        setIsWorkOpen(false)
       }
     }
 
@@ -200,12 +215,14 @@ setIsScrolled(prev => {
     setIsMobileMenuOpen(!isMobileMenuOpen)
     if (!isMobileMenuOpen) {
       setIsProgramsOpen(false)
+      setIsWorkOpen(false)
     }
   }
 
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false)
     setIsProgramsOpen(false)
+    setIsWorkOpen(false)
   }
 
   const handleProgramsNavClick = (e) => {
@@ -216,7 +233,17 @@ setIsScrolled(prev => {
     }
     e.preventDefault()
     clearCloseTimeout()
+    clearWorkCloseTimeout()
+    setIsWorkOpen(false)
     setIsProgramsOpen((open) => !open)
+  }
+
+  const handleWorkNavClick = (e) => {
+    e.preventDefault()
+    clearCloseTimeout()
+    clearWorkCloseTimeout()
+    setIsProgramsOpen(false)
+    setIsWorkOpen((open) => !open)
   }
 
   /** Accordion: only one category open at a time. */
@@ -289,6 +316,8 @@ setIsScrolled(prev => {
               onMouseEnter={() => {
                 if (window.innerWidth > 768) {
                   clearCloseTimeout()
+                  clearWorkCloseTimeout()
+                  setIsWorkOpen(false)
                   setIsProgramsOpen(true)
                 }
               }}
@@ -317,6 +346,8 @@ setIsScrolled(prev => {
                   onMouseEnter={() => {
                     if (window.innerWidth > 768) {
                       clearCloseTimeout()
+                      clearWorkCloseTimeout()
+                      setIsWorkOpen(false)
                       setIsProgramsOpen(true)
                     }
                   }}
@@ -380,12 +411,74 @@ setIsScrolled(prev => {
               <Link to="/resources" className="nav-link" onClick={closeMobileMenu}>Blogs</Link>
             </li>
             <li className="nav-item">
-              <Link to="/badhta-india-dekho" className="nav-link" onClick={closeMobileMenu}>
-                Badhta India Dekho
+              <Link
+                to="/badhta-india-dekho"
+                className={`nav-link ${isBidActive ? 'nav-link--active' : ''}`}
+                onClick={closeMobileMenu}
+              >
+                BID Podcast
               </Link>
             </li>
-            <li className="nav-item">
-              <Link to="/careers" className="nav-link" onClick={closeMobileMenu}>Careers</Link>
+            <li
+              className={`nav-item nav-item-dropdown nav-item-work ${isWorkOpen ? 'active' : ''}`}
+              onMouseEnter={() => {
+                if (window.innerWidth > 768) {
+                  clearWorkCloseTimeout()
+                  clearCloseTimeout()
+                  setIsProgramsOpen(false)
+                  setIsWorkOpen(true)
+                }
+              }}
+              onMouseLeave={() => {
+                if (window.innerWidth > 768) {
+                  workCloseTimeoutRef.current = setTimeout(() => {
+                    setIsWorkOpen(false)
+                  }, 280)
+                }
+              }}
+            >
+              <button
+                type="button"
+                className={`nav-link ${isWorkActive ? 'nav-link--active' : ''}`}
+                onClick={handleWorkNavClick}
+                aria-expanded={isWorkOpen}
+                aria-haspopup="true"
+              >
+                Work With Us
+                <svg className="dropdown-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                  <path d="M4 6L8 10L12 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </button>
+              {isWorkOpen && (
+                <div
+                  className="dropdown-menu work-dropdown-menu"
+                  onMouseEnter={() => {
+                    if (window.innerWidth > 768) {
+                      clearWorkCloseTimeout()
+                      setIsWorkOpen(true)
+                    }
+                  }}
+                  onMouseLeave={() => {
+                    if (window.innerWidth > 768) {
+                      workCloseTimeoutRef.current = setTimeout(() => {
+                        setIsWorkOpen(false)
+                      }, 280)
+                    }
+                  }}
+                >
+                  <a
+                    href={appendUtmToUrl(CHANNEL_PARTNER_URL)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={closeMobileMenu}
+                  >
+                    Channel Partner
+                  </a>
+                  <Link to="/careers" onClick={closeMobileMenu}>
+                    Job Postings
+                  </Link>
+                </div>
+              )}
             </li>
             <li className="nav-item">
               <Link

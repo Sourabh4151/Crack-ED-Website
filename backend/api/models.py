@@ -48,7 +48,7 @@ class QuizSubmission(models.Model):
 
 
 class JobListing(models.Model):
-    """Job opening managed from Django admin; shown on careers/job/:id."""
+    """Job opening managed from Django admin; shown on the Job Postings page (/careers/job/:id)."""
     title = models.CharField(max_length=255)
     job_type = models.CharField(max_length=50, default='FULL TIME')  # FULL TIME, PART TIME, etc.
     work_mode = models.CharField(max_length=50, default='WORK FROM OFFICE')  # WORK FROM OFFICE, WORK FROM HOME
@@ -61,7 +61,7 @@ class JobListing(models.Model):
         blank=True,
         help_text='List of {"title": "...", "description": "..."}'
     )
-    is_published = models.BooleanField(default=True, help_text='Uncheck to hide from careers page')
+    is_published = models.BooleanField(default=True, help_text='Uncheck to hide from the Job Postings page')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -120,7 +120,7 @@ def job_application_resume_path(instance, filename):
 
 
 class JobApplication(models.Model):
-    """Apply For This Role form submissions (careers/job/:id)."""
+    """Apply For This Role form submissions (Job Postings, /careers/job/:id)."""
     full_name = models.CharField(max_length=255)
     mobile = models.CharField(max_length=20)
     email = models.EmailField()
@@ -168,7 +168,7 @@ def bid_episode_thumbnail_path(instance, filename):
 
 
 class BIDEpisode(models.Model):
-    """Badhta India Dekho featured episode (bigLeft slot). Managed from Django admin."""
+    """BID Podcast featured episode (bigLeft slot). Managed from Django admin."""
     title = models.CharField(max_length=500)
     published_date = models.DateField(help_text='Date shown on the episode card (e.g. January 25, 2026)')
     youtube_url = models.URLField(max_length=500, help_text='Full YouTube watch URL (e.g. https://www.youtube.com/watch?v=...)')

@@ -5,13 +5,13 @@ Used for admin dropdown and auto-fill of center.
 
 # Fixed NoPaperForms cf_batch_name for all website lead submissions
 CF_BATCH_NAME = 'Select Batch Name'
-# Source page path -> short label for CRM attribution (e.g. /badhta-india-dekho -> BID)
+# Source page path -> short label for CRM attribution (e.g. /badhta-india-dekho -> BID Podcast)
 SOURCE_PAGE_TO_LABEL = {
     '/': 'Home',
     '/about': 'About',
     '/programs': 'Programs',
-    '/careers': 'Careers',
-    '/badhta-india-dekho': 'BID',
+    '/careers': 'Job Postings',
+    '/badhta-india-dekho': 'BID Podcast',
     '/resources': 'Blogs',
     '/influencer': 'Influencer',
     '/refund-policy': 'Refund Policy',

@@ -65,6 +65,7 @@
   list-style: none;
   gap: 2rem;
   align-items: center;
+  flex-wrap: nowrap;
 }
 
 .nav-item {
@@ -101,6 +102,10 @@
   align-items: center;
   gap: 0.3rem;
   cursor: pointer;
+  white-space: nowrap;
+  background: none;
+  border: none;
+  padding: 0;
 }
 
 .nav-link:hover {
@@ -369,6 +374,55 @@
   color: #00d4ff;
 }
 
+/* Work With Us: two links, same hover menu as All Programs */
+.dropdown-menu.work-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 0;
+  padding: 10px 0 0;
+  min-width: 196px;
+  background: transparent;
+  z-index: 1002;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  animation: fadeIn 0.3s ease;
+}
+
+.dropdown-menu.work-dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: 0;
+  right: 0;
+  height: 12px;
+  background: transparent;
+  pointer-events: auto;
+}
+
+.work-dropdown-menu a {
+  display: block;
+  background: #ffffff;
+  color: #111111;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  text-align: center;
+  padding: 12px 18px;
+  border-radius: 20px;
+  white-space: nowrap;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.16);
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.work-dropdown-menu a:hover {
+  color: #0099b8;
+  background: #ffffff;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -426,6 +480,47 @@
   transform: rotate(-45deg) translate(8px, -8px);
 }
 
+@media (max-width: 1280px) and (min-width: 769px) {
+  .header-container,
+  .header.scrolled .header-container {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  .logo-icon {
+    width: 150px;
+    height: auto;
+  }
+
+  .nav-list {
+    gap: 1.1rem;
+  }
+
+  .nav-link {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .header-container,
+  .header.scrolled .header-container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .logo-icon {
+    width: 128px;
+  }
+
+  .nav-list {
+    gap: 0.75rem;
+  }
+
+  .nav-link {
+    font-size: 13px;
+  }
+}
+
 /* Mobile Menu Styles */
 @media (max-width: 768px) {
   .header-container {
@@ -441,6 +536,10 @@
   /* Hide main Programs chevron on mobile (we navigate instead of dropdown) */
   .nav-item-dropdown .dropdown-arrow {
     display: none;
+  }
+
+  .nav-item-work .dropdown-arrow {
+    display: inline-block;
   }
 
   .nav {
@@ -485,6 +584,24 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+
+  .nav .dropdown-menu.work-dropdown-menu {
+    position: static;
+    min-width: 0;
+    width: 100%;
+    margin: 0 0 12px;
+    padding: 0 0 8px;
+    gap: 8px;
+  }
+
+  .nav .dropdown-menu.work-dropdown-menu::before {
+    display: none;
+  }
+
+  .work-dropdown-menu a {
+    text-align: left;
+    border-radius: 12px;
   }
 
   .logo-icon {

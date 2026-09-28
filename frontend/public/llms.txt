@@ -7,10 +7,11 @@ CRACK-ED helps learners upskill and get hired through job-linked programs.
 - [Home](https://crack-ed.com/)
 - [About Us](https://crack-ed.com/about)
 - [All Programs](https://crack-ed.com/programs)
-- [Careers](https://crack-ed.com/careers)
+- [Job Postings](https://crack-ed.com/careers)
+- [Channel Partner](https://ncppartner.crack-ed.com/)
 - [Blogs](https://crack-ed.com/resources)
 - [Testimonials](https://crack-ed.com/testimonials): LinkedIn posts and Google reviews from Crack-ED learners and alumni.
-- [Badhta India Dekho](https://crack-ed.com/badhta-india-dekho)
+- [BID Podcast](https://crack-ed.com/badhta-india-dekho)
 - [Contact Us](https://crack-ed.com/contact-us)
 - [Refund Policy](https://crack-ed.com/refund-policy)
 - [Privacy Policy](https://crack-ed.com/privacy-policy)

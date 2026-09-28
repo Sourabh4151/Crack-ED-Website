@@ -18,7 +18,7 @@ const Careers = () => {
         path={PAGE_SEO.careers.path}
         breadcrumbs={[
           { name: 'Home', path: '/' },
-          { name: 'Careers', path: '/careers' },
+          { name: 'Job Postings', path: '/careers' },
         ]}
       />
       <Header />
