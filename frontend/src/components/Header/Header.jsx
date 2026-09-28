@@ -466,17 +466,19 @@ setIsScrolled(prev => {
                     }
                   }}
                 >
-                  <a
-                    href={appendUtmToUrl(CHANNEL_PARTNER_URL)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={closeMobileMenu}
-                  >
-                    Channel Partner
-                  </a>
-                  <Link to="/careers" onClick={closeMobileMenu}>
-                    Job Postings
-                  </Link>
+                  <div className="work-dropdown-inner">
+                    <a
+                      href={appendUtmToUrl(CHANNEL_PARTNER_URL)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={closeMobileMenu}
+                    >
+                      Channel Partner
+                    </a>
+                    <Link to="/careers" onClick={closeMobileMenu}>
+                      Job Postings
+                    </Link>
+                  </div>
                 </div>
               )}
             </li>
