@@ -387,7 +387,7 @@ class MarketingBlogAdmin(admin.ModelAdmin):
 class SiteTestimonialAdmin(admin.ModelAdmin):
     list_display = ['id', 'kind', 'name', 'is_published', 'sort_order', 'updated_at']
     list_filter = ['kind', 'is_published']
-    search_fields = ['name', 'headline', 'body']
+    search_fields = ['name', 'headline', 'body', 'source_url']
     list_editable = ['is_published', 'sort_order']
     fieldsets = (
         (None, {
