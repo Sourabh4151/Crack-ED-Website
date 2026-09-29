@@ -21,6 +21,9 @@ import Rohitash from '../../assets/Rohitash.webp'
 import Kuldeep from '../../assets/Kuldeep.webp'
 import IlaKumari from '../../assets/Ila Kumari .webp'
 import Abhijeet from '../../assets/Abhijeet.webp'
+import Tamizharasan from '../../assets/Tamizharasan_c.webp'
+import ShelendraKumar from '../../assets/Shelendra_Kumar.webp'
+import VishalDhakrey from '../../assets/Vishal_Dhakrey.webp'
 import './Testimonial.css'
 
 const Testimonial = () => {
@@ -171,6 +174,28 @@ const Testimonial = () => {
       compactTitle: true,
       description: "The classroom sessions, practical learning, and constant guidance at Crack-ED helped me build the confidence. Getting placed as a Senior Business Development Officer at Textbook feels like a milestone I once only hoped for."
     },
+    {
+      id: 20,
+      image: VishalDhakrey,
+      name: "Vishal Dhakrey",
+      title: "Business Manager, Rupyy",
+      description: "Recently, I completed a 30-day training program through the Rupyy AutoEdge Programme. Throughout this journey, I learned a lot about the industry in practical, new ways. The training provided by Crack-ED helped me greatly in improving and refining my skills, and it will prove very beneficial for my career."
+    },
+    {
+      id: 21,
+      image: ShelendraKumar,
+      name: "Shelendra Kumar",
+      title: "Business Manager, Rupyy",
+      description: "I was very interested in building my career in the finance sector. Through the Rupyy AutoEdge program by Crack-ED I learned about loans, documentation and disbursement, and about the BFSI and NBFC sectors. This training has helped me build my communication and confidence."
+    },
+    {
+      id: 22,
+      image: Tamizharasan,
+      name: "Tamizharasan C",
+      title: "Customer Service Officer, Suryoday Small Finance Bank",
+      compactTitle: true,
+      description: "My classroom training has been really good, which helped me improve my banking knowledge, communication, and my confidence. One memorable experience was visiting IIM Lucknow, which helped my professional growth. Thank you Crack-ED for being part of my journey."
+    },
   ].reverse())
 
   useEffect(() => {
@@ -290,7 +315,7 @@ const Testimonial = () => {
       return undefined
     }
 
-    const durationMs = 30000
+    const durationMs = 60000
     lastTimeRef.current = performance.now()
     measureStep()
 
