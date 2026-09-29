@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { Link } from 'react-router-dom'
+import { fetchPublishedSuccessStories } from '../../services/testimonialApi'
 import AntimaMishra from '../../assets/Antima Mishra.webp'
 import PoojaMehta from '../../assets/Pooja Mehta.webp'
 import ShreyaVerma from '../../assets/Shreya_Verma.webp'
@@ -33,7 +34,7 @@ const Testimonial = () => {
   const inViewRef = useRef(true)
   const stepCacheRef = useRef(0)
 
-  const testimonials = [
+  const [testimonials, setTestimonials] = useState(() => [
     {
       id: 1,
       image: ShreyaVerma,
@@ -169,7 +170,26 @@ const Testimonial = () => {
       compactTitle: true,
       description: "The classroom sessions, practical learning, and constant guidance at Crack-ED helped me build the confidence. Getting placed as a Senior Business Development Officer at Textbook feels like a milestone I once only hoped for."
     },
-  ].reverse()
+  ].reverse())
+
+  useEffect(() => {
+    let cancelled = false
+    fetchPublishedSuccessStories().then((rows) => {
+      if (cancelled || !Array.isArray(rows) || rows.length === 0) return
+      const published = rows
+        .filter((row) => row && row.photo_url && row.name)
+        .map((row) => ({
+          id: row.id,
+          image: row.photo_url,
+          name: row.name,
+          title: row.role || '',
+          description: row.quote || '',
+          compactTitle: Boolean(row.compact_role),
+        }))
+      if (published.length > 0) setTestimonials(published)
+    })
+    return () => { cancelled = true }
+  }, [])
 
   const testimonialsToShow = isMobile ? testimonials : [...testimonials, ...testimonials]
 

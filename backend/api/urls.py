@@ -23,6 +23,7 @@ urlpatterns = [
     path('blogs/detail/<str:lookup>/', views.blog_public_detail),
     path('blogs/upload/', views.blog_upload_image),
     path('testimonials/', views.testimonial_published_list),
+    path('success-stories/', views.success_story_published_list),
     path('', include(router.urls)),
     path('health/', views.health),
     path('jobs/', views.job_list),

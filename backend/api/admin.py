@@ -13,7 +13,7 @@ from django.utils import timezone
 from .models import (
     Example, QuizSubmission, Lead, JobApplication, JobListing, BIDEpisode,
     MarketingBlog, MarketingBlogUpload, MerittoOutboundAPILog, SiteTestimonial,
-    QuizProgram, QuizQuestion, QuizOption,
+    QuizProgram, QuizQuestion, QuizOption, SuccessStory,
 )
 from .meritto_log import format_json_for_admin
 from .constants import PROGRAM_CHOICES, PROGRAM_TO_CENTER, get_center_for_program
@@ -404,6 +404,50 @@ class SiteTestimonialAdmin(admin.ModelAdmin):
             'fields': ('name', 'rating', 'body', 'profile_image'),
         }),
     )
+
+
+@admin.register(SuccessStory)
+class SuccessStoryAdmin(admin.ModelAdmin):
+    list_display = ['photo_thumb', 'name', 'role', 'is_published', 'sort_order', 'updated_at']
+    list_display_links = ['name']
+    list_filter = ['is_published']
+    search_fields = ['name', 'role', 'quote']
+    list_editable = ['is_published', 'sort_order']
+    list_per_page = 50
+    ordering = ['sort_order', '-created_at']
+    save_on_top = True
+    readonly_fields = ['photo_preview']
+    fieldsets = (
+        (None, {
+            'fields': ('photo', 'photo_preview', 'name', 'role', 'quote', 'compact_role'),
+            'description': (
+                'These are the portrait cards in the homepage Success Stories carousel. '
+                'Add a photo, name, role, and quote, then save. '
+                'Published cards appear in sort order (lower numbers first).'
+            ),
+        }),
+        ('Visibility', {
+            'fields': ('is_published', 'sort_order'),
+        }),
+    )
+
+    @admin.display(description='Photo')
+    def photo_thumb(self, obj):
+        if not obj.photo:
+            return '—'
+        return format_html(
+            '<img src="{}" width="48" height="64" style="object-fit:cover;border-radius:4px;" alt="" />',
+            obj.photo.url,
+        )
+
+    @admin.display(description='Preview')
+    def photo_preview(self, obj):
+        if obj is None or not obj.pk or not obj.photo:
+            return 'Preview appears after the photo is saved.'
+        return format_html(
+            '<img src="{}" style="max-height:220px;border-radius:8px;" alt="" />',
+            obj.photo.url,
+        )
 
 
 @admin.register(MarketingBlogUpload)

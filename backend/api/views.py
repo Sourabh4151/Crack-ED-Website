@@ -23,7 +23,7 @@ from .utm_resolve import vendor_info_for_utm
 from .models import (
     Example, QuizSubmission, Lead, JobApplication, JobListing, BIDEpisode,
     MarketingBlog, MarketingBlogUpload, QuizProgram, QuizQuestion, QuizOption,
-    SiteTestimonial,
+    SiteTestimonial, SuccessStory,
 )
 from .serializers import (
     ExampleSerializer,
@@ -36,6 +36,7 @@ from .serializers import (
     QuizQuestionAdminSerializer,
     serialize_quiz_public_config,
     SiteTestimonialSerializer,
+    SuccessStorySerializer,
 )
 
 
@@ -586,6 +587,15 @@ def testimonial_published_list(request):
     """Published testimonials for /testimonials."""
     qs = SiteTestimonial.objects.filter(is_published=True).order_by('sort_order', '-created_at')
     ser = SiteTestimonialSerializer(qs, many=True, context={'request': request})
+    return Response(ser.data, headers=_BLOG_PUBLIC_CACHE_HEADERS)
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def success_story_published_list(request):
+    """Published homepage success-story cards."""
+    qs = SuccessStory.objects.filter(is_published=True).order_by('sort_order', '-created_at')
+    ser = SuccessStorySerializer(qs, many=True, context={'request': request})
     return Response(ser.data, headers=_BLOG_PUBLIC_CACHE_HEADERS)
 
 

@@ -2,7 +2,10 @@
 API serializers for REST responses.
 """
 from rest_framework import serializers
-from .models import Example, JobListing, BIDEpisode, MarketingBlog, QuizProgram, QuizQuestion, QuizOption, SiteTestimonial
+from .models import (
+    Example, JobListing, BIDEpisode, MarketingBlog, QuizProgram, QuizQuestion, QuizOption,
+    SiteTestimonial, SuccessStory,
+)
 
 
 class ExampleSerializer(serializers.ModelSerializer):
@@ -153,6 +156,18 @@ class SiteTestimonialSerializer(serializers.ModelSerializer):
         data.pop('profile_image', None)
         data.pop('post_image', None)
         return data
+
+
+class SuccessStorySerializer(serializers.ModelSerializer):
+    """Published homepage success-story cards."""
+    photo_url = serializers.SerializerMethodField()
+
+    class Meta:
+        model = SuccessStory
+        fields = ['id', 'name', 'role', 'quote', 'photo_url', 'compact_role', 'sort_order']
+
+    def get_photo_url(self, obj):
+        return _absolute_media_url(self.context.get('request'), obj.photo)
 
 
 class QuizProgramSerializer(serializers.ModelSerializer):

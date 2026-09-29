@@ -37,6 +37,19 @@ async function staffRequest (path, opts = {}) {
   })
 }
 
+export async function fetchPublishedSuccessStories () {
+  const base = getApiBase()
+  if (!base) return []
+  try {
+    const r = await fetch(`${base}/api/success-stories/`, { cache: 'no-store' })
+    if (!r.ok) return []
+    const data = await r.json()
+    return Array.isArray(data) ? data : (data.results || [])
+  } catch {
+    return []
+  }
+}
+
 export async function fetchPublishedTestimonials () {
   const base = getApiBase()
   if (!base) return []

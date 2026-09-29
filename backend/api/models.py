@@ -507,3 +507,54 @@ class SiteTestimonial(models.Model):
 
     def __str__(self):
         return f'{self.get_kind_display()}: {self.name}'
+
+
+def success_story_photo_path(instance, filename):
+    """Homepage success-story portraits under success-stories/YYYY-MM-DD/."""
+    import uuid
+    from django.utils import timezone
+    date_str = timezone.now().strftime('%Y-%m-%d')
+    safe_name = (filename or 'photo').replace(' ', '_')
+    unique = uuid.uuid4().hex[:8]
+    return f'success-stories/{date_str}/{unique}_{safe_name}'
+
+
+class SuccessStory(models.Model):
+    """
+    Portrait cards in the homepage Success Stories carousel.
+    Marketing adds and reorders these from Django admin.
+    """
+    name = models.CharField(max_length=120)
+    role = models.CharField(
+        max_length=200,
+        help_text='Job line under the name, e.g. Bank Officer, AU Small Finance Bank',
+    )
+    quote = models.TextField(
+        help_text='Short quote shown when a visitor hovers the card.',
+    )
+    photo = models.ImageField(
+        upload_to=success_story_photo_path,
+        help_text='Portrait photo. A clear head-and-shoulders image works best.',
+    )
+    compact_role = models.BooleanField(
+        default=False,
+        help_text='Use a slightly smaller role line when the job title is long.',
+    )
+    is_published = models.BooleanField(
+        default=True,
+        help_text='Uncheck to hide this card from the homepage.',
+    )
+    sort_order = models.PositiveIntegerField(
+        default=0,
+        help_text='Lower numbers appear first. Leave at 0 to show a new card at the front.',
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['sort_order', '-created_at']
+        verbose_name = 'Homepage success story'
+        verbose_name_plural = 'Homepage success stories'
+
+    def __str__(self):
+        return self.name
