@@ -9,6 +9,7 @@ import threading
 
 import requests
 from django.contrib.auth import authenticate, login, logout
+from django.http import FileResponse
 from django.db.models import Q, Prefetch
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
@@ -597,6 +598,16 @@ def success_story_published_list(request):
     qs = SuccessStory.objects.filter(is_published=True).order_by('sort_order', '-created_at')
     ser = SuccessStorySerializer(qs, many=True, context={'request': request})
     return Response(ser.data, headers=_BLOG_PUBLIC_CACHE_HEADERS)
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def success_story_photo(request, pk):
+    """Portrait file for a published story. Used to keep a local copy in the browser."""
+    story = SuccessStory.objects.filter(pk=pk, is_published=True).first()
+    if story is None or not story.photo:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    return FileResponse(story.photo.open('rb'))
 
 
 class SiteTestimonialAdminViewSet(viewsets.ModelViewSet):

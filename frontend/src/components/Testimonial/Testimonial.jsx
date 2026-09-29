@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { fetchPublishedSuccessStories } from '../../services/testimonialApi'
+import { loadCachedSuccessStories, mapSuccessStories, saveSuccessStoryCache } from '../../services/successStoryCache'
 import AntimaMishra from '../../assets/Antima Mishra.webp'
 import PoojaMehta from '../../assets/Pooja Mehta.webp'
 import ShreyaVerma from '../../assets/Shreya_Verma.webp'
@@ -174,20 +175,20 @@ const Testimonial = () => {
 
   useEffect(() => {
     let cancelled = false
-    fetchPublishedSuccessStories().then((rows) => {
-      if (cancelled || !Array.isArray(rows) || rows.length === 0) return
-      const published = rows
-        .filter((row) => row && row.photo_url && row.name)
-        .map((row) => ({
-          id: row.id,
-          image: row.photo_url,
-          name: row.name,
-          title: row.role || '',
-          description: row.quote || '',
-          compactTitle: Boolean(row.compact_role),
-        }))
-      if (published.length > 0) setTestimonials(published)
-    })
+
+    async function loadStories () {
+      const cached = await loadCachedSuccessStories()
+      if (cancelled) return
+      if (cached.length) setTestimonials(cached)
+
+      const rows = await fetchPublishedSuccessStories()
+      if (cancelled) return
+      const published = mapSuccessStories(rows)
+      if (published.length) setTestimonials(published)
+      if (rows.length) saveSuccessStoryCache(rows)
+    }
+
+    loadStories()
     return () => { cancelled = true }
   }, [])
 
