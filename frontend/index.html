@@ -35,13 +35,11 @@
     <title>CRACK-ED - Upskill Today, Crack the World Tomorrow</title>
     <meta name="description" content="Crack-ED helps you upskill and get hired through job-linked programs. Apply, learn with our ABC model, and build a career in banking, NBFC, insurance, and more." />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://crack-ed.com/" />
     <link rel="icon" type="image/png" sizes="144x144" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/favicon.png" />
     <meta property="og:title" content="CRACK-ED - Upskill Today, Crack the World Tomorrow" />
     <meta property="og:description" content="Crack-ED helps you upskill and get hired through job-linked programs. Apply, learn with our ABC model, and build a career in banking, NBFC, insurance, and more." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://crack-ed.com/" />
     <meta property="og:image" content="https://crack-ed.com/hero_section_image.webp" />
     <meta property="og:site_name" content="CRACK-ED" />
     <meta name="twitter:card" content="summary_large_image" />
@@ -56,6 +54,7 @@
         var SITE = 'https://crack-ed.com';
         var path = location.pathname || '/';
         if (path.length > 1) path = path.replace(/\/+$/, '') || '/';
+        if (!/^\/[A-Za-z0-9/_-]*$/.test(path)) path = '/';
         var indexable = {
           '/': 1,
           '/about': 1,
@@ -70,21 +69,18 @@
           '/contact-us': 1,
           '/testimonials': 1
         };
-        var dynamic = /^\/resources\/blog\/[^/]+$/.test(path) || /^\/careers\/job\/[^/]+$/.test(path);
+        var dynamic = /^\/resources\/blog\/[^/]+$/.test(path) || /^\/careers\/job\/[0-9]{1,12}$/.test(path);
         var marketing = path === '/marketing' || path.indexOf('/marketing/') === 0;
         var unknown = !indexable[path] && !dynamic && !marketing;
         var url = path === '/' ? SITE + '/' : SITE + path;
-        var canonical = document.querySelector('link[rel="canonical"]');
-        if (canonical) canonical.setAttribute('href', url);
-        var ogUrl = document.querySelector('meta[property="og:url"]');
-        if (ogUrl) ogUrl.setAttribute('content', url);
-        var robots = document.querySelector('meta[name="robots"]');
-        if (robots) {
-          robots.setAttribute(
-            'content',
-            marketing ? 'noindex, nofollow' : unknown ? 'noindex, follow' : 'index, follow'
-          );
+        var robotsContent = marketing ? 'noindex, nofollow' : unknown ? 'noindex, follow' : 'index, follow';
+        function escAttr(value) {
+          return String(value).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
         }
+        document.write('<link rel="canonical" href="' + escAttr(url) + '">');
+        document.write('<meta property="og:url" content="' + escAttr(url) + '">');
+        var robots = document.querySelector('meta[name="robots"]');
+        if (robots) robots.setAttribute('content', robotsContent);
         if (!unknown) return;
         var title = 'Page not found | CRACK-ED';
         var description = 'This page does not exist on Crack-ED. Browse programs, blogs, and careers from the homepage.';
