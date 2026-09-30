@@ -51,6 +51,59 @@
     <script type="application/ld+json" data-seo-jsonld="true">
       {"@context":"https://schema.org","@type":"WebSite","name":"CRACK-ED","url":"https://crack-ed.com/"}
     </script>
+    <script>
+      (function () {
+        var SITE = 'https://crack-ed.com';
+        var path = location.pathname || '/';
+        if (path.length > 1) path = path.replace(/\/+$/, '') || '/';
+        var indexable = {
+          '/': 1,
+          '/about': 1,
+          '/programs': 1,
+          '/careers': 1,
+          '/badhta-india-dekho': 1,
+          '/resources': 1,
+          '/influencer': 1,
+          '/refund-policy': 1,
+          '/privacy-policy': 1,
+          '/terms-conditions': 1,
+          '/contact-us': 1,
+          '/testimonials': 1
+        };
+        var dynamic = /^\/resources\/blog\/[^/]+$/.test(path) || /^\/careers\/job\/[^/]+$/.test(path);
+        var marketing = path === '/marketing' || path.indexOf('/marketing/') === 0;
+        var unknown = !indexable[path] && !dynamic && !marketing;
+        var url = path === '/' ? SITE + '/' : SITE + path;
+        var canonical = document.querySelector('link[rel="canonical"]');
+        if (canonical) canonical.setAttribute('href', url);
+        var ogUrl = document.querySelector('meta[property="og:url"]');
+        if (ogUrl) ogUrl.setAttribute('content', url);
+        var robots = document.querySelector('meta[name="robots"]');
+        if (robots) {
+          robots.setAttribute(
+            'content',
+            marketing ? 'noindex, nofollow' : unknown ? 'noindex, follow' : 'index, follow'
+          );
+        }
+        if (!unknown) return;
+        var title = 'Page not found | CRACK-ED';
+        var description = 'This page does not exist on Crack-ED. Browse programs, blogs, and careers from the homepage.';
+        document.title = title;
+        var desc = document.querySelector('meta[name="description"]');
+        if (desc) desc.setAttribute('content', description);
+        var ogTitle = document.querySelector('meta[property="og:title"]');
+        if (ogTitle) ogTitle.setAttribute('content', title);
+        var ogDesc = document.querySelector('meta[property="og:description"]');
+        if (ogDesc) ogDesc.setAttribute('content', description);
+        var twTitle = document.querySelector('meta[name="twitter:title"]');
+        if (twTitle) twTitle.setAttribute('content', title);
+        var twDesc = document.querySelector('meta[name="twitter:description"]');
+        if (twDesc) twDesc.setAttribute('content', description);
+        document.querySelectorAll('script[data-seo-jsonld]').forEach(function (node) {
+          node.remove();
+        });
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700;800&family=Poppins:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">

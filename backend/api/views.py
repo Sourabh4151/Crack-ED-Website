@@ -6,10 +6,11 @@ import json
 import os
 import re
 import threading
+from urllib.parse import urlsplit
 
 import requests
 from django.contrib.auth import authenticate, login, logout
-from django.http import FileResponse
+from django.http import FileResponse, HttpResponse
 from django.db.models import Q, Prefetch
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
@@ -555,6 +556,49 @@ def blog_public_detail(request, lookup):
         )
     ser = MarketingBlogDetailSerializer(post, context={'request': request})
     return Response(ser.data, headers=_BLOG_PUBLIC_CACHE_HEADERS)
+
+
+# Legacy posts shipped in frontend/src/data/blogPosts.js. Valid public URLs even
+# when they are not rows in MarketingBlog.
+STATIC_PUBLIC_BLOG_IDS = frozenset({'1', '2', '4', '5', '6', '7'})
+_FRONTEND_BLOG_PATH = re.compile(r'^/resources/blog/([^/]+)$')
+_FRONTEND_JOB_PATH = re.compile(r'^/careers/job/([0-9]{1,12})$')
+
+
+def public_frontend_resource_exists(path):
+    """True when a dynamic public URL is a real published blog or job."""
+    if not path or len(path) > 512 or not path.startswith('/'):
+        return False
+    if len(path) > 1:
+        path = path.rstrip('/')
+    blog = _FRONTEND_BLOG_PATH.match(path)
+    if blog:
+        lookup = blog.group(1)
+        if lookup in STATIC_PUBLIC_BLOG_IDS:
+            return True
+        published = MarketingBlog.objects.filter(is_published=True)
+        if lookup.isdigit() and published.filter(pk=int(lookup)).exists():
+            return True
+        return published.filter(slug=lookup).exists()
+    job = _FRONTEND_JOB_PATH.match(path)
+    if job:
+        return JobListing.objects.filter(pk=int(job.group(1)), is_published=True).exists()
+    return False
+
+
+@api_view(['GET'])
+@authentication_classes([])
+@permission_classes([AllowAny])
+def frontend_route_exists(request):
+    """
+    Internal check used by Nginx auth_request for /resources/blog/:id and /careers/job/:id.
+    204 when that resource is public. 401 when it is not. No response body.
+    """
+    raw = request.META.get('HTTP_X_ORIGINAL_URI', '')
+    path = urlsplit(raw).path
+    if public_frontend_resource_exists(path):
+        return HttpResponse(status=204)
+    return HttpResponse(status=401)
 
 
 @api_view(['POST'])

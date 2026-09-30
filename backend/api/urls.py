@@ -21,6 +21,7 @@ urlpatterns = [
     path('blogs/', views.blog_published_list),
     path('blogs/featured/', views.blog_featured),
     path('blogs/detail/<str:lookup>/', views.blog_public_detail),
+    path('frontend-route/', views.frontend_route_exists),
     path('blogs/upload/', views.blog_upload_image),
     path('testimonials/', views.testimonial_published_list),
     path('success-stories/', views.success_story_published_list),

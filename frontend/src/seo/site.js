@@ -140,6 +140,11 @@ export const PAGE_SEO = {
     title: 'Blog Post Not Found | CRACK-ED',
     description: 'This blog post is unavailable. Browse other career resources from Crack-ED.',
   },
+  notFound: {
+    title: 'Page not found | CRACK-ED',
+    description: 'This page does not exist on Crack-ED. Browse programs, blogs, and careers from the homepage.',
+    robots: 'noindex, follow',
+  },
   adminTestimonials: {
     title: 'Marketing Testimonials | CRACK-ED',
     description: 'Internal marketing administration for Crack-ED testimonials.',

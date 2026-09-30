@@ -1,5 +1,5 @@
 import React, { lazy, Suspense, useEffect, useState } from 'react'
-import { BrowserRouter as Router, Routes, Route, useLocation, useParams } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, useLocation, useParams, Navigate } from 'react-router-dom'
 
 import './App.css'
 
@@ -27,6 +27,7 @@ const AdminQuiz = lazy(() => import('./pages/AdminQuiz'))
 const AdminQuizQuestionEdit = lazy(() => import('./pages/AdminQuizQuestionEdit'))
 const AdminQuizProgramEdit = lazy(() => import('./pages/AdminQuizProgramEdit'))
 const Testimonials = lazy(() => import('./pages/Testimonials'))
+const NotFound = lazy(() => import('./pages/NotFound'))
 const AdminTestimonials = lazy(() => import('./pages/AdminTestimonials'))
 const AdminTestimonialEdit = lazy(() => import('./pages/AdminTestimonialEdit'))
 
@@ -89,6 +90,48 @@ const AnalyticsTracker = () => {
   return null;
 };
 
+function AppRoutes() {
+  const { pathname, search, hash } = useLocation()
+  if (pathname.length > 1 && pathname.endsWith('/')) {
+    const next = pathname.replace(/\/+$/, '') || '/'
+    return <Navigate to={`${next}${search}${hash}`} replace />
+  }
+
+  return (
+    <Suspense fallback={null}>
+      {/* New public paths must also be added to deploy/nginx/crack-ed.com.conf or production will return 404. */}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/programs" element={<Programs />} />
+        <Route path="/careers" element={<Careers />} />
+        <Route path="/careers/job/:id" element={<JobDetail />} />
+        <Route path="/badhta-india-dekho" element={<BID />} />
+        <Route path="/resources" element={<Resources />} />
+        <Route path="/resources/blog/:id" element={<BlogPostRoute />} />
+        <Route path="/influencer" element={<Influencer />} />
+        <Route path="/refund-policy" element={<RefundPolicy />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms-conditions" element={<TermsConditions />} />
+        <Route path="/contact-us" element={<ContactUs />} />
+        <Route path="/testimonials" element={<Testimonials />} />
+        <Route path="/marketing/blogs" element={<AdminBlogs />} />
+        <Route path="/marketing/blogs/new" element={<AdminBlogEdit />} />
+        <Route path="/marketing/blogs/edit/:id" element={<AdminBlogEdit />} />
+        <Route path="/marketing/quiz" element={<AdminQuiz />} />
+        <Route path="/marketing/quiz/questions/new" element={<AdminQuizQuestionEdit />} />
+        <Route path="/marketing/quiz/questions/edit/:id" element={<AdminQuizQuestionEdit />} />
+        <Route path="/marketing/quiz/programs/new" element={<AdminQuizProgramEdit />} />
+        <Route path="/marketing/quiz/programs/edit/:id" element={<AdminQuizProgramEdit />} />
+        <Route path="/marketing/testimonials" element={<AdminTestimonials />} />
+        <Route path="/marketing/testimonials/new" element={<AdminTestimonialEdit />} />
+        <Route path="/marketing/testimonials/edit/:id" element={<AdminTestimonialEdit />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Suspense>
+  )
+}
+
 function App() {
   return (
     <Router>
@@ -101,36 +144,7 @@ function App() {
       <div className="App">
         <DeferredToastContainer />
         <StickyPhoneIcon />
-
-        <Suspense fallback={null}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/programs" element={<Programs />} />
-          <Route path="/careers" element={<Careers />} />
-          <Route path="/careers/job/:id" element={<JobDetail />} />
-          <Route path="/badhta-india-dekho" element={<BID />} />
-          <Route path="/resources" element={<Resources />} />
-          <Route path="/resources/blog/:id" element={<BlogPostRoute />} />
-          <Route path="/influencer" element={<Influencer />} />
-          <Route path="/refund-policy" element={<RefundPolicy />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/terms-conditions" element={<TermsConditions />} />
-          <Route path="/contact-us" element={<ContactUs />} />
-          <Route path="/testimonials" element={<Testimonials />} />
-          <Route path="/marketing/blogs" element={<AdminBlogs />} />
-          <Route path="/marketing/blogs/new" element={<AdminBlogEdit />} />
-          <Route path="/marketing/blogs/edit/:id" element={<AdminBlogEdit />} />
-          <Route path="/marketing/quiz" element={<AdminQuiz />} />
-          <Route path="/marketing/quiz/questions/new" element={<AdminQuizQuestionEdit />} />
-          <Route path="/marketing/quiz/questions/edit/:id" element={<AdminQuizQuestionEdit />} />
-          <Route path="/marketing/quiz/programs/new" element={<AdminQuizProgramEdit />} />
-          <Route path="/marketing/quiz/programs/edit/:id" element={<AdminQuizProgramEdit />} />
-          <Route path="/marketing/testimonials" element={<AdminTestimonials />} />
-          <Route path="/marketing/testimonials/new" element={<AdminTestimonialEdit />} />
-          <Route path="/marketing/testimonials/edit/:id" element={<AdminTestimonialEdit />} />
-        </Routes>
-        </Suspense>
+        <AppRoutes />
       </div>
     </Router>
   )
