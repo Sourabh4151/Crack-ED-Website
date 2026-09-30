@@ -14,6 +14,7 @@ import { fetchQuizConfig } from '../../services/quizApi';
 import { FALLBACK_QUIZ_CONFIG, isUsableQuizConfig } from '../../data/quizFallback';
 import { trackMicrositeClick, markQuizCompleted } from '../../utils/analytics';
 import 'react-toastify/dist/ReactToastify.css';
+import './CareerQuiz.css';
 
 function programFee (programs, name) {
   return programs?.[name]?.fee ?? 0;

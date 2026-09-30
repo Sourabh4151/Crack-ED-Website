@@ -121,8 +121,10 @@
   position: relative;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
   width: 100%;
+  min-width: 0;
+  min-height: 0;
 }
 
 /* Explore All Programs card - shown in 2 places (left column + below quiz) */
@@ -171,12 +173,21 @@
 
 .inf-cf-quiz-fade-in {
   width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  height: min(680px, calc(100dvh - 180px));
+  min-height: 520px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   animation: infCfFadeInRight 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   z-index: 15;
   background: #0d0d0d80;
-  padding: 20px;
+  padding: 16px;
   backdrop-filter: blur(10px);
   border: 1px solid #fafafa33;
+  border-radius: 16px;
+  box-sizing: border-box;
 }
 
 .inf-cf-quiz-fade-in .inf-cf-explore-card {
@@ -232,8 +243,12 @@
   }
 
   .inf-cf-quiz-fade-in {
-    padding: 0px !important;
-    border: transparent !important;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    padding: 12px !important;
+    border: 1px solid #fafafa33 !important;
+    overflow: visible;
   }
 
   .inf-cf-explore-card {
