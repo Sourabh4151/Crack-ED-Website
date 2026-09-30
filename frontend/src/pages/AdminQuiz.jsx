@@ -117,7 +117,8 @@ const AdminQuiz = () => {
         <h1>Marketing — Career Quiz</h1>
         <p className="admin-blogs-sub">
           Update questions, answer mappings, and result programs without a code deploy.
-          Same login as <Link className="admin-blogs-link" to="/marketing/blogs">blogs</Link>.
+          Same login as <Link className="admin-blogs-link" to="/marketing/blogs">blogs</Link>
+          {' '}and <Link className="admin-blogs-link" to="/marketing/brochures">brochures</Link>.
         </p>
       </header>
 

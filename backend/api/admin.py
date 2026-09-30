@@ -13,7 +13,7 @@ from django.utils import timezone
 from .models import (
     Example, QuizSubmission, Lead, JobApplication, JobListing, BIDEpisode,
     MarketingBlog, MarketingBlogUpload, MerittoOutboundAPILog, SiteTestimonial,
-    QuizProgram, QuizQuestion, QuizOption, SuccessStory,
+    QuizProgram, QuizQuestion, QuizOption, SuccessStory, MicrositeBrochure,
 )
 from .meritto_log import format_json_for_admin
 from .constants import PROGRAM_CHOICES, PROGRAM_TO_CENTER, get_center_for_program
@@ -453,6 +453,29 @@ class SuccessStoryAdmin(admin.ModelAdmin):
 @admin.register(MarketingBlogUpload)
 class MarketingBlogUploadAdmin(admin.ModelAdmin):
     list_display = ['id', 'file', 'created_at']
+
+
+@admin.register(MicrositeBrochure)
+class MicrositeBrochureAdmin(admin.ModelAdmin):
+    list_display = ['name', 'slug', 'download_name', 'has_file', 'updated_at']
+    search_fields = ['name', 'slug', 'download_name']
+    ordering = ['sort_order', 'name']
+    readonly_fields = ['updated_at', 'created_at']
+    fields = ['name', 'slug', 'download_name', 'file', 'sort_order', 'updated_at', 'created_at']
+
+    @admin.display(description='PDF', boolean=True)
+    def has_file(self, obj):
+        return bool(obj.file)
+
+    def save_model(self, request, obj, form, change):
+        old_name = ''
+        if change and obj.pk:
+            previous = MicrositeBrochure.objects.filter(pk=obj.pk).only('file').first()
+            if previous and previous.file:
+                old_name = previous.file.name
+        super().save_model(request, obj, form, change)
+        if old_name and (not obj.file or old_name != obj.file.name):
+            obj.file.storage.delete(old_name)
 
 
 @admin.register(QuizProgram)

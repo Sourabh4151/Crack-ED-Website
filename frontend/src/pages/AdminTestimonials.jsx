@@ -117,7 +117,8 @@ const AdminTestimonials = () => {
           <h1>Marketing — Testimonials</h1>
           <p className="admin-blogs-sub">
             LinkedIn posts and Google reviews shown on the public testimonials page.
-            Also manage <Link className="admin-blogs-link" to="/marketing/blogs">blogs</Link>.
+            Also manage <Link className="admin-blogs-link" to="/marketing/blogs">blogs</Link>
+            {' '}and <Link className="admin-blogs-link" to="/marketing/brochures">brochures</Link>.
           </p>
         </header>
 

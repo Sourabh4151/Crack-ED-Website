@@ -162,6 +162,12 @@ export const PAGE_SEO = {
     path: '/marketing/blogs',
     robots: 'noindex, nofollow',
   },
+  adminBrochures: {
+    title: 'Marketing Brochures | CRACK-ED',
+    description: 'Internal marketing administration for microsite brochure PDFs.',
+    path: '/marketing/brochures',
+    robots: 'noindex, nofollow',
+  },
   adminBlogEdit: {
     title: 'Edit Blog | CRACK-ED',
     description: 'Internal marketing blog editor for Crack-ED.',

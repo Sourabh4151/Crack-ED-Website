@@ -25,7 +25,7 @@ from .utm_resolve import vendor_info_for_utm
 from .models import (
     Example, QuizSubmission, Lead, JobApplication, JobListing, BIDEpisode,
     MarketingBlog, MarketingBlogUpload, QuizProgram, QuizQuestion, QuizOption,
-    SiteTestimonial, SuccessStory,
+    SiteTestimonial, SuccessStory, MicrositeBrochure,
 )
 from .serializers import (
     ExampleSerializer,
@@ -696,3 +696,142 @@ class QuizQuestionAdminViewSet(viewsets.ModelViewSet):
     serializer_class = QuizQuestionAdminSerializer
     permission_classes = [IsMarketingStaff]
     pagination_class = None
+
+
+MAX_BROCHURE_BYTES = 25 * 1024 * 1024
+
+
+def _clean_download_name(value, fallback):
+    name = (value or '').replace('\\', '/').split('/')[-1]
+    name = name.replace('\r', '').replace('\n', '').replace('"', '').strip()
+    if not name:
+        name = fallback or 'brochure.pdf'
+    if not name.lower().endswith('.pdf'):
+        name = f'{name}.pdf'
+    return name[:255]
+
+
+def _validate_brochure_pdf(uploaded):
+    if uploaded.size > MAX_BROCHURE_BYTES:
+        return 'PDF must be 25 MB or smaller.'
+    if not (uploaded.name or '').lower().endswith('.pdf'):
+        return 'Upload a PDF file.'
+    head = uploaded.read(5)
+    uploaded.seek(0)
+    if head != b'%PDF-':
+        return 'That file is not a PDF.'
+    return ''
+
+
+def _brochure_file_path(brochure):
+    version = int(brochure.updated_at.timestamp())
+    return f'/api/brochures/{brochure.slug}/file/?v={version}'
+
+
+def _brochure_admin_payload(brochure):
+    has_file = bool(brochure.file)
+    return {
+        'slug': brochure.slug,
+        'name': brochure.name,
+        'download_name': brochure.download_name,
+        'has_file': has_file,
+        'file_path': _brochure_file_path(brochure) if has_file else None,
+        'updated_at': brochure.updated_at.isoformat(),
+        'sort_order': brochure.sort_order,
+    }
+
+
+def _replace_brochure_file(brochure, uploaded):
+    old_name = brochure.file.name if brochure.file else ''
+    brochure.file = uploaded
+    brochure.save()
+    if old_name and old_name != brochure.file.name:
+        brochure.file.storage.delete(old_name)
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def brochure_public_detail(request, slug):
+    """Current brochure for one microsite. 404 until marketing uploads a PDF."""
+    brochure = MicrositeBrochure.objects.filter(slug=slug).first()
+    if brochure is None or not brochure.file:
+        return Response(
+            {'detail': 'Brochure not available.'},
+            status=status.HTTP_404_NOT_FOUND,
+            headers={'Cache-Control': 'no-store'},
+        )
+    return Response(
+        {
+            'slug': brochure.slug,
+            'name': brochure.name,
+            'url': _brochure_file_path(brochure),
+            'filename': brochure.download_name or 'brochure.pdf',
+            'updated_at': brochure.updated_at.isoformat(),
+        },
+        headers={'Cache-Control': 'no-store'},
+    )
+
+
+def brochure_public_file(request, slug):
+    """Stream the uploaded PDF. Microsites fetch this and save it with the download filename."""
+    if request.method != 'GET':
+        return HttpResponse(status=405)
+    brochure = MicrositeBrochure.objects.filter(slug=slug).first()
+    if brochure is None or not brochure.file:
+        return HttpResponse(status=404)
+    filename = _clean_download_name(brochure.download_name, 'brochure.pdf')
+    try:
+        handle = brochure.file.open('rb')
+    except OSError:
+        return HttpResponse(status=404)
+    response = FileResponse(
+        handle,
+        as_attachment=True,
+        filename=filename,
+        content_type='application/pdf',
+    )
+    response['Cache-Control'] = 'no-store'
+    return response
+
+
+@api_view(['GET'])
+@permission_classes([IsMarketingStaff])
+def brochure_admin_list(request):
+    rows = MicrositeBrochure.objects.all().order_by('sort_order', 'name')
+    return Response([_brochure_admin_payload(row) for row in rows])
+
+
+@api_view(['POST'])
+@permission_classes([IsMarketingStaff])
+def brochure_admin_upload(request, slug):
+    """Replace the PDF and/or the download filename for one microsite."""
+    brochure = MicrositeBrochure.objects.filter(slug=slug).first()
+    if brochure is None:
+        return Response({'detail': 'Unknown microsite.'}, status=status.HTTP_404_NOT_FOUND)
+
+    uploaded = request.FILES.get('file')
+    download_name = request.data.get('download_name')
+    if uploaded is None and download_name is None:
+        return Response(
+            {'detail': 'Choose a PDF or a download filename.'},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+
+    if download_name is not None:
+        brochure.download_name = _clean_download_name(
+            str(download_name),
+            brochure.download_name or (uploaded.name if uploaded else 'brochure.pdf'),
+        )
+
+    if uploaded is not None:
+        error = _validate_brochure_pdf(uploaded)
+        if error:
+            return Response({'detail': error}, status=status.HTTP_400_BAD_REQUEST)
+        if download_name is None:
+            brochure.download_name = _clean_download_name(uploaded.name, brochure.download_name)
+        _replace_brochure_file(brochure, uploaded)
+    else:
+        brochure.save(update_fields=['download_name', 'updated_at'])
+
+    brochure.refresh_from_db()
+    return Response(_brochure_admin_payload(brochure))

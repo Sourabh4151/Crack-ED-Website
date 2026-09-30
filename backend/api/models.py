@@ -558,3 +558,43 @@ class SuccessStory(models.Model):
 
     def __str__(self):
         return self.name
+
+
+def microsite_brochure_upload_path(instance, filename):
+    """Stored PDF for one microsite. A new upload gets a new name so caches do not keep the old file."""
+    import uuid
+    return f'brochures/{instance.slug}/{uuid.uuid4().hex[:12]}.pdf'
+
+
+class MicrositeBrochure(models.Model):
+    """
+    PDF brochure for one microsite, replaced from /marketing/brochures.
+    Until a file is uploaded, the microsite keeps serving the PDF in its own public folder.
+    """
+    slug = models.SlugField(
+        max_length=80,
+        unique=True,
+        help_text='Must match BROCHURE_SLUG in that microsite. Do not change it after the site is deployed.',
+    )
+    name = models.CharField(max_length=200, help_text='Label shown to marketing')
+    download_name = models.CharField(
+        max_length=255,
+        help_text='Filename the visitor gets when they download',
+    )
+    file = models.FileField(
+        upload_to=microsite_brochure_upload_path,
+        blank=True,
+        null=True,
+        help_text='PDF. Leave empty to keep the file already deployed on the microsite.',
+    )
+    sort_order = models.PositiveIntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['sort_order', 'name']
+        verbose_name = 'Microsite brochure'
+        verbose_name_plural = 'Microsite brochures'
+
+    def __str__(self):
+        return self.name

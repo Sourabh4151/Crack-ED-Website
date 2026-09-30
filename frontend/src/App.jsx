@@ -30,6 +30,7 @@ const Testimonials = lazy(() => import('./pages/Testimonials'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 const AdminTestimonials = lazy(() => import('./pages/AdminTestimonials'))
 const AdminTestimonialEdit = lazy(() => import('./pages/AdminTestimonialEdit'))
+const AdminBrochures = lazy(() => import('./pages/AdminBrochures'))
 
 const ToastContainer = lazy(() =>
   import('react-toastify').then(async (mod) => {
@@ -123,6 +124,7 @@ function AppRoutes() {
         <Route path="/marketing/quiz/questions/edit/:id" element={<AdminQuizQuestionEdit />} />
         <Route path="/marketing/quiz/programs/new" element={<AdminQuizProgramEdit />} />
         <Route path="/marketing/quiz/programs/edit/:id" element={<AdminQuizProgramEdit />} />
+        <Route path="/marketing/brochures" element={<AdminBrochures />} />
         <Route path="/marketing/testimonials" element={<AdminTestimonials />} />
         <Route path="/marketing/testimonials/new" element={<AdminTestimonialEdit />} />
         <Route path="/marketing/testimonials/edit/:id" element={<AdminTestimonialEdit />} />
