@@ -167,10 +167,9 @@ const ProgramsList = () => {
       {
         program: 'Talent Accelerator Program',
         role: 'Sales Executive',
-        admissionClosed: true,
         details: [
-          'Join as a Sales Executive at Kotak Prime and secure a CTC of Rs 2.75 LPA + incentives',
-          '1-month program'
+          'Join as a Sales Executive at Kotak Prime and secure a CTC of Rs 3 LPA + incentives',
+          '21-days program'
         ]
       },
       {
@@ -354,16 +353,23 @@ const ProgramsList = () => {
     ...items.filter((item) => item.admissionClosed),
   ]
 
-  const getAllProgramsInOrder = () => [
-    ...withCategory('Entrepreneurship', programs.Entrepreneurship),
-    ...withCategory('EdTech', programs.EdTech),
-    ...withCategory('Banking', programs.Banking.filter((item) => item.program === 'Kotak Gold Excellence Program')),
-    ...withCategory('NBFC', programs.NBFC.slice(0, 5)),
-    ...withCategory('Banking', programs.Banking.filter((item) => item.program !== 'Kotak Gold Excellence Program')),
-    ...withCategory('NBFC', programs.NBFC.slice(5)),
-    ...withCategory('Insurance', programs.Insurance),
-    ...withCategory('Retail', programs.Retail),
-  ]
+  const getAllProgramsInOrder = () => {
+    const isTalentAccelerator = (item) => item.program === 'Talent Accelerator Program'
+    const otherBanking = programs.Banking.filter((item) => item.program !== 'Kotak Gold Excellence Program')
+    const bandhanIndex = otherBanking.findIndex((item) => item.program === 'Bandhan Bank Aspiring Bank Champions Programme')
+    return [
+      ...withCategory('Entrepreneurship', programs.Entrepreneurship),
+      ...withCategory('EdTech', programs.EdTech),
+      ...withCategory('Banking', programs.Banking.filter((item) => item.program === 'Kotak Gold Excellence Program')),
+      ...withCategory('NBFC', programs.NBFC.slice(0, 5)),
+      ...withCategory('Banking', otherBanking.slice(0, bandhanIndex + 1)),
+      ...withCategory('NBFC', programs.NBFC.filter(isTalentAccelerator)),
+      ...withCategory('Banking', otherBanking.slice(bandhanIndex + 1)),
+      ...withCategory('NBFC', programs.NBFC.slice(5).filter((item) => !isTalentAccelerator(item))),
+      ...withCategory('Insurance', programs.Insurance),
+      ...withCategory('Retail', programs.Retail),
+    ]
+  }
 
   const displayedPrograms =
     activeTab === 'All'

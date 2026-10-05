@@ -12,4 +12,5 @@ export const LEAD_PROGRAMS = [
   'Mahindra Finance Prarambh Program - Business Executive',
   'Piramal ProEdge Program - Relationship Manager',
   'Samriddhi Program - Field Executive',
+  'Talent Accelerator Program - Sales Executive',
 ]

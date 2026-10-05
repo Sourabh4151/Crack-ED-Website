@@ -76,6 +76,7 @@ PROGRAM_TO_CENTER = {
     'Postgraduate Program Retail Banking - Relationship Officer': 'Axis - RO',
     'Postgraduate Certification Banking Management - Business Development Executive': 'IndusInd',
     'Mahindra Finance Prarambh Program - Business Executive (Vehicle Loan - Field Sales)': 'Mahindra - BE',
+    'Talent Accelerator Program': 'KMPL-SO-DST',
     'Talent Accelerator Program - Sales Executive': 'KMPL-SO-DST',
     'Kotak Gold Excellence Program': 'Kotak Gold Excellence',
     'Kotak Gold Excellence Program - Gold Loan Relationship Officer': 'Kotak Gold Excellence',

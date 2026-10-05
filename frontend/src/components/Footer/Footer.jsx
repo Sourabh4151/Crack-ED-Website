@@ -60,6 +60,14 @@ const PROGRAMS = [
     ],
   },
   {
+    id: 'kotak',
+    name: 'Talent Accelerator Program',
+    link: '/programs',
+    links: [
+      { label: 'Sales Executive', href: 'https://kotakmahindraso.crack-ed.com/' },
+    ],
+  },
+  {
     id: 'pgprb',
     name: 'PGP - Retail Banking',
     link: '/programs',
@@ -97,14 +105,6 @@ const PROGRAMS = [
     link: '/programs',
     links: [
       { label: 'Business Executive', href: 'https://mahindrafinancebe.crack-ed.com/' },
-    ],
-  },
-  {
-    id: 'kotak',
-    name: 'Talent Accelerator Program',
-    link: '/programs',
-    links: [
-      { label: 'Sales Executive', href: 'https://kotakmahindraso.crack-ed.com/' },
     ],
   },
   {
