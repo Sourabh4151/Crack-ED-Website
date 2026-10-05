@@ -244,7 +244,7 @@ const Programs = () => {
         programLabel: 'Talent Accelerator Program',
         logo: kotakLogo,
         details: 'Join as a Sales Executive at Kotak Prime and secure a CTC of Rs 3 LPA + incentives',
-        duration: '21-days program',
+        duration: '21-days online program',
         image: kotakProgramImage,
       },
       'Aviva Nirmaan Program - Direct Sales Executive': {

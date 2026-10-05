@@ -169,7 +169,7 @@ const ProgramsList = () => {
         role: 'Sales Executive',
         details: [
           'Join as a Sales Executive at Kotak Prime and secure a CTC of Rs 3 LPA + incentives',
-          '21-days program'
+          '21-days online program'
         ]
       },
       {
