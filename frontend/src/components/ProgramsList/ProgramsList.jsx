@@ -32,7 +32,7 @@ const ProgramsList = () => {
         program: 'Yes Bank Rise Program',
         role: 'Sales Officer',
         details: [
-          'Join as a Sales Officer with a CTC of ₹4.5 LPA + Incentives',
+          'Join as a Sales Officer with a CTC of upto ₹4.5 LPA + Incentives',
           '12 months apprenticeship program'
         ]
       },

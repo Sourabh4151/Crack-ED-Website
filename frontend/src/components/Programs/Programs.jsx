@@ -198,7 +198,7 @@ const Programs = () => {
       'Yes Bank Rise Program - Sales Officer': {
         programLabel: 'Yes Bank Rise Program',
         logo: udaanCardLogo,
-        details: 'Join as a Sales Officer with a CTC of ₹4.5 LPA + Incentives',
+        details: 'Join as a Sales Officer with a CTC of upto ₹4.5 LPA + Incentives',
         duration: '12 months apprenticeship program',
         image: yesBankSoImage,
         mobileBackgroundPosition: '15% center',
