@@ -17,7 +17,7 @@ import { trackMicrositeClick, markProgramsPageVisited } from '../../utils/analyt
 import { appendUtmToUrl } from '../../services/crmService'
 import './ProgramsList.css'
 
-const PROGRAM_CATEGORIES = ['Entrepreneurship', 'Banking', 'NBFC', 'Insurance', 'Retail', 'EdTech']
+const PROGRAM_CATEGORIES = ['Banking', 'NBFC', 'Insurance', 'Retail', 'EdTech']
 const PROGRAM_TABS = ['All', ...PROGRAM_CATEGORIES]
 
 const ProgramsList = () => {
@@ -27,17 +27,15 @@ const ProgramsList = () => {
   const [searchQuery, setSearchQuery] = useState('')
 
   const programs = {
-    Entrepreneurship: [
-      {
-        program: 'Entrepreneurship & Venture Creation',
-        role: 'House of Founders Fellowship',
-        details: [
-          '6-Month Hybrid Fellowship designed for aspiring and existing entrepreneurs.',
-          'Investor-ready by graduation, with a chance to pitch your venture to investors.*'
-        ]
-      }
-    ],
     Banking: [
+      {
+        program: 'Yes Bank Rise Program',
+        role: 'Sales Officer',
+        details: [
+          'Join as a Sales Officer with a CTC of ₹4.5 LPA + Incentives',
+          '12 months apprenticeship program'
+        ]
+      },
       {
         program: 'Kotak Gold Excellence Program',
         role: 'Gold Loan Relationship Officer',
@@ -224,11 +222,8 @@ const ProgramsList = () => {
   const getProgramLink = (category, item) => {
     const role = item?.role
     const program = item?.program
-    if (category === 'Entrepreneurship') {
-      if (role === 'House of Founders Fellowship') return 'https://house-of-founders.crack-ed.com/'
-      return null
-    }
     if (category === 'Banking') {
+      if (program === 'Yes Bank Rise Program' && role === 'Sales Officer') return 'https://yesbankso.crack-ed.com/'
       if (program === 'Kotak Gold Excellence Program' && role === 'Gold Loan Relationship Officer') {
         return 'https://kotakmahindraro.crack-ed.com/'
       }
@@ -311,9 +306,6 @@ const ProgramsList = () => {
       program === 'Banking Sales Program' ||
       program === 'Samriddhi Program' ||
       program === 'Elevate Banking Program'
-    if (category === 'Entrepreneurship') {
-      return <img src={udaanLogo} alt="Udaan" width="80" height="40" loading="lazy" decoding="async" className="program-logo-img program-logo-udaan" />
-    }
     if (category === 'Banking' && program === 'Kotak Gold Excellence Program') {
       return <img src={kotakSmallBankLogo} alt="Kotak Bank" width="80" height="40" loading="lazy" decoding="async" className="program-logo-img program-logo-kotak-bank" />
     }
@@ -355,10 +347,13 @@ const ProgramsList = () => {
 
   const getAllProgramsInOrder = () => {
     const isTalentAccelerator = (item) => item.program === 'Talent Accelerator Program'
-    const otherBanking = programs.Banking.filter((item) => item.program !== 'Kotak Gold Excellence Program')
+    const isYesBank = (item) => item.program === 'Yes Bank Rise Program'
+    const otherBanking = programs.Banking.filter(
+      (item) => item.program !== 'Kotak Gold Excellence Program' && !isYesBank(item)
+    )
     const bandhanIndex = otherBanking.findIndex((item) => item.program === 'Bandhan Bank Aspiring Bank Champions Programme')
     return [
-      ...withCategory('Entrepreneurship', programs.Entrepreneurship),
+      ...withCategory('Banking', programs.Banking.filter(isYesBank)),
       ...withCategory('EdTech', programs.EdTech),
       ...withCategory('Banking', programs.Banking.filter((item) => item.program === 'Kotak Gold Excellence Program')),
       ...withCategory('NBFC', programs.NBFC.slice(0, 5)),

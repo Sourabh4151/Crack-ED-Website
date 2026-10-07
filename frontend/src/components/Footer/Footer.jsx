@@ -10,11 +10,19 @@ import './Footer.css'
 
 const PROGRAMS = [
   {
-    id: 'house-of-founders',
-    name: 'House of Founders Fellowship',
+    id: 'yesbank-so',
+    name: 'Yes Bank Rise Program',
     link: '/programs',
     links: [
-      { label: 'Entrepreneurship & Venture Creation', href: 'https://house-of-founders.crack-ed.com/' },
+      { label: 'Sales Officer', href: 'https://yesbankso.crack-ed.com/' },
+    ],
+  },
+  {
+    id: 'edtech',
+    name: 'EdTech Launchpad Program',
+    link: '/programs',
+    links: [
+      { label: 'Academic Counsellor', href: 'https://edtechse.crack-ed.com/' },
     ],
   },
   {
@@ -30,25 +38,9 @@ const PROGRAMS = [
     name: 'Hero Housing Finance Pragati Program',
     link: '/programs',
     links: [
-      { label: 'Collection Officer', href: 'https://herofinanceco.crack-ed.com/' },
-      { label: 'Credit and Operations Manager', href: 'https://herofinancecom.crack-ed.com/' },
       { label: 'Relationship Manager', href: 'https://herofinancerm.crack-ed.com/' },
-    ],
-  },
-  {
-    id: 'rupyy',
-    name: 'Rupyy AutoEdge Program',
-    link: '/programs',
-    links: [
-      { label: 'Business Manager', href: 'https://rupyybm.crack-ed.com/' },
-    ],
-  },
-  {
-    id: 'pgprm',
-    name: 'PGP - Relationship Management',
-    link: '/programs',
-    links: [
-      { label: 'Relationship Manager', href: 'https://pgprm.crack-ed.com/' },
+      { label: 'Credit and Operations Manager', href: 'https://herofinancecom.crack-ed.com/' },
+      { label: 'Collection Officer', href: 'https://herofinanceco.crack-ed.com/' },
     ],
   },
   {
@@ -65,22 +57,6 @@ const PROGRAMS = [
     link: '/programs',
     links: [
       { label: 'Sales Executive', href: 'https://kotakmahindraso.crack-ed.com/' },
-    ],
-  },
-  {
-    id: 'pgprb',
-    name: 'PGP - Retail Banking',
-    link: '/programs',
-    links: [
-      { label: 'Relationship Officer', href: 'https://pgprb.crack-ed.com' },
-    ],
-  },
-  {
-    id: 'elevate',
-    name: 'Elevate Banking Program',
-    link: '/programs',
-    links: [
-      { label: 'Virtual Relationship Manager', href: 'https://elevatevrm.crack-ed.com/' },
     ],
   },
   {
@@ -108,14 +84,6 @@ const PROGRAMS = [
     ],
   },
   {
-    id: 'finova',
-    name: 'Finova VyaparaMitra Program',
-    link: '/programs',
-    links: [
-      { label: 'Relationship Officer', href: 'https://finovaro.crack-ed.com' },
-    ],
-  },
-  {
     id: 'piramal',
     name: 'Piramal ProEdge Program',
     link: '/programs',
@@ -133,6 +101,46 @@ const PROGRAMS = [
     ],
   },
   {
+    id: 'rupyy',
+    name: 'Rupyy AutoEdge Program',
+    link: '/programs',
+    links: [
+      { label: 'Business Manager', href: 'https://rupyybm.crack-ed.com/' },
+    ],
+  },
+  {
+    id: 'pgprm',
+    name: 'PGP - Relationship Management',
+    link: '/programs',
+    links: [
+      { label: 'Relationship Manager', href: 'https://pgprm.crack-ed.com/' },
+    ],
+  },
+  {
+    id: 'pgprb',
+    name: 'PGP - Retail Banking',
+    link: '/programs',
+    links: [
+      { label: 'Relationship Officer', href: 'https://pgprb.crack-ed.com' },
+    ],
+  },
+  {
+    id: 'elevate',
+    name: 'Elevate Banking Program',
+    link: '/programs',
+    links: [
+      { label: 'Virtual Relationship Manager', href: 'https://elevatevrm.crack-ed.com/' },
+    ],
+  },
+  {
+    id: 'finova',
+    name: 'Finova VyaparaMitra Program',
+    link: '/programs',
+    links: [
+      { label: 'Relationship Officer', href: 'https://finovaro.crack-ed.com' },
+    ],
+  },
+  {
     id: 'lenskart',
     name: 'Lenskart Eyetech Program',
     link: '/programs',
@@ -141,18 +149,10 @@ const PROGRAMS = [
       { label: 'Retail Sales Associate', href: 'https://lenskartrsa.crack-ed.com/portal' },
     ],
   },
-  {
-    id: 'edtech',
-    name: 'EdTech Launchpad Program',
-    link: '/programs',
-    links: [
-      { label: 'Academic Counsellor', href: 'https://edtechse.crack-ed.com/' },
-    ],
-  },
 ]
 
 const Footer = () => {
-  const [openProgram, setOpenProgram] = useState('house-of-founders')
+  const [openProgram, setOpenProgram] = useState('yesbank-so')
 
   const toggleProgram = (id) => {
     setOpenProgram((prev) => (prev === id ? null : id))

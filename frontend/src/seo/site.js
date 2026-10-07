@@ -75,7 +75,7 @@ export const PAGE_SEO = {
   programs: {
     title: 'All Programs | CRACK-ED',
     description:
-      "Explore Crack-ED's hands-on, job-linked programs designed to make you job-ready from day one across banking, NBFC, insurance, retail, and entrepreneurship.",
+      "Explore Crack-ED's hands-on, job-linked programs designed to make you job-ready from day one across banking, NBFC, insurance, retail, and EdTech.",
     path: '/programs',
   },
   careers: {

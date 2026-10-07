@@ -7,10 +7,10 @@ export const LEAD_PROGRAMS = [
   'EdTech Launchpad Program - Academic Counsellor',
   'Hero Housing Finance Pragati Program - Credit and Operations Manager',
   'Hero Housing Finance Pragati Program - Relationship Manager',
-  'House of Founder Fellowship',
   'Kotak Gold Excellence Program - Gold Loan Relationship Officer',
   'Mahindra Finance Prarambh Program - Business Executive',
   'Piramal ProEdge Program - Relationship Manager',
   'Samriddhi Program - Field Executive',
   'Talent Accelerator Program - Sales Executive',
+  'Yes Bank Rise Program - Sales Officer',
 ]

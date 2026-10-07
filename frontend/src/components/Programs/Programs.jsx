@@ -31,7 +31,7 @@ import heroFinanceRmImage from '../../assets/hero_finance_rm.webp'
 import heroComImage from '../../assets/hero_com.webp'
 import heroLogo from '../../assets/hero_logo.svg'
 import heroSmallLogo from '../../assets/hero_small_logo.png'
-import houseOfFoundersImage from '../../assets/Enter.webp'
+import yesBankSoImage from '../../assets/yesbank-so.png'
 import bandhanBankLogo from '../../assets/bandhan_bank_logo.webp'
 import bandhanMiniLogo from '../../assets/animation_bandhan_logo.svg'
 import edtechLargeImage from '../../assets/Edtech_larg.png'
@@ -73,7 +73,6 @@ const getProgramHomeLogo = (programLabel) => {
     case 'Banking Sales Program':
     case 'Banking Sales Program - Business Development Executive': return null
     case 'Samriddhi Program': return null
-    case 'Entrepreneurship & Venture Creation': return null
     default: return null
   }
 }
@@ -91,8 +90,8 @@ const Programs = () => {
     {
       id: 1,
       logo: udaanCardLogo,
-      title: 'House of Founders Fellowship',
-      url: 'https://house-of-founders.crack-ed.com/',
+      title: 'Yes Bank Rise Program - Sales Officer',
+      url: 'https://yesbankso.crack-ed.com/',
     },
     {
       id: 2,
@@ -196,12 +195,12 @@ const Programs = () => {
         duration: '4-months program',
         image: edtechLargeImage,
       },
-      'House of Founders Fellowship': {
-        programLabel: 'Entrepreneurship & Venture Creation',
-        logo: null,
-        details: '6-Month Hybrid Fellowship designed for aspiring and existing entrepreneurs.',
-        duration: 'Investor-ready by graduation, with a chance to pitch your venture to investors.*',
-        image: houseOfFoundersImage,
+      'Yes Bank Rise Program - Sales Officer': {
+        programLabel: 'Yes Bank Rise Program',
+        logo: udaanCardLogo,
+        details: 'Join as a Sales Officer with a CTC of ₹4.5 LPA + Incentives',
+        duration: '12 months apprenticeship program',
+        image: yesBankSoImage,
       },
       'Kotak Gold Excellence Program - Gold Loan Relationship Officer': {
         programLabel: 'Kotak Gold Excellence Program',
@@ -353,6 +352,7 @@ const Programs = () => {
       .replace('Mahindra Finance Prarambh Program - ', '')
       .replace('Talent Accelerator Program - ', '')
       .replace('Kotak Gold Excellence Program - ', '')
+      .replace('Yes Bank Rise Program - ', '')
       .replace('Housing Finance Pragati Program - ', '')
       .replace('Banking Sales Program - ', '')
       .replace('Samriddhi Program - ', '')

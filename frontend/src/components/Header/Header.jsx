@@ -7,13 +7,6 @@ import './Header.css'
 /** Programs grouped for the header dropdown; all categories closed by default. */
 const PROGRAM_CATEGORIES = [
   {
-    id: 'entrepreneurship',
-    label: 'Entrepreneurship',
-    items: [
-      { label: 'House of Founders Fellowship', href: 'https://house-of-founders.crack-ed.com/' },
-    ],
-  },
-  {
     id: 'banking',
     label: 'Banking',
     items: [
@@ -27,6 +20,7 @@ const PROGRAM_CATEGORIES = [
       {
         label: 'Core Programs',
         children: [
+          { label: 'Yes Bank Rise Program', href: 'https://yesbankso.crack-ed.com/' },
           { label: 'Kotak Gold Excellence Program', href: 'https://kotakmahindraro.crack-ed.com/' },
           { label: 'PGP - Retail Banking', href: 'https://pgprb.crack-ed.com' },
           { label: 'Elevate Banking Program', href: 'https://elevatevrm.crack-ed.com/' },
