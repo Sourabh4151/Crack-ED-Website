@@ -201,6 +201,7 @@ const Programs = () => {
         details: 'Join as a Sales Officer with a CTC of ₹4.5 LPA + Incentives',
         duration: '12 months apprenticeship program',
         image: yesBankSoImage,
+        mobileBackgroundPosition: '15% center',
       },
       'Kotak Gold Excellence Program - Gold Loan Relationship Officer': {
         programLabel: 'Kotak Gold Excellence Program',
