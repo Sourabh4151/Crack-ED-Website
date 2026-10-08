@@ -243,7 +243,7 @@ const Programs = () => {
       'Talent Accelerator Program - Sales Executive': {
         programLabel: 'Talent Accelerator Program',
         logo: kotakLogo,
-        details: 'Join as a Sales Executive at Kotak Prime and secure a CTC of Rs 3 LPA + incentives',
+        details: 'Join as a Sales Executive at Kotak Prime and secure a CTC of up to ₹3.5 LPA + Incentives',
         duration: '21-days online program',
         image: kotakProgramImage,
       },
