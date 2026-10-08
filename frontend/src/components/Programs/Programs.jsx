@@ -194,6 +194,7 @@ const Programs = () => {
         details: 'Join as an Academic Counsellor with a CTC of ₹4 LPA + Incentives',
         duration: '4-months program',
         image: edtechLargeImage,
+        mobileBackgroundPosition: '20% center',
       },
       'Yes Bank Rise Program - Sales Officer': {
         programLabel: 'Yes Bank Rise Program',
