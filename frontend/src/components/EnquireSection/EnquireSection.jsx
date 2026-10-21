@@ -78,7 +78,7 @@ const EnquireSection = () => {
       <div className="enquire-section-inner">
         <h2 className="enquire-section-title">Enquire Now</h2>
         <p className="enquire-section-subtitle">
-          Join thousands of learners building better futures with our expert-designed programs!
+          Write your query here and our team of counsellors will get back to you shortly!
         </p>
         <form className="enquire-section-form" onSubmit={handleSubmit} data-clarity-mask="true">
           <div className="enquire-section-form-grid">
