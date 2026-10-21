@@ -136,6 +136,13 @@
   gap: 30px;
 }
 
+.contact-hero-form-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
 .contact-hero-form-title {
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
@@ -143,6 +150,19 @@
   line-height: 27px;
   color: #fafafa;
   margin: 0;
+}
+
+.contact-hero-form-description {
+  margin: 0;
+  width: 100%;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 18px;
+  line-height: 100%;
+  letter-spacing: 0;
+  text-align: left;
+  color: rgba(250, 250, 250, 0.6);
 }
 
 .contact-hero-form {
@@ -418,5 +438,9 @@
 
   .contact-hero-form-card {
     padding: 28px 24px 36px;
+  }
+
+  .contact-hero-form-description {
+    line-height: 1.4;
   }
 }
