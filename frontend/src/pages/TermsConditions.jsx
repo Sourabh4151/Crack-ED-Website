@@ -84,7 +84,7 @@ const TermsConditions = () => {
           <h2 className="terms-subtitle">Governing Law</h2>
           <ul className="terms-list">
             <li>
-              These Terms shall be governed by and construed in accordance with the laws of [your Jurisdiction], without
+              These Terms shall be governed by and construed in accordance with the laws of India, without
               regard to its conflict of law provisions.
             </li>
           </ul>
