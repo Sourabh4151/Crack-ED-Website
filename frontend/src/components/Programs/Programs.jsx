@@ -214,9 +214,9 @@ const Programs = () => {
       'Housing Finance Pragati Program - Relationship Manager': {
         programLabel: 'Housing Finance Pragati Program',
         logo: heroLogo,
-        details: 'Join as a Relationship Manager - Mortgage Sales and secure a CTC of ₹3.6 LPA* + incentives',
+        details: 'Join as a Relationship Manager - Mortgage Sales and secure a CTC of up to ₹4.13 LPA*',
         duration: '1-month program',
-        disclaimer: '*₹2.75 Fixed Salary + ₹ 85,000 average incentives',
+        disclaimer: '*₹3.28 Fixed Salary for Delhi, ₹2.75 Fixed Salary for other cities + ₹ 85,000 average incentives',
         image: heroFinanceRmImage,
       },
       'Housing Finance Pragati Program - Credit and Operations Manager': {
