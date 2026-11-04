@@ -5,6 +5,7 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
 from . import views
+from .bid_podcast_webhook import bid_podcast_google_form
 
 router = DefaultRouter()
 router.register(r'examples', views.ExampleViewSet, basename='example')
@@ -39,4 +40,5 @@ urlpatterns = [
     path('quiz/submit/', views.quiz_submit),
     path('submit-lead/', views.submit_lead),
     path('job-apply/', views.job_apply),
+    path('webhooks/bid-podcast/google-form/', bid_podcast_google_form),
 ]

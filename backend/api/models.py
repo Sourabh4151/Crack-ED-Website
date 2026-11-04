@@ -598,3 +598,80 @@ class MicrositeBrochure(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class BIDPodcastGuestSubmission(models.Model):
+    """
+    One Badhta India Dekho guest-form response, copied from the linked Google Sheet.
+
+    Column names match the live form questions, which Google Forms uses as the
+    response-sheet headers:
+
+    - Timestamp
+    - Email Address (only when the form collects email)
+    - What is your current designation?
+    - Which best describes your business?
+    - Why would you like to feature on Badhta India Dekho?
+    - Are you comfortable with this being a paid podcast guest opportunity?
+    - Are you available to travel to Gurugram for the podcast recording?
+    - What is your company or startup name?
+
+    The Google Sheet itself is never updated by this app.
+    """
+
+    submission_id = models.CharField(
+        max_length=64,
+        unique=True,
+        help_text='SHA-256 hex id from Apps Script. Retries of the same response reuse it.',
+    )
+    submitted_at = models.DateTimeField(
+        help_text='Form response timestamp (sheet column "Timestamp"), stored in UTC.',
+    )
+    respondent_email = models.EmailField(
+        blank=True,
+        help_text='Sheet column "Email Address", when the form collects one.',
+    )
+    designation = models.TextField(
+        blank=True,
+        verbose_name='Current designation',
+        help_text='Sheet column "What is your current designation?"',
+    )
+    business_type = models.TextField(
+        blank=True,
+        help_text='Sheet column "Which best describes your business?"',
+    )
+    feature_reason = models.TextField(
+        blank=True,
+        verbose_name='Podcast feature reason',
+        help_text='Sheet column "Why would you like to feature on Badhta India Dekho?"',
+    )
+    paid_opportunity = models.TextField(
+        blank=True,
+        verbose_name='Paid podcast opportunity preference',
+        help_text='Sheet column "Are you comfortable with this being a paid podcast guest opportunity?"',
+    )
+    gurugram_travel = models.TextField(
+        blank=True,
+        verbose_name='Gurugram travel availability',
+        help_text='Sheet column "Are you available to travel to Gurugram for the podcast recording?"',
+    )
+    company_name = models.TextField(
+        blank=True,
+        verbose_name='Company or startup name',
+        help_text='Sheet column "What is your company or startup name?"',
+    )
+    raw_response = models.JSONField(
+        default=dict,
+        blank=True,
+        help_text='Complete header-to-answer map from that response row.',
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-submitted_at', '-id']
+        verbose_name = 'BID podcast guest submission'
+        verbose_name_plural = 'BID podcast guest submissions'
+
+    def __str__(self):
+        return self.company_name or self.respondent_email or self.submission_id

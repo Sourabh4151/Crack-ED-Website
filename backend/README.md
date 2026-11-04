@@ -34,6 +34,7 @@ Django REST API with PostgreSQL database.
 ## Endpoints
 
 - **Health:** `GET /api/health/`
+- **BID guest form webhook:** `POST /api/webhooks/bid-podcast/google-form/` (Apps Script only; header `X-BID-Webhook-Secret`)
 - **Examples (CRUD):** `GET/POST/PUT/PATCH/DELETE /api/examples/`
 - **Quiz config (public):** `GET /api/quiz/config/`
 - **Quiz / blogs marketing admin:** `/marketing/quiz` and `/marketing/blogs` on the frontend (staff session)
@@ -78,6 +79,7 @@ Before deploying to production, set these in your server environment (or `.env`)
 | `ALLOWED_HOSTS` | Yes | `crack-ed.com,api.crack-ed.com` |
 | `CORS_ORIGINS` | Yes (if frontend on different domain) | `https://crack-ed.com,https://www.crack-ed.com` |
 | `DB_NAME` / `DATABASE_URL` | Yes | Your production PostgreSQL credentials |
+| `BID_PODCAST_WEBHOOK_SECRET` | Yes, for the guest-form webhook | Long random string shared only with the Google Apps Script property of the same name |
 
 Then run:
 

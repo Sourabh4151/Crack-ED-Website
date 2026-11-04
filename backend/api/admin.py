@@ -14,6 +14,7 @@ from .models import (
     Example, QuizSubmission, Lead, JobApplication, JobListing, BIDEpisode,
     MarketingBlog, MarketingBlogUpload, MerittoOutboundAPILog, SiteTestimonial,
     QuizProgram, QuizQuestion, QuizOption, SuccessStory, MicrositeBrochure,
+    BIDPodcastGuestSubmission,
 )
 from .meritto_log import format_json_for_admin
 from .constants import PROGRAM_CHOICES, PROGRAM_TO_CENTER, get_center_for_program
@@ -603,4 +604,35 @@ class MerittoOutboundAPILogAdmin(admin.ModelAdmin):
         return format_html(
             '<pre style="max-height:480px;overflow:auto;white-space:pre-wrap;">{}</pre>',
             format_json_for_admin(obj.response_body),
+        )
+
+
+@admin.register(BIDPodcastGuestSubmission)
+class BIDPodcastGuestSubmissionAdmin(admin.ModelAdmin):
+    """Read-only view of guest-form rows synced from the Google Sheet."""
+
+    list_display = (
+        'id', 'submitted_at', 'company_name', 'respondent_email',
+        'designation', 'business_type', 'created_at',
+    )
+    search_fields = (
+        'submission_id', 'respondent_email', 'company_name',
+        'designation', 'business_type',
+    )
+    list_filter = ('submitted_at', 'created_at')
+    readonly_fields = (
+        'submission_id', 'submitted_at', 'respondent_email', 'designation',
+        'business_type', 'feature_reason', 'paid_opportunity', 'gurugram_travel',
+        'company_name', 'raw_response_display', 'created_at', 'updated_at',
+    )
+    exclude = ('raw_response',)
+
+    def has_add_permission(self, request):
+        return False
+
+    @admin.display(description='Raw response')
+    def raw_response_display(self, obj):
+        return format_html(
+            '<pre style="max-height:480px;overflow:auto;white-space:pre-wrap;">{}</pre>',
+            format_json_for_admin(obj.raw_response),
         )
